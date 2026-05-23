@@ -1,8 +1,12 @@
 import { useState } from "react";
-import { ArrowRight, Sparkles, Heart, Compass, Users, MessageCircleHeart, Sun, Moon, CheckCircle2 } from "lucide-react";
-import heroPortrait from "@/assets/hero-portrait.jpg";
-import creatorAlejandra from "@/assets/creator-alejandra.jpg";
-import founderPhoto from "@/assets/founder.jpg";
+import { ArrowRight, Sparkles, Heart, Compass, Users, MessageCircleHeart, Sun, CheckCircle2, Instagram } from "lucide-react";
+import appToday from "@/assets/app-today.png";
+import appCommunity from "@/assets/app-community.png";
+import appClarity from "@/assets/app-clarity.png";
+import appReflection from "@/assets/app-reflection.png";
+import appPath from "@/assets/app-path.png";
+import founderMengxi from "@/assets/founder-mengxi.jpg";
+import founderAlejandra from "@/assets/founder-alejandra.png";
 
 function Nav() {
   return (
@@ -33,12 +37,12 @@ function Hero() {
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs tracking-wide uppercase text-muted-foreground">
             <Sparkles className="h-3.5 w-3.5 text-accent" /> Founding waitlist open
           </span>
-          <h1 className="mt-6 font-serif text-[2.5rem] leading-[1.05] sm:text-6xl lg:text-[4.5rem] text-foreground text-balance">
-            A 7-day AI reset for ambitious women who are tired of carrying everything alone.
+          <h1 className="mt-6 font-serif text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-[4.5rem] text-foreground text-balance">
+            For the woman holding it all together <em className="italic text-accent">— quietly.</em>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
-            Elara helps you rebuild clarity, confidence, daily structure, and emotional support —
-            starting with one guided check-in at a time.
+            Elara is a 7-day guided reset for ambitious women who look fine on the outside
+            and feel scattered on the inside. Clarity, softness, and structure — one honest check-in at a time.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <a href="#waitlist" className="group inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:translate-y-[-1px] transition">
@@ -50,17 +54,30 @@ function Hero() {
             </a>
           </div>
           <p className="mt-6 text-sm text-muted-foreground">Built quietly. Launching soon. Free for founding members.</p>
+          <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-6 max-w-xl border-t border-border/60 pt-7">
+            {[
+              ["2.8M+", "social audience"],
+              ["80K", "in our community"],
+              ["4,100+", "survey responses"],
+              ["3,000", "prior paid buyers"],
+            ].map(([n, l]) => (
+              <div key={l}>
+                <dt className="font-serif text-2xl text-foreground">{n}</dt>
+                <dd className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{l}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
         <div className="lg:col-span-5 relative">
           <div className="relative mx-auto max-w-sm animate-float">
             <div className="absolute -inset-6 bg-gradient-warm rounded-[2rem] blur-2xl opacity-60" aria-hidden />
-            <img
-              src={heroPortrait}
-              alt="A woman in a quiet moment of reflection"
-              width={1024}
-              height={1280}
-              className="relative rounded-[2rem] shadow-soft object-cover w-full aspect-[4/5]"
-            />
+            <div className="relative rounded-[2.4rem] p-3 bg-foreground/5 backdrop-blur shadow-soft border border-border/60">
+              <img
+                src={appToday}
+                alt="Elara app — today screen with daily compass"
+                className="rounded-[1.9rem] w-full object-cover"
+              />
+            </div>
             <div className="absolute -bottom-6 -left-6 bg-card/95 backdrop-blur rounded-2xl shadow-card p-4 max-w-[220px] border border-border/60">
               <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-accent font-medium">
                 <Sun className="h-3.5 w-3.5" /> Day 3 · Morning
@@ -78,20 +95,12 @@ function Hero() {
 
 function SocialProof() {
   return (
-    <section className="py-16 border-y border-border/50 bg-card/40">
-      <div className="max-w-5xl mx-auto px-5 sm:px-8 grid sm:grid-cols-[auto_1fr] gap-8 items-center">
-        <div className="flex items-center gap-4">
-          <img src={creatorAlejandra} alt="Alejandra Ramirez" width={640} height={640} loading="lazy"
-            className="h-16 w-16 rounded-full object-cover ring-2 ring-accent/40" />
-          <div>
-            <p className="text-sm uppercase tracking-wider text-accent">Creator partner</p>
-            <p className="font-serif text-xl text-foreground">Alejandra Ramirez</p>
-            <p className="text-xs text-muted-foreground">2.8M+ social audience</p>
-          </div>
-        </div>
-        <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-          Built with creator-led community insights and early input from women navigating
-          <em className="text-foreground/80 not-italic"> ambition, burnout, dating, identity, and reinvention.</em>
+    <section className="py-14 border-y border-border/50 bg-card/40">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
+        <p className="text-xs uppercase tracking-[0.25em] text-accent">Built with — not for</p>
+        <p className="mt-4 font-serif text-2xl sm:text-3xl text-foreground/90 max-w-3xl mx-auto leading-snug text-balance">
+          Shaped by 4,100+ survey responses and an 80K community of women navigating
+          ambition, reinvention, money, family, and softness.
         </p>
       </div>
     </section>
@@ -99,10 +108,10 @@ function SocialProof() {
 }
 
 const problems = [
-  { icon: Sun, title: "You're high-functioning but exhausted", body: "You deliver. You show up. And quietly, you've been running on empty for months." },
-  { icon: Compass, title: "You want structure without pressure", body: "Not another rigid productivity system — something that meets you where you are." },
-  { icon: Heart, title: "You crave softness, but still want to grow", body: "Rest and ambition aren't opposites. You're allowed both, at the same time." },
-  { icon: MessageCircleHeart, title: "You want support that understands you", body: "Not a generic chatbot. Guidance that actually gets your culture, your context, your weight." },
+  { icon: Sun, title: "High-functioning, quietly depleted", body: "You're delivering for everyone. The exhaustion lives somewhere only you can feel it." },
+  { icon: Compass, title: "Structure, without the pressure", body: "Not another productivity system. Something that meets you where you actually are this week." },
+  { icon: Heart, title: "Softness and ambition, at once", body: "You don't have to choose between rest and reaching. Elara holds both." },
+  { icon: MessageCircleHeart, title: "Support that gets the context", body: "Your culture, your family, your standards. Guidance that doesn't flatten any of it." },
 ];
 
 function Problem() {
@@ -112,7 +121,7 @@ function Problem() {
         <div className="max-w-2xl">
           <p className="text-sm uppercase tracking-[0.2em] text-accent">If this sounds familiar</p>
           <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
-            You don't need another app. You need a quiet place to land.
+            You don't need another app. You need a place to land.
           </h2>
         </div>
         <div className="mt-14 grid sm:grid-cols-2 gap-5">
@@ -132,33 +141,22 @@ function Problem() {
 }
 
 const screens = [
-  { label: "Onboarding", caption: "Where are you, really?", tint: "from-[oklch(0.93_0.04_60)] to-[oklch(0.82_0.08_50)]" },
-  { label: "Daily reset", caption: "A 4-minute ritual.", tint: "from-[oklch(0.9_0.06_70)] to-[oklch(0.78_0.11_75)]" },
-  { label: "AI reflection", caption: "Elara, listening.", tint: "from-[oklch(0.86_0.07_45)] to-[oklch(0.62_0.13_40)]" },
-  { label: "Community", caption: "Women like you.", tint: "from-[oklch(0.88_0.05_80)] to-[oklch(0.7_0.1_65)]" },
-  { label: "Clarity test", caption: "What you actually want.", tint: "from-[oklch(0.92_0.03_50)] to-[oklch(0.74_0.09_55)]" },
+  { src: appPath, label: "Personalized path", caption: "Your context, not a template." },
+  { src: appToday, label: "Daily compass", caption: "Three small acts a day." },
+  { src: appReflection, label: "Gentle reflection", caption: "Awareness before action." },
+  { src: appCommunity, label: "Today's circle", caption: "Walking with you." },
+  { src: appClarity, label: "Clarity blueprint", caption: "Where to focus first." },
 ];
 
-function PhoneMockup({ label, caption, tint }: { label: string; caption: string; tint: string }) {
+function PhoneMockup({ src, label, caption }: { src: string; label: string; caption: string }) {
   return (
-    <div className="shrink-0 w-[200px] sm:w-[220px]">
-      <div className={`relative rounded-[2.2rem] p-3 bg-gradient-to-br ${tint} shadow-soft`}>
-        <div className="rounded-[1.7rem] bg-background aspect-[9/19] p-5 flex flex-col">
-          <div className="mx-auto h-1 w-12 rounded-full bg-foreground/10 mb-6" />
-          <p className="text-[10px] uppercase tracking-[0.18em] text-accent">{label}</p>
-          <p className="mt-2 font-serif text-xl text-foreground leading-tight">{caption}</p>
-          <div className="mt-6 space-y-2">
-            <div className="h-2 rounded-full bg-muted w-full" />
-            <div className="h-2 rounded-full bg-muted w-4/5" />
-            <div className="h-2 rounded-full bg-muted w-3/5" />
-          </div>
-          <div className="mt-auto rounded-2xl bg-secondary/70 p-3">
-            <div className="h-2 rounded-full bg-foreground/15 w-2/3" />
-            <div className="mt-2 h-2 rounded-full bg-foreground/10 w-1/2" />
-          </div>
-        </div>
+    <div className="shrink-0 w-[220px] sm:w-[240px]">
+      <div className="relative rounded-[2.2rem] p-2.5 bg-card border border-border/60 shadow-soft">
+        <img src={src} alt={`Elara app — ${label}`} loading="lazy"
+          className="rounded-[1.8rem] w-full object-cover" />
       </div>
-      <p className="mt-3 text-center text-sm text-muted-foreground">{label}</p>
+      <p className="mt-4 text-center font-serif text-lg text-foreground">{label}</p>
+      <p className="text-center text-xs text-muted-foreground mt-1">{caption}</p>
     </div>
   );
 }
@@ -170,7 +168,7 @@ function Product() {
         <div className="max-w-2xl">
           <p className="text-sm uppercase tracking-[0.2em] text-accent">Inside Elara</p>
           <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
-            A small, beautiful operating system for your inner life.
+            A small, beautiful place for your inner life.
           </h2>
         </div>
       </div>
@@ -186,9 +184,9 @@ function Product() {
 }
 
 const steps = [
-  { n: "01", title: "Tell Elara where you are emotionally", body: "A short, gentle check-in — no scoring, no shame. Just honesty." },
-  { n: "02", title: "Get a personalized 7-day path", body: "Rituals, reflections, and small actions designed for your specific season." },
-  { n: "03", title: "Check in daily with AI guidance, rituals, and community", body: "Soft structure that actually sticks — with women walking beside you." },
+  { n: "01", title: "A 4-minute honest check-in", body: "No scoring. No shame. Just where you actually are today." },
+  { n: "02", title: "A 7-day path made for your season", body: "Money, mind, body, people, purpose — whatever is loudest first." },
+  { n: "03", title: "Daily rituals, gentle AI, real circle", body: "Soft structure that sticks, with women walking beside you." },
 ];
 
 function HowItWorks() {
@@ -226,12 +224,19 @@ function Community() {
               <Users className="h-3.5 w-3.5" /> Latina-first community
             </div>
             <h2 className="mt-6 font-serif text-3xl sm:text-5xl text-balance leading-tight">
-              Launching first with Latina women — because culture, family, ambition, softness, and identity are deeply connected.
+              Launching first with Latina women — because family, ambition, and softness all live in the same body.
             </h2>
             <p className="mt-6 text-base sm:text-lg text-primary-foreground/80 max-w-2xl leading-relaxed">
-              We're building Elara for the women who hold everything together — daughters, founders, eldest sisters,
-              first-generation everything. You deserve something built for the way you actually live.
+              For the eldest daughters, the first-gen everything, the ones who translate at home and lead at work.
+              For the reinventors, the bilingual minds, the women learning that independence and tenderness can share a life.
             </p>
+            <ul className="mt-8 flex flex-wrap gap-2 max-w-2xl">
+              {["Family expectations","Reinvention","Ambition","Emotional growth","Bilingual identity","Independence","Softness","Confidence","Culture"].map((t) => (
+                <li key={t} className="text-xs uppercase tracking-wider rounded-full border border-primary-foreground/25 px-3 py-1.5 text-primary-foreground/85">
+                  {t}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
@@ -257,7 +262,7 @@ function Waitlist() {
           Be one of the first women inside Elara.
         </h2>
         <p className="mt-5 text-lg text-muted-foreground max-w-xl mx-auto">
-          Founding members get free lifetime access to the first cohort, early influence on what we build, and a private welcome from the team.
+          Founding members get free access to the first cohort, early influence on what we build, and a personal welcome from the team.
         </p>
 
         {submitted ? (
@@ -310,18 +315,34 @@ function Waitlist() {
 function Founder() {
   return (
     <section className="py-24 sm:py-32">
-      <div className="max-w-5xl mx-auto px-5 sm:px-8 grid md:grid-cols-[280px_1fr] gap-10 items-center">
-        <div className="relative max-w-[280px] mx-auto">
-          <div className="absolute -inset-4 bg-gradient-warm rounded-3xl blur-xl opacity-60" aria-hidden />
-          <img src={founderPhoto} alt="Founder of Elara" width={768} height={896} loading="lazy"
-            className="relative rounded-3xl object-cover w-full aspect-[4/5] shadow-card" />
-        </div>
-        <div>
-          <p className="text-sm uppercase tracking-[0.2em] text-accent">A note from the founder</p>
-          <blockquote className="mt-5 font-serif text-2xl sm:text-3xl text-foreground leading-snug text-balance">
-            "Elara was built for women who look successful from the outside, but privately feel overwhelmed, lonely, or unsure what they actually want next."
-          </blockquote>
-          <p className="mt-6 text-muted-foreground">— The Elara team</p>
+      <div className="max-w-5xl mx-auto px-5 sm:px-8">
+        <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">A note from the team</p>
+        <blockquote className="mt-6 mx-auto max-w-3xl font-serif text-2xl sm:text-3xl text-foreground leading-snug text-balance text-center">
+          "Elara was built for women who look successful from the outside, but privately feel overwhelmed,
+          lonely, or unsure what they actually want next."
+        </blockquote>
+
+        <div className="mt-16 grid sm:grid-cols-2 gap-10 sm:gap-14">
+          {[
+            { img: founderMengxi, name: "Mengxi Wang", role: "Product & design", ig: "karawang" },
+            { img: founderAlejandra, name: "Alejandra Ramirez", role: "Creator & community", ig: "alejandra.travels" },
+          ].map((f) => (
+            <figure key={f.name} className="flex flex-col items-center text-center">
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56">
+                <div className="absolute -inset-3 bg-gradient-warm rounded-full blur-xl opacity-50" aria-hidden />
+                <img src={f.img} alt={f.name} loading="lazy"
+                  className="relative rounded-full object-cover w-full h-full shadow-card" />
+              </div>
+              <figcaption className="mt-6">
+                <p className="font-serif text-2xl text-foreground">{f.name}</p>
+                <p className="text-sm uppercase tracking-wider text-muted-foreground mt-1">{f.role}</p>
+                <a href={`https://instagram.com/${f.ig}`} target="_blank" rel="noreferrer"
+                  className="mt-3 inline-flex items-center gap-1.5 text-sm text-accent hover:text-foreground transition">
+                  <Instagram className="h-4 w-4" /> @{f.ig}
+                </a>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </div>
     </section>
