@@ -66,8 +66,7 @@ function Hero() {
             {[
               ["1.8M+", "engaged audience"],
               ["80K", "direct community"],
-              ["1,998", "survey responses"],
-              ["3,000", "Alejandra's prior buyers"],
+              ["4,600+", "survey responses"],
             ].map(([n, l]) => (
               <div key={l}>
                 <dt className="font-serif text-2xl text-foreground">{n}</dt>

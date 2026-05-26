@@ -63,10 +63,9 @@ function Hero() {
           <p className="mt-6 text-sm text-muted-foreground">Construido en silencio. Abriendo pronto. Gratis para fundadoras.</p>
           <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-6 max-w-xl border-t border-border/60 pt-7">
             {[
-              ["2.8M+", "audiencia social"],
+              ["1.8M+", "audiencia social"],
               ["80K", "comunidad directa"],
-              ["4,100+", "respuestas de mujeres"],
-              ["3,000", "compradoras previas vía Alejandra"],
+              ["4,600+", "respuestas de mujeres"],
             ].map(([n, l]) => (
               <div key={l}>
                 <dt className="font-serif text-2xl text-foreground">{n}</dt>
