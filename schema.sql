@@ -5,5 +5,6 @@ CREATE TABLE IF NOT EXISTS subscribers (
   whatsapp    TEXT,
   instagram   TEXT,
   pain        TEXT,
+  language    TEXT DEFAULT 'en',
   created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
 );

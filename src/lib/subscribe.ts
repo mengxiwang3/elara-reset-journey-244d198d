@@ -9,6 +9,7 @@ interface SubscribePayload {
   whatsapp?: unknown;
   instagram?: unknown;
   pain?: unknown;
+  language?: unknown;
 }
 
 export async function handleSubscribe(request: Request, env: Env): Promise<Response> {
@@ -28,6 +29,7 @@ export async function handleSubscribe(request: Request, env: Env): Promise<Respo
   const whatsapp = typeof payload.whatsapp === "string" && payload.whatsapp.trim() ? payload.whatsapp.trim() : null;
   const instagram = typeof payload.instagram === "string" && payload.instagram.trim() ? payload.instagram.trim() : null;
   const pain = typeof payload.pain === "string" && payload.pain.trim() ? payload.pain.trim() : null;
+  const language = typeof payload.language === "string" && ["en", "es"].includes(payload.language) ? payload.language : "en";
 
   if (!name || !email) {
     return Response.json({ error: "Name and email are required" }, { status: 400 });
@@ -39,10 +41,10 @@ export async function handleSubscribe(request: Request, env: Env): Promise<Respo
 
   try {
     await env.DB.prepare(
-      `INSERT OR IGNORE INTO subscribers (name, email, whatsapp, instagram, pain)
-       VALUES (?, ?, ?, ?, ?)`,
+      `INSERT OR IGNORE INTO subscribers (name, email, whatsapp, instagram, pain, language)
+       VALUES (?, ?, ?, ?, ?, ?)`,
     )
-      .bind(name, email, whatsapp, instagram, pain)
+      .bind(name, email, whatsapp, instagram, pain, language)
       .run();
   } catch (e) {
     console.error("D1 error:", e);
@@ -62,6 +64,7 @@ export async function handleSubscribe(request: Request, env: Env): Promise<Respo
           firstName: name,
           source: "elara-waitlist",
           userGroup: "waitlist",
+          language,
           ...(whatsapp && { whatsapp }),
           ...(instagram && { instagram }),
           ...(pain && { pain }),

@@ -12,22 +12,22 @@ function Nav() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/40">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="#top" className="font-serif text-2xl tracking-tight text-foreground">
+        <a href="/es" className="font-serif text-2xl tracking-tight text-foreground">
           elara<span className="text-accent">.</span>
         </a>
         <nav className="hidden sm:flex items-center gap-8 text-sm text-muted-foreground">
-          <a href="#how" className="hover:text-foreground transition">How it works</a>
-          <a href="#product" className="hover:text-foreground transition">Inside Elara</a>
-          <a href="#community" className="hover:text-foreground transition">Community</a>
+          <a href="#como" className="hover:text-foreground transition">Cómo funciona</a>
+          <a href="#producto" className="hover:text-foreground transition">Dentro de Elara</a>
+          <a href="#comunidad" className="hover:text-foreground transition">Comunidad</a>
         </nav>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 text-xs font-medium">
-            <span className="text-foreground">EN</span>
+            <a href="/" className="text-muted-foreground hover:text-foreground transition">EN</a>
             <span className="text-border/60">|</span>
-            <a href="/es" className="text-muted-foreground hover:text-foreground transition">ES</a>
+            <span className="text-foreground">ES</span>
           </div>
-          <a href="#waitlist" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition">
-            Join waitlist
+          <a href="#lista" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition">
+            Unirme a la lista
           </a>
         </div>
       </div>
@@ -42,32 +42,31 @@ function Hero() {
       <div className="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-12 items-center relative">
         <div className="lg:col-span-7 animate-fade-up">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs tracking-wide uppercase text-muted-foreground">
-            <Sparkles className="h-3.5 w-3.5 text-accent" /> Spanish-first · Founding waitlist open
+            <Sparkles className="h-3.5 w-3.5 text-accent" /> Primera en español · Lista de espera fundadora abierta
           </span>
           <h1 className="mt-6 font-serif text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-[4.5rem] text-foreground text-balance">
-            Daily AI support for money, clarity, and stability — <em className="italic text-accent">in her language, her voice.</em>
+            Para la mujer que sostiene todo, <em className="italic text-accent">aunque nadie lo note.</em>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
-            Elara is a Spanish-first 7-day AI reset for Latina women navigating money pressure, family expectations,
-            ambition, and emotional overload — one honest check-in at a time.
+            Elara es un reset guiado de 7 días para mujeres ambiciosas que por fuera parecen estar bien,
+            pero por dentro se sienten saturadas, dispersas o lejos de sí mismas.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <a href="#waitlist" className="group inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:translate-y-[-1px] transition">
-              Join the waitlist
+            <a href="#lista" className="group inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:translate-y-[-1px] transition">
+              Unirme a la lista de espera
               <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition" />
             </a>
-            <a href="#how" className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-7 py-3.5 text-base font-medium text-foreground hover:bg-card transition">
-              See how it works
+            <a href="#como" className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-7 py-3.5 text-base font-medium text-foreground hover:bg-card transition">
+              Ver cómo funciona
             </a>
           </div>
-          <p className="mt-6 text-sm text-muted-foreground">Built quietly. Launching soon. Free for founding members.</p>
-          <p className="mt-2 text-sm text-muted-foreground/70 italic">Built first for Latina women — <a href="/es" className="text-accent hover:text-foreground transition not-italic underline underline-offset-2">en su idioma, con su voz, a su ritmo.</a></p>
+          <p className="mt-6 text-sm text-muted-foreground">Construido en silencio. Abriendo pronto. Gratis para fundadoras.</p>
           <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-6 max-w-xl border-t border-border/60 pt-7">
             {[
-              ["1.8M+", "engaged audience"],
-              ["80K", "direct community"],
-              ["1,998", "survey responses"],
-              ["3,000", "Alejandra's prior buyers"],
+              ["2.8M+", "audiencia social"],
+              ["80K", "comunidad directa"],
+              ["4,100+", "respuestas de mujeres"],
+              ["3,000", "compradoras previas vía Alejandra"],
             ].map(([n, l]) => (
               <div key={l}>
                 <dt className="font-serif text-2xl text-foreground">{n}</dt>
@@ -82,16 +81,16 @@ function Hero() {
             <div className="relative rounded-[2.4rem] p-3 bg-foreground/5 backdrop-blur shadow-soft border border-border/60">
               <img
                 src={appToday}
-                alt="Elara app — today screen with daily compass"
+                alt="App Elara — pantalla de inicio con brújula diaria"
                 className="rounded-[1.9rem] w-full object-cover"
               />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-card/95 backdrop-blur rounded-2xl shadow-card p-4 max-w-[220px] border border-border/60">
               <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-accent font-medium">
-                <Sun className="h-3.5 w-3.5" /> Day 3 · Morning
+                <Sun className="h-3.5 w-3.5" /> Día 3 · Mañana
               </div>
               <p className="mt-2 text-sm text-foreground leading-snug">
-                "What part of you needs softness today?"
+                "¿Qué parte de ti necesita suavidad hoy?"
               </p>
             </div>
           </div>
@@ -105,13 +104,13 @@ function SocialProof() {
   return (
     <section className="py-14 border-y border-border/50 bg-card/40">
       <div className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
-        <p className="text-xs uppercase tracking-[0.25em] text-accent">Built with — not for</p>
+        <p className="text-xs uppercase tracking-[0.25em] text-accent">Construido con — no para</p>
         <p className="mt-4 font-serif text-2xl sm:text-3xl text-foreground/90 max-w-3xl mx-auto leading-snug text-balance">
-          Shaped by 1,998 survey responses and an 80K direct community of Latina women navigating
-          money pressure, ambition, reinvention, family, and softness.
+          Moldeado por 1,998 respuestas de mujeres y una comunidad directa de 80K latinas navegando
+          presión económica, ambición, reinvención, familia y suavidad.
         </p>
         <p className="mt-6 text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          We start with Money Clarity because financial pressure was the clearest pull in our community — then expand into the life systems around it: confidence, habits, family, purpose, and emotional wellbeing.
+          Empezamos con Claridad Financiera porque la presión económica fue lo que más resonó en nuestra comunidad — y desde ahí abrimos los sistemas de vida que la rodean: confianza, hábitos, familia, propósito y bienestar emocional.
         </p>
       </div>
     </section>
@@ -119,10 +118,10 @@ function SocialProof() {
 }
 
 const problems = [
-  { icon: Sun, title: "High-functioning, quietly depleted", body: "You're delivering for everyone. The exhaustion lives somewhere only you can feel it." },
-  { icon: Compass, title: "Structure, without the pressure", body: "Not another productivity system. Something that meets you where you actually are this week." },
-  { icon: Heart, title: "Softness and ambition, at once", body: "You don't have to choose between rest and reaching. Elara holds both." },
-  { icon: MessageCircleHeart, title: "Support that gets the context", body: "Your culture, your family, your standards. Guidance that doesn't flatten any of it." },
+  { icon: Sun, title: "Funcionando al máximo, agotada en silencio", body: "Estás entregando para todos. El cansancio vive en un lugar donde solo tú puedes sentirlo." },
+  { icon: Compass, title: "Estructura, sin la presión", body: "No es otro sistema de productividad. Es algo que te recibe exactamente donde estás esta semana." },
+  { icon: Heart, title: "Suavidad y ambición, al mismo tiempo", body: "No tienes que elegir entre el descanso y el crecimiento. Elara sostiene los dos." },
+  { icon: MessageCircleHeart, title: "Apoyo que entiende el contexto", body: "Tu cultura, tu familia, tus estándares. Orientación que no aplana nada de eso." },
 ];
 
 function Problem() {
@@ -130,9 +129,9 @@ function Problem() {
     <section className="py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="max-w-2xl">
-          <p className="text-sm uppercase tracking-[0.2em] text-accent">If this sounds familiar</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-accent">Si esto te suena familiar</p>
           <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
-            You don't need another app. You need a place to land.
+            No necesitas otra app. Necesitas un lugar donde aterrizar.
           </h2>
         </div>
         <div className="mt-14 grid sm:grid-cols-2 gap-5">
@@ -152,11 +151,11 @@ function Problem() {
 }
 
 const screens = [
-  { src: appPath, label: "Personalized path", caption: "Your context, not a template." },
-  { src: appToday, label: "Daily compass", caption: "Three small acts a day." },
-  { src: appReflection, label: "Gentle reflection", caption: "Awareness before action." },
-  { src: appCommunity, label: "Today's circle", caption: "Walking with you." },
-  { src: appClarity, label: "Clarity blueprint", caption: "Where to focus first." },
+  { src: appPath, label: "Tu camino personalizado", caption: "Tu contexto, no una plantilla." },
+  { src: appToday, label: "Brújula diaria", caption: "Tres pequeños actos al día." },
+  { src: appReflection, label: "Reflexión suave", caption: "Conciencia antes que acción." },
+  { src: appCommunity, label: "El círculo de hoy", caption: "Caminando contigo." },
+  { src: appClarity, label: "Mapa de claridad", caption: "En qué enfocarte primero." },
 ];
 
 function PhoneMockup({ src, label, caption }: { src: string; label: string; caption: string }) {
@@ -174,13 +173,16 @@ function PhoneMockup({ src, label, caption }: { src: string; label: string; capt
 
 function Product() {
   return (
-    <section id="product" className="py-24 sm:py-32 bg-gradient-warm">
+    <section id="producto" className="py-24 sm:py-32 bg-gradient-warm">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="max-w-2xl">
-          <p className="text-sm uppercase tracking-[0.2em] text-accent">Inside Elara</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-accent">Dentro de Elara</p>
           <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
-            A small, beautiful place for your inner life.
+            Un espacio pequeño y hermoso para tu vida interior.
           </h2>
+          <p className="mt-5 text-base text-muted-foreground leading-relaxed">
+            Al final de la semana, sales con más claridad sobre lo que necesitas, un plan de reset personalizado y un ritmo diario más suave que sí puedes sostener.
+          </p>
         </div>
       </div>
       <div className="mt-14 overflow-x-auto pb-6 scrollbar-hide">
@@ -195,19 +197,19 @@ function Product() {
 }
 
 const steps = [
-  { n: "01", title: "A 4-minute honest check-in", body: "No scoring. No shame. Just where you actually are today." },
-  { n: "02", title: "A 7-day path made for your season", body: "Money, mind, body, people, purpose — whatever is loudest first." },
-  { n: "03", title: "Daily rituals, gentle AI, real circle", body: "Soft structure that sticks, with women walking beside you." },
+  { n: "01", title: "Un check-in honesto de 4 minutos", body: "Sin puntuaciones. Sin vergüenza. Solo dónde estás realmente hoy." },
+  { n: "02", title: "Un camino de 7 días hecho para tu momento", body: "Dinero, mente, cuerpo, personas, propósito — lo que esté más pesado, primero." },
+  { n: "03", title: "Rituales diarios, IA suave, círculo real", body: "Estructura gentil que se sostiene, con mujeres caminando a tu lado." },
 ];
 
 function HowItWorks() {
   return (
-    <section id="how" className="py-24 sm:py-32">
+    <section id="como" className="py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="max-w-2xl">
-          <p className="text-sm uppercase tracking-[0.2em] text-accent">How it works</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-accent">Cómo funciona</p>
           <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
-            Seven days. One quiet shift at a time.
+            Siete días. Un cambio tranquilo a la vez.
           </h2>
         </div>
         <div className="mt-14 grid md:grid-cols-3 gap-6">
@@ -226,23 +228,23 @@ function HowItWorks() {
 
 function Community() {
   return (
-    <section id="community" className="py-24 sm:py-32">
+    <section id="comunidad" className="py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
         <div className="rounded-[2.5rem] bg-primary text-primary-foreground p-10 sm:p-16 shadow-soft relative overflow-hidden">
           <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-accent/30 blur-3xl" aria-hidden />
           <div className="relative">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 px-3 py-1 text-xs uppercase tracking-wider">
-              <Users className="h-3.5 w-3.5" /> Latina-first community
+              <Users className="h-3.5 w-3.5" /> Comunidad Latina-first
             </div>
             <h2 className="mt-6 font-serif text-3xl sm:text-5xl text-balance leading-tight">
-              Launching first with Latina women — because family, ambition, and softness all live in the same body.
+              Diseñada primero para mujeres latinas — porque la familia, la ambición y la suavidad viven en el mismo cuerpo.
             </h2>
             <p className="mt-6 text-base sm:text-lg text-primary-foreground/80 max-w-2xl leading-relaxed">
-              For the eldest daughters, the first-gen everything, the ones who translate at home and lead at work.
-              For the reinventors, the bilingual minds, the women learning that independence and tenderness can share a life.
+              Para las hijas mayores, las primeras en su familia en todo, las que traducen en casa y lideran en el trabajo.
+              Para las reinventoras, las mentes bilingües, las mujeres aprendiendo que la independencia y la ternura pueden compartir una vida.
             </p>
             <ul className="mt-8 flex flex-wrap gap-2 max-w-2xl">
-              {["Family expectations","Reinvention","Ambition","Emotional growth","Bilingual identity","Independence","Softness","Confidence","Culture"].map((t) => (
+              {["Expectativas familiares","Reinvención","Ambición","Crecimiento emocional","Identidad bilingüe","Independencia","Suavidad","Confianza","Cultura"].map((t) => (
                 <li key={t} className="text-xs uppercase tracking-wider rounded-full border border-primary-foreground/25 px-3 py-1.5 text-primary-foreground/85">
                   {t}
                 </li>
@@ -255,14 +257,14 @@ function Community() {
   );
 }
 
-const PAIN_OPTIONS = [
-  "Money pressure / financial independence",
-  "Feeling scattered or overwhelmed",
-  "Emotionally drained, running on empty",
-  "Unsure what I actually want next",
-  "High-functioning but quietly lonely",
-  "Family expectations vs. my own life",
-  "Stuck in reinvention, unsure of next steps",
+const PAIN_OPTIONS_ES = [
+  "Presión económica / independencia financiera",
+  "Me siento dispersa o desbordada",
+  "Agotada emocionalmente, funcionando al mínimo",
+  "No sé qué quiero realmente",
+  "Exitosa por fuera, sola por dentro",
+  "Expectativas familiares vs. mi propia vida",
+  "Estancada en una reinvención, sin saber hacia dónde",
 ];
 
 function Waitlist() {
@@ -280,46 +282,46 @@ function Waitlist() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, language: "es" }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({})) as { error?: string };
-        throw new Error(data.error ?? "Something went wrong. Please try again.");
+        throw new Error(data.error ?? "Algo salió mal. Por favor, inténtalo de nuevo.");
       }
       setSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      setError(err instanceof Error ? err.message : "Algo salió mal. Por favor, inténtalo de nuevo.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <section id="waitlist" className="py-24 sm:py-32 bg-gradient-warm">
+    <section id="lista" className="py-24 sm:py-32 bg-gradient-warm">
       <div className="max-w-3xl mx-auto px-5 sm:px-8 text-center">
-        <p className="text-sm uppercase tracking-[0.2em] text-accent">Founding waitlist</p>
+        <p className="text-sm uppercase tracking-[0.2em] text-accent">Lista de espera fundadora</p>
         <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
-          Be one of the first women inside Elara.
+          Sé una de las primeras mujeres dentro de Elara.
         </h2>
         <p className="mt-5 text-lg text-muted-foreground max-w-xl mx-auto">
-          Founding members get free access to the first cohort, early influence on what we build, and a personal welcome from the team.
+          Las fundadoras obtienen acceso gratuito a la primera cohorte, influencia temprana en lo que construimos y una bienvenida personal del equipo.
         </p>
 
         {submitted ? (
           <div className="mt-12 rounded-3xl border border-border bg-card p-10 shadow-card">
             <CheckCircle2 className="h-10 w-10 text-accent mx-auto" />
-            <h3 className="mt-4 font-serif text-2xl text-foreground">You're on the list.</h3>
-            <p className="mt-2 text-muted-foreground">We'll be in touch soon, gently. Bienvenida.</p>
+            <h3 className="mt-4 font-serif text-2xl text-foreground">Ya estás en la lista.</h3>
+            <p className="mt-2 text-muted-foreground">Te escribiremos antes de abrir la primera cohorte de Elara. Bienvenida.</p>
           </div>
         ) : (
           <form onSubmit={onSubmit} className="mt-12 grid gap-3 text-left bg-card rounded-3xl border border-border p-6 sm:p-8 shadow-card">
             <label className="grid gap-1.5">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground">Name</span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">Nombre</span>
               <input
                 required maxLength={80}
                 value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
-                placeholder="Your first name"
+                placeholder="Tu nombre"
               />
             </label>
             <label className="grid gap-1.5">
@@ -328,11 +330,11 @@ function Waitlist() {
                 required type="email" maxLength={120}
                 value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
-                placeholder="you@example.com"
+                placeholder="tu@email.com"
               />
             </label>
             <label className="grid gap-1.5">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground">WhatsApp <span className="normal-case text-muted-foreground/70">(optional)</span></span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">WhatsApp <span className="normal-case text-muted-foreground/70">(opcional)</span></span>
               <input
                 maxLength={30}
                 value={form.whatsapp} onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
@@ -341,22 +343,22 @@ function Waitlist() {
               />
             </label>
             <label className="grid gap-1.5">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground">Instagram <span className="normal-case text-muted-foreground/70">(optional)</span></span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">Instagram <span className="normal-case text-muted-foreground/70">(opcional)</span></span>
               <input
                 maxLength={60}
                 value={form.instagram} onChange={(e) => setForm({ ...form, instagram: e.target.value })}
                 className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
-                placeholder="@handle"
+                placeholder="@usuario"
               />
             </label>
             <label className="grid gap-1.5">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground">What's loudest right now? <span className="normal-case text-muted-foreground/70">(optional)</span></span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">¿Qué se siente más pesado ahora mismo? <span className="normal-case text-muted-foreground/70">(opcional)</span></span>
               <select
                 value={form.pain} onChange={(e) => setForm({ ...form, pain: e.target.value })}
                 className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
               >
-                <option value="">Choose one…</option>
-                {PAIN_OPTIONS.map((o) => (
+                <option value="">Elige una…</option>
+                {PAIN_OPTIONS_ES.map((o) => (
                   <option key={o} value={o}>{o}</option>
                 ))}
               </select>
@@ -369,10 +371,10 @@ function Waitlist() {
               disabled={loading}
               className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {loading ? "Joining…" : "Join the founding waitlist"}
+              {loading ? "Uniéndome…" : "Unirme a la lista de espera fundadora"}
               {!loading && <ArrowRight className="h-4 w-4" />}
             </button>
-            <p className="text-xs text-muted-foreground text-center">No spam. Ever. Unsubscribe with one tap.</p>
+            <p className="text-xs text-muted-foreground text-center">Sin spam. Nunca. Baja con un solo toque.</p>
           </form>
         )}
       </div>
@@ -384,16 +386,16 @@ function Founder() {
   return (
     <section className="py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
-        <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">A note from the team</p>
+        <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">Una nota del equipo</p>
         <blockquote className="mt-6 mx-auto max-w-3xl font-serif text-2xl sm:text-3xl text-foreground leading-snug text-balance text-center">
-          "Elara was built for women who look successful from the outside, but privately feel overwhelmed,
-          lonely, or unsure what they actually want next."
+          "Elara fue construida para mujeres que por fuera parecen exitosas, pero en privado se sienten abrumadas,
+          solas o sin saber qué quieren realmente."
         </blockquote>
 
         <div className="mt-16 grid sm:grid-cols-2 gap-10 sm:gap-14">
           {[
-            { img: founderMengxi, name: "Mengxi Wang", role: "Product & design", ig: "karawang", pos: "center top" },
-            { img: founderAlejandra, name: "Alejandra Ramirez", role: "Creator & community", ig: "alejandra.travels", pos: "center 30%" },
+            { img: founderMengxi, name: "Mengxi Wang", role: "Producto y diseño", ig: "karawang", pos: "center top" },
+            { img: founderAlejandra, name: "Alejandra Ramirez", role: "Creadora y comunidad", ig: "alejandra.travels", pos: "center 30%" },
           ].map((f) => (
             <figure key={f.name} className="flex flex-col items-center text-center">
               <div className="relative w-48 h-48 sm:w-56 sm:h-56">
@@ -423,15 +425,20 @@ function Footer() {
     <footer className="border-t border-border/60 py-10">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
         <p className="font-serif text-lg text-foreground">elara<span className="text-accent">.</span></p>
-        <p>© {new Date().getFullYear()} Elara. Made with care.</p>
+        <nav className="flex items-center gap-5">
+          <a href="#" className="hover:text-foreground transition">Privacidad</a>
+          <a href="#" className="hover:text-foreground transition">Contacto</a>
+          <a href="https://instagram.com/alejandra.travels" target="_blank" rel="noreferrer" className="hover:text-foreground transition">Instagram</a>
+        </nav>
+        <p>© {new Date().getFullYear()} Elara</p>
       </div>
     </footer>
   );
 }
 
-export function Landing() {
+export function LandingES() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-background text-foreground" lang="es">
       <Nav />
       <Hero />
       <SocialProof />
