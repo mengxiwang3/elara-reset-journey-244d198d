@@ -380,14 +380,15 @@ function Founder() {
 
         <div className="mt-16 grid sm:grid-cols-2 gap-10 sm:gap-14">
           {[
-            { img: founderMengxi, name: "Mengxi Wang", role: "Product & design", ig: "karawang" },
-            { img: founderAlejandra, name: "Alejandra Ramirez", role: "Creator & community", ig: "alejandra.travels" },
+            { img: founderMengxi, name: "Mengxi Wang", role: "Product & design", ig: "karawang", pos: "center top" },
+            { img: founderAlejandra, name: "Alejandra Ramirez", role: "Creator & community", ig: "alejandra.travels", pos: "center 30%" },
           ].map((f) => (
             <figure key={f.name} className="flex flex-col items-center text-center">
               <div className="relative w-48 h-48 sm:w-56 sm:h-56">
                 <div className="absolute -inset-3 bg-gradient-warm rounded-full blur-xl opacity-50" aria-hidden />
                 <img src={f.img} alt={f.name} loading="lazy"
-                  className="relative rounded-full object-cover w-full h-full shadow-card" />
+                  className="relative rounded-full object-cover w-full h-full shadow-card"
+                  style={{ objectPosition: f.pos }} />
               </div>
               <figcaption className="mt-6">
                 <p className="font-serif text-2xl text-foreground">{f.name}</p>
