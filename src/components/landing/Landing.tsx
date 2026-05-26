@@ -6,7 +6,7 @@ import appClarity from "@/assets/app-clarity.png";
 import appReflection from "@/assets/app-reflection.png";
 import appPath from "@/assets/app-path.png";
 import founderMengxi from "@/assets/founder-mengxi.jpg";
-import founderAlejandra from "@/assets/founder-alejandra.png";
+import founderAlejandra from "@/assets/founder-alejandra.jpg";
 
 function Nav() {
   return (
@@ -244,14 +244,42 @@ function Community() {
   );
 }
 
+const PAIN_OPTIONS = [
+  "Feeling scattered or overwhelmed",
+  "Emotionally drained, running on empty",
+  "Unsure what I actually want next",
+  "High-functioning but quietly lonely",
+  "Family expectations vs. my own life",
+  "Stuck in reinvention, unsure of next steps",
+];
+
 function Waitlist() {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", whatsapp: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [form, setForm] = useState({ name: "", email: "", whatsapp: "", instagram: "", pain: "" });
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim()) return;
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({})) as { error?: string };
+        throw new Error(data.error ?? "Something went wrong. Please try again.");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -300,9 +328,37 @@ function Waitlist() {
                 placeholder="+1 555 000 0000"
               />
             </label>
-            <button type="submit" className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:opacity-90 transition">
-              Join the founding waitlist
-              <ArrowRight className="h-4 w-4" />
+            <label className="grid gap-1.5">
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">Instagram <span className="normal-case text-muted-foreground/70">(optional)</span></span>
+              <input
+                maxLength={60}
+                value={form.instagram} onChange={(e) => setForm({ ...form, instagram: e.target.value })}
+                className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
+                placeholder="@handle"
+              />
+            </label>
+            <label className="grid gap-1.5">
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">What's loudest right now? <span className="normal-case text-muted-foreground/70">(optional)</span></span>
+              <select
+                value={form.pain} onChange={(e) => setForm({ ...form, pain: e.target.value })}
+                className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
+              >
+                <option value="">Choose one…</option>
+                {PAIN_OPTIONS.map((o) => (
+                  <option key={o} value={o}>{o}</option>
+                ))}
+              </select>
+            </label>
+            {error && (
+              <p className="text-sm text-red-500 text-center">{error}</p>
+            )}
+            <button
+              type="submit"
+              disabled={loading}
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {loading ? "Joining…" : "Join the founding waitlist"}
+              {!loading && <ArrowRight className="h-4 w-4" />}
             </button>
             <p className="text-xs text-muted-foreground text-center">No spam. Ever. Unsubscribe with one tap.</p>
           </form>
