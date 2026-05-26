@@ -35,14 +35,14 @@ function Hero() {
       <div className="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-12 items-center relative">
         <div className="lg:col-span-7 animate-fade-up">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs tracking-wide uppercase text-muted-foreground">
-            <Sparkles className="h-3.5 w-3.5 text-accent" /> Founding waitlist open
+            <Sparkles className="h-3.5 w-3.5 text-accent" /> Spanish-first · Founding waitlist open
           </span>
           <h1 className="mt-6 font-serif text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-[4.5rem] text-foreground text-balance">
-            For the woman holding it all together <em className="italic text-accent">— quietly.</em>
+            Daily AI support for money, clarity, and stability — <em className="italic text-accent">in her language, her voice.</em>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
-            Elara is a 7-day guided reset for ambitious women who look fine on the outside
-            and feel scattered on the inside. Clarity, softness, and structure — one honest check-in at a time.
+            Elara is a Spanish-first 7-day AI reset for Latina women navigating money pressure, family expectations,
+            ambition, and emotional overload — one honest check-in at a time.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <a href="#waitlist" className="group inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:translate-y-[-1px] transition">
@@ -56,10 +56,10 @@ function Hero() {
           <p className="mt-6 text-sm text-muted-foreground">Built quietly. Launching soon. Free for founding members.</p>
           <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-6 max-w-xl border-t border-border/60 pt-7">
             {[
-              ["2.8M+", "social audience"],
-              ["80K", "in our community"],
-              ["4,100+", "survey responses"],
-              ["3,000", "prior paid buyers"],
+              ["1.8M+", "engaged audience"],
+              ["80K", "direct community"],
+              ["1,998", "survey responses"],
+              ["3,000", "Alejandra's prior buyers"],
             ].map(([n, l]) => (
               <div key={l}>
                 <dt className="font-serif text-2xl text-foreground">{n}</dt>
@@ -99,8 +99,11 @@ function SocialProof() {
       <div className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
         <p className="text-xs uppercase tracking-[0.25em] text-accent">Built with — not for</p>
         <p className="mt-4 font-serif text-2xl sm:text-3xl text-foreground/90 max-w-3xl mx-auto leading-snug text-balance">
-          Shaped by 4,100+ survey responses and an 80K community of women navigating
-          ambition, reinvention, money, family, and softness.
+          Shaped by 1,998 survey responses and an 80K direct community of Latina women navigating
+          money pressure, ambition, reinvention, family, and softness.
+        </p>
+        <p className="mt-6 text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          We start with Money Clarity because financial pressure was the clearest pull in our community — then expand into the life systems around it: confidence, habits, family, purpose, and emotional wellbeing.
         </p>
       </div>
     </section>
@@ -245,6 +248,7 @@ function Community() {
 }
 
 const PAIN_OPTIONS = [
+  "Money pressure / financial independence",
   "Feeling scattered or overwhelmed",
   "Emotionally drained, running on empty",
   "Unsure what I actually want next",
