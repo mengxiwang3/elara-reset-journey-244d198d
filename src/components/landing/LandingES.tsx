@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { ArrowRight, Sparkles, Heart, Compass, Users, MessageCircleHeart, Sun, CheckCircle2, Instagram } from "lucide-react";
+import { Sun, CheckCircle2, Instagram } from "lucide-react";
+import { Reveal } from "./Reveal";
+
+const underline =
+  "relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full";
 import appToday from "@/assets/app-today.png";
 import appCommunity from "@/assets/app-community.png";
 import appClarity from "@/assets/app-clarity.png";
@@ -16,9 +20,9 @@ function Nav() {
           elara<span className="text-accent">.</span>
         </a>
         <nav className="hidden sm:flex items-center gap-8 text-sm text-muted-foreground">
-          <a href="#como" className="hover:text-foreground transition">Cómo funciona</a>
-          <a href="#producto" className="hover:text-foreground transition">Dentro de Elara</a>
-          <a href="#comunidad" className="hover:text-foreground transition">Comunidad</a>
+          <a href="#como" className={`hover:text-foreground transition ${underline}`}>Cómo funciona</a>
+          <a href="#producto" className={`hover:text-foreground transition ${underline}`}>Dentro de Elara</a>
+          <a href="#comunidad" className={`hover:text-foreground transition ${underline}`}>Comunidad</a>
         </nav>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 text-xs font-medium">
@@ -26,7 +30,7 @@ function Nav() {
             <span className="text-border/60">|</span>
             <span className="text-foreground">ES</span>
           </div>
-          <a href="#lista" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition">
+          <a href="#lista" className="inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition">
             Unirme a la lista
           </a>
         </div>
@@ -38,11 +42,11 @@ function Nav() {
 function Hero() {
   return (
     <section id="top" className="relative pt-28 sm:pt-36 pb-20 sm:pb-28 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-glow pointer-events-none" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-glow pointer-events-none animate-breathe" aria-hidden />
       <div className="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-12 items-center relative">
         <div className="lg:col-span-7 animate-fade-up">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs tracking-wide uppercase text-muted-foreground">
-            <Sparkles className="h-3.5 w-3.5 text-accent" /> Primera en español · Lista de espera fundadora abierta
+          <span className="inline-flex items-center gap-3 text-xs tracking-[0.25em] uppercase text-muted-foreground">
+            <span className="h-px w-8 bg-accent" aria-hidden /> Primera en español · Lista de espera fundadora abierta
           </span>
           <h1 className="mt-6 font-serif text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-[4.5rem] text-foreground text-balance">
             Para la mujer que sostiene todo, <em className="italic text-accent">aunque nadie lo note.</em>
@@ -52,11 +56,11 @@ function Hero() {
             pero por dentro se sienten saturadas, dispersas o lejos de sí mismas.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <a href="#lista" className="group inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:translate-y-[-1px] transition">
+            <a href="#lista" className="group inline-flex items-center gap-2.5 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors">
               Unirme a la lista de espera
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition" />
+              <span className="text-accent group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>
             </a>
-            <a href="#como" className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-7 py-3.5 text-base font-medium text-foreground hover:bg-card transition">
+            <a href="#como" className="inline-flex items-center gap-2 rounded-lg border border-foreground/20 px-7 py-3.5 text-base font-medium text-foreground hover:border-foreground/40 transition">
               Ver cómo funciona
             </a>
           </div>
@@ -102,7 +106,7 @@ function Hero() {
 function SocialProof() {
   return (
     <section className="py-14 border-y border-border/50 bg-card/40">
-      <div className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
+      <Reveal className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
         <p className="text-xs uppercase tracking-[0.25em] text-accent">Construido con — no para</p>
         <p className="mt-4 font-serif text-2xl sm:text-3xl text-foreground/90 max-w-3xl mx-auto leading-snug text-balance">
           Moldeado por 1,998 respuestas de mujeres y una comunidad directa de 80K latinas navegando
@@ -111,37 +115,39 @@ function SocialProof() {
         <p className="mt-6 text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           Empezamos con Claridad Financiera porque la presión económica fue lo que más resonó en nuestra comunidad — y desde ahí abrimos los sistemas de vida que la rodean: confianza, hábitos, familia, propósito y bienestar emocional.
         </p>
-      </div>
+      </Reveal>
     </section>
   );
 }
 
 const problems = [
-  { icon: Sun, title: "Funcionando al máximo, agotada en silencio", body: "Estás entregando para todos. El cansancio vive en un lugar donde solo tú puedes sentirlo." },
-  { icon: Compass, title: "Estructura, sin la presión", body: "No es otro sistema de productividad. Es algo que te recibe exactamente donde estás esta semana." },
-  { icon: Heart, title: "Suavidad y ambición, al mismo tiempo", body: "No tienes que elegir entre el descanso y el crecimiento. Elara sostiene los dos." },
-  { icon: MessageCircleHeart, title: "Apoyo que entiende el contexto", body: "Tu cultura, tu familia, tus estándares. Orientación que no aplana nada de eso." },
+  { title: "Funcionando al máximo, agotada en silencio", body: "Estás entregando para todos. El cansancio vive en un lugar donde solo tú puedes sentirlo." },
+  { title: "Estructura, sin la presión", body: "No es otro sistema de productividad. Es algo que te recibe exactamente donde estás esta semana." },
+  { title: "Suavidad y ambición, al mismo tiempo", body: "No tienes que elegir entre el descanso y el crecimiento. Elara sostiene los dos." },
+  { title: "Apoyo que entiende el contexto", body: "Tu cultura, tu familia, tus estándares. Orientación que no aplana nada de eso." },
 ];
 
 function Problem() {
   return (
     <section className="py-24 sm:py-32">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="max-w-2xl">
-          <p className="text-sm uppercase tracking-[0.2em] text-accent">Si esto te suena familiar</p>
-          <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
-            No necesitas otra app. Necesitas un lugar donde aterrizar.
-          </h2>
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-10 lg:gap-16">
+        <div className="lg:col-span-5">
+          <Reveal className="lg:sticky lg:top-28">
+            <p className="text-sm uppercase tracking-[0.2em] text-accent">Si esto te suena familiar</p>
+            <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
+              No necesitas otra app. Necesitas un lugar donde aterrizar.
+            </h2>
+          </Reveal>
         </div>
-        <div className="mt-14 grid sm:grid-cols-2 gap-5">
-          {problems.map((p) => (
-            <div key={p.title} className="group rounded-3xl border border-border/70 bg-card p-7 shadow-card hover:shadow-soft transition">
-              <div className="h-11 w-11 rounded-2xl bg-accent/10 text-accent flex items-center justify-center">
-                <p.icon className="h-5 w-5" />
+        <div className="lg:col-span-7 border-t border-foreground/10">
+          {problems.map((p, i) => (
+            <Reveal key={p.title} delay={i * 90} className="flex gap-6 py-7 border-b border-foreground/10">
+              <span className="shrink-0 w-9 font-serif text-2xl italic text-accent/70">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 className="font-serif text-2xl text-foreground">{p.title}</h3>
+                <p className="mt-2 text-muted-foreground leading-relaxed">{p.body}</p>
               </div>
-              <h3 className="mt-5 font-serif text-2xl text-foreground">{p.title}</h3>
-              <p className="mt-2 text-muted-foreground leading-relaxed">{p.body}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -160,7 +166,7 @@ const screens = [
 function PhoneMockup({ src, label, caption }: { src: string; label: string; caption: string }) {
   return (
     <div className="shrink-0 w-[220px] sm:w-[240px]">
-      <div className="relative rounded-[2.2rem] p-2.5 bg-card border border-border/60 shadow-soft">
+      <div className="hover-lift relative rounded-[2.2rem] p-2.5 bg-card border border-border/60 shadow-soft hover:shadow-soft">
         <img src={src} alt={`Elara app — ${label}`} loading="lazy"
           className="rounded-[1.8rem] w-full object-cover" />
       </div>
@@ -174,7 +180,7 @@ function Product() {
   return (
     <section id="producto" className="py-24 sm:py-32 bg-gradient-warm">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl ml-auto text-right">
           <p className="text-sm uppercase tracking-[0.2em] text-accent">Dentro de Elara</p>
           <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
             Un espacio pequeño y hermoso para tu vida interior.
@@ -182,12 +188,14 @@ function Product() {
           <p className="mt-5 text-base text-muted-foreground leading-relaxed">
             Al final de la semana, sales con más claridad sobre lo que necesitas, un plan de reset personalizado y un ritmo diario más suave que sí puedes sostener.
           </p>
-        </div>
+        </Reveal>
       </div>
       <div className="mt-14 overflow-x-auto pb-6 scrollbar-hide">
         <div className="flex gap-5 sm:gap-7 px-5 sm:px-8 lg:justify-center min-w-max">
-          {screens.map((s) => (
-            <PhoneMockup key={s.label} {...s} />
+          {screens.map((s, i) => (
+            <Reveal key={s.label} delay={i * 80} className="shrink-0">
+              <PhoneMockup {...s} />
+            </Reveal>
           ))}
         </div>
       </div>
@@ -205,19 +213,19 @@ function HowItWorks() {
   return (
     <section id="como" className="py-24 sm:py-32">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl mx-auto text-center">
           <p className="text-sm uppercase tracking-[0.2em] text-accent">Cómo funciona</p>
           <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
             Siete días. Un cambio tranquilo a la vez.
           </h2>
-        </div>
-        <div className="mt-14 grid md:grid-cols-3 gap-6">
-          {steps.map((s) => (
-            <div key={s.n} className="rounded-3xl border border-border/70 bg-card p-8 shadow-card">
-              <div className="font-serif text-5xl text-accent/80">{s.n}</div>
+        </Reveal>
+        <div className="mt-16 grid md:grid-cols-3 gap-12 md:gap-10">
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 120}>
+              <div className="font-serif text-7xl text-accent/25 leading-none">{s.n}</div>
               <h3 className="mt-4 font-serif text-2xl text-foreground leading-snug">{s.title}</h3>
               <p className="mt-3 text-muted-foreground leading-relaxed">{s.body}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -228,12 +236,12 @@ function HowItWorks() {
 function Community() {
   return (
     <section id="comunidad" className="py-24 sm:py-32">
-      <div className="max-w-5xl mx-auto px-5 sm:px-8">
+      <Reveal className="max-w-5xl mx-auto px-5 sm:px-8">
         <div className="rounded-[2.5rem] bg-primary text-primary-foreground p-10 sm:p-16 shadow-soft relative overflow-hidden">
-          <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-accent/30 blur-3xl" aria-hidden />
+          <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-accent/30 blur-3xl animate-breathe" aria-hidden />
           <div className="relative">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 px-3 py-1 text-xs uppercase tracking-wider">
-              <Users className="h-3.5 w-3.5" /> Comunidad Latina-first
+            <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-primary-foreground/80">
+              <span className="h-px w-8 bg-primary-foreground/40" aria-hidden /> Comunidad Latina-first
             </div>
             <h2 className="mt-6 font-serif text-3xl sm:text-5xl text-balance leading-tight">
               Diseñada primero para mujeres latinas — porque la familia, la ambición y la suavidad viven en el mismo cuerpo.
@@ -244,14 +252,14 @@ function Community() {
             </p>
             <ul className="mt-8 flex flex-wrap gap-2 max-w-2xl">
               {["Expectativas familiares","Reinvención","Ambición","Crecimiento emocional","Identidad bilingüe","Independencia","Suavidad","Confianza","Cultura"].map((t) => (
-                <li key={t} className="text-xs uppercase tracking-wider rounded-full border border-primary-foreground/25 px-3 py-1.5 text-primary-foreground/85">
+                <li key={t} className="text-xs uppercase tracking-wider rounded-full border border-primary-foreground/25 px-3 py-1.5 text-primary-foreground/85 transition-colors hover:border-primary-foreground/60 hover:bg-primary-foreground/10">
                   {t}
                 </li>
               ))}
             </ul>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -298,13 +306,15 @@ function Waitlist() {
   return (
     <section id="lista" className="py-24 sm:py-32 bg-gradient-warm">
       <div className="max-w-3xl mx-auto px-5 sm:px-8 text-center">
-        <p className="text-sm uppercase tracking-[0.2em] text-accent">Lista de espera fundadora</p>
-        <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
-          Sé una de las primeras mujeres dentro de Elara.
-        </h2>
-        <p className="mt-5 text-lg text-muted-foreground max-w-xl mx-auto">
-          Las fundadoras obtienen acceso gratuito a la primera cohorte, influencia temprana en lo que construimos y una bienvenida personal del equipo.
-        </p>
+        <Reveal>
+          <p className="text-sm uppercase tracking-[0.2em] text-accent">Lista de espera fundadora</p>
+          <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
+            Sé una de las primeras mujeres dentro de Elara.
+          </h2>
+          <p className="mt-5 text-lg text-muted-foreground max-w-xl mx-auto">
+            Las fundadoras obtienen acceso gratuito a la primera cohorte, influencia temprana en lo que construimos y una bienvenida personal del equipo.
+          </p>
+        </Reveal>
 
         {submitted ? (
           <div className="mt-12 rounded-3xl border border-border bg-card p-10 shadow-card">
@@ -368,10 +378,10 @@ function Waitlist() {
             <button
               type="submit"
               disabled={loading}
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
+              className="group mt-2 inline-flex items-center justify-center gap-2.5 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {loading ? "Uniéndome…" : "Unirme a la lista de espera fundadora"}
-              {!loading && <ArrowRight className="h-4 w-4" />}
+              {!loading && <span className="text-accent group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>}
             </button>
             <p className="text-xs text-muted-foreground text-center">Sin spam. Nunca. Baja con un solo toque.</p>
           </form>
@@ -385,33 +395,39 @@ function Founder() {
   return (
     <section className="py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
-        <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">Una nota del equipo</p>
-        <blockquote className="mt-6 mx-auto max-w-3xl font-serif text-2xl sm:text-3xl text-foreground leading-snug text-balance text-center">
-          "Elara fue construida para mujeres que por fuera parecen exitosas, pero en privado se sienten abrumadas,
-          solas o sin saber qué quieren realmente."
-        </blockquote>
+        <Reveal>
+          <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">Una nota del equipo</p>
+          <blockquote className="mt-6 mx-auto max-w-3xl font-serif text-2xl sm:text-3xl text-foreground leading-snug text-balance text-center">
+            "Elara fue construida para mujeres que por fuera parecen exitosas, pero en privado se sienten abrumadas,
+            solas o sin saber qué quieren realmente."
+          </blockquote>
+        </Reveal>
 
         <div className="mt-16 grid sm:grid-cols-2 gap-10 sm:gap-14">
           {[
             { img: founderMengxi, name: "Mengxi Wang", role: "Producto y diseño", ig: "karawang", pos: "center top" },
             { img: founderAlejandra, name: "Alejandra Ramirez", role: "Creadora y comunidad", ig: "alejandra.travels", pos: "center 30%" },
-          ].map((f) => (
-            <figure key={f.name} className="flex flex-col items-center text-center">
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56">
-                <div className="absolute -inset-3 bg-gradient-warm rounded-full blur-xl opacity-50" aria-hidden />
-                <img src={f.img} alt={f.name} loading="lazy"
-                  className="relative rounded-full object-cover w-full h-full shadow-card"
-                  style={{ objectPosition: f.pos }} />
-              </div>
-              <figcaption className="mt-6">
-                <p className="font-serif text-2xl text-foreground">{f.name}</p>
-                <p className="text-sm uppercase tracking-wider text-muted-foreground mt-1">{f.role}</p>
-                <a href={`https://instagram.com/${f.ig}`} target="_blank" rel="noreferrer"
-                  className="mt-3 inline-flex items-center gap-1.5 text-sm text-accent hover:text-foreground transition">
-                  <Instagram className="h-4 w-4" /> @{f.ig}
-                </a>
-              </figcaption>
-            </figure>
+          ].map((f, i) => (
+            <Reveal key={f.name} delay={i * 120}>
+              <figure className="flex flex-col items-center text-center">
+                <div className="group relative w-48 h-48 sm:w-56 sm:h-56">
+                  <div className="absolute -inset-3 bg-gradient-warm rounded-full blur-xl opacity-50 transition-opacity duration-500 group-hover:opacity-80" aria-hidden />
+                  <div className="relative w-full h-full rounded-full overflow-hidden shadow-card">
+                    <img src={f.img} alt={f.name} loading="lazy"
+                      className="img-zoom w-full h-full object-cover"
+                      style={{ objectPosition: f.pos }} />
+                  </div>
+                </div>
+                <figcaption className="mt-6">
+                  <p className="font-serif text-2xl text-foreground">{f.name}</p>
+                  <p className="text-sm uppercase tracking-wider text-muted-foreground mt-1">{f.role}</p>
+                  <a href={`https://instagram.com/${f.ig}`} target="_blank" rel="noreferrer"
+                    className={`mt-3 inline-flex items-center gap-1.5 text-sm text-accent hover:text-foreground transition ${underline}`}>
+                    <Instagram className="h-4 w-4" /> @{f.ig}
+                  </a>
+                </figcaption>
+              </figure>
+            </Reveal>
           ))}
         </div>
       </div>
