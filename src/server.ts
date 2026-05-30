@@ -4,6 +4,8 @@ import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 import { handleSubscribe } from "./lib/subscribe";
 import type { Env } from "./lib/subscribe";
+import { handleAdmin } from "./lib/admin";
+import type { AdminEnv } from "./lib/admin";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -73,6 +75,9 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === "/api/subscribe") {
       return handleSubscribe(request, env as Env);
+    }
+    if (url.pathname === "/admin") {
+      return handleAdmin(request, env as AdminEnv);
     }
 
     try {
