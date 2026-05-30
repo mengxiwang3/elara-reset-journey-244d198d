@@ -250,10 +250,11 @@ function Community() {
               Para las hijas mayores, las primeras en su familia en todo, las que traducen en casa y lideran en el trabajo.
               Para las reinventoras, las mentes bilingües, las mujeres aprendiendo que la independencia y la ternura pueden compartir una vida.
             </p>
-            <ul className="mt-8 flex flex-wrap gap-2 max-w-2xl">
-              {["Expectativas familiares","Reinvención","Ambición","Crecimiento emocional","Identidad bilingüe","Independencia","Suavidad","Confianza","Cultura"].map((t) => (
-                <li key={t} className="text-xs uppercase tracking-wider rounded-full border border-primary-foreground/25 px-3 py-1.5 text-primary-foreground/85 transition-colors hover:border-primary-foreground/60 hover:bg-primary-foreground/10">
-                  {t}
+            <ul className="mt-9 flex flex-wrap items-center gap-x-3 gap-y-1.5 max-w-2xl font-serif text-lg sm:text-xl text-primary-foreground/65">
+              {["Expectativas familiares","Reinvención","Ambición","Crecimiento emocional","Identidad bilingüe","Independencia","Suavidad","Confianza","Cultura"].map((t, i, arr) => (
+                <li key={t} className="inline-flex items-center gap-3">
+                  <span className="transition-colors hover:text-primary-foreground">{t}</span>
+                  {i < arr.length - 1 && <span className="text-accent/60" aria-hidden>·</span>}
                 </li>
               ))}
             </ul>

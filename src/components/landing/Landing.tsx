@@ -248,10 +248,11 @@ function Community() {
               For the eldest daughters, the first-gen everything, the ones who translate at home and lead at work.
               For the reinventors, the bilingual minds, the women learning that independence and tenderness can share a life.
             </p>
-            <ul className="mt-8 flex flex-wrap gap-2 max-w-2xl">
-              {["Family expectations","Reinvention","Ambition","Emotional growth","Bilingual identity","Independence","Softness","Confidence","Culture"].map((t) => (
-                <li key={t} className="text-xs uppercase tracking-wider rounded-full border border-primary-foreground/25 px-3 py-1.5 text-primary-foreground/85 transition-colors hover:border-primary-foreground/60 hover:bg-primary-foreground/10">
-                  {t}
+            <ul className="mt-9 flex flex-wrap items-center gap-x-3 gap-y-1.5 max-w-2xl font-serif text-lg sm:text-xl text-primary-foreground/65">
+              {["Family expectations","Reinvention","Ambition","Emotional growth","Bilingual identity","Independence","Softness","Confidence","Culture"].map((t, i, arr) => (
+                <li key={t} className="inline-flex items-center gap-3">
+                  <span className="transition-colors hover:text-primary-foreground">{t}</span>
+                  {i < arr.length - 1 && <span className="text-accent/60" aria-hidden>·</span>}
                 </li>
               ))}
             </ul>
