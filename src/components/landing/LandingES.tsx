@@ -321,7 +321,8 @@ function Waitlist() {
           <div className="mt-12 rounded-3xl border border-border bg-card p-10 shadow-card">
             <CheckCircle2 className="h-10 w-10 text-accent mx-auto" />
             <h3 className="mt-4 font-serif text-2xl text-foreground">Ya estás en la lista.</h3>
-            <p className="mt-2 text-muted-foreground">Te escribiremos antes de abrir la primera cohorte de Elara. Bienvenida.</p>
+            <p className="mt-2 text-muted-foreground">Te escribiremos antes de abrir el primer grupo de Elara. Bienvenida.</p>
+            <p className="mt-4 font-hand text-2xl text-accent -rotate-2">— Mengxi &amp; Ale</p>
           </div>
         ) : (
           <form onSubmit={onSubmit} className="mt-12 grid gap-3 text-left bg-card rounded-3xl border border-border p-6 sm:p-8 shadow-card">
@@ -384,6 +385,7 @@ function Waitlist() {
               {loading ? "Uniéndome…" : "Unirme a la lista de espera fundadora"}
               {!loading && <span className="text-accent group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>}
             </button>
+            <p className="font-hand text-xl text-accent/80 text-center">leemos cada respuesta — de verdad.</p>
             <p className="text-xs text-muted-foreground text-center">Sin spam. Nunca. Baja con un solo toque.</p>
           </form>
         )}
@@ -397,11 +399,13 @@ function Founder() {
     <section className="py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">Una nota del equipo</p>
-          <blockquote className="mt-6 mx-auto max-w-3xl font-serif text-2xl sm:text-3xl text-foreground leading-snug text-balance text-center">
-            "Elara fue construida para mujeres que por fuera parecen exitosas, pero en privado se sienten abrumadas,
-            solas o sin saber qué quieren realmente."
+          <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">Una nota de nosotras</p>
+          <blockquote className="mt-6 mx-auto max-w-2xl font-serif text-2xl sm:text-[2rem] text-foreground leading-snug text-balance text-center">
+            Veíamos lo mismo una y otra vez — en nuestra propia vida, y en miles de mensajes: mujeres que
+            por fuera parecen tenerlo todo resuelto, y por dentro funcionan en vacío. No encontrábamos el
+            lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. <span className="italic text-muted-foreground">(La verdad, también para nosotras.)</span>
           </blockquote>
+          <p className="mt-8 text-center font-hand text-3xl sm:text-4xl text-accent -rotate-2">— Mengxi &amp; Ale</p>
         </Reveal>
 
         <div className="mt-16 grid sm:grid-cols-2 gap-10 sm:gap-14">
@@ -446,7 +450,7 @@ function Footer() {
           <a href="#" className="hover:text-foreground transition">Contacto</a>
           <a href="https://instagram.com/alejandra.travels" target="_blank" rel="noreferrer" className="hover:text-foreground transition">Instagram</a>
         </nav>
-        <p>© {new Date().getFullYear()} Elara</p>
+        <p>© {new Date().getFullYear()} Elara · Hecho por dos mujeres que también lo necesitaban.</p>
       </div>
     </footer>
   );

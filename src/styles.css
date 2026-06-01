@@ -109,6 +109,7 @@
   --color-terracotta: var(--terracotta);
   --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
   --font-sans: "Inter", system-ui, sans-serif;
+  --font-hand: "Caveat", "Segoe Script", cursive;
 }
 
 @layer base {

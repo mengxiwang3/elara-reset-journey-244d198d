@@ -320,6 +320,7 @@ function Waitlist() {
             <CheckCircle2 className="h-10 w-10 text-accent mx-auto" />
             <h3 className="mt-4 font-serif text-2xl text-foreground">You're on the list.</h3>
             <p className="mt-2 text-muted-foreground">We'll be in touch soon, gently. Bienvenida.</p>
+            <p className="mt-4 font-hand text-2xl text-accent -rotate-2">— Mengxi &amp; Ale</p>
           </div>
         ) : (
           <form onSubmit={onSubmit} className="mt-12 grid gap-3 text-left bg-card rounded-3xl border border-border p-6 sm:p-8 shadow-card">
@@ -382,6 +383,7 @@ function Waitlist() {
               {loading ? "Joining…" : "Join the founding waitlist"}
               {!loading && <span className="text-accent group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>}
             </button>
+            <p className="font-hand text-xl text-accent/80 text-center">we read every single reply — promise.</p>
             <p className="text-xs text-muted-foreground text-center">No spam. Ever. Unsubscribe with one tap.</p>
           </form>
         )}
@@ -395,11 +397,13 @@ function Founder() {
     <section className="py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">A note from the team</p>
-          <blockquote className="mt-6 mx-auto max-w-3xl font-serif text-2xl sm:text-3xl text-foreground leading-snug text-balance text-center">
-            "Elara was built for women who look successful from the outside, but privately feel overwhelmed,
-            lonely, or unsure what they actually want next."
+          <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">A note from us</p>
+          <blockquote className="mt-6 mx-auto max-w-2xl font-serif text-2xl sm:text-[2rem] text-foreground leading-snug text-balance text-center">
+            We kept noticing the same thing — in our own lives, and in thousands of replies: women who look
+            like they have it all together, quietly running on empty. We couldn't find the soft place we
+            needed, so we started building it. Elara is for you. <span className="italic text-muted-foreground">(Honestly, it's for us too.)</span>
           </blockquote>
+          <p className="mt-8 text-center font-hand text-3xl sm:text-4xl text-accent -rotate-2">— Mengxi &amp; Ale</p>
         </Reveal>
 
         <div className="mt-16 grid sm:grid-cols-2 gap-10 sm:gap-14">
@@ -439,7 +443,7 @@ function Footer() {
     <footer className="border-t border-border/60 py-10">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
         <p className="font-serif text-lg text-foreground">elara<span className="text-accent">.</span></p>
-        <p>© {new Date().getFullYear()} Elara. Made with care.</p>
+        <p>© {new Date().getFullYear()} Elara · Built by two women who needed it too.</p>
       </div>
     </footer>
   );
