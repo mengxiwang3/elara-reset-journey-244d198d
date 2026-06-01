@@ -109,11 +109,11 @@ function SocialProof() {
       <Reveal className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
         <p className="text-xs uppercase tracking-[0.25em] text-accent">Construido con — no para</p>
         <p className="mt-4 font-serif text-2xl sm:text-3xl text-foreground/90 max-w-3xl mx-auto leading-snug text-balance">
-          Moldeado por 1,998 respuestas de mujeres y una comunidad directa de 80K latinas navegando
-          presión económica, ambición, reinvención, familia y suavidad.
+          Moldeado por 1,998 respuestas y una comunidad de 80K latinas que nos contaron,
+          con honestidad, lo que estaban cargando.
         </p>
         <p className="mt-6 text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Empezamos con Claridad Financiera porque la presión económica fue lo que más resonó en nuestra comunidad — y desde ahí abrimos los sistemas de vida que la rodean: confianza, hábitos, familia, propósito y bienestar emocional.
+          Empezamos por el dinero porque fue la presión que más salió. Desde ahí se abre hacia todo lo demás — confianza, familia, hábitos y cómo te sientes de verdad, día a día.
         </p>
       </Reveal>
     </section>
@@ -122,7 +122,7 @@ function SocialProof() {
 
 const problems = [
   { title: "Funcionando al máximo, agotada en silencio", body: "Estás entregando para todos. El cansancio vive en un lugar donde solo tú puedes sentirlo." },
-  { title: "Estructura, sin la presión", body: "No es otro sistema de productividad. Es algo que te recibe exactamente donde estás esta semana." },
+  { title: "Estructura, sin la presión", body: "No es otro sistema de productividad. Empieza desde donde estás de verdad esta semana, no desde donde crees que deberías estar." },
   { title: "Suavidad y ambición, al mismo tiempo", body: "No tienes que elegir entre el descanso y el crecimiento. Elara sostiene los dos." },
   { title: "Apoyo que entiende el contexto", body: "Tu cultura, tu familia, tus estándares. Orientación que no aplana nada de eso." },
 ];
@@ -206,7 +206,7 @@ function Product() {
 const steps = [
   { n: "01", title: "Un check-in honesto de 4 minutos", body: "Sin puntuaciones. Sin vergüenza. Solo dónde estás realmente hoy." },
   { n: "02", title: "Un camino de 7 días hecho para tu momento", body: "Dinero, mente, cuerpo, personas, propósito — lo que esté más pesado, primero." },
-  { n: "03", title: "Rituales diarios, IA suave, círculo real", body: "Estructura gentil que se sostiene, con mujeres caminando a tu lado." },
+  { n: "03", title: "Rituales diarios, IA suave, un círculo real", body: "Estructura suave que sí puedes mantener — y mujeres que lo viven contigo." },
 ];
 
 function HowItWorks() {
@@ -216,7 +216,7 @@ function HowItWorks() {
         <Reveal className="max-w-2xl mx-auto text-center">
           <p className="text-sm uppercase tracking-[0.2em] text-accent">Cómo funciona</p>
           <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
-            Siete días. Un cambio tranquilo a la vez.
+            Siete días. Cambios pequeños, sin reinventarte.
           </h2>
         </Reveal>
         <div className="mt-16 grid md:grid-cols-3 gap-12 md:gap-10">
@@ -313,7 +313,7 @@ function Waitlist() {
             Sé una de las primeras mujeres dentro de Elara.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-xl mx-auto">
-            Las fundadoras obtienen acceso gratuito a la primera cohorte, influencia temprana en lo que construimos y una bienvenida personal del equipo.
+            Las fundadoras entran gratis al primer grupo, opinan de verdad en lo que construimos y reciben un saludo personal de nosotras — no un correo de bienvenida genérico.
           </p>
         </Reveal>
 

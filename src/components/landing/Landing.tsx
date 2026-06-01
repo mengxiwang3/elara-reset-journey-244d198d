@@ -52,8 +52,8 @@ function Hero() {
             Daily AI support for money, clarity, and stability — <em className="italic text-accent">in her language, her voice.</em>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
-            Elara is a Spanish-first 7-day AI reset for Latina women navigating money pressure, family expectations,
-            ambition, and emotional overload — one honest check-in at a time.
+            Elara is a Spanish-first 7-day AI reset for Latina women carrying money stress, family expectations,
+            and the weight of holding everything together — one honest check-in at a time.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <a href="#waitlist" className="group inline-flex items-center gap-2.5 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors">
@@ -110,11 +110,11 @@ function SocialProof() {
       <Reveal className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
         <p className="text-xs uppercase tracking-[0.25em] text-accent">Built with — not for</p>
         <p className="mt-4 font-serif text-2xl sm:text-3xl text-foreground/90 max-w-3xl mx-auto leading-snug text-balance">
-          Shaped by 1,998 survey responses and an 80K direct community of Latina women navigating
-          money pressure, ambition, reinvention, family, and softness.
+          Shaped by 1,998 survey responses and an 80K community of Latina women who told us,
+          honestly, what they were carrying.
         </p>
         <p className="mt-6 text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          We start with Money Clarity because financial pressure was the clearest pull in our community — then expand into the life systems around it: confidence, habits, family, purpose, and emotional wellbeing.
+          We start with money because that's the pressure that came up most. From there it opens into everything around it — confidence, family, habits, and how you actually feel day to day.
         </p>
       </Reveal>
     </section>
@@ -123,8 +123,8 @@ function SocialProof() {
 
 const problems = [
   { title: "High-functioning, quietly depleted", body: "You're delivering for everyone. The exhaustion lives somewhere only you can feel it." },
-  { title: "Structure, without the pressure", body: "Not another productivity system. Something that meets you where you actually are this week." },
-  { title: "Softness and ambition, at once", body: "You don't have to choose between rest and reaching. Elara holds both." },
+  { title: "Structure, without the pressure", body: "Not another productivity system. It starts from where you actually are this week, not where you think you should be." },
+  { title: "Softness and ambition, at once", body: "You don't have to choose between rest and ambition. Elara makes room for both." },
   { title: "Support that gets the context", body: "Your culture, your family, your standards. Guidance that doesn't flatten any of it." },
 ];
 
@@ -204,7 +204,7 @@ function Product() {
 const steps = [
   { n: "01", title: "A 4-minute honest check-in", body: "No scoring. No shame. Just where you actually are today." },
   { n: "02", title: "A 7-day path made for your season", body: "Money, mind, body, people, purpose — whatever is loudest first." },
-  { n: "03", title: "Daily rituals, gentle AI, real circle", body: "Soft structure that sticks, with women walking beside you." },
+  { n: "03", title: "Daily rituals, gentle AI, a real circle", body: "Gentle structure you can actually keep — and women going through it with you." },
 ];
 
 function HowItWorks() {
@@ -214,7 +214,7 @@ function HowItWorks() {
         <Reveal className="max-w-2xl mx-auto text-center">
           <p className="text-sm uppercase tracking-[0.2em] text-accent">How it works</p>
           <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
-            Seven days. One quiet shift at a time.
+            Seven days. Small shifts, no overhaul.
           </h2>
         </Reveal>
         <div className="mt-16 grid md:grid-cols-3 gap-12 md:gap-10">
@@ -311,7 +311,7 @@ function Waitlist() {
             Be one of the first women inside Elara.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-xl mx-auto">
-            Founding members get free access to the first cohort, early influence on what we build, and a personal welcome from the team.
+            Founding members join the first group free, get a real say in what we build, and a personal hello from us — not a generic welcome email.
           </p>
         </Reveal>
 
