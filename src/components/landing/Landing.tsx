@@ -49,11 +49,11 @@ function Hero() {
             <span className="h-px w-8 bg-accent" aria-hidden /> Spanish-first · Founding waitlist open
           </span>
           <h1 className="mt-6 font-serif text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-[4.5rem] text-foreground text-balance">
-            Daily AI support for money, clarity, and stability — <em className="italic text-accent">in her language, her voice.</em>
+            A softer place to come back to <em className="italic text-accent">yourself.</em>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
-            Elara is a Spanish-first 7-day AI reset for Latina women carrying money stress, family expectations,
-            and the weight of holding everything together — one honest check-in at a time.
+            Elara is a Spanish-first, 7-day AI reset for Latina women — a few quiet minutes a day to sort
+            your thoughts, feel understood, and set one thing down. In your language, in your voice.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <a href="#waitlist" className="group inline-flex items-center gap-2.5 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors">
@@ -263,6 +263,39 @@ function Community() {
   );
 }
 
+const phrasePairs = [
+  { es: "“Hoy fue mucho.”", en: "Today was a lot — and that's allowed." },
+  { es: "“No sé por dónde empezar.”", en: "Let's find one small place to start." },
+  { es: "“Aquí puedo ser yo.”", en: "A place you don't have to perform." },
+];
+
+function Culture() {
+  return (
+    <section className="py-24 sm:py-32">
+      <Reveal className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+        <p className="text-sm uppercase tracking-[0.2em] text-accent">Built from the inside out</p>
+        <h2 className="mt-4 font-serif text-4xl sm:text-6xl text-foreground leading-[1.05] text-balance">
+          Not English, translated. <em className="italic text-accent">Spanish, understood.</em>
+        </h2>
+        <p className="mt-6 max-w-xl mx-auto text-lg text-muted-foreground leading-relaxed">
+          Elara reads tone, emotion, culture, and chaos — not just words. The eldest-daughter weight, the family
+          that calls, the two worlds you live between. Built for that, not adapted to it.
+        </p>
+      </Reveal>
+      <Reveal className="mt-12 max-w-4xl mx-auto px-5 sm:px-8">
+        <div className="grid sm:grid-cols-3 border-t border-l border-foreground/10">
+          {phrasePairs.map((p) => (
+            <div key={p.es} className="border-b border-r border-foreground/10 p-7 sm:p-8 bg-card/40 transition-colors hover:bg-card/70">
+              <p className="font-serif italic text-2xl sm:text-[1.7rem] text-foreground leading-snug">{p.es}</p>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.en}</p>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 const PAIN_OPTIONS = [
   "Money pressure / financial independence",
   "Feeling scattered or overwhelmed",
@@ -459,6 +492,7 @@ export function Landing() {
       <Product />
       <HowItWorks />
       <Community />
+      <Culture />
       <Waitlist />
       <Founder />
       <Footer />

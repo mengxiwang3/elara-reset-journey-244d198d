@@ -265,6 +265,39 @@ function Community() {
   );
 }
 
+const phrasePairs = [
+  { es: "“Hoy fue mucho.”", reply: "Hoy fue mucho — y está bien." },
+  { es: "“No sé por dónde empezar.”", reply: "Busquemos un pequeño lugar para empezar." },
+  { es: "“Aquí puedo ser yo.”", reply: "Un lugar donde no tienes que actuar." },
+];
+
+function Culture() {
+  return (
+    <section className="py-24 sm:py-32">
+      <Reveal className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+        <p className="text-sm uppercase tracking-[0.2em] text-accent">Construido desde adentro</p>
+        <h2 className="mt-4 font-serif text-4xl sm:text-6xl text-foreground leading-[1.05] text-balance">
+          No es inglés, traducido. <em className="italic text-accent">Español, entendido.</em>
+        </h2>
+        <p className="mt-6 max-w-xl mx-auto text-lg text-muted-foreground leading-relaxed">
+          Elara lee el tono, la emoción, la cultura y el caos — no solo las palabras. El peso de ser la hija mayor,
+          la familia que llama, los dos mundos que habitas. Construido para eso, no adaptado a eso.
+        </p>
+      </Reveal>
+      <Reveal className="mt-12 max-w-4xl mx-auto px-5 sm:px-8">
+        <div className="grid sm:grid-cols-3 border-t border-l border-foreground/10">
+          {phrasePairs.map((p) => (
+            <div key={p.es} className="border-b border-r border-foreground/10 p-7 sm:p-8 bg-card/40 transition-colors hover:bg-card/70">
+              <p className="font-serif italic text-2xl sm:text-[1.7rem] text-foreground leading-snug">{p.es}</p>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.reply}</p>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 const PAIN_OPTIONS_ES = [
   "Presión económica / independencia financiera",
   "Me siento dispersa o desbordada",
@@ -466,6 +499,7 @@ export function LandingES() {
       <Product />
       <HowItWorks />
       <Community />
+      <Culture />
       <Waitlist />
       <Founder />
       <Footer />
