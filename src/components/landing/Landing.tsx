@@ -27,10 +27,15 @@ function Nav() {
           <a href="#community" className={`hover:text-foreground transition ${underline}`}>Community</a>
         </nav>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 text-xs font-medium">
-            <span className="text-foreground">EN</span>
-            <span className="text-border/60">|</span>
-            <a href="/es" className="text-muted-foreground hover:text-foreground transition">ES</a>
+          <div className="flex items-center rounded-full border border-border/70 p-0.5 text-xs font-semibold">
+            <span className="rounded-full bg-foreground text-background px-2.5 py-1.5">EN</span>
+            <a
+              href="/es"
+              onClick={() => { document.cookie = "elara_lang=es;path=/;max-age=31536000;samesite=lax"; }}
+              className="rounded-full px-2.5 py-1.5 text-accent hover:bg-accent/10 transition"
+            >
+              Español
+            </a>
           </div>
           <a href="#waitlist" className="inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition">
             Join waitlist

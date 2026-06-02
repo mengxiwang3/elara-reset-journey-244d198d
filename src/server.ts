@@ -80,6 +80,35 @@ export default {
       return handleAdmin(request, env as AdminEnv);
     }
 
+    // Language routing for the root: Spanish is the primary market, so
+    // Spanish-preferring browsers (or anyone who chose ES) land on /es.
+    // An explicit choice is remembered via the elara_lang cookie, set by the
+    // nav toggle — so this never fights a user who picked a language.
+    if (request.method === "GET" && url.pathname === "/") {
+      const cookie = request.headers.get("Cookie") ?? "";
+      const pref = cookie.match(/(?:^|;)\s*elara_lang=(es|en)\b/)?.[1];
+      let preferSpanish: boolean;
+      if (pref === "es") preferSpanish = true;
+      else if (pref === "en") preferSpanish = false;
+      else {
+        const first = (request.headers.get("Accept-Language") ?? "")
+          .split(",")[0]
+          .trim()
+          .toLowerCase();
+        preferSpanish = first.split("-")[0] === "es";
+      }
+      if (preferSpanish) {
+        return new Response(null, {
+          status: 302,
+          headers: {
+            Location: "/es" + url.search,
+            "Cache-Control": "no-store",
+            Vary: "Accept-Language, Cookie",
+          },
+        });
+      }
+    }
+
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
