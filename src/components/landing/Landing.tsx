@@ -12,6 +12,7 @@ import appReflection from "@/assets/app-reflection.png";
 import appPath from "@/assets/app-path.png";
 import founderMengxi from "@/assets/founder-mengxi.jpg";
 import founderAlejandra from "@/assets/founder-alejandra.jpg";
+import communityCircle from "@/assets/community-circle.jpg";
 
 function Nav() {
   return (
@@ -69,10 +70,10 @@ function Hero() {
           <p className="mt-2 text-sm text-muted-foreground/70 italic">Built first for Latina women — <a href="/es" className="text-accent hover:text-foreground transition not-italic underline underline-offset-2">en su idioma, con su voz, a su ritmo.</a></p>
           <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 items-end gap-y-8 gap-x-6 max-w-2xl border-t border-border/60 pt-8">
             {[
-              { n: "1.8M", u: "+", l: "women in our world", avatars: false },
-              { n: "80K", u: "", l: "in the community", avatars: true },
-              { n: "4,600", u: "+", l: "told us what they carry", avatars: false },
-              { n: "7", u: " days", l: "to feel the shift", avatars: false },
+              { n: "1.8M", u: "+", l: "reached through Alejandra's world", avatars: false },
+              { n: "80K", u: "+", l: "in community", avatars: true },
+              { n: "4,600", u: "+", l: "women surveyed", avatars: false },
+              { n: "7", u: "-day", l: "first clarity loop", avatars: false },
             ].map((s) => (
               <div key={s.l}>
                 {s.avatars && <MemberAvatars className="mb-3" />}
@@ -123,6 +124,40 @@ function SocialProof() {
           We start with money because that's the pressure that came up most. From there it opens into everything around it — confidence, family, habits, and how you actually feel day to day.
         </p>
       </Reveal>
+    </section>
+  );
+}
+
+function RealContext() {
+  return (
+    <section className="py-24 sm:py-32">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <Reveal>
+          <p className="text-sm uppercase tracking-[0.2em] text-accent">The real context</p>
+          <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground leading-[1.08] text-balance">
+            Not another habit to perform. <em className="italic text-accent">A place for what you already carry.</em>
+          </h2>
+          <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
+            Elara is built around the conversations women are already having with friends, sisters, mothers,
+            and themselves — the quiet patterns, emotional loops, and decisions that rarely fit into a checklist.
+          </p>
+        </Reveal>
+        <Reveal delay={120}>
+          <figure>
+            <div className="overflow-hidden rounded-[2rem] border border-border/60 shadow-card">
+              <img
+                src={communityCircle}
+                alt="Four women in conversation over coffee at a kitchen table in a lived-in apartment"
+                loading="lazy"
+                className="w-full aspect-[4/3] sm:aspect-[3/2] object-cover object-center [filter:saturate(1.03)]"
+              />
+            </div>
+            <figcaption className="mt-4 max-w-md text-sm italic text-muted-foreground leading-relaxed">
+              Not wellness as performance. A private space for the thoughts, patterns, and emotions you've been carrying quietly.
+            </figcaption>
+          </figure>
+        </Reveal>
+      </div>
     </section>
   );
 }
@@ -494,6 +529,7 @@ export function Landing() {
       <Nav />
       <Hero />
       <SocialProof />
+      <RealContext />
       <Problem />
       <Product />
       <HowItWorks />
