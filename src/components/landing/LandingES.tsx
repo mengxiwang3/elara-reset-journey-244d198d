@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Sun, CheckCircle2, Instagram } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { MemberAvatars } from "./MemberAvatars";
 
 const underline =
   "relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full";
@@ -65,15 +66,20 @@ function Hero() {
             </a>
           </div>
           <p className="mt-6 text-sm text-muted-foreground">Construido en silencio. Abriendo pronto. Gratis para fundadoras.</p>
-          <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-6 max-w-xl border-t border-border/60 pt-7">
+          <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 items-end gap-y-8 gap-x-6 max-w-2xl border-t border-border/60 pt-8">
             {[
-              ["1.8M+", "audiencia social"],
-              ["80K", "comunidad directa"],
-              ["4,600+", "respuestas de mujeres"],
-            ].map(([n, l]) => (
-              <div key={l}>
-                <dt className="font-serif text-2xl text-foreground">{n}</dt>
-                <dd className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{l}</dd>
+              { n: "1.8M", u: "+", l: "mujeres en nuestro mundo", avatars: false },
+              { n: "80K", u: "", l: "en la comunidad", avatars: true },
+              { n: "4,600", u: "+", l: "nos contaron lo que cargan", avatars: false },
+              { n: "7", u: " días", l: "para sentir el cambio", avatars: false },
+            ].map((s) => (
+              <div key={s.l}>
+                {s.avatars && <MemberAvatars className="mb-3" />}
+                <dt className="font-serif text-4xl sm:text-5xl text-foreground leading-none">
+                  {s.n}
+                  {s.u && <span className="italic text-accent text-3xl sm:text-4xl">{s.u}</span>}
+                </dt>
+                <dd className="font-serif italic text-base text-muted-foreground mt-2">{s.l}</dd>
               </div>
             ))}
           </dl>

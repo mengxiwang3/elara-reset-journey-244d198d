@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Sun, CheckCircle2, Instagram } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { MemberAvatars } from "./MemberAvatars";
 
 const underline =
   "relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full";
@@ -66,15 +67,20 @@ function Hero() {
           </div>
           <p className="mt-6 text-sm text-muted-foreground">Built quietly. Launching soon. Free for founding members.</p>
           <p className="mt-2 text-sm text-muted-foreground/70 italic">Built first for Latina women — <a href="/es" className="text-accent hover:text-foreground transition not-italic underline underline-offset-2">en su idioma, con su voz, a su ritmo.</a></p>
-          <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-6 max-w-xl border-t border-border/60 pt-7">
+          <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 items-end gap-y-8 gap-x-6 max-w-2xl border-t border-border/60 pt-8">
             {[
-              ["1.8M+", "engaged audience"],
-              ["80K", "direct community"],
-              ["4,600+", "survey responses"],
-            ].map(([n, l]) => (
-              <div key={l}>
-                <dt className="font-serif text-2xl text-foreground">{n}</dt>
-                <dd className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{l}</dd>
+              { n: "1.8M", u: "+", l: "women in our world", avatars: false },
+              { n: "80K", u: "", l: "in the community", avatars: true },
+              { n: "4,600", u: "+", l: "told us what they carry", avatars: false },
+              { n: "7", u: " days", l: "to feel the shift", avatars: false },
+            ].map((s) => (
+              <div key={s.l}>
+                {s.avatars && <MemberAvatars className="mb-3" />}
+                <dt className="font-serif text-4xl sm:text-5xl text-foreground leading-none">
+                  {s.n}
+                  {s.u && <span className="italic text-accent text-3xl sm:text-4xl">{s.u}</span>}
+                </dt>
+                <dd className="font-serif italic text-base text-muted-foreground mt-2">{s.l}</dd>
               </div>
             ))}
           </dl>
