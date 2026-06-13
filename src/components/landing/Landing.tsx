@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sun, CheckCircle2, Instagram } from "lucide-react";
+import { Sun, CheckCircle2, Instagram, Mail } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { MemberAvatars } from "./MemberAvatars";
 
@@ -14,20 +14,78 @@ import founderMengxi from "@/assets/founder-mengxi.jpg";
 import founderAlejandra from "@/assets/founder-alejandra.jpg";
 import communityCircle from "@/assets/community-circle.jpg";
 
+function StewellHeaderCapture() {
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState<"idle" | "loading" | "done">("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setState("loading");
+    setError(null);
+    try {
+      const res = await fetch("/api/stewell/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: email.split("@")[0], email }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({})) as { error?: string };
+        throw new Error(data.error ?? "Something went wrong.");
+      }
+      setState("done");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setState("idle");
+    }
+  }
+
+  if (state === "done") {
+    return (
+      <span className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-accent">
+        <CheckCircle2 className="h-3.5 w-3.5" /> You're in!
+      </span>
+    );
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="hidden sm:flex items-center gap-1.5" title={error ?? undefined}>
+      <div className="relative">
+        <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" aria-hidden />
+        <input
+          type="email" required value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          className="rounded-lg border border-input bg-background pl-8 pr-3 py-1.5 text-xs text-foreground outline-none focus:ring-1 focus:ring-ring w-40 disabled:opacity-60"
+          disabled={state === "loading"}
+        />
+      </div>
+      <button
+        type="submit" disabled={state === "loading"}
+        className="rounded-lg bg-accent/15 text-accent border border-accent/30 px-3 py-1.5 text-xs font-semibold hover:bg-accent hover:text-white transition disabled:opacity-50 whitespace-nowrap"
+      >
+        {state === "loading" ? "…" : "Join Stewell"}
+      </button>
+    </form>
+  );
+}
+
 function Nav() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/40">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="#top" className="font-serif text-2xl tracking-tight text-foreground">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
+        <a href="#top" className="font-serif text-2xl tracking-tight text-foreground shrink-0">
           elara<span className="text-accent">.</span>
         </a>
-        <nav className="hidden sm:flex items-center gap-8 text-sm text-muted-foreground">
+        <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           <a href="#how" className={`hover:text-foreground transition ${underline}`}>How it works</a>
           <a href="#product" className={`hover:text-foreground transition ${underline}`}>Inside Elara</a>
           <a href="#community" className={`hover:text-foreground transition ${underline}`}>Community</a>
         </nav>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center rounded-full border border-border/70 p-0.5 text-xs font-semibold">
+        <div className="flex items-center gap-3 ml-auto">
+          <StewellHeaderCapture />
+          <div className="flex items-center rounded-full border border-border/70 p-0.5 text-xs font-semibold shrink-0">
             <span className="rounded-full bg-foreground text-background px-2.5 py-1.5">EN</span>
             <a
               href="/es"
@@ -37,7 +95,7 @@ function Nav() {
               Español
             </a>
           </div>
-          <a href="#waitlist" className="inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition">
+          <a href="#waitlist" className="inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition shrink-0">
             Join waitlist
           </a>
         </div>
@@ -517,6 +575,86 @@ function Founder() {
   );
 }
 
+function StewellBottomCapture() {
+  const [form, setForm] = useState({ name: "", email: "" });
+  const [state, setState] = useState<"idle" | "loading" | "done">("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!form.name.trim() || !form.email.trim()) return;
+    setState("loading");
+    setError(null);
+    try {
+      const res = await fetch("/api/stewell/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({})) as { error?: string };
+        throw new Error(data.error ?? "Something went wrong.");
+      }
+      setState("done");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setState("idle");
+    }
+  }
+
+  return (
+    <section className="py-16 sm:py-20 border-t border-border/60 bg-card/40">
+      <div className="max-w-md mx-auto px-5 sm:px-8 text-center">
+        <Reveal>
+          <p className="text-xs uppercase tracking-[0.25em] text-accent">Stewell</p>
+          <h2 className="mt-3 font-serif text-3xl sm:text-4xl text-foreground text-balance">
+            Be the first to know.
+          </h2>
+          <p className="mt-3 text-muted-foreground leading-relaxed">
+            Join the early list and we'll reach out personally when it's ready.
+          </p>
+        </Reveal>
+
+        {state === "done" ? (
+          <Reveal className="mt-10 flex flex-col items-center gap-3">
+            <CheckCircle2 className="h-9 w-9 text-accent" />
+            <p className="font-serif text-xl text-foreground">You're on the list.</p>
+            <p className="text-sm text-muted-foreground">We'll be in touch soon.</p>
+          </Reveal>
+        ) : (
+          <form onSubmit={onSubmit} className="mt-8 flex flex-col gap-3 text-left">
+            <input
+              required maxLength={80}
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              placeholder="Your name"
+              className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring disabled:opacity-60"
+              disabled={state === "loading"}
+            />
+            <input
+              required type="email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              placeholder="you@example.com"
+              className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring disabled:opacity-60"
+              disabled={state === "loading"}
+            />
+            {error && <p className="text-sm text-red-500 text-center">{error}</p>}
+            <button
+              type="submit" disabled={state === "loading"}
+              className="group mt-1 inline-flex items-center justify-center gap-2.5 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {state === "loading" ? "Joining…" : "Join the early list"}
+              {state !== "loading" && <span className="text-accent group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>}
+            </button>
+            <p className="text-xs text-muted-foreground text-center">No spam. Unsubscribe anytime.</p>
+          </form>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer className="border-t border-border/60 py-10">
@@ -542,6 +680,7 @@ export function Landing() {
       <Culture />
       <Waitlist />
       <Founder />
+      <StewellBottomCapture />
       <Footer />
     </main>
   );
