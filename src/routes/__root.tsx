@@ -72,18 +72,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Elara — A 7-Day AI Reset for Ambitious Women" },
-      { name: "description", content: "Elara is an AI-guided 7-day reset for ambitious Latina women — rebuild clarity, confidence, daily structure, and emotional support." },
-      { name: "author", content: "Elara" },
-      { property: "og:title", content: "Elara — A 7-Day AI Reset for Ambitious Women" },
-      { property: "og:description", content: "Elara is an AI-guided 7-day reset for ambitious Latina women — rebuild clarity, confidence, daily structure, and emotional support." },
+      // Primary
+      { title: "Elara — Un reset de 7 días para la mujer que sostiene todo" },
+      { name: "description", content: "Elara es tu compañera de IA en español. Un reset guiado de 7 días para mujeres ambiciosas que sostienen todo — creado con Alejandra." },
+      // Open Graph
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Elara — A 7-Day AI Reset for Ambitious Women" },
-      { name: "twitter:description", content: "Elara is an AI-guided 7-day reset for ambitious Latina women — rebuild clarity, confidence, daily structure, and emotional support." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/595e7935-d28d-4bb6-b44c-a418baf4ba51/id-preview-f82e47c7--fa861464-c611-400a-a595-6088dfa5f8c5.lovable.app-1779551261872.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/595e7935-d28d-4bb6-b44c-a418baf4ba51/id-preview-f82e47c7--fa861464-c611-400a-a595-6088dfa5f8c5.lovable.app-1779551261872.png" },
+      { property: "og:url", content: "https://holaelara.com/" },
+      { property: "og:site_name", content: "Elara" },
+      { property: "og:title", content: "Elara — Un reset de 7 días para la mujer que sostiene todo" },
+      { property: "og:description", content: "Tu compañera de IA en español. Únete a la lista de espera." },
+      // TODO: og-image.jpg doesn't exist yet — design and export a real 1200×630 image
+      // (photo of Ale + wordmark) and host it at this path before sharing links publicly.
+      { property: "og:image", content: "https://holaelara.com/og-image.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:locale", content: "es_MX" },
+      { property: "og:locale:alternate", content: "en_US" },
+      // Twitter
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Elara — Un reset de 7 días para la mujer que sostiene todo" },
+      { name: "twitter:description", content: "Tu compañera de IA en español. Únete a la lista de espera." },
+      { name: "twitter:image", content: "https://holaelara.com/og-image.jpg" },
+      // twitter:site / twitter:creator intentionally omitted — no confirmed Elara/Ale handle yet
     ],
     links: [
       {
@@ -93,6 +103,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" },
+      { rel: "canonical", href: "https://holaelara.com/" },
+      // Language routing: confirm which URL is canonical ES vs EN (English is currently
+      // served at "/" via the elara_lang cookie, not a dedicated /en route)
+      { rel: "alternate", hrefLang: "es", href: "https://holaelara.com/" },
+      { rel: "alternate", hrefLang: "en", href: "https://holaelara.com/en" },
+      { rel: "alternate", hrefLang: "x-default", href: "https://holaelara.com/" },
     ],
   }),
   shellComponent: RootShell,
@@ -103,7 +119,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <HeadContent />
       </head>

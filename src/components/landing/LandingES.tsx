@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sun, CheckCircle2, Instagram } from "lucide-react";
+import { Sun, CheckCircle2, Instagram, Compass } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { MemberAvatars } from "./MemberAvatars";
 
@@ -22,22 +22,35 @@ function Nav() {
           elara<span className="text-accent">.</span>
         </a>
         <nav className="hidden sm:flex items-center gap-8 text-sm text-muted-foreground">
-          <a href="#como" className={`hover:text-foreground transition ${underline}`}>Cómo funciona</a>
-          <a href="#producto" className={`hover:text-foreground transition ${underline}`}>Dentro de Elara</a>
-          <a href="#comunidad" className={`hover:text-foreground transition ${underline}`}>Comunidad</a>
+          <a href="#como" className={`hover:text-foreground transition ${underline}`}>
+            Cómo funciona
+          </a>
+          <a href="#producto" className={`hover:text-foreground transition ${underline}`}>
+            Dentro de Elara
+          </a>
+          <a href="#comunidad" className={`hover:text-foreground transition ${underline}`}>
+            Comunidad
+          </a>
         </nav>
         <div className="flex items-center gap-3">
           <div className="flex items-center rounded-full border border-border/70 p-0.5 text-xs font-semibold">
-            <span className="rounded-full bg-foreground text-background px-2.5 py-1.5">Español</span>
+            <span className="rounded-full bg-foreground text-background px-2.5 py-1.5">
+              Español
+            </span>
             <a
               href="/"
-              onClick={() => { document.cookie = "elara_lang=en;path=/;max-age=31536000;samesite=lax"; }}
+              onClick={() => {
+                document.cookie = "elara_lang=en;path=/;max-age=31536000;samesite=lax";
+              }}
               className="rounded-full px-2.5 py-1.5 text-muted-foreground hover:text-foreground transition"
             >
               EN
             </a>
           </div>
-          <a href="#lista" className="inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition">
+          <a
+            href="#lista"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background transition"
+          >
             Unirme a la lista
           </a>
         </div>
@@ -46,35 +59,96 @@ function Nav() {
   );
 }
 
+function HeroAtmosphere() {
+  return (
+    <>
+      {/* Inner compass: a soft path drawing itself in, with a light gently traveling along it */}
+      <svg
+        viewBox="0 0 420 420"
+        aria-hidden
+        className="pointer-events-none absolute -right-16 -top-16 hidden h-[340px] w-[340px] text-accent/25 lg:block"
+      >
+        <path
+          d="M 40 340 C 140 300, 160 160, 260 120 S 380 60, 380 40"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          pathLength={1}
+          className="path-draw"
+        />
+        <circle r="4" fill="currentColor" className="hero-compass-dot" />
+      </svg>
+
+      {/* Thought fragments — softly settle, then drift, suggesting patterns coming into focus */}
+      <div
+        className="animate-settle-drift absolute -top-8 -right-4 hidden items-center gap-2 rounded-full border border-border/60 bg-card/90 px-4 py-2 text-xs text-muted-foreground shadow-soft backdrop-blur lg:flex"
+        style={{ animationDelay: "0.5s, 1.6s" }}
+      >
+        <Compass className="h-3.5 w-3.5 text-accent" aria-hidden />
+        Tu brújula interior
+      </div>
+    </>
+  );
+}
+
 function Hero() {
   return (
     <section id="top" className="relative pt-28 sm:pt-36 pb-20 sm:pb-28 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-glow pointer-events-none animate-breathe" aria-hidden />
+      <div
+        className="absolute inset-0 bg-gradient-glow pointer-events-none animate-breathe"
+        aria-hidden
+      />
+      <div
+        className="absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-accent/10 blur-3xl pointer-events-none animate-breathe"
+        style={{ animationDuration: "13s", animationDelay: "1.5s" }}
+        aria-hidden
+      />
       <div className="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-12 items-center relative">
         <div className="lg:col-span-7 animate-fade-up">
           <span className="inline-flex items-center gap-3 text-xs tracking-[0.25em] uppercase text-muted-foreground">
-            <span className="h-px w-8 bg-accent" aria-hidden /> Primera en español · Lista de espera fundadora abierta
+            <span className="h-px w-8 bg-accent" aria-hidden /> Primera en español · Lista de espera
+            fundadora abierta
           </span>
           <h1 className="mt-6 font-serif text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-[4.5rem] text-foreground text-balance">
-            Para la mujer que sostiene todo, <em className="italic text-accent">aunque nadie lo note.</em>
+            Para la mujer que sostiene todo,{" "}
+            <em className="italic text-accent">aunque nadie lo note.</em>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
-            Elara es un reset guiado de 7 días para mujeres ambiciosas que por fuera parecen estar bien,
-            pero por dentro se sienten saturadas, dispersas o lejos de sí mismas.
+            Elara es un reset guiado de 7 días para mujeres ambiciosas que por fuera parecen estar
+            bien, pero por dentro se sienten saturadas, dispersas o lejos de sí mismas.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <a href="#lista" className="group inline-flex items-center gap-2.5 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors">
+            <a
+              href="#lista"
+              className="cta-glow btn-tactile group inline-flex items-center gap-2.5 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
+            >
               Unirme a la lista de espera
-              <span className="text-accent group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>
+              <span
+                className="text-accent group-hover:text-primary-foreground group-hover:translate-x-1 transition-[color,transform] duration-300"
+                aria-hidden
+              >
+                →
+              </span>
             </a>
-            <a href="#como" className="inline-flex items-center gap-2 rounded-lg border border-foreground/20 px-7 py-3.5 text-base font-medium text-foreground hover:border-foreground/40 transition">
+            <a
+              href="#como"
+              className="btn-tactile inline-flex items-center gap-2 rounded-lg border border-foreground/20 px-7 py-3.5 text-base font-medium text-foreground hover:border-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background transition"
+            >
               Ver cómo funciona
             </a>
           </div>
-          <p className="mt-6 text-sm text-muted-foreground">Construido en silencio. Abriendo pronto. Gratis para fundadoras.</p>
+          <p className="mt-6 text-sm text-muted-foreground">
+            Construido en silencio. Abriendo pronto. Gratis para fundadoras.
+          </p>
           <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 items-end gap-y-8 gap-x-6 max-w-2xl border-t border-border/60 pt-8">
             {[
-              { n: "1.8M", u: "+", l: "alcanzadas en el mundo de Alejandra", avatars: false },
+              {
+                n: "1.8M",
+                u: "+",
+                l: "mujeres alcanzadas por la comunidad de Alejandra",
+                avatars: false,
+              },
               { n: "80K", u: "+", l: "en comunidad", avatars: true },
               { n: "4,600", u: "+", l: "mujeres encuestadas", avatars: false },
               { n: "7", u: " días", l: "primer ciclo de claridad", avatars: false },
@@ -91,8 +165,12 @@ function Hero() {
           </dl>
         </div>
         <div className="lg:col-span-5 relative">
+          <HeroAtmosphere />
           <div className="relative mx-auto max-w-sm animate-float">
-            <div className="absolute -inset-6 bg-gradient-warm rounded-[2rem] blur-2xl opacity-60" aria-hidden />
+            <div
+              className="absolute -inset-6 bg-gradient-warm rounded-[2rem] blur-2xl opacity-60"
+              aria-hidden
+            />
             <div className="relative rounded-[2.4rem] p-3 bg-foreground/5 backdrop-blur shadow-soft border border-border/60">
               <img
                 src={appToday}
@@ -121,11 +199,12 @@ function SocialProof() {
       <Reveal className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
         <p className="text-xs uppercase tracking-[0.25em] text-accent">Construido con — no para</p>
         <p className="mt-4 font-serif text-2xl sm:text-3xl text-foreground/90 max-w-3xl mx-auto leading-snug text-balance">
-          Moldeado por 1,998 respuestas y una comunidad de 80K latinas que nos contaron,
-          con honestidad, lo que estaban cargando.
+          Moldeado por 1,998 respuestas y una comunidad de 80K latinas que nos contaron, con
+          honestidad, lo que estaban cargando.
         </p>
         <p className="mt-6 text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Empezamos por el dinero porque fue la presión que más salió. Desde ahí se abre hacia todo lo demás — confianza, familia, hábitos y cómo te sientes de verdad, día a día.
+          Empezamos por el dinero porque fue la presión que más salió. Desde ahí se abre hacia todo
+          lo demás — confianza, familia, hábitos y cómo te sientes de verdad, día a día.
         </p>
       </Reveal>
     </section>
@@ -139,12 +218,13 @@ function RealContext() {
         <Reveal>
           <p className="text-sm uppercase tracking-[0.2em] text-accent">El contexto real</p>
           <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground leading-[1.08] text-balance">
-            No es otro hábito que cumplir. <em className="italic text-accent">Un lugar para lo que ya llevas.</em>
+            No es otro hábito que cumplir.{" "}
+            <em className="italic text-accent">Un lugar para lo que ya llevas.</em>
           </h2>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
-            Elara se construye alrededor de las conversaciones que las mujeres ya tienen con amigas, hermanas,
-            madres y consigo mismas — los patrones silenciosos, los bucles emocionales y las decisiones que
-            rara vez caben en una lista.
+            Elara se construye alrededor de las conversaciones que las mujeres ya tienen con amigas,
+            hermanas, madres y consigo mismas — los patrones silenciosos, los bucles emocionales y
+            las decisiones que rara vez caben en una lista.
           </p>
         </Reveal>
         <Reveal delay={120}>
@@ -158,7 +238,8 @@ function RealContext() {
               />
             </div>
             <figcaption className="mt-4 max-w-md text-sm italic text-muted-foreground leading-relaxed">
-              No es bienestar como actuación. Un espacio privado para los pensamientos, patrones y emociones que has cargado en silencio.
+              No es bienestar como actuación. Un espacio privado para los pensamientos, patrones y
+              emociones que has cargado en silencio.
             </figcaption>
           </figure>
         </Reveal>
@@ -168,10 +249,22 @@ function RealContext() {
 }
 
 const problems = [
-  { title: "Funcionando al máximo, agotada en silencio", body: "Estás entregando para todos. El cansancio vive en un lugar donde solo tú puedes sentirlo." },
-  { title: "Estructura, sin la presión", body: "No es otro sistema de productividad. Empieza desde donde estás de verdad esta semana, no desde donde crees que deberías estar." },
-  { title: "Suavidad y ambición, al mismo tiempo", body: "No tienes que elegir entre el descanso y el crecimiento. Elara sostiene los dos." },
-  { title: "Apoyo que entiende el contexto", body: "Tu cultura, tu familia, tus estándares. Orientación que no aplana nada de eso." },
+  {
+    title: "Funcionando al máximo, agotada en silencio",
+    body: "Estás entregando para todos. El cansancio vive en un lugar donde solo tú puedes sentirlo.",
+  },
+  {
+    title: "Estructura, sin la presión",
+    body: "No es otro sistema de productividad. Empieza desde donde estás de verdad esta semana, no desde donde crees que deberías estar.",
+  },
+  {
+    title: "Suavidad y ambición, al mismo tiempo",
+    body: "No tienes que elegir entre el descanso y el crecimiento. Elara sostiene los dos.",
+  },
+  {
+    title: "Apoyo que entiende el contexto",
+    body: "Tu cultura, tu familia, tus estándares. Orientación que no aplana nada de eso.",
+  },
 ];
 
 function Problem() {
@@ -180,23 +273,35 @@ function Problem() {
       <div className="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-10 lg:gap-16">
         <div className="lg:col-span-5">
           <Reveal className="lg:sticky lg:top-28">
-            <p className="text-sm uppercase tracking-[0.2em] text-accent">Si esto te suena familiar</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-accent">
+              Si esto te suena familiar
+            </p>
             <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
               No necesitas otra app. Necesitas un lugar donde aterrizar.
             </h2>
           </Reveal>
         </div>
-        <div className="lg:col-span-7 border-t border-foreground/10">
+        <Reveal className="lg:col-span-7 relative border-t border-foreground/10">
+          <span
+            className="grow-line absolute left-0 top-0 bottom-0 w-px bg-accent/40"
+            aria-hidden
+          />
           {problems.map((p, i) => (
-            <Reveal key={p.title} delay={i * 90} className="flex gap-6 py-7 border-b border-foreground/10">
-              <span className="shrink-0 w-9 font-serif text-2xl italic text-accent/70">{String(i + 1).padStart(2, "0")}</span>
+            <Reveal
+              key={p.title}
+              delay={i * 90}
+              className="group flex gap-6 py-7 pl-5 -ml-5 rounded-2xl border-b border-foreground/10 transition-colors duration-500 hover:bg-card/50"
+            >
+              <span className="shrink-0 w-9 font-serif text-2xl italic text-accent/70 transition-all duration-500 group-hover:scale-110 group-hover:text-accent">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               <div>
                 <h3 className="font-serif text-2xl text-foreground">{p.title}</h3>
                 <p className="mt-2 text-muted-foreground leading-relaxed">{p.body}</p>
               </div>
             </Reveal>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -213,9 +318,13 @@ const screens = [
 function PhoneMockup({ src, label, caption }: { src: string; label: string; caption: string }) {
   return (
     <div className="shrink-0 w-[220px] sm:w-[240px]">
-      <div className="hover-lift relative rounded-[2.2rem] p-2.5 bg-card border border-border/60 shadow-soft hover:shadow-soft">
-        <img src={src} alt={`Elara app — ${label}`} loading="lazy"
-          className="rounded-[1.8rem] w-full object-cover" />
+      <div className="hover-lift relative rounded-[2.2rem] p-2.5 bg-card border border-border/60 shadow-soft">
+        <img
+          src={src}
+          alt={`Elara app — ${label}`}
+          loading="lazy"
+          className="rounded-[1.8rem] w-full object-cover"
+        />
       </div>
       <p className="mt-4 text-center font-serif text-lg text-foreground">{label}</p>
       <p className="text-center text-xs text-muted-foreground mt-1">{caption}</p>
@@ -233,7 +342,8 @@ function Product() {
             Un espacio pequeño y hermoso para tu vida interior.
           </h2>
           <p className="mt-5 text-base text-muted-foreground leading-relaxed">
-            Al final de la semana, sales con más claridad sobre lo que necesitas, un plan de reset personalizado y un ritmo diario más suave que sí puedes sostener.
+            Al final de la semana, sales con más claridad sobre lo que necesitas, un plan de reset
+            personalizado y un ritmo diario más suave que sí puedes sostener.
           </p>
         </Reveal>
       </div>
@@ -251,9 +361,21 @@ function Product() {
 }
 
 const steps = [
-  { n: "01", title: "Un check-in honesto de 4 minutos", body: "Sin puntuaciones. Sin vergüenza. Solo dónde estás realmente hoy." },
-  { n: "02", title: "Un camino de 7 días hecho para tu momento", body: "Dinero, mente, cuerpo, personas, propósito — lo que esté más pesado, primero." },
-  { n: "03", title: "Rituales diarios, IA suave, un círculo real", body: "Estructura suave que sí puedes mantener — y mujeres que lo viven contigo." },
+  {
+    n: "01",
+    title: "Un check-in honesto de 4 minutos",
+    body: "Sin puntuaciones. Sin vergüenza. Solo dónde estás realmente hoy.",
+  },
+  {
+    n: "02",
+    title: "Un camino de 7 días hecho para tu momento",
+    body: "Dinero, mente, cuerpo, personas, propósito — lo que esté más pesado, primero.",
+  },
+  {
+    n: "03",
+    title: "Rituales diarios, IA suave, un círculo real",
+    body: "Estructura suave que sí puedes mantener — y mujeres que lo viven contigo.",
+  },
 ];
 
 function HowItWorks() {
@@ -266,17 +388,80 @@ function HowItWorks() {
             Siete días. Cambios pequeños, sin reinventarte.
           </h2>
         </Reveal>
-        <div className="mt-16 grid md:grid-cols-3 gap-12 md:gap-10">
-          {steps.map((s, i) => (
-            <Reveal key={s.n} delay={i * 120}>
-              <div className="font-serif text-7xl text-accent/25 leading-none">{s.n}</div>
-              <h3 className="mt-4 font-serif text-2xl text-foreground leading-snug">{s.title}</h3>
-              <p className="mt-3 text-muted-foreground leading-relaxed">{s.body}</p>
-            </Reveal>
-          ))}
-        </div>
+        <Reveal className="mt-16 relative">
+          {/* Connecting path — a quiet reminder these three steps are one continuous move */}
+          <span
+            className="grow-line-x pointer-events-none absolute left-0 right-0 top-[5px] hidden h-px bg-accent/25 md:block"
+            aria-hidden
+          />
+          <div className="grid md:grid-cols-3 gap-12 md:gap-10">
+            {steps.map((s, i) => (
+              <Reveal key={s.n} delay={i * 120} className="relative md:pt-10">
+                <span
+                  className="step-node absolute top-0 left-[calc(50%-6px)] hidden h-3 w-3 rounded-full bg-border md:block"
+                  aria-hidden
+                />
+                {/* Fog → clarity: each number arrives blurred and sharpens as its step reveals */}
+                <div
+                  className="fog-clear font-serif text-7xl text-accent leading-none"
+                  style={{ transitionDelay: `${i * 160 + 150}ms` }}
+                >
+                  {s.n}
+                </div>
+                <h3 className="mt-4 font-serif text-2xl text-foreground leading-snug">{s.title}</h3>
+                <p className="mt-3 text-muted-foreground leading-relaxed">{s.body}</p>
+              </Reveal>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
+  );
+}
+
+const ORBIT_AVATARS = [
+  { g: "from-[#C0795C] to-[#B0543A]", i: "S", top: "6%", left: "62%" },
+  { g: "from-[#CE9E55] to-[#BF8A49]", i: "A", top: "36%", left: "82%" },
+  { g: "from-[#9C8067] to-[#5B4B3F]", i: "M", top: "66%", left: "60%" },
+  { g: "from-[#C58467] to-[#9A4530]", i: "R", top: "40%", left: "38%" },
+];
+
+/**
+ * Small constellation of women gently connected — the "not doing this alone"
+ * feeling, kept abstract (brand-gradient initials, not stock avatars).
+ */
+function CommunityOrbit() {
+  return (
+    <div
+      className="pointer-events-none absolute bottom-10 right-10 hidden h-48 w-48 lg:block"
+      aria-hidden
+    >
+      <svg viewBox="0 0 200 200" className="absolute inset-0 h-full w-full overflow-visible">
+        {/* Connecting lines run center-to-center of the avatar circles below */}
+        <path
+          d="M 147 35 L 187 95 L 143 155 L 99 103 Z"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeLinejoin="round"
+          pathLength={1}
+          className="text-primary-foreground/25 path-draw-reveal"
+        />
+      </svg>
+      {ORBIT_AVATARS.map((a, i) => (
+        <span
+          key={a.i}
+          className={`settle-drift-reveal absolute h-11 w-11 rounded-full bg-gradient-to-br ${a.g} ring-2 ring-primary-foreground/25 grid place-items-center font-serif text-xs text-white shadow-soft`}
+          style={{
+            top: a.top,
+            left: a.left,
+            animationDelay: `${0.4 + i * 0.18}s, ${1.4 + i * 0.4}s`,
+          }}
+        >
+          {a.i}
+        </span>
+      ))}
+    </div>
   );
 }
 
@@ -285,23 +470,44 @@ function Community() {
     <section id="comunidad" className="py-24 sm:py-32">
       <Reveal className="max-w-5xl mx-auto px-5 sm:px-8">
         <div className="rounded-[2.5rem] bg-primary text-primary-foreground p-10 sm:p-16 shadow-soft relative overflow-hidden">
-          <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-accent/30 blur-3xl animate-breathe" aria-hidden />
+          <div
+            className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-accent/30 blur-3xl animate-breathe"
+            aria-hidden
+          />
+          <CommunityOrbit />
           <div className="relative">
             <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-primary-foreground/80">
-              <span className="h-px w-8 bg-primary-foreground/40" aria-hidden /> Comunidad Latina-first
+              <span className="h-px w-8 bg-primary-foreground/40" aria-hidden /> Comunidad
+              Latina-first
             </div>
-            <h2 className="mt-6 font-serif text-3xl sm:text-5xl text-balance leading-tight">
-              Diseñada primero para mujeres latinas — porque la familia, la ambición y la suavidad viven en el mismo cuerpo.
+            <h2 className="mt-6 max-w-3xl font-serif text-3xl sm:text-5xl text-balance leading-tight">
+              Diseñada primero para mujeres latinas — porque la familia, la ambición y la suavidad
+              viven en el mismo cuerpo.
             </h2>
             <p className="mt-6 text-base sm:text-lg text-primary-foreground/80 max-w-2xl leading-relaxed">
-              Para las hijas mayores, las primeras en su familia en todo, las que traducen en casa y lideran en el trabajo.
-              Para las reinventoras, las mentes bilingües, las mujeres aprendiendo que la independencia y la ternura pueden compartir una vida.
+              Para las hijas mayores, las primeras en su familia en todo, las que traducen en casa y
+              lideran en el trabajo. Para las reinventoras, las mentes bilingües, las mujeres
+              aprendiendo que la independencia y la ternura pueden compartir una vida.
             </p>
             <ul className="mt-9 flex flex-wrap items-center gap-x-3 gap-y-1.5 max-w-2xl font-serif text-lg sm:text-xl text-primary-foreground/65">
-              {["Expectativas familiares","Reinvención","Ambición","Crecimiento emocional","Identidad bilingüe","Independencia","Suavidad","Confianza","Cultura"].map((t, i, arr) => (
+              {[
+                "Expectativas familiares",
+                "Reinvención",
+                "Ambición",
+                "Crecimiento emocional",
+                "Identidad bilingüe",
+                "Independencia",
+                "Suavidad",
+                "Confianza",
+                "Cultura",
+              ].map((t, i, arr) => (
                 <li key={t} className="inline-flex items-center gap-3">
                   <span className="transition-colors hover:text-primary-foreground">{t}</span>
-                  {i < arr.length - 1 && <span className="text-accent/60" aria-hidden>·</span>}
+                  {i < arr.length - 1 && (
+                    <span className="text-accent/60" aria-hidden>
+                      ·
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -327,15 +533,21 @@ function Culture() {
           No es inglés, traducido. <em className="italic text-accent">Español, entendido.</em>
         </h2>
         <p className="mt-6 max-w-xl mx-auto text-lg text-muted-foreground leading-relaxed">
-          Elara lee el tono, la emoción, la cultura y el caos — no solo las palabras. El peso de ser la hija mayor,
-          la familia que llama, los dos mundos que habitas. Construido para eso, no adaptado a eso.
+          Elara lee el tono, la emoción, la cultura y el caos — no solo las palabras. El peso de ser
+          la hija mayor, la familia que llama, los dos mundos que habitas. Construido para eso, no
+          adaptado a eso.
         </p>
       </Reveal>
       <Reveal className="mt-12 max-w-4xl mx-auto px-5 sm:px-8">
         <div className="grid sm:grid-cols-3 border-t border-l border-foreground/10">
           {phrasePairs.map((p) => (
-            <div key={p.es} className="border-b border-r border-foreground/10 p-7 sm:p-8 bg-card/40 transition-colors hover:bg-card/70">
-              <p className="font-serif italic text-2xl sm:text-[1.7rem] text-foreground leading-snug">{p.es}</p>
+            <div
+              key={p.es}
+              className="border-b border-r border-foreground/10 p-7 sm:p-8 bg-card/40 transition-colors hover:bg-card/70"
+            >
+              <p className="font-serif italic text-2xl sm:text-[1.7rem] text-foreground leading-snug">
+                {p.es}
+              </p>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.reply}</p>
             </div>
           ))}
@@ -355,30 +567,39 @@ const PAIN_OPTIONS_ES = [
   "Estancada en una reinvención, sin saber hacia dónde",
 ];
 
+// TODO: paste the real form ID from Loops (Settings → API → form endpoint)
+const LOOPS_FORM_ENDPOINT = "https://app.loops.so/api/newsletter-form/YOUR_FORM_ID";
+
 function Waitlist() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", whatsapp: "", instagram: "", pain: "" });
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim()) return;
     setLoading(true);
-    setError(null);
+    setError(false);
     try {
-      const res = await fetch("/api/subscribe", {
+      const res = await fetch(LOOPS_FORM_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, language: "es" }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          email: form.email.trim(),
+          firstName: form.name.trim(),
+          // Custom contact properties — create in Loops (Audience → Properties) first
+          whatsapp: form.whatsapp.trim(),
+          instagram: form.instagram.trim(),
+          pain: form.pain,
+          userGroup: "waitlist-es",
+          source: "holaelara.com",
+        }),
       });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({})) as { error?: string };
-        throw new Error(data.error ?? "Algo salió mal. Por favor, inténtalo de nuevo.");
-      }
+      if (!res.ok) throw new Error();
       setSubmitted(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Algo salió mal. Por favor, inténtalo de nuevo.");
+    } catch {
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -388,29 +609,37 @@ function Waitlist() {
     <section id="lista" className="py-24 sm:py-32 bg-gradient-warm">
       <div className="max-w-3xl mx-auto px-5 sm:px-8 text-center">
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.2em] text-accent">Lista de espera fundadora</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-accent">
+            Lista de espera fundadora
+          </p>
           <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
             Sé una de las primeras mujeres dentro de Elara.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-xl mx-auto">
-            Las fundadoras entran gratis al primer grupo, opinan de verdad en lo que construimos y reciben un saludo personal de nosotras — no un correo de bienvenida genérico.
+            Las fundadoras entran gratis al primer grupo, opinan de verdad en lo que construimos y
+            reciben un saludo personal de nosotras — no un correo de bienvenida genérico.
           </p>
         </Reveal>
 
         {submitted ? (
           <div className="mt-12 rounded-3xl border border-border bg-card p-10 shadow-card">
             <CheckCircle2 className="h-10 w-10 text-accent mx-auto" />
-            <h3 className="mt-4 font-serif text-2xl text-foreground">Ya estás en la lista.</h3>
-            <p className="mt-2 text-muted-foreground">Te escribiremos antes de abrir el primer grupo de Elara. Bienvenida.</p>
-            <p className="mt-4 font-hand text-2xl text-accent -rotate-2">— Mengxi &amp; Ale</p>
+            <h3 className="mt-4 font-serif text-2xl text-foreground">
+              Lista. Te escribimos pronto 💌
+            </h3>
           </div>
         ) : (
-          <form onSubmit={onSubmit} className="mt-12 grid gap-3 text-left bg-card rounded-3xl border border-border p-6 sm:p-8 shadow-card">
+          <form
+            onSubmit={onSubmit}
+            className="mt-12 grid gap-3 text-left bg-card rounded-3xl border border-border p-6 sm:p-8 shadow-card"
+          >
             <label className="grid gap-1.5">
               <span className="text-xs uppercase tracking-wider text-muted-foreground">Nombre</span>
               <input
-                required maxLength={80}
-                value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
+                required
+                maxLength={80}
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
                 placeholder="Tu nombre"
               />
@@ -418,55 +647,86 @@ function Waitlist() {
             <label className="grid gap-1.5">
               <span className="text-xs uppercase tracking-wider text-muted-foreground">Email</span>
               <input
-                required type="email" maxLength={120}
-                value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
+                required
+                type="email"
+                maxLength={120}
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
                 placeholder="tu@email.com"
               />
             </label>
             <label className="grid gap-1.5">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground">WhatsApp <span className="normal-case text-muted-foreground/70">(opcional)</span></span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">
+                WhatsApp <span className="normal-case text-muted-foreground/70">(opcional)</span>
+              </span>
               <input
                 maxLength={30}
-                value={form.whatsapp} onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+                value={form.whatsapp}
+                onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
                 className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
                 placeholder="+1 555 000 0000"
               />
             </label>
             <label className="grid gap-1.5">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground">Instagram <span className="normal-case text-muted-foreground/70">(opcional)</span></span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">
+                Instagram <span className="normal-case text-muted-foreground/70">(opcional)</span>
+              </span>
               <input
                 maxLength={60}
-                value={form.instagram} onChange={(e) => setForm({ ...form, instagram: e.target.value })}
+                value={form.instagram}
+                onChange={(e) => setForm({ ...form, instagram: e.target.value })}
                 className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
                 placeholder="@usuario"
               />
             </label>
             <label className="grid gap-1.5">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground">¿Qué se siente más pesado ahora mismo? <span className="normal-case text-muted-foreground/70">(opcional)</span></span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">
+                ¿Qué se siente más pesado ahora mismo?{" "}
+                <span className="normal-case text-muted-foreground/70">(opcional)</span>
+              </span>
               <select
-                value={form.pain} onChange={(e) => setForm({ ...form, pain: e.target.value })}
+                value={form.pain}
+                onChange={(e) => setForm({ ...form, pain: e.target.value })}
                 className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
               >
                 <option value="">Elige una…</option>
                 {PAIN_OPTIONS_ES.map((o) => (
-                  <option key={o} value={o}>{o}</option>
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
                 ))}
               </select>
             </label>
             {error && (
-              <p className="text-sm text-red-500 text-center">{error}</p>
+              <p className="text-sm text-red-500 text-center">
+                Algo falló — inténtalo otra vez o escríbenos a{" "}
+                <a href="mailto:hola@holaelara.com" className="underline">
+                  hola@holaelara.com
+                </a>
+              </p>
             )}
             <button
               type="submit"
               disabled={loading}
-              className="group mt-2 inline-flex items-center justify-center gap-2.5 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="btn-tactile group mt-2 inline-flex items-center justify-center gap-2.5 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {loading ? "Uniéndome…" : "Unirme a la lista de espera fundadora"}
-              {!loading && <span className="text-accent group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>}
+              {loading ? "Un segundo…" : "Unirme a la lista de espera fundadora"}
+              {!loading && (
+                <span
+                  className="text-accent group-hover:text-primary-foreground group-hover:translate-x-1 transition-[color,transform] duration-300"
+                  aria-hidden
+                >
+                  →
+                </span>
+              )}
             </button>
-            <p className="font-hand text-xl text-accent/80 text-center">leemos cada respuesta — de verdad.</p>
-            <p className="text-xs text-muted-foreground text-center">Sin spam. Nunca. Baja con un solo toque.</p>
+            <p className="font-hand text-xl text-accent/80 text-center">
+              leemos cada respuesta — de verdad.
+            </p>
+            <p className="text-xs text-muted-foreground text-center">
+              Sin spam. Nunca. Baja con un solo toque.
+            </p>
           </form>
         )}
       </div>
@@ -479,35 +739,68 @@ function Founder() {
     <section className="py-24 sm:py-32">
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">Una nota de nosotras</p>
+          <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">
+            Una nota de nosotras
+          </p>
           <blockquote className="mt-6 mx-auto max-w-2xl font-serif text-2xl sm:text-[2rem] text-foreground leading-snug text-balance text-center">
-            Veíamos lo mismo una y otra vez — en nuestra propia vida, y en miles de mensajes: mujeres que
-            por fuera parecen tenerlo todo resuelto, y por dentro funcionan en vacío. No encontrábamos el
-            lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. <span className="italic text-muted-foreground">(La verdad, también para nosotras.)</span>
+            Veíamos lo mismo una y otra vez — en nuestra propia vida, y en miles de mensajes:
+            mujeres que por fuera parecen tenerlo todo resuelto, y por dentro funcionan en vacío. No
+            encontrábamos el lugar suave que necesitábamos, así que empezamos a construirlo. Elara
+            es para ti.{" "}
+            <span className="italic text-muted-foreground">
+              (La verdad, también para nosotras.)
+            </span>
           </blockquote>
-          <p className="mt-8 text-center font-hand text-3xl sm:text-4xl text-accent -rotate-2">— Mengxi &amp; Ale</p>
+          <p className="mt-8 text-center font-hand text-3xl sm:text-4xl text-accent -rotate-2">
+            — Mengxi &amp; Ale
+          </p>
         </Reveal>
 
         <div className="mt-16 grid sm:grid-cols-2 gap-10 sm:gap-14">
           {[
-            { img: founderMengxi, name: "Mengxi Wang", role: "Producto y diseño", ig: "karawang", pos: "center top" },
-            { img: founderAlejandra, name: "Alejandra Ramirez", role: "Creadora y comunidad", ig: "alejandra.travels", pos: "center 30%" },
+            {
+              img: founderMengxi,
+              name: "Mengxi Wang",
+              role: "Producto y diseño",
+              ig: "karawang",
+              pos: "center top",
+            },
+            {
+              img: founderAlejandra,
+              name: "Alejandra Ramirez",
+              role: "Creadora y comunidad",
+              ig: "alejandra.travels",
+              pos: "center 30%",
+            },
           ].map((f, i) => (
             <Reveal key={f.name} delay={i * 120}>
               <figure className="flex flex-col items-center text-center">
                 <div className="group relative w-48 h-48 sm:w-56 sm:h-56">
-                  <div className="absolute -inset-3 bg-gradient-warm rounded-full blur-xl opacity-50 transition-opacity duration-500 group-hover:opacity-80" aria-hidden />
+                  <div
+                    className="absolute -inset-3 bg-gradient-warm rounded-full blur-xl opacity-50 transition-opacity duration-500 group-hover:opacity-80"
+                    aria-hidden
+                  />
                   <div className="relative w-full h-full rounded-full overflow-hidden shadow-card">
-                    <img src={f.img} alt={f.name} loading="lazy"
+                    <img
+                      src={f.img}
+                      alt={f.name}
+                      loading="lazy"
                       className="img-zoom w-full h-full object-cover"
-                      style={{ objectPosition: f.pos }} />
+                      style={{ objectPosition: f.pos }}
+                    />
                   </div>
                 </div>
                 <figcaption className="mt-6">
                   <p className="font-serif text-2xl text-foreground">{f.name}</p>
-                  <p className="text-sm uppercase tracking-wider text-muted-foreground mt-1">{f.role}</p>
-                  <a href={`https://instagram.com/${f.ig}`} target="_blank" rel="noreferrer"
-                    className={`mt-3 inline-flex items-center gap-1.5 text-sm text-accent hover:text-foreground transition ${underline}`}>
+                  <p className="text-sm uppercase tracking-wider text-muted-foreground mt-1">
+                    {f.role}
+                  </p>
+                  <a
+                    href={`https://instagram.com/${f.ig}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`mt-3 inline-flex items-center gap-1.5 text-sm text-accent hover:text-foreground transition ${underline}`}
+                  >
                     <Instagram className="h-4 w-4" /> @{f.ig}
                   </a>
                 </figcaption>
@@ -524,13 +817,28 @@ function Footer() {
   return (
     <footer className="border-t border-border/60 py-10">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
-        <p className="font-serif text-lg text-foreground">elara<span className="text-accent">.</span></p>
+        <p className="font-serif text-lg text-foreground">
+          elara<span className="text-accent">.</span>
+        </p>
         <nav className="flex items-center gap-5">
-          <a href="#" className="hover:text-foreground transition">Privacidad</a>
-          <a href="#" className="hover:text-foreground transition">Contacto</a>
-          <a href="https://instagram.com/alejandra.travels" target="_blank" rel="noreferrer" className="hover:text-foreground transition">Instagram</a>
+          <a href="/privacidad" className="hover:text-foreground transition">
+            Privacidad
+          </a>
+          <a href="mailto:hola@holaelara.com" className="hover:text-foreground transition">
+            Contacto
+          </a>
+          <a
+            href="https://instagram.com/alejandra.travels"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-foreground transition"
+          >
+            Instagram
+          </a>
         </nav>
-        <p>© {new Date().getFullYear()} Elara · Hecho por dos mujeres que también lo necesitaban.</p>
+        <p>
+          © {new Date().getFullYear()} Elara · Hecho por dos mujeres que también lo necesitaban.
+        </p>
       </div>
     </footer>
   );
