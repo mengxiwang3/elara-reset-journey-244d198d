@@ -317,6 +317,20 @@
   .reveal-in > .grow-line-x {
     transform: scaleX(1);
   }
+
+  /* Elara's reply "blooms" open — a soft unfold from the top of the card */
+  .elara-bloom {
+    animation: elara-bloom 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  /* Reflection prompt / CTA settle in just after the reply lands */
+  .elara-rise {
+    animation: elara-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 0.35s;
+  }
+  /* Three-dot "Elara is with you" thinking indicator */
+  .elara-dot {
+    animation: elara-dot 1.2s ease-in-out infinite;
+  }
 }
 
 @keyframes fade-up {
@@ -354,6 +368,19 @@
   from { offset-distance: 0%; }
   to { offset-distance: 100%; }
 }
+@keyframes elara-bloom {
+  0% { opacity: 0; transform: translateY(10px) scale(0.98); filter: blur(6px); }
+  60% { filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+@keyframes elara-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes elara-dot {
+  0%, 100% { opacity: 0.25; transform: translateY(0); }
+  50% { opacity: 0.9; transform: translateY(-2px); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
@@ -364,8 +391,16 @@
   .animate-settle-drift-slow,
   .settle-drift-reveal,
   .animate-spin-slow,
-  .cta-glow::before {
+  .cta-glow::before,
+  .elara-dot {
     animation: none !important;
+  }
+  .elara-bloom,
+  .elara-rise {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
   .animate-settle,
   .animate-settle-drift,

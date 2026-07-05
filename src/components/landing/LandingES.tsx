@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Sun, CheckCircle2, Instagram, Compass } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { MemberAvatars } from "./MemberAvatars";
+import { ElaraTaste } from "./ElaraTaste";
 
 const underline =
   "relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full";
@@ -849,6 +850,7 @@ export function LandingES() {
     <main className="min-h-screen bg-background text-foreground" lang="es">
       <Nav />
       <Hero />
+      <ElaraTaste />
       <SocialProof />
       <RealContext />
       <Problem />
