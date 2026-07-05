@@ -568,9 +568,6 @@ const PAIN_OPTIONS_ES = [
   "Estancada en una reinvención, sin saber hacia dónde",
 ];
 
-// TODO: paste the real form ID from Loops (Settings → API → form endpoint)
-const LOOPS_FORM_ENDPOINT = "https://app.loops.so/api/newsletter-form/YOUR_FORM_ID";
-
 function Waitlist() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -583,18 +580,16 @@ function Waitlist() {
     setLoading(true);
     setError(false);
     try {
-      const res = await fetch(LOOPS_FORM_ENDPOINT, {
+      const res = await fetch("/api/subscribe", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
           email: form.email.trim(),
-          firstName: form.name.trim(),
-          // Custom contact properties — create in Loops (Audience → Properties) first
-          whatsapp: form.whatsapp.trim(),
-          instagram: form.instagram.trim(),
-          pain: form.pain,
-          userGroup: "waitlist-es",
-          source: "holaelara.com",
+          whatsapp: form.whatsapp.trim() || undefined,
+          instagram: form.instagram.trim() || undefined,
+          pain: form.pain || undefined,
+          language: "es",
         }),
       });
       if (!res.ok) throw new Error();
