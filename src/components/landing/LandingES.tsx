@@ -539,21 +539,22 @@ function Culture() {
           adaptado a eso.
         </p>
       </Reveal>
-      <Reveal className="mt-12 max-w-4xl mx-auto px-5 sm:px-8">
+      <div className="mt-12 max-w-4xl mx-auto px-5 sm:px-8">
         <div className="grid sm:grid-cols-3 border-t border-l border-foreground/10">
-          {phrasePairs.map((p) => (
-            <div
+          {phrasePairs.map((p, i) => (
+            <Reveal
               key={p.es}
+              delay={i * 100}
               className="border-b border-r border-foreground/10 p-7 sm:p-8 bg-card/40 transition-colors hover:bg-card/70"
             >
               <p className="font-serif italic text-2xl sm:text-[1.7rem] text-foreground leading-snug">
                 {p.es}
               </p>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.reply}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }

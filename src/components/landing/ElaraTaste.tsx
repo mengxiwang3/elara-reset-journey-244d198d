@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Sparkles, ArrowRight, Heart } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 /**
@@ -191,6 +191,24 @@ function useTypedPlaceholder(active: boolean): string {
   return text;
 }
 
+type ElaraOrbState = "idle" | "listening" | "thinking" | "replied";
+
+/**
+ * Elara's visual presence — a small breathing orb that shifts through
+ * idle / listening / thinking / replied so the exchange feels like it's
+ * with someone. Purely decorative (state is echoed in text for
+ * prefers-reduced-motion and screen readers).
+ */
+function ElaraOrb({ state }: { state: ElaraOrbState }) {
+  return (
+    <span className={`elara-orb elara-orb--${state}`} aria-hidden>
+      <span className="elara-orb-halo" />
+      <span className="elara-orb-ring" />
+      <span className="elara-orb-core" />
+    </span>
+  );
+}
+
 export function ElaraTaste() {
   const [input, setInput] = useState("");
   const [reply, setReply] = useState<ElaraReply | null>(null);
@@ -200,6 +218,14 @@ export function ElaraTaste() {
 
   // Typed examples run only while the field is empty and unfocused.
   const placeholder = useTypedPlaceholder(!focused && input.length === 0 && reply === null);
+
+  const orbState: ElaraOrbState = reply
+    ? "replied"
+    : thinking
+      ? "thinking"
+      : focused || input.trim().length > 0
+        ? "listening"
+        : "idle";
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -238,6 +264,12 @@ export function ElaraTaste() {
           ref={cardRef}
           className="cta-glow relative rounded-3xl border border-border bg-card p-5 sm:p-7 shadow-card"
         >
+          <div className="mb-4 flex items-center gap-2.5">
+            <ElaraOrb state={orbState} />
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">
+              {thinking ? "Elara está contigo…" : "Elara"}
+            </span>
+          </div>
           <form onSubmit={onSubmit}>
             <label htmlFor="elara-input" className="sr-only">
               Cuéntale a Elara cómo te sientes hoy
@@ -277,23 +309,11 @@ export function ElaraTaste() {
             </div>
           </form>
 
-          {/* Thinking indicator */}
+          {/* Thinking state is carried by the orb + header label above — no separate indicator needed */}
           {thinking && (
-            <div
-              className="mt-5 flex items-center gap-1.5 text-accent"
-              role="status"
-              aria-label="Elara está respondiendo"
-            >
-              <span className="h-2 w-2 rounded-full bg-current elara-dot" />
-              <span
-                className="h-2 w-2 rounded-full bg-current elara-dot"
-                style={{ animationDelay: "0.2s" }}
-              />
-              <span
-                className="h-2 w-2 rounded-full bg-current elara-dot"
-                style={{ animationDelay: "0.4s" }}
-              />
-            </div>
+            <p className="sr-only" role="status" aria-live="polite">
+              Elara está respondiendo
+            </p>
           )}
 
           {/* Elara's reply blooms open */}
@@ -306,10 +326,7 @@ export function ElaraTaste() {
                     : "border-border/70 bg-gradient-warm"
                 }`}
               >
-                <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-accent font-medium">
-                  <Sparkles className="h-3.5 w-3.5" aria-hidden /> Elara
-                </div>
-                <p className="mt-3 font-serif text-xl sm:text-2xl text-foreground leading-snug text-balance">
+                <p className="font-serif text-xl sm:text-2xl text-foreground leading-snug text-balance">
                   {reply.text}
                 </p>
 

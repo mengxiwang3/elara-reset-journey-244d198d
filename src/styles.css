@@ -327,9 +327,79 @@
     animation: elara-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: 0.35s;
   }
-  /* Three-dot "Elara is with you" thinking indicator */
-  .elara-dot {
-    animation: elara-dot 1.2s ease-in-out infinite;
+  /* Elara's presence orb — idle / listening / thinking / replied */
+  .elara-orb {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+  }
+  .elara-orb-halo {
+    position: absolute;
+    inset: -7px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, oklch(0.72 0.12 50 / 0.55), transparent 72%);
+    animation: elara-breathe-soft 5.5s ease-in-out infinite;
+  }
+  .elara-orb-ring {
+    position: absolute;
+    inset: 1px;
+    border-radius: 9999px;
+    border: 1px solid oklch(0.62 0.13 40 / 0.35);
+    animation: spin-slow 16s linear infinite;
+  }
+  .elara-orb-core {
+    position: relative;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, oklch(0.72 0.12 50), oklch(0.5 0.12 40));
+    opacity: 0.75;
+    box-shadow: 0 0 0 0 oklch(0.62 0.13 40 / 0);
+    transition:
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.5s ease,
+      opacity 0.5s ease;
+  }
+
+  .elara-orb--listening .elara-orb-halo {
+    animation-duration: 3.2s;
+  }
+  .elara-orb--listening .elara-orb-ring {
+    animation-duration: 8s;
+  }
+  .elara-orb--listening .elara-orb-core {
+    opacity: 1;
+    transform: scale(1.15);
+    box-shadow: 0 0 0 4px oklch(0.62 0.13 40 / 0.12);
+  }
+
+  .elara-orb--thinking .elara-orb-halo {
+    animation-duration: 1.9s;
+  }
+  .elara-orb--thinking .elara-orb-core {
+    opacity: 1;
+  }
+  .elara-orb--thinking .elara-orb-core::before,
+  .elara-orb--thinking .elara-orb-core::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 1px solid oklch(0.62 0.13 40 / 0.5);
+    animation: elara-ripple 1.6s ease-out infinite;
+  }
+  .elara-orb--thinking .elara-orb-core::after {
+    animation-delay: 0.5s;
+  }
+
+  .elara-orb--replied .elara-orb-halo {
+    animation-duration: 6.5s;
+  }
+  .elara-orb--replied .elara-orb-core {
+    opacity: 0.9;
   }
 }
 
@@ -377,9 +447,13 @@
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@keyframes elara-dot {
-  0%, 100% { opacity: 0.25; transform: translateY(0); }
-  50% { opacity: 0.9; transform: translateY(-2px); }
+@keyframes elara-breathe-soft {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 0.85; }
+}
+@keyframes elara-ripple {
+  0% { transform: scale(0.7); opacity: 0.6; }
+  100% { transform: scale(2.6); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -391,8 +465,7 @@
   .animate-settle-drift-slow,
   .settle-drift-reveal,
   .animate-spin-slow,
-  .cta-glow::before,
-  .elara-dot {
+  .cta-glow::before {
     animation: none !important;
   }
   .elara-bloom,
@@ -401,6 +474,19 @@
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
+  }
+  .elara-orb-halo,
+  .elara-orb-ring {
+    animation: none !important;
+  }
+  .elara-orb-core {
+    transition: none !important;
+    transform: none !important;
+    opacity: 0.85 !important;
+  }
+  .elara-orb-core::before,
+  .elara-orb-core::after {
+    display: none !important;
   }
   .animate-settle,
   .animate-settle-drift,
