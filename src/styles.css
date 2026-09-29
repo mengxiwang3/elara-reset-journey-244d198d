@@ -919,7 +919,7 @@
     box-shadow: 0 20px 55px rgb(26 22 21 / 22%), 0 1px 0 rgb(255 255 255 / 18%) inset;
     animation: walkthrough-change 520ms cubic-bezier(.22,1,.36,1) both;
   }
-  .walkthrough-screen { overflow: hidden; border-radius: 28px; background: #F9F5EF; }
+  .walkthrough-screen { position: relative; overflow: hidden; border-radius: 28px; background: #F9F5EF; }
   .walkthrough-phone img { display: block; width: 100%; height: auto; }
   .walkthrough-island {
     position: absolute;
@@ -964,10 +964,35 @@
   .walkthrough-moment-copy strong { font-size: 21px; font-weight: 600; line-height: 1.2; letter-spacing: -0.025em; }
   .walkthrough-moment-copy > span { max-width: 420px; font-size: 14px; line-height: 1.6; }
   .walkthrough-moment:not([aria-selected="true"]) .walkthrough-moment-copy > span { display: none; }
-  .walkthrough-next { display: flex; justify-content: flex-end; padding-top: 22px; }
+  .walkthrough-next { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-top: 22px; }
   .walkthrough-next button { color: var(--accent); font-size: 13px; border-bottom: 1px solid var(--border); padding: 8px 0; }
   .walkthrough-next button span { display: inline-block; margin-left: 14px; transition: transform 180ms ease; }
   .walkthrough-next button:hover span { transform: translateX(4px); }
+  .walkthrough-demo-toggle { color: var(--muted-foreground) !important; border-bottom: 0 !important; }
+  .walkthrough-demo-cursor {
+    position: absolute;
+    z-index: 3;
+    width: 28px;
+    height: 34px;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 3px rgb(26 22 21 / 35%));
+    transform-origin: 3px 3px;
+    animation: cursor-walkthrough 5.2s cubic-bezier(.22,1,.36,1) both;
+  }
+  .walkthrough-demo-cursor svg { position: relative; z-index: 2; display: block; width: 100%; height: 100%; }
+  .walkthrough-demo-cursor path { fill: white; stroke: #1A1615; stroke-width: 1.7; stroke-linejoin: round; }
+  .walkthrough-demo-cursor > span {
+    position: absolute;
+    z-index: 1;
+    left: -12px;
+    top: -12px;
+    width: 34px;
+    height: 34px;
+    border: 2px solid #E65A28;
+    border-radius: 50%;
+    opacity: 0;
+    animation: cursor-click-ring 5.2s ease-out both;
+  }
 
   @media (max-width: 760px) {
     .product-walkthrough { padding: 76px 24px; }
@@ -977,12 +1002,30 @@
   @media (prefers-reduced-motion: reduce) {
     .walkthrough-phone { animation: none; }
     .walkthrough-moment, .walkthrough-next button span { transition: none; }
+    .walkthrough-demo-cursor { display: none; }
   }
 }
 
 @keyframes walkthrough-change {
   from { opacity: 0; transform: translateY(12px) scale(.985); }
   to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cursor-walkthrough {
+  0% { opacity: 0; transform: translate(48px, 70px) scale(1); }
+  14% { opacity: 1; }
+  62% { opacity: 1; transform: translate(0, 0) scale(1); }
+  70% { opacity: 1; transform: translate(0, 0) scale(.82); }
+  76% { opacity: 1; transform: translate(0, 0) scale(1); }
+  90% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(0, 0) scale(1); }
+}
+
+@keyframes cursor-click-ring {
+  0%, 66% { opacity: 0; transform: scale(.55); }
+  70% { opacity: .85; transform: scale(.55); }
+  82% { opacity: 0; transform: scale(1.45); }
+  100% { opacity: 0; transform: scale(1.45); }
 }
 
 /* Restore the original site's six-second float and nine-second breathing rhythm. */
