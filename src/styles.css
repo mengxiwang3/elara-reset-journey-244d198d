@@ -766,6 +766,117 @@
   to { opacity: 1; transform: rotateY(0) translateX(0); }
 }
 
+/* The short Option B page is composed as discrete writing blocks. */
+@layer utilities {
+  .writing-block { padding: 104px 32px; }
+  .writing-block h2 {
+    margin-top: 20px;
+    font-size: clamp(36px, 4.2vw, 58px);
+    font-weight: 500;
+    line-height: 1.06;
+    letter-spacing: -0.045em;
+  }
+  .writing-block-grid {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: clamp(56px, 9vw, 120px);
+    max-width: 1080px;
+    margin-inline: auto;
+    align-items: start;
+  }
+  .writing-block-body > p {
+    max-width: 420px;
+    font-size: 20px;
+    line-height: 1.65;
+    color: var(--muted-foreground);
+  }
+  .writing-stat {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 38px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .writing-stat strong { font-size: 48px; font-weight: 500; letter-spacing: -0.055em; }
+  .writing-stat span { max-width: 190px; font-size: 13px; line-height: 1.5; color: var(--muted-foreground); }
+  .writing-block-insight { background: var(--card); border-block: 1px solid var(--border); }
+  .writing-block-heading { max-width: 720px; margin-inline: auto; text-align: center; }
+  .writing-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    max-width: 1080px;
+    margin: 64px auto 0;
+    border-block: 1px solid var(--border);
+  }
+  .writing-step { min-height: 260px; padding: 32px; border-right: 1px solid var(--border); }
+  .writing-step:last-child { border-right: 0; }
+  .writing-step > span { color: var(--accent); font-size: 11px; font-weight: 600; letter-spacing: .16em; }
+  .writing-step h3 { margin-top: 58px; font-size: 23px; font-weight: 600; letter-spacing: -0.025em; }
+  .writing-step p { margin-top: 12px; color: var(--muted-foreground); line-height: 1.65; }
+  .writing-ai-note {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 28px;
+    max-width: 720px;
+    margin: 36px auto 0;
+    color: var(--muted-foreground);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .writing-ai-note span { color: var(--foreground); font-weight: 600; }
+  .writing-block-outcome { background: var(--forest); color: white; text-align: center; }
+  .writing-block-outcome > div { max-width: 820px; margin-inline: auto; }
+  .writing-block-outcome .uppercase { color: var(--mint); }
+  .writing-block-outcome ul {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-top: 52px;
+    border-block: 1px solid rgb(255 255 255 / 22%);
+  }
+  .writing-block-outcome li { flex: 1; padding: 24px; border-right: 1px solid rgb(255 255 255 / 22%); font-size: 14px; }
+  .writing-block-outcome li:last-child { border-right: 0; }
+  .writing-block-community {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 0;
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+  .writing-community-image { min-height: 580px; overflow: hidden; border-radius: 20px 0 0 20px; }
+  .writing-community-image img { width: 100%; height: 100%; object-fit: cover; }
+  .writing-community-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(38px, 6vw, 76px);
+    border: 1px solid var(--border);
+    border-left: 0;
+    border-radius: 0 20px 20px 0;
+    background: var(--card);
+  }
+  .writing-community-copy .uppercase { color: var(--accent); }
+  .writing-community-copy > p:not(.uppercase) { margin-top: 24px; color: var(--muted-foreground); font-size: 17px; line-height: 1.7; }
+  .writing-community-copy > a { align-self: flex-start; margin-top: 30px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+
+  @media (max-width: 760px) {
+    .writing-block { padding: 72px 24px; }
+    .writing-block-grid, .writing-block-community { grid-template-columns: 1fr; gap: 40px; }
+    .writing-steps { grid-template-columns: 1fr; }
+    .writing-step { min-height: 0; border-right: 0; border-bottom: 1px solid var(--border); }
+    .writing-step:last-child { border-bottom: 0; }
+    .writing-step h3 { margin-top: 28px; }
+    .writing-ai-note { grid-template-columns: 1fr; gap: 8px; }
+    .writing-block-outcome ul { flex-direction: column; }
+    .writing-block-outcome li { border-right: 0; border-bottom: 1px solid rgb(255 255 255 / 22%); }
+    .writing-block-outcome li:last-child { border-bottom: 0; }
+    .writing-community-image { min-height: 420px; border-radius: 20px 20px 0 0; }
+    .writing-community-copy { border-left: 1px solid var(--border); border-top: 0; border-radius: 0 0 20px 20px; }
+  }
+}
+
 /* Restore the original site's six-second float and nine-second breathing rhythm. */
 @layer utilities {
   .landing-soft .soft-hero { position: relative; isolation: isolate; overflow: hidden; }

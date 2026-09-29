@@ -14,11 +14,10 @@ export function AlejandraStory() {
         </Reveal>
         <Reveal delay={140} className="alejandra-copy">
           <p className="uppercase text-accent">Una de las mujeres detrás de Elara</p>
-          <h2 id="alejandra-title">Antes de hablar de una app,<br /><span>hablemos de nosotras.</span></h2>
+          <h2 id="alejandra-title">Escuchamos antes<br /><span>de construir.</span></h2>
           <div className="alejandra-rule" aria-hidden="true" />
-          <p>Alejandra es creadora y cofundadora de Elara. Junto a Mengxi, está construyendo un espacio para las mujeres que sostienen mucho y también necesitan un lugar para sí mismas.</p>
-          <p>El punto de partida está en la vida real: lo que compartimos con amigas, lo que nos cuesta decir y lo que tantas mujeres han contado en la comunidad. Las <strong>4,601 respuestas a la encuesta</strong> nos ayudan a escuchar con más atención.</p>
-          <p>No se trata de tener todo resuelto. Se trata de encontrar un pequeño lugar por donde empezar, con compañía y a tu ritmo.</p>
+          <p>Alejandra veía la misma necesidad en su vida y en su comunidad: mujeres sosteniendo mucho, sin un lugar para sí mismas.</p>
+          <p>Elara nace de esas conversaciones. No para tener todo resuelto, sino para encontrar un lugar por donde empezar.</p>
           <a href="https://instagram.com/alejandra.travels" target="_blank" rel="noreferrer" className="alejandra-link">Conoce a Alejandra <span aria-hidden="true">↗</span></a>
         </Reveal>
       </div>
