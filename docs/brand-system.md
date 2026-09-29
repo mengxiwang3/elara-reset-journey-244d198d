@@ -22,3 +22,5 @@ The five supplied screenshot files are used unchanged. Brand inconsistencies bak
 Run `npm ci` and `npm run dev -- --host 127.0.0.1 --port 4173`. Open `/es` for Spanish or `/` for English in the local development server.
 
 Production build succeeds. Full TypeScript checking reports an existing implicit-any parameter in `src/lib/error-capture.ts:13`, which this change does not modify. Browser visual inspection could not be completed because the browser tool could not verify its required security policy.
+
+Review follow-up: scoped brand styles now share Tailwind's utilities layer so higher-specificity brand rules reliably override utility defaults. Full navigation begins at desktop width to avoid crowding tablet headers. Avatar initials use neutral sans-serif styling instead of legacy gold/brown gradients, and decorative founder glows are removed. GitHub reported a failed Cloudflare Workers build for commit `023ab61`; the check provides only a dashboard link, not error logs, so the hosted-build cause remains unverified.

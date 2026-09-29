@@ -258,7 +258,8 @@
 }
 
 /* Website expressions of the September system. App screenshots remain source assets. */
-@layer components {
+/* Scoped overrides must follow Tailwind utilities in the cascade. */
+@layer utilities {
   .landing-page { line-height: 1.5; }
   .landing-page section { scroll-margin-top: 5rem; }
   .landing-page header nav { font-weight: 500; }

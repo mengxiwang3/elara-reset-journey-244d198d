@@ -22,7 +22,7 @@ function Nav() {
         <a href="/es" className="shrink-0">
           <BrandMark />
         </a>
-        <nav className="hidden sm:flex items-center gap-8 text-sm text-muted-foreground">
+        <nav className="hidden lg:flex items-center gap-8 text-sm text-muted-foreground">
           <a href="#como" className={`hover:text-foreground transition ${underline}`}>Cómo funciona</a>
           <a href="#producto" className={`hover:text-foreground transition ${underline}`}>Dentro de Elara</a>
           <a href="#comunidad" className={`hover:text-foreground transition ${underline}`}>Comunidad</a>
@@ -495,7 +495,6 @@ function Founder() {
             <Reveal key={f.name} delay={i * 120}>
               <figure className="flex flex-col items-center text-center">
                 <div className="group relative w-48 h-48 sm:w-56 sm:h-56">
-                  <div className="absolute -inset-3 bg-gradient-warm rounded-full blur-xl opacity-50 transition-opacity duration-500 group-hover:opacity-80" aria-hidden />
                   <div className="relative w-full h-full rounded-full overflow-hidden shadow-card">
                     <img src={f.img} alt={f.name} loading="lazy"
                       className="img-zoom w-full h-full object-cover"
