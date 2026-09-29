@@ -1,5 +1,11 @@
+import { AlejandraStory } from "./AlejandraStory";
+import { FloatingElara } from "./FloatingElara";
+import { SoftWritingBlocks } from "./SoftWritingBlocks";
+import { StoryHero } from "./StoryHero";
+import { SoftHero } from "./SoftHero";
+import { BrandMark, ElaraOrb } from "./Brand";
 import { useState } from "react";
-import { Sun, CheckCircle2, Instagram } from "lucide-react";
+import { CheckCircle2, Instagram } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { MemberAvatars } from "./MemberAvatars";
 
@@ -14,16 +20,16 @@ import founderMengxi from "@/assets/founder-mengxi.jpg";
 import founderAlejandra from "@/assets/founder-alejandra.jpg";
 import communityCircle from "@/assets/community-circle.jpg";
 
-function Nav() {
+function Nav({ soft = false }: { soft?: boolean }) {
   return (
     <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/40">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="/es" className="font-serif text-2xl tracking-tight text-foreground">
-          elara<span className="text-accent">.</span>
+        <a href="/es" className="shrink-0">
+          <BrandMark />
         </a>
-        <nav className="hidden sm:flex items-center gap-8 text-sm text-muted-foreground">
+        <nav className="hidden lg:flex items-center gap-8 text-sm text-muted-foreground">
           <a href="#como" className={`hover:text-foreground transition ${underline}`}>Cómo funciona</a>
-          <a href="#producto" className={`hover:text-foreground transition ${underline}`}>Dentro de Elara</a>
+          <a href={soft ? "#recorrido" : "#producto"} className={`hover:text-foreground transition ${underline}`}>Dentro de Elara</a>
           <a href="#comunidad" className={`hover:text-foreground transition ${underline}`}>Comunidad</a>
         </nav>
         <div className="flex items-center gap-3">
@@ -37,7 +43,7 @@ function Nav() {
               EN
             </a>
           </div>
-          <a href="#lista" className="inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition">
+          <a href="#lista" className="brand-nav-action inline-flex items-center gap-2 rounded-full border border-border bg-card text-accent px-4 py-2 text-sm font-semibold hover:bg-secondary transition">
             Unirme a la lista
           </a>
         </div>
@@ -55,19 +61,19 @@ function Hero() {
           <span className="inline-flex items-center gap-3 text-xs tracking-[0.25em] uppercase text-muted-foreground">
             <span className="h-px w-8 bg-accent" aria-hidden /> Primera en español · Lista de espera fundadora abierta
           </span>
-          <h1 className="mt-6 font-serif text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-[4.5rem] text-foreground text-balance">
-            Para la mujer que sostiene todo, <em className="italic text-accent">aunque nadie lo note.</em>
+          <h1 className="mt-6 font-sans text-[2.5rem] leading-[1.02] sm:text-6xl lg:text-[4.5rem] text-foreground text-balance">
+            Para la mujer que sostiene todo, <em className="not-italic text-accent">aunque nadie lo note.</em>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
             Elara es un reset guiado de 7 días para mujeres ambiciosas que por fuera parecen estar bien,
             pero por dentro se sienten saturadas, dispersas o lejos de sí mismas.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <a href="#lista" className="group inline-flex items-center gap-2.5 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors">
+            <a href="#lista" className="group inline-flex items-center gap-2.5 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors">
               Unirme a la lista de espera
-              <span className="text-accent group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>
+              <span className="text-primary-foreground group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>
             </a>
-            <a href="#como" className="inline-flex items-center gap-2 rounded-lg border border-foreground/20 px-7 py-3.5 text-base font-medium text-foreground hover:border-foreground/40 transition">
+            <a href="#como" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-7 py-3.5 text-base font-medium text-foreground hover:border-foreground/40 transition">
               Ver cómo funciona
             </a>
           </div>
@@ -76,33 +82,32 @@ function Hero() {
             {[
               { n: "1.8M", u: "+", l: "alcanzadas en el mundo de Alejandra", avatars: false },
               { n: "80K", u: "+", l: "en comunidad", avatars: true },
-              { n: "4,600", u: "+", l: "mujeres encuestadas", avatars: false },
+              { n: "4,601", u: "", l: "respuestas a la encuesta", avatars: false },
               { n: "7", u: " días", l: "primer ciclo de claridad", avatars: false },
             ].map((s) => (
               <div key={s.l}>
                 {s.avatars && <MemberAvatars className="mb-3" />}
-                <dt className="font-serif text-4xl sm:text-5xl text-foreground leading-none">
+                <dt className="font-sans text-4xl sm:text-5xl text-foreground leading-none">
                   {s.n}
-                  {s.u && <span className="italic text-accent text-3xl sm:text-4xl">{s.u}</span>}
+                  {s.u && <span className="not-italic text-accent text-3xl sm:text-4xl">{s.u}</span>}
                 </dt>
-                <dd className="font-serif italic text-base text-muted-foreground mt-2">{s.l}</dd>
+                <dd className="font-sans not-italic text-base text-muted-foreground mt-2">{s.l}</dd>
               </div>
             ))}
           </dl>
         </div>
         <div className="lg:col-span-5 relative">
-          <div className="relative mx-auto max-w-sm animate-float">
-            <div className="absolute -inset-6 bg-gradient-warm rounded-[2rem] blur-2xl opacity-60" aria-hidden />
-            <div className="relative rounded-[2.4rem] p-3 bg-foreground/5 backdrop-blur shadow-soft border border-border/60">
+          <div className="relative mx-auto max-w-[320px]">
+            <div className="relative rounded-[2.4rem] p-2 bg-card shadow-soft border border-border">
               <img
                 src={appToday}
-                alt="App Elara — pantalla de inicio con brújula diaria"
+                alt="App Elara: pantalla de inicio con brújula diaria"
                 className="rounded-[1.9rem] w-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-card/95 backdrop-blur rounded-2xl shadow-card p-4 max-w-[220px] border border-border/60">
+            <div className="absolute -bottom-6 -left-6 bg-card rounded-2xl shadow-card p-4 max-w-[220px] border border-border/60">
               <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-accent font-medium">
-                <Sun className="h-3.5 w-3.5" /> Día 3 · Mañana
+                <ElaraOrb /> Día 3 · Mañana
               </div>
               <p className="mt-2 text-sm text-foreground leading-snug">
                 "¿Qué parte de ti necesita suavidad hoy?"
@@ -119,13 +124,13 @@ function SocialProof() {
   return (
     <section className="py-14 border-y border-border/50 bg-card/40">
       <Reveal className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
-        <p className="text-xs uppercase tracking-[0.25em] text-accent">Construido con — no para</p>
-        <p className="mt-4 font-serif text-2xl sm:text-3xl text-foreground/90 max-w-3xl mx-auto leading-snug text-balance">
-          Moldeado por 1,998 respuestas y una comunidad de 80K latinas que nos contaron,
+        <p className="text-xs uppercase tracking-[0.25em] text-accent">Construido con, no para</p>
+        <p className="mt-4 font-sans text-2xl sm:text-3xl text-foreground/90 max-w-3xl mx-auto leading-snug text-balance">
+          Moldeado por 4,601 respuestas a la encuesta y una comunidad de 80K latinas que nos contaron,
           con honestidad, lo que estaban cargando.
         </p>
         <p className="mt-6 text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Empezamos por el dinero porque fue la presión que más salió. Desde ahí se abre hacia todo lo demás — confianza, familia, hábitos y cómo te sientes de verdad, día a día.
+          Empezamos por el dinero porque fue la presión que más salió. Desde ahí se abre hacia todo lo demás: confianza, familia, hábitos y cómo te sientes de verdad, día a día.
         </p>
       </Reveal>
     </section>
@@ -138,12 +143,12 @@ function RealContext() {
       <div className="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <Reveal>
           <p className="text-sm uppercase tracking-[0.2em] text-accent">El contexto real</p>
-          <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground leading-[1.08] text-balance">
-            No es otro hábito que cumplir. <em className="italic text-accent">Un lugar para lo que ya llevas.</em>
+          <h2 className="mt-4 font-sans text-4xl sm:text-5xl text-foreground leading-[1.08] text-balance">
+            No es otro hábito que cumplir. <em className="not-italic text-accent">Un lugar para lo que ya llevas.</em>
           </h2>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
             Elara se construye alrededor de las conversaciones que las mujeres ya tienen con amigas, hermanas,
-            madres y consigo mismas — los patrones silenciosos, los bucles emocionales y las decisiones que
+            madres y consigo mismas, los patrones silenciosos, los bucles emocionales y las decisiones que
             rara vez caben en una lista.
           </p>
         </Reveal>
@@ -157,7 +162,7 @@ function RealContext() {
                 className="w-full aspect-[4/3] sm:aspect-[3/2] object-cover object-center [filter:saturate(1.03)]"
               />
             </div>
-            <figcaption className="mt-4 max-w-md text-sm italic text-muted-foreground leading-relaxed">
+            <figcaption className="mt-4 max-w-md text-sm not-italic text-muted-foreground leading-relaxed">
               No es bienestar como actuación. Un espacio privado para los pensamientos, patrones y emociones que has cargado en silencio.
             </figcaption>
           </figure>
@@ -181,7 +186,7 @@ function Problem() {
         <div className="lg:col-span-5">
           <Reveal className="lg:sticky lg:top-28">
             <p className="text-sm uppercase tracking-[0.2em] text-accent">Si esto te suena familiar</p>
-            <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
+            <h2 className="mt-4 font-sans text-4xl sm:text-5xl text-foreground text-balance">
               No necesitas otra app. Necesitas un lugar donde aterrizar.
             </h2>
           </Reveal>
@@ -189,9 +194,9 @@ function Problem() {
         <div className="lg:col-span-7 border-t border-foreground/10">
           {problems.map((p, i) => (
             <Reveal key={p.title} delay={i * 90} className="flex gap-6 py-7 border-b border-foreground/10">
-              <span className="shrink-0 w-9 font-serif text-2xl italic text-accent/70">{String(i + 1).padStart(2, "0")}</span>
+              <span className="shrink-0 w-9 font-sans text-2xl not-italic text-accent">{String(i + 1).padStart(2, "0")}</span>
               <div>
-                <h3 className="font-serif text-2xl text-foreground">{p.title}</h3>
+                <h3 className="font-sans text-2xl text-foreground">{p.title}</h3>
                 <p className="mt-2 text-muted-foreground leading-relaxed">{p.body}</p>
               </div>
             </Reveal>
@@ -203,21 +208,21 @@ function Problem() {
 }
 
 const screens = [
-  { src: appPath, label: "Tu camino personalizado", caption: "Tu contexto, no una plantilla." },
-  { src: appToday, label: "Brújula diaria", caption: "Tres pequeños actos al día." },
+  { src: appPath, label: "Un camino para ti", caption: "Tu contexto, no una plantilla." },
+  { src: appToday, label: "Un paso cada día", caption: "Tres pequeños actos al día." },
   { src: appReflection, label: "Reflexión suave", caption: "Conciencia antes que acción." },
   { src: appCommunity, label: "El círculo de hoy", caption: "Caminando contigo." },
-  { src: appClarity, label: "Mapa de claridad", caption: "En qué enfocarte primero." },
+  { src: appClarity, label: "Lo que necesita atención", caption: "En qué enfocarte primero." },
 ];
 
 function PhoneMockup({ src, label, caption }: { src: string; label: string; caption: string }) {
   return (
     <div className="shrink-0 w-[220px] sm:w-[240px]">
       <div className="hover-lift relative rounded-[2.2rem] p-2.5 bg-card border border-border/60 shadow-soft hover:shadow-soft">
-        <img src={src} alt={`Elara app — ${label}`} loading="lazy"
+        <img src={src} alt={`Elara app: ${label}`} loading="lazy"
           className="rounded-[1.8rem] w-full object-cover" />
       </div>
-      <p className="mt-4 text-center font-serif text-lg text-foreground">{label}</p>
+      <p className="mt-4 text-center font-sans text-lg text-foreground">{label}</p>
       <p className="text-center text-xs text-muted-foreground mt-1">{caption}</p>
     </div>
   );
@@ -225,15 +230,15 @@ function PhoneMockup({ src, label, caption }: { src: string; label: string; capt
 
 function Product() {
   return (
-    <section id="producto" className="py-24 sm:py-32 bg-gradient-warm">
+    <section id="producto" className="py-24 sm:py-32 bg-background">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <Reveal className="max-w-2xl ml-auto text-right">
           <p className="text-sm uppercase tracking-[0.2em] text-accent">Dentro de Elara</p>
-          <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
+          <h2 className="mt-4 font-sans text-4xl sm:text-5xl text-foreground text-balance">
             Un espacio pequeño y hermoso para tu vida interior.
           </h2>
           <p className="mt-5 text-base text-muted-foreground leading-relaxed">
-            Al final de la semana, sales con más claridad sobre lo que necesitas, un plan de reset personalizado y un ritmo diario más suave que sí puedes sostener.
+            Durante siete días, haz espacio para lo que necesitas, prueba pequeños pasos y encuentra un ritmo que se sienta más tuyo.
           </p>
         </Reveal>
       </div>
@@ -251,9 +256,9 @@ function Product() {
 }
 
 const steps = [
-  { n: "01", title: "Un check-in honesto de 4 minutos", body: "Sin puntuaciones. Sin vergüenza. Solo dónde estás realmente hoy." },
-  { n: "02", title: "Un camino de 7 días hecho para tu momento", body: "Dinero, mente, cuerpo, personas, propósito — lo que esté más pesado, primero." },
-  { n: "03", title: "Rituales diarios, IA suave, un círculo real", body: "Estructura suave que sí puedes mantener — y mujeres que lo viven contigo." },
+  { n: "01", title: "Cuatro minutos para escucharte", body: "Sin puntuaciones. Sin vergüenza. Solo dónde estás realmente hoy." },
+  { n: "02", title: "Un camino de 7 días hecho para tu momento", body: "Dinero, mente, cuerpo, personas, propósito: lo que esté más pesado, primero." },
+  { n: "03", title: "Un momento para ti, cada día", body: "Estructura suave que sí puedes mantener, y mujeres que lo viven contigo." },
 ];
 
 function HowItWorks() {
@@ -262,19 +267,20 @@ function HowItWorks() {
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <Reveal className="max-w-2xl mx-auto text-center">
           <p className="text-sm uppercase tracking-[0.2em] text-accent">Cómo funciona</p>
-          <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
+          <h2 className="mt-4 font-sans text-4xl sm:text-5xl text-foreground text-balance">
             Siete días. Cambios pequeños, sin reinventarte.
           </h2>
         </Reveal>
         <div className="mt-16 grid md:grid-cols-3 gap-12 md:gap-10">
           {steps.map((s, i) => (
             <Reveal key={s.n} delay={i * 120}>
-              <div className="font-serif text-7xl text-accent/25 leading-none">{s.n}</div>
-              <h3 className="mt-4 font-serif text-2xl text-foreground leading-snug">{s.title}</h3>
+              <div className="font-sans text-7xl text-accent/25 leading-none">{s.n}</div>
+              <h3 className="mt-4 font-sans text-2xl text-foreground leading-snug">{s.title}</h3>
               <p className="mt-3 text-muted-foreground leading-relaxed">{s.body}</p>
             </Reveal>
           ))}
         </div>
+        <p className="mt-10 max-w-xl mx-auto text-center text-sm text-muted-foreground leading-relaxed">Elara usa inteligencia artificial para ofrecerte preguntas y sugerencias a partir de lo que compartes.</p>
       </div>
     </section>
   );
@@ -284,24 +290,23 @@ function Community() {
   return (
     <section id="comunidad" className="py-24 sm:py-32">
       <Reveal className="max-w-5xl mx-auto px-5 sm:px-8">
-        <div className="rounded-[2.5rem] bg-primary text-primary-foreground p-10 sm:p-16 shadow-soft relative overflow-hidden">
-          <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-accent/30 blur-3xl animate-breathe" aria-hidden />
+        <div className="brand-forest rounded-[20px] bg-forest text-white p-10 sm:p-16 shadow-soft relative overflow-hidden">
           <div className="relative">
-            <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-primary-foreground/80">
-              <span className="h-px w-8 bg-primary-foreground/40" aria-hidden /> Comunidad Latina-first
+            <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-white/85">
+              <span className="h-px w-8 bg-mint" aria-hidden /> Comunidad Latina-first
             </div>
-            <h2 className="mt-6 font-serif text-3xl sm:text-5xl text-balance leading-tight">
-              Diseñada primero para mujeres latinas — porque la familia, la ambición y la suavidad viven en el mismo cuerpo.
+            <h2 className="mt-6 font-sans text-3xl sm:text-5xl text-balance leading-tight">
+              Diseñada primero para mujeres latinas, porque la familia, la ambición y la suavidad viven en el mismo cuerpo.
             </h2>
-            <p className="mt-6 text-base sm:text-lg text-primary-foreground/80 max-w-2xl leading-relaxed">
+            <p className="mt-6 text-base sm:text-lg text-white/85 max-w-2xl leading-relaxed">
               Para las hijas mayores, las primeras en su familia en todo, las que traducen en casa y lideran en el trabajo.
               Para las reinventoras, las mentes bilingües, las mujeres aprendiendo que la independencia y la ternura pueden compartir una vida.
             </p>
-            <ul className="mt-9 flex flex-wrap items-center gap-x-3 gap-y-1.5 max-w-2xl font-serif text-lg sm:text-xl text-primary-foreground/65">
+            <ul className="mt-9 flex flex-wrap items-center gap-x-3 gap-y-1.5 max-w-2xl font-sans text-lg sm:text-xl text-white/85">
               {["Expectativas familiares","Reinvención","Ambición","Crecimiento emocional","Identidad bilingüe","Independencia","Suavidad","Confianza","Cultura"].map((t, i, arr) => (
                 <li key={t} className="inline-flex items-center gap-3">
                   <span className="transition-colors hover:text-primary-foreground">{t}</span>
-                  {i < arr.length - 1 && <span className="text-accent/60" aria-hidden>·</span>}
+                  {i < arr.length - 1 && <span className="text-mint" aria-hidden>·</span>}
                 </li>
               ))}
             </ul>
@@ -313,7 +318,7 @@ function Community() {
 }
 
 const phrasePairs = [
-  { es: "“Hoy fue mucho.”", reply: "Hoy fue mucho — y está bien." },
+  { es: "“Hoy fue mucho.”", reply: "Hoy fue mucho, y está bien." },
   { es: "“No sé por dónde empezar.”", reply: "Busquemos un pequeño lugar para empezar." },
   { es: "“Aquí puedo ser yo.”", reply: "Un lugar donde no tienes que actuar." },
 ];
@@ -323,19 +328,19 @@ function Culture() {
     <section className="py-24 sm:py-32">
       <Reveal className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
         <p className="text-sm uppercase tracking-[0.2em] text-accent">Construido desde adentro</p>
-        <h2 className="mt-4 font-serif text-4xl sm:text-6xl text-foreground leading-[1.05] text-balance">
-          No es inglés, traducido. <em className="italic text-accent">Español, entendido.</em>
+        <h2 className="mt-4 font-sans text-4xl sm:text-6xl text-foreground leading-[1.05] text-balance">
+          No es inglés, traducido. <em className="not-italic text-accent">Español, entendido.</em>
         </h2>
         <p className="mt-6 max-w-xl mx-auto text-lg text-muted-foreground leading-relaxed">
-          Elara lee el tono, la emoción, la cultura y el caos — no solo las palabras. El peso de ser la hija mayor,
+          Elara lee el tono, la emoción, la cultura y el caos, no solo las palabras. El peso de ser la hija mayor,
           la familia que llama, los dos mundos que habitas. Construido para eso, no adaptado a eso.
         </p>
       </Reveal>
       <Reveal className="mt-12 max-w-4xl mx-auto px-5 sm:px-8">
         <div className="grid sm:grid-cols-3 border-t border-l border-foreground/10">
           {phrasePairs.map((p) => (
-            <div key={p.es} className="border-b border-r border-foreground/10 p-7 sm:p-8 bg-card/40 transition-colors hover:bg-card/70">
-              <p className="font-serif italic text-2xl sm:text-[1.7rem] text-foreground leading-snug">{p.es}</p>
+            <div key={p.es} className="border-b border-r border-foreground/10 p-7 sm:p-8 bg-card transition-colors hover:bg-field">
+              <p className="font-sans not-italic text-2xl sm:text-[1.7rem] text-foreground leading-snug">{p.es}</p>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.reply}</p>
             </div>
           ))}
@@ -355,8 +360,10 @@ const PAIN_OPTIONS_ES = [
   "Estancada en una reinvención, sin saber hacia dónde",
 ];
 
-function Waitlist() {
+export function Waitlist() {
   const [submitted, setSubmitted] = useState(false);
+  const [followupToken, setFollowupToken] = useState<string | null>(null);
+  const [detailsDone, setDetailsDone] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ name: "", email: "", whatsapp: "", instagram: "", pain: "" });
@@ -370,13 +377,21 @@ function Waitlist() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, language: "es" }),
+        body: JSON.stringify(submitted
+          ? { followupToken, whatsapp: form.whatsapp, instagram: form.instagram, pain: form.pain }
+          : { name: form.name, email: form.email, language: "es" }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({})) as { error?: string };
         throw new Error(data.error ?? "Algo salió mal. Por favor, inténtalo de nuevo.");
       }
-      setSubmitted(true);
+      const data = await res.json() as { followupToken?: string };
+      if (submitted) {
+        setDetailsDone(true);
+      } else {
+        setFollowupToken(data.followupToken ?? null);
+        setSubmitted(true);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Algo salió mal. Por favor, inténtalo de nuevo.");
     } finally {
@@ -389,29 +404,32 @@ function Waitlist() {
       <div className="max-w-3xl mx-auto px-5 sm:px-8 text-center">
         <Reveal>
           <p className="text-sm uppercase tracking-[0.2em] text-accent">Lista de espera fundadora</p>
-          <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground text-balance">
+          <h2 className="mt-4 font-sans text-4xl sm:text-5xl text-foreground text-balance">
             Sé una de las primeras mujeres dentro de Elara.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-xl mx-auto">
-            Las fundadoras entran gratis al primer grupo, opinan de verdad en lo que construimos y reciben un saludo personal de nosotras — no un correo de bienvenida genérico.
+            Las fundadoras entran gratis al primer grupo, opinan de verdad en lo que construimos y reciben un saludo personal de nosotras, no un correo de bienvenida genérico.
           </p>
         </Reveal>
 
-        {submitted ? (
-          <div className="mt-12 rounded-3xl border border-border bg-card p-10 shadow-card">
+        {submitted && (
+          <div role="status" className="mt-12 rounded-2xl border border-border bg-card p-10 shadow-card">
             <CheckCircle2 className="h-10 w-10 text-accent mx-auto" />
-            <h3 className="mt-4 font-serif text-2xl text-foreground">Ya estás en la lista.</h3>
+            <h3 className="mt-4 font-sans text-2xl text-foreground">Ya estás en la lista.</h3>
             <p className="mt-2 text-muted-foreground">Te escribiremos antes de abrir el primer grupo de Elara. Bienvenida.</p>
-            <p className="mt-4 font-hand text-2xl text-accent -rotate-2">— Mengxi &amp; Ale</p>
+            <p className="mt-4 font-sans text-2xl text-accent">Mengxi &amp; Ale</p>
+            {detailsDone && <p className="mt-4 text-muted-foreground">Gracias por estar aquí.</p>}
           </div>
-        ) : (
-          <form onSubmit={onSubmit} className="mt-12 grid gap-3 text-left bg-card rounded-3xl border border-border p-6 sm:p-8 shadow-card">
+        )}
+        {!detailsDone && (!submitted || followupToken) && (
+          <form onSubmit={onSubmit} className="mt-12 grid gap-3 text-left bg-card rounded-2xl border border-border p-6 sm:p-8 shadow-card">
+            {!submitted ? (<>
             <label className="grid gap-1.5">
               <span className="text-xs uppercase tracking-wider text-muted-foreground">Nombre</span>
               <input
                 required maxLength={80}
                 value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
+                className="rounded-xl border border-input bg-field px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
                 placeholder="Tu nombre"
               />
             </label>
@@ -420,33 +438,36 @@ function Waitlist() {
               <input
                 required type="email" maxLength={120}
                 value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
+                className="rounded-xl border border-input bg-field px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
                 placeholder="tu@email.com"
               />
             </label>
+            </>) : (<>
+            <h3 className="text-xl font-semibold">¿Nos cuentas un poco más?</h3>
+            <p className="text-sm text-muted-foreground">Ya guardamos tu lugar. Estas preguntas son opcionales.</p>
             <label className="grid gap-1.5">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground">WhatsApp <span className="normal-case text-muted-foreground/70">(opcional)</span></span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">WhatsApp <span className="normal-case text-muted-foreground">(opcional)</span></span>
               <input
                 maxLength={30}
                 value={form.whatsapp} onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
-                className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
+                className="rounded-xl border border-input bg-field px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
                 placeholder="+1 555 000 0000"
               />
             </label>
             <label className="grid gap-1.5">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground">Instagram <span className="normal-case text-muted-foreground/70">(opcional)</span></span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">Instagram <span className="normal-case text-muted-foreground">(opcional)</span></span>
               <input
                 maxLength={60}
                 value={form.instagram} onChange={(e) => setForm({ ...form, instagram: e.target.value })}
-                className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
+                className="rounded-xl border border-input bg-field px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
                 placeholder="@usuario"
               />
             </label>
             <label className="grid gap-1.5">
-              <span className="text-xs uppercase tracking-wider text-muted-foreground">¿Qué se siente más pesado ahora mismo? <span className="normal-case text-muted-foreground/70">(opcional)</span></span>
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">¿Qué se siente más pesado ahora mismo? <span className="normal-case text-muted-foreground">(opcional)</span></span>
               <select
                 value={form.pain} onChange={(e) => setForm({ ...form, pain: e.target.value })}
-                className="rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
+                className="rounded-xl border border-input bg-field px-4 py-3 text-foreground outline-none focus:ring-2 focus:ring-ring"
               >
                 <option value="">Elige una…</option>
                 {PAIN_OPTIONS_ES.map((o) => (
@@ -454,18 +475,20 @@ function Waitlist() {
                 ))}
               </select>
             </label>
+            </>)}
             {error && (
-              <p className="text-sm text-red-500 text-center">{error}</p>
+              <p role="alert" className="text-sm text-red-500 text-center">{error}</p>
             )}
             <button
               type="submit"
               disabled={loading}
-              className="group mt-2 inline-flex items-center justify-center gap-2.5 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="group mt-2 inline-flex items-center justify-center gap-2.5 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {loading ? "Uniéndome…" : "Unirme a la lista de espera fundadora"}
-              {!loading && <span className="text-accent group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>}
+              {loading ? "Guardando…" : submitted ? "Guardar mis respuestas" : "Unirme a la lista de espera fundadora"}
+              {!loading && <span className="text-primary-foreground group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>}
             </button>
-            <p className="font-hand text-xl text-accent/80 text-center">leemos cada respuesta — de verdad.</p>
+            {submitted && <button type="button" disabled={loading} onClick={() => setDetailsDone(true)} className="py-3 text-sm text-muted-foreground underline">Ahora no</button>}
+            <p className="font-sans text-xl text-accent text-center">leemos cada respuesta. De verdad.</p>
             <p className="text-xs text-muted-foreground text-center">Sin spam. Nunca. Baja con un solo toque.</p>
           </form>
         )}
@@ -480,12 +503,12 @@ function Founder() {
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
         <Reveal>
           <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">Una nota de nosotras</p>
-          <blockquote className="mt-6 mx-auto max-w-2xl font-serif text-2xl sm:text-[2rem] text-foreground leading-snug text-balance text-center">
-            Veíamos lo mismo una y otra vez — en nuestra propia vida, y en miles de mensajes: mujeres que
+          <blockquote className="mt-6 mx-auto max-w-2xl font-sans text-2xl sm:text-[2rem] text-foreground leading-snug text-balance text-center">
+            Veíamos lo mismo una y otra vez en nuestra propia vida y en miles de mensajes: mujeres que
             por fuera parecen tenerlo todo resuelto, y por dentro funcionan en vacío. No encontrábamos el
-            lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. <span className="italic text-muted-foreground">(La verdad, también para nosotras.)</span>
+            lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. <span className="not-italic text-muted-foreground">(La verdad, también para nosotras.)</span>
           </blockquote>
-          <p className="mt-8 text-center font-hand text-3xl sm:text-4xl text-accent -rotate-2">— Mengxi &amp; Ale</p>
+          <p className="mt-8 text-center font-sans text-3xl sm:text-4xl text-accent">Mengxi &amp; Ale</p>
         </Reveal>
 
         <div className="mt-16 grid sm:grid-cols-2 gap-10 sm:gap-14">
@@ -496,7 +519,6 @@ function Founder() {
             <Reveal key={f.name} delay={i * 120}>
               <figure className="flex flex-col items-center text-center">
                 <div className="group relative w-48 h-48 sm:w-56 sm:h-56">
-                  <div className="absolute -inset-3 bg-gradient-warm rounded-full blur-xl opacity-50 transition-opacity duration-500 group-hover:opacity-80" aria-hidden />
                   <div className="relative w-full h-full rounded-full overflow-hidden shadow-card">
                     <img src={f.img} alt={f.name} loading="lazy"
                       className="img-zoom w-full h-full object-cover"
@@ -504,7 +526,7 @@ function Founder() {
                   </div>
                 </div>
                 <figcaption className="mt-6">
-                  <p className="font-serif text-2xl text-foreground">{f.name}</p>
+                  <p className="font-sans text-2xl text-foreground">{f.name}</p>
                   <p className="text-sm uppercase tracking-wider text-muted-foreground mt-1">{f.role}</p>
                   <a href={`https://instagram.com/${f.ig}`} target="_blank" rel="noreferrer"
                     className={`mt-3 inline-flex items-center gap-1.5 text-sm text-accent hover:text-foreground transition ${underline}`}>
@@ -524,7 +546,7 @@ function Footer() {
   return (
     <footer className="border-t border-border/60 py-10">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
-        <p className="font-serif text-lg text-foreground">elara<span className="text-accent">.</span></p>
+        <p className="font-sans text-lg text-foreground"><BrandMark /></p>
         <nav className="flex items-center gap-5">
           <a href="#" className="hover:text-foreground transition">Privacidad</a>
           <a href="#" className="hover:text-foreground transition">Contacto</a>
@@ -536,21 +558,34 @@ function Footer() {
   );
 }
 
-export function LandingES() {
+export function LandingES({ variant = "default", colorway }: { variant?: "default" | "soft" | "story"; colorway?: "contrast" | "forest" }) {
   return (
-    <main className="min-h-screen bg-background text-foreground" lang="es">
-      <Nav />
-      <Hero />
-      <SocialProof />
-      <RealContext />
-      <Problem />
-      <Product />
-      <HowItWorks />
-      <Community />
-      <Culture />
-      <Waitlist />
-      <Founder />
-      <Footer />
+    <main className={`landing-page ${variant === "soft" ? "landing-soft" : variant === "story" ? "landing-story" : ""} ${colorway ? `landing-color-${colorway}` : ""} min-h-screen bg-background text-foreground`} lang="es">
+      <Nav soft={variant === "soft"} />
+      {variant === "soft" ? (
+        <>
+          <FloatingElara />
+          <SoftHero />
+          <AlejandraStory />
+          <SoftWritingBlocks />
+          <Waitlist />
+          <Footer />
+        </>
+      ) : (
+        <>
+          {variant === "story" ? <StoryHero /> : <Hero />}
+          <SocialProof />
+          <RealContext />
+          <Problem />
+          <Product />
+          <HowItWorks />
+          <Community />
+          <Culture />
+          <Waitlist />
+          <Founder />
+          <Footer />
+        </>
+      )}
     </main>
   );
 }

@@ -55,7 +55,7 @@ function isCatastrophicSsrErrorBody(body: string, responseStatus: number): boole
 }
 
 // h3 swallows in-handler throws into a normal 500 Response with body
-// {"unhandled":true,"message":"HTTPError"} — try/catch alone never fires for those.
+// {"unhandled":true,"message":"HTTPError"}, try/catch alone never fires for those.
 async function normalizeCatastrophicSsrResponse(response: Response): Promise<Response> {
   if (response.status < 500) return response;
   const contentType = response.headers.get("content-type") ?? "";
@@ -81,7 +81,7 @@ export default {
     }
 
     // Language routing for the root: Spanish is the primary market, so the
-    // root defaults to /es for everyone — unless a visitor explicitly chose
+    // root defaults to /es for everyone, unless a visitor explicitly chose
     // English (remembered via the elara_lang cookie set by the nav toggle).
     if (request.method === "GET" && url.pathname === "/") {
       const cookie = request.headers.get("Cookie") ?? "";

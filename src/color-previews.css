@@ -1,0 +1,105 @@
+/* Isolated color studies. Product screenshots retain their original colors. */
+.landing-color-forest,
+.landing-color-contrast > header,
+.landing-color-contrast > .editorial-hero,
+.landing-color-contrast > .product-walkthrough,
+.landing-color-contrast > footer {
+  --background: #133226;
+  --foreground: #F9F5EF;
+  --muted-foreground: #CDD5C8;
+  --card: #1C4032;
+  --card-foreground: #F9F5EF;
+  --secondary: #295340;
+  --secondary-foreground: #F9F5EF;
+  --field: #193B2D;
+  --accent: #A3E5C7;
+  --primary: #F9F5EF;
+  --primary-foreground: #133226;
+  --border: #476152;
+  --input: #668171;
+  --ring: #A3E5C7;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.landing-color-contrast.landing-soft .editorial-hero,
+.landing-color-forest.landing-soft .editorial-hero {
+  max-width: none;
+  padding-inline: max(32px, calc((100% - 1136px) / 2));
+  background: #133226;
+}
+.landing-color-contrast.landing-soft .editorial-hero h1 span,
+.landing-color-forest.landing-soft .editorial-hero h1 span,
+.landing-color-forest .alejandra-copy h2 span { color: #A3E5C7; }
+
+/* Cream portrait, orange research interlude, cream steps, forest demo. */
+.landing-color-contrast .alejandra-section,
+.landing-color-contrast .writing-block-steps { background: #F9F5EF; }
+.landing-color-contrast .writing-block-insight,
+.landing-color-contrast .writing-block-outcome {
+  --foreground: #1A1615;
+  --muted-foreground: #1A1615;
+  --accent: #1A1615;
+  --border: #9F3918;
+  background: #E65A28;
+  color: #1A1615;
+  border: 0;
+}
+.landing-color-contrast .writing-block-outcome .uppercase { color: #1A1615; }
+.landing-color-contrast .writing-block-outcome :is(ul, li) { border-color: #9F3918; }
+.landing-color-contrast .writing-stat strong { font-size: clamp(64px, 7vw, 100px); }
+.landing-color-contrast .writing-community-copy { background: #EFE6D8; }
+.landing-color-contrast #lista { background: #EFE6D8; }
+
+/* One continuous forest canvas, defined by rules and type instead of pale cards. */
+.landing-color-forest :is(.alejandra-section, .writing-block-insight, .writing-block-steps,
+  .product-walkthrough, .writing-block-outcome, .writing-block-community, #lista, footer) {
+  background: #133226;
+  background-image: none;
+  color: var(--foreground);
+}
+.landing-color-forest .writing-community-copy { background: transparent; }
+.landing-color-forest :is(.alejandra-photo, .writing-community-image, .writing-community-copy) { border-radius: 0; }
+.landing-color-forest .writing-block-outcome { border-block: 1px solid var(--border); }
+.landing-color-forest #lista form { background: #193B2D; box-shadow: none; }
+.landing-color-forest #lista :is(input, select) { background: #133226; color: #F9F5EF; }
+.landing-color-forest #lista input::placeholder { color: #BCCBBC; }
+.landing-color-forest .alejandra-rule { background: #A3E5C7; }
+.landing-color-forest .writing-stat strong { color: #A3E5C7; }
+
+/* Deck typography needs its own palette against the existing light app cards. */
+:is(.landing-color-contrast, .landing-color-forest) .editorial-deck-stage {
+  --foreground: #1A1615;
+  --muted-foreground: #635A54;
+  --border: #E8E0D5;
+  box-shadow: 0 24px 70px #07180F40;
+}
+:is(.landing-color-contrast, .landing-color-forest) .editorial-deck-controls { color: #F9F5EF; }
+.landing-color-forest .editorial-deck-stage {
+  --foreground: #F9F5EF;
+  --muted-foreground: #CDD5C8;
+  --border: #476152;
+  background: #1C4032;
+  color: #A3E5C7;
+  box-shadow: none;
+}
+.landing-color-forest .editorial-deck-stage.tone-path { border-top-color: #A3E5C7; }
+.landing-color-forest .editorial-deck-controls button[aria-pressed="true"] {
+  background: #A3E5C7;
+  color: #133226;
+  border-color: #A3E5C7;
+}
+:is(.landing-color-contrast, .landing-color-forest) .walkthrough-visual::before {
+  background: transparent;
+  border-color: #668171;
+}
+:is(.landing-color-contrast, .landing-color-forest) :is(a, button, input, select):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+.landing-color-forest .soft-hero-actions > a:first-child:hover,
+.landing-color-contrast .soft-hero-actions > a:first-child:hover { background: #A3E5C7; }
+@media (max-width: 760px) {
+  .landing-color-contrast.landing-soft .editorial-hero,
+  .landing-color-forest.landing-soft .editorial-hero { padding-inline: 24px; }
+}
