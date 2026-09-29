@@ -60,7 +60,7 @@ function Hero() {
             A softer place to come back to <em className="not-italic text-accent">yourself.</em>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
-            Elara is a Spanish-first, 7-day AI reset for Latina women — a few quiet minutes a day to sort
+            Elara is a Spanish-first, 7-day AI reset for Latina women, with a few quiet minutes a day to sort
             your thoughts, feel understood, and set one thing down. In your language, in your voice.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
@@ -73,12 +73,12 @@ function Hero() {
             </a>
           </div>
           <p className="mt-6 text-sm text-muted-foreground">Built quietly. Launching soon. Free for founding members.</p>
-          <p className="mt-2 text-sm text-muted-foreground not-italic">Built first for Latina women — <a href="/es" className="text-accent hover:text-foreground transition not-not-italic underline underline-offset-2">en su idioma, con su voz, a su ritmo.</a></p>
+          <p className="mt-2 text-sm text-muted-foreground not-italic">Built first for Latina women, <a href="/es" className="text-accent hover:text-foreground transition not-italic underline underline-offset-2">en su idioma, con su voz, a su ritmo.</a></p>
           <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 items-end gap-y-8 gap-x-6 max-w-2xl border-t border-border/60 pt-8">
             {[
               { n: "1.8M", u: "+", l: "reached through Alejandra's world", avatars: false },
               { n: "80K", u: "+", l: "in community", avatars: true },
-              { n: "4,600", u: "+", l: "women surveyed", avatars: false },
+              { n: "4,601", u: "", l: "survey responses", avatars: false },
               { n: "7", u: "-day", l: "first clarity loop", avatars: false },
             ].map((s) => (
               <div key={s.l}>
@@ -97,7 +97,7 @@ function Hero() {
             <div className="relative rounded-[2.4rem] p-2 bg-card shadow-soft border border-border">
               <img
                 src={appToday}
-                alt="Elara app — today screen with daily compass"
+                alt="Elara app: today screen with daily compass"
                 className="rounded-[1.9rem] w-full object-cover"
               />
             </div>
@@ -120,13 +120,13 @@ function SocialProof() {
   return (
     <section className="py-14 border-y border-border/50 bg-card/40">
       <Reveal className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
-        <p className="text-xs uppercase tracking-[0.25em] text-accent">Built with — not for</p>
+        <p className="text-xs uppercase tracking-[0.25em] text-accent">Built with, not for</p>
         <p className="mt-4 font-sans text-2xl sm:text-3xl text-foreground/90 max-w-3xl mx-auto leading-snug text-balance">
-          Shaped by 1,998 survey responses and an 80K community of Latina women who told us,
+          Shaped by 4,601 survey responses and an 80K community of Latina women who told us,
           honestly, what they were carrying.
         </p>
         <p className="mt-6 text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          We start with money because that's the pressure that came up most. From there it opens into everything around it — confidence, family, habits, and how you actually feel day to day.
+          We start with money because that's the pressure that came up most. From there it opens into everything around it: confidence, family, habits, and how you actually feel day to day.
         </p>
       </Reveal>
     </section>
@@ -144,7 +144,7 @@ function RealContext() {
           </h2>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
             Elara is built around the conversations women are already having with friends, sisters, mothers,
-            and themselves — the quiet patterns, emotional loops, and decisions that rarely fit into a checklist.
+            and themselves, the quiet patterns, emotional loops, and decisions that rarely fit into a checklist.
           </p>
         </Reveal>
         <Reveal delay={120}>
@@ -214,7 +214,7 @@ function PhoneMockup({ src, label, caption }: { src: string; label: string; capt
   return (
     <div className="shrink-0 w-[220px] sm:w-[240px]">
       <div className="hover-lift relative rounded-[2.2rem] p-2.5 bg-card border border-border/60 shadow-soft hover:shadow-soft">
-        <img src={src} alt={`Elara app — ${label}`} loading="lazy"
+        <img src={src} alt={`Elara app: ${label}`} loading="lazy"
           className="rounded-[1.8rem] w-full object-cover" />
       </div>
       <p className="mt-4 text-center font-sans text-lg text-foreground">{label}</p>
@@ -249,8 +249,8 @@ function Product() {
 
 const steps = [
   { n: "01", title: "A 4-minute honest check-in", body: "No scoring. No shame. Just where you actually are today." },
-  { n: "02", title: "A 7-day path made for your season", body: "Money, mind, body, people, purpose — whatever is loudest first." },
-  { n: "03", title: "Daily rituals, gentle AI, a real circle", body: "Gentle structure you can actually keep — and women going through it with you." },
+  { n: "02", title: "A 7-day path made for your season", body: "Money, mind, body, people, purpose: whatever is loudest first." },
+  { n: "03", title: "Daily rituals, gentle AI, a real circle", body: "Gentle structure you can actually keep, and women going through it with you." },
 ];
 
 function HowItWorks() {
@@ -287,7 +287,7 @@ function Community() {
               <span className="h-px w-8 bg-mint" aria-hidden /> Latina-first community
             </div>
             <h2 className="mt-6 font-sans text-3xl sm:text-5xl text-balance leading-tight">
-              Launching first with Latina women — because family, ambition, and softness all live in the same body.
+              Launching first with Latina women, because family, ambition, and softness all live in the same body.
             </h2>
             <p className="mt-6 text-base sm:text-lg text-white/85 max-w-2xl leading-relaxed">
               For the eldest daughters, the first-gen everything, the ones who translate at home and lead at work.
@@ -309,7 +309,7 @@ function Community() {
 }
 
 const phrasePairs = [
-  { es: "“Hoy fue mucho.”", en: "Today was a lot — and that's allowed." },
+  { es: "“Hoy fue mucho.”", en: "Today was a lot, and that's allowed." },
   { es: "“No sé por dónde empezar.”", en: "Let's find one small place to start." },
   { es: "“Aquí puedo ser yo.”", en: "A place you don't have to perform." },
 ];
@@ -323,7 +323,7 @@ function Culture() {
           Not English, translated. <em className="not-italic text-accent">Spanish, understood.</em>
         </h2>
         <p className="mt-6 max-w-xl mx-auto text-lg text-muted-foreground leading-relaxed">
-          Elara reads tone, emotion, culture, and chaos — not just words. The eldest-daughter weight, the family
+          Elara reads tone, emotion, culture, and chaos, not just words. The eldest-daughter weight, the family
           that calls, the two worlds you live between. Built for that, not adapted to it.
         </p>
       </Reveal>
@@ -389,7 +389,7 @@ function Waitlist() {
             Be one of the first women inside Elara.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-xl mx-auto">
-            Founding members join the first group free, get a real say in what we build, and a personal hello from us — not a generic welcome email.
+            Founding members join the first group free, get a real say in what we build, and a personal hello from us, not a generic welcome email.
           </p>
         </Reveal>
 
@@ -398,7 +398,7 @@ function Waitlist() {
             <CheckCircle2 className="h-10 w-10 text-accent mx-auto" />
             <h3 className="mt-4 font-sans text-2xl text-foreground">You're on the list.</h3>
             <p className="mt-2 text-muted-foreground">We'll be in touch soon, gently. Bienvenida.</p>
-            <p className="mt-4 font-sans text-2xl text-accent">— Mengxi &amp; Ale</p>
+            <p className="mt-4 font-sans text-2xl text-accent">Mengxi &amp; Ale</p>
           </div>
         ) : (
           <form onSubmit={onSubmit} className="mt-12 grid gap-3 text-left bg-card rounded-2xl border border-border p-6 sm:p-8 shadow-card">
@@ -461,7 +461,7 @@ function Waitlist() {
               {loading ? "Joining…" : "Join the founding waitlist"}
               {!loading && <span className="text-primary-foreground group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>}
             </button>
-            <p className="font-sans text-xl text-accent text-center">we read every single reply — promise.</p>
+            <p className="font-sans text-xl text-accent text-center">we read every single reply. Promise.</p>
             <p className="text-xs text-muted-foreground text-center">No spam. Ever. Unsubscribe with one tap.</p>
           </form>
         )}
@@ -477,11 +477,11 @@ function Founder() {
         <Reveal>
           <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">A note from us</p>
           <blockquote className="mt-6 mx-auto max-w-2xl font-sans text-2xl sm:text-[2rem] text-foreground leading-snug text-balance text-center">
-            We kept noticing the same thing — in our own lives, and in thousands of replies: women who look
+            We kept noticing the same thing in our own lives and in thousands of replies: women who look
             like they have it all together, quietly running on empty. We couldn't find the soft place we
             needed, so we started building it. Elara is for you. <span className="not-italic text-muted-foreground">(Honestly, it's for us too.)</span>
           </blockquote>
-          <p className="mt-8 text-center font-sans text-3xl sm:text-4xl text-accent">— Mengxi &amp; Ale</p>
+          <p className="mt-8 text-center font-sans text-3xl sm:text-4xl text-accent">Mengxi &amp; Ale</p>
         </Reveal>
 
         <div className="mt-16 grid sm:grid-cols-2 gap-10 sm:gap-14">

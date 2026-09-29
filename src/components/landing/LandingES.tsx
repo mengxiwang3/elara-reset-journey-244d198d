@@ -78,7 +78,7 @@ function Hero() {
             {[
               { n: "1.8M", u: "+", l: "alcanzadas en el mundo de Alejandra", avatars: false },
               { n: "80K", u: "+", l: "en comunidad", avatars: true },
-              { n: "4,600", u: "+", l: "mujeres encuestadas", avatars: false },
+              { n: "4,601", u: "", l: "respuestas a la encuesta", avatars: false },
               { n: "7", u: " días", l: "primer ciclo de claridad", avatars: false },
             ].map((s) => (
               <div key={s.l}>
@@ -97,7 +97,7 @@ function Hero() {
             <div className="relative rounded-[2.4rem] p-2 bg-card shadow-soft border border-border">
               <img
                 src={appToday}
-                alt="App Elara — pantalla de inicio con brújula diaria"
+                alt="App Elara: pantalla de inicio con brújula diaria"
                 className="rounded-[1.9rem] w-full object-cover"
               />
             </div>
@@ -120,13 +120,13 @@ function SocialProof() {
   return (
     <section className="py-14 border-y border-border/50 bg-card/40">
       <Reveal className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
-        <p className="text-xs uppercase tracking-[0.25em] text-accent">Construido con — no para</p>
+        <p className="text-xs uppercase tracking-[0.25em] text-accent">Construido con, no para</p>
         <p className="mt-4 font-sans text-2xl sm:text-3xl text-foreground/90 max-w-3xl mx-auto leading-snug text-balance">
-          Moldeado por 1,998 respuestas y una comunidad de 80K latinas que nos contaron,
+          Moldeado por 4,601 respuestas a la encuesta y una comunidad de 80K latinas que nos contaron,
           con honestidad, lo que estaban cargando.
         </p>
         <p className="mt-6 text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Empezamos por el dinero porque fue la presión que más salió. Desde ahí se abre hacia todo lo demás — confianza, familia, hábitos y cómo te sientes de verdad, día a día.
+          Empezamos por el dinero porque fue la presión que más salió. Desde ahí se abre hacia todo lo demás: confianza, familia, hábitos y cómo te sientes de verdad, día a día.
         </p>
       </Reveal>
     </section>
@@ -144,7 +144,7 @@ function RealContext() {
           </h2>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
             Elara se construye alrededor de las conversaciones que las mujeres ya tienen con amigas, hermanas,
-            madres y consigo mismas — los patrones silenciosos, los bucles emocionales y las decisiones que
+            madres y consigo mismas, los patrones silenciosos, los bucles emocionales y las decisiones que
             rara vez caben en una lista.
           </p>
         </Reveal>
@@ -215,7 +215,7 @@ function PhoneMockup({ src, label, caption }: { src: string; label: string; capt
   return (
     <div className="shrink-0 w-[220px] sm:w-[240px]">
       <div className="hover-lift relative rounded-[2.2rem] p-2.5 bg-card border border-border/60 shadow-soft hover:shadow-soft">
-        <img src={src} alt={`Elara app — ${label}`} loading="lazy"
+        <img src={src} alt={`Elara app: ${label}`} loading="lazy"
           className="rounded-[1.8rem] w-full object-cover" />
       </div>
       <p className="mt-4 text-center font-sans text-lg text-foreground">{label}</p>
@@ -253,8 +253,8 @@ function Product() {
 
 const steps = [
   { n: "01", title: "Un check-in honesto de 4 minutos", body: "Sin puntuaciones. Sin vergüenza. Solo dónde estás realmente hoy." },
-  { n: "02", title: "Un camino de 7 días hecho para tu momento", body: "Dinero, mente, cuerpo, personas, propósito — lo que esté más pesado, primero." },
-  { n: "03", title: "Rituales diarios, IA suave, un círculo real", body: "Estructura suave que sí puedes mantener — y mujeres que lo viven contigo." },
+  { n: "02", title: "Un camino de 7 días hecho para tu momento", body: "Dinero, mente, cuerpo, personas, propósito: lo que esté más pesado, primero." },
+  { n: "03", title: "Rituales diarios, IA suave, un círculo real", body: "Estructura suave que sí puedes mantener, y mujeres que lo viven contigo." },
 ];
 
 function HowItWorks() {
@@ -291,7 +291,7 @@ function Community() {
               <span className="h-px w-8 bg-mint" aria-hidden /> Comunidad Latina-first
             </div>
             <h2 className="mt-6 font-sans text-3xl sm:text-5xl text-balance leading-tight">
-              Diseñada primero para mujeres latinas — porque la familia, la ambición y la suavidad viven en el mismo cuerpo.
+              Diseñada primero para mujeres latinas, porque la familia, la ambición y la suavidad viven en el mismo cuerpo.
             </h2>
             <p className="mt-6 text-base sm:text-lg text-white/85 max-w-2xl leading-relaxed">
               Para las hijas mayores, las primeras en su familia en todo, las que traducen en casa y lideran en el trabajo.
@@ -313,7 +313,7 @@ function Community() {
 }
 
 const phrasePairs = [
-  { es: "“Hoy fue mucho.”", reply: "Hoy fue mucho — y está bien." },
+  { es: "“Hoy fue mucho.”", reply: "Hoy fue mucho, y está bien." },
   { es: "“No sé por dónde empezar.”", reply: "Busquemos un pequeño lugar para empezar." },
   { es: "“Aquí puedo ser yo.”", reply: "Un lugar donde no tienes que actuar." },
 ];
@@ -327,7 +327,7 @@ function Culture() {
           No es inglés, traducido. <em className="not-italic text-accent">Español, entendido.</em>
         </h2>
         <p className="mt-6 max-w-xl mx-auto text-lg text-muted-foreground leading-relaxed">
-          Elara lee el tono, la emoción, la cultura y el caos — no solo las palabras. El peso de ser la hija mayor,
+          Elara lee el tono, la emoción, la cultura y el caos, no solo las palabras. El peso de ser la hija mayor,
           la familia que llama, los dos mundos que habitas. Construido para eso, no adaptado a eso.
         </p>
       </Reveal>
@@ -393,7 +393,7 @@ function Waitlist() {
             Sé una de las primeras mujeres dentro de Elara.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-xl mx-auto">
-            Las fundadoras entran gratis al primer grupo, opinan de verdad en lo que construimos y reciben un saludo personal de nosotras — no un correo de bienvenida genérico.
+            Las fundadoras entran gratis al primer grupo, opinan de verdad en lo que construimos y reciben un saludo personal de nosotras, no un correo de bienvenida genérico.
           </p>
         </Reveal>
 
@@ -402,7 +402,7 @@ function Waitlist() {
             <CheckCircle2 className="h-10 w-10 text-accent mx-auto" />
             <h3 className="mt-4 font-sans text-2xl text-foreground">Ya estás en la lista.</h3>
             <p className="mt-2 text-muted-foreground">Te escribiremos antes de abrir el primer grupo de Elara. Bienvenida.</p>
-            <p className="mt-4 font-sans text-2xl text-accent">— Mengxi &amp; Ale</p>
+            <p className="mt-4 font-sans text-2xl text-accent">Mengxi &amp; Ale</p>
           </div>
         ) : (
           <form onSubmit={onSubmit} className="mt-12 grid gap-3 text-left bg-card rounded-2xl border border-border p-6 sm:p-8 shadow-card">
@@ -465,7 +465,7 @@ function Waitlist() {
               {loading ? "Uniéndome…" : "Unirme a la lista de espera fundadora"}
               {!loading && <span className="text-primary-foreground group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>}
             </button>
-            <p className="font-sans text-xl text-accent text-center">leemos cada respuesta — de verdad.</p>
+            <p className="font-sans text-xl text-accent text-center">leemos cada respuesta. De verdad.</p>
             <p className="text-xs text-muted-foreground text-center">Sin spam. Nunca. Baja con un solo toque.</p>
           </form>
         )}
@@ -481,11 +481,11 @@ function Founder() {
         <Reveal>
           <p className="text-sm uppercase tracking-[0.2em] text-accent text-center">Una nota de nosotras</p>
           <blockquote className="mt-6 mx-auto max-w-2xl font-sans text-2xl sm:text-[2rem] text-foreground leading-snug text-balance text-center">
-            Veíamos lo mismo una y otra vez — en nuestra propia vida, y en miles de mensajes: mujeres que
+            Veíamos lo mismo una y otra vez en nuestra propia vida y en miles de mensajes: mujeres que
             por fuera parecen tenerlo todo resuelto, y por dentro funcionan en vacío. No encontrábamos el
             lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. <span className="not-italic text-muted-foreground">(La verdad, también para nosotras.)</span>
           </blockquote>
-          <p className="mt-8 text-center font-sans text-3xl sm:text-4xl text-accent">— Mengxi &amp; Ale</p>
+          <p className="mt-8 text-center font-sans text-3xl sm:text-4xl text-accent">Mengxi &amp; Ale</p>
         </Reveal>
 
         <div className="mt-16 grid sm:grid-cols-2 gap-10 sm:gap-14">

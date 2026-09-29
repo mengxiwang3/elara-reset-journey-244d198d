@@ -131,7 +131,7 @@ function renderPage(rows: SubscriberRow[]): string {
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Elara — Waitlist Admin</title>
+<title>Elara: Waitlist Admin</title>
 <style>
   :root {
     --bg: #faf6ef; --card: #fffdf9; --ink: #2a2018; --muted: #8a7d6e;

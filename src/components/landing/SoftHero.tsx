@@ -22,15 +22,15 @@ export function SoftHero() {
       </div>
       <div className="soft-preview-strip" aria-label="Un vistazo a Elara">
         <figure className="soft-preview-side">
-          <img src={appPath} alt="Elara — tu camino personalizado" width="1446" height="2862" />
+          <img src={appPath} alt="Elara: tu camino personalizado" width="1446" height="2862" />
           <figcaption>Un camino para tu momento</figcaption>
         </figure>
         <figure className="soft-preview-main">
-          <img src={appToday} alt="Elara — tu día, con un poco más de claridad" width="1446" height="2862" fetchPriority="high" />
+          <img src={appToday} alt="Elara: tu día, con un poco más de claridad" width="1446" height="2862" fetchPriority="high" />
           <figcaption>Un pequeño paso cada día</figcaption>
         </figure>
         <figure className="soft-preview-side">
-          <img src={appClarity} alt="Elara — claridad sobre tus seis áreas" width="1446" height="2862" />
+          <img src={appClarity} alt="Elara: claridad sobre tus seis áreas" width="1446" height="2862" />
           <figcaption>Espacio para ver dónde estás</figcaption>
         </figure>
       </div>
