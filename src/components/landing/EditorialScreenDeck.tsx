@@ -32,12 +32,12 @@ const SCREENS = [
 
 export function EditorialScreenDeck() {
   const [active, setActive] = useState(0);
-  const [cycling, setCycling] = useState(false);
+  const [cycling, setCycling] = useState(true);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     if (!cycling || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    timerRef.current = setInterval(() => setActive((current) => (current + 1) % SCREENS.length), 1900);
+    timerRef.current = setInterval(() => setActive((current) => (current + 1) % SCREENS.length), 4200);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
       timerRef.current = null;
@@ -49,9 +49,12 @@ export function EditorialScreenDeck() {
   return (
     <div
       className="editorial-deck"
-      onMouseEnter={() => setCycling(true)}
-      onMouseLeave={() => setCycling(false)}
+      onMouseEnter={() => setCycling(false)}
+      onMouseLeave={() => setCycling(true)}
       onFocus={() => setCycling(false)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setCycling(true);
+      }}
     >
       <div className={`editorial-deck-stage tone-${screen.tone}`} aria-live="polite">
         <div className="editorial-deck-card" key={screen.short}>
@@ -72,14 +75,17 @@ export function EditorialScreenDeck() {
             key={item.short}
             type="button"
             aria-pressed={active === index}
-            onClick={() => setActive(index)}
+            onClick={() => {
+              setCycling(false);
+              setActive(index);
+            }}
           >
             <span>{String(index + 1).padStart(2, "0")}</span>
             {item.short}
           </button>
         ))}
       </div>
-      <p className="editorial-deck-hint">Pasa el cursor para recorrer Elara.</p>
+      <p className="editorial-deck-hint">Cambia automáticamente. Pasa el cursor para detenerlo.</p>
     </div>
   );
 }
