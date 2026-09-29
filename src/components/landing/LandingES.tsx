@@ -1,3 +1,4 @@
+import { SoftHero } from "./SoftHero";
 import { BrandMark, ElaraOrb } from "./Brand";
 import { useState } from "react";
 import { CheckCircle2, Instagram } from "lucide-react";
@@ -534,11 +535,11 @@ function Footer() {
   );
 }
 
-export function LandingES() {
+export function LandingES({ variant = "default" }: { variant?: "default" | "soft" }) {
   return (
-    <main className="landing-page min-h-screen bg-background text-foreground" lang="es">
+    <main className={`landing-page ${variant === "soft" ? "landing-soft" : ""} min-h-screen bg-background text-foreground`} lang="es">
       <Nav />
-      <Hero />
+      {variant === "soft" ? <SoftHero /> : <Hero />}
       <SocialProof />
       <RealContext />
       <Problem />

@@ -301,3 +301,50 @@
   .landing-page header .brand-nav-action { font-size: 11px; padding-inline: 8px; }
   .landing-page header a > span { font-size: 20px; gap: 6px; }
 }
+
+/* Option B: a quieter, centered composition for side-by-side review. */
+@layer utilities {
+  .landing-soft .soft-hero {
+    padding: 136px 24px 88px;
+    background: radial-gradient(ellipse at 50% 72%, #F8ECE3, #F9F5EF 65%);
+  }
+  .soft-hero-copy { max-width: 760px; margin-inline: auto; text-align: center; }
+  .landing-soft .soft-hero h1 {
+    max-width: none; margin-top: 24px; font-size: clamp(36px, 4.2vw, 60px);
+    font-weight: 600; line-height: 1.12; letter-spacing: -0.04em; text-wrap: balance;
+  }
+  .soft-hero h1 span { color: var(--forest); }
+  .soft-hero-description {
+    max-width: 510px; margin: 24px auto 0; font-size: 18px;
+    line-height: 1.7; color: var(--muted-foreground); text-wrap: pretty;
+  }
+  .soft-hero-actions { display: flex; justify-content: center; align-items: center; gap: 24px; margin-top: 28px; flex-wrap: wrap; }
+  .soft-hero-note { margin-top: 18px; font-size: 13px; color: var(--muted-foreground); }
+  .soft-preview-strip {
+    display: flex; align-items: center; justify-content: center; gap: 36px;
+    max-width: 820px; margin: 64px auto 0;
+  }
+  .soft-preview-strip figure { margin: 0; flex: 0 1 220px; min-width: 0; text-align: center; }
+  .soft-preview-strip img { display: block; width: 100%; height: auto; }
+  .soft-preview-strip figcaption { margin-top: 18px; font-size: 13px; color: var(--muted-foreground); }
+  .soft-preview-strip .soft-preview-side { flex-basis: 190px; }
+  .landing-soft h2 { font-size: clamp(30px, 3vw, 44px); font-weight: 600; line-height: 1.18; }
+  .landing-soft h3 { font-weight: 600; }
+  .landing-soft section:not(.soft-hero) em { color: var(--foreground); }
+  .landing-soft .brand-forest { padding: 64px; }
+  .landing-soft blockquote { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.5; }
+  .landing-soft .hover-lift:hover { transform: translateY(-3px); }
+  @media (max-width: 639px) {
+    .landing-soft .soft-hero { padding: 112px 24px 56px; }
+    .soft-hero-description { font-size: 16px; }
+    .soft-preview-strip { gap: 10px; margin-top: 40px; }
+    .soft-preview-strip .soft-preview-main { flex-basis: 180px; }
+    .soft-preview-strip .soft-preview-side { flex-basis: 90px; }
+    .soft-preview-strip figcaption { font-size: 11px; line-height: 1.5; }
+    .soft-preview-side figcaption { display: none; }
+    .landing-soft .brand-forest { padding: 32px 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .landing-soft .hover-lift:hover { transform: none; }
+  }
+}
