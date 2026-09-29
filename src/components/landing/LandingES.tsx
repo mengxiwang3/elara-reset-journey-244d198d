@@ -1,3 +1,4 @@
+import { StoryHero } from "./StoryHero";
 import { SoftHero } from "./SoftHero";
 import { BrandMark, ElaraOrb } from "./Brand";
 import { useState } from "react";
@@ -535,11 +536,11 @@ function Footer() {
   );
 }
 
-export function LandingES({ variant = "default" }: { variant?: "default" | "soft" }) {
+export function LandingES({ variant = "default" }: { variant?: "default" | "soft" | "story" }) {
   return (
-    <main className={`landing-page ${variant === "soft" ? "landing-soft" : ""} min-h-screen bg-background text-foreground`} lang="es">
+    <main className={`landing-page ${variant === "soft" ? "landing-soft" : variant === "story" ? "landing-story" : ""} min-h-screen bg-background text-foreground`} lang="es">
       <Nav />
-      {variant === "soft" ? <SoftHero /> : <Hero />}
+      {variant === "soft" ? <SoftHero /> : variant === "story" ? <StoryHero /> : <Hero />}
       <SocialProof />
       <RealContext />
       <Problem />

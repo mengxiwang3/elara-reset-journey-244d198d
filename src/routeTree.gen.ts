@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as EsRouteImport } from './routes/es'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PreviewStoryRouteImport } from './routes/preview/story'
 import { Route as PreviewSoftRouteImport } from './routes/preview/soft'
 
 const EsRoute = EsRouteImport.update({
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PreviewStoryRoute = PreviewStoryRouteImport.update({
+  id: '/preview/story',
+  path: '/preview/story',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PreviewSoftRoute = PreviewSoftRouteImport.update({
   id: '/preview/soft',
   path: '/preview/soft',
@@ -33,30 +39,34 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/es': typeof EsRoute
   '/preview/soft': typeof PreviewSoftRoute
+  '/preview/story': typeof PreviewStoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/es': typeof EsRoute
   '/preview/soft': typeof PreviewSoftRoute
+  '/preview/story': typeof PreviewStoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/es': typeof EsRoute
   '/preview/soft': typeof PreviewSoftRoute
+  '/preview/story': typeof PreviewStoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/es' | '/preview/soft'
+  fullPaths: '/' | '/es' | '/preview/soft' | '/preview/story'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/es' | '/preview/soft'
-  id: '__root__' | '/' | '/es' | '/preview/soft'
+  to: '/' | '/es' | '/preview/soft' | '/preview/story'
+  id: '__root__' | '/' | '/es' | '/preview/soft' | '/preview/story'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EsRoute: typeof EsRoute
   PreviewSoftRoute: typeof PreviewSoftRoute
+  PreviewStoryRoute: typeof PreviewStoryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/preview/story': {
+      id: '/preview/story'
+      path: '/preview/story'
+      fullPath: '/preview/story'
+      preLoaderRoute: typeof PreviewStoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/preview/soft': {
       id: '/preview/soft'
       path: '/preview/soft'
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EsRoute: EsRoute,
   PreviewSoftRoute: PreviewSoftRoute,
+  PreviewStoryRoute: PreviewStoryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
