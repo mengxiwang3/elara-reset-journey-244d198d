@@ -906,20 +906,34 @@
     position: absolute;
     inset: 9% -24px -20px 26px;
     border: 1px solid var(--border);
-    border-radius: 28px;
-    background: var(--card);
+    border-radius: 30px;
+    background: #EDE6DD;
   }
   .walkthrough-phone {
     position: relative;
     width: min(300px, 72vw);
-    padding: 8px;
-    border: 1px solid var(--border);
-    border-radius: 27px;
-    background: white;
-    box-shadow: 0 18px 55px rgb(26 22 21 / 13%);
+    padding: 7px;
+    border: 1px solid #46413E;
+    border-radius: 35px;
+    background: #201D1C;
+    box-shadow: 0 20px 55px rgb(26 22 21 / 22%), 0 1px 0 rgb(255 255 255 / 18%) inset;
     animation: walkthrough-change 520ms cubic-bezier(.22,1,.36,1) both;
   }
-  .walkthrough-phone img { display: block; width: 100%; height: auto; border-radius: 20px; }
+  .walkthrough-screen { overflow: hidden; border-radius: 28px; background: #F9F5EF; }
+  .walkthrough-phone img { display: block; width: 100%; height: auto; }
+  .walkthrough-island {
+    position: absolute;
+    z-index: 2;
+    top: 14px;
+    left: 50%;
+    width: 72px;
+    height: 20px;
+    border-radius: 999px;
+    background: #171514;
+    box-shadow: 0 1px 1px rgb(255 255 255 / 8%) inset;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
   .walkthrough-screen-label {
     position: relative;
     display: block;

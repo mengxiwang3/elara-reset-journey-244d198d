@@ -45,7 +45,10 @@ export function ProductWalkthrough() {
       <div className="walkthrough-layout">
         <Reveal className="walkthrough-visual">
           <div className="walkthrough-phone" key={moment.number}>
-            <img src={moment.image} alt={moment.alt} width="1446" height="2862" />
+            <span className="walkthrough-island" aria-hidden="true" />
+            <div className="walkthrough-screen">
+              <img src={moment.image} alt={moment.alt} width="1446" height="2862" />
+            </div>
           </div>
           <span className="walkthrough-screen-label">Pantalla {active + 1} de {moments.length}</span>
         </Reveal>
