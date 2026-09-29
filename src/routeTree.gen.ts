@@ -13,6 +13,10 @@ import { Route as EsRouteImport } from './routes/es'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PreviewStoryRouteImport } from './routes/preview/story'
 import { Route as PreviewSoftRouteImport } from './routes/preview/soft'
+import { Route as PreviewJournalRouteImport } from './routes/preview/journal'
+import { Route as PreviewForestRouteImport } from './routes/preview/forest'
+import { Route as PreviewContrastRouteImport } from './routes/preview/contrast'
+import { Route as PreviewClearRouteImport } from './routes/preview/clear'
 
 const EsRoute = EsRouteImport.update({
   id: '/es',
@@ -34,16 +38,44 @@ const PreviewSoftRoute = PreviewSoftRouteImport.update({
   path: '/preview/soft',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PreviewJournalRoute = PreviewJournalRouteImport.update({
+  id: '/preview/journal',
+  path: '/preview/journal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreviewForestRoute = PreviewForestRouteImport.update({
+  id: '/preview/forest',
+  path: '/preview/forest',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreviewContrastRoute = PreviewContrastRouteImport.update({
+  id: '/preview/contrast',
+  path: '/preview/contrast',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreviewClearRoute = PreviewClearRouteImport.update({
+  id: '/preview/clear',
+  path: '/preview/clear',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/es': typeof EsRoute
+  '/preview/clear': typeof PreviewClearRoute
+  '/preview/contrast': typeof PreviewContrastRoute
+  '/preview/forest': typeof PreviewForestRoute
+  '/preview/journal': typeof PreviewJournalRoute
   '/preview/soft': typeof PreviewSoftRoute
   '/preview/story': typeof PreviewStoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/es': typeof EsRoute
+  '/preview/clear': typeof PreviewClearRoute
+  '/preview/contrast': typeof PreviewContrastRoute
+  '/preview/forest': typeof PreviewForestRoute
+  '/preview/journal': typeof PreviewJournalRoute
   '/preview/soft': typeof PreviewSoftRoute
   '/preview/story': typeof PreviewStoryRoute
 }
@@ -51,20 +83,53 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/es': typeof EsRoute
+  '/preview/clear': typeof PreviewClearRoute
+  '/preview/contrast': typeof PreviewContrastRoute
+  '/preview/forest': typeof PreviewForestRoute
+  '/preview/journal': typeof PreviewJournalRoute
   '/preview/soft': typeof PreviewSoftRoute
   '/preview/story': typeof PreviewStoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/es' | '/preview/soft' | '/preview/story'
+  fullPaths:
+    | '/'
+    | '/es'
+    | '/preview/clear'
+    | '/preview/contrast'
+    | '/preview/forest'
+    | '/preview/journal'
+    | '/preview/soft'
+    | '/preview/story'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/es' | '/preview/soft' | '/preview/story'
-  id: '__root__' | '/' | '/es' | '/preview/soft' | '/preview/story'
+  to:
+    | '/'
+    | '/es'
+    | '/preview/clear'
+    | '/preview/contrast'
+    | '/preview/forest'
+    | '/preview/journal'
+    | '/preview/soft'
+    | '/preview/story'
+  id:
+    | '__root__'
+    | '/'
+    | '/es'
+    | '/preview/clear'
+    | '/preview/contrast'
+    | '/preview/forest'
+    | '/preview/journal'
+    | '/preview/soft'
+    | '/preview/story'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EsRoute: typeof EsRoute
+  PreviewClearRoute: typeof PreviewClearRoute
+  PreviewContrastRoute: typeof PreviewContrastRoute
+  PreviewForestRoute: typeof PreviewForestRoute
+  PreviewJournalRoute: typeof PreviewJournalRoute
   PreviewSoftRoute: typeof PreviewSoftRoute
   PreviewStoryRoute: typeof PreviewStoryRoute
 }
@@ -99,12 +164,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PreviewSoftRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/preview/journal': {
+      id: '/preview/journal'
+      path: '/preview/journal'
+      fullPath: '/preview/journal'
+      preLoaderRoute: typeof PreviewJournalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preview/forest': {
+      id: '/preview/forest'
+      path: '/preview/forest'
+      fullPath: '/preview/forest'
+      preLoaderRoute: typeof PreviewForestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preview/contrast': {
+      id: '/preview/contrast'
+      path: '/preview/contrast'
+      fullPath: '/preview/contrast'
+      preLoaderRoute: typeof PreviewContrastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preview/clear': {
+      id: '/preview/clear'
+      path: '/preview/clear'
+      fullPath: '/preview/clear'
+      preLoaderRoute: typeof PreviewClearRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EsRoute: EsRoute,
+  PreviewClearRoute: PreviewClearRoute,
+  PreviewContrastRoute: PreviewContrastRoute,
+  PreviewForestRoute: PreviewForestRoute,
+  PreviewJournalRoute: PreviewJournalRoute,
   PreviewSoftRoute: PreviewSoftRoute,
   PreviewStoryRoute: PreviewStoryRoute,
 }

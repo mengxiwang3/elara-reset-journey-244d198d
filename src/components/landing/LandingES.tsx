@@ -20,7 +20,7 @@ import founderMengxi from "@/assets/founder-mengxi.jpg";
 import founderAlejandra from "@/assets/founder-alejandra.jpg";
 import communityCircle from "@/assets/community-circle.jpg";
 
-function Nav() {
+function Nav({ soft = false }: { soft?: boolean }) {
   return (
     <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/40">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
@@ -29,7 +29,7 @@ function Nav() {
         </a>
         <nav className="hidden lg:flex items-center gap-8 text-sm text-muted-foreground">
           <a href="#como" className={`hover:text-foreground transition ${underline}`}>Cómo funciona</a>
-          <a href="#producto" className={`hover:text-foreground transition ${underline}`}>Dentro de Elara</a>
+          <a href={soft ? "#recorrido" : "#producto"} className={`hover:text-foreground transition ${underline}`}>Dentro de Elara</a>
           <a href="#comunidad" className={`hover:text-foreground transition ${underline}`}>Comunidad</a>
         </nav>
         <div className="flex items-center gap-3">
@@ -360,7 +360,7 @@ const PAIN_OPTIONS_ES = [
   "Estancada en una reinvención, sin saber hacia dónde",
 ];
 
-function Waitlist() {
+export function Waitlist() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -540,10 +540,10 @@ function Footer() {
   );
 }
 
-export function LandingES({ variant = "default" }: { variant?: "default" | "soft" | "story" }) {
+export function LandingES({ variant = "default", colorway }: { variant?: "default" | "soft" | "story"; colorway?: "contrast" | "forest" }) {
   return (
-    <main className={`landing-page ${variant === "soft" ? "landing-soft" : variant === "story" ? "landing-story" : ""} min-h-screen bg-background text-foreground`} lang="es">
-      <Nav />
+    <main className={`landing-page ${variant === "soft" ? "landing-soft" : variant === "story" ? "landing-story" : ""} ${colorway ? `landing-color-${colorway}` : ""} min-h-screen bg-background text-foreground`} lang="es">
+      <Nav soft={variant === "soft"} />
       {variant === "soft" ? (
         <>
           <FloatingElara />

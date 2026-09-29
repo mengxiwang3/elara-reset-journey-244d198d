@@ -58,7 +58,7 @@ export function SoftWritingBlocks() {
         </Reveal>
       </section>
 
-      <section className="writing-block writing-block-community" aria-labelledby="community-title">
+      <section id="comunidad" className="writing-block writing-block-community" aria-labelledby="community-title">
         <Reveal className="writing-community-image">
           <img src={community} alt="Mujeres conversando alrededor de una mesa" loading="lazy" />
         </Reveal>
