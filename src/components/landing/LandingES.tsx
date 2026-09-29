@@ -1,3 +1,4 @@
+import { AlejandraStory } from "./AlejandraStory";
 import { StoryHero } from "./StoryHero";
 import { SoftHero } from "./SoftHero";
 import { BrandMark, ElaraOrb } from "./Brand";
@@ -205,11 +206,11 @@ function Problem() {
 }
 
 const screens = [
-  { src: appPath, label: "Tu camino personalizado", caption: "Tu contexto, no una plantilla." },
-  { src: appToday, label: "Brújula diaria", caption: "Tres pequeños actos al día." },
+  { src: appPath, label: "Un camino para ti", caption: "Tu contexto, no una plantilla." },
+  { src: appToday, label: "Un paso cada día", caption: "Tres pequeños actos al día." },
   { src: appReflection, label: "Reflexión suave", caption: "Conciencia antes que acción." },
   { src: appCommunity, label: "El círculo de hoy", caption: "Caminando contigo." },
-  { src: appClarity, label: "Mapa de claridad", caption: "En qué enfocarte primero." },
+  { src: appClarity, label: "Lo que necesita atención", caption: "En qué enfocarte primero." },
 ];
 
 function PhoneMockup({ src, label, caption }: { src: string; label: string; caption: string }) {
@@ -235,7 +236,7 @@ function Product() {
             Un espacio pequeño y hermoso para tu vida interior.
           </h2>
           <p className="mt-5 text-base text-muted-foreground leading-relaxed">
-            Al final de la semana, sales con más claridad sobre lo que necesitas, un plan de reset personalizado y un ritmo diario más suave que sí puedes sostener.
+            Durante siete días, haz espacio para lo que necesitas, prueba pequeños pasos y encuentra un ritmo que se sienta más tuyo.
           </p>
         </Reveal>
       </div>
@@ -253,9 +254,9 @@ function Product() {
 }
 
 const steps = [
-  { n: "01", title: "Un check-in honesto de 4 minutos", body: "Sin puntuaciones. Sin vergüenza. Solo dónde estás realmente hoy." },
+  { n: "01", title: "Cuatro minutos para escucharte", body: "Sin puntuaciones. Sin vergüenza. Solo dónde estás realmente hoy." },
   { n: "02", title: "Un camino de 7 días hecho para tu momento", body: "Dinero, mente, cuerpo, personas, propósito: lo que esté más pesado, primero." },
-  { n: "03", title: "Rituales diarios, IA suave, un círculo real", body: "Estructura suave que sí puedes mantener, y mujeres que lo viven contigo." },
+  { n: "03", title: "Un momento para ti, cada día", body: "Estructura suave que sí puedes mantener, y mujeres que lo viven contigo." },
 ];
 
 function HowItWorks() {
@@ -277,6 +278,7 @@ function HowItWorks() {
             </Reveal>
           ))}
         </div>
+        <p className="mt-10 max-w-xl mx-auto text-center text-sm text-muted-foreground leading-relaxed">Elara usa inteligencia artificial para ofrecerte preguntas y sugerencias a partir de lo que compartes.</p>
       </div>
     </section>
   );
@@ -541,6 +543,7 @@ export function LandingES({ variant = "default" }: { variant?: "default" | "soft
     <main className={`landing-page ${variant === "soft" ? "landing-soft" : variant === "story" ? "landing-story" : ""} min-h-screen bg-background text-foreground`} lang="es">
       <Nav />
       {variant === "soft" ? <SoftHero /> : variant === "story" ? <StoryHero /> : <Hero />}
+      {variant === "soft" && <AlejandraStory />}
       <SocialProof />
       <RealContext />
       <Problem />
