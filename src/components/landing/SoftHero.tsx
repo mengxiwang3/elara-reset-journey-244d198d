@@ -1,4 +1,4 @@
-import appToday from "@/assets/app-today.png";
+import { EditorialScreenDeck } from "./EditorialScreenDeck";
 
 export function SoftHero() {
   return (
@@ -28,12 +28,7 @@ export function SoftHero() {
           </div>
         </div>
 
-        <div className="editorial-product" aria-label="Un momento dentro de Elara">
-          <div className="editorial-phone">
-            <img src={appToday} alt="Un día dentro de Elara" width="1446" height="2862" fetchPriority="high" />
-          </div>
-          <p className="editorial-note">Una pregunta. Un pequeño paso. Un momento que también es tuyo.</p>
-        </div>
+        <EditorialScreenDeck />
       </div>
 
       <div className="editorial-proof">

@@ -646,6 +646,126 @@
   50% { transform: translateY(-3px) scale(1.04); }
 }
 
+/* Distinct product moments replace the decorative green screen pedestal. */
+@layer utilities {
+  .editorial-deck { min-width: 0; perspective: 1400px; }
+  .editorial-deck-stage {
+    position: relative;
+    min-height: 500px;
+    border: 1px solid var(--border);
+    border-top-width: 4px;
+    border-radius: 20px;
+    background: var(--card);
+    overflow: hidden;
+    transition: border-color 280ms ease, background-color 280ms ease;
+  }
+  .editorial-deck-stage.tone-today { border-top-color: #E65A28; background: #FFF9F5; }
+  .editorial-deck-stage.tone-path { border-top-color: #133226; background: #F6F9F7; }
+  .editorial-deck-stage.tone-clarity { border-top-color: #FCBB39; background: #FFFCF2; }
+  .editorial-deck-stage::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    right: -90px;
+    top: -100px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    opacity: .12;
+  }
+  .tone-today { color: #B8441A; }
+  .tone-path { color: #133226; }
+  .tone-clarity { color: #9A6500; }
+  .editorial-deck-card {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 28px 28px 0;
+    transform-origin: left center;
+    backface-visibility: hidden;
+    animation: card-turn 620ms cubic-bezier(.22,1,.36,1) both;
+  }
+  .editorial-deck-copy { position: relative; z-index: 1; color: var(--foreground); }
+  .editorial-deck-copy > p { color: currentColor; }
+  .editorial-deck-copy > strong {
+    display: block;
+    margin-top: 12px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+  }
+  .editorial-deck-copy > span {
+    display: block;
+    max-width: 300px;
+    margin-top: 8px;
+    color: var(--muted-foreground);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .editorial-deck-phone {
+    align-self: end;
+    width: 235px;
+    margin: 24px auto -42px;
+    padding: 7px;
+    border: 1px solid var(--border);
+    border-radius: 23px;
+    background: white;
+    box-shadow: 0 16px 45px rgb(26 22 21 / 12%);
+  }
+  .editorial-deck-phone img { display: block; width: 100%; height: auto; border-radius: 17px; }
+  .editorial-deck-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .editorial-deck-controls button {
+    min-height: 48px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+    color: var(--muted-foreground);
+    font-size: 12px;
+    font-weight: 600;
+    transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+  }
+  .editorial-deck-controls button span {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .14em;
+  }
+  .editorial-deck-controls button:nth-child(1)[aria-pressed="true"] { border-color: #E65A28; background: #FFF3EE; color: #B8441A; }
+  .editorial-deck-controls button:nth-child(2)[aria-pressed="true"] { border-color: #133226; background: #F0F5F2; color: #133226; }
+  .editorial-deck-controls button:nth-child(3)[aria-pressed="true"] { border-color: #D89A15; background: #FFF8E4; color: #8A5C00; }
+  .editorial-deck-hint { margin-top: 10px; color: var(--muted-foreground); font-size: 11px; text-align: center; }
+
+  @media (max-width: 800px) {
+    .editorial-deck { width: min(100%, 430px); margin-inline: auto; }
+  }
+  @media (max-width: 430px) {
+    .editorial-deck-stage { min-height: 460px; }
+    .editorial-deck-card { padding: 22px 20px 0; }
+    .editorial-deck-phone { width: 205px; }
+    .editorial-deck-controls button { padding-inline: 5px; }
+  }
+  @media (hover: none) {
+    .editorial-deck-hint { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .editorial-deck-card { animation: none; }
+  }
+}
+
+@keyframes card-turn {
+  from { opacity: 0; transform: rotateY(72deg) translateX(-18px); }
+  to { opacity: 1; transform: rotateY(0) translateX(0); }
+}
+
 /* Restore the original site's six-second float and nine-second breathing rhythm. */
 @layer utilities {
   .landing-soft .soft-hero { position: relative; isolation: isolate; overflow: hidden; }
