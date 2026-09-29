@@ -877,6 +877,100 @@
   }
 }
 
+/* A short, manually controlled walkthrough using the real product screens. */
+@layer utilities {
+  .product-walkthrough {
+    padding: 112px 32px;
+    background: #F4EFE8;
+    border-block: 1px solid var(--border);
+  }
+  .walkthrough-heading { max-width: 1080px; margin-inline: auto; }
+  .walkthrough-heading h2 {
+    margin-top: 20px;
+    font-size: clamp(38px, 4.4vw, 60px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+  }
+  .walkthrough-layout {
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: clamp(56px, 9vw, 120px);
+    max-width: 1000px;
+    margin: 72px auto 0;
+    align-items: center;
+  }
+  .walkthrough-visual { position: relative; justify-self: center; }
+  .walkthrough-visual::before {
+    content: "";
+    position: absolute;
+    inset: 9% -24px -20px 26px;
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    background: var(--card);
+  }
+  .walkthrough-phone {
+    position: relative;
+    width: min(300px, 72vw);
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 27px;
+    background: white;
+    box-shadow: 0 18px 55px rgb(26 22 21 / 13%);
+    animation: walkthrough-change 520ms cubic-bezier(.22,1,.36,1) both;
+  }
+  .walkthrough-phone img { display: block; width: 100%; height: auto; border-radius: 20px; }
+  .walkthrough-screen-label {
+    position: relative;
+    display: block;
+    margin-top: 30px;
+    color: var(--muted-foreground);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .walkthrough-moments { border-top: 1px solid var(--border); }
+  .walkthrough-moment {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 22px;
+    width: 100%;
+    padding: 26px 4px;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted-foreground);
+    text-align: left;
+    transition: color 200ms ease, padding-left 260ms cubic-bezier(.22,1,.36,1);
+  }
+  .walkthrough-moment:hover { color: var(--foreground); }
+  .walkthrough-moment[aria-selected="true"] { padding-left: 14px; color: var(--foreground); }
+  .walkthrough-number { padding-top: 3px; color: var(--accent); font-size: 11px; font-weight: 600; letter-spacing: .15em; }
+  .walkthrough-moment-copy { display: grid; gap: 7px; }
+  .walkthrough-moment-copy small { color: var(--accent); font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+  .walkthrough-moment-copy strong { font-size: 21px; font-weight: 600; line-height: 1.2; letter-spacing: -0.025em; }
+  .walkthrough-moment-copy > span { max-width: 420px; font-size: 14px; line-height: 1.6; }
+  .walkthrough-moment:not([aria-selected="true"]) .walkthrough-moment-copy > span { display: none; }
+  .walkthrough-next { display: flex; justify-content: flex-end; padding-top: 22px; }
+  .walkthrough-next button { color: var(--accent); font-size: 13px; border-bottom: 1px solid var(--border); padding: 8px 0; }
+  .walkthrough-next button span { display: inline-block; margin-left: 14px; transition: transform 180ms ease; }
+  .walkthrough-next button:hover span { transform: translateX(4px); }
+
+  @media (max-width: 760px) {
+    .product-walkthrough { padding: 76px 24px; }
+    .walkthrough-layout { grid-template-columns: 1fr; gap: 54px; margin-top: 52px; }
+    .walkthrough-moments { max-width: 560px; width: 100%; margin-inline: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .walkthrough-phone { animation: none; }
+    .walkthrough-moment, .walkthrough-next button span { transition: none; }
+  }
+}
+
+@keyframes walkthrough-change {
+  from { opacity: 0; transform: translateY(12px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 /* Restore the original site's six-second float and nine-second breathing rhythm. */
 @layer utilities {
   .landing-soft .soft-hero { position: relative; isolation: isolate; overflow: hidden; }

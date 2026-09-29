@@ -1,5 +1,6 @@
 import community from "@/assets/community-circle.jpg";
 import { Reveal } from "./Reveal";
+import { ProductWalkthrough } from "./ProductWalkthrough";
 
 const steps = [
   { number: "01", title: "Haz una pausa", body: "Cuéntale a Elara qué está ocupando espacio." },
@@ -42,6 +43,8 @@ export function SoftWritingBlocks() {
           <p>Elara usa inteligencia artificial para responder a lo que compartes. No diagnostica ni reemplaza apoyo profesional.</p>
         </Reveal>
       </section>
+
+      <ProductWalkthrough />
 
       <section className="writing-block writing-block-outcome" aria-labelledby="outcome-title">
         <Reveal>
