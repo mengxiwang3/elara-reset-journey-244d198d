@@ -1,4 +1,5 @@
 import { AlejandraStory } from "./AlejandraStory";
+import { FloatingElara } from "./FloatingElara";
 import { StoryHero } from "./StoryHero";
 import { SoftHero } from "./SoftHero";
 import { BrandMark, ElaraOrb } from "./Brand";
@@ -542,6 +543,7 @@ export function LandingES({ variant = "default" }: { variant?: "default" | "soft
   return (
     <main className={`landing-page ${variant === "soft" ? "landing-soft" : variant === "story" ? "landing-story" : ""} min-h-screen bg-background text-foreground`} lang="es">
       <Nav />
+      {variant === "soft" && <FloatingElara />}
       {variant === "soft" ? <SoftHero /> : variant === "story" ? <StoryHero /> : <Hero />}
       {variant === "soft" && <AlejandraStory />}
       <SocialProof />

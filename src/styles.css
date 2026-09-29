@@ -510,6 +510,142 @@
   to { opacity: 1; transform: translateY(0) rotate(1.5deg); }
 }
 
+/* Elara's orb is a small presence, not a generic support widget. */
+@layer utilities {
+  .floating-elara {
+    --orb-travel: 0px;
+    --orb-rise: 0px;
+    position: fixed;
+    z-index: 45;
+    right: clamp(18px, 4vw, 56px);
+    top: 54%;
+    transform: translate3d(var(--orb-travel), calc(-50% + var(--orb-rise)), 0);
+    transition: transform 180ms linear;
+  }
+  .floating-elara-orb {
+    --pointer-x: 0px;
+    --pointer-y: 0px;
+    display: grid;
+    justify-items: center;
+    gap: 7px;
+    min-width: 76px;
+    padding: 8px;
+    color: var(--muted-foreground);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transform: translate(var(--pointer-x), var(--pointer-y));
+    transition: transform 180ms ease, color 180ms ease;
+  }
+  .floating-elara-orb:hover { color: var(--accent); }
+  .floating-elara-well {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 62px;
+    height: 62px;
+    border: 1px solid #E8E0D5;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 8px 30px rgb(187 76 3 / 16%);
+  }
+  .floating-elara-well::before {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    border: 1px solid rgb(230 90 40 / 32%);
+    border-radius: inherit;
+    animation: orb-breathe 4.5s ease-in-out infinite;
+  }
+  .floating-elara-well::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: 4px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #E65A28;
+  }
+  .floating-elara-sphere {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 36% 30%, #FCDE85 0%, #FCBB39 32%, #EA890A 70%, #BB4C03 100%);
+    box-shadow: 0 7px 14px rgb(187 76 3 / 28%);
+    animation: orb-float 5s ease-in-out infinite;
+  }
+  .floating-elara-card {
+    position: absolute;
+    right: 88px;
+    top: 50%;
+    width: min(310px, calc(100vw - 130px));
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: rgb(255 255 255 / 96%);
+    box-shadow: 0 22px 70px rgb(19 50 38 / 18%);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(16px, -50%) scale(.96);
+    transform-origin: right center;
+    transition: opacity 240ms ease, transform 320ms cubic-bezier(.22,1,.36,1);
+  }
+  .floating-elara.is-open .floating-elara-card {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(0, -50%) scale(1);
+  }
+  .floating-elara-card > p { color: var(--accent); }
+  .floating-elara-card > strong {
+    display: block;
+    margin-top: 14px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+  }
+  .floating-elara-next {
+    margin-top: 20px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+    color: var(--accent);
+    font-size: 13px;
+  }
+  .floating-elara-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    color: var(--muted-foreground);
+    font-size: 21px;
+  }
+  @media (max-width: 700px) {
+    .floating-elara { right: 10px; top: auto; bottom: 18px; transform: none; }
+    .floating-elara-well { width: 52px; height: 52px; }
+    .floating-elara-sphere { width: 23px; height: 23px; }
+    .floating-elara-label { display: none; }
+    .floating-elara-card { right: 66px; top: auto; bottom: 0; transform: translate(12px, 0) scale(.96); }
+    .floating-elara.is-open .floating-elara-card { transform: translate(0, 0) scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .floating-elara { transform: translateY(-50%); transition: none; }
+    .floating-elara-well::before, .floating-elara-sphere { animation: none; }
+    .floating-elara-orb, .floating-elara-card { transition: none; }
+  }
+}
+
+@keyframes orb-breathe {
+  0%, 100% { opacity: .42; transform: scale(.96); }
+  50% { opacity: .9; transform: scale(1.08); }
+}
+@keyframes orb-float {
+  0%, 100% { transform: translateY(1px) scale(.98); }
+  50% { transform: translateY(-3px) scale(1.04); }
+}
+
 /* Restore the original site's six-second float and nine-second breathing rhythm. */
 @layer utilities {
   .landing-soft .soft-hero { position: relative; isolation: isolate; overflow: hidden; }
