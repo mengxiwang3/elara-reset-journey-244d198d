@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import appToday from "@/assets/app-today.png";
 import appPath from "@/assets/app-path.png";
 import appClarity from "@/assets/app-clarity.png";
@@ -32,30 +32,11 @@ const SCREENS = [
 
 export function EditorialScreenDeck() {
   const [active, setActive] = useState(0);
-  const [cycling, setCycling] = useState(true);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  useEffect(() => {
-    if (!cycling || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    timerRef.current = setInterval(() => setActive((current) => (current + 1) % SCREENS.length), 4200);
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-      timerRef.current = null;
-    };
-  }, [cycling]);
 
   const screen = SCREENS[active];
 
   return (
-    <div
-      className="editorial-deck"
-      onMouseEnter={() => setCycling(false)}
-      onMouseLeave={() => setCycling(true)}
-      onFocus={() => setCycling(false)}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setCycling(true);
-      }}
-    >
+    <div className="editorial-deck editorial-deck-manual">
       <div className={`editorial-deck-stage tone-${screen.tone}`} aria-live="polite">
         <div className="editorial-deck-card" key={screen.short}>
           <div className="editorial-deck-copy">
@@ -76,7 +57,6 @@ export function EditorialScreenDeck() {
             type="button"
             aria-pressed={active === index}
             onClick={() => {
-              setCycling(false);
               setActive(index);
             }}
           >
@@ -85,7 +65,7 @@ export function EditorialScreenDeck() {
           </button>
         ))}
       </div>
-      <p className="editorial-deck-hint">Cambia automáticamente. Pasa el cursor para detenerlo.</p>
+      <p className="editorial-deck-hint">Explora las pantallas a tu ritmo.</p>
     </div>
   );
 }

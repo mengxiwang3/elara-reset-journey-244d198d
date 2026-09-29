@@ -362,6 +362,8 @@ const PAIN_OPTIONS_ES = [
 
 export function Waitlist() {
   const [submitted, setSubmitted] = useState(false);
+  const [followupToken, setFollowupToken] = useState<string | null>(null);
+  const [detailsDone, setDetailsDone] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ name: "", email: "", whatsapp: "", instagram: "", pain: "" });
@@ -375,13 +377,21 @@ export function Waitlist() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, language: "es" }),
+        body: JSON.stringify(submitted
+          ? { followupToken, whatsapp: form.whatsapp, instagram: form.instagram, pain: form.pain }
+          : { name: form.name, email: form.email, language: "es" }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({})) as { error?: string };
         throw new Error(data.error ?? "Algo salió mal. Por favor, inténtalo de nuevo.");
       }
-      setSubmitted(true);
+      const data = await res.json() as { followupToken?: string };
+      if (submitted) {
+        setDetailsDone(true);
+      } else {
+        setFollowupToken(data.followupToken ?? null);
+        setSubmitted(true);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Algo salió mal. Por favor, inténtalo de nuevo.");
     } finally {
@@ -402,15 +412,18 @@ export function Waitlist() {
           </p>
         </Reveal>
 
-        {submitted ? (
-          <div className="mt-12 rounded-2xl border border-border bg-card p-10 shadow-card">
+        {submitted && (
+          <div role="status" className="mt-12 rounded-2xl border border-border bg-card p-10 shadow-card">
             <CheckCircle2 className="h-10 w-10 text-accent mx-auto" />
             <h3 className="mt-4 font-sans text-2xl text-foreground">Ya estás en la lista.</h3>
             <p className="mt-2 text-muted-foreground">Te escribiremos antes de abrir el primer grupo de Elara. Bienvenida.</p>
             <p className="mt-4 font-sans text-2xl text-accent">Mengxi &amp; Ale</p>
+            {detailsDone && <p className="mt-4 text-muted-foreground">Gracias por estar aquí.</p>}
           </div>
-        ) : (
+        )}
+        {!detailsDone && (!submitted || followupToken) && (
           <form onSubmit={onSubmit} className="mt-12 grid gap-3 text-left bg-card rounded-2xl border border-border p-6 sm:p-8 shadow-card">
+            {!submitted ? (<>
             <label className="grid gap-1.5">
               <span className="text-xs uppercase tracking-wider text-muted-foreground">Nombre</span>
               <input
@@ -429,6 +442,9 @@ export function Waitlist() {
                 placeholder="tu@email.com"
               />
             </label>
+            </>) : (<>
+            <h3 className="text-xl font-semibold">¿Nos cuentas un poco más?</h3>
+            <p className="text-sm text-muted-foreground">Ya guardamos tu lugar. Estas preguntas son opcionales.</p>
             <label className="grid gap-1.5">
               <span className="text-xs uppercase tracking-wider text-muted-foreground">WhatsApp <span className="normal-case text-muted-foreground">(opcional)</span></span>
               <input
@@ -459,17 +475,19 @@ export function Waitlist() {
                 ))}
               </select>
             </label>
+            </>)}
             {error && (
-              <p className="text-sm text-red-500 text-center">{error}</p>
+              <p role="alert" className="text-sm text-red-500 text-center">{error}</p>
             )}
             <button
               type="submit"
               disabled={loading}
               className="group mt-2 inline-flex items-center justify-center gap-2.5 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-base font-medium shadow-soft hover:bg-accent transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {loading ? "Uniéndome…" : "Unirme a la lista de espera fundadora"}
+              {loading ? "Guardando…" : submitted ? "Guardar mis respuestas" : "Unirme a la lista de espera fundadora"}
               {!loading && <span className="text-primary-foreground group-hover:text-primary-foreground transition-colors" aria-hidden>→</span>}
             </button>
+            {submitted && <button type="button" disabled={loading} onClick={() => setDetailsDone(true)} className="py-3 text-sm text-muted-foreground underline">Ahora no</button>}
             <p className="font-sans text-xl text-accent text-center">leemos cada respuesta. De verdad.</p>
             <p className="text-xs text-muted-foreground text-center">Sin spam. Nunca. Baja con un solo toque.</p>
           </form>

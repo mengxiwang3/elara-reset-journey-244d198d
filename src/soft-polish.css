@@ -1,0 +1,10 @@
+.soft-founder-link { display: inline-flex; gap: 14px; align-items: center; margin-top: 28px; max-width: 100%; }
+.soft-founder-link > img { width: 52px; height: 52px; flex-shrink: 0; border-radius: 50%; object-fit: cover; object-position: center 25%; }
+.soft-founder-link > span { display: grid; gap: 5px; }
+.soft-founder-link strong { font-size: 13px; font-weight: 500; }
+.soft-founder-link span > span { color: var(--muted-foreground); font-size: 12px; text-decoration: underline; text-underline-offset: 4px; }
+.soft-founder-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+.editorial-deck-manual .editorial-deck-card { animation: none; }
+.landing-soft .floating-elara { transform: translateY(-50%); transition: none; }
+.landing-soft :is(.floating-elara-sphere, .floating-elara-well::before, .soft-entrance) { animation: none; }
+@media (max-width: 700px) { .landing-soft .floating-elara { transform: none; } }

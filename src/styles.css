@@ -2,6 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 @import "./color-previews.css";
+@import "./soft-polish.css";
 
 @custom-variant dark (&:is(.dark *));
 
