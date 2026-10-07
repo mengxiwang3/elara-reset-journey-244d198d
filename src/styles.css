@@ -266,3 +266,78 @@
     color: var(--color-foreground);
   }
 }
+
+/* ---------- Mist Meadow explainer (preview/meadow) ----------
+   Scene units: 1 art unit = var(--u). The art is the real world engine's
+   300 x 360 space; --yb is the art y that sits on the bottom edge. */
+.mm-page { background: var(--background); }
+.mm-top { display: flex; align-items: center; justify-content: space-between; max-width: 72rem; margin: 0 auto; padding: 1.25rem 1.25rem 0; }
+.mm-hero { max-width: 72rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; display: grid; gap: 2.5rem; align-items: center; }
+.mm-hero-shot { margin: 0 auto; width: min(100%, 24rem); text-align: center; }
+.mm-hero-shot img { width: 100%; height: auto; border-radius: 2.2rem; border: 1px solid var(--border); box-shadow: var(--shadow-soft); background: var(--card); }
+@media (min-width: 1024px) {
+  .mm-hero { grid-template-columns: 1.1fr 0.9fr; min-height: calc(100svh - 4.5rem); padding-bottom: 3rem; }
+  .mm-hero-shot { width: min(100%, calc((100svh - 9rem) * 0.46)); min-width: 22rem; }
+}
+
+.mm { background: var(--background); color: var(--foreground); }
+.mm-intro { max-width: 44rem; margin: 0 auto; padding: 3rem 1.25rem 2.5rem; text-align: center; }
+.mm-eyebrow { font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: oklch(0.45 0.09 40); }
+.mm-h2 { margin-top: 0.9rem; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; color: var(--foreground); text-wrap: balance; }
+.mm-lead { margin-top: 1.1rem; font-size: 1.1rem; line-height: 1.65; color: var(--muted-foreground); text-wrap: pretty; }
+.mm-hint { margin-top: 1.5rem; font-size: 0.85rem; color: var(--muted-foreground); }
+
+.mm-stage { position: relative; overflow: hidden; container-type: size; background: #F3ECDD; }
+.mm-art { position: absolute; inset: 0; --u: max(calc(100cqw / 400), calc(100cqh / 208)); --yb: 348; }
+.mm-art-frame { --u: calc(100cqw / 330); --yb: 340; }
+.mm-layer { position: absolute; inset: 0; transform-origin: 50% calc(100% - (var(--yb) - 196) * var(--u)); pointer-events: none; }
+.mm-part { position: absolute; display: block; max-width: none; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+.mm-orb { position: absolute; display: block; aspect-ratio: 1; height: auto; transform: translate(-50%, -52%); pointer-events: none; }
+.mm-tooth { position: absolute; inset: 0; background-size: calc(64 * var(--u)) calc(64 * var(--u)); pointer-events: none; }
+.mm-art[data-live="1"] .mm-layer { will-change: transform, opacity; }
+.mm-art[data-live="1"] .mm-part { will-change: opacity; }
+.mm-haze { animation: mm-haze 46s ease-in-out infinite alternate; }
+@keyframes mm-haze { from { translate: calc(-2 * var(--u)) 0; } to { translate: calc(2 * var(--u)) 0; } }
+
+/* captions: plain cream, never on the art */
+.mm-band { background: var(--background); border-top: 1px solid var(--border); }
+.mm-band-inner { max-width: 72rem; margin: 0 auto; padding: 1.1rem 1.25rem 1.3rem; display: grid; gap: 0.9rem; }
+.mm-rail { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: oklch(0.45 0.03 45); }
+.mm-rail li { padding-bottom: 0.2rem; border-bottom: 2px solid transparent; transition: color .3s, border-color .3s; }
+.mm-rail li.is-past { color: var(--foreground); }
+.mm-rail li.is-on { color: var(--foreground); font-weight: 600; border-color: var(--foreground); }
+.mm-caps { position: relative; min-height: 4.6rem; }
+.mm-cap { position: absolute; inset: 0; opacity: 0; transition: opacity .5s ease; display: grid; grid-template-columns: 11rem 1fr; gap: 1.5rem; align-items: baseline; }
+.mm-cap.is-on { opacity: 1; }
+.mm-day { font-family: var(--font-serif); font-size: 1.9rem; line-height: 1.1; color: var(--foreground); }
+.mm-text { font-size: 1.15rem; line-height: 1.5; color: var(--foreground); max-width: 46rem; text-wrap: pretty; }
+
+/* desktop: pinned stage in a tall track */
+.mm-track { height: 560vh; position: relative; }
+.mm-sticky { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; }
+.mm-sticky .mm-stage { flex: 1 1 auto; min-height: 0; }
+.mm-sticky .mm-band { flex: none; }
+
+/* static (reduced motion, no JS, server render) */
+.mm-stage-static { width: 100%; aspect-ratio: 400 / 208; max-height: 80svh; }
+.mm-list { max-width: 48rem; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; display: grid; gap: 1.6rem; }
+.mm-list li { display: grid; grid-template-columns: 9rem 1fr; gap: 1.25rem; align-items: baseline; }
+
+/* mobile: five short beats, no pinning */
+.mm-beats { padding: 0 0 2rem; display: grid; gap: 2.4rem; }
+.mm-beat { opacity: 0; transition: opacity .7s ease; padding: 0 1rem; }
+.mm-beat.is-in { opacity: 1; }
+.mm-frame { aspect-ratio: 330 / 204; container-type: size; position: relative; overflow: hidden; border-radius: 1.1rem; border: 1px solid var(--border); background: #F3ECDD; }
+.mm-beat .mm-day { margin-top: 0.9rem; font-size: 1.5rem; }
+.mm-beat .mm-text { margin-top: 0.35rem; font-size: 1.05rem; }
+@media (max-width: 768px) {
+  .mm-intro { padding: 2rem 1.25rem 1.75rem; }
+  .mm-list li { grid-template-columns: 1fr; gap: 0.25rem; }
+  .mm-stage-static { aspect-ratio: 330 / 204; }
+  .mm-stage-static .mm-art { --u: calc(100cqw / 330); --yb: 340; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mm-haze { animation: none !important; }
+  .mm-beat { opacity: 1; transition: none; }
+  .mm-cap { transition: none; }
+}

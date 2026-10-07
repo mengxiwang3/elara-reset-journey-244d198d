@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as EsRouteImport } from './routes/es'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PreviewMeadowRouteImport } from './routes/preview/meadow'
 
 const EsRoute = EsRouteImport.update({
   id: '/es',
@@ -22,31 +23,40 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PreviewMeadowRoute = PreviewMeadowRouteImport.update({
+  id: '/preview/meadow',
+  path: '/preview/meadow',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/es': typeof EsRoute
+  '/preview/meadow': typeof PreviewMeadowRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/es': typeof EsRoute
+  '/preview/meadow': typeof PreviewMeadowRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/es': typeof EsRoute
+  '/preview/meadow': typeof PreviewMeadowRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/es'
+  fullPaths: '/' | '/es' | '/preview/meadow'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/es'
-  id: '__root__' | '/' | '/es'
+  to: '/' | '/es' | '/preview/meadow'
+  id: '__root__' | '/' | '/es' | '/preview/meadow'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EsRoute: typeof EsRoute
+  PreviewMeadowRoute: typeof PreviewMeadowRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/preview/meadow': {
+      id: '/preview/meadow'
+      path: '/preview/meadow'
+      fullPath: '/preview/meadow'
+      preLoaderRoute: typeof PreviewMeadowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EsRoute: EsRoute,
+  PreviewMeadowRoute: PreviewMeadowRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
