@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Sun, CheckCircle2, Instagram } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { AtlasMap } from "@/components/atlas/AtlasMap";
+
 import { MemberAvatars } from "./MemberAvatars";
 
 const underline =
@@ -528,6 +530,31 @@ function Footer() {
   );
 }
 
+function AtlasSection({ es = false }: { es?: boolean }) {
+  return (
+    <section id="atlas" className="py-24 sm:py-32">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+        <Reveal>
+          <p className="text-sm uppercase tracking-[0.2em] text-accent">{es ? "Tu Atlas" : "Your Atlas"}</p>
+          <h2 className="mt-4 font-serif text-4xl sm:text-5xl text-foreground leading-[1.08] text-balance max-w-3xl">
+            {es ? "Seis áreas, un solo hilo." : "Six areas, one thread."}
+          </h2>
+          <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
+            {es
+              ? "Cada camino que recorres se guarda como un lugar. Solo uno está en color: donde caminas ahora."
+              : "Every path you walk is kept as a place. Only one is in full colour: where you are walking now."}
+          </p>
+        </Reveal>
+        <Reveal delay={120}>
+          <div className="mt-12">
+            <AtlasMap lang={es ? "es" : "en"} />
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export function Landing() {
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -538,6 +565,7 @@ export function Landing() {
       <Problem />
       <Product />
       <HowItWorks />
+      <AtlasSection />
       <Community />
       <Culture />
       <Waitlist />
