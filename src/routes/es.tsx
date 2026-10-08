@@ -1,10 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { LandingES } from "@/components/landing/LandingES";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
+/** Old Spanish URL. Spanish now lives at the root; the Worker also 301s this. */
 export const Route = createFileRoute("/es")({
-  component: EsPage,
+  beforeLoad: () => {
+    throw redirect({ to: "/", statusCode: 301 });
+  },
 });
-
-function EsPage() {
-  return <LandingES />;
-}

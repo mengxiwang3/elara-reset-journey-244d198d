@@ -1,11 +1,15 @@
+import { Wordmark } from "../elara/Wordmark";
+
+const WRAP = "mx-auto w-full max-w-6xl px-5 sm:px-8";
+
 function Nav() {
   return (
-    <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/40">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="/es" className="font-serif text-2xl tracking-tight text-foreground">
-          elara<span className="text-accent">.</span>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-hairline bg-cream/95 backdrop-blur-[6px]">
+      <div className={`${WRAP} flex h-[68px] items-center justify-between gap-4`}>
+        <a href="/" className="text-ink" aria-label="Elara — inicio">
+          <Wordmark size={34} />
         </a>
-        <a href="/es" className="text-sm text-muted-foreground hover:text-foreground transition">
+        <a href="/" className="e-label text-ink-72 transition-colors hover:text-ink">
           Volver al inicio
         </a>
       </div>
@@ -15,15 +19,31 @@ function Nav() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border/60 py-10">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
-        <p className="font-serif text-lg text-foreground">elara<span className="text-accent">.</span></p>
+    <footer className="on-field e-field bg-forest py-10">
+      <div className={`${WRAP} flex flex-wrap items-center justify-between gap-4`}>
+        <Wordmark size={40} onDark />
         <nav className="flex items-center gap-5">
-          <a href="/privacidad" className="hover:text-foreground transition">Privacidad</a>
-          <a href="mailto:hola@holaelara.com" className="hover:text-foreground transition">Contacto</a>
-          <a href="https://instagram.com/alejandra.travels" target="_blank" rel="noreferrer" className="hover:text-foreground transition">Instagram</a>
+          <a href="/privacidad" className="e-label text-cream-72 transition-colors hover:text-cream">
+            Privacidad
+          </a>
+          <a
+            href="mailto:hola@holaelara.com"
+            className="e-label text-cream-72 transition-colors hover:text-cream"
+          >
+            Contacto
+          </a>
+          <a
+            href="https://instagram.com/alejandra.travels"
+            target="_blank"
+            rel="noreferrer"
+            className="e-label text-cream-72 transition-colors hover:text-cream"
+          >
+            Instagram
+          </a>
         </nav>
-        <p>© {new Date().getFullYear()} Elara · Hecho por dos mujeres que también lo necesitaban.</p>
+        <p className="e-caption">
+          © {new Date().getFullYear()} Elara · Hecho por dos mujeres que también lo necesitaban.
+        </p>
       </div>
     </footer>
   );
@@ -31,65 +51,67 @@ function Footer() {
 
 export function Privacidad() {
   return (
-    <main className="min-h-screen bg-background text-foreground" lang="es">
+    <main className="min-h-screen bg-cream text-ink" lang="es">
       <Nav />
-      <article className="pt-32 pb-24 sm:pb-32">
-        <div className="max-w-2xl mx-auto px-5 sm:px-8">
-          <h1 className="font-serif text-4xl sm:text-5xl text-foreground text-balance">
+      <article className="pb-20 pt-28 sm:pb-28">
+        <div className="mx-auto w-full max-w-2xl px-5 sm:px-8">
+          <h1 className="e-h1 text-ink">
             Política de Privacidad — Elara
           </h1>
-          <p className="mt-4 text-sm text-muted-foreground">Última actualización: 3 de julio de 2026</p>
+          <p className="e-caption mt-2">Última actualización: 7 de octubre de 2026</p>
 
-          <div className="mt-12 space-y-10 text-base text-muted-foreground leading-relaxed">
-            <section>
-              <h2 className="font-serif text-2xl text-foreground">Quiénes somos</h2>
-              <p className="mt-3">
-                Elara ("nosotras") opera holaelara.com. Responsable del tratamiento:{" "}
-                {/* TODO: replace with the registered legal entity name and Berlin business address */}
-                [Nombre legal de la entidad], [Dirección en Berlín]. Contacto: privacidad@holaelara.com
+          <div className="e-rule mt-8 pt-8">
+            <section className="e-row py-5">
+              <h2 className="e-h2 text-ink">Quiénes somos</h2>
+              <p className="e-body mt-2">
+                Elara ("nosotras") opera holaelara.com. Para cualquier asunto de privacidad, escríbenos a{" "}
+                <a href="mailto:privacidad@holaelara.com" className="e-link">
+                  privacidad@holaelara.com
+                </a>
+                .
               </p>
             </section>
 
-            <section>
-              <h2 className="font-serif text-2xl text-foreground">Qué datos recopilamos</h2>
-              <p className="mt-3">
+            <section className="e-row py-5">
+              <h2 className="e-h2 text-ink">Qué datos recopilamos</h2>
+              <p className="e-body mt-2">
                 Cuando te unes a la lista de espera: nombre, correo electrónico, número de WhatsApp
                 y usuario de Instagram (opcionales según el formulario).
               </p>
             </section>
 
-            <section>
-              <h2 className="font-serif text-2xl text-foreground">Para qué los usamos</h2>
-              <ul className="mt-3 list-disc list-inside space-y-1.5">
+            <section className="e-row py-5">
+              <h2 className="e-h2 text-ink">Para qué los usamos</h2>
+              <ul className="e-body mt-2 list-inside list-disc space-y-1">
                 <li>Avisarte cuando Elara esté disponible</li>
                 <li>Enviarte correos sobre el lanzamiento y el reset de 7 días</li>
                 <li>Entender quién forma parte de nuestra comunidad</li>
               </ul>
-              <p className="mt-3">
+              <p className="e-body mt-2">
                 Base legal (RGPD): tu consentimiento (art. 6.1.a). Puedes retirarlo en cualquier momento.
               </p>
             </section>
 
-            <section>
-              <h2 className="font-serif text-2xl text-foreground">Con quién los compartimos</h2>
-              <p className="mt-3">Usamos proveedores para operar la lista de espera:</p>
-              <ul className="mt-3 list-disc list-inside space-y-1.5">
+            <section className="e-row py-5">
+              <h2 className="e-h2 text-ink">Con quién los compartimos</h2>
+              <p className="e-body mt-2">Usamos proveedores para operar la lista de espera:</p>
+              <ul className="e-body mt-2 list-inside list-disc space-y-1">
                 <li>Loops (envío de correos) — datos procesados en EE. UU. bajo cláusulas contractuales tipo</li>
                 <li>Cloudflare (alojamiento y seguridad)</li>
               </ul>
-              <p className="mt-3">No vendemos tus datos. Nunca.</p>
+              <p className="e-body mt-2">No vendemos tus datos. Nunca.</p>
             </section>
 
-            <section>
-              <h2 className="font-serif text-2xl text-foreground">Cuánto tiempo los guardamos</h2>
-              <p className="mt-3">Hasta que te des de baja o nos pidas eliminarlos.</p>
+            <section className="e-row py-5">
+              <h2 className="e-h2 text-ink">Cuánto tiempo los guardamos</h2>
+              <p className="e-body mt-2">Hasta que te des de baja o nos pidas eliminarlos.</p>
             </section>
 
-            <section>
-              <h2 className="font-serif text-2xl text-foreground">Tus derechos</h2>
-              <p className="mt-3">
+            <section className="e-row py-5">
+              <h2 className="e-h2 text-ink">Tus derechos</h2>
+              <p className="e-body mt-2">
                 Acceso, rectificación, supresión, portabilidad y oposición. Escríbenos a{" "}
-                <a href="mailto:privacidad@holaelara.com" className="text-accent hover:text-foreground transition">
+                <a href="mailto:privacidad@holaelara.com" className="e-link">
                   privacidad@holaelara.com
                 </a>
                 . También puedes reclamar ante la autoridad de protección de datos de Berlín
@@ -97,9 +119,9 @@ export function Privacidad() {
               </p>
             </section>
 
-            <section>
-              <h2 className="font-serif text-2xl text-foreground">Cookies</h2>
-              <p className="mt-3">No usamos cookies de seguimiento.</p>
+            <section className="e-row py-5">
+              <h2 className="e-h2 text-ink">Cookies</h2>
+              <p className="e-body mt-2">No usamos cookies de seguimiento.</p>
             </section>
           </div>
         </div>

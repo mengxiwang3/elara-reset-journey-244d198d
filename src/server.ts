@@ -80,22 +80,13 @@ export default {
       return handleAdmin(request, env as AdminEnv);
     }
 
-    // Language routing for the root: Spanish is the primary market, so the
-    // root defaults to /es for everyone — unless a visitor explicitly chose
-    // English (remembered via the elara_lang cookie set by the nav toggle).
-    if (request.method === "GET" && url.pathname === "/") {
-      const cookie = request.headers.get("Cookie") ?? "";
-      const pref = cookie.match(/(?:^|;)\s*elara_lang=(es|en)\b/)?.[1];
-      if (pref !== "en") {
-        return new Response(null, {
-          status: 302,
-          headers: {
-            Location: "/es" + url.search,
-            "Cache-Control": "no-store",
-            Vary: "Cookie",
-          },
-        });
-      }
+    // Spanish is the root for everyone; English lives at /en. The old /es URL
+    // (shared on Instagram and in emails) permanently redirects to the root.
+    if (request.method === "GET" && (url.pathname === "/es" || url.pathname === "/es/")) {
+      return new Response(null, {
+        status: 301,
+        headers: { Location: "/" + url.search },
+      });
     }
 
     try {

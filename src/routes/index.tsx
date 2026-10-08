@@ -1,10 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Landing } from "@/components/landing/Landing";
+import { LandingES } from "@/components/landing/LandingES";
 
+/** The root is Spanish for everyone. English lives at /en. */
 export const Route = createFileRoute("/")({
+  head: () => ({
+    links: [{ rel: "canonical", href: "https://holaelara.com/" }],
+  }),
   component: Index,
 });
 
 function Index() {
-  return <Landing />;
+  return <LandingES />;
 }

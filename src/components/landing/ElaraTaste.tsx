@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Heart } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Reveal } from "./Reveal";
+import { Orb, type OrbState } from "../elara/Orb";
 
 /**
  * "Un momento con Elara" — a single, warm taste of Elara's voice on the landing
@@ -63,15 +63,15 @@ const BUCKETS: Bucket[] = [
     test: /vac[ií]|triste|sola|desconectad|sin sentido|apagad|perdida|no me reconozco|desanimad/i,
     replies: [
       "Vacía es una palabra pesada para cargarla sola. Estoy aquí contigo en esto.",
-      "A veces sentirse lejos de una misma no es un fallo — es una señal de que algo pide atención. Vamos despacio.",
+      "A veces sentirse lejos de una misma no es un fallo. Es una señal de que algo pide atención. Vamos despacio.",
     ],
-    prompt: "¿Desde cuándo se siente así? No para resolverlo — solo para nombrarlo.",
+    prompt: "¿Desde cuándo se siente así? No para resolverlo, solo para nombrarlo.",
   },
   {
     key: "sobrecarga",
     test: /(fue|es) mucho|saturad|desbordad|abrumad|no s[eé] por d[oó]nde|ansiedad|estr[eé]s|demasiad|todo a la vez|en mi cabeza/i,
     replies: [
-      "Hoy fue mucho — y está bien. No tienes que sostenerlo todo perfecto para merecer un respiro.",
+      "Hoy fue mucho, y está bien. No tienes que sostenerlo todo perfecto para merecer un respiro.",
       "Cuando todo pesa a la vez, no hay que ordenarlo entero. Busquemos un solo lugar pequeño por donde empezar.",
     ],
     prompt: "Si solo una cosa pudiera sentirse más ligera esta semana, ¿cuál sería?",
@@ -80,7 +80,7 @@ const BUCKETS: Bucket[] = [
     key: "dinero",
     test: /dinero|plata|deuda|econ[oó]mic|finanz|gastos|no me alcanza|facturas/i,
     replies: [
-      "El dinero rara vez es solo dinero — es seguridad, libertad, la sensación de poder respirar. Que pese tanto tiene sentido.",
+      "El dinero rara vez es solo dinero: es seguridad, libertad, la sensación de poder respirar. Que pese tanto tiene sentido.",
       "Cargar la presión económica en silencio agota doble. Aquí lo puedes decir sin adornarlo.",
     ],
     prompt: "¿Qué parte de esto es número, y qué parte es el miedo que lo acompaña?",
@@ -89,7 +89,7 @@ const BUCKETS: Bucket[] = [
     key: "familia",
     test: /familia|mam[aá]|pap[aá]|hijos|hija mayor|todos dependen|expectativ|qu[eé] dir[aá]n|cuidar a/i,
     replies: [
-      "Traducir en casa, liderar afuera, sostener a todos — es mucho para un solo cuerpo. Aquí no tienes que traducirte.",
+      "Traducir en casa, liderar afuera, sostener a todos: es mucho para un solo cuerpo. Aquí no tienes que traducirte.",
       "Querer a tu familia y querer tu propia vida no se contradicen, aunque a veces tiren en direcciones distintas.",
     ],
     prompt: "¿Dónde termina lo que es tuyo de verdad y empieza lo que cargas por otros?",
@@ -105,13 +105,141 @@ const BUCKETS: Bucket[] = [
   },
 ];
 
+
+// --- English set ------------------------------------------------------------
+// Same behaviour as the Spanish demo: canned replies, broad crisis detection,
+// one exchange. Drafts for the team to review in their own voice.
+const CRISIS_PATTERNS_EN = [
+  /\bsuicid/i,
+  /kill myself|end my life|end it all|take my own life/i,
+  /(don'?t|do not) want to (go on|live|exist|be here)/i,
+  /(hurt|harm|cut) myself/i,
+  /want to die|wish i (was|were) dead|better off (dead|without me)/i,
+  /can'?t (take|do) (it|this) anymore/i,
+  /disappear (forever|for good)/i,
+];
+
+const BUCKETS_EN: Bucket[] = [
+  {
+    key: "exhaustion",
+    test: /exhaust|tired|drained|burn(ed|t)? ?out|no energy|can'?t stop|running on empty|worn out/i,
+    replies: [
+      "You are everyone's support… and who holds you up? For today, even for a moment, let it be me.",
+      "Holding everything is tiring in a way almost no one sees. You don't have to be whole to deserve rest.",
+    ],
+    prompt: "What is the smallest thing you could put down today, even for a few hours?",
+  },
+  {
+    key: "empty",
+    test: /empty|sad|lonely|alone|disconnected|numb|lost|don'?t recognize myself|discouraged/i,
+    replies: [
+      "Empty is a heavy word to carry alone. I'm here with you in this.",
+      "Sometimes feeling far from yourself isn't a failure. It's a sign that something is asking for attention. We'll go slowly.",
+    ],
+    prompt: "How long has it felt this way? Not to fix it, just to name it.",
+  },
+  {
+    key: "overwhelm",
+    test: /(was|is|so) much|overwhelm|too much|swamped|anxious|anxiety|stress|don'?t know where to start|everything at once|in my head/i,
+    replies: [
+      "Today was a lot, and that's okay. You don't have to hold it all perfectly to deserve a breath.",
+      "When everything weighs at once, you don't have to sort it all out. Let's find one small place to begin.",
+    ],
+    prompt: "If only one thing could feel lighter this week, which would it be?",
+  },
+  {
+    key: "money",
+    test: /money|debt|financ|bills|rent|afford|paycheck|broke|expenses/i,
+    replies: [
+      "Money is rarely just money: it's safety, freedom, the feeling of being able to breathe. It makes sense that it weighs so much.",
+      "Carrying money pressure in silence is tiring twice over. You can say it plainly here.",
+    ],
+    prompt: "Which part of this is a number, and which part is the fear that comes with it?",
+  },
+  {
+    key: "family",
+    test: /family|mom|mother|dad|father|kids|children|eldest|everyone depends|what will they say|caring for/i,
+    replies: [
+      "Translating at home, leading outside, holding everyone up: that is a lot for one body. You don't have to translate yourself here.",
+      "Loving your family and wanting your own life don't contradict each other, even when they pull in different directions.",
+    ],
+    prompt: "Where does what is truly yours end, and what you carry for others begin?",
+  },
+  {
+    key: "well",
+    test: /good|calm|happy|thank|at peace|better|grateful|hopeful|okay|fine/i,
+    replies: [
+      "So good to read that. Soft days deserve a pause too.",
+      "I'm glad there is some calm today. Don't let it slip by unnoticed.",
+    ],
+    prompt: "What made this moment possible? It's worth remembering for the harder days.",
+  },
+];
+
+const DEFAULT_REPLIES_EN = [
+  "Thank you for saying it out loud. You don't have to perform here. You can just be you.",
+  "I read you. Whatever you're carrying today, you don't have to carry it alone right now.",
+];
+
+const SUPPORT_TEXT_EN =
+  "What you are carrying sounds very heavy, and I'm glad you said it. You shouldn't go through this alone: please reach out to someone you trust or to a professional who can be close to you.";
+
+const EXAMPLES_EN = [
+  "today was a lot…",
+  "i'm exhausted but i can't stop",
+  "i don't know where to start",
+  "fine on the outside, not so much inside",
+];
+
+type TasteLang = "es" | "en";
+const UI = {
+  es: {
+    eyebrow: "Un momento con Elara",
+    title: "Escríbele a Elara cómo te sientes hoy.",
+    lead: "Una frase basta. Elara no te va a arreglar ni a darte tareas, solo quiere leerte. Esto es apenas una pequeña muestra de su voz.",
+    label: "Cuéntale a Elara cómo te sientes hoy",
+    withYou: "Elara está contigo…",
+    private: "Privado. Una sola respuesta.",
+    reading: "Elara te está leyendo…",
+    send: "Enviar a Elara",
+    replying: "Elara está respondiendo",
+    emergency: "Si estás en peligro inmediato, contacta ahora mismo a los servicios de emergencia de tu país. No estás sola en esto.",
+    stay: "Para quedarte un momento con esto",
+    more: "Hay más dentro de Elara",
+    crisisCta: "Conoce Elara cuando estés lista",
+    again: "Escribir otra vez",
+    fallbackPrompt: "¿Qué necesitarías escuchar hoy que nadie te ha dicho?",
+    note: "Elara no es terapia ni un servicio médico. Es una compañera para acompañarte, no para diagnosticar.",
+    cta: "#lista",
+  },
+  en: {
+    eyebrow: "A moment with Elara",
+    title: "Tell Elara how you feel today.",
+    lead: "One sentence is enough. Elara won't fix you or hand you tasks, she just wants to read you. This is only a small taste of her voice.",
+    label: "Tell Elara how you feel today",
+    withYou: "Elara is with you…",
+    private: "Private. One reply only.",
+    reading: "Elara is reading you…",
+    send: "Send to Elara",
+    replying: "Elara is replying",
+    emergency: "If you are in immediate danger, contact your local emergency services right now. You are not alone in this.",
+    stay: "To stay with this for a moment",
+    more: "There's more inside Elara",
+    crisisCta: "Meet Elara when you're ready",
+    again: "Write again",
+    fallbackPrompt: "What would you need to hear today that no one has told you?",
+    note: "Elara is not therapy or a medical service. She is a companion, not a diagnosis.",
+    cta: "#waitlist",
+  },
+} as const;
+
 const DEFAULT_REPLIES = [
-  "Gracias por decirlo en voz alta. Aquí no tienes que actuar — puedes ser tú.",
+  "Gracias por decirlo en voz alta. Aquí no tienes que actuar. Puedes ser tú.",
   "Te leo. Sea lo que sea que traes hoy, no tienes que cargarlo sola en este momento.",
 ];
 
 const SUPPORT_TEXT =
-  "Lo que estás cargando suena muy pesado, y me importa que lo hayas dicho. No deberías pasar por esto sola: por favor busca a alguien de confianza o a un profesional que pueda acompañarte de cerca ahora mismo. Yo soy solo una pequeña muestra — tú mereces apoyo real.";
+  "Lo que estás cargando suena muy pesado, y me importa que lo hayas dicho. No deberías pasar por esto sola: por favor busca a alguien de confianza o a un profesional que pueda acompañarte de cerca ahora mismo. Yo soy solo una pequeña muestra, y tú mereces apoyo real.";
 
 /** Deterministic pick so SSR and client agree (no Math.random hydration drift). */
 function pick(list: string[], seed: number): string {
@@ -124,22 +252,24 @@ function pick(list: string[], seed: number): string {
  * API with Elara's system prompt AND runs the same CRISIS_PATTERNS server-side.
  * Keep the ElaraReply shape and every caller stays untouched.
  */
-async function getElaraReply(input: string): Promise<ElaraReply> {
+async function getElaraReply(input: string, lang: TasteLang = "es"): Promise<ElaraReply> {
   const text = input.trim();
   const seed = text.length; // stable, no randomness
 
-  if (CRISIS_PATTERNS.some((p) => p.test(text))) {
-    return { text: SUPPORT_TEXT, crisis: true };
+  const en = lang === "en";
+  // Spanish patterns also run on the English page: a woman may write in either.
+  if (CRISIS_PATTERNS.some((p) => p.test(text)) || (en && CRISIS_PATTERNS_EN.some((p) => p.test(text)))) {
+    return { text: en ? SUPPORT_TEXT_EN : SUPPORT_TEXT, crisis: true };
   }
 
-  const bucket = BUCKETS.find((b) => b.test.test(text));
+  const bucket = (en ? BUCKETS_EN : BUCKETS).find((b) => b.test.test(text));
   if (bucket) {
     return { text: pick(bucket.replies, seed), prompt: bucket.prompt, crisis: false };
   }
 
   return {
-    text: pick(DEFAULT_REPLIES, seed),
-    prompt: "¿Qué necesitarías escuchar hoy que nadie te ha dicho?",
+    text: pick(en ? DEFAULT_REPLIES_EN : DEFAULT_REPLIES, seed),
+    prompt: UI[lang].fallbackPrompt,
     crisis: false,
   };
 }
@@ -152,7 +282,7 @@ const EXAMPLES = [
   "por fuera bien, por dentro no tanto",
 ];
 
-function useTypedPlaceholder(active: boolean): string {
+function useTypedPlaceholder(active: boolean, EXAMPLES: readonly string[]): string {
   const [text, setText] = useState(EXAMPLES[0]);
 
   useEffect(() => {
@@ -186,40 +316,22 @@ function useTypedPlaceholder(active: boolean): string {
 
     timer = setTimeout(tick, 1400);
     return () => clearTimeout(timer);
-  }, [active]);
+  }, [active, EXAMPLES]);
 
   return text;
 }
 
-type ElaraOrbState = "idle" | "listening" | "thinking" | "replied";
-
-/**
- * Elara's visual presence — a small breathing orb that shifts through
- * idle / listening / thinking / replied so the exchange feels like it's
- * with someone. Purely decorative (state is echoed in text for
- * prefers-reduced-motion and screen readers).
- */
-function ElaraOrb({ state }: { state: ElaraOrbState }) {
-  return (
-    <span className={`elara-orb elara-orb--${state}`} aria-hidden>
-      <span className="elara-orb-halo" />
-      <span className="elara-orb-ring" />
-      <span className="elara-orb-core" />
-    </span>
-  );
-}
-
-export function ElaraTaste() {
+export function ElaraTaste({ lang = "es" }: { lang?: TasteLang }) {
+  const u = UI[lang];
   const [input, setInput] = useState("");
   const [reply, setReply] = useState<ElaraReply | null>(null);
   const [thinking, setThinking] = useState(false);
   const [focused, setFocused] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
 
   // Typed examples run only while the field is empty and unfocused.
-  const placeholder = useTypedPlaceholder(!focused && input.length === 0 && reply === null);
+  const placeholder = useTypedPlaceholder(!focused && input.length === 0 && reply === null, lang === "en" ? EXAMPLES_EN : EXAMPLES);
 
-  const orbState: ElaraOrbState = reply
+  const orbState: OrbState = reply
     ? "replied"
     : thinking
       ? "thinking"
@@ -235,7 +347,7 @@ export function ElaraTaste() {
     setReply(null);
     // A brief, human pause — Elara "taking it in" before answering.
     await new Promise((r) => setTimeout(r, 750));
-    const result = await getElaraReply(text);
+    const result = await getElaraReply(text, lang);
     setReply(result);
     setThinking(false);
   }
@@ -247,33 +359,25 @@ export function ElaraTaste() {
   }
 
   return (
-    <section id="elara" className="py-20 sm:py-28">
-      <Reveal className="max-w-2xl mx-auto px-5 sm:px-8 text-center">
-        <p className="text-sm uppercase tracking-[0.2em] text-accent">Un momento con Elara</p>
-        <h2 className="mt-4 font-serif text-3xl sm:text-5xl text-foreground text-balance leading-[1.08]">
-          Escríbele a Elara cómo te sientes hoy.
-        </h2>
-        <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
-          Una frase basta. Elara no te va a arreglar ni a darte tareas — solo quiere leerte. Esto es
-          apenas una pequeña muestra de su voz.
-        </p>
-      </Reveal>
-
-      <Reveal delay={80} className="mt-10 max-w-xl mx-auto px-5 sm:px-8">
-        <div
-          ref={cardRef}
-          className="cta-glow relative rounded-3xl border border-border bg-card p-5 sm:p-7 shadow-card"
-        >
-          <div className="mb-4 flex items-center gap-2.5">
-            <ElaraOrb state={orbState} />
-            <span className="text-xs uppercase tracking-wider text-muted-foreground">
-              {thinking ? "Elara está contigo…" : "Elara"}
-            </span>
+    /*
+      The "Ask Elara" brand moment (Paper at dusk §07): dark forest paper, the
+      painted orb with its warm glow, Elara's voice in Fraunces italic and one
+      terracotta action. One focus on this screen.
+    */
+    <section id={lang === "es" ? "elara" : "ask-elara"} className="e-field on-field relative overflow-hidden py-12 sm:py-16">
+      <div className="mx-auto w-full max-w-2xl px-5 text-center sm:px-8">
+        <Reveal>
+          <div className="flex justify-center">
+            <Orb state={orbState} size={132} glow />
           </div>
-          <form onSubmit={onSubmit}>
-            <label htmlFor="elara-input" className="sr-only">
-              Cuéntale a Elara cómo te sientes hoy
-            </label>
+          <p className="e-eyebrow mt-10">{u.eyebrow}</p>
+          <h2 className="e-h1 mt-4">{u.title}</h2>
+          <p className="e-body mx-auto mt-4 max-w-xl">{u.lead}</p>
+        </Reveal>
+
+        <Reveal delay={70}>
+          <form onSubmit={onSubmit} className="mt-10 text-left">
+            <label htmlFor="elara-input" className="sr-only">{u.label}</label>
             <textarea
               id="elara-input"
               value={input}
@@ -284,99 +388,69 @@ export function ElaraTaste() {
               rows={2}
               disabled={thinking}
               placeholder={placeholder}
-              className="w-full resize-none rounded-2xl border border-input bg-background px-4 py-3.5 text-base text-foreground leading-relaxed outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground/60 disabled:opacity-60"
+              className="e-input"
             />
-            <div className="mt-3 flex items-center justify-between gap-3">
-              <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                <Heart className="h-3.5 w-3.5 text-accent/70" aria-hidden />
-                Privado. Una sola respuesta.
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+              <span className="e-caption">
+                {thinking ? u.withYou : u.private}
               </span>
+              {/* On dark paper the one warm action is terracotta. */}
               <button
                 type="submit"
                 disabled={thinking || input.trim().length === 0}
-                className="btn-tactile group inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium shadow-soft hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="e-btn e-btn--onfield e-btn--compact"
               >
-                {thinking ? "Elara te está leyendo…" : "Enviar a Elara"}
-                {!thinking && (
-                  <span
-                    className="text-accent group-hover:text-primary-foreground group-hover:translate-x-0.5 transition-[color,transform] duration-300"
-                    aria-hidden
-                  >
-                    →
-                  </span>
-                )}
+                {thinking ? u.reading : u.send}
               </button>
             </div>
           </form>
 
-          {/* Thinking state is carried by the orb + header label above — no separate indicator needed */}
           {thinking && (
-            <p className="sr-only" role="status" aria-live="polite">
-              Elara está respondiendo
-            </p>
+            <p className="sr-only" role="status" aria-live="polite">{u.replying}</p>
           )}
 
-          {/* Elara's reply blooms open */}
           {reply && (
-            <div className="elara-bloom mt-5" aria-live="polite">
-              <div
-                className={`rounded-2xl border p-5 ${
-                  reply.crisis
-                    ? "border-accent/40 bg-accent/5"
-                    : "border-border/70 bg-gradient-warm"
-                }`}
-              >
-                <p className="font-serif text-xl sm:text-2xl text-foreground leading-snug text-balance">
-                  {reply.text}
-                </p>
-
-                {reply.crisis ? (
-                  <p className="elara-rise mt-4 text-sm text-muted-foreground leading-relaxed">
-                    Si estás en peligro inmediato, contacta ahora mismo a los servicios de
-                    emergencia de tu país. No estás sola en esto.
-                  </p>
-                ) : (
-                  reply.prompt && (
-                    <div className="elara-rise mt-4 rounded-xl border border-border/60 bg-card/60 px-4 py-3">
-                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                        Para quedarte un momento con esto
+            <div className="e-arrive mt-8 text-left" aria-live="polite">
+              <div className="e-inset-dark flex gap-4 p-5 sm:p-6">
+                <Orb size={36} className="mt-1" />
+                <div className="min-w-0">
+                  {reply.crisis ? (
+                    /* Safety copy stays upright and plain: clarity over voice. */
+                    <>
+                      <p className="text-[1.0625rem] font-medium leading-relaxed">{reply.text}</p>
+                      <p className="e-body mt-3">{u.emergency}</p>
+                    </>
+                  ) : (
+                    <>
+                      {/* Elara speaking: Fraunces italic, the system's only italic. */}
+                      <p className="e-voice">{reply.text}</p>
+                      <p className="e-eyebrow mt-3" style={{ fontSize: "0.625rem" }}>
+                        Elara
                       </p>
-                      <p className="mt-1.5 font-serif italic text-lg text-foreground leading-snug">
-                        {reply.prompt}
-                      </p>
-                    </div>
-                  )
-                )}
+                    </>
+                  )}
+                </div>
               </div>
 
-              <div className="elara-rise mt-5 flex flex-wrap items-center justify-between gap-3">
-                <a
-                  href="#lista"
-                  className="btn-tactile group inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium shadow-soft hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card transition-colors"
-                >
-                  {reply.crisis ? "Conoce Elara cuando estés lista" : "Los 7 días van más profundo"}
-                  <ArrowRight
-                    className="h-4 w-4 text-accent group-hover:text-primary-foreground group-hover:translate-x-0.5 transition-[color,transform] duration-300"
-                    aria-hidden
-                  />
+              {!reply.crisis && reply.prompt && (
+                <div className="e-arrive-late mt-4 rounded-[20px] border border-[var(--hairline-on-field)] px-5 py-5 sm:px-6">
+                  <p className="e-eyebrow">{u.stay}</p>
+                  <p className="e-voice mt-2.5">{reply.prompt}</p>
+                </div>
+              )}
+
+              <div className="e-arrive-late mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <a href={u.cta} className="e-btn e-btn--ghostfield e-btn--compact">
+                  {reply.crisis ? u.crisisCta : u.more}
                 </a>
-                <button
-                  type="button"
-                  onClick={reset}
-                  className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground transition"
-                >
-                  Escribir otra vez
-                </button>
+                <button type="button" onClick={reset} className="e-textlink text-[0.9375rem]">{u.again}</button>
               </div>
             </div>
           )}
-        </div>
 
-        <p className="mt-4 text-center text-xs text-muted-foreground/80 leading-relaxed">
-          Elara no es terapia ni un servicio médico. Es una compañera para acompañarte, no para
-          diagnosticar.
-        </p>
-      </Reveal>
+          <p className="e-caption mt-8">{u.note}</p>
+        </Reveal>
+      </div>
     </section>
   );
 }

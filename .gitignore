@@ -33,3 +33,11 @@ dist-ssr
 
 # Claude Code local files
 .claude/
+
+# design-sync (staged converter scripts, build output, machine state)
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
+_to_delete/

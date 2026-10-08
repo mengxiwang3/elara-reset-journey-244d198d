@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as EsRouteImport } from './routes/es'
+import { Route as EnRouteImport } from './routes/en'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PrivacidadRoute = PrivacidadRouteImport.update({
@@ -23,6 +24,11 @@ const EsRoute = EsRouteImport.update({
   path: '/es',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnRoute = EnRouteImport.update({
+  id: '/en',
+  path: '/en',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,30 +37,34 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/en': typeof EnRoute
   '/es': typeof EsRoute
   '/privacidad': typeof PrivacidadRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/en': typeof EnRoute
   '/es': typeof EsRoute
   '/privacidad': typeof PrivacidadRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/en': typeof EnRoute
   '/es': typeof EsRoute
   '/privacidad': typeof PrivacidadRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/es' | '/privacidad'
+  fullPaths: '/' | '/en' | '/es' | '/privacidad'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/es' | '/privacidad'
-  id: '__root__' | '/' | '/es' | '/privacidad'
+  to: '/' | '/en' | '/es' | '/privacidad'
+  id: '__root__' | '/' | '/en' | '/es' | '/privacidad'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EnRoute: typeof EnRoute
   EsRoute: typeof EsRoute
   PrivacidadRoute: typeof PrivacidadRoute
 }
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en': {
+      id: '/en'
+      path: '/en'
+      fullPath: '/en'
+      preLoaderRoute: typeof EnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EnRoute: EnRoute,
   EsRoute: EsRoute,
   PrivacidadRoute: PrivacidadRoute,
 }
