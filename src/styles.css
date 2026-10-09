@@ -2467,17 +2467,17 @@
     padding:clamp(3.5rem,6vw,5.5rem) 0;
     position:relative;
 }
-.e-atlas__grid {
-  align-items:center;
-    gap:2.25rem;
-    display:grid;
+/* Copy block sits compact at the top-left; map below spans full section width */
+.e-atlas__top {
+  padding-bottom: 2rem;
 }
-.e-atlas__grid {
-  grid-template-columns:5fr 7fr;
-    gap:3.5rem;
+.e-atlas__copy {
+  max-width: 36rem;
 }
 .e-atlas__stage {
-  margin-right:calc(-1*max(0px,50vw - min(100vw,72rem)/2 - 1rem));
+  /* Full-width bleed: counteract the WRAP padding on both sides */
+  margin-left: calc(-1 * max(1.25rem, 50vw - min(100vw, 72rem) / 2 - 1.25rem));
+  margin-right: calc(-1 * max(1.25rem, 50vw - min(100vw, 72rem) / 2 - 1.25rem));
 }
 .e-atlas__line {
   font-family:var(--font-serif);
@@ -2487,56 +2487,65 @@
     font-style:italic;
     line-height:1.4;
 }
+/* Points sit in a horizontal row below the map — three columns at desktop */
 .e-atlas__points {
-  gap:.85rem;
-    max-width:28rem;
-    margin:1.6rem 0 0;
-    padding:0;
-    list-style:none;
-    display:grid;
+  gap: 1rem 2rem;
+  margin: 1.25rem 1.25rem 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+@media (min-width: 640px) {
+  .e-atlas__points {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 1.25rem 2rem 0;
+  }
 }
 .e-atlas__points li {
-  align-items:flex-start;
-    gap:.85rem;
-    display:flex;
+  align-items: flex-start;
+  gap: .75rem;
+  display: flex;
 }
 .e-atlas__points .e-body {
-  font-size:.97rem;
+  font-size: .95rem;
 }
 .e-atlas__glyph {
-  border-radius:50%;
-    flex:none;
-    width:1rem;
-    height:1rem;
-    margin-top:.3rem;
+  border-radius: 50%;
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  margin-top: .3rem;
 }
 .e-atlas__glyph--walked {
-  background:#22304a;
-    box-shadow:inset 0 0 0 4px #22304a,inset 0 0 0 8px #d9a94f;
+  background: #22304a;
+  box-shadow: inset 0 0 0 4px #22304a, inset 0 0 0 8px #d9a94f;
 }
 .e-atlas__glyph--now {
-  border:2px solid var(--terracotta);
-    background:var(--paper-sheet);
+  border: 2px solid var(--terracotta);
+  background: var(--paper-sheet);
 }
 .e-atlas__glyph--ahead {
-  border:1.5px dashed #8d8577;
+  border: 1.5px dashed #8d8577;
 }
 .e-atlas__stage {
-  min-width:0;
-    position:relative;
+  min-width: 0;
+  position: relative;
 }
 .e-atlas__map {
-  border-radius:6px;
-    height:clamp(15rem,40vw,21rem);
-    display:flex;
-    position:relative;
-    overflow:hidden;
-    box-shadow:0 1px 3px #3c281424,0 22px 36px -20px #3c281480;
+  border-radius: 0;
+  height: clamp(14rem, 30vw, 22rem);
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px #3c281424, 0 22px 36px -20px #3c281480;
 }
+/* Full-width stacked: override the old aspect-ratio bleed rule */
 .e-atlas__map {
-  aspect-ratio:394/212;
-    border-radius:6px 0 0 6px;
-    height:auto;
+  aspect-ratio: auto;
+  border-radius: 0;
+  height: clamp(14rem, 30vw, 22rem);
 }
 .e-atlas__slice {
   flex-basis:0;
@@ -2630,10 +2639,16 @@
     transform:none;
 }
 .e-atlas__caps {
-  margin:.8rem 0 0;
-    padding:0;
-    list-style:none;
-    display:flex;
+  margin: .8rem 1.25rem 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+@media (min-width: 640px) {
+  .e-atlas__caps {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
 }
 .e-atlas__caps li {
   flex-direction:column;
@@ -2883,4 +2898,30 @@
     opacity:1;
     transform:none;
   }
+}
+/* Mid-page beta nudge -------------------------------------------------------- */
+.e-beta-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 1.25rem 2.5rem;
+  text-align: center;
+  border-top: 1px solid var(--hairline);
+}
+@media (min-width: 640px) {
+  .e-beta-cta {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.75rem;
+    padding: 1.75rem 2rem;
+    text-align: left;
+  }
+}
+.e-beta-cta__line {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(.95rem, .9rem + .25vw, 1.1rem);
+  color: var(--ink-72);
+  max-width: 28rem;
 }

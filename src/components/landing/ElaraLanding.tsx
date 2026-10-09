@@ -164,17 +164,17 @@ const COPY = {
       //   B  Cuando quieres quedarte un poco más.
       //   C  Algo para llevar contigo fuera de la pantalla.
       title: "Para los días que piden un poco más.",
-      lead: "Elara no es solo una práctica diaria. Cuando quieres quedarte más tiempo con algo, puedes entrar a un taller en vivo, escuchar una voz que te encuentra donde estás o elegir una escucha pequeña para el momento que vives.",
+      lead: "Elara no es solo una práctica diaria. Cuando quieres quedarte más tiempo con algo, Explorar irá abriéndose poco a poco en beta: talleres en vivo, voces que acompañan y escuchas pequeñas para el momento que vives.",
       intent: "Son lugares a los que vuelves a propósito, no contenido para consumir sin fin.",
       places: [
         {
           k: "Talleres en vivo",
-          v: "Un taller destacado, con fecha y hora. Reservas tu lugar y te avisamos antes de empezar.",
+          v: "Un taller destacado, con fecha y hora. Pronto disponible para el primer grupo.",
           alt: "Explorar en la app: el taller destacado de la semana, con su fecha.",
         },
         {
           k: "Voces que acompañan",
-          v: "Voces de mujeres y conversaciones guiadas que te encuentran donde estás.",
+          v: "Voces de mujeres y conversaciones guiadas. Se irán abriendo en beta.",
           alt: "Explorar en la app: Voces en Elara, conversaciones guiadas con mujeres.",
         },
         {
@@ -865,23 +865,16 @@ function Atlas({ lang }: { lang: Lang }) {
   const nowPt = THREAD[NOW_AT];
   return (
     <section id="atlas" className="e-atlas relative">
-      <div className={`${WRAP} e-atlas__grid`}>
+      <div className={`${WRAP} e-atlas__top`}>
         <Reveal className="e-atlas__copy">
           <p className="e-eyebrow">{t.eyebrow}</p>
           <h2 className="e-h1 mt-3 text-ink">{t.title}</h2>
           <p className="e-lead mt-5">{t.body}</p>
           <p className="e-atlas__line mt-4">{t.line}</p>
-          <ul className="e-atlas__points">
-            {t.points.map((p) => (
-              <li key={p.k}>
-                <i className={`e-atlas__glyph e-atlas__glyph--${p.k}`} aria-hidden />
-                <span className="e-body">{p.t}</span>
-              </li>
-            ))}
-          </ul>
         </Reveal>
 
-        <div ref={ref} className={`e-atlas__stage ${seen ? "is-in" : ""}`}>
+      </div>
+      <div ref={ref} className={`e-atlas__stage ${seen ? "is-in" : ""}`}>
           <div className="e-atlas__map" role="img" aria-label={t.alt}>
             {ATLAS_SLICES.map((s, i) => (
               <div key={i} className={`e-atlas__slice e-atlas__slice--${s.kind}`} style={{ flexGrow: s.weight }}>
@@ -910,9 +903,33 @@ function Atlas({ lang }: { lang: Lang }) {
               </li>
             ))}
           </ol>
-        </div>
+          {/* Legend — sits under the map, aligned with the visual it describes. */}
+          <ul className="e-atlas__points">
+            {t.points.map((p) => (
+              <li key={p.k}>
+                <i className={`e-atlas__glyph e-atlas__glyph--${p.k}`} aria-hidden />
+                <span className="e-body">{p.t}</span>
+              </li>
+            ))}
+          </ul>
       </div>
     </section>
+  );
+}
+
+/* -- RESTRAINED: mid-page beta nudge between Atlas and Explore ----------------- */
+const BETA_CTA = {
+  es: { line: "Las primeras plazas son para quienes están en lista.", cta: "Quiero entrar al primer grupo" },
+  en: { line: "First access goes to people already on the list.", cta: "Join the first group" },
+};
+function BetaCta({ lang }: { lang: Lang }) {
+  const t = BETA_CTA[lang];
+  const target = lang === "es" ? "#lista" : "#waitlist";
+  return (
+    <div className="e-beta-cta">
+      <p className="e-beta-cta__line">{t.line}</p>
+      <a href={target} className="e-btn e-btn--secondary e-btn--compact">{t.cta}</a>
+    </div>
   );
 }
 
@@ -1174,6 +1191,7 @@ export function ElaraLanding({ lang }: { lang: Lang }) {
       {/* open */}
       <Areas lang={lang} />
       <Atlas lang={lang} />
+      <BetaCta lang={lang} />
       <Explore lang={lang} />
       {/* human */}
       <Circles lang={lang} />
