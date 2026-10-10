@@ -84,15 +84,15 @@ const COPY = {
       shot: "Pantalla Hoy de Elara: la tarjeta de la semana con su camino, el día 4 de 7 y el botón para empezar la práctica de hoy.",
     },
     stats: [
-      { n: "1.8M+", l: "mujeres alcanzadas por la comunidad de Alejandra" },
-      { n: "80K+", l: "en la comunidad de Alejandra" },
-      { n: "4,600+", l: "mujeres respondieron nuestra encuesta" },
+      { n: "1,8 M+", l: "mujeres alcanzadas por la comunidad de Alejandra" },
+      { n: "80 000+", l: "en la comunidad de Alejandra" },
+      { n: "4600+", l: "mujeres respondieron nuestra encuesta" },
       { n: "6", l: "áreas de tu vida, un solo lugar" },
     ],
     built: {
       eyebrow: "Construido con ellas, no para ellas",
       title:
-        "Más de 4,600 mujeres nos contaron, con honestidad, lo que estaban cargando.",
+        "Más de 4600 mujeres nos contaron, con honestidad, lo que estaban cargando.",
       body: "El dinero fue lo que más salió: casi 1 de cada 3 lo eligió como lo primero que resolvería. Por eso Elara lo toma en serio, no como números, sino como lo que se siente cargarlo. Y desde ahí se abre hacia el resto de tu vida.",
     },
     problem: {
@@ -604,7 +604,7 @@ function Shot({ src, alt, className = "" }: { src: string; alt: string; classNam
 function Passage({ lang }: { lang: Lang }) {
   const b = COPY[lang].built;
   return (
-    <section className="relative z-[2] pb-9 pt-4 sm:pb-11 sm:pt-6">
+    <section className="e-passage relative z-[2] pb-9 pt-4 sm:pb-11 sm:pt-6">
       <Paper src={fragMist} depth={10} sway={28} className="e-frag-mist" />
       <div className={`${WRAP} relative`}>
         <div className="grid items-end gap-4 lg:grid-cols-12 lg:gap-10">
@@ -776,7 +776,6 @@ function Areas({ lang }: { lang: Lang }) {
           ))}
         </ul>
       </div>
-      <Seam side="l" />
     </section>
   );
 }
@@ -995,24 +994,26 @@ function Explore({ lang }: { lang: Lang }) {
         </Reveal>
 
         <div className="lg:col-span-7">
-          {real ? (
+          {real && (
             <div className="grid grid-cols-3 gap-4">
               {shots.map((src, i) => (
                 <Shot key={i} src={src as string} alt={t.places[i].alt} />
               ))}
             </div>
-          ) : (
-            <div className="e-ex-cluster" aria-hidden>
-              {art.map((src, i) => (
-                <img key={i} src={src} alt="" width={900} height={i === 0 ? 900 : 507} loading="lazy" decoding="async" className={`e-ex-cluster__piece e-ex-cluster__piece--${i}`} />
-              ))}
-            </div>
           )}
-          <ul className="e-ex-places mt-3 grid gap-x-6 gap-y-3 sm:grid-cols-3">
-            {t.places.map((p) => (
+          {/* Each paper piece sits with the place it stands for. */}
+          <ul className={`e-ex-places ${real ? "mt-3" : ""}`}>
+            {t.places.map((p, i) => (
               <li key={p.k} className="e-place">
-                <h3 className="e-h3 text-ink">{p.k}</h3>
-                <p className="e-caption mt-1">{p.v}</p>
+                {!real && (
+                  <div className={`e-ex-art e-ex-art--${i}`} aria-hidden>
+                    <img src={art[i]} alt="" width={900} height={i === 0 ? 900 : 507} loading="lazy" decoding="async" />
+                  </div>
+                )}
+                <div>
+                  <h3 className="e-h3 text-ink">{p.k}</h3>
+                  <p className="e-caption mt-1">{p.v}</p>
+                </div>
               </li>
             ))}
           </ul>
@@ -1070,7 +1071,6 @@ function Circles({ lang }: { lang: Lang }) {
           </Reveal>
         </div>
       </div>
-      <Seam side="r" className="e-seam--low" />
     </section>
   );
 }

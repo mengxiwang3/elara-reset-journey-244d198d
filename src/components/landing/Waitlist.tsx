@@ -138,8 +138,8 @@ export function Waitlist({ lang }: { lang: "es" | "en" }) {
         <source media="(max-width: 767px)" srcSet={nightMob} />
         <img src={nightDesk} alt="" width={1600} height={988} loading="lazy" decoding="async" />
       </picture>
-      <div className="relative z-[2] mx-auto grid w-full max-w-6xl gap-8 px-5 sm:px-8">
-        <div className="max-w-[31rem]">
+      <div className="e-night__grid relative z-[2] mx-auto grid w-full max-w-6xl gap-8 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12">
+        <div className="e-night__copy max-w-[31rem] lg:col-span-5">
         <Reveal>
           <p className="e-eyebrow flex items-center gap-2.5">
             {/* The one rust mark on this screen: something is live. */}
@@ -151,7 +151,7 @@ export function Waitlist({ lang }: { lang: "es" | "en" }) {
         </Reveal>
         </div>
 
-        <div className="max-w-[31rem]">
+        <div className="e-night__form w-full max-w-[31rem] lg:col-span-6 lg:col-start-7 lg:max-w-none">
 
         {submitted ? (
           /* Completion: butter field, one calm line. No confetti, no badge,
