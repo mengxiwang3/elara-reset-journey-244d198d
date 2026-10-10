@@ -2475,9 +2475,7 @@
   max-width: 36rem;
 }
 .e-atlas__stage {
-  /* Full-width bleed: counteract the WRAP padding on both sides */
-  margin-left: calc(-1 * max(1.25rem, 50vw - min(100vw, 72rem) / 2 - 1.25rem));
-  margin-right: calc(-1 * max(1.25rem, 50vw - min(100vw, 72rem) / 2 - 1.25rem));
+  overflow: hidden;
 }
 /* Horizontal scroll wrapper — hides scrollbar, touch-friendly */
 .e-atlas__scroll {
@@ -2490,7 +2488,7 @@
 .e-atlas__scroll::-webkit-scrollbar { display: none; }
 /* Inner track: fixed panoramic width wider than typical viewport to enable scrolling */
 .e-atlas__track {
-  width: max(clamp(40rem, 100vw, 72rem), 100%);
+  width: clamp(44rem, 125vw, 110rem);
   display: flex;
   flex-direction: column;
 }
@@ -2550,7 +2548,7 @@
 }
 .e-atlas__map {
   border-radius: 0;
-  height: clamp(6rem, 10vw, 8rem);
+  height: clamp(9rem, 15vw, 13rem);
   display: flex;
   width: 100%;
   position: relative;
@@ -2885,18 +2883,6 @@
   .e-chap__people {
     justify-content:flex-start;
     padding-left:1rem;
-  }
-  .e-atlas__grid {
-    grid-template-columns:5fr 7fr;
-    gap:3.5rem;
-  }
-  .e-atlas__stage {
-    margin-right:calc(-1*max(0px,50vw - min(100vw,72rem)/2 - 1rem));
-  }
-  .e-atlas__map {
-    aspect-ratio:394/212;
-    border-radius:6px 0 0 6px;
-    height:auto;
   }
 }
 
