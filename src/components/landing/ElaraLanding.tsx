@@ -850,16 +850,34 @@ function threadY(x: number) {
 
 function Atlas({ lang }: { lang: Lang }) {
   const t = ATLAS[lang];
-  const ref = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
   const [seen, setSeen] = useState(false);
+  const [hovered, setHovered] = useState<number | null>(null);
+
   useEffect(() => {
-    const el = ref.current;
+    const el = stageRef.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return setSeen(true);
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && (setSeen(true), io.disconnect()), { threshold: 0.35 });
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      setSeen(true);
+      const scroller = scrollerRef.current;
+      if (scroller) {
+        const slices = scroller.querySelectorAll<HTMLElement>(".e-atlas__slice");
+        const nowSlice = slices[2];
+        if (nowSlice) {
+          const sr = scroller.getBoundingClientRect();
+          const ns = nowSlice.getBoundingClientRect();
+          scroller.scrollLeft += (ns.left - sr.left) - scroller.clientWidth / 2 + ns.width / 2;
+        }
+      }
+      io.disconnect();
+    }, { threshold: 0.35 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
+
   let acc = 0;
   const nodes = ATLAS_SLICES.map((s) => (acc += s.weight) / ATLAS_TOTAL * 100);
   const nowPt = THREAD[NOW_AT];
@@ -872,46 +890,62 @@ function Atlas({ lang }: { lang: Lang }) {
           <p className="e-lead mt-5">{t.body}</p>
           <p className="e-atlas__line mt-4">{t.line}</p>
         </Reveal>
-
       </div>
-      <div ref={ref} className={`e-atlas__stage ${seen ? "is-in" : ""}`}>
-          <div className="e-atlas__map" role="img" aria-label={t.alt}>
-            {ATLAS_SLICES.map((s, i) => (
-              <div key={i} className={`e-atlas__slice e-atlas__slice--${s.kind}`} style={{ flexGrow: s.weight }}>
-                <img src={s.src} alt="" loading="lazy" decoding="async" />
-              </div>
-            ))}
-            <svg className="e-atlas__thread" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
-              <path className="e-atlas__pencil" d={threadPath(THREAD)} pathLength={1} />
-              <path className="e-atlas__ink" d={threadPath(THREAD.slice(0, NOW_AT + 1))} pathLength={1} />
-            </svg>
-            {nodes.slice(0, 2).map((x, i) => (
-              <i key={i} className="e-atlas__node e-atlas__node--walked" style={{ left: `${x}%`, top: `${threadY(x)}%` }} aria-hidden />
-            ))}
-            {nodes.slice(3, 5).map((x, i) => (
-              <i key={i} className="e-atlas__node e-atlas__node--ahead" style={{ left: `${Math.min(x, 99)}%`, top: `${threadY(x)}%` }} aria-hidden />
-            ))}
-            <i className="e-atlas__now" style={{ left: `${nowPt[0]}%`, top: `${nowPt[1]}%` }} aria-hidden />
+      <div ref={stageRef} className={`e-atlas__stage ${seen ? "is-in" : ""}`}>
+        {/* Scrollable panorama: map + cap labels scroll together */}
+        <div ref={scrollerRef} className="e-atlas__scroll">
+          <div className="e-atlas__track">
+            <div className="e-atlas__map" role="img" aria-label={t.alt}>
+              {ATLAS_SLICES.map((s, i) => (
+                <div
+                  key={i}
+                  className={`e-atlas__slice e-atlas__slice--${s.kind}${hovered === i ? " is-hover" : ""}${hovered !== null && hovered !== i ? " is-dimmed" : ""}`}
+                  style={{ flexGrow: s.weight }}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  <img src={s.src} alt="" loading="lazy" decoding="async" />
+                </div>
+              ))}
+              <svg className="e-atlas__thread" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+                <path className="e-atlas__pencil" d={threadPath(THREAD)} pathLength={1} />
+                <path className="e-atlas__ink" d={threadPath(THREAD.slice(0, NOW_AT + 1))} pathLength={1} />
+              </svg>
+              {nodes.slice(0, 2).map((x, i) => (
+                <i key={i} className="e-atlas__node e-atlas__node--walked" style={{ left: `${x}%`, top: `${threadY(x)}%` }} aria-hidden />
+              ))}
+              {nodes.slice(3, 5).map((x, i) => (
+                <i key={i} className="e-atlas__node e-atlas__node--ahead" style={{ left: `${Math.min(x, 99)}%`, top: `${threadY(x)}%` }} aria-hidden />
+              ))}
+              <i className="e-atlas__now" style={{ left: `${nowPt[0]}%`, top: `${nowPt[1]}%` }} aria-hidden />
+            </div>
+            {/* Cap labels sit under the map, scrolling with it */}
+            <ol className="e-atlas__caps">
+              {t.caps.map((c, i) => (
+                <li
+                  key={i}
+                  style={{ flexGrow: ATLAS_SLICES[i].weight }}
+                  className={[i === 2 ? "is-now" : "", hovered === i ? "is-hover" : "", hovered !== null && hovered !== i ? "is-dimmed" : ""].filter(Boolean).join(" ")}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  <span className="e-atlas__capw"><b className="e-long">{c.w}</b><b className="e-short">{c.x}</b></span>
+                  {c.n ? <span className="e-atlas__capn">{c.n}</span> : null}
+                  {c.s ? <span className="e-atlas__caps2">{c.s}</span> : null}
+                </li>
+              ))}
+            </ol>
           </div>
-          {/* The words sit under the picture, never on it. */}
-          <ol className="e-atlas__caps">
-            {t.caps.map((c, i) => (
-              <li key={i} style={{ flexGrow: ATLAS_SLICES[i].weight }} className={i === 2 ? "is-now" : ""}>
-                <span className="e-atlas__capw"><b className="e-long">{c.w}</b><b className="e-short">{c.x}</b></span>
-                {c.n ? <span className="e-atlas__capn">{c.n}</span> : null}
-                {c.s ? <span className="e-atlas__caps2">{c.s}</span> : null}
-              </li>
-            ))}
-          </ol>
-          {/* Legend — sits under the map, aligned with the visual it describes. */}
-          <ul className="e-atlas__points">
-            {t.points.map((p) => (
-              <li key={p.k}>
-                <i className={`e-atlas__glyph e-atlas__glyph--${p.k}`} aria-hidden />
-                <span className="e-body">{p.t}</span>
-              </li>
-            ))}
-          </ul>
+        </div>
+        {/* Legend — outside the scroll, always full-width */}
+        <ul className="e-atlas__points">
+          {t.points.map((p) => (
+            <li key={p.k}>
+              <i className={`e-atlas__glyph e-atlas__glyph--${p.k}`} aria-hidden />
+              <span className="e-body">{p.t}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

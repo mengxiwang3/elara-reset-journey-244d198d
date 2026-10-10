@@ -2479,6 +2479,21 @@
   margin-left: calc(-1 * max(1.25rem, 50vw - min(100vw, 72rem) / 2 - 1.25rem));
   margin-right: calc(-1 * max(1.25rem, 50vw - min(100vw, 72rem) / 2 - 1.25rem));
 }
+/* Horizontal scroll wrapper — hides scrollbar, touch-friendly */
+.e-atlas__scroll {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.e-atlas__scroll::-webkit-scrollbar { display: none; }
+/* Inner track: fixed panoramic width wider than typical viewport to enable scrolling */
+.e-atlas__track {
+  width: max(clamp(56rem, 130vw, 100rem), 100%);
+  display: flex;
+  flex-direction: column;
+}
 .e-atlas__line {
   font-family:var(--font-serif);
     color:var(--ink);
@@ -2535,23 +2550,21 @@
 }
 .e-atlas__map {
   border-radius: 0;
-  height: clamp(14rem, 30vw, 22rem);
+  height: clamp(11rem, 22vw, 16rem);
   display: flex;
+  width: 100%;
   position: relative;
   overflow: hidden;
   box-shadow: 0 1px 3px #3c281424, 0 22px 36px -20px #3c281480;
-}
-/* Full-width stacked: override the old aspect-ratio bleed rule */
-.e-atlas__map {
   aspect-ratio: auto;
-  border-radius: 0;
-  height: clamp(14rem, 30vw, 22rem);
 }
 .e-atlas__slice {
   flex-basis:0;
     min-width:0;
     position:relative;
     overflow:hidden;
+    transition: filter .2s ease, opacity .2s ease, flex-grow .25s ease;
+    cursor: default;
 }
 .e-atlas__slice+.e-atlas__slice {
   box-shadow:-1px 0 #fbf6ecd9;
@@ -2561,6 +2574,16 @@
     width:100%;
     height:100%;
     display:block;
+    transition: filter .2s ease;
+}
+/* Hover: brighten the active slice */
+.e-atlas__slice.is-hover img {
+  filter: brightness(1.06) saturate(1.08);
+}
+/* Dim all other slices when one is hovered */
+.e-atlas__slice.is-dimmed {
+  opacity: .6;
+  filter: saturate(.7);
 }
 .e-atlas__slice--ahead img {
   filter:sepia(.1)saturate(.72)contrast(.74)brightness(1.06);
@@ -2639,16 +2662,11 @@
     transform:none;
 }
 .e-atlas__caps {
-  margin: .8rem 1.25rem 0;
-  padding: 0;
+  margin: .6rem 0 0;
+  padding: 0 .75rem;
   list-style: none;
   display: flex;
-}
-@media (min-width: 640px) {
-  .e-atlas__caps {
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
+  width: 100%;
 }
 .e-atlas__caps li {
   flex-direction:column;
@@ -2657,6 +2675,16 @@
     min-width:0;
     padding-right:.4rem;
     display:flex;
+    transition: opacity .2s ease;
+    cursor: default;
+}
+.e-atlas__caps li.is-hover .e-atlas__capn,
+.e-atlas__caps li.is-hover .e-atlas__capw {
+  color: var(--ink);
+  opacity: 1;
+}
+.e-atlas__caps li.is-dimmed {
+  opacity: .4;
 }
 .e-atlas__capw {
   letter-spacing:.1em;
