@@ -417,14 +417,14 @@ export function ElaraTaste({ lang = "es" }: { lang?: TasteLang }) {
                   {reply.crisis ? (
                     /* Safety copy stays upright and plain: clarity over voice. */
                     <>
-                      <p className="text-[1.0625rem] font-medium leading-relaxed">{reply.text}</p>
+                      <p className="text-[1.125rem] font-medium leading-relaxed">{reply.text}</p>
                       <p className="e-body mt-3">{u.emergency}</p>
                     </>
                   ) : (
                     <>
                       {/* Elara speaking: Fraunces italic, the system's only italic. */}
                       <p className="e-voice">{reply.text}</p>
-                      <p className="e-eyebrow mt-3" style={{ fontSize: "0.625rem" }}>
+                      <p className="e-eyebrow mt-3">
                         Elara
                       </p>
                     </>
@@ -443,7 +443,7 @@ export function ElaraTaste({ lang = "es" }: { lang?: TasteLang }) {
                 <a href={u.cta} className="e-btn e-btn--ghostfield e-btn--compact">
                   {reply.crisis ? u.crisisCta : u.more}
                 </a>
-                <button type="button" onClick={reset} className="e-textlink text-[0.9375rem]">{u.again}</button>
+                <button type="button" onClick={reset} className="e-textlink text-[1rem]">{u.again}</button>
               </div>
             </div>
           )}
