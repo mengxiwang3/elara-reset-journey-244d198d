@@ -2550,7 +2550,7 @@
 }
 .e-atlas__map {
   border-radius: 0;
-  height: clamp(11rem, 22vw, 16rem);
+  height: clamp(8rem, 15vw, 11rem);
   display: flex;
   width: 100%;
   position: relative;
