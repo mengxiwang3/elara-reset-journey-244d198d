@@ -417,7 +417,7 @@ export function ElaraTaste({ lang = "es" }: { lang?: TasteLang }) {
                   {reply.crisis ? (
                     /* Safety copy stays upright and plain: clarity over voice. */
                     <>
-                      <p className="text-[1.125rem] font-medium leading-relaxed">{reply.text}</p>
+                      <p className="text-[1.125rem] font-semibold leading-relaxed">{reply.text}</p>
                       <p className="e-body mt-3">{u.emergency}</p>
                     </>
                   ) : (

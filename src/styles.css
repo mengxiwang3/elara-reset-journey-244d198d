@@ -144,8 +144,10 @@
   --fs-lead: 1.125rem;
   --fs-h3: 1.125rem;
   --fs-h2: 1.375rem;
+  --fs-voice-s: 1.125rem;
+  --fs-voice-l: 1.75rem;
   --fs-title-m: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
-  --fs-title-l: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+  --fs-title-l: clamp(2rem, 1.5rem + 1.5vw, 2.5rem);
   --fs-hero: clamp(2.5rem, 1.4rem + 4.4vw, 4.5rem);
   --step-hero: var(--fs-hero);
   --step-h1: var(--fs-title-l);
@@ -383,7 +385,7 @@
   font-size: var(--fs-eyebrow);
   font-weight: 600;
   line-height: 1.3;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--terracotta-text);
 }
@@ -1988,7 +1990,7 @@
 .e-slip__stamp {
   font-size: var(--fs-eyebrow);
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--terracotta-text);
   border: 1px solid currentColor;
@@ -2339,7 +2341,7 @@
     padding-top:.75rem;
 }
 .e-cx--small .e-cx__el .e-voice {
-  font-size: var(--fs-body);
+  font-size: var(--fs-voice-s);
 }
 .e-cx--big {
   padding:1.9rem 2rem;
@@ -2348,7 +2350,7 @@
   font-size: var(--fs-lead);
 }
 .e-cx--big .e-cx__el .e-voice {
-  font-size: var(--fs-title-m);
+  font-size: var(--fs-voice-l);
 }
 .e-ph-wrap {
   background:var(--paper-sheet);
@@ -2583,7 +2585,7 @@
   opacity: .4;
 }
 .e-atlas__capw {
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform:uppercase;
   color:var(--ink-muted);
   font-size: var(--fs-eyebrow);
@@ -2655,7 +2657,7 @@
 
 @media(max-width:640px) {
   .e-atlas__capw {
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   font-size: var(--fs-eyebrow);
   font-weight: 600;
 }

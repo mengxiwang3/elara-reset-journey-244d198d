@@ -110,7 +110,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         // Paper at dusk §03: Fraunces 600 edits (titles, numbers, wordmark),
         // Fraunces italic 400 is Elara speaking, Instrument Sans does the
         // quiet work. opsz lets Fraunces tighten at display sizes.
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,400&family=Instrument+Sans:wght@400;500;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,400&family=Instrument+Sans:wght@400;600&display=swap",
       },
       // The painted orb is the app icon and avatar (Paper at dusk §01).
       { rel: "icon", type: "image/png", sizes: "64x64", href: "/favicon.png" },
