@@ -2395,7 +2395,7 @@
 .e-atlas__scroll::-webkit-scrollbar { display: none; }
 /* Inner track: fixed panoramic width wider than typical viewport to enable scrolling */
 .e-atlas__track {
-  width: clamp(44rem, 125vw, 110rem);
+  width: max(clamp(44rem, 125vw, 110rem), 100%);
   display: flex;
   flex-direction: column;
 }
@@ -2929,3 +2929,6 @@
 
 /* Instrument Sans is loaded at 400/500/600; never let the browser fake a 700 */
 strong, b { font-weight: 600; }
+
+/* Anchor jumps clear the fixed nav */
+[id="como"], [id="how"], [id="producto"], [id="product"], section[id] { scroll-margin-top: 5rem; }

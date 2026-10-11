@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://holaelara.com/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://holaelara.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://holaelara.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://holaelara.com/"/>
+  </url>
+  <url>
+    <loc>https://holaelara.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://holaelara.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://holaelara.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://holaelara.com/"/>
+  </url>
+  <url>
+    <loc>https://holaelara.com/privacidad</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://holaelara.com/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://holaelara.com/privacy"/>
+  </url>
+  <url>
+    <loc>https://holaelara.com/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://holaelara.com/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://holaelara.com/privacy"/>
+  </url>
+</urlset>

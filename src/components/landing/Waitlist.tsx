@@ -30,7 +30,10 @@ const COPY = {
     loading: "Un segundo…",
     error: "Algo falló. Inténtalo otra vez o escríbenos a",
     note: "Leemos cada respuesta, de verdad.",
-    privacy: "Sin spam. Nunca. Baja con un solo toque.",
+    privacy: "Sin spam. Nunca. Puedes darte de baja cuando quieras.",
+    consentBefore: "Al unirte aceptas nuestra ",
+    consentLink: "Política de Privacidad",
+    consentHref: "/privacidad",
     doneTitle: "Listo. Te escribimos pronto.",
     doneBody: "Te vamos a escribir a mano antes de abrir. Mientras tanto, no tienes que hacer nada.",
     options: [
@@ -61,7 +64,10 @@ const COPY = {
     loading: "One second…",
     error: "Something went wrong. Try again or write to us at",
     note: "We read every reply, really.",
-    privacy: "No spam. Ever. One tap to leave.",
+    privacy: "No spam. Ever. Leave whenever you like.",
+    consentBefore: "By joining you accept our ",
+    consentLink: "Privacy Policy",
+    consentHref: "/privacy",
     doneTitle: "You're on the list.",
     doneBody: "We'll write to you by hand before we open. Until then, there's nothing you need to do.",
     options: [
@@ -102,7 +108,7 @@ export function Waitlist({ lang }: { lang: "es" | "en" }) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", whatsapp: "", instagram: "", pain: "" });
+  const [form, setForm] = useState({ name: "", email: "", whatsapp: "", instagram: "", pain: "", website: "" });
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -120,6 +126,7 @@ export function Waitlist({ lang }: { lang: "es" | "en" }) {
           instagram: form.instagram.trim() || undefined,
           pain: form.pain || undefined,
           language: lang,
+          website: form.website,
         }),
       });
       if (!res.ok) throw new Error();
@@ -162,6 +169,21 @@ export function Waitlist({ lang }: { lang: "es" | "en" }) {
           </div>
         ) : (
           <form onSubmit={onSubmit} className="e-sheet grid gap-5 p-6 sm:p-8">
+            {/* Honeypot: people never see it; bots fill it. */}
+            <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+              <label>
+                Website
+                <input
+                  type="text"
+                  name="hp_check"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.website}
+                  onChange={(e) => setForm({ ...form, website: e.target.value })}
+                />
+              </label>
+            </div>
+
             <Field label={t.name}>
               <input
                 required
@@ -236,6 +258,13 @@ export function Waitlist({ lang }: { lang: "es" | "en" }) {
 
             <p className="e-caption text-center">
               {t.note} {t.privacy}
+            </p>
+            <p className="e-caption -mt-2 text-center">
+              {t.consentBefore}
+              <a href={t.consentHref} className="e-link">
+                {t.consentLink}
+              </a>
+              .
             </p>
           </form>
         )}

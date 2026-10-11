@@ -411,7 +411,7 @@ const COPY = {
     },
     footer: {
       privacy: "Privacy",
-      privacyHref: "/privacidad",
+      privacyHref: "/privacy",
       contact: "Contact",
       line: "Made by two women who needed it too.",
       disclaimer: "Elara is not therapy or a medical service.",

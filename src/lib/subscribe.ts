@@ -10,6 +10,7 @@ interface SubscribePayload {
   instagram?: unknown;
   pain?: unknown;
   language?: unknown;
+  website?: unknown;
 }
 
 export async function handleSubscribe(request: Request, env: Env): Promise<Response> {
@@ -31,12 +32,33 @@ export async function handleSubscribe(request: Request, env: Env): Promise<Respo
   const pain = typeof payload.pain === "string" && payload.pain.trim() ? payload.pain.trim() : null;
   const language = typeof payload.language === "string" && ["en", "es"].includes(payload.language) ? payload.language : "en";
 
+  // Honeypot: real people never see this field. Pretend it worked.
+  if (typeof payload.website === "string" && payload.website.trim()) {
+    return Response.json({ success: true });
+  }
+
+  if (name.length > 80 || email.length > 120 || (whatsapp?.length ?? 0) > 30 || (instagram?.length ?? 0) > 60 || (pain?.length ?? 0) > 200) {
+    return Response.json({ error: "Value too long" }, { status: 400 });
+  }
+
   if (!name || !email) {
     return Response.json({ error: "Name and email are required" }, { status: 400 });
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return Response.json({ error: "Invalid email address" }, { status: 400 });
+  }
+
+  // Global brake on bursts of signups (bots); a real launch day stays well under this.
+  try {
+    const recent = await env.DB.prepare(
+      `SELECT COUNT(*) AS n FROM subscribers WHERE created_at > datetime('now', '-1 minute')`,
+    ).first<{ n: number }>();
+    if ((recent?.n ?? 0) >= 20) {
+      return Response.json({ error: "Too many requests" }, { status: 429 });
+    }
+  } catch (e) {
+    console.error("D1 rate check error:", e);
   }
 
   try {
