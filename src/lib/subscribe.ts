@@ -63,8 +63,12 @@ export async function handleSubscribe(request: Request, env: Env): Promise<Respo
 
   try {
     await env.DB.prepare(
-      `INSERT OR IGNORE INTO subscribers (name, email, whatsapp, instagram, pain, language)
-       VALUES (?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO subscribers (name, email, whatsapp, instagram, pain, language)
+       VALUES (?, ?, ?, ?, ?, ?)
+       ON CONFLICT(email) DO UPDATE SET
+         whatsapp  = COALESCE(subscribers.whatsapp,  excluded.whatsapp),
+         instagram = COALESCE(subscribers.instagram, excluded.instagram),
+         pain      = COALESCE(subscribers.pain,      excluded.pain)`,
     )
       .bind(name, email, whatsapp, instagram, pain, language)
       .run();

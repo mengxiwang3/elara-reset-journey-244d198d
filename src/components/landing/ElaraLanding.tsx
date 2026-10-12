@@ -79,14 +79,14 @@ const COPY = {
       title: "Para la mujer que sostiene todo, aunque nadie lo note.",
       body: "Elara te ayuda a ver dónde estás, entender qué está pidiendo atención y dar el siguiente paso pequeño, en español. Para mujeres ambiciosas que por fuera parecen estar bien, pero por dentro se sienten saturadas, dispersas o lejos de sí mismas.",
       cta: "Unirme a la lista de espera",
-      secondary: "Ver cómo funciona",
-      caption: "Abriendo pronto.",
+      secondary: "Pruébala: escríbele a Elara",
+      secondaryHref: "#elara",
       shot: "Pantalla Hoy de Elara: la tarjeta de la semana con su camino, el día 4 de 7 y el botón para empezar la práctica de hoy.",
     },
     stats: [
-      { n: "1,8 M+", l: "mujeres alcanzadas por la comunidad de Alejandra" },
-      { n: "80 000+", l: "en la comunidad de Alejandra" },
       { n: "4600+", l: "mujeres respondieron nuestra encuesta" },
+      { n: "80 000+", l: "mujeres en la comunidad de Alejandra, con quien construimos Elara" },
+      { n: "1,8 M+", l: "mujeres alcanzadas por esa comunidad" },
       { n: "6", l: "áreas de tu vida, un solo lugar" },
     ],
     built: {
@@ -258,14 +258,14 @@ const COPY = {
       title: "For the woman who holds everything, even when no one notices.",
       body: "Elara helps you see where you are, understand what is asking for attention, and take the next small step. Built for ambitious women who look fine on the outside but feel stretched, scattered or far from themselves on the inside.",
       cta: "Join the waitlist",
-      secondary: "See how it works",
-      caption: "Opening soon.",
+      secondary: "Try it: write to Elara",
+      secondaryHref: "#ask-elara",
       shot: "Elara's Today screen: this week's card with its path, day 4 of 7, and the button to start today's practice.",
     },
     stats: [
-      { n: "1.8M+", l: "women reached by Alejandra's community" },
-      { n: "80K+", l: "in Alejandra's community" },
       { n: "4,600+", l: "women answered our survey" },
+      { n: "80K+", l: "women in the community of Alejandra, who we build Elara with" },
+      { n: "1.8M+", l: "women reached by that community" },
       { n: "6", l: "areas of your life, one place" },
     ],
     built: {
@@ -545,14 +545,10 @@ function Hero({ lang }: { lang: Lang }) {
             <a href={`#${t.waitlistId}`} className="e-btn e-btn--primary">
               {t.hero.cta}
             </a>
-            <a href={t.nav[0].href} className="e-textlink">
+            <a href={t.hero.secondaryHref} className="e-textlink">
               {t.hero.secondary}
             </a>
           </div>
-          <p className="e-caption mt-4 flex items-center gap-2.5">
-            <span className="e-dot" aria-hidden />
-            {t.hero.caption}
-          </p>
         </div>
 
         <p className="e-hero__body e-lead">{t.hero.body}</p>
@@ -952,8 +948,8 @@ function Atlas({ lang }: { lang: Lang }) {
 
 /* -- RESTRAINED: mid-page beta nudge between Atlas and Explore ----------------- */
 const BETA_CTA = {
-  es: { line: "Las primeras plazas son para quienes están en lista.", cta: "Quiero entrar al primer grupo" },
-  en: { line: "First access goes to people already on the list.", cta: "Join the first group" },
+  es: { line: "Las primeras plazas son para quienes están en lista.", cta: "Unirme a la lista" },
+  en: { line: "First access goes to people already on the list.", cta: "Join the list" },
 };
 function BetaCta({ lang }: { lang: Lang }) {
   const t = BETA_CTA[lang];
@@ -1220,6 +1216,9 @@ export function ElaraLanding({ lang }: { lang: Lang }) {
       <Passage lang={lang} />
       {/* water: first strong tonal contrast */}
       <Water lang={lang} />
+      {/* human first: the feeling, then who built it */}
+      <Circles lang={lang} />
+      <Chapter lang={lang} />
       {/* product-dense */}
       <HowAndProduct lang={lang} />
       {/* open */}
@@ -1227,9 +1226,6 @@ export function ElaraLanding({ lang }: { lang: Lang }) {
       <Atlas lang={lang} />
       <BetaCta lang={lang} />
       <Explore lang={lang} />
-      {/* human */}
-      <Circles lang={lang} />
-      <Chapter lang={lang} />
       {/* light -> dusk -> deep forest -> night */}
       <Dusk />
       <ElaraTaste lang={lang} />

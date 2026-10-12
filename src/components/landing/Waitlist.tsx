@@ -34,8 +34,14 @@ const COPY = {
     consentBefore: "Al unirte aceptas nuestra ",
     consentLink: "Política de Privacidad",
     consentHref: "/privacidad",
-    doneTitle: "Listo. Te escribimos pronto.",
-    doneBody: "Te vamos a escribir a mano antes de abrir. Mientras tanto, no tienes que hacer nada.",
+    doneTitle: "Listo. Estás en la lista.",
+    doneBody: "Te escribimos a mano antes de abrir. Mientras tanto, no tienes que hacer nada.",
+    extrasTitle: "¿Quieres ayudarnos a pensar en ti?",
+    extrasBody: "Tres preguntas opcionales. Puedes saltártelas.",
+    extrasSave: "Guardar",
+    extrasSkip: "Ahora no",
+    extrasSaved: "Gracias. Lo guardamos.",
+    followBefore: "Mientras tanto, nos encuentras en ",
     options: [
       "Presión económica / independencia financiera",
       "Me siento dispersa o desbordada",
@@ -70,6 +76,12 @@ const COPY = {
     consentHref: "/privacy",
     doneTitle: "You're on the list.",
     doneBody: "We'll write to you by hand before we open. Until then, there's nothing you need to do.",
+    extrasTitle: "Want to help us think of you?",
+    extrasBody: "Three optional questions. You can skip them.",
+    extrasSave: "Save",
+    extrasSkip: "Not now",
+    extrasSaved: "Thank you. Saved.",
+    followBefore: "In the meantime, find us on ",
     options: [
       "Money pressure / financial independence",
       "Feeling scattered or overwhelmed",
@@ -106,9 +118,25 @@ function Field({
 export function Waitlist({ lang }: { lang: "es" | "en" }) {
   const t = COPY[lang];
   const [submitted, setSubmitted] = useState(false);
+  const [extrasState, setExtrasState] = useState<"idle" | "saving" | "saved" | "skipped">("idle");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", whatsapp: "", instagram: "", pain: "", website: "" });
+
+  async function post(extra: { whatsapp?: string; instagram?: string; pain?: string }) {
+    const res = await fetch("/api/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        ...extra,
+        language: lang,
+        website: form.website,
+      }),
+    });
+    if (!res.ok) throw new Error();
+  }
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -116,25 +144,30 @@ export function Waitlist({ lang }: { lang: "es" | "en" }) {
     setLoading(true);
     setError(false);
     try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name.trim(),
-          email: form.email.trim(),
-          whatsapp: form.whatsapp.trim() || undefined,
-          instagram: form.instagram.trim() || undefined,
-          pain: form.pain || undefined,
-          language: lang,
-          website: form.website,
-        }),
-      });
-      if (!res.ok) throw new Error();
+      await post({});
       setSubmitted(true);
     } catch {
       setError(true);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function onExtras(e: React.FormEvent) {
+    e.preventDefault();
+    const extra = {
+      whatsapp: form.whatsapp.trim() || undefined,
+      instagram: form.instagram.trim() || undefined,
+      pain: form.pain || undefined,
+    };
+    if (!extra.whatsapp && !extra.instagram && !extra.pain) return setExtrasState("skipped");
+    setExtrasState("saving");
+    try {
+      await post(extra);
+      setExtrasState("saved");
+    } catch {
+      setExtrasState("idle");
+      setError(true);
     }
   }
 
@@ -161,11 +194,82 @@ export function Waitlist({ lang }: { lang: "es" | "en" }) {
         <div className="e-night__form w-full max-w-[31rem] lg:col-span-6 lg:col-start-7 lg:max-w-none">
 
         {submitted ? (
-          /* Completion: butter field, one calm line. No confetti, no badge,
-             no points animation. */
-          <div className="e-arrive e-card-forest on-field p-7 sm:p-9">
-            <p className="e-h2">{t.doneTitle}</p>
-            <p className="e-body mt-2">{t.doneBody}</p>
+          /* Completion: still paper, still calm. Nothing is asked twice, and the
+             optional questions live here, after the signup is safe. */
+          <div className="e-arrive e-sheet grid gap-5 p-6 sm:p-8">
+            <div>
+              <p className="e-h2">{t.doneTitle}</p>
+              <p className="e-body mt-2">{t.doneBody}</p>
+            </div>
+
+            {extrasState === "saved" && <p className="e-body" role="status">{t.extrasSaved}</p>}
+
+            {(extrasState === "idle" || extrasState === "saving") && (
+              <form onSubmit={onExtras} className="e-rule grid gap-4 pt-5">
+                <div>
+                  <p className="e-label text-ink">{t.extrasTitle}</p>
+                  <p className="e-caption mt-1">{t.extrasBody}</p>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field label={t.whatsapp} optional={t.optional}>
+                    <input
+                      maxLength={30}
+                      value={form.whatsapp}
+                      onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+                      className="e-input"
+                      placeholder="+1 555 000 0000"
+                    />
+                  </Field>
+                  <Field label={t.instagram} optional={t.optional}>
+                    <input
+                      maxLength={60}
+                      value={form.instagram}
+                      onChange={(e) => setForm({ ...form, instagram: e.target.value })}
+                      className="e-input"
+                      placeholder="@usuario"
+                    />
+                  </Field>
+                </div>
+                <Field label={t.pain} optional={t.optional}>
+                  <select
+                    value={form.pain}
+                    onChange={(e) => setForm({ ...form, pain: e.target.value })}
+                    className="e-input"
+                  >
+                    <option value="">{t.painPlaceholder}</option>
+                    {t.options.map((o) => (
+                      <option key={o} value={o}>
+                        {o}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+                {error && (
+                  <p className="e-small" style={{ color: "var(--error)" }} role="alert">
+                    {t.error}{" "}
+                    <a href="mailto:hola@holaelara.com" className="e-link">
+                      hola@holaelara.com
+                    </a>
+                  </p>
+                )}
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                  <button type="submit" disabled={extrasState === "saving"} className="e-btn e-btn--secondary e-btn--compact">
+                    {extrasState === "saving" ? t.loading : t.extrasSave}
+                  </button>
+                  <button type="button" onClick={() => setExtrasState("skipped")} className="e-textlink text-[1rem]">
+                    {t.extrasSkip}
+                  </button>
+                </div>
+              </form>
+            )}
+
+            <p className="e-caption">
+              {t.followBefore}
+              <a href="https://instagram.com/holaelara" target="_blank" rel="noreferrer" className="e-link">
+                Instagram
+              </a>
+              .
+            </p>
           </div>
         ) : (
           <form onSubmit={onSubmit} className="e-sheet grid gap-5 p-6 sm:p-8">
@@ -205,42 +309,6 @@ export function Waitlist({ lang }: { lang: "es" | "en" }) {
                 className="e-input"
                 placeholder={t.emailPlaceholder}
               />
-            </Field>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label={t.whatsapp} optional={t.optional}>
-                <input
-                  maxLength={30}
-                  value={form.whatsapp}
-                  onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
-                  className="e-input"
-                  placeholder="+1 555 000 0000"
-                />
-              </Field>
-              <Field label={t.instagram} optional={t.optional}>
-                <input
-                  maxLength={60}
-                  value={form.instagram}
-                  onChange={(e) => setForm({ ...form, instagram: e.target.value })}
-                  className="e-input"
-                  placeholder="@usuario"
-                />
-              </Field>
-            </div>
-
-            <Field label={t.pain} optional={t.optional}>
-              <select
-                value={form.pain}
-                onChange={(e) => setForm({ ...form, pain: e.target.value })}
-                className="e-input"
-              >
-                <option value="">{t.painPlaceholder}</option>
-                {t.options.map((o) => (
-                  <option key={o} value={o}>
-                    {o}
-                  </option>
-                ))}
-              </select>
             </Field>
 
             {error && (

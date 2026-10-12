@@ -1937,10 +1937,6 @@
 /* Explore: one concise preview, three paper pieces overlapping ---------------- */
 .e-ex-places { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
 .e-ex-places .e-place { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; align-items: center; }
-@media (min-width: 640px) {
-  .e-ex-places { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
-  .e-ex-places .e-place { grid-template-columns: 1fr; align-items: start; gap: 0.9rem; }
-}
 .e-ex-art { aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; }
 .e-ex-art img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; border-radius: 12px;
   box-shadow: 0 2px 4px rgb(60 40 20 / 0.08), 0 16px 26px -14px rgb(60 40 20 / 0.4); }
@@ -2932,3 +2928,19 @@ strong, b { font-weight: 600; }
 
 /* Anchor jumps clear the fixed nav */
 [id="como"], [id="how"], [id="producto"], [id="product"], section[id] { scroll-margin-top: 5rem; }
+
+/* Hero on phones: say what Elara is straight after the headline, then the button, then the product */
+@media (max-width: 1023px) {
+  .e-hero__body { order: 2; max-width: none; }
+  .e-hero__cta { order: 3; }
+  .e-hero__phone { order: 4; }
+}
+.e-hero { padding-top: calc(4.5rem + 1rem); }
+@media (min-width: 1024px) { .e-hero { padding-top: 4.75rem; } }
+
+/* Areas and Atlas read as one chapter */
+.e-atlas { padding-top: clamp(1rem, 2vw, 1.5rem); }
+
+/* Explore: a short list, art as small thumbnails */
+.e-ex-places { max-width: 34rem; }
+.e-ex-places .e-place { grid-template-columns: 7.5rem 1fr; }
