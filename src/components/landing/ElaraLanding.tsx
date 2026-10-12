@@ -77,7 +77,7 @@ const COPY = {
     hero: {
       eyebrow: "Primera en español · Lista de espera abierta",
       title: "Para la mujer que sostiene todo, aunque nadie lo note.",
-      body: "Elara te ayuda a ver dónde estás, entender qué está pidiendo atención y dar el siguiente paso pequeño, en español. Para mujeres ambiciosas que por fuera parecen estar bien, pero por dentro se sienten saturadas, dispersas o lejos de sí mismas.",
+      body: "Elara te ayuda a ver dónde estás, qué está pidiendo atención y cuál es el siguiente paso pequeño, en español. Para mujeres ambiciosas que por fuera parecen estar bien y por dentro se sienten saturadas o lejos de sí mismas.",
       cta: "Unirme a la lista de espera",
       secondary: "Pruébala: escríbele a Elara",
       secondaryHref: "#elara",
@@ -93,7 +93,7 @@ const COPY = {
       eyebrow: "Construido con ellas, no para ellas",
       title:
         "Más de 4600 mujeres nos contaron, con honestidad, lo que estaban cargando.",
-      body: "El dinero fue lo que más salió: casi 1 de cada 3 lo eligió como lo primero que resolvería. Por eso Elara lo toma en serio, no como números, sino como lo que se siente cargarlo. Y desde ahí se abre hacia el resto de tu vida.",
+      body: "El dinero fue lo que más salió: casi 1 de cada 3 lo eligió como lo primero que resolvería. Por eso Elara empieza ahí, y desde ahí se abre al resto de tu vida.",
     },
     problem: {
       eyebrow: "Si esto te suena familiar",
@@ -123,11 +123,11 @@ const COPY = {
       steps: [
         {
           title: "Unas preguntas honestas",
-          body: "La evaluación de claridad te pregunta cómo se sienten las cosas ahora mismo. No hay respuestas correctas ni puntuaciones, y puedes repetirla cuando quieras.",
+          body: "La evaluación te pregunta cómo se sienten las cosas ahora mismo. Sin respuestas correctas ni puntuaciones, y puedes repetirla.",
         },
         {
           title: "Tu foto de claridad",
-          body: "Elara te muestra qué área de tu vida está pidiendo atención y cómo se conecta con las demás. Si no te suena, eliges otra.",
+          body: "Elara te muestra qué área está pidiendo atención y cómo se conecta con las demás. Si no te suena, eliges otra.",
         },
         {
           title: "Tu camino de 7 días",
@@ -164,7 +164,7 @@ const COPY = {
       //   B  Cuando quieres quedarte un poco más.
       //   C  Algo para llevar contigo fuera de la pantalla.
       title: "Para los días que piden un poco más.",
-      lead: "Elara no es solo una práctica diaria. Cuando quieres quedarte más tiempo con algo, Explorar irá abriéndose poco a poco en beta: talleres en vivo, voces que acompañan y escuchas pequeñas para el momento que vives.",
+      lead: "Elara no es solo una práctica diaria. Cuando quieres quedarte más tiempo con algo, Explorar irá abriéndose poco a poco en beta.",
       intent: "Son lugares a los que vuelves a propósito, no contenido para consumir sin fin.",
       places: [
         {
@@ -218,7 +218,7 @@ const COPY = {
     culture: {
       eyebrow: "Construido desde adentro",
       title: "No es inglés, traducido. Es español, entendido.",
-      body: "Elara lee el tono, la emoción y la cultura, no solo las palabras. El peso de ser la hija mayor, la familia que llama, los dos mundos que habitas. Construida para eso, no adaptada a eso.",
+      body: "Elara lee el tono, la emoción y la cultura, no solo las palabras: el peso de ser la hija mayor, la familia que llama, los dos mundos que habitas.",
       pairs: [
         { you: "“Hoy fue mucho.”", elara: "“Hoy fue mucho, y está bien.”" },
         { you: "“No sé por dónde empezar.”", elara: "“Busquemos un lugar pequeño para empezar.”" },
@@ -229,7 +229,7 @@ const COPY = {
     },
     founders: {
       eyebrow: "Una nota de nosotras",
-      note: "Veíamos lo mismo una y otra vez, en nuestra propia vida y en miles de mensajes: mujeres que por fuera parecen tenerlo todo resuelto, y por dentro funcionan en vacío. No encontrábamos el lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. (La verdad, también para nosotras.)",
+      note: "Lo veíamos en nuestra vida y en miles de mensajes: mujeres que por fuera parecen tenerlo todo resuelto y por dentro funcionan en vacío. No encontrábamos el lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. (La verdad, también para nosotras.)",
       sign: "Mengxi y Ale",
       people: [
         { name: "Mengxi Wang", role: "Producto y diseño", ig: "karawang" },
@@ -256,7 +256,7 @@ const COPY = {
     hero: {
       eyebrow: "Spanish-first · Waitlist open",
       title: "For the woman who holds everything, even when no one notices.",
-      body: "Elara helps you see where you are, understand what is asking for attention, and take the next small step. Built for ambitious women who look fine on the outside but feel stretched, scattered or far from themselves on the inside.",
+      body: "Elara helps you see where you are, what is asking for attention, and your next small step, in Spanish. Built for ambitious women who look fine on the outside and feel stretched or far from themselves on the inside.",
       cta: "Join the waitlist",
       secondary: "Try it: write to Elara",
       secondaryHref: "#ask-elara",
@@ -271,7 +271,7 @@ const COPY = {
     built: {
       eyebrow: "Built with women, not for them",
       title: "More than 4,600 women told us, honestly, what they were carrying.",
-      body: "Money came up most: almost 1 in 3 chose it as the first thing they would fix. So Elara takes it seriously, not as numbers but as what it feels like to carry. From there it opens into the rest of your life.",
+      body: "Money came up most: almost 1 in 3 chose it as the first thing they would fix. So Elara starts there, and from there opens into the rest of your life.",
     },
     problem: {
       eyebrow: "If this sounds familiar",
@@ -301,11 +301,11 @@ const COPY = {
       steps: [
         {
           title: "A few honest questions",
-          body: "The Clarity Assessment asks how things feel right now. There are no right answers and no scores, and you can retake it anytime.",
+          body: "The assessment asks how things feel right now. No right answers, no scores, and you can retake it.",
         },
         {
           title: "Your clarity picture",
-          body: "Elara shows you which area of your life is asking for attention and how it connects to the others. If it doesn't feel right, you pick another.",
+          body: "Elara shows you which area is asking for attention and how it connects to the others. If it doesn't feel right, you pick another.",
         },
         {
           title: "Your 7-day path",
@@ -338,17 +338,17 @@ const COPY = {
     explore: {
       eyebrow: "Explore",
       title: "For the days that ask for a little more.",
-      lead: "Elara is not only a daily practice. When you want to stay with something longer, you can join a live workshop, hear a voice that meets you where you are, or choose a small listening experience for the moment you are in.",
+      lead: "Elara is not only a daily practice. When you want to stay with something longer, Explore will open up gradually in beta.",
       intent: "These are places you return to on purpose, not content to consume without end.",
       places: [
         {
           k: "Live workshops",
-          v: "One featured workshop, with a date and time. You reserve your place and we remind you before it starts.",
+          v: "One featured workshop, with a date and time. Coming soon for the first group.",
           alt: "Explore in the app: the week's featured workshop, with its date.",
         },
         {
           k: "Voices that keep you company",
-          v: "Women's voices and guided conversations that meet you where you are.",
+          v: "Women's voices and guided conversations. They'll open up gradually in beta.",
           alt: "Explore in the app: Voices on Elara, guided conversations with women.",
         },
         {
@@ -391,7 +391,7 @@ const COPY = {
     culture: {
       eyebrow: "Built from the inside",
       title: "Not English, translated. Spanish, understood.",
-      body: "Elara reads tone, emotion and culture, not just words. The weight of being the eldest daughter, the family that calls, the two worlds you live in. Built for that, not adapted to it.",
+      body: "Elara reads tone, emotion and culture, not just words: the weight of being the eldest daughter, the family that calls, the two worlds you live in.",
       pairs: [
         { you: "“Hoy fue mucho.”", elara: "“Hoy fue mucho, y está bien.”" },
         { you: "“No sé por dónde empezar.”", elara: "“Busquemos un lugar pequeño para empezar.”" },
@@ -402,7 +402,7 @@ const COPY = {
     },
     founders: {
       eyebrow: "A note from us",
-      note: "We kept seeing the same thing, in our own lives and in thousands of messages: women who look like they have it all together on the outside, and are running on empty inside. We couldn't find the soft place we needed, so we started building it. Elara is for you. (Honestly, for us too.)",
+      note: "We saw it in our own lives and in thousands of messages: women who look like they have it all together and are running on empty inside. We couldn't find the soft place we needed, so we started building it. Elara is for you. (Honestly, for us too.)",
       sign: "Mengxi and Ale",
       people: [
         { name: "Mengxi Wang", role: "Product and design", ig: "karawang" },
@@ -781,7 +781,7 @@ const ATLAS = {
   es: {
     eyebrow: "ATLAS",
     title: "Un mapa de lo que ya caminaste.",
-    body: "Cada camino que terminas deja una huella. Atlas reúne tus territorios, tus frases y los momentos que Elara recuerda contigo, para que puedas mirar atrás sin sentir que empiezas de cero otra vez.",
+    body: "Cada camino que terminas deja una huella. Atlas reúne tus territorios, tus frases y lo que Elara recuerda contigo, para que mires atrás sin sentir que empiezas de cero.",
     line: "No es una puntuación. Es una forma suave de ver que sí has avanzado.",
     points: [
       { k: "now", t: "Tu territorio actual, donde estás poniendo atención ahora." },
@@ -800,7 +800,7 @@ const ATLAS = {
   en: {
     eyebrow: "ATLAS",
     title: "A map of what you’ve already walked.",
-    body: "Every path you finish leaves a mark. Atlas gathers your territories, your lines and the moments Elara remembers with you, so you can look back without feeling you’re starting from zero again.",
+    body: "Every path you finish leaves a mark. Atlas gathers your territories, your lines and what Elara remembers with you, so you can look back without feeling you’re starting from zero.",
     line: "It isn’t a score. It’s a gentle way to see that you have moved forward.",
     points: [
       { k: "now", t: "Your current territory, where you’re putting your attention now." },

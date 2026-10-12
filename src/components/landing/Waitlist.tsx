@@ -15,7 +15,7 @@ const COPY = {
   es: {
     label: "Lista de espera",
     title: "Sé una de las primeras mujeres dentro de Elara.",
-    body: "Las primeras de la lista entran al primer grupo, opinan de verdad en lo que construimos y reciben un saludo personal de nosotras, no un correo de bienvenida genérico.",
+    body: "Las primeras de la lista entran al primer grupo, opinan en lo que construimos y reciben un saludo personal nuestro, no un correo genérico.",
     live: "Abriendo pronto",
     name: "Nombre",
     namePlaceholder: "Tu nombre",
@@ -55,7 +55,7 @@ const COPY = {
   en: {
     label: "Waitlist",
     title: "Be one of the first women inside Elara.",
-    body: "The first women on the list join the first group, get a real say in what we build, and a personal hello from us, not a generic welcome email.",
+    body: "The first women on the list join the first group, get a say in what we build, and a personal hello from us, not a generic email.",
     live: "Opening soon",
     name: "Name",
     namePlaceholder: "Your name",

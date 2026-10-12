@@ -196,7 +196,7 @@ const UI = {
   es: {
     eyebrow: "Un momento con Elara",
     title: "Escríbele a Elara cómo te sientes hoy.",
-    lead: "Una frase basta. Elara no te va a arreglar ni a darte tareas, solo quiere leerte. Esto es apenas una pequeña muestra de su voz.",
+    lead: "Una frase basta. Elara no va a arreglarte ni a darte tareas: solo quiere leerte. Es apenas una muestra de su voz.",
     label: "Cuéntale a Elara cómo te sientes hoy",
     withYou: "Elara está contigo…",
     private: "Privado. Una sola respuesta.",
@@ -215,7 +215,7 @@ const UI = {
   en: {
     eyebrow: "A moment with Elara",
     title: "Tell Elara how you feel today.",
-    lead: "One sentence is enough. Elara won't fix you or hand you tasks, she just wants to read you. This is only a small taste of her voice.",
+    lead: "One sentence is enough. Elara won't fix you or hand you tasks: she just wants to read you. This is only a small taste of her voice.",
     label: "Tell Elara how you feel today",
     withYou: "Elara is with you…",
     private: "Private. One reply only.",
