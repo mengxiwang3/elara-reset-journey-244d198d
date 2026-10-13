@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  <title>Elara</title>
+  <defs><clipPath id="orb"><circle cx="50" cy="50" r="50"/></clipPath></defs>
+  <g clip-path="url(#orb)">
+    <rect width="100" height="100" fill="#E0723F"/>
+    <circle cx="36" cy="34" r="42" fill="#F4E0C6"/>
+    <circle cx="63" cy="44" r="26" fill="#F2A04D"/>
+    <path d="M0 62 C22 52 38 72 60 66 C78 61 90 66 100 60 V100 H0 Z" fill="#CF5B30"/>
+    <path d="M0 80 C24 70 44 90 68 82 C82 78 92 80 100 76 V100 H0 Z" fill="#B8441A"/>
+  </g>
+</svg>
