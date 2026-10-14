@@ -1,0 +1,49 @@
+<section class="doc" id="rationale"><h2>Design rationale</h2>
+<div class="cols">
+<div><h3>Two kinds of Circle, named plainly</h3><ul>
+<li><b>Life areas</b> (what she cares about) and <b>Life stages</b> (what she is going through) are separate groups everywhere they appear: Explore, search results, the destination picker.</li>
+<li>Six areas and five stages start as a curated set that can sustain conversation. They are proposed names, not a launch list. Narrower interests are <b>tags</b> until enough women are talking to support a Circle.</li>
+<li>A <b>Circle</b> is open and topic-led. A <b>room</b> is a private group of up to ten women, optional, and kept out of the main navigation.</li></ul></div>
+<div><h3>Useful before a post</h3><ul>
+<li>Home leads with <b>Your Circles</b>, then useful questions from them with the best reply shown. A new woman sees useful questions before she has joined anything.</li>
+<li>The date and the large “What's on your mind?” box are gone. <b>Ask</b> is a compact, always-visible pill.</li>
+<li>Search covers Circle names, questions and tags, with an Unanswered filter. Unanswered is also one tap on Home.</li></ul></div>
+<div><h3>Clear destinations and a calm path</h3><ul>
+<li>Every question row names its Circle. Before she posts, the composer shows <b>where it will appear</b> and who can read it. She must choose.</li>
+<li>Browsing is open. Joining is one tap, adds the Circle to Your Circles, and is <b>private to her</b> by default.</li>
+<li>With several Circles joined, a switcher and an “All your Circles” list keep navigation clear. No red unread badges; the cues are words.</li></ul></div>
+</div>
+<p class="small" style="margin-top:12px"><b>Not used:</b> <code>esf.pdf</code> and <code>circle1.pdf</code> were not available, and you asked me to ignore them. The visual language comes from the earlier topic-community prototype and the app's design system (Fraunces and Instrument Sans, cream and paper, forest, ember). All names, questions and replies are fictional. “Active today”, tags becoming Circles, private Circle membership, and “join to reply or ask” are proposals to test, not current app behaviour.</p></section>
+
+<section class="doc" id="tradeoffs"><h2>Main tradeoffs</h2>
+<div class="tablewrap"><table><thead><tr><th>Decision</th><th>What it buys</th><th>What it costs</th></tr></thead><tbody>
+<tr><td><b>Two groups, 11 Circles at launch</b></td><td>Women find where they belong by interest or by situation. Enough in each to sustain conversation.</td><td>Many women are in several stages at once. Some situations (grief, fertility, illness) have no Circle yet and rely on tags.</td></tr>
+<tr><td><b>Tags before Circles</b></td><td>Avoids dozens of empty categories. Gives real data on what wants its own Circle.</td><td>Tags are less discoverable than Circles, and need moderation against drift and duplicates.</td></tr>
+<tr><td><b>Open reading, join to ask or reply</b></td><td>Browse before committing. Joining is a natural, one-tap moment to be useful.</td><td>A little friction for the woman who wants to reply once. May reduce casual replies. This is the main thing to test.</td></tr>
+<tr><td><b>Joining is private</b></td><td>Women can join Divorce &amp; Separation or Caregiving without it appearing anywhere.</td><td>No “women like me” social proof. Posts still show her first name, so her Circles can be inferred from what she writes.</td></tr>
+<tr><td><b>Qualitative activity, no member counts</b></td><td>Avoids popularity contests and a feeling of empty rooms.</td><td>Women lose a signal of size. “Just starting” can discourage joining; wording needs testing.</td></tr></tbody></table></div></section>
+
+<section class="doc" id="test"><h2>What to test with real women before implementation</h2>
+<div class="cols">
+<div><h3>Choosing Circles</h3><ul>
+<li>Do women understand “Life areas” versus “Life stages” without explanation? Do they join one of each, or several of one kind?</li>
+<li>Do they browse before joining? Do they read a Circle's purpose and sample questions, or just join?</li>
+<li>Which situations have no home, and which tags do they reach for?</li></ul></div>
+<div><h3>Reading, asking, replying</h3><ul>
+<li>Does the first screen give useful content to a woman with no Circles, and to one with five?</li>
+<li>Is the destination of a new question clear before posting? Do women pick the right Circle, or the first one?</li>
+<li>What does “join to reply” do to a woman who wanted to reply once?</li></ul></div>
+<div><h3>Navigation at scale</h3><ul>
+<li>With three, six and ten joined Circles, can she find a question she read yesterday?</li>
+<li>Do unanswered cues bring women to answer, or feel like a to-do list?</li>
+<li>Do rooms stay optional, or are they mistaken for another kind of Circle?</li></ul></div>
+</div></section>
+
+<section class="doc" id="verify"><h2>To verify before real-member testing</h2>
+<div class="flag"><ul style="margin:0;padding-left:18px;display:grid;gap:6px;font-size:14.5px">
+<li><b>Membership privacy and audience enforcement.</b> Joined Circles must not be visible to other members. Posts need an explicit audience. Private Ask Elara and Clarity content must never be posted unless she brings in a specific line.</li>
+<li><b>Moderation capacity for open Circles at 80,000.</b> Sensitive life stages (Divorce &amp; Separation, Pregnancy &amp; New Parenthood, Caregiving) need trained hosts, a self-harm path and a response target. The app today says reports are read “during the day”.</li>
+<li><b>Search and tags.</b> Search must respect blocks, hidden posts and anonymous authorship, and must not surface private rooms.</li>
+<li><b>Access.</b> Circles is currently part of Premium. Open reading and joining could be free or paid; this design does not decide it.</li>
+<li><b>Proposals, not facts:</b> the Circle names, “join to ask or reply”, activity labels, and the tags-to-Circle rule.</li></ul></div></section>
+</div>
