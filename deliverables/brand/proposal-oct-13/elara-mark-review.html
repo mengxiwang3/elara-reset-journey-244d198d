@@ -1,0 +1,667 @@
+<title>Elara Mark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: one column of review boards; sizes are actual points (CSS px); app grounds are fixed paper and forest. */
+:root{--bg:#F7F1E8;--fg:#1F3A2E;--muted:#5D6A5E;--rule:#E2D8C8;--board:#FBF7F0;--ember:#B8441A;
+--display:"Fraunces",Georgia,serif;--body:"Instrument Sans",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151B17;--fg:#ECE5D8;--muted:#A7B1A5;--rule:#2E3830;--board:#1C231E;--ember:#E07A4F;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#151B17;--fg:#ECE5D8;--muted:#A7B1A5;--rule:#2E3830;--board:#1C231E;--ember:#E07A4F;color-scheme:dark}
+*{box-sizing:border-box} body{background:var(--bg);color:var(--fg);font:15px/1.5 var(--body);padding-inline:16px;margin:0}
+main{max-width:1080px;margin:0 auto;padding-block:32px 64px;display:grid;gap:24px}
+h1{font:600 clamp(28px,5vw,38px)/1.12 var(--display);margin:0;text-wrap:balance} h2{font:600 21px/1.2 var(--display);margin:0}
+h4{margin:0 0 6px;font:600 13px var(--body)}
+.eyebrow{font:600 12px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--ember);margin:0}
+.lede{color:var(--muted);max-width:68ch;margin:6px 0 0}
+.board{background:var(--board);border:1px solid var(--rule);border-radius:14px;padding:20px 22px;display:grid;gap:14px;min-width:0}
+.paper{--ink:#1F3A2E;background:#F7F1E8;color:#1F3A2E;border-color:#E2D8C8}
+.forest{--ink:#F7F1E8;background:#1F3A2E;color:#F7F1E8;border-color:#1F3A2E}
+.paper h2,.forest h2{color:inherit}
+.row{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:flex-end}
+.cell{margin:0;display:grid;justify-items:center;gap:6px} figcaption{font-size:12px;opacity:.85;text-align:center;max-width:220px}
+.bigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px;color:#1F3A2E}
+.big figcaption{color:var(--fg)}
+.scroll{overflow-x:auto} table.mx{border-collapse:collapse;min-width:760px;color:inherit;font:inherit}
+.mx th{font:600 12px var(--body);text-align:center;padding:6px 8px;opacity:.85} .mx th[scope=row]{text-align:left;white-space:nowrap;padding-right:14px}
+.mx td{padding:10px 8px;text-align:center;border-top:1px solid color-mix(in srgb,var(--ink) 14%,transparent)}
+.tab{display:inline-grid;justify-items:center;gap:2px;font-size:10px;color:#B8441A} .forest .tab{color:#F2A04D} .ti{display:grid;place-items:end center}
+.tab svg{color:var(--ink)}
+.chat{display:inline-flex;gap:6px;align-items:center} .bub{font-size:12px;font-weight:600}
+.avatar{border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--ink) 10%,transparent)}
+.icon{width:var(--s);height:var(--s);border-radius:22.37%;display:inline-grid;place-items:center;background:#1C1C1E;color:#D9C38F;box-shadow:0 0 0 1px rgba(127,127,127,.3)}
+.px{image-rendering:pixelated;border-radius:6px;border:1px solid var(--rule)}
+.ov{position:relative;width:140px;height:140px} .ov .ink{position:absolute;inset:0;color:#1F3A2E;opacity:.6}
+.rec{border-left:4px solid var(--ember)} .rec p{margin:0;max-width:72ch}
+code{font-size:12.5px;word-break:break-all}
+</style>
+<main>
+<header><p class="eyebrow">Brand · one-colour mark · round 3 · for review</p><h1>One-colour Elara mark: four candidates at real sizes</h1>
+<p class="lede">The refined colour mark stays as it is. Only the one-colour mark is iterated. Option C is new: it keeps the colour mark's round silhouette, an off-centre sun and one strong horizon, with no ring. Nothing is selected yet, and the app's assets are unchanged.</p></header>
+<section class="board"><h2>Side by side</h2><div class="bigs"><figure class="cell big"><svg width="112" height="112" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<defs><clipPath id="u1_ob"><circle cx="50" cy="50" r="50"/></clipPath></defs>
+<g clip-path="url(#u1_ob)"><rect width="100" height="100" fill="#E0723F"/>
+<circle cx="38" cy="38" r="47" fill="#F4E0C6"/><circle cx="60" cy="45" r="22" fill="#F2A04D"/>
+<path d="M0 62 C22 52 38 72 60 66 C78 61 90 66 100 60 V100 H0 Z" fill="#CF5B30"/><path d="M0 80 C24 70 44 90 68 82 C82 78 92 80 100 76 V100 H0 Z" fill="#B8441A"/></g></svg><figcaption><b>Colour (unchanged)</b><br>The refined colour mark, kept as it is.</figcaption></figure><figure class="cell big"><svg width="112" height="112" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u2_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u2_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="45.5" fill="#000"/>
+      <circle cx="61" cy="43" r="23" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="11"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+      <path d="M-2 82 C24 72 44 90 68 83 C82 79 92 81 102 77" fill="none" stroke="#000" stroke-width="6"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u2_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u2_cut)"/></g>
+</svg>
+<figcaption><b>Current</b><br>Ring around a dark sun: reads as an eye at 16 to 32 pt.</figcaption></figure><figure class="cell big"><svg width="112" height="112" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u3_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u3_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u3_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u3_am)"/></g></svg><figcaption><b>A · Sun and land</b><br>Sun resting on the land. At small sizes the round sun over a bowl reads as a head and shoulders.</figcaption></figure><figure class="cell big"><svg width="112" height="112" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u4_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u4_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg><figcaption><b>B · Sun and horizon line</b><br>Sun over one stroke. At 16 pt the line thins to a dash and the horizon is lost.</figcaption></figure><figure class="cell big"><svg width="112" height="112" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u5_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u5_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u5_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u5_cm)"/></g></svg><figcaption><b>C · Sun set on the horizon</b><br>New. The sun sits deep in one strong horizon and meets the orb's edge on the right; sun and land together keep the round silhouette.</figcaption></figure></div></section>
+<section class="board paper"><h2>Light ground · 16, 24 and 32 pt</h2><div class="scroll"><table class="mx"><tr><th></th><th colspan="3">Tab</th><th colspan="3">Chat avatar</th><th colspan="3">Tinted icon</th></tr><tr><th></th><th>16 pt</th><th>24 pt</th><th>32 pt</th><th>16 pt</th><th>24 pt</th><th>32 pt</th><th>16 pt</th><th>24 pt</th><th>32 pt</th></tr><tr><th scope="row">Current</th><td><div class="tab on"><span class="ti" style="height:16px"><svg width="16" height="16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u12_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u12_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u12_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u12_cut)"/></g>
+</svg>
+</span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:24px"><svg width="24" height="24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u13_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u13_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u13_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u13_cut)"/></g>
+</svg>
+</span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:32px"><svg width="32" height="32" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u14_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u14_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="45.5" fill="#000"/>
+      <circle cx="61" cy="43" r="23" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="11"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+      <path d="M-2 82 C24 72 44 90 68 83 C82 79 92 81 102 77" fill="none" stroke="#000" stroke-width="6"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u14_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u14_cut)"/></g>
+</svg>
+</span><span>Ask Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:16px;height:16px"><svg width="12" height="12" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u15_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u15_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u15_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u15_cut)"/></g>
+</svg>
+</span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:24px;height:24px"><svg width="17" height="17" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u16_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u16_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u16_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u16_cut)"/></g>
+</svg>
+</span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:32px;height:32px"><svg width="23" height="23" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u17_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u17_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u17_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u17_cut)"/></g>
+</svg>
+</span><span class="bub">Elara</span></div></td><td><span class="icon tint" style="--s:16px"><svg width="10" height="10" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u18_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u18_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u18_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u18_cut)"/></g>
+</svg>
+</span></td><td><span class="icon tint" style="--s:24px"><svg width="15" height="15" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u19_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u19_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u19_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u19_cut)"/></g>
+</svg>
+</span></td><td><span class="icon tint" style="--s:32px"><svg width="20" height="20" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u20_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u20_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u20_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u20_cut)"/></g>
+</svg>
+</span></td></tr><tr><th scope="row">A · Sun and land</th><td><div class="tab on"><span class="ti" style="height:16px"><svg width="16" height="16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u21_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u21_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u21_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u21_am)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:24px"><svg width="24" height="24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u22_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u22_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u22_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u22_am)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:32px"><svg width="32" height="32" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u23_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u23_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u23_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u23_am)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:16px;height:16px"><svg width="12" height="12" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u24_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u24_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u24_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u24_am)"/></g></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:24px;height:24px"><svg width="17" height="17" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u25_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u25_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u25_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u25_am)"/></g></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:32px;height:32px"><svg width="23" height="23" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u26_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u26_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u26_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u26_am)"/></g></svg></span><span class="bub">Elara</span></div></td><td><span class="icon tint" style="--s:16px"><svg width="10" height="10" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u27_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u27_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u27_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u27_am)"/></g></svg></span></td><td><span class="icon tint" style="--s:24px"><svg width="15" height="15" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u28_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u28_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u28_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u28_am)"/></g></svg></span></td><td><span class="icon tint" style="--s:32px"><svg width="20" height="20" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u29_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u29_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u29_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u29_am)"/></g></svg></span></td></tr><tr><th scope="row">B · Sun and horizon line</th><td><div class="tab on"><span class="ti" style="height:16px"><svg width="16" height="16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u30_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u30_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:24px"><svg width="24" height="24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u31_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u31_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:32px"><svg width="32" height="32" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u32_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u32_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span>Ask Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:16px;height:16px"><svg width="12" height="12" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u33_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u33_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:24px;height:24px"><svg width="17" height="17" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u34_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u34_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:32px;height:32px"><svg width="23" height="23" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u35_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u35_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span class="bub">Elara</span></div></td><td><span class="icon tint" style="--s:16px"><svg width="10" height="10" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u36_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u36_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span></td><td><span class="icon tint" style="--s:24px"><svg width="15" height="15" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u37_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u37_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span></td><td><span class="icon tint" style="--s:32px"><svg width="20" height="20" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u38_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u38_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span></td></tr><tr><th scope="row">C · Sun set on the horizon</th><td><div class="tab on"><span class="ti" style="height:16px"><svg width="16" height="16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u39_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u39_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u39_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u39_cm)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:24px"><svg width="24" height="24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u40_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u40_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u40_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u40_cm)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:32px"><svg width="32" height="32" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u41_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u41_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u41_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u41_cm)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:16px;height:16px"><svg width="12" height="12" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u42_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u42_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u42_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u42_cm)"/></g></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:24px;height:24px"><svg width="17" height="17" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u43_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u43_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u43_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u43_cm)"/></g></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:32px;height:32px"><svg width="23" height="23" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u44_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u44_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u44_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u44_cm)"/></g></svg></span><span class="bub">Elara</span></div></td><td><span class="icon tint" style="--s:16px"><svg width="10" height="10" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u45_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u45_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u45_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u45_cm)"/></g></svg></span></td><td><span class="icon tint" style="--s:24px"><svg width="15" height="15" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u46_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u46_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u46_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u46_cm)"/></g></svg></span></td><td><span class="icon tint" style="--s:32px"><svg width="20" height="20" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u47_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u47_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u47_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u47_cm)"/></g></svg></span></td></tr></table></div></section>
+<section class="board forest"><h2>Forest ground · 16, 24 and 32 pt</h2><div class="scroll"><table class="mx"><tr><th></th><th colspan="3">Tab</th><th colspan="3">Chat avatar</th><th colspan="3">Tinted icon</th></tr><tr><th></th><th>16 pt</th><th>24 pt</th><th>32 pt</th><th>16 pt</th><th>24 pt</th><th>32 pt</th><th>16 pt</th><th>24 pt</th><th>32 pt</th></tr><tr><th scope="row">Current</th><td><div class="tab on"><span class="ti" style="height:16px"><svg width="16" height="16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u48_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u48_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u48_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u48_cut)"/></g>
+</svg>
+</span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:24px"><svg width="24" height="24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u49_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u49_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u49_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u49_cut)"/></g>
+</svg>
+</span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:32px"><svg width="32" height="32" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u50_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u50_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="45.5" fill="#000"/>
+      <circle cx="61" cy="43" r="23" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="11"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+      <path d="M-2 82 C24 72 44 90 68 83 C82 79 92 81 102 77" fill="none" stroke="#000" stroke-width="6"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u50_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u50_cut)"/></g>
+</svg>
+</span><span>Ask Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:16px;height:16px"><svg width="12" height="12" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u51_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u51_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u51_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u51_cut)"/></g>
+</svg>
+</span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:24px;height:24px"><svg width="17" height="17" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u52_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u52_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u52_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u52_cut)"/></g>
+</svg>
+</span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:32px;height:32px"><svg width="23" height="23" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u53_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u53_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u53_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u53_cut)"/></g>
+</svg>
+</span><span class="bub">Elara</span></div></td><td><span class="icon tint" style="--s:16px"><svg width="10" height="10" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u54_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u54_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u54_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u54_cut)"/></g>
+</svg>
+</span></td><td><span class="icon tint" style="--s:24px"><svg width="15" height="15" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u55_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u55_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u55_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u55_cut)"/></g>
+</svg>
+</span></td><td><span class="icon tint" style="--s:32px"><svg width="20" height="20" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Elara">
+  
+  <!-- 24 px and under: one hill band and a heavier rim, so nothing closes up.
+       The colour mark's own shapes in one ink: the rim of the orb, the sun, and
+       the two hill bands, parted by even gaps; the cream sky is open paper. -->
+  <defs>
+    <clipPath id="u56_orb"><circle cx="50" cy="50" r="50"/></clipPath>
+    <mask id="u56_cut">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="50" cy="50" r="44" fill="#000"/>
+      <circle cx="60" cy="44" r="20" fill="#fff"/>
+      <path d="M-2 65 C22 53 38 73 60 67 C78 62 90 67 102 60" fill="none" stroke="#000" stroke-width="13"/>
+      <path d="M-2 63 C22 51 38 71 60 65 C78 60 90 65 102 58 V102 H-2 Z" fill="#fff"/>
+    </mask>
+  </defs>
+  <g clip-path="url(#u56_orb)"><rect width="100" height="100" fill="currentColor" mask="url(#u56_cut)"/></g>
+</svg>
+</span></td></tr><tr><th scope="row">A · Sun and land</th><td><div class="tab on"><span class="ti" style="height:16px"><svg width="16" height="16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u57_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u57_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u57_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u57_am)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:24px"><svg width="24" height="24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u58_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u58_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u58_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u58_am)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:32px"><svg width="32" height="32" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u59_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u59_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u59_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u59_am)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:16px;height:16px"><svg width="12" height="12" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u60_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u60_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u60_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u60_am)"/></g></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:24px;height:24px"><svg width="17" height="17" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u61_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u61_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u61_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u61_am)"/></g></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:32px;height:32px"><svg width="23" height="23" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u62_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u62_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u62_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u62_am)"/></g></svg></span><span class="bub">Elara</span></div></td><td><span class="icon tint" style="--s:16px"><svg width="10" height="10" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u63_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u63_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u63_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u63_am)"/></g></svg></span></td><td><span class="icon tint" style="--s:24px"><svg width="15" height="15" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u64_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u64_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u64_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u64_am)"/></g></svg></span></td><td><span class="icon tint" style="--s:32px"><svg width="20" height="20" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u65_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u65_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u65_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u65_am)"/></g></svg></span></td></tr><tr><th scope="row">B · Sun and horizon line</th><td><div class="tab on"><span class="ti" style="height:16px"><svg width="16" height="16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u66_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u66_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:24px"><svg width="24" height="24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u67_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u67_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:32px"><svg width="32" height="32" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u68_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u68_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span>Ask Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:16px;height:16px"><svg width="12" height="12" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u69_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u69_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:24px;height:24px"><svg width="17" height="17" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u70_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u70_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:32px;height:32px"><svg width="23" height="23" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u71_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u71_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span><span class="bub">Elara</span></div></td><td><span class="icon tint" style="--s:16px"><svg width="10" height="10" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u72_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u72_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span></td><td><span class="icon tint" style="--s:24px"><svg width="15" height="15" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u73_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u73_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span></td><td><span class="icon tint" style="--s:32px"><svg width="20" height="20" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u74_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u74_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span></td></tr><tr><th scope="row">C · Sun set on the horizon</th><td><div class="tab on"><span class="ti" style="height:16px"><svg width="16" height="16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u75_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u75_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u75_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u75_cm)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:24px"><svg width="24" height="24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u76_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u76_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u76_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u76_cm)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="tab on"><span class="ti" style="height:32px"><svg width="32" height="32" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u77_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u77_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u77_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u77_cm)"/></g></svg></span><span>Ask Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:16px;height:16px"><svg width="12" height="12" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u78_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u78_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u78_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u78_cm)"/></g></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:24px;height:24px"><svg width="17" height="17" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u79_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u79_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u79_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u79_cm)"/></g></svg></span><span class="bub">Elara</span></div></td><td><div class="chat"><span class="avatar" style="width:32px;height:32px"><svg width="23" height="23" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u80_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u80_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u80_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u80_cm)"/></g></svg></span><span class="bub">Elara</span></div></td><td><span class="icon tint" style="--s:16px"><svg width="10" height="10" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u81_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u81_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u81_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u81_cm)"/></g></svg></span></td><td><span class="icon tint" style="--s:24px"><svg width="15" height="15" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u82_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u82_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u82_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u82_cm)"/></g></svg></span></td><td><span class="icon tint" style="--s:32px"><svg width="20" height="20" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u83_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u83_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u83_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u83_cm)"/></g></svg></span></td></tr></table></div></section>
+<section class="board"><h2>16 pt, pixel by pixel</h2><p class="lede">Each mark at 16 pt on 1x, 2x and 3x screens, magnified.</p><div><h4>Current</h4><div class="row"><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAACD0lEQVR4nIySS0gbYRDHN7sxmwptSgK1NJqs7q4kJr4oLa0WSsGGSkGUNj1ZA60UilYopYfSag9aKogvDAjiyQeKiooPxEgSPKgXn+CaaFgf8YFBoygalWjWCdElKqj/w8c3M7/5mJlvhAc768i5JmwzHSYTu+xknUtgkgolqVBkvNYlqmN4RhBIODw6qmqoa+vvM6S/i1erVJEkOO3z7KTdVtfZoX+TmvfRIAoJOUuwsez3//8opbIg59sDqRS5KJfbnV9R7nJvFv/4qSZJFFy9g9YYijLm/w2m9z2eqVn71u5OmExWU1gEtQEGfuE4w3RZzN3VNTx64vP9Ki3ptlo4jgPzSVx85e8/BTm5qdmf3r58hcmIR2qSSklK5hN6rBZjYz1vrrlcPo5LeZ60sb0FU0Ghs6exccFFM465S21MOxxwArawsowurq4+1mqRWyhRowFYiItEYhEeHNDQ0ZdQLU3DGYqLpRKJYHjEPDQxfgfHYaxUBCF/GAa9whg6zQMYitEEEUtHSyX3nyUk7O175pYWBIXlRbWtLfxjMERd8gvJ3Xtw9x4fT83axhjG6/UGotn6D4IZZjTt6xeIITcpVCxuN1ajkeHhuZlZyC2Ul2Ug5HL/T39+r4c/v55WRUVlpqXDxZ8gxLCm0gqoD0XRqyg44cXmskrAEH5bA/Kv94CJdQatd4QiQ3dhvU8BAAD//2Goi58AAAAGSURBVAMALITIZh1IUZ8AAAAASUVORK5CYII=" width="80" height="80" alt="Current at 16 pt, 1x, light"><figcaption>1x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAEvklEQVR4nKxWeVATZxTfhBAl9yYECowo2JYAhqOWAm3FylXkcEoHuRXHaQsqVKdl6NjaIqTtWOtoy/QAqjIqUuwM2IEOlMsqOAoFp2BTjhIZCFfClYMEQg7os0GEQDZB/f2x++3b7/3et2/fRZiViRBMNNy983tTo0A4IJHJJXIZDodDaTSURt/q6Lg7YGegnz+2Os6YAem0vKC09FrVbzMqFYY+hUTaGxaeGh/PoNLMNaBWq4srK/JLS+QKhaWlpc82bsDLPlwXFxsmi4WisGFSIhmbmvy7p+dma0sbn6/VamkUyqGEpKTIKCKRaMLAtFKZzjvZ0tEB1ElRe96LjWPSGYhxiCcnfygpLq+r1Wg04K6vMrOoZLJRA32DwsM5J4dEo3uCgtMTk+1tbRHzMCIW5xVfqbhRv9ne4btPs+H3rGFgSipN+PDYwMgI/LrTmVnwBch6MKtSfZb3beUfDVscHK6eOcdiLH43Xn9TazSHc7KB/e3QN88d/2S97ACrjRu/zvpob9ju/uFhcDIQrjBQVF7W3t3l5eqWm3HUHDrR+FinQKDV6Qzk2UcyXnJ3/6uzEwj1kocumpRKQw6maLW6mvMX7Gyw/A55kHf5cs3tximZDB6JlkRvN9dj+w94u7kv7RkWicNT3yEQLGrOF1mjqMWJ45mnCvPbu7oOxsSEvr7DGPX8/Pwv1VUZvNxW/v3ZuTm9UDevGxaLIYRGxsY8XDhkKysQQsjOqGab29sVMzO7fP3wEOzX62qZdHpaXALG2Sek0rNFF+ELVr9aWFgor61paL6zJEmNTYCffL2+DsjxLfc7NFptVGAQmUTCMPDx2TMyxTTGhtM/FQpHR/RrCpkUuSsQMgPI8U1trSB6heuBoQwHuX2vDcEEVJSapqalRy+OK1yBnNDd9wBWzps2YShPSKYQM7B8G8fZGa5ATpiQSGBlzWBiaFLJFMQMQFAtrfWEQI4fl0g2EDdQKWQMTTaTaf1/mcOGJ4fz+EwUMtACOR4xD9HBodgbnmPbBPj4rJbj2Sg6p55TKGew9dPiE7Bz8ETaoeUumlYobZjM+PAI3D/8P1kMlE6lIqZQdevmB6e+NBC6ODnZsdnb3bnvxsYtl6s1ar09XGtbY0VDPV/QC9koGh9n0ugog2HLYr3h6xcesNPA9VBUvr96pW9okPuCy/ZtXG9X1zVPNiQSCYRCfm8P9FdcRXVZBi8HMQJfT09fDy8/Ty8oYQYUfUNC4egoHKt/cBBSDBhXqxfmfo4TDwteS4zTPKquGIDsh4pCsiL92983q5ozud+SQLhX9isealN0cAhiBsA/vQMDHd1d5rADokNCoUU/DNP05H3E9XcYbADh+/tSEH3DgXEhLjwCeabY/1a0PkAWEw2svbjFCXlGgJQ+kpisXy8agFmjIJdna22NPDUc7ex/zM6FFr3CAMCObVOQw8PuCibBoNEKeV8wGY9HqRW1iOO8tf7iJWj9yBPB38u7uvACjC3LhWuMjjqdDtrsN5eKIC4R8wD5cTTlQExomIWFhcEro8OvQqnMv/ZzSWWFyeE3PiIS+jmFvHbBx5kc3280361uvPVAKISOL5HLocXD7I7Sac87bg7bERDk/yq2+n8AAAD//zrk32MAAAAGSURBVAMAuGMB4nMqyncAAAAASUVORK5CYII=" width="80" height="80" alt="Current at 16 pt, 2x, light"><figcaption>2x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,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" width="80" height="80" alt="Current at 16 pt, 3x, light"><figcaption>3x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAACI0lEQVR4nIxSXUhTYRg+fzsyFyGuHDE3cyd1Z9lyQhd1E2oOA0uTfm7CrrwQ+v/D6KbCohCJtAgyDbEb/5gOBX9wIoiTieg8zk3nNj0q/qBjovNsZxvzG9Pj3IX6XHy87/c+z/t+L9+DJV1TQvvIkJN31GpCIiWkSSC10fM2mtb09oxbzBwHDgticPzJw+K7eXn1Go3RYrY47OCSlBGX5WRxQUFzV1dVQ73P798TyGWy7+/eg2YfflWvO53QYZwVCsufvRQJ48sqKyx2OxonET0qLPKw3udfyncYhuMJ+HySuOD1sU6Xq6Nfd0WpPHcmQT8+hqkUitvZOfmlJRwVQZCvr17fysqBYRikhomJp58/ffxZ3f33X+dAP1r25gUY1KfXc4L8rGywT5gNIBaJUATWDQ8nxAtVpAKRywgDZYx8dHpKatQaF1PSQqMoY3KiBDkvFo9QFHQCjJpMyYlijPWxXpaNLExaZ6KoJus0OBmPZ8PlQu3bzsIbuZfSUk8LBH5/YMvtnnE46OXlU4LYuaVFnX6oQdsOllxcXeHjMZTVClfV/Ci5/4Brtrax3j04uLm9BWIMxTJIMlORjvOwcLWmqRG+fu+m9vcfnMeDjoObYYoel6JQXGwgELiqyjxWUFlXOzBiQEBU29I8NTt7NNtss/3XtoEgZI1gMNjW14uhKHAr+OYoKphf19rytuLbgfm4WsjeuWpCGmHvBVrTc8jeuwAAAP//XXn9dAAAAAZJREFUAwBhhNmEaetxOwAAAABJRU5ErkJggg==" width="80" height="80" alt="Current at 16 pt, 1x, forest"><figcaption>1x forest</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAE1ElEQVR4nKxWC0yTVxT+W9sKBfqghRbW8ibIYDzsGCAD2QCpbLL5mDKcwQ0EFvdI5rKZOV7RBbdsi1lAQZ0b41UkBjdeDuQhBARW5CWPLg4GTHS0pS1tebTa7mBdKWj/1oQvzc25p/d85977n3PuwTlv80NQ8WpIKDc8wsPJmUomUUlkrVYrmZ+XzMv+mpqqb7vR0t2Fbo4x5oBsbZOWkHAg7nUrS0sUe7lSWXmtrpDHkynk5jrA4/Hv7IpPT0gk29io1A/4twfb+H8MCgSzYpFYIoUFNCrFnkb38/KKfCmY4+OLx+Fkcvm58tLSmmq1Wm3CgTWRmJeRHRIQANSl1VfPX66QyGSIcdjRaEcTD+6J4RLwuKabnZ9/+41iYcGoA1cW+2xWNtvB4dempvyS4hnhLGIeHO3sPzyU9EZU1N93//ngZM749LT+r00UNkMnUcnkn3K/dmWxrrW3fXnmO5lCgZgN+YKyo7eXxWSGBARuC+TUt7UuLi+vcQD3ePGrXG839ysNv8MxNRot8ox48PBhY2cHg0YP43ACvX1+a27SaDSrDlL2vbUnJrZ/dOSjUyc1Wo1JOiadzmY6QrBC1Brq2/n8EH//rT6+S8tLvcPDiO4b2JLJjZeKcDg8N+XwPaEQhRfi6uOkw9ywcFsKBabLKnXf6PCZop9hZ/o1z9kz6i78COEUm/KuWCpdOcHx1PTA530uXals7OgwRo3BYPZz485m5QS94GdpYaFT4jZtgnvfuyPW0Z4xKBhbWFpCHmUG0dIiNHArBGRrTzfWxspqd8yOOam0kFeOsncalfppcgqFRHqqb/ARHRqm15zn8WDvu6NjgBwb7OdPwOOrW5qVi4soDnI/OUaytkZZ8NmRVIhvnaxYXKhpaSYQCECODX8xCFQ9QwMoxjZW1uGcIAQVRAsL7ssR+mn/2CiMQI7b4uYO0vj0FIqxHZWCmAG6ra1eHhu/AyOQ4+hUKkiiOSmK5bxSiZgBlVqll3WEQI61o1KXVSpIRRRLkUQCP8QU+kdH9TIQAi2QYxHzUHW9AX0BJFA7v+dJPVYokWwmEKwtiej2BeVl6LXv1Ll8KMD6qQ3RalYsrqivxUTujxNJJXKF6VuO2x75/fEv1ikFExP3hLP820MXKy8b6qF66/xhXkvaFx8V5evh6chgQoWB6j8nk/0rFsFbWHejFfLF0AwqxNGDh9zZ7KE/BUB6a2T4qTtjMZjuzk6+nl5ajQaTfCw9LzMbMYKugf7ugQEY+0aG11G4sVlsB0eoPC4stpODg4ez85PmRzJOYHxjQjvKKiDrEFOA00BFgYT3cnO13Gxhcr1KrebsfRMLtanqeiNiBmgUiqeLS4C3tznsgKrGBqipK2GaV1IMMYtsKIDwh+IiEFYcCCVzFXW1yIbil6tVugB5nGjgTTAxjmwQIKXzy0p08mMH0GukZWbcR33OzMTkzN33czKX/n/0V0vFfZEwLStDYV5dMwZIo9SME4at1JpaBLcU/V7SupA3H519t3amJk/OzBgqV/siHeBoELWQ/X5eW4ioXakh4HueLiw4faFw8dGzbAijza8VkZh+4O3EXfEmm19ebU1BRblybcdo2oEerwSH7IzY7u7kBL07lUSCJx7aIYls/s7UJPSAzV030c3/AwAA///GZaUkAAAABklEQVQDADojE0wNesc7AAAAAElFTkSuQmCC" width="80" height="80" alt="Current at 16 pt, 2x, forest"><figcaption>2x forest</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,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" width="80" height="80" alt="Current at 16 pt, 3x, forest"><figcaption>3x forest</figcaption></figure></div></div><div><h4>A · Sun and land</h4><div class="row"><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABXUlEQVR4nJRSTUjCYBj2rxIri8HsR7bhRqGd8hh4NiqQpKxLh6Awugd19dihH8mIOkS33MXOGUWHYhXl6KBlYeamLDJYc4ewTPrEsFhN2XP63ud7nvePV/cmPKmUQKdSCMUGjdyHIIrX8Vsum61dIf+e960HQuH9cthnty/OzZsgSLbCFklW1AAUTfvW/NVaOjyjJMzxxflnsShryDxLFw3UqUxa1tBr7ZEwMAThCCprGB8Y/MMMVd7qq8jJEUU1NRq6MYsFQTpgGLDJNHtKRxrq6rswDDWbIWPLq5hrbTa+8Lw6Fr10zXo/CoVygnbY1O9w2HCi09QWvb+LPyZZjntgWT4nGPT6UGBDDW5pkwyu7GyramHBOzPpHinNMDXqsRFEdbUVxydcw99D67Ta3aXVac+YRvPPDgAJMgaX/UBWGvr3edM3sb2DcIJhEkwKhASKEQjqdjrttp9FfwEAAP//514EiwAAAAZJREFUAwAyTnhcE38VrwAAAABJRU5ErkJggg==" width="80" height="80" alt="A · Sun and land at 16 pt, 1x, light"><figcaption>1x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAC7ElEQVR4nOyWX0hTURzHr3dbbru6f7mF05y65ea0zcpGGonaH0yFDCItTH0MgoQeil4KNQl8iDIkNfozlUoE6R8sM4Q0SKKHfAitsenccuafbXd3uun+dcRa5v7d7vTNL5fLuef3PedzOff3O+eS7eg0tJkiQ5usLcAWwF9jWs3wyJcx7Thmw8SpqRm70vL2ZVMolGD+KPx14PV67/d031E+dns8a/tlYnHLtTouhxMRwIJZLzc1DX7+FDAKZr915ep+mdw/BEP41KNSBZsdaNZkamxrdTqdBAHftNrmro7QHvBtmjs7CAJ6+/sCvt06PVO9JgjQ6PV4bJhtAawVEYDWgAsANG4wEAHIxRI8NhiGQcoSAUiFIjw2AT+BGh1NBFBaUIjQaGFtFcUl/p24APFc7sVz1aE9UpGo8kQZQQAQGJwpSgsWJcHwjdpL4O4fivqvM/nN0GB9y10TioI2jRot4CcK+PzS/MJ8hSLYfhdlnTfcbG8dGRvVG41Ly042I5bFYIJhR3MPFhzI8V96j8ezaHfAJJhOpYZ4FRTD1LqJvdIMMoVMdrlcX9Xq1cD03NL03Byo+74PQ+AxL1uhkMkUMrkv/0AuxiB00LA7HLqpH5NGo944NWMyW6yoGbWiNmzWbDKjFrtj6fTx4uzM3StLNGOaP1JTtRxuM0gXClMSd/J5PPXExHedzjjzM4R5G4UyoOyKY7NXDhweZ3t5cUnni+ehAaMaDbggfKoqOwlmh3xZBLIwLTkF2iDJJZILZytX278BsQjSVt+wIy4OilhJ8fx71+tpf1Lgb+bGc3ltdQ0InQ5FIBaD0d7QyGGxfD3/lIYkVfjuoTIrXQoRUk7WHlX7g+SEhLWdAQrN7Xb39r+9rXw0b7FA+MRhMmura04dKyKRSOtCQSvZtrDQ2v30yauXiw4HFFwxdHpFSen58jMxCBLQEH6rGBj+qBp8r5mcNINSslrBzwubwWQzGaIkQdGhvMM5uaGH/wIAAP//BkLn7QAAAAZJREFUAwBiOxeNmfklnAAAAABJRU5ErkJggg==" width="80" height="80" alt="A · Sun and land at 16 pt, 2x, light"><figcaption>2x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAEFUlEQVR4nOyXbUwTdxjAn9EXMAKF9not6hithRbbyqw0W6zafVASpw7IBipZWeKmcWzuhS2BTMEtcSPbNG4S5vhAskwFjfrB18So0SjqB6UkakHEtmpJhZaaKihQsPr4EiS2vTuuBxrD70OT9v/c09/d/+55nuP33e2E1wk+vGZMCNExIUTHhBAdE0J0vLlCnV5Po9Xa5rC3OhxtNxyJ8fGZSpVGodSmZ8w3GnkxMQzzvMVJLzt+7mzZpj/u9/WFXZ2t1W0uK5dLSWBAtEIDgYGq2tpdRw5Rh4niE379vnTBHBOMqVD7zZulVRvxk2H8isVL1635ks+nuk+Ybm1YDpw4ztwG2X/imNvroY5hL9TcYqvbt2dUhzzo7y/f/GcwGATOhTB12Saa1GGx2mx1e/dwL3TO2nTrthtY0UD5BLAUcnZ0AFu6vN7e+w+AWyG7ywVseRgMujpvA7dCTtctiAJnR8TzYSmkmT4dokCjVEZaYtnLMqMQiouNTZs6DbgV0ijZC6nTFDGRey3LLaNOSg31drNMOiku7vOPC2D0TIqLteTmAedCyDeW4plqNYySypK1qtR3YCyEBALBlvL1OIgxPyRvQU7+whzqmKi6/VS5bPeWv7PUGtpInBi/KCjc+O13tJEcTIzYYv/d1fBPw86hoaHQVbVCMS/baMnNl0kkTLI9F/L5/Vcddu8d3x3/3UfwiJRISDFBSsQpUhLLBpNE/p5755ubzzRdxL6bLBK9/+6snDkmfYaaehwLL3T41Mkffq+KFDFFJtOp0k2G2QvnzhUnimBsaLXbebyYjDTFE6Gu7m6zpYjJYe9lZeWY5i0ym5mbtTmdeO0dLpfg6aXCrfD4um+43eKkpOGYlvZr+IJwemcDKZY837Lq7f/X1O8AxqhSUw1anXLa2zKpNIUgMBFeyGdLV9qvNdlsrfbrbU4HnjfDhF8VfbrWUgzD99C93t5Fq1aiPrwKxCLR0br/EiZPhuHHHsvJqsJl8IpYvWz5MxsYWYeKlnyUrdPDuGOYocW/Hv76QkgoEPz10/oUqRTGETkhra7YgH8NoUIIkZyMy3weD8aFWKGwZsPPkhGPG4S2Dl16xro1JTAu/Fb6o1aV/tKPYcroiiVLn0TXbhsM1wo4AWtSRcnXi80fhC5F7GX4RlfyS6W/pwe4Rpos3lpROStzRtjViN3eoNXu3VqTGd0wH4paodxXXRPJBmi7fSAQ2HFwPzZzrJwQHVjqVhcuL87NEwqFFGGMxg/s5Nvq6+sPHWB3V+HT9Fle/spPCpISEmmDRzEPuT2eo41nGpsuXrh8KTA4SBuP1cWo15sM2R/ON8sZlzc2A1r/wAA6WVtsqIiTQpfP19Xtxd9JCSEnCBlBTCFJrL9G/UyGs9RIHgMAAP//iItwygAAAAZJREFUAwDO3XJPXssTTQAAAABJRU5ErkJggg==" width="80" height="80" alt="A · Sun and land at 16 pt, 3x, light"><figcaption>3x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABb0lEQVR4nJRSz0vCYBie27RDJgMPmqYWUhmBFIGgpyiyiC4amBEREQj9oENQx64h/gN1KAg6FFlJkIERFAUd86RRTudUIkyJ5Vgxx5oMZgym7Lk9z/c93/s+7/fCFpcdkAMYkAnZBlDqoE3dau+16bTa5hVaVMrt1fVp9zhPn+LPm6HgZ7nMUwgx6USGldm5BY9XoCZ9u8VgjN7fSbY04nSJlGGHAwRBSYNRJ64JQVCnwSBpiCeTIoULkM7nJQ0n0SuRcnxdVxQT895Rp/ObJF8zmXQO/yiVOLWrw+gaHPql6VQWwwqFL4LQqNVEpaJFEJj6oQI+v0qp5B94LxZjjw8JFH3DsP7uHv/klEmvt5otiEZDUpR3bVnB7VLAN7OxuAQ0w87e7mHkvJZhP3yaSKUa306i6NFlBOA/jmXZyO0NDEEDtj5h3gIYhjk4C2+FgnS1Wgv9f705g2fMbTWbuaY5iuJZNIdfxGLxl/qg/wAAAP//wao98QAAAAZJREFUAwBi9HmtwxqSAAAAAABJRU5ErkJggg==" width="80" height="80" alt="A · Sun and land at 16 pt, 1x, forest"><figcaption>1x forest</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAC+0lEQVR4nOxVXUhTYRg+29mOzq2znTl/Umf7UdQCsUCMLMUKyyypLjIjFAqmSdRtWWreeRFFQqB0YyalV5ZlRMnAlBQV5/9xzvmTePyZOrfcn22zTwzRHXd2nHrnw8fhO+/7vOf5ft73Pawjp2Kh/QQL2mccCBwIkBEtlSXExUVL5SiPpx7T9muGmzs7/tod7viMHdWB4sbNh9k5MAxvNvaqh/JLiuf1+m1DYIE4CKIBsN6yp8VZ6ZeZTKaLK0gkykg516dRE3Nz5EAmRA+ZaenJ8fHuvCKhsCAvn82CyS5aO4iSSJ8/KoBhqtUEYEI2m92qUrnYae3g+oWLCNtzOmReSicbaQnIxGF0aCiXJ8Iw7wTCIXqQhYm9EejBcTo0p9PZox7yRgDXaunQxgnCtrLijUC9stFksXik1TR8JhtpCcwuLLyqqqTm4FpNdf0nLwUAQPCARuPO63A4Cl68BHdAdu2sF6Umnn52/4FQIABzi806PjU1OU3UK5VN7W3u+h1DnnTisSL3eMwxcXAwgiBLRuOi0QDCvre0KNtazVarawCDwfXlOJxOIECxlEM8Lqj/rsFBlt1uZ8GsoxER6w7QucCIkclTE8+A16aOjva+7vae3r5h9TphdXV12WIGE1/ERxIaKj4cIg4JDsT8MT4qQAV8Hi/AXyjk8zk+vrVfGzr7+9eOCLSRxsoqHwSBKIGPjoxOTk7P6iIlkkipJCQgkIIM8vVszu2FpaW1DqPTLwK17KvXqAViZBFgQPRQ9bEOfB3ayKKyd2/VY6PQHqEbx1+/r16f/xdYNptziwpndDpo15ggpu6VFFltti0CADPzutziwmWTCdoF9AaDovAJeG5YthQaOKXzd3JUgwOQV/il6kpT3J0giM1G1z8a2Fpd449p3VxsVLQfhwPRA7jP0ory0jcVFnLduKtkrp9fXmbWrSsZXEqZPyZTTcOX8toPJrN5W4LnVpGScDItKVkeHo6hfAxFQSXrjQa9wTjye+Jb809Q7dTh/wAAAP//T3iM6gAAAAZJREFUAwBEMx4FIBI0nQAAAABJRU5ErkJggg==" width="80" height="80" alt="A · Sun and land at 16 pt, 2x, forest"><figcaption>2x forest</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAERElEQVR4nOyYe0xTVxzHfx2PUkHsuxZFSimVxyBb0S1jbLKwjT8k27JliSuaLDF7OF2yhTCyzCW6TRhblmXKkkWzZoozc7KhZi8HW8Kjk6RSnIAWsG0QQbx90BdKS0v9YQ0SbG9vb4sawydNk97zO+d8e07P7/ftic8oLoT7iXi4z1gSFI4lQeFYEhSOJUHheHAFreTzS4rWrc2U5mbJ5JkSh8ul0+t1RkPf4GD7Gc3MzAzFcRgxqWVlTxR/UV2TzGIFbe3u662qrxs3m4ECcex0EUQBMzFh57btNW+8lZiQEComTSh6+flyw+UR4+WRcONFJ0iWkaHa8/mGxx4PG8lMTNy4oZTLYau7tTN+su17CKLgxbJnsyUS6vEvlT0nFgrIY+gLeiQ3b+srr0bUZVlSUn1VNYPBIImhuWUsZpKqto6dmgoRIhYK3W6P9nx/qACaK1SsUKwRpwEtNlVUkLTSFCRdnQ50Wcnjp7CWQYwFpa8BusTFxa0WiyHWguivEHl3moIuGC5CFOj0IbvTrGU6vQHoMuV2G0dHIbaColmhAaPR7/eHaqW5ZQMGI/UCvgDyL0NT0JTH/f0vxyByrrunGk8ch5gLQvYe+uHcgA4i5JNv9+kvXYLFEDTt9b1fu8fpclHv0tzSgi/ymKjsh3NysvV0Z4E8B+0ieaTP51M1NdXt/47ce0BMHCNW77c3Kd9RVibEBzmzeKY6NJqDJ5tNFgul0QKCuGx2rjRLwOVwVnAYDD9hsWJ/wmoeI0xuj4fKQKkpKU8qitBWlyiKrA5bV0/PKbUaDbXX54VImBW0sfSZr2o+DBUxSlw9PzTY2a09pe6wORywOORIs3w+79Dw8KwgIY/X1niE3DcF6Pr/bEtnx+/tbdSVySWSHKkMi1dgqXArRFy+ZNUqi802F5OfnY3e7enK10wT1ltbtmPzlh2VW4AyF4eHtRf6DSMj4ybTuNlEmC1jJiLQlCeTrcsvwPe10sxcqYzigA0/NjYcboS539Dy5OQ/D6j4HA7cC3C1yre+7rp2DebyEB7gAz8fhXvE/qM/BdTA/MR45LeTmt5zcNfp7u/Dqec+3hY07fW+V/vZGEHAXeSKiXj30904NdwpCG7u5YLmRQWN0fbdu6x2+/yHC0uHyWqdcNhLKfwZjZ4Pvqz/72zPgodBalnf0KDZNlH8qALdOCwOnunpXQ17T/zTemdT8OKKmjAH4p0Gi8mEWENYLW9+/NG/XaeDtoas9pjx/upoW/9woYDLhdihM+g3V1dhRg0VQGY/MDn92vq30zVZIJcnRb1Udqdz3+FDO7/5GoclCaNkP1akLN+mVCorXiC5BCIBT9PB482qpmN2lzNscAR+SCwQlJc8hQZjfUEh3veEjUffountVWvP/NHedpXa9RnQM2ioBjUp8vLThEIRny/i8UT82VsfwmLGezucG7Mr3m9g3qfopeZzAwAA///kdJiYAAAABklEQVQDAJDyrkmC5kUnAAAAAElFTkSuQmCC" width="80" height="80" alt="A · Sun and land at 16 pt, 3x, forest"><figcaption>3x forest</figcaption></figure></div></div><div><h4>B · Sun and horizon line</h4><div class="row"><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABHElEQVR4nMxSv0/CYBAtUoMJGNN8WiwJH6agIU4dnXT2j9BFVzcSV13djDq4GhcWTVcSDJMpDKRjgQQamtKWFghh6A9oA4SkQ0OBbrzp7t29vHfJofpQRoIARQIisGDHbzAcjViOk1R1vYNpmc8fbz+FwqK9oKiX3CMOgK/DZz7vbs/AsOzT++uqSH/Mv4cpVSq2bfsKREXxMI7j8B3RV0Blzz3MEYalk3BRLzk6d3evm0aD589IcjcchkTi+vLKnYZqXPWbpiW1qxsmwLA4AIk4niUzGQjrraY1ngiSJPc0wzJKTPnh5hali8Uv+hfZAASO70UiIbHNNQUhSRAHsZisaYrWa4mC2h+4e8fg8PQklYap/Wh0Hmn7nm8KAAD//+V2TAgAAAAGSURBVAMAhMVrtX4/68YAAAAASUVORK5CYII=" width="80" height="80" alt="B · Sun and horizon line at 16 pt, 1x, light"><figcaption>1x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAACVklEQVR4nOyWT2jTUBzHm9J/60Zt1j9bUk3aZm2zIevB4UU9iOChqHN62EGKuwseRbyIF0FBUIeIetqG4HrwoHaiB5FdVByirNB1W5JuHbYmWbo23RT7zzcGbizd+sjoaf3e8nvf9z4vv/zye0/3O5fRNFI6TYPVBDQBSsUZ5vOP7wmOzRfkgIc67POf6Osz6PU7+RH4/6BarT6NvHgwOlKpVLbGe/2BRzdvOdrb9wRYkfPX7t6ZnPpac9SBoveu3zjaG1QOaTVwiryd2Gl1ICGbvf3k8d9iUSVghmWHx0breh6OjagEvHz/rlgq1bWNT0RVAthUCsYmr64KkqQKsAQFqLkVKECQpmFsCIIE6YAaQDdFwdjcLpfJaFIDOHvylLnFVNc2GDqjDEIBMIfjanhod08P1RU+16+Mw/aiy+cHeEmMzc5uPBr0hoDHAxZ1dXbarShqsbSazTUnbraK1M90YoH7JYqg2uwoCnoLgeEkjmu1UG9ZLpd5SRJXpJl59sOXT1Ox6aGBC1cuhdcBz9+8ehYZzwiCcppep/ORbook/aSbpryY3eG02S1tbaBwv8VicZZJcByo/Ww+ly8Utu8dQaZfRxExzR252K9pgEAOI/eHdaA8aK8XdJKNqKujA+QnI4i8tAz6s0aVerp8p48dHwyFjAbDeopyshyd/Bj00xRx6H8hg9Y4l0zGmfm5hSSzmGKWFtM8v3UVkAHwnXCn02a12g6gTruNwDACP+gjyFZzy6YN/sAplUvCsiTmsmtrf0wmY7eX2uUgUwNQp+a1ZR8A/gEAAP//bhWavQAAAAZJREFUAwBPmubRfGGoCwAAAABJRU5ErkJggg==" width="80" height="80" alt="B · Sun and horizon line at 16 pt, 2x, light"><figcaption>2x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAADUElEQVR4nOyYa0hTURzA/3Oa2l5tuofO3FttSpCpRU/70JcizCjCDyYkQQkGImhFRARiD/ssQvVZyqBAJbKHlQZWZk3cms5Nm7rNbbrt7qGB2lFDSuze7e5KEvfHYR92/ufyu+f8z/kfbmzIa4eNRCxsMGghImghImghImghIv5fIdvkZPfn3m8Ws8FsHrSYuWz2NqUqU6nK0WgO5OUzmcwwn8OgpJZ1vO+ubbgVDM2s2ZubnXO35lKKSARhEK3Q7I/Z+qam5vZW/DA0YXVV1Yf37IV1FRoaGam6WWcaHQ0zvuTosSvnL8TF4uVJDETB01cvwrdBPHnZYXNO4seQF+rTD9xveRTRkNDMTG3Dnfn5eaBcCOVvTcPthYUFiBD0GvdaHgLlQt19vVabDUjR3NYGlAtZxqxAFrvLiQUCQK2Q2UpeCOWQ1W6jWMgShRDgTjBJoSylCqIAZzjJWpalUgJZ4jfFK6RpQLGQUg1kyVIoYmL+ujJkl0whZzAYQAr85SYplJiQWH7yFEROQnx8aVERUC6EuFhatj0jEyLkWkWlWibHCYiq2o/Z7ScqK3x+P06MOCkJNVGyEP3u25l3aNduwCXa+5A/GGx/02kYHp72eVFD2apVqZVp6VKxOE0iQQ0iZA0hVDg9mNeDYaFQiLWZxWWzOCw2h8UCqkEFBN16n717+6lfd+50SdnxYljZ9l4Me97V1dP/9aNO53C71hyvVWtU6ekamUwjk6MW5tujBXW4XI4pl83hdE67PT7MF/BjAb/b4/1i0K+E1Tc1Cvn8IwcLF2cIdZRfvRwIhiASEhMS0AbOkMmlEvEWDpfH4fDYHHQWOKfcRovlu20CZdjoxDha0zAfiNKr8fqNxRl68LglUhtYum2hyw1qQBECHg+Wl2xTXBz8a3I0GdVny2FZ6ExxcWvn69+7UQoL+QIel+vDMA/mc3s8sD6gLbk/L7+woGCHNnv5n1+7rPNDT3NbqyRZiLpzs7V8Lm/VyJHxMbS39SaTftjUP2jEP3tWgbJVKpGIk5K3pqQk8wWLx5JAIFw6n1ChXRVM8hxCOaszGgeGhgxm09zcH5d2JjMmVSSSpUrl0jTUMhUKiAQG/RWWAFqICFqICFqICFqIiJ8AAAD//4p7tysAAAAGSURBVAMAIcRNfCQukfYAAAAASUVORK5CYII=" width="80" height="80" alt="B · Sun and horizon line at 16 pt, 3x, light"><figcaption>3x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABJ0lEQVR4nMxSvU/CcBAtbWmLIcbIrymlFioDOqkTEqKJXxEnBZk0JuwaV0d3o5OrTvo/6GonR9zsUBt/qVYL5SsQAgQSIE06NDTQjTfdu7t3dy85PJJcQdwAR1zCtQB1Ksz6/atLywwA4zeQBHF9cZndT5n0PZ+/ursplssmxeZ4xiY4PznNZY4tyrNsJMS9iG+OJ+0kkrbMVjyOoqijgGPsOzEME0Kco+BD+rRlBgaUH9WMR5i+fXyYoXwxQZAUpdvrQu33VRStqmcjmzo7TLM07aPIUqWqlwxNL0jKl6zCmBAlCe9CkA0CQHnJ7cT6/fMTfrS7l0tnkAmgFfRWp+1ZO9iMhsPqn1arNwaTGBBY5Hg6MG/1/RuGDL9lCBvN5vCk6Xu+PgAAAP//HAzTBwAAAAZJREFUAwAf11ROeW371QAAAABJRU5ErkJggg==" width="80" height="80" alt="B · Sun and horizon line at 16 pt, 1x, forest"><figcaption>1x forest</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAACaklEQVR4nOxWTWjTYBiOaSv+pLXNmtpJsy3NRuvsVPBn6GVMQXSdHjzU6UFPKsLQoygy8e5pB8+TibCL0+E8COJBxctAC7r1LzUNa7umP6lK/0frWwZza9rta2Cn9SGXvHm+PO/75nufL+rO04exrYQa22K0BFoCctit1v4jR+2MVUdovb+4H37fp7m50vJyI/6Opubglmvk3vUbKpVqbdDt9Yw+eRyXpLpLVHp6P4aAfYR2/NHYVecwjuM1j8xG48XBs1BKRIzJF+IYGlwXhgZOnGz0lCLJh7fvaNR1Go5UgY1hnt5/UNMZuQYIfP3+rSaOVMHlc+d3ajSb0q4MOeVBJAErbUGh6QiCMhgUCVhoDA0MTSsRcHs8KLRyuez2eJUILHAcCo2PhAvFghKBmY8fMtncprSp2bfyIJJALJEYn5zYmDMf8E/OvJHHUb3o+etpimzrs9lWbouloi/Iz3OBxVg0KaVTf35nc/VL/O9FFrMZBsrcZiT2EgkpFU+lhGg0FAlXKhUMAWAhMGuUgbSz7Jn+U8cdjonpV89evqgKXHMO33SNtJtM8mXFUikQ4gNCyMfzHi4YTYhiMvk3k2EslmOHHHYrCznBe0mdXqclatbCpuq75FTv2b1rbPRuo7xggHu7e+DCmgfkpMJxdTaXh114kGVXootLS2C87RRlIkm5cSLip9///svnqXez0IBqi2DEnQODYOucIKxuZHCuni6ml2W7O7vYDpqlOw6Y1tkidCAupaKimEink5IkVr9ZRAiH/QIPSa/SmjhwwE2h3Ua9AbqazxcWgtwGB5kSAWVo/bZsA4F/AAAA///g0BgeAAAABklEQVQDALMW4dRn1YG4AAAAAElFTkSuQmCC" width="80" height="80" alt="B · Sun and horizon line at 16 pt, 2x, forest"><figcaption>2x forest</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAADf0lEQVR4nOyYSUxTQRiAp6zdW6ALBUoptEhZKotCZJFFJAYwLsGEs8YoXtGQGE9GBUy8qNGDQoJcNBqRk1fFeFCWaIBSKF2AFlseLdCNtoTWISVEK32vfa2RmPflpUk7/0y/N/Pm/6eNE1XKwUEiDhwwCCEsCCEsCCEsCCEs/l+hVC63urTskDhblpOTmyW22u0zGvWsVjM1NzcyNur1ekMchxSVWtZ4rLL3eheNStm3dXxqsvN+jxFBQAjEsoV8EAGJCQm3Oq51Xb6SEB8fLCaNxz/X2KTT6zX6JazxIhOSiET9d3tqyyswI8mJic21dclJ7M/jE14f2vLFgAg409AozcoKPf5sw0kBj4seg1+oWJZ/qe1CWF2oFHJv5w0SiYQSg3PJKGRy/71uNpMJwkTA47ndngnFdLAAnDNUVVKaKUgDuGhvaUFpxSkkzhACvKRyuHQqFURXKFuIXyg2NlYoEIDoComFmSACUCYYp5BSMw8iQKlWB2vCWcuUag3Ai8vt0hr0ILpCMxHMkFKr8/l8wVpxLtmsVht6AQ8UQr0ZnEIut7vvzWsQPpuuzcHhdyDqQpCHgwPfZ5UgTG4/eaxeXEQJiOg8lM7nDz16ymTQUWJWzKsms9m0uvP6aWz0w9cvAJVID2hUCqWlrk6WI0lmsmBpg0+rQjWv0S8aTCa90ag3GUGY7CMECyccms1gUMgUh9NhdThsdrvd6QTRBhaQqtKyUzXHjxTJn716+WJ4COxteyad3lRdU1EkPyo/nMrh7Nt/WqVSLy2odAuqBR284ByE8KWAQaPxORx+CgfWeW5SMrxVJo3GoNNTWKyS/IK9sJtXO5A1y/uRjztCxTLZ8zvdKAXPT4FUCq+9t85NF9zAc9DMaFq3WzdsdqvdBnMBLzklVyyGZ4EMfqooPR0KgdA4XX9iV+ji+TZMmz+Bp63SgkJ4gShh2VgH/iXzbG2Bf82kavZBfx/wCw0MvW2tb/i1Gf6qgiu6YbWyGAwWk8Vhs8HfQTGvGhkbg7ng24zC/8nuLqstL29vbjWuIjBVTEwr1m3WgJ6itPS87Gz4DOVLJHJpHnruCQCxWAwm4w8EgYlgdc0CE9KKxYJYzCtms9vjCQjGmYfgCUuem1colchypDExvx3at7e9y8jKgsGgWzbo9EtzOh0IBxLxLywGhBAWhBAWhBAWhBAWPwEAAP//85p1fAAAAAZJREFUAwDzYUC5KWA3HQAAAABJRU5ErkJggg==" width="80" height="80" alt="B · Sun and horizon line at 16 pt, 3x, forest"><figcaption>3x forest</figcaption></figure></div></div><div><h4>C · Sun set on the horizon</h4><div class="row"><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABdUlEQVR4nMRSv0sCURy/Ow/vsKwg0LrzV3cOpy05R6stEQVpi9hQ0hJB/0C0REtJRdQsQTVE5WKgWxRECYqY1WBwV4pHaFhBnYr2BeEQvQKnPrzhy+d9Pu99PryHfxVzSDvAkTbxj4asKAaCZ3zmmSRI1mjyuadJggAeVSx9HY8vra2+vRdlhmPY3eUVSq9XMLwWCmPzvuLnRxPvsA8erPsVIm3vB1rVgFjqLnx1qWCIJpPIL0g8PuBSuYwitWq1JpVKKkzV2aFBUbS+jatUFpqm9X1miurSaoEfHR5BQ5Hg8XmIIAirycwYjUMcp1ar0zxPkKSdtYLnW5JexByfzT4JQr9Oh1so+iJ6W65U5HtZk7m3pxsGPpMR83mZ15Dkyc4eNmAwLHi8jUHTAn+TSMBqVAMWvTOQEINpdsplY1nkT3AM4xmfgAGrlzvc2JxzuTEMa5UCCSce+bdAhjS9dOw+dRoJpwUBUtXLwKeYdDodNrus+QEAAP//Erdw3wAAAAZJREFUAwCKzoQ1pusfFwAAAABJRU5ErkJggg==" width="80" height="80" alt="C · Sun set on the horizon at 16 pt, 1x, light"><figcaption>1x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAC40lEQVR4nOyVS0wTURSGL3Qo2Ckz7dBSkAZaHm3xBUY3SHQjGgQWkqi1RIGNicZEoysXJkbQhRpfiUYLQVPDUwMxaEBUiBgSXejGR6AWWlIsZYA+aAs0tFO8WEJspe20hR1fZjFz59z73zP3/GeQ+ZkJsJ4gYJ3ZENgQiJ5YEAUul+unRjNlNgeJiSSDUYPh2cuOb0PqoVGt2+2GI8kEsS1HUrhrt6K0LDbWZ9MxYTkZLtfQ/uJhU9OCa2HVgO050msXLkrF4kgEvmvUl+/eUet0wcMQBDl1VH5GoWDGMUFYZ3BfpQq5OvibpbKt5ccvjfeRrkBr1+uBr19oBns8nku3b805nXQF9Mbxm/V1IBzglBv1SroCnb293u2ERXvPG8rjoVWmv0kShI+boiampmgJGCYjEYBMW8z0BMjw/nopPJ5IKNyanZPKT6blg/aengfNjUbfPPgEIRYKM4XpAl4SB8MwlJ3IRjkYLskQJcTHr4TF2M2GQe3wODk5ZjQiDAbB4RA4LsvM4nG5fjLzTue0xTJpNnkoKkskIjA85M5gacSQhuHCCjlsW37v0lIEedLc/NwteTJZnlQWaAmT1aob01vtdpvDAS94Y7HNWG020mTS6vUDza0IxmaXFx143t3lN9MwQcKrq/+D93GHRCLg8wmcw8VwBGHYZ+cGRzRqrW7GYQ+kfexQCZPJXDoDmHVRdeXCf0lEAzMurk/VCL/zktGSiSR5SSlYUyoPl3tPcdnJ505WSURisEbAYztbccJ7vyyQiKLKmloBjweiJj1186MrNZsSEnwEINAUyqu1KIsFogAaoq72Oqz1lRGfZgfL//0TFSxNEBEF+Tu76xpEaWn/Dq7iZIqiOt69vad6Cmsc0AN683xV9ZGDxQwGw+9VwFbhmJ193NbS/KozeKNms1jHS8tOyxVsFF01IHQv6vv8qftj/4heDy1qsdkWFxeh17g4lp2eUbx33/6CPcGn/wEAAP//sds1JgAAAAZJREFUAwBpvChIGVKzmwAAAABJRU5ErkJggg==" width="80" height="80" alt="C · Sun set on the horizon at 16 pt, 2x, light"><figcaption>2x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAEJ0lEQVR4nOyYbUxbVRiAXwZtXQv0kxYGZdBRu7a0DCjR7At/GH/o1G3qhkQ+onExzKmZ/lA3hkvMTKZLdE2FZSa6WUETDY7hEuPiB0N+jI5l024irVA2lkJL6dctW5nFt4zg0lFue3sHS9bnV3vPe8992nvOed9z0iY9driXSIN7jKQQGUkhMpJCZCSFyEgKkXEfCNmdzq7esz3n+4ZGRlzuCZfXm8HmCHi8nKysh7QlG3UVCplsgdtTaMz2lmHbJ8e/ON3TMz09vUCYfOXK12rqH127NiUlBe6SEKq0fN126rdfQ6FQjLeo5fI3aus36Coiri+DhAlOBQ8ePdr5y8+x2yDmgYH3mz+1O8aAXiGfn3hp754u01mIH9u1kao3d/cPDgKNQh99/lnvxQtAFfyH3j500E8EgBahM6beb079AIlx2WrVG49B4kI4dA4caQE6MHacwGkBCQoda28fvHoF6ODfUOiDlpaEhHClMXZ8D/Tx+/lz+O6oC13o/2t0fBxopfucCSgLdZtMQDddM0IUc5n1yjDQzeBMnxSFfAQBdOP1h/ukKuT3A92sLizA5ENRaIVEguMa4idbJOJzuQIuTyISZfEFYqFQLBDmSiSqoqJbARSFHlu/4bLVghVPtAAsemS5eQV50qL8/BVisZDPF2Ty0jlsIGO2/Bhzufr/sbo8ngmPxz8ZYKSlFeTmSbNz5sTnBWsx67DNSxBen88fIFKXpcrypYW5UmlODlAlLPTOoQ/bT/8ULWKNUrWutGx9eXmpSg30gQkVfzkRIIjJ63an45LFgvXa67V1YaG2zpP7DXrSLjhs9sPaknJ1sU6j1SoUMTwUrtrtAzabxTbkcI07JibGsaJ1u11uj8vruTO4aeeu5zc9GRYadTora6ohHlhM1hrl6hKFUsDjprM5nOXLMzgcFoOBTd5AoPePi33mP/8eGrp+40bsfXZ91YYDfHYM6b88bmg1wtKxs/qFXTW1MJc66rZsFfJ4sEQIuNz6rc/c+jwrlJme/vK27bBE7NhehW8cbhdCqjc9pSvWwKJTplLjo+e+/i/EZDA+fncvbudgEckWZekbm5gzsyFSCBHx+diclpoKiwKLyTQ0vRcxdiProWL5g3teaYBF4cDut9RF8oiL8+QyXJ3C0Ueap27ehLsDpqbGhlefqHzkzqaoW+k+s7lh/z63zwd0g0n+cOO+UqVq3taoJWyZWv3tYYNy1SqgFUWh7Du9IZoNkB42BINB48kTeJDgTbgiw6Vux7aq2qc3M5nMBcJiOv1w+7zNra2tnR3URhXOprrNW1589jleRiZpcBzHMdfGxn7sPoObFcydwakp0nhcXSo0mnVlusc3VmbHvLxROR/CHB7O55fMqIiVAm7QRp0OvC4WirBCxdoUS0Rcfys02gdYLIiT/wAAAP//7sLbKQAAAAZJREFUAwCEkp/ikhMzHQAAAABJRU5ErkJggg==" width="80" height="80" alt="C · Sun set on the horizon at 16 pt, 3x, light"><figcaption>3x light</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABiElEQVR4nMRRPUgCYRg+z7sTzP/8w5+zMNAK/8qhjEYLmjJaC5eGKIiWhghqDSmaA51cKitpS2kommqJhjTwyru0sIKKLP/uuL4KDjELnHr4hofnfZ/vfR9exOSxQ40AgRrEPxp0KvX4sK/FYCiVyykyvb65AQjQeXVD9zica/MLMomEUxJXxNTS4u3DPV9m1NR0K+XycGBVKhZXiyq5wm6x7MRjdVaaGfNLRKKfuquj0+vpq2PottmgX+CwWhEBirIQy+PBGIayDJsvvLMs+12mGTqdyWZzOfIu+/KaB/r+8RHPPzsxOjhULBdTJEVQ5PllslSptOF4oVgCQRmGEWCYQas16XRmowmERq4zmX63G0NRbi5BUY/PT4C06vXqZiWnvxUKI9OTfEgmBN/0urq4gkIqNWi04DUJhdUBVkLBw9MTGLBgZOsilYL+RIIgwntRQD7vANJED+IIn++0tsMwXNMK5oe2I3OB5QpNQzWXBgafd8CM42bc9BWGJG6o3VjsLJngej4AAAD//224qOwAAAAGSURBVAMAJhKUl1ffpWsAAAAASUVORK5CYII=" width="80" height="80" alt="C · Sun set on the horizon at 16 pt, 1x, forest"><figcaption>1x forest</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAC/ElEQVR4nOyVWUwTQRjHd7vb0+623UJbCoW0BQvBEI0xHhFJFSOXGg2GIyhGEvB48UFfNOCRmGBifDBqQF8UEeUJH8CYSIzR4BlFRGxpEShHBXpuL4FacJoSApXClsIbv2w2c3wz/5nvm28GTdiRBq0mKLTKrAmsCUQODYoAOoqkKBOjBIJFbJazgwRp7LFDhzeqktfL5XTUP4PJYunU69u+fG5oaZ6enp5rDIeVySiCluUfOV1cwmTQFzT4oddduHlD198/24LwZWKIGqlJSfeuXstTq1EECWUjEgrzs7IZdLT9Z5dvagoKKwZnS4+r5PIlzYDTKgqKUpNUgSpVgcKcvPTNWyga02i06+fOs5ksiKKLZDExt6suB+JJER6G8XHs9aePlHZwcE8mh8WCwiR/XxaCIJQWFSuSQOEDjpxYKKQmIKZ60oKIJghqApLwBEbN5r7hoS6d3jg2Rkng7uP6MyVHpdGiuY1mq/XX0GDv4MCo2UI6nQ6Xy+l2WkmH3tA/MTk5awYr0zepFAqpSBIvlfh8Uxa73WYnNb09oBAkw2IwowiBSBiF0GC9wWB3OJZcGZvFgjfs3d7W0MhgMIL6hkZHOrSabxpNh1b7vVsbagqCz1fExfEwnIdxcS7G959OnODxRIRQLpPtLC5EnW53U+vLgpzcoJFxYgn4cjPUgWqnrnvEZLKQdrBw718fxuGkJCamKJQ4lxtKu/F5i9fr9V920QKi9UEd879NRAIIw+7SEuBnf6KZbFagBq0odc+aAlGcyeRbjx529/VCKwSI3J2G+kB5RsDl8VRUVQIvQxFjMA6fulI1PjExTwAwYjZVXKp0ud1QBNhIsrzyIvjPtsy77ICXMk+UgrcCWhbv2r9ml5cZjMa5jcHXNdgaOLW/TWNpqmQOmw1RA8Szuram+n7tn/HxoK6Qb/I6DudkQVHx/gPrFpUBafS0pbmm8Ynb41nQYOlHX711W/auDGV8vADnCXAchmGbg7SRjp4Bw4u3b159eL/48H8AAAD//y3n5bsAAAAGSURBVAMAw0gRrCCqOi0AAAAASUVORK5CYII=" width="80" height="80" alt="C · Sun set on the horizon at 16 pt, 2x, forest"><figcaption>2x forest</figcaption></figure><figure class="cell"><img class="px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAEQ0lEQVR4nOyYe2xTVRzHf3uW9bb0cdsVx7aWvTI2mLquGPcQEhUTo6DxH91DTUjUBUxQHomvBCI+iIlkuL/UKLOI4mOoMcaQaTLHENJ1rHRvZlfYxvq4fdG12K1h/kqXQrq1vb29YyT20/5x77nnnvO9v3PO7/c7J11eXQF3E+lwl5EUFIukoFgkBcUiKSgWSUGx+B8IyiYlm1WqWmVVfk6ORCAUCgQer9fmdF61ms/rdF0azYhxPMrrKSxG+8L8/N3Pv/hIdU1KSkqUapeMxhZ1W8fZblg+QSil+dn6xzdvSU1NpfnK4NjYkWNfdmk1YeVpwjwZJEZmRvp7r+3dWlMb3TBhSMXie0tL0U4zXu/t5XQ/KBJ8LvH5oQ9x0kD8yHPWfvNxS4lCASwK2rNjx6YK5oN+j1R6eN9+XhY3VJLQkNUpVW++3AyJIRWJORzOGW1P8Ja5hXDqvPFKomqCND65DZcFJCjohaeeKcjNBTZIS0sLWZq5oKbt24E9aiqVpQWFwFgQrlj0yMAqdcoqYCyororJOqfTJsNYVpCbB2xTkBdok6EgPo8AtuETPGAsaDXBB7YZNRowFDIUNGU24byG+DFTlP2aE7MRM2Wz2u1WG2W226dM5iHDWLACQ0Gnu8+UFRUp1kb0Q8PjhvGJCePU5NjlK1MWs83pcDhdM9e9MVteSD8kYvH6dYUigUAsFBBZXL/fb5icnJyeDglfElz5xXI5nyBWEzwej3vjxrzhyuXAiyYTMCVgoQ9e3/v0o1sj1egbGuzu1XZptXgR9shio/APjMCAivC5WfhbI5GWFxfh9xxVtwUE6UaGowi6b30Z/nc2NKHBz/fpegb6e/QX9aMjdHrNla0pksuL5QopKZYIRaRIRAqEpFCIQ7G48oHWoxAcsmyS7FSfiCu98s3OXhga1A0P2V0uTJndHo/He90354PA6iVUGyuU5RtKFOtWcTg0G5yfn3+o4Tmrw74wh3Y1Nu1qaIKVo/VrdetxNYRCR9updsrhgBUCvcCx9h+D1wuC0OaffXcSVohPT34byqxvBdcTv/6i0V+EO452oB+7Dt3eEjTn9+9+/9BViwXuINNWy6vvHsSuYbEguDmWYY+XlX99vp0HD+A6vb0wPMnH+OK45tqy6QFYfvZ/dPhs34WwwiV2Hf2XRimno/r+Skx1YXmYnZtDN/jzHx2LHy29DUJN53R9Dz9YnUXbs9HHYre99M5bf577e8mnEfdlJqv1965O1YYK3PMCewwb/mnct8cwMRGpQrSNIjqn9o7T7hnPxpKSVQmbyuV2f3L8q7dbjmCzUarROv0Q8PjN9fX1T2zLzMiA+MHV1PbTqS9++N41445ZOY7jGNyHP1ZbhydRGDs5mZkx62MA1uj13b09v/3ViYki0IPJ+RCqQU2VZeU52dkyiURGkjKJFG6mRyaKwr7Ru/YODqDfR00QJ/8BAAD//z7v5W0AAAAGSURBVAMANXqZYivOv1wAAAAASUVORK5CYII=" width="80" height="80" alt="C · Sun set on the horizon at 16 pt, 3x, forest"><figcaption>3x forest</figcaption></figure></div></div></section>
+<section class="board"><h2>Same family</h2><p class="lede">Each option in ink over the colour mark. A and B use its exact sun; C moves the sun lower and right, onto the horizon and out to the orb's edge, and keeps the colour mark's horizon and lower circle.</p><div class="row"><figure class="cell"><div class="ov"><svg width="140" height="140" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<defs><clipPath id="u6_ob"><circle cx="50" cy="50" r="50"/></clipPath></defs>
+<g clip-path="url(#u6_ob)"><rect width="100" height="100" fill="#E0723F"/>
+<circle cx="38" cy="38" r="47" fill="#F4E0C6"/><circle cx="60" cy="45" r="22" fill="#F2A04D"/>
+<path d="M0 62 C22 52 38 72 60 66 C78 61 90 66 100 60 V100 H0 Z" fill="#CF5B30"/><path d="M0 80 C24 70 44 90 68 82 C82 78 92 80 100 76 V100 H0 Z" fill="#B8441A"/></g></svg><span class="ink"><svg width="140" height="140" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option A · Sun and land. The colour mark's sun, resting on its first horizon (the horizon trims its base, as the hills do in colour), and the land below that horizon, inside the orb's circle. One gap parts them. One ink: currentColor. -->
+<defs><clipPath id="u7_ao"><circle cx="50" cy="50" r="50"/></clipPath>
+<mask id="u7_am" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#000"/>
+<circle cx="60" cy="45" r="22" fill="#fff"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#000"/>
+<path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" transform="translate(0 6)" fill="#fff"/></mask></defs><g clip-path="url(#u7_ao)"><rect width="100" height="100" fill="currentColor" mask="url(#u7_am)"/></g></svg></span></div><figcaption>A · Sun and land</figcaption></figure><figure class="cell"><div class="ov"><svg width="140" height="140" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<defs><clipPath id="u8_ob"><circle cx="50" cy="50" r="50"/></clipPath></defs>
+<g clip-path="url(#u8_ob)"><rect width="100" height="100" fill="#E0723F"/>
+<circle cx="38" cy="38" r="47" fill="#F4E0C6"/><circle cx="60" cy="45" r="22" fill="#F2A04D"/>
+<path d="M0 62 C22 52 38 72 60 66 C78 61 90 66 100 60 V100 H0 Z" fill="#CF5B30"/><path d="M0 80 C24 70 44 90 68 82 C82 78 92 80 100 76 V100 H0 Z" fill="#B8441A"/></g></svg><span class="ink"><svg width="140" height="140" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: currentColor. -->
+<defs><mask id="u9_bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="currentColor" mask="url(#u9_bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linecap="round"/></svg></span></div><figcaption>B · Sun and horizon line</figcaption></figure><figure class="cell"><div class="ov"><svg width="140" height="140" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<defs><clipPath id="u10_ob"><circle cx="50" cy="50" r="50"/></clipPath></defs>
+<g clip-path="url(#u10_ob)"><rect width="100" height="100" fill="#E0723F"/>
+<circle cx="38" cy="38" r="47" fill="#F4E0C6"/><circle cx="60" cy="45" r="22" fill="#F2A04D"/>
+<path d="M0 62 C22 52 38 72 60 66 C78 61 90 66 100 60 V100 H0 Z" fill="#CF5B30"/><path d="M0 80 C24 70 44 90 68 82 C82 78 92 80 100 76 V100 H0 Z" fill="#B8441A"/></g></svg><span class="ink"><svg width="140" height="140" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara">
+<!-- Option C · Sun at the edge: the colour mark's sun, moved out to meet the orb's circle on the right, resting on one horizon over the land. The round silhouette is the orb's own circle, traced by sun and land. One ink: currentColor. -->
+<defs><clipPath id="u11_co"><circle cx="50" cy="50" r="50"/></clipPath><mask id="u11_cm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120"><rect x="-10" y="-10" width="120" height="120" fill="#000"/><circle cx="68" cy="57" r="30" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5 V104 H-4 Z" fill="#fff"/><path d="M-4 63.5 C22 52 38 72 60 66 C78 61 90 66 104 59.5" fill="none" stroke="#000" stroke-width="7"/></mask></defs><g clip-path="url(#u11_co)"><rect width="100" height="100" fill="currentColor" mask="url(#u11_cm)"/></g></svg></span></div><figcaption>C · Sun set on the horizon</figcaption></figure></div></section>
+<section class="board rec"><h2>Where C stands</h2>
+<p>C holds at 16 pt as one round shape, sun set into land, with a single horizon running across it. It does not form a ring or a pupil, and because the sun is wide and sits deep in the horizon there is no neck, so it does not read as a head and shoulders. The cost is that its sun is lower and larger than the colour mark's, so the family link is the orb's round shape and the horizon rather than an identical sun. Choose one of the four and I'll export it and wire it in.</p></section>
+<section class="board"><h2>Files</h2><p class="lede"><code>deliverables/brand/proposal-oct-13/elara-mark-mono-c.svg</code> (currentColor), with <code>-forest</code> and <code>-cream</code>. A and B are alongside it. The app's icon, tab and avatar assets are unchanged.</p></section>
+</main>

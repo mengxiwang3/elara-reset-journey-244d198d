@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Elara"><title>Elara</title>
+<!-- Option B · Sun and horizon line. The colour mark's sun above its first horizon, drawn as one stroke across the orb's width. Nothing encloses it. One ink: #1F3A2E. -->
+<defs><mask id="bm" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">
+<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#000" stroke-width="23.5" stroke-linecap="round"/></mask></defs><circle cx="60" cy="45" r="22" fill="#1F3A2E" mask="url(#bm)"/>
+<path d="M8 71 C27 64 41 77 60 73 C75 70 84 72 92 68" fill="none" stroke="#1F3A2E" stroke-width="10.5" stroke-linecap="round"/></svg>
