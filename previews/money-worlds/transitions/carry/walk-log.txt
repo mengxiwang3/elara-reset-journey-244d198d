@@ -1,0 +1,20 @@
+$ /tmp/seed-day.py 14 13
+current 14 done 13
+  walk 0: press "This is my compass
+"
+  walk 1: press "See my week
+"
+  walk stop at 2: Meet the next world
+  [carry-w2-to-w3-320x568] /path/day?area=money&day=14 :: What do you want to carry with you? Pick up to two. 1 of 2 selected My money rule  My first value  My money compass “A small honest sentence about this week”  My conve
+$ /tmp/seed-day.py 21 20
+current 21 done 20
+  walk 0: press "Let's write
+"
+  walk 1: press "Next
+"
+  walk 2: press "This is my rule
+"
+  walk 3: press "See my week
+"
+  walk stop at 4: Meet the next world
+  [carry-w3-to-w4-320x568] /path/day?area=money&day=21 :: What do you want to carry with you? Pick up to two. 1 of 2 selected My anchor  My edge  My cushion  My letter For the first of next month  See my week   TOWARD THE 

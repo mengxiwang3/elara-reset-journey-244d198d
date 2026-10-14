@@ -1,0 +1,16 @@
+$ /tmp/seed-day.py 21 20
+current 21 done 20
+  [reduced-practice-open] /path/day?area=money&day=21 :: Look at what you kept this week. Seven days of tending. Here's what held. Let's write   TOWARD THE LIT LANTERN Reed Island · Day 7
+  walk 0: press "Let's write
+"
+  walk 1: press "Next
+"
+  walk 2: press "This is my rule
+"
+  walk 3: press "See my week
+"
+  walk stop at 4: Meet the next world
+  [reduced-week-close] /path/day?area=money&day=21 :: What do you want to carry with you? Pick up to two. 1 of 2 selected My anchor  My edge  My cushion  My letter For the first of next month  See my week   TOWARD THE 
+  [reduced-next-horizon] /path/day?area=money&day=21 :: What do you want to carry with you? Pick up to two. 1 of 2 selected My anchor  My edge  My cushion  My letter For the first of next month  See my week   TOWARD THE 
+  press "Done for today"
+  [reduced-today-walked] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 3 Reed Island Your path   You walked Reed Island You kept tending, and it stayed afloat. UP NEXT Guadua Roo

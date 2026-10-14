@@ -1,0 +1,49 @@
+<section class="doc" id="rationale"><h2>Design rationale</h2>
+<div class="cols">
+<div><h3>Value before commitment</h3><ul>
+<li><b>Reading is the first reward.</b> Home leads with a short, finite list of useful questions and the best reply to each, not a feed. A woman gets value in her first minute without posting.</li>
+<li><b>One contribution is enough.</b> Unanswered questions are one tap away, and replying has its own bar. Asking is a persistent, plain action.</li>
+<li><b>The return hook is a person.</b> “Valeria replied to your question” sits at the top of Home, and the thread opens at the new reply. No streaks, no weekly obligation.</li></ul></div>
+<div><h3>Questions, not people-ranking</h3><ul>
+<li><b>No karma.</b> “This helped me” is private to the author (“Helped 6 women · only you see this”). It quietly orders replies and the “Helpful this month” view; no one sees a score.</li>
+<li><b>Topics, not dozens of categories.</b> Six topics, each with a stated purpose. Rooms are separate, optional, and capped at ten.</li>
+<li><b>Elara stays in her lane.</b> She suggests similar questions and asks a room's questions. She never answers in a thread in a woman's voice.</li></ul></div>
+<div><h3>Audience is never a guess</h3><ul>
+<li>Every composer states who sees the post: “Women in Elara Circles, with your first name”, or without your name. Private Ask Elara and Clarity content is never included unless she brings in a specific line and sees exactly what will be posted.</li>
+<li>Rooms say “Private · N women · M seats open” on every room screen.</li>
+<li>Report, hide, block and mute sit behind the “⋯” on every post and reply, in two taps, in plain words.</li></ul></div>
+</div>
+<p class="small" style="margin-top:12px"><b>Grounding in the current app.</b> I read the Circles screens and strings in <code>apps/mobile</code>, the Circles wire contract in <code>packages/shared/src/circles.ts</code>, the theme tokens and <code>docs/CIRCLE.md</code>. Today the app has a ten-seat “hall” of rooms and, behind a server flag, a beta feed with “My conversations”, a post menu (report, hide, delete), block, and a “Circles aren't monitored overnight” card. The topic names start from the six Clarity areas, plus one the app suggests: Mothers Circle and Family Money Talks already exist as rooms, so “Motherhood &amp; Family” is a topic without a Clarity area behind it. “Energy &amp; Daily Life” merges the Energy and Everyday areas. I could not open <code>circle1.pdf</code> (the Mac path isn't reachable from this cloud session), so the private-room screens follow the earlier ten-woman room prototypes from this project.</p></section>
+
+<section class="doc" id="tradeoffs"><h2>Main tradeoffs</h2>
+<div class="tablewrap"><table><thead><tr><th>Decision</th><th>What it buys</th><th>What it costs</th></tr></thead><tbody>
+<tr><td><b>Open topics, not private groups, by default</b></td><td>Value from reading; no dependence on ten women all turning up. Scales to 80,000.</td><td>Loses the closeness of a room. Public posts about money and family need real moderation. The approved “no feed, no counts” rule in <code>docs/CIRCLE.md</code> is relaxed for topic spaces and has to be re-decided.</td></tr>
+<tr><td><b>“This helped me” private, no scores</b></td><td>Avoids karma and popularity contests; thoughtful replies can still rise.</td><td>Women can't see what the community found useful, and some will want to. New replies may start below older ones.</td></tr>
+<tr><td><b>Ask without my name</b></td><td>Lets a woman ask the hard family or money question she wouldn't sign.</td><td>More abuse risk and harder moderation. The Elara team can still see who posted. Needs testing, and possibly a limit for new accounts.</td></tr>
+<tr><td><b>Finite home list</b></td><td>Avoids a noisy global feed. A visit ends.</td><td>Less time in the app. May under-serve the woman who wants to browse for an hour; each topic space covers that.</td></tr>
+<tr><td><b>Rooms are invitation-only from a thread</b></td><td>Closeness comes from a real exchange, and both sides opt in. No assigning 80,000 women to rooms.</td><td>Fewer rooms form. Quiet rooms are likely; the design lets them rest instead of pushing them.</td></tr></tbody></table></div></section>
+
+<section class="doc" id="test"><h2>What to test with real women before implementation</h2>
+<div class="cols">
+<div><h3>Does reading pay off?</h3><ul>
+<li>First visit, no account history: do they find a useful question and reply in under two minutes, without being told where to look?</li>
+<li>Do they understand that Circles is for questions, and that a room is something else?</li></ul>
+<h3>Will she contribute once?</h3><ul>
+<li>Of women who read, how many ask or reply, and what stops the rest (fear of being seen, not knowing what's allowed, nothing to add)?</li>
+<li>Do the audience lines change what she is willing to write? Test “with my name” against “without my name”.</li></ul></div>
+<div><h3>Does a reply bring her back?</h3><ul>
+<li>Which notification wording brings her back without making her feel watched? Test lock-screen text with and without the reply preview.</li>
+<li>After a reply, does she thank, reply again or leave? Does “This helped me” feel natural, or a little odd?</li></ul>
+<h3>Is it safe and fair?</h3><ul>
+<li>Do women find report, hide and block, and trust that hiding tells nobody? Test with a deliberately unkind reply.</li>
+<li>Do women read a private room as a promotion, or as relief? What makes them accept an invitation, and what does a quiet room feel like to those in it?</li></ul></div>
+</div></section>
+
+<section class="doc" id="verify"><h2>To verify before real-member testing</h2>
+<div class="flag"><ul style="margin:0;padding-left:18px;display:grid;gap:6px;font-size:14.5px">
+<li><b>Audience enforced on the server.</b> A post meant for a room must never be readable by women outside it. Topic posts need an explicit visibility field. Ask Elara and Clarity content must never be included in a post unless she brings in a specific line. This prototype shows the promise and proves none of it.</li>
+<li><b>Anonymous posting.</b> The server must keep authorship for moderation while never returning it to other members, including in replies, notifications and search.</li>
+<li><b>Moderation capacity at 80,000.</b> The current app says reports are read “during the day”. A public topic space needs a queue, response targets, a self-harm path and trained hosts. Nothing here assumes they exist.</li>
+<li><b>Access.</b> Circles is currently part of Premium. Open topics could be free to read or require membership; that is a business decision this design does not make.</li>
+<li><b>Notifications.</b> The “one a day” digest and lock-screen wording shown here are proposals, not what the app does today.</li></ul></div></section>
+</div>

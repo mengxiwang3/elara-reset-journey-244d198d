@@ -1,0 +1,353 @@
+<!doctype html>
+<meta charset=utf-8>
+<title>Circles Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>:root{--bg:#F4EEE4;--fg:#25231F;--mut:#6A645A;--line:#DCD2C0;--card:#FBF7F0;--acc:#B8441A;--forest:#1F3A2E}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1B1A17;--fg:#EFE8DB;--mut:#A8A092;--line:#3A362F;--card:#242220;--acc:#E0825B;--forest:#8FB39F;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1B1A17;--fg:#EFE8DB;--mut:#A8A092;--line:#3A362F;--card:#242220;--acc:#E0825B;--forest:#8FB39F;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 "Instrument Sans",system-ui,sans-serif;margin:0}
+main{max-width:1240px;margin:0 auto;padding-inline:20px;padding-block:32px 80px}
+h1,h2,h3,h4{font-family:Fraunces,Georgia,serif;font-weight:600;margin:0;text-wrap:balance}
+.hero h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:8px 0 14px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);font-weight:600}
+.lead{max-width:68ch;color:var(--mut);font-size:17px}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.jump a{padding:8px 14px;border:1px solid var(--line);border-radius:99px;color:var(--fg);text-decoration:none;font-size:14px;background:var(--card)}
+.held{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;max-width:760px}
+.held h3{font-size:17px;margin-bottom:6px}.held ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:14px}
+section{margin-top:64px;padding-top:24px;border-top:1px solid var(--line)}
+.sh{display:flex;gap:16px;align-items:center}.sh h2{font-size:clamp(24px,3.4vw,32px)}
+.num{width:44px;height:44px;flex:none;border-radius:50%;background:var(--forest);color:var(--bg);display:grid;place-items:center;font:600 20px Fraunces,serif}
+.kick{margin:2px 0 0;color:var(--mut)}
+.desc{max-width:70ch;margin:14px 0 8px}
+.notes{margin:0 0 20px;padding-left:18px;max-width:70ch;color:var(--mut);font-size:14px}
+.scroll{overflow-x:auto;padding-bottom:12px}
+.row3{display:flex;gap:28px;width:max-content}
+.ph{margin:0}.ph figcaption{font-size:13px;color:var(--mut);margin-top:10px;text-align:center}
+.dense{display:flex;flex-wrap:wrap;gap:28px;margin-top:28px;align-items:flex-start}
+.dnote{max-width:46ch;min-width:0;flex:1 1 260px}.dnote h4{font-size:18px;margin-bottom:6px}.dnote p{color:var(--mut);margin:0}
+.tablewrap{overflow-x:auto;margin-top:16px}
+table{border-collapse:collapse;min-width:760px;width:100%;font-size:14px}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+thead th{background:var(--card);font-family:Fraunces,serif}tbody th{width:130px;background:var(--card)}
+.reco{max-width:74ch;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-top:16px}
+.reco ol{padding-left:20px;display:grid;gap:6px}.small{color:var(--mut);font-size:14px}
+
+/* ---------- phone shell (fixed app palette) ---------- */
+.phone{position:relative;overflow:hidden;border-radius:34px;border:1px solid #CFC5B2;box-shadow:0 14px 34px rgba(40,30,15,.16);display:flex;flex-direction:column;flex:none;
+ --paper:#FFFDF9;--cream:#F7F1E8;--ink:#25231F;--mut:#6A645A;--hair:#E2D8C6;--forest:#1F3A2E;--ember:#B8441A;--peach:#FFF1EC;
+ background:var(--cream);color:var(--ink);font:15px/1.45 "Instrument Sans",system-ui,sans-serif}
+.phone *{box-sizing:border-box}
+.phone h1,.phone h2,.phone h3,.phone h4{font-family:Fraunces,Georgia,serif;font-weight:600;margin:0;color:var(--ink)}
+.phone p{margin:0}
+.sb{height:44px;flex:none;display:flex;justify-content:space-between;align-items:flex-end;padding:0 28px 6px;font-size:15px}
+.sbi{display:flex;gap:3px}.sbi u{width:16px;height:9px;border-radius:2px;background:var(--ink);opacity:.8}
+.tiny .sb{height:26px;padding:0 20px 3px;font-size:12px}
+.scr{flex:1;min-height:0;overflow:hidden;padding:6px 20px 12px;display:flex;flex-direction:column;gap:12px}
+.tiny .scr{padding:4px 14px 8px;gap:8px}
+.tabs{flex:none;height:66px;display:flex;justify-content:space-around;align-items:flex-start;padding:8px 6px 0;border-top:1px solid var(--hair);background:var(--paper);font-size:11px;color:var(--mut)}
+.tabs span{display:grid;justify-items:center;gap:3px;min-width:56px}.tabs em{width:20px;height:20px;border-radius:6px;background:var(--hair)}
+.tabs .on{color:var(--forest);font-weight:600}.tabs .on em{background:var(--forest)}
+.av{width:36px;height:36px;border-radius:50%;display:inline-grid;place-items:center;font:600 14px "Instrument Sans";font-style:normal;flex:none}
+.av.sm{width:28px;height:28px;font-size:12px}.av.xs{width:22px;height:22px;font-size:10px}.av.dashed{background:transparent!important;border:1.5px dashed #A89E8B;color:#8A8274!important}
+.prim{border:0;background:var(--forest);color:var(--cream);font:600 15px "Instrument Sans";height:48px;border-radius:12px;padding:0 20px;width:100%}
+.top,.lockbar{display:flex;align-items:center;justify-content:space-between;font-size:14px;min-height:36px}
+.top span{font-weight:600}.back{font-size:24px;font-weight:400}.x{font-size:13px;color:var(--forest);font-weight:600}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--ember);vertical-align:text-bottom;margin-left:1px}
+.lock,.lk{display:inline-block;width:12px;height:10px;background:var(--forest);border-radius:2px;position:relative;margin-right:6px;flex:none}
+.lock:before,.lk:before{content:"";position:absolute;left:2px;top:-6px;width:8px;height:7px;border:2px solid var(--forest);border-bottom:0;border-radius:5px 5px 0 0}
+.kbd{flex:none;background:#D4D0C8;padding:8px 4px 24px;display:grid;gap:9px}
+.kbd div{display:flex;gap:5px;justify-content:center}.kbd b{background:#fff;border-radius:5px;height:42px;min-width:30px;display:grid;place-items:center;font:400 18px system-ui;box-shadow:0 1px 0 #9A968D}
+.kbd .kr3 b.w{min-width:88px;background:#ADB3BC;font-size:14px}.kbd .sp{flex:1;font-size:14px}
+.kbd .kr1{padding:0 16px}.kbd .kr2{padding:0 36px}
+.kbd.s{padding:5px 3px 14px;gap:6px}.kbd.s b{height:34px;min-width:27px;font-size:16px}
+.tiny .kbd.s .kr3 b.w{min-width:70px}
+.tiny .kbd.s b{min-width:24px}
+.hint,.aud{font-size:12px;color:var(--mut)}
+.tiny .hint{display:none}
+
+/* ================= D1 editorial paper ================= */
+.d1 .mast h1{font-size:34px;line-height:1.1;margin:2px 0 8px}.d1 .rule2{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);height:4px;opacity:.7}
+.d1 .ent{border-bottom:1px solid var(--hair);padding-bottom:12px;display:grid;gap:6px}
+.d1 .ent.first{border:0;padding:0}
+.d1 .slip{position:relative;background:var(--paper);border:1px solid var(--hair);padding:14px 14px 14px;display:grid;gap:9px;box-shadow:0 2px 0 rgba(60,40,10,.06);clip-path:polygon(0 0,100% 0,100% calc(100% - 4px),97% 100%,93% calc(100% - 3px),88% 100%,82% calc(100% - 3px),76% 100%,70% calc(100% - 3px),64% 100%,58% calc(100% - 3px),52% 100%,46% calc(100% - 3px),40% 100%,34% calc(100% - 3px),28% 100%,22% calc(100% - 3px),16% 100%,10% calc(100% - 3px),5% 100%,0 calc(100% - 3px))}
+.d1 .stamp{position:absolute;right:12px;top:12px;border:1.5px solid var(--ember);color:var(--ember);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;transform:rotate(2deg);border-radius:3px}
+.d1 .nm{font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}.d1 .nm span{color:var(--mut);text-transform:none;letter-spacing:0;font-weight:400}
+.d1 .slip h2{font-size:23px;line-height:1.2;padding-right:4px}.d1 .ent h3{font-size:17px;line-height:1.25}
+.d1 .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.d1 .seats{display:flex;gap:-4px}.d1 .seats .av{margin-right:-4px;border:2px solid var(--paper)}.d1 .seats .av.dashed{border:1.5px dashed #A89E8B}
+.d1 .since{font-style:normal;font-size:12px;color:var(--forest);font-weight:600;margin-left:10px}
+.d1 .quiet{border:0;padding:0;font-size:12px}.d1 .more{color:var(--forest);font-weight:600;font-size:13px;margin-top:auto}
+.d1 .ask{gap:10px}.d1 .q{font-size:26px;line-height:1.18}.d1 .q.sm{font-size:21px}
+.d1 .priv{display:flex;gap:2px;font-size:12px;color:var(--ink);background:var(--peach);border:1px solid #E8CDBE;padding:8px 10px;border-radius:8px;align-items:flex-start}.d1 .priv .lock{margin-top:3px;margin-right:8px}
+.d1 .paper{background:var(--paper);border:1px solid var(--hair);padding:14px;flex:1;min-height:0;background-image:repeating-linear-gradient(transparent 0 25px,#EFE7D8 25px 26px);background-position:0 12px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.d1 .typed{line-height:26px;font-size:15px}
+.d1 .from{background:var(--cream);border:1px dashed #B9AE97;padding:8px 10px;font-size:13px;display:grid;gap:2px}.d1 .from b{color:var(--forest)}
+.d1 .rev{gap:10px}.d1 .line{display:grid;gap:4px;font-size:12px;color:var(--mut)}.d1 .line span{display:flex}.d1 .line .av{margin-right:-4px;border:2px solid var(--cream)}.d1 .line .av.dashed{border:1.5px dashed #A89E8B}.d1 .line em{font-style:normal}
+.d1 article{border-top:1px solid var(--ink);padding-top:8px;display:grid;gap:6px}
+.d1 article header{display:flex;align-items:center;gap:8px}.d1 article header em{font-style:normal;color:var(--mut);font-size:12px;margin-left:auto}
+.d1 article p{font-size:15px;line-height:1.45}
+.d1 footer{display:flex;gap:16px}.d1 footer button{background:none;border:0;padding:0;font:600 13px "Instrument Sans";color:var(--forest);height:28px}.d1 footer .on{color:var(--ember)}
+.d1 .margin{margin-left:36px;border-left:2px solid var(--hair);padding-left:10px;font-size:13px;color:var(--ink)}.d1 .margin b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.d1 .trace{font-size:12px;color:var(--forest);font-weight:600}
+.d1 .mine{background:var(--paper);padding:8px 10px;border:1px solid var(--hair)}
+.d1 .recap{background:var(--peach);border:1px solid #E8CDBE;padding:10px 12px;font-size:13px;display:grid;gap:2px}
+.d1.tiny .q{font-size:20px}.d1.tiny .paper{background-image:repeating-linear-gradient(transparent 0 21px,#EFE7D8 21px 22px)}.d1.tiny .typed{line-height:22px;font-size:14px}.d1.tiny .priv{font-size:11px;padding:6px 8px}.d1.tiny .prim{height:42px}
+
+/* ================= D2 tactile journal ================= */
+.d2{background:#E7D9C2;background-image:radial-gradient(rgba(120,90,50,.07) 1px,transparent 1.5px);background-size:6px 6px}
+.d2 .tabs{background:#F2E8D6}
+.d2 .mast h1{font-size:30px;margin-top:2px}
+.d2 .open-note{position:relative;background:#FFF1EC;border:1px solid #E8CDBE;padding:12px 14px;font-size:13px;transform:rotate(-.6deg);box-shadow:0 2px 3px rgba(80,50,20,.15);margin-top:4px}
+.d2 .tape{position:absolute;top:-9px;left:50%;width:58px;height:18px;margin-left:-29px;background:rgba(214,190,130,.7);transform:rotate(-2deg)}
+.d2 .shelf-wrap{display:grid;gap:14px;margin-top:6px}
+.d2 .book{position:relative;transform:rotate(var(--t));padding:16px 16px 14px 28px;border-radius:4px 10px 10px 4px;box-shadow:0 3px 0 rgba(0,0,0,.12),0 8px 14px rgba(70,40,10,.18);display:grid;gap:5px;color:#F7F1E8}
+.d2 .book:before{content:"";position:absolute;left:0;top:0;bottom:0;width:16px;background:rgba(0,0,0,.18);border-radius:4px 0 0 4px}
+.d2 .b1{background:#1F3A2E}.d2 .b2{background:#8A4A2B}.d2 .b3{background:#5C6B54}
+.d2 .band{position:absolute;right:26px;top:0;bottom:0;width:7px;background:rgba(255,240,220,.35)}
+.d2 .plate{background:#F7F1E8;color:#25231F;border-radius:3px;padding:6px 10px;display:flex;flex-direction:column;width:calc(100% - 28px)}.d2 .plate b{font:600 15px Fraunces}.d2 .plate em{font-style:normal;font-size:11px;color:#6A645A}
+.d2 .bq{font:600 17px/1.25 Fraunces,serif;padding-right:30px;color:#F7F1E8}.d2 .bs{font-size:12px;color:#E9DFCB}
+.d2 .b1 .bq{font-size:19px}
+.d2 .spine-row{display:flex;gap:8px}.d2 .spine{flex:1;background:var(--c);color:#F7F1E8;font-size:12px;padding:10px;border-radius:3px;box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.d2 .top span,.d2 .x{color:var(--ink)}.d2 .x{color:var(--forest)}
+.d2 .ask{gap:10px}.d2 .page{position:relative;flex:1;min-height:0;background:#FFFDF9;background-image:repeating-linear-gradient(transparent 0 27px,#E3EAF0 27px 28px);background-position:0 8px;border-radius:3px;padding:22px 16px 14px 46px;box-shadow:0 3px 6px rgba(70,40,10,.2);display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.d2 .page:after{content:"";position:absolute;left:36px;top:0;bottom:0;width:1px;background:#E0A79A}
+.d2 .holes{position:absolute;left:8px;top:20px;display:grid;gap:34px}.d2 .holes i{width:12px;height:12px;border-radius:50%;background:#D8C9AE;box-shadow:inset 0 1px 2px rgba(0,0,0,.3)}
+.d2 .tapes{position:absolute;top:-1px;right:14px}.d2 .tape.lbl{position:static;display:block;margin:0;width:auto;height:auto;padding:3px 10px;font-size:11px;color:#3A2E1A;font-weight:600;transform:rotate(1deg)}
+.d2 .q{font-size:24px;line-height:28px}.d2 .q.sm{font-size:19px;line-height:24px}
+.d2 .typed{line-height:28px;font-size:15px}.d2 .clip{background:#F3EAD6;padding:6px 10px;font-size:12px;line-height:17px;border-radius:2px;margin-top:auto}.d2 .clip b{color:var(--forest)}
+.d2 .aud{text-align:center}
+.d2 .rev{padding:4px 14px 8px}.d2 .board{display:grid;gap:12px;overflow:hidden;padding-top:8px}
+.d2 .qcard{background:#F7F1E8;padding:10px 12px;border-radius:3px;box-shadow:0 2px 4px rgba(70,40,10,.2);display:grid;gap:2px}.d2 .qcard em{font-style:normal;font-size:12px;color:var(--mut)}
+.d2 .note{position:relative;padding:12px 12px 10px;display:grid;gap:6px;box-shadow:0 3px 6px rgba(70,40,10,.2);border-radius:2px}
+.d2 .n1{background:#FBE5D6;transform:rotate(-1deg)}.d2 .n2{background:#DDE8D5;transform:rotate(.8deg)}.d2 .n3{background:#FFFDF9;transform:rotate(-.5deg)}.d2 .n4{background:transparent;border:1.5px dashed #9B8C72;box-shadow:none;font-size:13px;padding:10px 12px}.d2 .n4 b{display:block}
+.d2 .note header{display:flex;align-items:center;gap:8px}.d2 .note header em{font-style:normal;font-size:12px;color:var(--mut);margin-left:auto}
+.d2 .note p{font-size:14px;line-height:1.4}.d2 .note footer{display:flex;gap:8px}
+.d2 .note footer button{height:30px;border:1px solid rgba(60,40,20,.25);background:rgba(255,255,255,.5);border-radius:99px;padding:0 10px;font:600 12px "Instrument Sans";color:var(--ink);display:flex;align-items:center;gap:5px}
+.d2 .leaf i,.d2 .leaves i{width:10px;height:14px;background:#5C6B54;border-radius:0 90% 0 90%;display:inline-block;transform:rotate(-20deg)}.d2 .leaf.on{background:#CFE0C4}
+.d2 .leaves{font-size:12px;color:var(--forest);font-weight:600;display:flex;gap:3px;align-items:center}
+.d2 .slipr{background:#FFFDF9;border:1px solid rgba(60,40,20,.2);padding:6px 10px;font-size:12px;line-height:1.35;margin-left:14px;transform:rotate(.5deg);box-shadow:0 1px 2px rgba(70,40,10,.15)}.d2 .slipr b{display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.d2.tiny .page{padding:16px 10px 8px 38px}.d2.tiny .page:after{left:30px}.d2.tiny .holes{left:6px;gap:26px;top:14px}.d2.tiny .q{font-size:19px;line-height:23px}.d2.tiny .typed{font-size:13.5px;line-height:23px}.d2.tiny .page{background-image:repeating-linear-gradient(transparent 0 22px,#E3EAF0 22px 23px)}.d2.tiny .tapes{display:none}.d2.tiny .aud{font-size:11px}.d2.tiny .prim{height:40px}
+
+/* ================= D3 clear room ================= */
+.d3{background:#FBF8F3}.d3 .tabs{background:#fff}
+.d3 .scr{gap:10px}.d3 .mast{display:flex;align-items:baseline;justify-content:space-between}.d3 .mast h1{font-size:30px}.d3 .mast .eyebrow{color:var(--mut)}
+.d3 .sec{font:600 12px "Instrument Sans";letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-top:6px}
+.d3 .card{background:#fff;border:1px solid #E8E1D4;border-radius:14px;padding:14px;display:grid;gap:6px}
+.d3 .card.hero{border:1.5px solid var(--forest);gap:8px}
+.d3 .rt{display:flex;justify-content:space-between;align-items:center}.d3 .rt b{font:600 16px Fraunces,serif}
+.d3 .pill{font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;background:#EEF1EA;color:#3A5A47}.d3 .pill.go{background:var(--forest);color:#fff}.d3 .pill.qt{background:#F0EBE0;color:#6A645A}
+.d3 .rq{font-size:15px;line-height:1.35}.d3 .hero .rq{font:600 19px/1.25 Fraunces,serif}
+.d3 .rm{display:flex;align-items:center;font-size:12px;color:var(--mut)}.d3 .st{font-size:13px;color:var(--ink)}
+.d3 .card.flat{background:transparent;border-style:dashed}
+.d3 .more{color:var(--forest);font-weight:600;font-size:13px;margin-top:auto}
+.d3 .lockbar{background:#fff;border:1px solid #E8E1D4;border-radius:12px;padding:6px 12px;gap:8px;justify-content:flex-start}
+.d3 .lockbar div{flex:1;display:flex;flex-direction:column;line-height:1.2}.d3 .lockbar b{font-weight:600}.d3 .lockbar div b{font-size:14px}.d3 .lockbar em{font-style:normal;font-size:12px;color:var(--mut)}.d3 .lockbar .lk{margin-right:0}
+.d3 .q{font-size:24px;line-height:1.2}.d3 .q.sm{font-size:19px}
+.d3 .who{display:grid;gap:6px;font-size:12px}.d3 .who>div{display:flex;align-items:center;flex-wrap:wrap;gap:0}.d3 .who em{font-style:normal;font-weight:600;width:84px;flex:none;color:var(--mut)}.d3 .who .av{margin-right:-5px;border:2px solid #FBF8F3}.d3 .who span{margin-left:10px;color:var(--ink)}
+.d3 .field{background:#fff;border:1.5px solid var(--forest);border-radius:12px;padding:12px;flex:1;min-height:0;overflow:hidden}
+.d3 .from{font-size:12px;background:#fff;border:1px solid #E8E1D4;border-radius:10px;padding:8px 10px}.d3 .from span{font-weight:600}.d3 .from b{color:var(--forest);float:right}
+.d3 .seg{display:flex;gap:6px}.d3 .seg b{font-size:12px;padding:6px 10px;border-radius:99px;border:1px solid #E8E1D4;background:#fff;font-weight:500;white-space:nowrap}.d3 .seg b.on{background:var(--forest);color:#fff;border-color:var(--forest)}
+.d3 .ans{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #EAE3D6}
+.d3 .ab{min-width:0;display:grid;gap:5px}.d3 .an{display:flex;gap:8px;align-items:baseline}.d3 .an em{font-style:normal;font-size:12px;color:var(--mut)}
+.d3 .ans p{font-size:15px;line-height:1.4}.d3 .acts{display:flex;gap:8px}
+.d3 .acts button{height:32px;border:1px solid #E0D8C8;background:#fff;border-radius:8px;padding:0 10px;font:500 12px "Instrument Sans";color:var(--ink);display:flex;gap:5px;align-items:center}
+.d3 .acts i,.d3 .trace i{width:9px;height:12px;background:#5C6B54;border-radius:0 90% 0 90%;transform:rotate(-20deg);display:inline-block}
+.d3 .acts .on{background:#E4EEDF;border-color:#B7CCAE}
+.d3 .rp{display:flex;gap:8px;background:#F4EFE5;border-radius:10px;padding:8px 10px;align-items:flex-start}.d3 .rp p{font-size:13px}
+.d3 .trace{font-size:12px;font-weight:600;color:var(--forest);display:flex;gap:6px;align-items:center}
+.d3 .mine{background:#F5F8F2;margin:0 -8px;padding-inline:8px;border-radius:10px;border:0}
+.d3 .foot{font-size:12px;color:var(--mut);text-align:center;padding-top:4px}
+.d3.tiny .q{font-size:20px}.d3.tiny .lockbar{padding:4px 8px}.d3.tiny .who{font-size:11px}.d3.tiny .who em{width:70px}.d3.tiny .prim{height:42px}
+.d3.tiny .field{padding:9px}.d3.tiny .typed{font-size:14px}
+@media (max-width:640px){.row3{gap:16px}}
+
+.d2 .clip .eyebrow{display:block}
+.d2 .board{gap:8px}.d2 .note{padding:10px 12px 8px}.d2 .note p{font-size:13.5px}.d2 .qcard h2{font-size:18px}
+.d1 .rev article p{font-size:14.5px}.d1 .rev{gap:8px}
+.d3 .seg{overflow:hidden}.d3 .seg b{font-size:11.5px;padding:6px 9px}
+.d3.tiny .who .av{display:none}.d3.tiny .who span{margin-left:0}.d3.tiny .who em{width:62px}
+</style><main>
+<header class="hero"><span class="eyebrow">Elara Circles · design exploration · not in the app</span>
+<h1>Three ways to sit in the same room</h1>
+<p class="lead">Every direction keeps one behaviour: a private room of up to ten women, Elara's weekly question, writing before reading, a shelf of past questions and a recap. Reply and “This resonated” come from the newer feed prototype, but they live inside the room and under one answer. There is no global feed, no counts, and no way to read before you write.</p>
+<nav class="jump"><a href="#d1">1 Editorial paper</a><a href="#d2">2 Tactile journal</a><a href="#d3">3 Clear room</a><a href="#compare">Compare</a><a href="#pick">Recommendation</a></nav>
+<div class="held"><h3>Same in all three</h3><ul>
+<li><b>Room:</b> Mothers Circle, 8 women, seats for 10.</li>
+<li><b>Question:</b> “What did you want a purchase to solve for you?” asked by Elara AI on Friday.</li>
+<li><b>Order:</b> write, then read. Their answers open after yours.</li>
+<li><b>Borrowed from the feed:</b> Reply under one answer, and “This resonated”, private to the author as names, never a number.</li>
+<li><b>Shelf and recap:</b> 14 past questions; Elara's recap opens Monday.</li>
+<li><b>Content:</b> the same four answers and the same two replies in each direction, so only the design changes.</li></ul></div></header>
+<section id="d1"><div class="sh"><span class="num">1</span><div><h2>Editorial paper</h2><p class="kick">Refines what is already approved</p></div></div><p class="desc">The existing paper, seats and signature rule, tightened. A masthead and a hairline hierarchy make each room read like a page in a small publication: the question is the headline, the women are the byline, replies sit in the margin.</p><ul class="notes"><li>Belonging comes from seats on the signature rule: filled for answered, dashed for waiting.</li><li>Privacy is a quiet sentence under the question and a “private · 8 women” label on every entry.</li><li>Least new work: closest to the shipped room, shelf and recap.</li></ul><div class="scroll"><div class="row3"><figure class="ph"><div class="phone d1" style="width:390px;height:844px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr">
+ <div class="mast"><span class="eyebrow">Sunday 4 October</span><h1>Circles</h1><div class="rule2"></div></div>
+ <div class="ent first">
+  <div class="slip"><span class="stamp">Your turn</span>
+   <div class="nm">Mothers Circle <span>· private · 8 women</span></div>
+   <div class="eyebrow">On the table · asked by Elara</div>
+   <h2>What did you want a purchase to solve for you?</h2>
+   <div class="row"><span class="seats"><i class="av sm" style="background:#E9D5C3;color:#2B2A26;">V</i><i class="av sm" style="background:#D5E0D2;color:#2B2A26;">C</i><i class="av sm" style="background:#CFE0E4;color:#2B2A26;">L</i><i class="av sm dashed" style="background:#DDD2E3;color:#2B2A26;">M</i><i class="av sm dashed" style="background:#E6DCB8;color:#2B2A26;">D</i><i class="av sm dashed" style="background:#EBD0CC;color:#2B2A26;">X</i><i class="av sm dashed" style="background:#D9D9C4;color:#2B2A26;">A</i></span></div>
+   <p class="aud">Valeria, Camila and Luz have answered. Write yours first; then theirs open.</p>
+   <button class="prim">Write your answer</button>
+  </div>
+ </div>
+ <div class="ent"><div class="nm">Family Money Talks <span>· private · 6 women</span></div>
+   <h3>Which money talk with family are you putting off?</h3>
+   <div class="row"><span class="seats"><i class="av sm" style="background:#1F3A2E;color:#F7F1E8;">S</i><i class="av sm" style="background:#E9D5C3;color:#2B2A26;">V</i><i class="av sm" style="background:#DDD2E3;color:#2B2A26;">M</i><i class="av sm" style="background:#E6DCB8;color:#2B2A26;">D</i><i class="av sm dashed" style="background:#EBD0CC;color:#2B2A26;">X</i></span><em class="since">Rosa wrote back to you.</em></div></div>
+ <div class="ent"><div class="nm">Soft Boundaries <span>· private · 4 women</span></div>
+   <h3>Where did you say yes when you meant no?</h3>
+   <div class="row"><span class="seats"><i class="av sm" style="background:#1F3A2E;color:#F7F1E8;">S</i><i class="av sm" style="background:#CFE0E4;color:#2B2A26;">L</i><i class="av sm dashed" style="background:#D5E0D2;color:#2B2A26;">C</i></span><em class="since">Nothing new since Friday.</em></div></div>
+ <div class="ent quiet"><div class="nm">Founder Money Reset <span>· quiet since Wednesday</span></div></div>
+ <a class="more">Rooms with a seat open ›</a>
+</div><div class="tabs"><span class=""><em></em>Today</span><span class=""><em></em>Atlas</span><span class=""><em></em>Ask Elara</span><span class=""><em></em>Explore</span><span class="on"><em></em>Circles</span></div></div><figcaption>1 · Circles home</figcaption></figure><figure class="ph"><div class="phone d1" style="width:390px;height:844px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr ask">
+ <div class="top"><b class="back">‹</b><span>Mothers Circle</span><b class="x">Close</b></div>
+ <div class="eyebrow">Asked by Elara AI · Friday</div>
+ <h2 class="q">What did you want a purchase to solve for you?</h2>
+ <div class="priv"><span class="lock"></span>Only the 8 women in this room see your answer. Elara never shows it anywhere else.</div>
+ <div class="paper">
+  <p class="typed">I think I wanted the jacket to make Monday feel lighter. It didn't, but the walk to the shop did<span class="caret"></span></p>
+  <div class="from"><span class="eyebrow">From your practice · Day 4</span>“A spend that felt right: the school shoes.” <b>Add</b></div>
+ </div>
+ <button class="prim">Put it on the table</button>
+ <p class="hint">Theirs open once yours is here. You can take yours back later.</p>
+</div><div class="kbd"><div class="kr0"><b>q</b><b>w</b><b>e</b><b>r</b><b>t</b><b>y</b><b>u</b><b>i</b><b>o</b><b>p</b></div><div class="kr1"><b>a</b><b>s</b><b>d</b><b>f</b><b>g</b><b>h</b><b>j</b><b>k</b><b>l</b></div><div class="kr2"><b>z</b><b>x</b><b>c</b><b>v</b><b>b</b><b>n</b><b>m</b></div><div class="kr3"><b class="w">123</b><b class="sp">space</b><b class="w">return</b></div></div></div><figcaption>2 · Weekly question, answer entry</figcaption></figure><figure class="ph"><div class="phone d1" style="width:390px;height:844px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr rev">
+ <div class="top"><b class="back">‹</b><span>Mothers Circle</span><b class="x">Shelf · 14</b></div>
+ <div class="eyebrow">Week of 4 October · you signed the line</div>
+ <h2 class="q sm">What did you want a purchase to solve for you?</h2>
+ <div class="line"><span><i class="av sm" style="background:#1F3A2E;color:#F7F1E8;">S</i><i class="av sm" style="background:#E9D5C3;color:#2B2A26;">V</i><i class="av sm" style="background:#D5E0D2;color:#2B2A26;">C</i><i class="av sm" style="background:#CFE0E4;color:#2B2A26;">L</i><i class="av sm dashed" style="background:#DDD2E3;color:#2B2A26;">M</i><i class="av sm dashed" style="background:#E6DCB8;color:#2B2A26;">D</i></span><em>Four of eight so far · visible to all eight of you · recap Monday</em></div>
+ <article><header><i class="av sm" style="background:#E9D5C3;color:#2B2A26;">V</i><b>Valeria</b><em>Mon</em></header>
+  <p>Quiet. I wanted the new vacuum to give me an evening back. It gave me forty minutes, which I spent sitting on the clean floor.</p>
+  <footer><button>Write back</button><button class="on">This resonated</button></footer>
+  <div class="margin"><b>You</b> Forty minutes on the clean floor is the most honest sentence I've read this week.</div></article>
+ <article><header><i class="av sm" style="background:#D5E0D2;color:#2B2A26;">C</i><b>Camila</b><em>Tue</em></header>
+  <p>Permission. I bought the planner in March because I thought a nicer system would make me someone who plans.</p>
+  <footer><button>Write back</button><button>This resonated</button></footer></article>
+ <article class="mine"><header><i class="av sm" style="background:#1F3A2E;color:#F7F1E8;">S</i><b>You</b><em>Just now</em></header>
+  <p>I think I wanted the jacket to make Monday feel lighter. It didn't, but the walk to the shop did.</p>
+  <div class="trace">Stayed with Camila and Luz · only you see this</div>
+  <div class="margin"><b>Camila</b> The walk did something. I think I buy that too.</div></article>
+
+</div><div class="tabs"><span class=""><em></em>Today</span><span class=""><em></em>Atlas</span><span class=""><em></em>Ask Elara</span><span class=""><em></em>Explore</span><span class="on"><em></em>Circles</span></div></div><figcaption>3 · The room after answers open</figcaption></figure></div></div><div class="dense"><div><figure class="ph"><div class="phone d1 tiny" style="width:320px;height:568px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr ask">
+ <div class="top"><b class="back">‹</b><span>Mothers Circle</span><b class="x">Close</b></div>
+ <div class="eyebrow">Asked by Elara AI · Friday</div>
+ <h2 class="q">What did you want a purchase to solve for you?</h2>
+ <div class="priv"><span class="lock"></span>Only the 8 women in this room see your answer. Elara never shows it anywhere else.</div>
+ <div class="paper">
+  <p class="typed">I think I wanted the jacket to make Monday feel lighter. It didn't, but the walk to the shop did<span class="caret"></span></p>
+  
+ </div>
+ <button class="prim">Put it on the table</button>
+ <p class="hint">Theirs open once yours is here. You can take yours back later.</p>
+</div><div class="kbd s"><div class="kr0"><b>q</b><b>w</b><b>e</b><b>r</b><b>t</b><b>y</b><b>u</b><b>i</b><b>o</b><b>p</b></div><div class="kr1"><b>a</b><b>s</b><b>d</b><b>f</b><b>g</b><b>h</b><b>j</b><b>k</b><b>l</b></div><div class="kr2"><b>z</b><b>x</b><b>c</b><b>v</b><b>b</b><b>n</b><b>m</b></div><div class="kr3"><b class="w">123</b><b class="sp">space</b><b class="w">return</b></div></div></div><figcaption>320 × 568 · answering with the keyboard up</figcaption></figure></div><div class="dnote"><h4>Density test</h4><p>Answer field measures 117px (about four ruled lines) with the keyboard up. The privacy box stays in full, at the cost of the practice line, which is dropped at this size. The button clears the keys. Hint text is hidden.</p></div></div></section><section id="d2"><div class="sh"><span class="num">2</span><div><h2>Tactile shared journal</h2><p class="kick">A notebook the women pass around</p></div></div><p class="desc">Each circle is a journal on a table. Answering means writing on a ruled page; after that, their pages are pinned on the board as notes with tape and small clipped replies. The leaf is the “This resonated” mark.</p><ul class="notes"><li>Belonging is the strongest: it feels like a place with objects, and blank pages say who is missing.</li><li>Privacy is told by the metaphor, but the sentence still has to be written out, and a tape label repeats “Private · the 8 of you”.</li><li>Costs the most: textures, tilt and layered paper, with a longer reveal screen.</li></ul><div class="scroll"><div class="row3"><figure class="ph"><div class="phone d2" style="width:390px;height:844px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr">
+ <div class="mast"><span class="eyebrow">Sunday 4 October · on your table</span><h1>Your circles</h1></div>
+ <div class="open-note"><span class="tape"></span><b>Mothers Circle is waiting on your page.</b> Write first; their pages turn over afterwards.</div>
+ <div class="shelf-wrap">
+ <div class="book b1" style="--t:-1.2deg"><span class="band"></span><div class="plate"><b>Mothers Circle</b><em>private · the 8 of you</em></div><p class="bq">What did you want a purchase to solve for you?</p><p class="bs">Valeria, Camila and Luz have written.</p></div>
+ <div class="book b2" style="--t:0.8deg"><span class="band"></span><div class="plate"><b>Family Money Talks</b><em>private · the 6 of you</em></div><p class="bq">Which money talk with family are you putting off?</p><p class="bs">Rosa wrote back to you.</p></div>
+ <div class="book b3" style="--t:-0.5deg"><span class="band"></span><div class="plate"><b>Soft Boundaries</b><em>private · the 4 of you</em></div><p class="bq">Where did you say yes when you meant no?</p><p class="bs">Nothing new since Friday.</p></div>
+ <div class="spine-row"><span class="spine" style="--c:#8A6B4F">Founder Money Reset</span><span class="spine" style="--c:#6B7F5C">Seat open · Money After Divorce</span></div>
+ </div>
+</div><div class="tabs"><span class=""><em></em>Today</span><span class=""><em></em>Atlas</span><span class=""><em></em>Ask Elara</span><span class=""><em></em>Explore</span><span class="on"><em></em>Circles</span></div></div><figcaption>1 · Circles home</figcaption></figure><figure class="ph"><div class="phone d2" style="width:390px;height:844px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr ask">
+ <div class="top"><b class="back">‹</b><span>Mothers Circle</span><b class="x">Close</b></div>
+ <div class="page">
+  <span class="holes"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  <div class="tapes"><span class="tape lbl">Private · the 8 of you</span></div>
+  <div class="eyebrow">Elara AI asked on Friday</div>
+  <h2 class="q">What did you want a purchase to solve for you?</h2>
+  <p class="typed">I think I wanted the jacket to make Monday feel lighter. It didn't, but the walk to the shop did<span class="caret"></span></p>
+  <div class="clip"><span class="eyebrow">From your practice · Day 4</span>“A spend that felt right: the school shoes.” <b>Pin it here</b></div>
+ </div>
+ <p class="aud">Only the women in this room can open this page. Not Elara's other screens, not other circles.</p>
+ <button class="prim">Put it on the table</button>
+</div><div class="kbd"><div class="kr0"><b>q</b><b>w</b><b>e</b><b>r</b><b>t</b><b>y</b><b>u</b><b>i</b><b>o</b><b>p</b></div><div class="kr1"><b>a</b><b>s</b><b>d</b><b>f</b><b>g</b><b>h</b><b>j</b><b>k</b><b>l</b></div><div class="kr2"><b>z</b><b>x</b><b>c</b><b>v</b><b>b</b><b>n</b><b>m</b></div><div class="kr3"><b class="w">123</b><b class="sp">space</b><b class="w">return</b></div></div></div><figcaption>2 · Weekly question, answer entry</figcaption></figure><figure class="ph"><div class="phone d2" style="width:390px;height:844px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr rev">
+ <div class="top"><b class="back">‹</b><span>Mothers Circle</span><b class="x">Shelf · 14</b></div>
+ <div class="board">
+  <div class="qcard"><span class="eyebrow">Elara AI · Friday</span><h2 class="q sm">What did you want a purchase to solve for you?</h2><em>Private to the 8 of you · two pages still blank</em></div>
+  <div class="note n1"><span class="tape"></span><header><i class="av sm" style="background:#E9D5C3;color:#2B2A26;">V</i><b>Valeria</b><em>Mon</em></header>
+   <p>Quiet. I wanted the new vacuum to give me an evening back. It gave me forty minutes, which I spent sitting on the clean floor.</p>
+   <footer><button class="leaf on"><i></i>This resonated</button><button>Write back</button></footer>
+   <div class="slipr"><b>You</b>Forty minutes on the clean floor is the most honest sentence I've read this week.</div></div>
+  <div class="note n2"><span class="tape"></span><header><i class="av sm" style="background:#D5E0D2;color:#2B2A26;">C</i><b>Camila</b><em>Tue</em></header>
+   <p>Permission. I bought the planner in March because I thought a nicer system would make me someone who plans.</p>
+   <footer><button class="leaf"><i></i>This resonated</button><button>Write back</button></footer></div>
+  <div class="note n3 mine"><span class="tape"></span><header><i class="av sm" style="background:#1F3A2E;color:#F7F1E8;">S</i><b>Your page</b><em>Just now</em></header>
+   <p>I think I wanted the jacket to make Monday feel lighter. It didn't, but the walk to the shop did.</p>
+   <div class="leaves"><i></i><i></i> Stayed with Camila and Luz · only you see this</div>
+   <div class="slipr"><b>Camila</b>The walk did something. I think I buy that too.</div></div>
+ </div>
+</div><div class="tabs"><span class=""><em></em>Today</span><span class=""><em></em>Atlas</span><span class=""><em></em>Ask Elara</span><span class=""><em></em>Explore</span><span class="on"><em></em>Circles</span></div></div><figcaption>3 · The room after answers open</figcaption></figure></div></div><div class="dense"><div><figure class="ph"><div class="phone d2 tiny" style="width:320px;height:568px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr ask">
+ <div class="top"><b class="back">‹</b><span>Mothers Circle</span><b class="x">Close</b></div>
+ <div class="page">
+  <span class="holes"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  <div class="tapes"><span class="tape lbl">Private · the 8 of you</span></div>
+  <div class="eyebrow">Elara AI asked on Friday</div>
+  <h2 class="q">What did you want a purchase to solve for you?</h2>
+  <p class="typed">I think I wanted the jacket to make Monday feel lighter. It didn't, but the walk to the shop did<span class="caret"></span></p>
+  
+ </div>
+ <p class="aud">Only the women in this room can open this page. Not Elara's other screens, not other circles.</p>
+ <button class="prim">Put it on the table</button>
+</div><div class="kbd s"><div class="kr0"><b>q</b><b>w</b><b>e</b><b>r</b><b>t</b><b>y</b><b>u</b><b>i</b><b>o</b><b>p</b></div><div class="kr1"><b>a</b><b>s</b><b>d</b><b>f</b><b>g</b><b>h</b><b>j</b><b>k</b><b>l</b></div><div class="kr2"><b>z</b><b>x</b><b>c</b><b>v</b><b>b</b><b>n</b><b>m</b></div><div class="kr3"><b class="w">123</b><b class="sp">space</b><b class="w">return</b></div></div></div><figcaption>320 × 568 · answering with the keyboard up</figcaption></figure></div><div class="dnote"><h4>Density test</h4><p>The page holds question and answer together and measures 217px, so it leaves the most room to write (about five lines). The cost is privacy: the tape label is dropped at this size and the audience is a two-line caption under the page, the quietest of the three.</p></div></div></section><section id="d3"><div class="sh"><span class="num">3</span><div><h2>Clear, scannable room</h2><p class="kick">The easiest to read at a glance</p></div></div><p class="desc">A calmer, flatter room. Home sorts by what needs you; every room carries a lock bar with its audience; the reveal is a straight list with reply and resonate in a fixed place under each answer.</p><ul class="notes"><li>Belonging is quieter: faces and names, but fewer objects. It reads closer to a tidy inbox than a table.</li><li>Privacy is clearest: a persistent lock bar, plus “Seen by / Not seen by” right above the field.</li><li>Risk: drifting toward a messaging app. The sections and the “Replies to you” filter must stay inside one room.</li></ul><div class="scroll"><div class="row3"><figure class="ph"><div class="phone d3" style="width:390px;height:844px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr">
+ <div class="mast"><h1>Circles</h1><span class="eyebrow">Sunday 4 October</span></div>
+ <h4 class="sec">Needs your answer · 1</h4>
+ <div class="card hero"><div class="rt"><b>Mothers Circle</b><span class="pill go">Your turn</span></div><p class="rq">What did you want a purchase to solve for you?</p><div class="rm"><span class="lk"></span>Private · 8 women</div><p class="st">Valeria, Camila and Luz have answered. Yours first, then theirs open.</p></div>
+ <h4 class="sec">Answered</h4>
+ <div class="card "><div class="rt"><b>Family Money Talks</b><span class="pill ok">New reply</span></div><p class="rq">Which money talk with family are you putting off?</p><div class="rm"><span class="lk"></span>Private · 6 women</div><p class="st">Rosa wrote back to you.</p></div>
+ <div class="card "><div class="rt"><b>Soft Boundaries</b><span class="pill ok">Up to date</span></div><p class="rq">Where did you say yes when you meant no?</p><div class="rm"><span class="lk"></span>Private · 4 women</div><p class="st">Nothing new since Friday.</p></div>
+ <div class="card flat"><div class="rt"><b>Founder Money Reset</b><span class="pill qt">Quiet</span></div><p class="st">Quiet since Wednesday.</p></div>
+ <a class="more">Rooms with a seat open ›</a>
+</div><div class="tabs"><span class=""><em></em>Today</span><span class=""><em></em>Atlas</span><span class=""><em></em>Ask Elara</span><span class=""><em></em>Explore</span><span class="on"><em></em>Circles</span></div></div><figcaption>1 · Circles home</figcaption></figure><figure class="ph"><div class="phone d3" style="width:390px;height:844px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr ask">
+ <div class="lockbar"><b class="back">‹</b><span class="lk"></span><div><b>Mothers Circle</b><em>Private · 8 women</em></div><b class="x">Close</b></div>
+ <div class="eyebrow">Question from Elara AI · Friday</div>
+ <h2 class="q">What did you want a purchase to solve for you?</h2>
+ <div class="who"><div><em>Seen by</em><i class="av sm" style="background:#E9D5C3;color:#2B2A26;">V</i><i class="av sm" style="background:#D5E0D2;color:#2B2A26;">C</i><i class="av sm" style="background:#CFE0E4;color:#2B2A26;">L</i><i class="av sm" style="background:#DDD2E3;color:#2B2A26;">M</i><i class="av sm" style="background:#E6DCB8;color:#2B2A26;">D</i><i class="av sm" style="background:#EBD0CC;color:#2B2A26;">X</i><i class="av sm" style="background:#D9D9C4;color:#2B2A26;">A</i><span>the other 7</span></div><div><em>Not seen by</em><span>Elara's other screens · other circles</span></div></div>
+ <div class="field"><p class="typed">I think I wanted the jacket to make Monday feel lighter. It didn't, but the walk to the shop did<span class="caret"></span></p></div>
+ <div class="from"><span>Day 4:</span> “A spend that felt right: the school shoes.” <b>Add</b></div>
+ <button class="prim">Put it on the table</button>
+ <p class="hint">Their answers open after yours. You can remove yours later.</p>
+</div><div class="kbd"><div class="kr0"><b>q</b><b>w</b><b>e</b><b>r</b><b>t</b><b>y</b><b>u</b><b>i</b><b>o</b><b>p</b></div><div class="kr1"><b>a</b><b>s</b><b>d</b><b>f</b><b>g</b><b>h</b><b>j</b><b>k</b><b>l</b></div><div class="kr2"><b>z</b><b>x</b><b>c</b><b>v</b><b>b</b><b>n</b><b>m</b></div><div class="kr3"><b class="w">123</b><b class="sp">space</b><b class="w">return</b></div></div></div><figcaption>2 · Weekly question, answer entry</figcaption></figure><figure class="ph"><div class="phone d3" style="width:390px;height:844px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr rev">
+ <div class="lockbar"><b class="back">‹</b><span class="lk"></span><div><b>Mothers Circle</b><em>Private · all 8 of you can read this</em></div><b class="x">Shelf</b></div>
+ <h2 class="q sm">What did you want a purchase to solve for you?</h2>
+ <div class="seg"><b class="on">All answers · 4</b><b>Replies to you · 1</b><b>Not yet · 4 · recap Mon</b></div>
+ <div class="ans"><div class="al"><i class="av " style="background:#E9D5C3;color:#2B2A26;">V</i></div><div class="ab"><div class="an"><b>Valeria</b><em>Mon</em></div><p>Quiet. I wanted the new vacuum to give me an evening back. It gave me forty minutes, which I spent sitting on the clean floor.</p><div class="acts"><button class="on"><i></i>This resonated</button><button>Reply</button></div><div class="rp"><i class="av xs" style="background:#1F3A2E;color:#F7F1E8;">S</i><p><b>You</b> Forty minutes on the clean floor is the most honest sentence I've read this week.</p></div></div></div>
+ <div class="ans"><div class="al"><i class="av " style="background:#D5E0D2;color:#2B2A26;">C</i></div><div class="ab"><div class="an"><b>Camila</b><em>Tue</em></div><p>Permission. I bought the planner in March because I thought a nicer system would make me someone who plans.</p><div class="acts"><button class=""><i></i>This resonated</button><button>Reply</button></div></div></div>
+ <div class="ans mine"><div class="al"><i class="av " style="background:#1F3A2E;color:#F7F1E8;">S</i></div><div class="ab"><div class="an"><b>You</b><em>Just now</em></div><p>I think I wanted the jacket to make Monday feel lighter. It didn't, but the walk to the shop did.</p><div class="trace"><i></i>Stayed with Camila and Luz · only you see this</div><div class="rp"><i class="av xs" style="background:#D5E0D2;color:#2B2A26;">C</i><p><b>Camila</b> The walk did something. I think I buy that too.</p></div></div></div>
+</div><div class="tabs"><span class=""><em></em>Today</span><span class=""><em></em>Atlas</span><span class=""><em></em>Ask Elara</span><span class=""><em></em>Explore</span><span class="on"><em></em>Circles</span></div></div><figcaption>3 · The room after answers open</figcaption></figure></div></div><div class="dense"><div><figure class="ph"><div class="phone d3 tiny" style="width:320px;height:568px"><div class="sb"><b>9:41</b><span class="sbi"><u></u><u></u><u></u></span></div>
+<div class="scr ask">
+ <div class="lockbar"><b class="back">‹</b><span class="lk"></span><div><b>Mothers Circle</b><em>Private · 8 women</em></div><b class="x">Close</b></div>
+ <div class="eyebrow">Question from Elara AI · Friday</div>
+ <h2 class="q">What did you want a purchase to solve for you?</h2>
+ <div class="who"><div><em>Seen by</em><i class="av sm" style="background:#E9D5C3;color:#2B2A26;">V</i><i class="av sm" style="background:#D5E0D2;color:#2B2A26;">C</i><i class="av sm" style="background:#CFE0E4;color:#2B2A26;">L</i><i class="av sm" style="background:#DDD2E3;color:#2B2A26;">M</i><i class="av sm" style="background:#E6DCB8;color:#2B2A26;">D</i><i class="av sm" style="background:#EBD0CC;color:#2B2A26;">X</i><i class="av sm" style="background:#D9D9C4;color:#2B2A26;">A</i><span>the other 7</span></div><div><em>Not seen by</em><span>Elara's other screens · other circles</span></div></div>
+ <div class="field"><p class="typed">I think I wanted the jacket to make Monday feel lighter. It didn't, but the walk to the shop did<span class="caret"></span></p></div>
+ 
+ <button class="prim">Put it on the table</button>
+ <p class="hint">Their answers open after yours. You can remove yours later.</p>
+</div><div class="kbd s"><div class="kr0"><b>q</b><b>w</b><b>e</b><b>r</b><b>t</b><b>y</b><b>u</b><b>i</b><b>o</b><b>p</b></div><div class="kr1"><b>a</b><b>s</b><b>d</b><b>f</b><b>g</b><b>h</b><b>j</b><b>k</b><b>l</b></div><div class="kr2"><b>z</b><b>x</b><b>c</b><b>v</b><b>b</b><b>n</b><b>m</b></div><div class="kr3"><b class="w">123</b><b class="sp">space</b><b class="w">return</b></div></div></div><figcaption>320 × 568 · answering with the keyboard up</figcaption></figure></div><div class="dnote"><h4>Density test</h4><p>Answer field is 115px, level with direction 1. The lock bar with “Private · 8 women” stays on top; the row of seven faces collapses to “the other 7” so “Not seen by” survives. Nothing important is cut, but there is no spare room.</p></div></div></section><section id="compare"><div class="sh"><span class="num">⌗</span><div><h2>Compared</h2><p class="kick">Four things you asked about, scored from the screens above</p></div></div>
+<div class="tablewrap"><table><thead><tr><th></th><th>1 Editorial paper</th><th>2 Tactile journal</th><th>3 Clear room</th></tr></thead><tbody>
+<tr><th>Belonging</th><td><b>Good.</b> Seats on the signature rule, names as bylines. Warm, a little formal.</td><td><b>Strongest.</b> Pages, tape and blank pages for women who haven't written make the room feel inhabited.</td><td><b>Moderate.</b> Faces and names are present but there is little to hold on to.</td></tr>
+<tr><th>Privacy clarity</th><td><b>Good.</b> One sentence under the question, “private · 8 women” on each entry.</td><td><b>Mixed.</b> Metaphor says private, copy says it. Two places, both quieter than the other directions.</td><td><b>Clearest.</b> Lock bar on every room screen, “Seen by / Not seen by” beside the field.</td></tr>
+<tr><th>Readability</th><td><b>Good.</b> Strong serif hierarchy; margin replies are easy to miss.</td><td><b>Weakest.</b> Tilt, tints and texture lower contrast and slow scanning; long answers get cramped.</td><td><b>Best.</b> Fixed positions for name, text, resonate and reply. Easy to scan eight answers.</td></tr>
+<tr><th>Ease of answering</th><td><b>Good.</b> One field, one button; the practice line is one tap on larger phones and drops at 320.</td><td><b>Good, most room at 320.</b> The ruled page leaves the most space to write with the keyboard up, but privacy shrinks to a caption there.</td><td><b>Good.</b> Same order every time: field, optional practice line, button. At 320 the field is level with direction 1 and the privacy rows survive.</td></tr>
+<tr><th>Build cost</th><td>Low</td><td>High</td><td>Low to medium</td></tr>
+<tr><th>Brand fit</th><td>Highest. It is the Elara you have approved.</td><td>High, but crosses into scrapbook.</td><td>Needs warmth added back through paper edges and seats.</td></tr></tbody></table></div></section>
+
+<section id="pick"><div class="sh"><span class="num">★</span><div><h2>Recommendation</h2><p class="kick">Direction 1, with the privacy bar and the list order from direction 3</p></div></div>
+<div class="reco"><p>Build <b>editorial paper</b> as the base. It keeps the approved room, seats and paper, so it is the smallest change from what women have seen, and it makes “a room, not a feed” obvious from the first screen. The one thing the other two do better is privacy. Direction 3's lock bar and “Seen by / Not seen by” are clearer than a sentence under the question.</p>
+<ol><li><b>Take from 3:</b> a lock bar with the room name and audience on the question and room screens, and “Needs your answer” first on home.</li>
+<li><b>Take from 2:</b> the blank, dashed seat for women who haven't answered; skip tilt and tape.</li>
+<li><b>Keep from 1:</b> the question as headline, seats on the signature rule, replies in the margin, and the shelf and recap rows.</li>
+<li><b>Fix in 1:</b> margin replies are easy to miss. Show “Camila wrote back” as a visible line under the answer.</li></ol>
+<p class="small">Why not 2: it has the most belonging and writes best at 320 × 568, but it is the hardest to read, its privacy line is the quietest at 320, and it is the most work. Why not 3 alone: it answers every functional question but could feel like any other inbox. The next step, if you agree, is one combined direction at the same three screens and the 320 view. Nothing here changes the app; no app screens were replaced, and nothing has been committed or deployed.</p></div></section>
+</main>

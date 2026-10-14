@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Money Clarity Worlds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#F4EEE2; --paper:#FBF7EF; --ink:#2A2420; --muted:#6B6158; --rule:#DDD3C2; --forest:#1F3A2E; --ember:#B8461F; --lake:#4F6B6A; --soil:#6B5141; --lilac:#A79BC0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#1B1A17; --paper:#24221E; --ink:#EFE8DC; --muted:#B5AB9C; --rule:#3A362F; --forest:#9CC3AE; --ember:#E58A62; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg:#1B1A17; --paper:#24221E; --ink:#EFE8DC; --muted:#B5AB9C; --rule:#3A362F; --forest:#9CC3AE; --ember:#E58A62; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.55 Inter, system-ui, sans-serif; padding-inline:16px; }
+main { max-width:1120px; margin:0 auto; padding-block:28px 64px; display:grid; gap:44px; }
+h1, h2 { font-family:Fraunces, Georgia, serif; font-weight:600; letter-spacing:-.01em; text-wrap:balance; margin:0; }
+h1 { font-size:clamp(28px, 5vw, 42px); line-height:1.1; }
+h2 { font-size:28px; }
+h3 { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 6px; font-weight:600; }
+.eyebrow { font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ember); margin:0 0 6px; font-weight:600; }
+.lede { max-width:68ch; color:var(--muted); margin:10px 0 0; }
+.bar { position:sticky; top:env(safe-area-inset-top, 0px); z-index:2; display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; padding:10px 0; background:var(--bg); border-bottom:1px solid var(--rule); }
+.toggle { display:inline-flex; border:1px solid var(--rule); border-radius:999px; padding:3px; background:var(--paper); }
+.toggle button { border:0; background:transparent; color:var(--ink); font:500 14px Inter, system-ui; padding:8px 16px; border-radius:999px; cursor:pointer; min-height:36px; }
+.toggle button[aria-pressed="true"] { background:var(--forest); color:var(--paper); }
+nav a { color:var(--ink); margin-right:14px; font-size:14px; }
+.world { display:grid; gap:18px; }
+.mood { color:var(--muted); max-width:70ch; margin:6px 0 0; }
+.scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+table.sheet { border-collapse:separate; border-spacing:10px 10px; margin:-10px; }
+table.sheet th { font:600 12px Inter, system-ui; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); text-align:left; white-space:nowrap; }
+table.sheet tbody th { writing-mode:vertical-rl; transform:rotate(180deg); text-align:center; padding:0 2px; }
+table.sheet img { display:block; width:min(23vw, 230px); min-width:150px; aspect-ratio:390/844; object-fit:cover; object-position:top; border-radius:12px; border:1px solid var(--rule); background:var(--paper); }
+.notes { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px 24px; }
+.notes > div { min-width:0; }
+.notes ul { margin:0; padding-left:18px; display:grid; gap:6px; }
+.notes .changed { background:var(--paper); border:1px solid var(--rule); border-radius:12px; padding:14px 16px; grid-column:1 / -1; }
+.notes .changed h3 { color:var(--forest); }
+figure { margin:0; display:grid; gap:8px; }
+figure img { width:100%; height:auto; border-radius:10px; border:1px solid var(--rule); background:var(--paper); }
+figcaption { color:var(--muted); font-size:14px; }
+.pair { display:grid; gap:18px; }
+.list { max-width:78ch; display:grid; gap:10px; padding-left:20px; margin:0; }
+.badge { font-size:12px; color:var(--muted); }
+img[hidden] { display:none; }
+</style></head>
+<body><main>
+<header>
+  <p class="eyebrow">Elara · Money Clarity · Weeks 3 to 5</p>
+  <h1>Reed Island, Guadua Roots, The Overlook</h1>
+  <p class="lede">The current experience at Day 1, Day 4, Day 7 and the morning after each world is walked, captured from the app running locally (iPhone width, 390 pt). Switch between the state before this pass and after it. Every screenshot opens full size.</p>
+</header>
+<div class="bar">
+  <nav aria-label="Sections"><a href="#w3">Reed Island</a><a href="#w4">Guadua Roots</a><a href="#w5">The Overlook</a><a href="#turns">Week turns</a><a href="#days">Day by day</a><a href="#gaps">Gaps</a></nav>
+  <div class="toggle" role="group" aria-label="Which version">
+    <button type="button" data-v="before" aria-pressed="false">Before</button>
+    <button type="button" data-v="after" aria-pressed="true">After</button>
+  </div>
+</div>
+
+<section class="world" id="w3">
+  <header class="world-head">
+    <p class="eyebrow">Week 3 · Build · Keeping</p>
+    <h2>Reed Island</h2>
+    <p class="mood">A still lilac lake at morning; an island of reed built up a little each day, dusk and a lit lantern at the end.</p>
+  </header>
+  <div class='scroll'><table class='sheet'><thead><tr><th></th><th scope='col'>Day 1</th><th scope='col'>Day 4</th><th scope='col'>Day 7</th><th scope='col'>Walked</th></tr></thead><tbody><tr><th scope='row'>Today</th><td><a class='shot' href='after/w3-d1-today.png' data-file='w3-d1-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d1-today.png' data-file='w3-d1-today.png' alt='Reed Island, Day 1, Today'></a></td><td><a class='shot' href='after/w3-d4-today.png' data-file='w3-d4-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d4-today.png' data-file='w3-d4-today.png' alt='Reed Island, Day 4, Today'></a></td><td><a class='shot' href='after/w3-d7-today.png' data-file='w3-d7-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d7-today.png' data-file='w3-d7-today.png' alt='Reed Island, Day 7, Today'></a></td><td><a class='shot' href='after/w3-done-today.png' data-file='w3-done-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-done-today.png' data-file='w3-done-today.png' alt='Reed Island, Walked, Today'></a></td></tr><tr><th scope='row'>Atlas map</th><td><a class='shot' href='after/w3-d1-atlas.png' data-file='w3-d1-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d1-atlas.png' data-file='w3-d1-atlas.png' alt='Reed Island, Day 1, Atlas map'></a></td><td><a class='shot' href='after/w3-d4-atlas.png' data-file='w3-d4-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d4-atlas.png' data-file='w3-d4-atlas.png' alt='Reed Island, Day 4, Atlas map'></a></td><td><a class='shot' href='after/w3-d7-atlas.png' data-file='w3-d7-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d7-atlas.png' data-file='w3-d7-atlas.png' alt='Reed Island, Day 7, Atlas map'></a></td><td><a class='shot' href='after/w3-done-atlas.png' data-file='w3-done-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-done-atlas.png' data-file='w3-done-atlas.png' alt='Reed Island, Walked, Atlas map'></a></td></tr><tr><th scope='row'>Path page</th><td><a class='shot' href='after/w3-d1-journey.png' data-file='w3-d1-journey.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d1-journey.png' data-file='w3-d1-journey.png' alt='Reed Island, Day 1, Path page'></a></td><td><a class='shot' href='after/w3-d4-journey.png' data-file='w3-d4-journey.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d4-journey.png' data-file='w3-d4-journey.png' alt='Reed Island, Day 4, Path page'></a></td><td><a class='shot' href='after/w3-d7-journey.png' data-file='w3-d7-journey.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d7-journey.png' data-file='w3-d7-journey.png' alt='Reed Island, Day 7, Path page'></a></td><td><a class='shot' href='after/w3-done-journey-a.png' data-file='w3-done-journey-a.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-done-journey-a.png' data-file='w3-done-journey-a.png' alt='Reed Island, Walked, Path page'></a></td></tr><tr><th scope='row'>Practice</th><td><a class='shot' href='after/w3-d1-practice.png' data-file='w3-d1-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d1-practice.png' data-file='w3-d1-practice.png' alt='Reed Island, Day 1, Practice'></a></td><td><a class='shot' href='after/w3-d4-practice.png' data-file='w3-d4-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d4-practice.png' data-file='w3-d4-practice.png' alt='Reed Island, Day 4, Practice'></a></td><td><a class='shot' href='after/w3-d7-practice.png' data-file='w3-d7-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-d7-practice.png' data-file='w3-d7-practice.png' alt='Reed Island, Day 7, Practice'></a></td><td><a class='shot' href='after/w3-done-practice.png' data-file='w3-done-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w3-done-practice.png' data-file='w3-done-practice.png' alt='Reed Island, Walked, Practice (the next morning)'></a></td></tr></tbody></table></div>
+  <div class="notes">
+    <div><h3>Finished</h3><ul><li>The island visibly builds every day: raft, anchor pole, leaning reeds, woven edge, house, watch post, lantern.</li><li>Day 7 turns to dusk and the reed boat comes home. The sewn card is one of the strongest in the path.</li></ul></div>
+    <div><h3>Placeholder</h3><ul><li>Day 1 morning on Today was an empty lake: the raft waiting to be built was graphite pencil on dark water, invisible.</li><li>The same on later mornings for anything over water (the pole, the reeds, the boat).</li></ul></div>
+    <div><h3>Lost continuity</h3><ul><li>Nothing is carried in from Week 2 (Celestial Night). Its red ties and boat had nowhere to go next.</li></ul></div>
+    <div class="changed"><h3>Changed in this pass</h3><ul><li>Pencil drawn over the lake is chalk now, so tomorrow&#x27;s piece reads on Today and in practice (raft, pole, reeds, boat).</li><li>The boat is a shared piece, so Week 4 can find the same boat on its bank.</li></ul></div>
+  </div>
+</section>
+<section class="world" id="w4">
+  <header class="world-head">
+    <p class="eyebrow">Week 4 · Grow · Growing</p>
+    <h2>Guadua Roots</h2>
+    <p class="mood">Now the far shore of that lake: a cut-away of warm soil under a pale sky, roots spreading where nobody sees them.</p>
+  </header>
+  <div class='scroll'><table class='sheet'><thead><tr><th></th><th scope='col'>Day 1</th><th scope='col'>Day 4</th><th scope='col'>Day 7</th><th scope='col'>Walked</th></tr></thead><tbody><tr><th scope='row'>Today</th><td><a class='shot' href='after/w4-d1-today.png' data-file='w4-d1-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d1-today.png' data-file='w4-d1-today.png' alt='Guadua Roots, Day 1, Today'></a></td><td><a class='shot' href='after/w4-d4-today.png' data-file='w4-d4-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d4-today.png' data-file='w4-d4-today.png' alt='Guadua Roots, Day 4, Today'></a></td><td><a class='shot' href='after/w4-d7-today.png' data-file='w4-d7-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d7-today.png' data-file='w4-d7-today.png' alt='Guadua Roots, Day 7, Today'></a></td><td><a class='shot' href='after/w4-done-today.png' data-file='w4-done-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-done-today.png' data-file='w4-done-today.png' alt='Guadua Roots, Walked, Today'></a></td></tr><tr><th scope='row'>Atlas map</th><td><a class='shot' href='after/w4-d1-atlas.png' data-file='w4-d1-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d1-atlas.png' data-file='w4-d1-atlas.png' alt='Guadua Roots, Day 1, Atlas map'></a></td><td><a class='shot' href='after/w4-d4-atlas.png' data-file='w4-d4-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d4-atlas.png' data-file='w4-d4-atlas.png' alt='Guadua Roots, Day 4, Atlas map'></a></td><td><a class='shot' href='after/w4-d7-atlas.png' data-file='w4-d7-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d7-atlas.png' data-file='w4-d7-atlas.png' alt='Guadua Roots, Day 7, Atlas map'></a></td><td><a class='shot' href='after/w4-done-atlas.png' data-file='w4-done-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-done-atlas.png' data-file='w4-done-atlas.png' alt='Guadua Roots, Walked, Atlas map'></a></td></tr><tr><th scope='row'>Path page</th><td><a class='shot' href='after/w4-d1-journey.png' data-file='w4-d1-journey.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d1-journey.png' data-file='w4-d1-journey.png' alt='Guadua Roots, Day 1, Path page'></a></td><td><a class='shot' href='after/w4-d4-journey.png' data-file='w4-d4-journey.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d4-journey.png' data-file='w4-d4-journey.png' alt='Guadua Roots, Day 4, Path page'></a></td><td><a class='shot' href='after/w4-d7-journey.png' data-file='w4-d7-journey.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d7-journey.png' data-file='w4-d7-journey.png' alt='Guadua Roots, Day 7, Path page'></a></td><td><a class='shot' href='after/w4-done-journey-a.png' data-file='w4-done-journey-a.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-done-journey-a.png' data-file='w4-done-journey-a.png' alt='Guadua Roots, Walked, Path page'></a></td></tr><tr><th scope='row'>Practice</th><td><a class='shot' href='after/w4-d1-practice.png' data-file='w4-d1-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d1-practice.png' data-file='w4-d1-practice.png' alt='Guadua Roots, Day 1, Practice'></a></td><td><a class='shot' href='after/w4-d4-practice.png' data-file='w4-d4-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d4-practice.png' data-file='w4-d4-practice.png' alt='Guadua Roots, Day 4, Practice'></a></td><td><a class='shot' href='after/w4-d7-practice.png' data-file='w4-d7-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-d7-practice.png' data-file='w4-d7-practice.png' alt='Guadua Roots, Day 7, Practice'></a></td><td><a class='shot' href='after/w4-done-practice.png' data-file='w4-done-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w4-done-practice.png' data-file='w4-done-practice.png' alt='Guadua Roots, Walked, Practice (the next morning)'></a></td></tr></tbody></table></div>
+  <div class="notes">
+    <div><h3>Finished</h3><ul><li>The root network spreads day by day; the shoot breaks the surface on Day 4; beetle, rain, then the grove closes overhead.</li></ul></div>
+    <div><h3>Placeholder</h3><ul><li>Days 1 to 3 on Today were bands of soil only. The seed, Day 1&#x27;s landmark, sat on the picture&#x27;s top edge in graphite on dark soil.</li><li>Day 7 morning: seven stems and 26 leaves of dashed pencil filled the sky and the practice header.</li><li>Atlas: the morning after Reed Island was finished, Money Clarity was an empty paper square on the map, with only the orb.</li></ul></div>
+    <div><h3>Lost continuity</h3><ul><li>A hard cut from the lilac lake to brown soil: no sky, no shore, nothing from Reed Island.</li></ul></div>
+    <div class="changed"><h3>Changed in this pass</h3><ul><li>Reed Island&#x27;s lilac mountains stand low on the horizon; the lake&#x27;s edge and the reed boat from Week 3&#x27;s last day lie at the bank.</li><li>A reed tied in the island&#x27;s red marks where the seed goes in. It stays beside the grown guadua on Day 7.</li><li>Her thread is re-routed: down into the roots on Days 2 and 3, up with the shoot on Day 4, to the foot of the grove. Today&#x27;s picture now holds the bank, the reed and the seed from the first morning, and the shoot on Day 4.</li><li>The seed&#x27;s pencil is chalk; the beetle moved up so Day 5&#x27;s picture holds it; Day 7&#x27;s pencil is three stems and no leaves.</li></ul></div>
+  </div>
+</section>
+<section class="world" id="w5">
+  <header class="world-head">
+    <p class="eyebrow">Week 5 · Ascend · Enough</p>
+    <h2>The Overlook</h2>
+    <p class="mood">Up on the plateau, in straw grass: the cloud below thins and the four earlier worlds appear in the valley.</p>
+  </header>
+  <div class='scroll'><table class='sheet'><thead><tr><th></th><th scope='col'>Day 1</th><th scope='col'>Day 4</th><th scope='col'>Day 7</th><th scope='col'>Walked</th></tr></thead><tbody><tr><th scope='row'>Today</th><td><a class='shot' href='after/w5-d1-today.png' data-file='w5-d1-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d1-today.png' data-file='w5-d1-today.png' alt='The Overlook, Day 1, Today'></a></td><td><a class='shot' href='after/w5-d4-today.png' data-file='w5-d4-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d4-today.png' data-file='w5-d4-today.png' alt='The Overlook, Day 4, Today'></a></td><td><a class='shot' href='after/w5-d7-today.png' data-file='w5-d7-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d7-today.png' data-file='w5-d7-today.png' alt='The Overlook, Day 7, Today'></a></td><td><a class='shot' href='after/w5-done-today.png' data-file='w5-done-today.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-done-today.png' data-file='w5-done-today.png' alt='The Overlook, Walked, Today'></a></td></tr><tr><th scope='row'>Atlas map</th><td><a class='shot' href='after/w5-d1-atlas.png' data-file='w5-d1-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d1-atlas.png' data-file='w5-d1-atlas.png' alt='The Overlook, Day 1, Atlas map'></a></td><td><a class='shot' href='after/w5-d4-atlas.png' data-file='w5-d4-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d4-atlas.png' data-file='w5-d4-atlas.png' alt='The Overlook, Day 4, Atlas map'></a></td><td><a class='shot' href='after/w5-d7-atlas.png' data-file='w5-d7-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d7-atlas.png' data-file='w5-d7-atlas.png' alt='The Overlook, Day 7, Atlas map'></a></td><td><a class='shot' href='after/w5-done-atlas.png' data-file='w5-done-atlas.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-done-atlas.png' data-file='w5-done-atlas.png' alt='The Overlook, Walked, Atlas map'></a></td></tr><tr><th scope='row'>Path page</th><td><a class='shot' href='after/w5-d1-journey.png' data-file='w5-d1-journey.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d1-journey.png' data-file='w5-d1-journey.png' alt='The Overlook, Day 1, Path page'></a></td><td><a class='shot' href='after/w5-d4-journey.png' data-file='w5-d4-journey.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d4-journey.png' data-file='w5-d4-journey.png' alt='The Overlook, Day 4, Path page'></a></td><td><a class='shot' href='after/w5-d7-journey.png' data-file='w5-d7-journey.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d7-journey.png' data-file='w5-d7-journey.png' alt='The Overlook, Day 7, Path page'></a></td><td><a class='shot' href='after/w5-done-journey-a.png' data-file='w5-done-journey-a.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-done-journey-a.png' data-file='w5-done-journey-a.png' alt='The Overlook, Walked, Path page'></a></td></tr><tr><th scope='row'>Practice</th><td><a class='shot' href='after/w5-d1-practice.png' data-file='w5-d1-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d1-practice.png' data-file='w5-d1-practice.png' alt='The Overlook, Day 1, Practice'></a></td><td><a class='shot' href='after/w5-d4-practice.png' data-file='w5-d4-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d4-practice.png' data-file='w5-d4-practice.png' alt='The Overlook, Day 4, Practice'></a></td><td><a class='shot' href='after/w5-d7-practice.png' data-file='w5-d7-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-d7-practice.png' data-file='w5-d7-practice.png' alt='The Overlook, Day 7, Practice'></a></td><td><a class='shot' href='after/w5-done-practice.png' data-file='w5-done-practice.png' target='_blank' rel='noopener'><img loading='lazy' src='after/w5-done-practice.png' data-file='w5-done-practice.png' alt='The Overlook, Walked, Practice (the next morning)'></a></td></tr></tbody></table></div>
+  <div class="notes">
+    <div><h3>Finished</h3><ul><li>The four earlier worlds appear as miniatures and her thread joins them on Day 6.</li><li>When all five are walked, the Area shows the five places side by side with one line: &quot;You have a wider view of your money now.&quot;</li></ul></div>
+    <div><h3>Placeholder</h3><ul><li>Days 1 and 2 on Today: dry grass under cloud and a cut tree trunk. Nothing near her stop to look at.</li></ul></div>
+    <div><h3>Lost continuity</h3><ul><li>The miniatures tie back, but she arrives empty-handed from Week 4.</li></ul></div>
+    <div class="changed"><h3>Changed in this pass</h3><ul><li>Her guadua staff from Week 4, tied in Reed Island&#x27;s red, stands in the grass at the edge from the first morning, by her stop.</li></ul></div>
+  </div>
+</section>
+<section id="turns" class="pair">
+  <header><p class="eyebrow">Where one week becomes the next</p><h2>The week turns</h2>
+  <p class="mood">The sewn card of the world just finished, the next world's first look (the week close shows it full screen), and its Day 1 on Today, morning and done. Rendered straight from the paper engine at the sizes those screens use.</p></header>
+  <figure><img class="vimg" data-before="engine/week-turns-before.png" data-after="engine/week-turns-after.png" src="engine/week-turns-after.png" alt="Week 3 to 4 and Week 4 to 5 transitions"></figure>
+</section>
+<section id="days" class="pair">
+  <header><p class="eyebrow">The sense of progress inside a world</p><h2>Day by day</h2>
+  <p class="mood">Each day as it looks once walked, with tomorrow's piece in pencil, then the sewn card.</p></header>
+  <figure><img class="vimg" data-before="engine/days-before.png" data-after="engine/days-after.png" src="engine/days-after.png" alt="Every day of the three worlds"></figure>
+</section>
+<section id="atlas" class="pair">
+  <header><p class="eyebrow">What Atlas shows after a world is walked</p><h2>Between two worlds</h2>
+  <p class="mood">The morning after Reed Island is finished, before Guadua Roots opens: the Money Clarity territory on the map, and its sheet.</p></header>
+  <figure><img class="vimg" data-before="before/w3-done-atlas.png" data-after="after/w3-done-atlas-sheet.png" src="after/w3-done-atlas-sheet.png" alt="Atlas map between two worlds" style="max-width:390px"></figure>
+</section>
+<section id="gaps">
+  <header><p class="eyebrow">Still open</p><h2>Remaining gaps</h2></header>
+  <ul class="list">
+    <li>Week 2 to 3: Reed Island still opens with nothing carried from Celestial Night.</li>
+    <li>The practice screen's header strip shows mostly sky in these worlds. The scene is framed from its top behind the header, and the art shows when the sheet sets down between questions. Framing element worlds lower is a design call, because the sheet covers the lower half.</li>
+    <li>The week close (fold, sewn card, the next world's horizon) was not walked live here; the strip above is the same art, from the engine.</li>
+    <li>Today's "You walked Reed Island" card shows the finished world and a line of text for the next; no picture of what comes next.</li>
+    <li>No new motion. The existing week close and Atlas update are unchanged, and everything here is still art and copy, so Reduce Motion behaves as before.</li>
+  </ul>
+</section>
+</main>
+<script>
+(function () {
+  var KEY = "mw-version";
+  function set(v) {
+    document.querySelectorAll(".toggle button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.v === v ? "true" : "false"); });
+    document.querySelectorAll("table.sheet img").forEach(function (img) {
+      var f = img.dataset.file; img.src = v + "/" + f; img.parentNode.href = v + "/" + f;
+    });
+    document.querySelectorAll("img.vimg").forEach(function (img) { img.src = img.dataset[v]; });
+    try { localStorage.setItem(KEY, v); } catch (e) {}
+  }
+  document.querySelectorAll(".toggle button").forEach(function (b) { b.addEventListener("click", function () { set(b.dataset.v); }); });
+  var saved = null; try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved === "before" || saved === "after") set(saved);
+})();
+</script>
+</body></html>

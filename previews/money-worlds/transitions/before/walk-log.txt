@@ -1,0 +1,130 @@
+# Week 2 Day 7 -> Week 3 Day 1
+$ /tmp/seed-day.py 14 13
+current 14 done 13
+  [w2d7-1-today-morning] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 2 Celestial Night Your path  Today Your money compass Day 7 of 7 · ~4 min  1  2  3  4  5  6 7 Start to
+  [w2d7-2-atlas-morning] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. Pick up where you left off Celestial Night · toward the full moon  View as list Self-Trust Ahead
+  [w2d7-3-practice-open] /path/day?area=money&day=14 :: Celestial Night · Day 7 Your path is still here. YOUR MONEY COMPASS Here's a first draft from your week. Change anything. It's yours.  You can change this anytime. This 
+  walk 0: press "This is my compass
+"
+  walk 1: press "See my week
+"
+  walk stop at 2: See it in Your Atlas
+  [w2d7-4-week-close] /path/day?area=money&day=14 :: Celestial Night · Day 7 Your path is still here. What do you want to carry with you? Pick up to two. 1 of 2 selected My money rule  My first value  My money compass “A 
+  [w2d7-5-next-horizon] /path/day?area=money&day=14 :: Celestial Night · Day 7 Your path is still here. What do you want to carry with you? Pick up to two. 1 of 2 selected My money rule  My first value  My money compass “A 
+  press "Done for today"
+  [w2d7-6-today-after-close] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 2 Celestial Night Your path   You walked Celestial Night You learned to read your bearings. Next: Reed Isla
+  [w2d7-7-atlas-walked] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. View as list Self-Trust Ahead Purpose Finding Ahead Love & Boundaries Ahead Money Clarity Now Ene
+  [w2d7-8-path-top] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 10 October WEEK
+  [w2d7-8-path-mid] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 10 October WEEK
+# close and reopen the app (new page, same storage)
+  [w2d7-9-today-reopened] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 2 Celestial Night Your path   You walked Celestial Night You learned to read your bearings. Next: Reed Isla
+  [w3d1-0-practice-before-unlock] /path/week-intro?area=money&week=3&day=15 ::  WEEK 3 · PREMIUM Keeping You've looked, and you've chosen. This week is about keeping what you chose when life pushes back. A reed island stays afloat because someone k
+# test clock: next morning (stored answers aged 26 h)
+$ /tmp/age.py 26
+aged 14 rows by 26.0 h
+  [w3d1-1-today] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 3 Reed Island Your path  Today What you can see now Day 1 of 7 · ~4 min 1 2 3 4 5 6 7 Start today's practice
+  [w3d1-2-atlas] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. View as list Self-Trust Ahead Purpose Finding Ahead Love & Boundaries Ahead Money Clarity Now Ene
+  [w3d1-3-path-top] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 9 October WEEK 
+  [w3d1-3-path-mid] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 9 October WEEK 
+  [w3d1-4-practice] /path/week-intro?area=money&week=3&day=15 ::  WEEK 3 · PREMIUM Keeping You've looked, and you've chosen. This week is about keeping what you chose when life pushes back. A reed island stays afloat because someone k
+  press "Begin Week 3 · Day 1 "
+  [w3d1-5-practice-begun] /path/day?area=money&day=15&introSeen=1 :: ON MONDAY YOU SAID · YOUR MONEY COMPASS “A small honest sentence about this week.” IN YOUR WORDS Here's what you chose. Read it slowly. It still belongs to you. Keep goin
+# Week 3 Day 7 -> Week 4 Day 1
+$ /tmp/seed-day.py 21 20
+current 21 done 20
+  [w3d7-1-today-morning] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 3 Reed Island Your path  Today A letter a month ahead Day 7 of 7 · ~5 min  1  2  3  4  5  6 7 Start to
+  [w3d7-2-atlas-morning] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. Pick up where you left off Reed Island · toward the lit lantern  View as list Self-Trust Ahead P
+  [w3d7-3-practice-open] /path/day?area=money&day=21 :: Reed Island · Day 7 Your path is still here. Look at what you kept this week. Seven days of tending. Here's what held. Let's write   TOWARD THE LIT LANTERN Reed Island 
+  walk 0: press "Let's write
+"
+  walk 1: press "Next
+"
+  walk 2: press "This is my rule
+"
+  walk 3: press "See my week
+"
+  walk stop at 4: See it in Your Atlas
+  [w3d7-4-week-close] /path/day?area=money&day=21 :: Reed Island · Day 7 Your path is still here. What do you want to carry with you? Pick up to two. 1 of 2 selected My anchor  My edge  My cushion  My letter For the firs
+  [w3d7-5-next-horizon] /path/day?area=money&day=21 :: Reed Island · Day 7 Your path is still here. What do you want to carry with you? Pick up to two. 1 of 2 selected My anchor  My edge  My cushion  My letter For the firs
+  press "Done for today"
+  [w3d7-6-today-after-close] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 3 Reed Island Your path   You walked Reed Island You kept tending, and it stayed afloat. Next: Guadua Roots
+  [w3d7-7-atlas-walked] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. View as list Self-Trust Ahead Purpose Finding Ahead Love & Boundaries Ahead Money Clarity Now Ene
+  [w3d7-8-path-top] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 10 October WEEK
+  [w3d7-8-path-mid] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 10 October WEEK
+# close and reopen the app (new page, same storage)
+  [w3d7-9-today-reopened] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 3 Reed Island Your path   You walked Reed Island You kept tending, and it stayed afloat. Next: Guadua Roots
+  [w4d1-0-practice-before-unlock] /path/week-intro?area=money&week=4&day=22 ::  WEEK 4 · PREMIUM Growing Guadua grows roots for years before anything shows above the ground. This week you plant something small and regular, and trust the part you ca
+# test clock: next morning (stored answers aged 26 h)
+$ /tmp/age.py 26
+aged 21 rows by 26.0 h
+  [w4d1-1-today] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 4 Guadua Roots Your path  Today Plant one amount Day 1 of 7 · ~4 min 1 2 3 4 5 6 7 Start today's practice  
+  [w4d1-2-atlas] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. View as list Self-Trust Ahead Purpose Finding Ahead Love & Boundaries Ahead Money Clarity Now Ene
+  [w4d1-3-path-top] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 9 October WEEK 
+  [w4d1-3-path-mid] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 9 October WEEK 
+  [w4d1-4-practice] /path/week-intro?area=money&week=4&day=22 ::  WEEK 4 · PREMIUM Growing Guadua grows roots for years before anything shows above the ground. This week you plant something small and regular, and trust the part you ca
+  press "Begin Week 4 · Day 1 "
+  [w4d1-5-practice-begun] /path/day?area=money&day=22&introSeen=1 :: ON MONDAY YOU SAID · YOUR KEEPING RULE “When money gets loud, I come back to my anchor, and I hold my edge.” LAST WEEK YOU WROTE Before we plant, your keeping rule. Keep 
+# Week 4 Day 7 -> Week 5 Day 1
+$ /tmp/seed-day.py 28 27
+current 28 done 27
+  [w4d7-1-today-morning] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 4 Guadua Roots Your path  Today First harvest Day 7 of 7 · ~5 min  1  2  3  4  5  6 7 Start today's pr
+  [w4d7-2-atlas-morning] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. Pick up where you left off Guadua Roots · toward the grove  View as list Self-Trust Ahead Purpos
+  [w4d7-3-practice-open] /path/day?area=money&day=28 :: Guadua Roots · Day 7 Your path is still here. Look at what grew this week. Some of it shows. Most of it is roots. Keep going   TOWARD THE GROVE Guadua Roots · Day 7
+  walk 0: press "Keep going
+"
+  walk 1: press "Next
+"
+  walk 2: press "This is my rule
+"
+  walk 3: press "See my week
+"
+  walk stop at 4: See it in Your Atlas
+  [w4d7-4-week-close] /path/day?area=money&day=28 :: Guadua Roots · Day 7 Your path is still here. What do you want to carry with you? Pick up to two. 1 of 2 selected My amount  Its home  My ask  My ten minutes  See my 
+  [w4d7-5-next-horizon] /path/day?area=money&day=28 :: Guadua Roots · Day 7 Your path is still here. What do you want to carry with you? Pick up to two. 1 of 2 selected My amount  Its home  My ask  My ten minutes  See my 
+  press "Done for today"
+  [w4d7-6-today-after-close] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 4 Guadua Roots Your path   You walked Guadua Roots What you planted took root. Next: The Overlook · Come ba
+  [w4d7-7-atlas-walked] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. View as list Self-Trust Ahead Purpose Finding Ahead Love & Boundaries Ahead Money Clarity Now Ene
+  [w4d7-8-path-top] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 10 October WEEK
+  [w4d7-8-path-mid] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 10 October WEEK
+# close and reopen the app (new page, same storage)
+  [w4d7-9-today-reopened] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 4 Guadua Roots Your path   You walked Guadua Roots What you planted took root. Next: The Overlook · Come ba
+  [w5d1-0-practice-before-unlock] /path/week-intro?area=money&week=5&day=29 ::  WEEK 5 · PREMIUM Enough From up here you can see every place you've walked. This last week is about enough: what it means for you, and a practice you'll keep long after
+# test clock: next morning (stored answers aged 26 h)
+$ /tmp/age.py 26
+aged 28 rows by 26.0 h
+  [w5d1-1-today] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 5 The Overlook Your path  Today What is enough Day 1 of 7 · ~4 min 1 2 3 4 5 6 7 Start today's practice  Ho
+  [w5d1-2-atlas] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. View as list Self-Trust Ahead Purpose Finding Ahead Love & Boundaries Ahead Money Clarity Now Ene
+  [w5d1-3-path-top] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 9 October WEEK 
+  [w5d1-3-path-mid] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. WEEK 1 · REVEAL Mist Meadow You found the clearing. Revealed · walked 9 October WEEK 
+  [w5d1-4-practice] /path/week-intro?area=money&week=5&day=29 ::  WEEK 5 · PREMIUM Enough From up here you can see every place you've walked. This last week is about enough: what it means for you, and a practice you'll keep long after
+  press "Begin Week 5 · Day 1 "
+  [w5d1-5-practice-begun] /path/day?area=money&day=29&introSeen=1 :: ON MONDAY YOU SAID · YOUR GROWING RULE “I plant a little, regularly, and I tend it once a week.” LAST WEEK YOU WROTE Before we climb, your growing rule. Keep going   TO
+# Week 5 Day 7 -> after the last day
+$ /tmp/seed-day.py 35 34
+current 35 done 34
+  [w5d7-1-today-morning] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 5 The Overlook Your path  Today Your map Day 7 of 7 · ~5 min  1  2  3  4  5  6 7 Start today's practic
+  [w5d7-2-atlas-morning] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. Pick up where you left off The Overlook · toward the open valley  View as list Self-Trust Ahead 
+  [w5d7-3-practice-open] /path/day?area=money&day=35 :: The Overlook · Day 7 Your path is still here. Look at the whole way you came. Five places, and your words in each one. Make my map   TOWARD THE OPEN VALLEY The Overlook
+  walk 0: press "Make my map
+"
+  walk 1: press "Make my map
+"
+  walk 2: press "Next
+"
+  walk 3: press "This is my map
+"
+  walk 4: press "See my path
+"
+  walk stop at 5: See it in Your Atlas
+  [w5d7-4-week-close] /path/day?area=money&day=35 :: The Overlook · Day 7 Your path is still here. What do you want to carry with you? Pick up to two. 1 of 2 selected My map Five weeks, one page  My rule  My compass  My 
+  [w5d7-6-today-after-close] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 5 All done The Overlook Your path  You've finished the first 5 weeks. The next weeks are on their way. We'll
+  [w5d7-7-atlas-walked] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. View as list Self-Trust Ahead Purpose Finding Ahead Love & Boundaries Ahead Money Clarity Walked 
+  [w5d7-8-path-top] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. You have a wider view of your money now. WEEK 1 · REVEAL Mist Meadow You found the cl
+  [w5d7-8-path-mid] /atlas/money ::  YOUR ATLAS · AREA Money Clarity Five worlds, one clearer way of seeing your money. You have a wider view of your money now. WEEK 1 · REVEAL Mist Meadow You found the cl
+# close and reopen the app (new page, same storage)
+  [w5d7-9-today-reopened] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 5 All done The Overlook Your path  You've finished the first 5 weeks. The next weeks are on their way. We'll
+# test clock: next morning
+$ /tmp/age.py 26
+aged 35 rows by 26.0 h
+  [w5d8-today-next-morning] / :: TUESDAY · OCT 13 Good evening, Maya. MA MONEY CLARITY · WEEK 5 All done The Overlook Your path  You've finished the first 5 weeks. The next weeks are on their way. We'll
+  [w5d8-atlas-next-morning] /atlas :: TUESDAY · OCT 13 Your Atlas MA Where you have walked, and what is ahead. View as list Self-Trust Ahead Purpose Finding Ahead Love & Boundaries Ahead Money Clarity Walked 
