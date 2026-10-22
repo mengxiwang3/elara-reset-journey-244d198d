@@ -1,0 +1,121 @@
+/* ==== ELARA SHARED SYSTEM v2 (22 Oct 2026, authored pass). Source: explorations/_shared/SHARED-SYSTEM.md ====
+   This block is byte-identical in explore-refined-2026-10-21/artifact/index.html and
+   circles-review-2026-10-22/artifact/index.html. Edit it here and paste it into both.
+   Each prototype maps the type sizes (--el-fs-*, --el-lh-*) and the two font stacks to its own
+   text-size simulation and font files; everything else is fixed here.
+   v2 replaces the generic parts of v1 with Elara's own materials (see _shared/AI-TELLS.md):
+   real paper grain and the header paper, torn slips for words (production TornPaper), SectionHeading's link,
+   Ionicons, the paper orb, a review-annotation switch (.el-rv-off hides .el-rvmark). Type roles are unchanged from v1. Assets live in each prototype's assets/el/. */
+:root{
+  --el-band:#1F3A2E;         /* header band = colors.buttonForest */
+  --el-forest:#1F3A2E;       /* primary fill, selected chip, progress */
+  --el-on-forest:#F7F1E8;    /* colors.cream: ink on forest, 10.98:1 */
+  --el-on-band-mut:#C9D4CD;  /* secondary ink and resting sub-tabs on the band, 8.09:1 */
+  --el-on-band-sel:#FFFFFF;  /* selected sub-tab, 12.33:1 */
+  --el-on-band-line:rgba(247,241,232,.45); /* edge of a control on the band, 3.52:1 */
+  --el-on-band-rule:rgba(247,241,232,.18); /* the rule under the sub-tabs (decorative) */
+  --el-page:#F9F5EF;         /* colors.background: the one page ground (flat, as production's canvas) */
+  --el-card:#FFFDF9;         /* colors.bubbleMember: card, field fill */
+  --el-sheet:#FCF8F1;        /* brand paper "Sheet": torn slips, paper labels */
+  --el-paper-2:#F1EBE2;      /* colors.conversationMuted: paper tiles and placeholders */
+  --el-under:#E2CFAF;        /* brand paper "Under": the second sheet under the torn edge */
+  --el-seal:#F3E0CD;         /* brand paper "Seal": the folded corner of a slip with news */
+  --el-rule:#D6CBBC;         /* colors.rule: row rules (decorative, 1.47:1) */
+  --el-control:#8E8174;      /* edge of a chip or field, 3.49:1 on page */
+  --el-ink:#1A1615;          /* colors.foreground, 16.53:1 on page */
+  --el-body:#3B342F;         /* running text where it is not ink, 12.03:1 on card */
+  --el-meta:#635A54;         /* colors.textSecondary: every metadata line, resting tab label, 6.20:1 page */
+  --el-ember:#E65A28;        /* accent, never text: sub-tab underline, live dot, focus ring */
+  --el-terra:#C94A1C;        /* colors.brand: the active tab glyph, activity dots (non-text, 4.6:1) */
+  --el-terra-text:#A13A12;   /* terracotta as text: active tab label, section links, «1 nueva», 6.18:1 page */
+  --el-link:var(--el-terra-text); /* SectionHeading's ember link, darkened for AA text */
+  --el-danger:#B3261E;       /* destructive only: text 6.02:1 on page, white on it 6.54:1 */
+  --el-mint:#A3E5C7;         /* colors.mint: ink on the band only, 8.57:1 */
+  --el-edge:rgba(80,50,30,.14);  /* TornPaper's shadow copy: one offset copy, no blur */
+  --el-edge-2:rgba(80,50,30,.06);
+  --el-grain:url("assets/el/el-grain.webp"); /* real fibre, cut from daily-path-paper-stone-v1.png */
+  --el-r-card:8px;           /* radius.content: the few real cards (price, player, sheets' boxes) */
+  --el-r-row:4px;            /* radius.row: thumbnails, date tiles, photos in a slip */
+  --el-r-label:2px;          /* small paper captions */
+  --el-r-sheet:32px;         /* radius.sheet: bottom sheets */
+  --el-pad-card:16px;        /* padding.content */
+  --el-gutter:16px;          /* screen side margin inside the phone */
+  --el-torn-a:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 6' preserveAspectRatio='none'%3E%3Cpath d='M0 1.4 L12 1.4 L18 0.2 L28 0.9 L34 1.3 L46 2.0 L56 1.0 L66 1.1 L73 1.2 L82 1.4 L92 1.9 L100 2.1 L106 1.6 L118 0.9 L128 1.7 L140 1.7 L153 1.1 L162 2.3 L173 2.1 L182 1.7 L193 1.6 L203 2.3 L216 1.8 L226 0.1 L232 0.2 L245 1.3 L254 2.1 L267 0.8 L279 1.3 L289 0.7 L300 1.1 L308 1.3 L317 1.4 L328 0.9 L334 1.8 L340 0.4 L350 2.3 L363 1.5 L374 1.8 L385 1.8 L400 0.1 L400 6 L0 6Z'/%3E%3C/svg%3E") top/100% 6px no-repeat,linear-gradient(#000 0 0) center/100% calc(100% - 10px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 6' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L400 0 L400 5.7 L389 5.3 L377 4.7 L365 5.6 L357 5.4 L348 4.2 L340 5.7 L326 5.8 L316 5.2 L308 4.1 L295 4.5 L288 5.0 L280 5.8 L266 5.3 L257 3.7 L250 5.2 L242 4.3 L234 4.2 L222 5.8 L215 4.1 L207 3.8 L196 4.5 L184 5.7 L175 5.1 L162 5.0 L154 5.9 L144 5.0 L138 3.8 L127 5.3 L115 4.2 L102 5.9 L95 4.0 L81 5.8 L72 4.8 L60 4.0 L49 5.5 L42 4.6 L31 5.8 L24 5.1 L12 4.4 L0 5.4Z'/%3E%3C/svg%3E") bottom/100% 6px no-repeat;
+  --el-torn-b:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 6' preserveAspectRatio='none'%3E%3Cpath d='M0 0.7 L7 2.4 L18 1.4 L27 1.0 L38 0.1 L49 1.1 L59 1.9 L71 2.4 L79 0.6 L89 2.1 L95 0.2 L106 1.3 L112 1.3 L123 0.4 L131 1.0 L138 0.3 L151 0.3 L163 2.4 L170 2.0 L177 0.5 L183 0.1 L193 2.3 L203 1.5 L215 1.9 L227 1.0 L234 1.1 L243 0.1 L252 1.0 L262 0.7 L271 1.7 L281 0.0 L288 1.8 L301 0.9 L309 0.6 L321 2.4 L334 2.1 L344 2.0 L356 1.4 L368 1.6 L379 2.3 L388 0.7 L396 0.2 L400 1.4 L400 6 L0 6Z'/%3E%3C/svg%3E") top/100% 6px no-repeat,linear-gradient(#000 0 0) center/100% calc(100% - 10px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 6' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L400 0 L400 3.8 L393 3.8 L386 5.6 L377 5.2 L369 5.7 L363 4.8 L352 5.2 L346 5.1 L335 5.6 L326 4.5 L317 4.2 L310 5.2 L298 4.0 L289 3.7 L276 4.6 L267 5.9 L261 5.8 L254 4.8 L246 5.5 L239 4.0 L230 4.6 L218 3.9 L211 4.2 L203 3.9 L191 3.9 L182 5.9 L171 3.9 L164 4.2 L153 5.8 L142 5.7 L133 5.9 L123 4.1 L115 5.6 L107 5.2 L95 5.6 L84 5.1 L71 5.8 L60 4.8 L51 3.6 L45 3.7 L39 3.8 L32 4.6 L26 4.0 L19 6.0 L11 5.5 L0 4.4Z'/%3E%3C/svg%3E") bottom/100% 6px no-repeat;
+  --el-i-chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M179 89Q179 89 179 89Q187 87 195 91Q198 92 273 167Q335 228 344 238Q352 248 352 256Q352 264 344 274Q335 284 273 345Q213 405 203 414Q193 423 186 424Q177 425 170 419Q162 413 161 404Q159 396 163 389Q164 386 229 321Q229 321 294 256L229 191Q164 126 163 123Q159 116 161 108Q163 92 179 89Z'/%3E%3C/svg%3E");
+  --el-i-info:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M234 49Q254 47 275 50Q340 59 388 106Q436 153 446 218Q449 243 447 266Q440 345 380 398Q320 451 241 448Q219 447 198 442Q139 427 99 382Q59 337 50 276Q48 267 48 250Q48 232 49 224Q56 172 85 132Q114 91 160 69Q195 51 234 49ZM276 82Q268 81 252 80Q236 80 229 81Q171 88 129 129Q78 181 80 254Q82 291 98 324Q118 363 155 388Q192 412 236 416Q302 420 354 378Q405 337 414 271Q417 249 415 228Q408 172 370 132Q331 92 276 82ZM243 131Q258 129 267 139Q276 149 274 161Q271 173 259 179Q256 181 248 181Q240 181 236 179Q220 170 222 154Q223 145 229 138Q235 132 243 131ZM214 206Q214 206 214 206Q217 204 236 204Q255 204 258 206Q265 209 267 214Q268 217 268 271Q268 271 268 324H284Q303 324 308 330Q312 335 312 340Q312 345 308 350Q304 355 298 356Q291 356 252 356Q204 356 201 354Q193 350 192 341Q192 332 200 327Q200 327 203 324H219H236V280V236H228Q213 236 208 231Q203 225 204 217Q206 209 214 206Z'/%3E%3C/svg%3E");
+}
+/* Paper: the grain is the app's own fibre, laid over a ground with soft-light, so the colour stays the token. */
+.el-grainy{background-image:var(--el-grain);background-size:256px 256px;background-blend-mode:soft-light}
+/* Header band: forest paper. The header paper (explore-header-paper-v2.png) is tucked into its top corner. */
+.el-band{position:relative;background-color:var(--el-band);background-image:var(--el-grain);background-size:256px 256px;background-blend-mode:soft-light;color:var(--el-on-forest)}
+/* It stays inside the title row (56 px) so it never sits behind the sub-tabs; the band buttons are solid forest on it. */
+.el-band-paper{position:absolute;top:0;right:0;width:124px;height:56px;background:url("assets/el/el-band-paper.webp") right top/124px auto no-repeat;pointer-events:none}
+.el-band-hd{position:relative;padding-top:8px}
+.el-band-row{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;min-height:48px}
+.el-title{font-family:var(--el-serif);font-weight:600;font-size:var(--el-fs-title);line-height:var(--el-lh-title);letter-spacing:-.01em;color:var(--el-on-forest);margin:0 auto 0 0;padding:4px 0;font-variation-settings:normal}
+.el-band-acts{display:flex;align-items:center;gap:6px;margin-left:auto}
+/* Band buttons are forest pills with a cream edge: they sit on the header paper and stay 10.98:1. */
+.el-bbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;border-radius:22px;border:1px solid var(--el-on-band-line);background:var(--el-band);color:var(--el-on-forest);font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-label);line-height:var(--el-lh-label);white-space:nowrap}
+.el-bbtn.lbl{padding:0 14px 0 11px}
+.el-lbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;border-radius:22px;border:1px solid var(--el-control);background:var(--el-card);color:var(--el-ink);font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-label);line-height:var(--el-lh-label);white-space:nowrap}
+.el-lbtn.lbl{padding:0 14px 0 11px}
+.el-bbtn svg,.el-lbtn svg{width:20px;height:20px;flex:none}
+/* Sub-navigation in the band: underline tabs. */
+.el-subtabs{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:4px calc(-1 * var(--el-gutter)) 0 -10px;padding-right:var(--el-gutter);border-bottom:1px solid var(--el-on-band-rule)}
+.el-subtabs::-webkit-scrollbar{display:none}
+.el-subtab{position:relative;flex:none;min-height:44px;padding:0 10px;background:none;border:0;font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-label);line-height:var(--el-lh-label);color:var(--el-on-band-mut);white-space:nowrap}
+.el-subtab[aria-pressed="true"],.el-subtab[aria-selected="true"]{color:var(--el-on-band-sel)}
+.el-subtab[aria-pressed="true"]::after,.el-subtab[aria-selected="true"]::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:3px;border-radius:2px;background:var(--el-ember)}
+.el-band-foot{height:14px}
+/* The torn edge where the page begins: two sheets, the page and the "under" sheet a little above it (same seeded path in both). */
+.el-tear{display:block;flex:none;height:14px;line-height:0;background-color:var(--el-band);background-image:var(--el-grain);background-size:256px 256px;background-blend-mode:soft-light}
+.el-tear svg{display:block;width:100%;height:14px}
+.el-tear path{fill:var(--el-page)}
+.el-tear path.u{fill:var(--el-under)}
+/* Section heading (type unchanged from v1) and SectionHeading's link: terracotta text with a chevron, no underline. */
+.el-sech-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px}
+.el-sech{font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-sech);line-height:var(--el-lh-sech);letter-spacing:-.005em;color:var(--el-ink)}
+.el-more{display:inline-flex;align-items:center;gap:3px;min-height:44px;padding-left:6px;margin-left:auto;font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-label);line-height:var(--el-lh-label);color:var(--el-link);text-decoration:none;white-space:nowrap}
+.el-more::after{content:"";flex:none;width:12px;height:12px;background:currentColor;-webkit-mask:var(--el-i-chevron) center/contain no-repeat;mask:var(--el-i-chevron) center/contain no-repeat}
+/* A quiet note: simulated or sample, said plainly, never in a dashed box. */
+.el-note{display:flex;gap:8px;align-items:flex-start;font-family:var(--el-sans);font-weight:400;font-size:var(--el-fs-meta);line-height:var(--el-lh-meta);color:var(--el-meta)}
+.el-note::before{content:"";flex:none;width:16px;height:16px;margin-top:1px;background:currentColor;-webkit-mask:var(--el-i-info) center/contain no-repeat;mask:var(--el-i-info) center/contain no-repeat}
+/* «Foto de muestra»: a small paper caption, not a dark pill. */
+.el-sample{position:absolute;left:6px;bottom:6px;padding:2px 6px;border-radius:var(--el-r-label);background:rgba(252,248,241,.94);color:var(--el-meta);font:600 11px/14px var(--el-sans);pointer-events:none}
+/* Card: only for a separate object you act on. Row: a rule, no fill. */
+.el-card{background:var(--el-card);border:1px solid var(--el-rule);border-radius:var(--el-r-card)}
+.el-meta{font-family:var(--el-sans);font-weight:400;font-size:var(--el-fs-meta);line-height:var(--el-lh-meta);color:var(--el-meta)}
+.el-paper{background-color:var(--el-paper-2);background-image:var(--el-grain);background-size:256px 256px;background-blend-mode:soft-light}
+/* Torn slip: words are written on torn paper (production TornPaper: seeded tear, one 3 px shadow copy, no blur). */
+.el-slip{position:relative;isolation:isolate;background:none;border:0;border-radius:0}
+.el-slip::before,.el-slip::after{content:"";position:absolute;inset:0;z-index:-1;-webkit-mask:var(--el-torn-a);mask:var(--el-torn-a)}
+.el-slip.b::before,.el-slip.b::after{-webkit-mask:var(--el-torn-b);mask:var(--el-torn-b)}
+.el-slip::before{background:var(--el-edge);transform:translateY(3px)}
+.el-slip::after{background-color:var(--el-sheet);background-image:var(--el-grain);background-size:256px 256px;background-blend-mode:soft-light}
+.el-fold{position:absolute;top:0;right:0;width:22px;height:22px;background:linear-gradient(225deg,var(--el-page) 0 50%,var(--el-seal) 50% 100%);box-shadow:-1px 1px 0 var(--el-edge);pointer-events:none}
+/* Filter chip: a 32 px chip inside a 44 px target. Selected is a forest fill, no check. */
+.el-chips{display:flex;flex-wrap:wrap;column-gap:6px;row-gap:0}
+.el-chip-hit{min-height:44px;display:flex;align-items:center;max-width:100%;background:none;border:0;padding:0}
+.el-chip{min-height:32px;padding:4px 13px;border-radius:999px;border:1px solid var(--el-control);background:var(--el-card);display:flex;align-items:center;gap:4px;max-width:100%;font-family:var(--el-sans);font-weight:400;font-size:var(--el-fs-meta);line-height:var(--el-lh-meta);color:var(--el-ink)}
+.el-chip.on{background:var(--el-forest);border-color:var(--el-forest);color:var(--el-on-forest);font-weight:600}
+/* Buttons: primary forest with cream ink; on the band the primary inverts. */
+.el-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-label);line-height:var(--el-lh-label);text-align:center}
+.el-btn-p{background:var(--el-forest);color:var(--el-on-forest);border:0}
+.el-btn-s{background:var(--el-card);color:var(--el-forest);border:1.5px solid var(--el-forest)}
+.el-btn-d{background:var(--el-danger);color:#FFFFFF;border:0}
+.el-band .el-btn-p{background:var(--el-on-forest);color:var(--el-forest)}
+.el-band .el-btn-s{background:transparent;color:var(--el-on-forest);border-color:var(--el-on-forest)}
+/* Tab bar: production TabBar.tsx (padTop 10, 44 pt targets, 22 pt Ionicons, 12 pt labels, the paper orb at 28 pt). */
+.el-tabbar{display:flex;justify-content:space-around;align-items:stretch;padding-top:10px;background:rgba(249,245,239,.95);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid #E8E0D5}
+.el-tab{flex:1;min-width:0;min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0 2px;background:none;border:0;color:var(--el-meta)}
+.el-tab svg{width:22px;height:22px;margin:1px 0;flex:none}
+.el-tab .el-orb{display:block;width:28px;height:28px;margin:-2px 0;flex:none;background:url("assets/el/el-orb.webp") center/contain no-repeat}
+.el-tab-l{font-family:var(--el-sans);font-weight:400;font-size:var(--el-fs-tab);line-height:var(--el-lh-tab);color:var(--el-meta);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.el-tab[aria-current="page"] svg{color:var(--el-terra)}
+.el-tab[aria-current="page"] .el-tab-l{color:var(--el-terra-text);font-weight:600}
+/* Review annotations (proposed-copy marks, «Foto de muestra», stand-in tags, simulated notes) are off by default;
+   the reviewer switch «Mostrar notas de revisión» outside the phone removes .el-rv-off from <html>. */
+.el-rv-off .el-rvmark{display:none!important}
+.el-rv-off .chg{text-decoration:none!important}
+/* ==== end ELARA SHARED SYSTEM v2 ==== */

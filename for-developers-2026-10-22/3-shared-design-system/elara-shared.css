@@ -1,0 +1,80 @@
+/* ==== ELARA SHARED SYSTEM v1 (22 Oct 2026). Source: explorations/_shared/SHARED-SYSTEM.md ====
+   This block is byte-identical in explore-refined-2026-10-21/artifact/index.html and
+   circles-review-2026-10-22/artifact/index.html. Edit it here and paste it into both.
+   Each prototype maps the type sizes (--el-fs-*, --el-lh-*) and the two font stacks to its own
+   text-size simulation and font files; everything else is fixed here. */
+:root{
+  --el-band:#1F3A2E;         /* header band = colors.buttonForest */
+  --el-forest:#1F3A2E;       /* primary fill, links, selected chip, progress */
+  --el-on-forest:#F7F1E8;    /* colors.cream: ink on forest, 10.98:1 */
+  --el-on-band-mut:#C9D4CD;  /* secondary ink and resting sub-tabs on the band, 8.09:1 */
+  --el-on-band-sel:#FFFFFF;  /* selected sub-tab, 12.33:1 */
+  --el-on-band-line:rgba(247,241,232,.45); /* edge of a control on the band, 3.52:1 */
+  --el-on-band-rule:rgba(247,241,232,.18); /* the rule under the sub-tabs (decorative) */
+  --el-page:#F9F5EF;         /* colors.background: the one page ground */
+  --el-card:#FFFDF9;         /* colors.bubbleMember: card, field and light icon-button fill */
+  --el-paper-2:#F1EBE2;      /* colors.conversationMuted: muted paper tiles and placeholders */
+  --el-rule:#D6CBBC;         /* colors.rule: row rules and card borders (decorative, 1.47:1) */
+  --el-control:#8E8174;      /* edge of a chip, field or light icon button, 3.49:1 on page */
+  --el-ink:#1A1615;          /* colors.foreground, 16.53:1 on page */
+  --el-body:#3B342F;         /* running text where it is not ink, 12.03:1 on card */
+  --el-meta:#635A54;         /* colors.textSecondary: every metadata line, 6.20:1 page, 6.62:1 card */
+  --el-ember:#E65A28;        /* accent, never text: sub-tab underline, live dot, focus ring (3.44:1 on band) */
+  --el-terra:#C94A1C;        /* colors.brand: activity dots (non-text) */
+  --el-terra-text:#A13A12;   /* terracotta as text: active tab label, new-reply count, 6.18:1 page */
+  --el-danger:#B3261E;       /* destructive only: text 6.02:1 on page, white on it 6.54:1 */
+  --el-mint:#A3E5C7;         /* colors.mint: ink on the band only, 8.57:1 */
+  --el-r-card:8px;           /* radius.content: cards, photos, notes, toasts */
+  --el-r-row:4px;            /* radius.row: thumbnails, date tiles, covers, small tiles */
+  --el-r-sheet:32px;         /* radius.sheet: bottom sheets */
+  --el-pad-card:16px;        /* padding.content */
+  --el-gutter:16px;          /* screen side margin inside the phone */
+}
+/* Header band: one component for tab-level screens. */
+.el-band{background:var(--el-band);color:var(--el-on-forest)}
+.el-band-hd{padding-top:8px}
+.el-band-row{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;min-height:48px}
+.el-title{font-family:var(--el-serif);font-weight:600;font-size:var(--el-fs-title);line-height:var(--el-lh-title);letter-spacing:-.005em;color:var(--el-on-forest);margin:0 auto 0 0;padding:4px 0;font-variation-settings:normal}
+.el-band-acts{display:flex;align-items:center;gap:6px;margin-left:auto}
+.el-bbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;border-radius:22px;border:1px solid var(--el-on-band-line);background:transparent;color:var(--el-on-forest);font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-label);line-height:var(--el-lh-label);white-space:nowrap}
+.el-bbtn.lbl{padding:0 14px 0 11px}
+.el-lbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;border-radius:22px;border:1px solid var(--el-control);background:var(--el-card);color:var(--el-ink);font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-label);line-height:var(--el-lh-label);white-space:nowrap}
+.el-lbtn.lbl{padding:0 14px 0 11px}
+/* Sub-navigation in the band: underline tabs. */
+.el-subtabs{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:4px calc(-1 * var(--el-gutter)) 0 -10px;padding-right:var(--el-gutter);border-bottom:1px solid var(--el-on-band-rule)}
+.el-subtabs::-webkit-scrollbar{display:none}
+.el-subtab{position:relative;flex:none;min-height:44px;padding:0 10px;background:none;border:0;font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-label);line-height:var(--el-lh-label);color:var(--el-on-band-mut);white-space:nowrap}
+.el-subtab[aria-pressed="true"],.el-subtab[aria-selected="true"]{color:var(--el-on-band-sel)}
+.el-subtab[aria-pressed="true"]::after,.el-subtab[aria-selected="true"]::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:3px;border-radius:2px;background:var(--el-ember)}
+.el-band-foot{height:14px}
+/* The single torn-paper edge where the page begins (same seeded path in both). */
+.el-tear{display:block;flex:none;height:14px;background:var(--el-band);line-height:0}
+.el-tear svg{display:block;width:100%;height:14px}
+.el-tear path{fill:var(--el-page)}
+/* Section heading and its link. */
+.el-sech{font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-sech);line-height:var(--el-lh-sech);letter-spacing:-.005em;color:var(--el-ink)}
+.el-more{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding-left:6px;margin-left:auto;font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-label);line-height:var(--el-lh-label);color:var(--el-forest);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;white-space:nowrap}
+/* Card and row. */
+.el-card{background:var(--el-card);border:1px solid var(--el-rule);border-radius:var(--el-r-card)}
+.el-meta{font-family:var(--el-sans);font-weight:400;font-size:var(--el-fs-meta);line-height:var(--el-lh-meta);color:var(--el-meta)}
+/* Filter chip: a 32 px chip inside a 44 px target. */
+.el-chips{display:flex;flex-wrap:wrap;column-gap:6px;row-gap:0}
+.el-chip-hit{min-height:44px;display:flex;align-items:center;max-width:100%;background:none;border:0;padding:0}
+.el-chip{min-height:32px;padding:4px 12px;border-radius:999px;border:1px solid var(--el-control);background:var(--el-card);display:flex;align-items:center;gap:4px;max-width:100%;font-family:var(--el-sans);font-weight:400;font-size:var(--el-fs-meta);line-height:var(--el-lh-meta);color:var(--el-ink)}
+.el-chip.on{background:var(--el-forest);border-color:var(--el-forest);color:var(--el-on-forest);font-weight:600}
+/* Buttons: primary forest with cream ink; on the band the primary inverts. */
+.el-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font-family:var(--el-sans);font-weight:600;font-size:var(--el-fs-label);line-height:var(--el-lh-label);text-align:center}
+.el-btn-p{background:var(--el-forest);color:var(--el-on-forest);border:0}
+.el-btn-s{background:var(--el-card);color:var(--el-forest);border:1.5px solid var(--el-forest)}
+.el-btn-d{background:var(--el-danger);color:#FFFFFF;border:0}
+.el-band .el-btn-p{background:var(--el-on-forest);color:var(--el-forest)}
+.el-band .el-btn-s{background:transparent;color:var(--el-on-forest);border-color:var(--el-on-forest)}
+/* Tab bar: production TabBar.tsx metrics (padTop 10, 44 pt targets, 12 pt labels, frosted canvas, hairline). */
+.el-tabbar{display:flex;justify-content:space-around;align-items:stretch;padding-top:10px;background:rgba(249,245,239,.95);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid #E8E0D5;box-shadow:0 -4px 14px rgba(26,22,21,.05)}
+.el-tab{flex:1;min-width:0;min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0 2px;background:none;border:0;color:var(--el-meta)}
+.el-tab svg,.el-tab .el-orb{width:24px;height:24px;flex:none}
+.el-tab .el-orb{display:inline-flex;border-radius:12px;background:radial-gradient(circle at 35% 30%,#F7D9C9,#C94A1C 75%)}
+.el-tab-l{font-family:var(--el-sans);font-weight:400;font-size:var(--el-fs-tab);line-height:var(--el-lh-tab);color:var(--el-meta);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.el-tab[aria-current="page"]{color:var(--el-terra-text)}
+.el-tab[aria-current="page"] .el-tab-l{color:var(--el-terra-text);font-weight:600}
+/* ==== end ELARA SHARED SYSTEM v1 ==== */
