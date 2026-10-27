@@ -1,0 +1,158 @@
+<title>Atlas Sorpresa handoff</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: one reading column (spec doc), screens in a 4-up strip, tables scroll in their own box. */
+@font-face{font-family:"Fraunces";src:url(fonts/Fraunces_600SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(fonts/InstrumentSans_400Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(fonts/InstrumentSans_600SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
+:root{
+ --paper:#fbf8f1; --sheet:#ffffff; --ink:#24221f; --muted:#625d56; --rule:#e5ddcd; --code:#f2ede2;
+ --na:#2f6fd0; --as:#e0662a; --ok:#16803c; --warn:#a35a00; --warnbg:#fff3df; --todo:#8a2c4d; --todobg:#fbe8ef;
+ --serif:"Fraunces",Georgia,"Times New Roman",serif; --sans:"Instrument Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#1b1a18;--sheet:#242220;--ink:#efe9de;--muted:#aaa296;--rule:#3a3631;--code:#2e2b27;--na:#7fb0ff;--as:#ff9a63;--ok:#5fd08a;--warn:#ffb655;--warnbg:#3a2a12;--todo:#ff8fb7;--todobg:#3b1e29;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#1b1a18;--sheet:#242220;--ink:#efe9de;--muted:#aaa296;--rule:#3a3631;--code:#2e2b27;--na:#7fb0ff;--as:#ff9a63;--ok:#5fd08a;--warn:#ffb655;--warnbg:#3a2a12;--todo:#ff8fb7;--todobg:#3b1e29;color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--sans)}
+.wrap{max-width:980px;margin:0 auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:34px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;text-wrap:balance;margin:0}
+h1{font-size:32px;line-height:1.15}h2{font-size:22px;margin-bottom:10px}h3{font-size:16px;margin:14px 0 4px}
+p{margin:0 0 10px;max-width:68ch}.lead{font-size:17px;color:var(--muted);max-width:62ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted);margin-top:10px}
+a{color:var(--na)}a:focus-visible,button:focus-visible{outline:2px solid var(--na);outline-offset:2px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.shots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.shots figure{margin:0;display:grid;gap:6px}.shots img{width:100%;border-radius:14px;border:1px solid var(--rule);display:block}
+.shots figcaption{font-size:13px;color:var(--muted)}.shots b{color:var(--ink);font-weight:600}
+@media (max-width:720px){.shots{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:640px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--rule)}
+th{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--code)}
+tr:last-child td{border-bottom:0}
+code,pre{font-family:var(--mono);font-size:12.5px}code{background:var(--code);padding:1px 4px;border-radius:4px}
+pre{background:var(--code);padding:12px 14px;border-radius:10px;overflow-x:auto;margin:6px 0 10px;line-height:1.5}
+ul{margin:0 0 10px;padding-left:20px;max-width:70ch}li{margin:3px 0}
+.pill{display:inline-block;font-size:11.5px;font-weight:600;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.p-done{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.p-dec{background:var(--warnbg);color:var(--warn)}
+.p-todo{background:var(--todobg);color:var(--todo)}
+.check{display:grid;gap:8px}.check .row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;align-items:start;padding:10px 12px;background:var(--sheet);border:1px solid var(--rule);border-radius:10px}
+.check .row p{margin:0}.check .row .t{font-weight:600}
+.note{font-size:13px;color:var(--muted)}
+</style>
+<div class="wrap">
+
+<header>
+ <p class="eyebrow">Atlas · developer handoff · prototype, not production code</p>
+ <h1>Atlas: “Sorpresa” locked places</h1>
+ <p class="lead">How the Atlas shows places a user has not reached yet. Only the next two places tease with a blurred photo and a “?”. Everything further ahead is a small coloured dot, and its name and photo stay hidden until the user gets there.</p>
+ <div class="meta"><span>Chosen 2026-10-26: Sorpresa, “Maché natural” globe, “Postal garabato” postcards, big globe in every view</span><span>Copy: Spanish (EN to follow)</span><span><a href="https://claude.ai/artifact/VbfYudsh9jG1kMu8VVfuGq">Interactive prototype (final)</a></span><span><a href="https://claude.ai/artifact/B5yN3K9WcF8ZioWKdJAeEc">The 4 directions, for context</a></span><span><a href="handoff-sorpresa.pdf">PDF of this page</a></span></div>
+</header>
+
+<section>
+ <h2>Screens</h2>
+ <div class="shots">
+  <figure><img src="captures/fin_w.jpg" alt="Globe with Asia completed, one teaser pin with a question mark and small coloured dots for the rest"><figcaption><b>World.</b> Done and current places are photo pins. The next places are blurred pins with “?”. Further places are dots.</figcaption></figure>
+  <figure><img src="captures/fin_z.jpg" alt="North America zone with postcards: two done, one in progress, one blurred Por descubrir"><figcaption><b>Zone.</b> The globe stays full size and turns to the area. The postcard panel sits below it. The postcards follow the same rules: a teaser shows a blurred photo and the country only.</figcaption></figure>
+  <figure><img src="captures/fin_s.jpg" alt="Place sheet titled Lugar por descubrir with a blurred hero image"><figcaption><b>Place sheet.</b> Opening a hidden place never shows its name, photo or blurb.</figcaption></figure>
+  <figure><img src="captures/fu_1_l.jpg" alt="List view where future places read Por descubrir or Lugar por descubrir with blurred thumbnails"><figcaption><b>List (“Ver lista”).</b> This is the accessible version of the globe, with the same hiding rules.</figcaption></figure>
+ </div>
+</section>
+
+<section>
+ <h2>Chosen look</h2>
+ <ul>
+  <li><b>Globe:</b> “Maché natural”. The sea is one blue with undyed cream paper strips over it. Land is tinted in the area colour (grey until the area is started). Seams, a soft rim shadow and a paper-grain overlay. No rainbow.</li>
+  <li><b>Size:</b> 352 px across (radius 176) on a 390 px-wide screen, in both the world and zone views. In the zone view it only moves (centre at y 250 within the 500 px globe canvas) and rotates to the area. Keep it from feeling busy: other areas' places show only as dots while a zone is open.</li>
+  <li><b>Postcards:</b> “Postal garabato”, 128 px wide. Torn paper edge, a hand-drawn frame in the area colour, a dotted stamp with the week number, name and country on one line each (they shorten with “…”). The row scrolls sideways and snaps.</li>
+ </ul>
+</section>
+
+<section>
+ <h2>The rule</h2>
+ <p>Each place has a state from the user's progress, plus an order (<code>o</code>, 0-based) inside its area of life. Places inside an area open in order.</p>
+<pre>state(place)  ∈ done | current | open | locked          // from backend progress
+lockRank(p)   = count of locked places in p.area with o &lt; p.o
+isTeaser(p)   = state(p) == locked
+                &amp;&amp; lockRank(p) &lt; (areaStarted(p.area) ? 2 : 1)
+isHidden(p)   = state(p) == locked &amp;&amp; !isTeaser(p)
+areaStarted(a)= any place in a is done or current</pre>
+ <p>So a started area teases its next <b>two</b> places. An area that hasn't been started teases only its <b>first</b> place, so every area always shows at least one “?”.</p>
+</section>
+
+<section>
+ <h2>What each state looks like</h2>
+ <div class="tbl"><table>
+  <thead><tr><th>State</th><th>Globe pin</th><th>Zone postcard</th><th>Place sheet</th><th>List row</th></tr></thead>
+  <tbody>
+   <tr><td><span class="pill p-done">done</span></td><td>Photo medallion, area-colour ring, green check</td><td>Photo, name, “País · Recorrido”</td><td>Full content. CTA “Volver a recorrer”</td><td>Photo, name, “Recorrido”</td></tr>
+   <tr><td><span class="pill p-done">current</span></td><td>Photo medallion with a pulsing ring (static if reduced motion)</td><td>Photo, name, “País · En curso”</td><td>Full content. CTA “Seguir donde lo dejaste”</td><td>“En curso”</td></tr>
+   <tr><td><span class="pill p-done">open</span></td><td>Photo medallion, no badge</td><td>Photo, name, “País · Abierto”</td><td>Full content. CTA “Empezar este lugar”</td><td>“Abierto”</td></tr>
+   <tr><td><span class="pill p-dec">teaser</span></td><td>Photo blurred (~2.6px at pin size, saturation 0.75, 28% warm veil) and a “?” badge in the area colour, top-right</td><td>Blurred photo (3px). Title “Por descubrir”, sub “Siguiente · País” or “Después · País”</td><td>Hero blurred 5px. Title “¿Qué habrá en País?”. Blurb shown. CTA disabled: “Se abre cuando llegues aquí”</td><td>Blurred thumb, “Por descubrir · País”, “Sorpresa”</td></tr>
+   <tr><td><span class="pill p-todo">hidden</span></td><td>Dot, 3.2px radius, area colour at 80%. Not tappable</td><td>No photo. Dashed paper block with “?”. Title “Semana N”, sub “Sorpresa”</td><td>Hero blurred 14px. Title “Lugar por descubrir”, sub “Área · Semana N de M”, blurb replaced (see copy). CTA disabled</td><td>Blurred thumb, “Lugar por descubrir”, “Sorpresa”</td></tr>
+  </tbody>
+ </table></div>
+ <p class="note">Areas that haven't been started draw their land and labels in grey. A teaser in such an area still uses the area's real colour, so it reads as an invitation rather than a dead end.</p>
+</section>
+
+<section>
+ <h2>Copy (Spanish, as in the prototype)</h2>
+ <div class="tbl"><table>
+  <thead><tr><th>Where</th><th>String</th><th>Notes</th></tr></thead>
+  <tbody>
+   <tr><td>Teaser postcard title</td><td>Por descubrir</td><td></td></tr>
+   <tr><td>Teaser postcard sub</td><td>Siguiente · {país} / Después · {país}</td><td>“Siguiente” for lockRank 0, “Después” for 1</td></tr>
+   <tr><td>Hidden postcard</td><td>Semana {n} · Sorpresa</td><td>No name, no country</td></tr>
+   <tr><td>Teaser sheet title</td><td>¿Qué habrá en {país}?</td><td></td></tr>
+   <tr><td>Hidden sheet title</td><td>Lugar por descubrir</td><td>Also the list label and image alt text</td></tr>
+   <tr><td>Hidden sheet blurb</td><td>Se revela cuando llegues. Cada lugar que terminas abre el siguiente.</td><td></td></tr>
+   <tr><td>Locked CTA (disabled)</td><td>Se abre cuando llegues aquí</td><td>Don't name the previous place. It may be a teaser itself</td></tr>
+   <tr><td>“Leer más” path</td><td>Lago Moraine → Yosemite → Golden Gate → ? → ?</td><td>Teaser and hidden names show as “?”</td></tr>
+   <tr><td>List status</td><td>Sorpresa</td><td>Replaces “Bloqueado”</td></tr>
+  </tbody>
+ </table></div>
+</section>
+
+<section>
+ <h2>Behaviour and edge cases</h2>
+ <ul>
+  <li><b>One tap opens.</b> Tapping a postcard or a globe pin opens the place sheet straight away. The postcard row scrolls sideways, and a scroll never opens anything.</li>
+  <li><b>Dots aren't tappable.</b> The area still opens by tapping its land, its label or its area card.</li>
+  <li><b>Pins near the rim.</b> A pin facing less than about 0.32 toward the viewer becomes a dot. After pins are pushed apart so they don't overlap, they're clamped inside the globe edge so none hang off it. This applies to every state except the selected place.</li>
+  <li><b>No leaks.</b> Hidden names and photos must not appear in alt text, accessibility labels, the list, “Leer más”, search, push notifications or share images. Ideally the API doesn't send them to the client at all until a place becomes a teaser.</li>
+  <li><b>Reveal moment.</b> When a place goes from teaser to open, unblur the photo, drop the “?” and play a short pop (skip it if reduced motion is on). The place after it becomes the new teaser. This moment isn't built in the prototype.</li>
+  <li><b>Accessibility.</b> The globe is a canvas, so the list is the screen-reader path. A teaser pin's label reads “Lugar sorpresa en {país}, siguiente”. Hidden places are grouped as “{n} lugares por descubrir” instead of one row each, if the list feels long to people using VoiceOver or TalkBack.</li>
+  <li><b>Small screens.</b> At 320 px the zone title shortens with “…” and the postcard names are one line with “…”.</li>
+ </ul>
+</section>
+
+<section>
+ <h2>Checked: what's still missing</h2>
+ <p>I went through the Atlas prototype for anything a build would trip on. Green is done in the prototype, amber needs a product decision, and red needs content or assets.</p>
+ <div class="check">
+  <div class="row"><span class="pill p-done">fixed</span><div><p class="t">Hidden names were leaking</p><p>“Ver lista” and “Leer más” showed the names and photos of hidden places. Both now follow the rule, checked with a script.</p></div></div>
+  <div class="row"><span class="pill p-done">fixed</span><div><p class="t">The list scrolled under the header</p><p>The list now starts below the “Tu Atlas” header and the “Ver mapa” button.</p></div></div>
+  <div class="row"><span class="pill p-dec">decide</span><div><p class="t">How areas open</p><p>In the sample data only Asia and North America have progress. Every place in Europe, South America and Africa is locked, so there's no way in. Decide whether all five areas start open (first place open), open one at a time, or open after a set number of weeks.</p></div></div>
+  <div class="row"><span class="pill p-dec">decide</span><div><p class="t">Places per area aren't 8 everywhere</p><p>Counts now: Asia 6, Europe 5, South America 5, North America 10, Africa 10. The prototype assumes 8 (“2 de 8”, “Semana N de 8”, 8-segment bars, “Pronto” fillers, and “Lugar extra” after 8). Agreed direction: uneven counts per area, minimum 6. Every “de 8” should become “de {total of the area}”.</p></div></div>
+  <div class="row"><span class="pill p-dec">decide</span><div><p class="t">Oceania</p><p>Proposed as part of Asia · Dinero y seguridad (Uluru and Milford Sound). The land is drawn on the globe but has no places yet.</p></div></div>
+  <div class="row"><span class="pill p-done">decided</span><div><p class="t">Globe and postcard look</p><p>“Maché natural” globe, “Postal garabato” postcards, and the globe stays big when you open an area.</p></div></div>
+  <div class="row"><span class="pill p-todo">content</span><div><p class="t">Photos still to come (Codex prompt sent)</p><p>Europe: Provence and Cinque Terre. South America: Iguazú and Valparaíso. Oceania: Uluru and Milford Sound. Optional spares: Hallstatt, Uyuni, Great Barrier Reef. Also Lan Hạ week 1 day 7 (scheduled 2026-11-01).</p></div></div>
+  <div class="row"><span class="pill p-todo">content</span><div><p class="t">Image sizes for production</p><p>The prototype uses 240 px pin and postcard thumbnails and 680×400 sheet heroes. Ship at least 2×: 480 px square thumbnails and 1360×800 heroes. Blur on the device. Never ship a pre-blurred copy alongside the sharp one.</p></div></div>
+  <div class="row"><span class="pill p-todo">content</span><div><p class="t">English copy</p><p>All Atlas strings are Spanish only, including the 35 place blurbs and the 5 “Lo que aprenderás” lists. They need English versions and Alejandra's review of the Spanish.</p></div></div>
+  <div class="row"><span class="pill p-todo">content</span><div><p class="t">Journey questions for weeks 7–9</p><p>Europe, South America and Africa still use placeholder questions copied from week 5. This doesn't block the Atlas, but the CTA starts those journeys.</p></div></div>
+  <div class="row"><span class="pill p-todo">build</span><div><p class="t">Not in the prototype</p><p>The reveal animation, the “Seguir” card's behaviour when nothing is in progress, offline and loading states for the globe, and analytics events (teaser tapped, hidden tapped, reveal seen).</p></div></div>
+ </div>
+</section>
+
+<section>
+ <h2>Data the client needs</h2>
+<pre>Area   { id, name_es, region_es, color, tint, places: Place[] (ordered) }
+Place  { id, areaId, order, state,                    // always
+         country_es,                                  // teaser and up
+         name_es, blurb_es, thumbUrl, heroUrl, lat, lon,  // teaser: thumb/hero only (to blur);
+       }                                              // hidden: none of these
+Pins for hidden places only need lat/lon, colour and order.</pre>
+ <p class="note">The prototype computes everything on the client from one static list. That's fine for a prototype, but not for production, because it ships every hidden name and photo to the phone.</p>
+</section>
+
+</div>

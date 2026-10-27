@@ -1,0 +1,15 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Círculos: cambios en Mensajes</title>
+<style>body{font-family:Georgia,serif;background:#f9f5ef;color:#1f2a24;margin:0;padding:32px}h1{font-weight:500;margin:0 0 6px}p,li{font-family:system-ui,sans-serif;font-size:14px;line-height:1.5;color:#3d3a35}ol{max-width:760px}.row{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px}figure{margin:0;width:230px}img{width:100%;border:1px solid #d6cbbc;border-radius:18px}figcaption{font-family:system-ui,sans-serif;font-size:12px;color:#645e56;margin-top:6px}</style></head><body>
+<h1>Círculos: cambios en Mensajes y respuestas</h1><div class="dl" hidden style="margin:0 0 14px"><button type="button" data-pdf="circulos-cambios-mensajes.pdf" style="font:600 14px system-ui,sans-serif;color:#FBF6EF;background:#1F3A2E;border:0;border-radius:22px;padding:10px 18px;min-height:44px;cursor:pointer">Descargar PDF</button> <span class="dlmsg" role="status" style="font:13px system-ui,sans-serif;color:#5E584F;margin-left:8px"></span></div><style>@media print{.dl{display:none!important}}</style><script>(async()=>{const w=document.querySelector(".dl"),b=w.querySelector("button"),m=w.querySelector(".dlmsg");const d=window.claude&&await window.claude.use("downloads").catch(()=>null);if(!d)return;w.hidden=false;b.onclick=async()=>{b.disabled=true;m.textContent="";try{const r=await fetch(b.dataset.pdf);if(!r.ok)throw{code:"unavailable"};await d.save({filename:b.dataset.pdf,data:await r.blob()});m.textContent="Listo.";}catch(e){const c=e&&e.code;if(c==="declined"){}else if(c==="rate_limited")m.textContent="Espera un momento y vuelve a intentarlo.";else{w.hidden=true;}}finally{b.disabled=false;}};})();</script><p>26 oct 2026 · prototipo Círculos, versión 7</p>
+<ol>
+<li><b>«Conexiones» ahora es «Contactos»</b>, con una línea bajo las pestañas: «Mujeres de tus círculos con las que conectaste. Toca a una para ver su perfil o escribirle.»</li>
+<li><b>«Nuevo» ahora es «Nuevo mensaje»</b> en la cabecera de Mensajes.</li>
+<li><b>«Plegar» desaparece.</b> Solo las respuestas que tienen respuestas muestran «Ocultar respuestas». Al tocarlo, la respuesta sigue visible y se ocultan las que cuelgan de ella. Después dice «Ver 3 respuestas».</li>
+<li><b>Texto pequeño más legible:</b> horas, datos de las publicaciones, avisos y la nota de demo pasan a 12–13 px (antes 10–11 px), en el gris oscuro del sistema (unos 6:1 sobre el papel). Solo las iniciales dentro de los avatares quedan más pequeñas.</li>
+</ol>
+<div class="row">
+<figure><img src="contactos.jpg"><figcaption>Mensajes › Contactos (390 px)</figcaption></figure>
+<figure><img src="fold-390.jpg"><figcaption>Respuestas con «Ocultar respuestas» (390 px)</figcaption></figure>
+<figure><img src="hilo-oculto.jpg"><figcaption>Después de ocultar: «Ver 3 respuestas»</figcaption></figure>
+<figure><img src="fold-320.jpg"><figcaption>Teléfono pequeño (320 px)</figcaption></figure>
+</div></body></html>
