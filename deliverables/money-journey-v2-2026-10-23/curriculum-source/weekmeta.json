@@ -1,0 +1,122 @@
+{
+ "money-1": {
+  "title": "Mirar sin juzgar / Look without judging",
+  "take": "Una descripción de la situación y datos pendientes. / A picture of the situation and missing facts."
+ },
+ "money-2": {
+  "title": "Ingresos y posibilidades / Income and possibilities",
+  "take": "Un criterio de oportunidad y una pregunta verificable. / An opportunity criterion and a checkable question."
+ },
+ "money-3": {
+  "title": "Decidir con información / Decide with information",
+  "take": "Una pregunta sobre obligaciones y un criterio de decisión. / A question about obligations and a decision criterion."
+ },
+ "money-4": {
+  "title": "Un intento concreto / One concrete attempt",
+  "take": "Una tarea acotada, su resultado o la barrera real. / A bounded task, its result, or the actual barrier."
+ },
+ "money-5": {
+  "title": "Una claridad que continúa / Clarity that continues",
+  "take": "Una nota de situación y una revisión opcional. / A situation note and an optional review."
+ },
+ "purpose-1": {
+  "title": "Una pregunta propia / A question of your own",
+  "take": "Un foco pequeño que se puede explorar. / A small focus that can be explored."
+ },
+ "purpose-2": {
+  "title": "Lo que tu vida necesita / What your life needs",
+  "take": "Hasta tres condiciones para comparar opciones. / Up to three conditions for comparing options."
+ },
+ "purpose-3": {
+  "title": "Mirar posibilidades / Look at possibilities",
+  "take": "Alternativas, datos faltantes y una prueba reversible. / Alternatives, missing facts, and a reversible trial."
+ },
+ "purpose-4": {
+  "title": "Probar para aprender / Try to learn",
+  "take": "Un experimento limitado y aprendizaje sin nota. / A bounded experiment and learning without grading."
+ },
+ "purpose-5": {
+  "title": "Una dirección por ahora / A direction for now",
+  "take": "Una decisión provisional, incluyendo pausar. / A provisional decision, including pausing."
+ },
+ "self-1": {
+  "title": "Escuchar tu criterio / Hear your own judgment",
+  "take": "Una preferencia y evidencia concreta de capacidad. / A preference and concrete evidence of capability."
+ },
+ "self-2": {
+  "title": "Tu voz entre otras / Your voice among others",
+  "take": "Un criterio propio con contexto, sin comparación injusta. / A personal criterion with context, without unfair comparison."
+ },
+ "self-3": {
+  "title": "Cumplirte en pequeño / Keep a small promise",
+  "take": "Un compromiso realista y un ajuste sin castigo. / A realistic commitment and a nonpunitive adjustment."
+ },
+ "self-4": {
+  "title": "Elegir sin certeza total / Choose without total certainty",
+  "take": "Una decisión cotidiana revisable. / A revisable everyday decision."
+ },
+ "self-5": {
+  "title": "Volver a confiar / Return to trust",
+  "take": "Una reparación posible y una nota basada en hechos. / A possible repair and a fact-based note."
+ },
+ "love-1": {
+  "title": "Reconocer lo que necesitas / Recognize what you need",
+  "take": "Una necesidad traducida a una petición concreta. / A need translated into a concrete request."
+ },
+ "love-2": {
+  "title": "Límites que puedes nombrar / Boundaries you can name",
+  "take": "Un borrador de límite y una opción segura. / A boundary draft and a safe option."
+ },
+ "love-3": {
+  "title": "Hacer espacio a la conexión / Make room for connection",
+  "take": "Una invitación posible sin presión ni exposición. / A possible invitation without pressure or exposure."
+ },
+ "love-4": {
+  "title": "Desacuerdos con cuidado / Care within disagreement",
+  "take": "Distinguir hechos, responsabilidad y condiciones para hablar. / Separate facts, responsibility, and conditions for talking."
+ },
+ "love-5": {
+  "title": "Vínculos sostenibles / Sustainable relationships",
+  "take": "Una nota de necesidades, apoyo y ritmo de contacto. / A note on needs, support, and rhythm of contact."
+ },
+ "rhythm-1": {
+  "title": "Ver la carga real / See the real load",
+  "take": "Un momento difícil descrito sin culparse. / A difficult moment described without self-blame."
+ },
+ "rhythm-2": {
+  "title": "Quitar fricción / Remove friction",
+  "take": "Una tarea con menos pasos y una versión mínima. / A task with fewer steps and a minimum version."
+ },
+ "rhythm-3": {
+  "title": "Compartir y coordinar / Share and coordinate",
+  "take": "Una petición concreta o un ajuste de alcance. / A concrete request or adjustment in scope."
+ },
+ "rhythm-4": {
+  "title": "Días que se tuercen / Days that go off course",
+  "take": "Un plan mínimo y un punto de reentrada. / A minimum plan and a reentry point."
+ },
+ "rhythm-5": {
+  "title": "Un ritmo que se adapta / A rhythm that adapts",
+  "take": "Una guía breve para semanas imperfectas. / A short guide for imperfect weeks."
+ },
+ "energy-1": {
+  "title": "Notar sin diagnosticar / Notice without diagnosing",
+  "take": "Observaciones provisionales sobre cargas y necesidades. / Provisional observations about loads and needs."
+ },
+ "energy-2": {
+  "title": "Descanso que sí cabe / Rest that fits",
+  "take": "Una pausa probada o la barrera que la impide. / A tested pause or the barrier preventing it."
+ },
+ "energy-3": {
+  "title": "Reducir lo que drena / Reduce what drains",
+  "take": "Una demanda ajustable y una necesidad de apoyo. / An adjustable demand and a support need."
+ },
+ "energy-4": {
+  "title": "Curiosidad sin rendimiento / Curiosity without performance",
+  "take": "Una posibilidad de disfrute sin exigir un efecto. / An enjoyment option without requiring an effect."
+ },
+ "energy-5": {
+  "title": "Cuidar el margen / Protect your capacity",
+  "take": "Una nota práctica para días de poca energía. / A practical note for low-energy days."
+ }
+}

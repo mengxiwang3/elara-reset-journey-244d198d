@@ -1,0 +1,781 @@
+[
+ {
+  "code": "RHYTHM-W1-D1",
+  "fields": {
+   "es_o": "Al despertar • Al salir • A media jornada • Al volver • Antes de dormir • Mi horario cambia • Ninguno en particular",
+   "en_o": "On waking • When leaving • Midday • On returning • Before bed • My schedule changes • None in particular"
+  },
+  "reasons": [
+   {
+    "es": "Se añade «Ninguno en particular» como respuesta real; «Mi horario cambia» se mantiene porque también lo es.",
+    "en": "Added “None in particular” as a real answer; “My schedule changes” stays because it is one too."
+   }
+  ],
+  "resolves": [
+   "options"
+  ]
+ },
+ {
+  "code": "RHYTHM-W1-D2",
+  "fields": {
+   "es_q": "Vuelve a ese momento en que todo se te junta: ¿qué intentabas hacer a la vez?",
+   "en_q": "Go back to that moment when everything piles up: what were you trying to do at once?"
+  },
+  "dep": {
+   "on": "RHYTHM-W1-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste un momento, piensa en uno reciente en que todo se te juntó.",
+   "en": "If you did not choose a moment, think of a recent one when everything piled up on you."
+  },
+  "reasons": [
+   {
+    "es": "Se quita «de ayer»: el momento no tiene por qué haber ocurrido ayer.",
+    "en": "Removed “yesterday”: the moment need not have happened yesterday."
+   },
+   {
+    "es": "Depende del momento elegido en W1-D1; se añade línea para quien lo saltó.",
+    "en": "Relies on the moment chosen in W1-D1; added a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "RHYTHM-W1-D3",
+  "fields": {
+   "es_s": "Paso opcional / Para llevarte: Escribe una de esas tareas y reconócela como trabajo real.",
+   "en_s": "Optional step / Takeaway: Write down one of those tasks and recognize it as real work."
+  },
+  "reasons": [
+   {
+    "es": "El paso aludía a «tu descripción del momento», que la nueva pregunta ya no menciona; ahora se sostiene solo.",
+    "en": "The step referred to “your description of the moment”, which the new question no longer mentions; it now stands on its own."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "RHYTHM-W1-D4",
+  "fields": {
+   "es_q": "En ese momento del día, ¿qué depende de ti y qué de horarios o necesidades ajenas?",
+   "en_q": "In that moment, what depends on you and what on other people's schedules or needs?"
+  },
+  "dep": {
+   "on": "RHYTHM-W1-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste un momento, usa cualquier parte de tu día que se sienta cargada.",
+   "en": "If you did not choose a moment, use any part of your day that feels heavy."
+  },
+  "reasons": [
+   {
+    "es": "«Qué parte» no tenía referente; se nombra el momento y se añade línea para quien saltó W1-D1.",
+    "en": "“Which part” had no referent; the moment is named and a line is added for anyone who skipped W1-D1."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "RHYTHM-W1-D5",
+  "fields": {
+   "es_s": "Paso opcional / Para llevarte: Escribe qué paso o esfuerzo te ahorraría ese cambio.",
+   "en_s": "Optional step / Takeaway: Write which step or effort that change would save you."
+  },
+  "dep": {
+   "on": "RHYTHM-W1-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste un momento esta semana, piensa en una parte del día que hoy te pese.",
+   "en": "If you did not choose a moment this week, think of a part of the day that feels heavy today."
+  },
+  "reasons": [
+   {
+    "es": "Se mantiene la reescritura; el paso se ajusta a «más sencillo» en lugar de exigir un paso que desaparezca.",
+    "en": "Reviewer's rewrite kept; the step now matches “simpler” instead of requiring a step to disappear."
+   },
+   {
+    "es": "Depende de «ese momento» (W1-D1); se añade línea para quien lo saltó.",
+    "en": "Relies on “that moment” (W1-D1); added a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous",
+   "edit-review"
+  ]
+ },
+ {
+  "code": "RHYTHM-W1-D6",
+  "fields": {
+   "es_q": "¿Con qué cuentas para intentar ese cambio?",
+   "en_q": "What can you count on to try that change?",
+   "fmt": "Varias opciones / Multiple choice"
+  },
+  "dep": {
+   "on": "RHYTHM-W1-D5",
+   "strategy": "new_example",
+   "es": "Si no definiste un cambio, piensa en uno pequeño, como dejar algo preparado la noche anterior.",
+   "en": "If you did not define a change, think of a small one, like getting something ready the night before."
+  },
+  "reasons": [
+   {
+    "es": "«Sobre todo» hace que una sola opción tenga sentido aunque haya varios recursos.",
+    "en": "“Most” makes a single choice make sense even when several resources exist."
+   },
+   {
+    "es": "Depende de «ese cambio» (W1-D5); se ofrece un ejemplo para quien lo saltó.",
+    "en": "Relies on “that change” (W1-D5); an example is offered for anyone who skipped it."
+   },
+   {
+    "es": "Pasa a varias opciones: casi siempre se cuenta con más de un recurso. «Nada por ahora» y «No lo sé» se eligen solas.",
+    "en": "Now multiple choice: there is usually more than one resource. “Nothing for now” and “Not sure” are picked on their own."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous",
+   "format",
+   "options"
+  ]
+ },
+ {
+  "code": "RHYTHM-W2-D2",
+  "fields": {
+   "es_q": "¿Cuál es el primer obstáculo que encuentras al empezar esa tarea?",
+   "en_q": "What is the first obstacle you run into when starting that task?",
+   "es_o": "No encuentro algo • No sé por dónde • Me interrumpen • Requiere preparar mucho • No tengo tiempo • Otro • No lo sé",
+   "en_o": "Cannot find something • Do not know where to start • Interruptions • Too much setup • No time • Other • Not sure"
+  },
+  "dep": {
+   "on": "RHYTHM-W2-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una tarea, piensa en algo cotidiano que te cueste empezar, como hacer una llamada.",
+   "en": "If you did not choose a task, think of something everyday that is hard to start, like making a call."
+  },
+  "reasons": [
+   {
+    "es": "«Al empezar» se refería sin decirlo a la tarea de W2-D1; se hace explícito y se añade línea para quien la saltó.",
+    "en": "“When starting” silently referred to the W2-D1 task; made explicit with a line for anyone who skipped it."
+   },
+   {
+    "es": "Se añade «No lo sé» como respuesta real.",
+    "en": "Added “Not sure” as a real answer."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous",
+   "options"
+  ]
+ },
+ {
+  "code": "RHYTHM-W2-D3",
+  "fields": {
+   "es_q": "¿Qué podrías dejar listo para esa tarea sin crear otra carga pesada?",
+   "en_q": "What could you leave ready for that task without creating another heavy load?",
+   "es_o": "Foto opcional de un objeto o rincón, sin personas, documentos ni datos de ubicación; o descríbelo.",
+   "en_o": "Optional photo of an object or corner, with no people, documents or location details; or describe it."
+  },
+  "dep": {
+   "on": "RHYTHM-W2-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una tarea, piensa en cualquier cosa cotidiana que te cueste empezar; basta con dejar lista una cosa.",
+   "en": "If you did not choose a task, think of anything everyday that is hard to start; leaving one thing ready is enough."
+  },
+  "reasons": [
+   {
+    "es": "La foto sigue siendo opcional con alternativa de texto; ahora excluye personas, documentos y ubicación.",
+    "en": "The photo stays optional with a text alternative; it now excludes people, documents and location."
+   },
+   {
+    "es": "Se hace explícito que se refiere a la tarea de W2-D1, con línea para quien la saltó.",
+    "en": "Made explicit that it refers to the W2-D1 task, with a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "safety-privacy",
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "RHYTHM-W2-D4",
+  "fields": {
+   "es_q": "¿En qué momento que ya ocurre en tu día podrías dar el primer paso de esa tarea?",
+   "en_q": "What moment already in your day could you use to take that task's first step?"
+  },
+  "dep": {
+   "on": "RHYTHM-W2-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una tarea, piensa en algo pequeño que quieras empezar y en su primer paso.",
+   "en": "If you did not choose a task, think of something small you want to start and its first step."
+  },
+  "reasons": [
+   {
+    "es": "«Tu rutina» suponía horarios estables; se recupera «un momento que ya ocurre», como en el original.",
+    "en": "“Your routine” assumed a stable schedule; restored “a moment that already happens”, as in the original."
+   },
+   {
+    "es": "«Ese primer paso» no estaba definido; se ancla a la tarea de W2-D1 con línea para quien la saltó.",
+    "en": "“That first step” was undefined; anchored to the W2-D1 task with a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "RHYTHM-W2-D5",
+  "fields": {
+   "es_q": "¿Cómo sería una versión más simple de esa tarea para un día difícil?",
+   "en_q": "What would a simpler version of that task look like for a difficult day?"
+  },
+  "dep": {
+   "on": "RHYTHM-W2-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una tarea, usa una que hagas casi a diario, como cocinar u ordenar.",
+   "en": "If you did not choose a task, use one you do almost daily, like cooking or tidying."
+  },
+  "reasons": [
+   {
+    "es": "La reescritura pasaba de 90 caracteres y «que te resulte útil» era poco natural; se acorta conservando su intención.",
+    "en": "The rewrite exceeded 90 characters and “so it is useful to you” was awkward; shortened while keeping its intent."
+   },
+   {
+    "es": "Depende de la tarea de W2-D1; se añade línea para quien la saltó.",
+    "en": "Relies on the W2-D1 task; added a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "clarity",
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "RHYTHM-W2-D6",
+  "fields": {
+   "es_q": "¿Qué ocurrió cuando probaste esa versión simple, o pensaste en probarla?",
+   "en_q": "What happened when you tried that simpler version, or thought about trying it?"
+  },
+  "dep": {
+   "on": "RHYTHM-W2-D5",
+   "strategy": "own_situation",
+   "es": "Si no preparaste una versión simple, piensa en un ajuste pequeño que intentaste esta semana; si no hubo, elige «No lo probé».",
+   "en": "If you did not prepare a simpler version, think of a small adjustment you tried this week; if there was none, choose “Did not try.”"
+  },
+  "reasons": [
+   {
+    "es": "«Lo» no tenía referente; se nombra la versión simple de W2-D5 y se añade línea para quien la saltó.",
+    "en": "“It” had no referent; the simpler version from W2-D5 is named, with a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "RHYTHM-W2-D7",
+  "dep": {
+   "on": "RHYTHM-W2-D6",
+   "strategy": "own_situation",
+   "es": "Si no registraste qué pasó, piensa en una tarea reciente que te costó y en qué paso podrías quitar o mover.",
+   "en": "If you did not note what happened, think of a recent task that was hard and which step you could remove or move."
+  },
+  "reasons": [
+   {
+    "es": "«Lo que observaste» depende de W2-D6; se añade línea para quien lo saltó.",
+    "en": "“What you observed” relies on W2-D6; added a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "RHYTHM-W3-D4",
+  "fields": {
+   "es_q": "¿Cómo le dirías a alguien cuándo puedes responder a su petición?"
+  },
+  "reasons": [
+   {
+    "es": "«Solicitud» suena burocrático; «petición» es más cotidiano. El inglés no cambia.",
+    "en": "“Solicitud” sounds bureaucratic; “petición” is more everyday. English unchanged."
+   }
+  ],
+  "resolves": [
+   "audience-fit"
+  ]
+ },
+ {
+  "code": "RHYTHM-W3-D6",
+  "fields": {
+   "es_q": "¿Qué pequeño ajuste a ese compromiso podrías hacer sin desatender algo importante?",
+   "en_q": "What small adjustment to that commitment wouldn't leave something important uncovered?",
+   "es_s": "Paso opcional / Para llevarte: Escribe el ajuste y qué necesidad importante, tuya o de otra persona, debe seguir cubierta.",
+   "en_s": "Optional step / Takeaway: Write the adjustment and which important need, yours or someone else's, must stay covered."
+  },
+  "dep": {
+   "on": "RHYTHM-W3-D5",
+   "strategy": "own_situation",
+   "es": "Si no nombraste un compromiso, piensa en uno de esta semana que te ocupe mucho tiempo.",
+   "en": "If you did not name a commitment, think of one this week that takes up a lot of your time."
+  },
+  "reasons": [
+   {
+    "es": "Se revierte en parte la reescritura: «tus necesidades» excluía necesidades de otras personas (p. ej. cuidados); «algo importante» las incluye y se dice a qué se hace el ajuste.",
+    "en": "Partly reverts the rewrite: “your needs” excluded other people's needs (e.g. caregiving); “something important” covers them, and the question says what is being adjusted."
+   },
+   {
+    "es": "Depende del compromiso de W3-D5; se añade línea para quien lo saltó.",
+    "en": "Relies on the W3-D5 commitment; added a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "RHYTHM-W3-D7",
+  "fields": {
+   "es_q": "¿Qué conversación o ajuste te quitaría más carga de coordinación la próxima semana?",
+   "en_q": "What conversation or adjustment would take the most coordination load off you next week?"
+  },
+  "reasons": [
+   {
+    "es": "«Aliviaría más coordinación» era una construcción forzada.",
+    "en": "“Would reduce coordination most” was a forced construction."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "RHYTHM-W4-D5",
+  "fields": {
+   "es_q": "¿Qué te ayudaría a retomar una tarea sin sentir que debes ponerte al día con todo?",
+   "en_q": "What would help you resume a task without feeling you must catch up on everything?"
+  },
+  "reasons": [
+   {
+    "es": "«Tiempo perdido» juzga el tiempo como desperdiciado y pasaba de 90 caracteres; «ponerte al día» describe lo mismo sin culpa.",
+    "en": "“Lost time” judges the time as wasted and exceeded 90 characters; “catch up” says the same without blame."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "RHYTHM-W4-D6",
+  "fields": {
+   "es_q": "¿Qué parte de tu plan para días difíciles necesita adaptarse a tu vida real?",
+   "en_q": "What part of your plan for difficult days needs to adapt to your actual life?",
+   "es_s": "Paso opcional / Para llevarte: Ajusta el plan a esa condición; es parte de tu realidad.",
+   "en_s": "Optional step / Takeaway: Adapt the plan to that condition; it is part of your reality."
+  },
+  "dep": {
+   "on": "RHYTHM-W4-D4",
+   "strategy": "own_situation",
+   "es": "Si no dejaste nada por escrito, piensa en cómo sueles organizar un día difícil.",
+   "en": "If you did not write anything down, think about how you usually organize a difficult day."
+  },
+  "reasons": [
+   {
+    "es": "«Tu plan» no tenía referente; se ancla al plan para días difíciles de esta semana, con línea para quien saltó W4-D4.",
+    "en": "“Your plan” had no referent; anchored to this week's plan for difficult days, with a line for anyone who skipped W4-D4."
+   },
+   {
+    "es": "Se quita la idea de «excusa» del paso, que sonaba a juicio.",
+    "en": "Removed the idea of an “excuse” from the step, which sounded judgmental."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous",
+   "tone"
+  ]
+ },
+ {
+  "code": "RHYTHM-W4-D7",
+  "fields": {
+   "es_q": "¿Qué conservarías, de lo que preparaste esta semana, para un día complicado?",
+   "en_q": "What would you keep, from what you prepared this week, for a difficult day?",
+   "es_o": "Puede ser tu lista de mínimos, tu nota o una señal temprana.",
+   "en_o": "It could be your minimum-needs list, your note, or an early sign.",
+   "es_s": "Paso opcional / Para llevarte: Guarda solo lo que te quite carga; lo demás puedes soltarlo.",
+   "en_s": "Optional step / Takeaway: Keep only what takes load off you; you can let go of the rest."
+  },
+  "dep": {
+   "on": [
+    "RHYTHM-W4-D3",
+    "RHYTHM-W4-D4",
+    "RHYTHM-W4-D2"
+   ],
+   "strategy": "new_example",
+   "es": "Si no preparaste nada esta semana, elige una sola cosa que te ayudaría en un día complicado, como una lista de mínimos.",
+   "en": "If you did not prepare anything this week, pick one thing that would help on a difficult day, like a minimum-needs list."
+  },
+  "reasons": [
+   {
+    "es": "Casi duplicaba W4-D4; ahora cierra la semana revisando lo preparado en lugar de crear algo nuevo.",
+    "en": "It nearly duplicated W4-D4; it now closes the week by reviewing what was prepared instead of creating something new."
+   },
+   {
+    "es": "Recoge lo hecho en la semana (sobre todo W4-D4); se añade línea para quien no lo hizo.",
+    "en": "Draws on the week's work (mainly W4-D4); added a line for anyone who did not do it."
+   },
+   {
+    "es": "Recoge las tres piezas que nombra la pregunta (lista de mínimos, nota, señal temprana), no solo una.",
+    "en": "Recalls all three pieces the question names (minimum list, note, early sign), not just one."
+   }
+  ],
+  "resolves": [
+   "duplicate",
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "RHYTHM-W5-D1",
+  "fields": {
+   "es_o": "«Ninguno todavía» también sirve; si quieres, anota qué lo hizo difícil.",
+   "en_o": "“None yet” is valid; if you like, note what made it hard."
+  },
+  "dep": {
+   "on": [
+    "RHYTHM-W1-D5",
+    "RHYTHM-W2-D5",
+    "RHYTHM-W3-D6",
+    "RHYTHM-W4-D4"
+   ],
+   "strategy": "own_situation",
+   "es": "Si no probaste cambios en estas semanas, piensa en cualquier ajuste reciente de tu día, aunque sea pequeño.",
+   "en": "If you did not try changes over these weeks, think of any recent adjustment to your day, however small."
+  },
+  "reasons": [
+   {
+    "es": "«Anota qué lo impidió» sonaba a rendir cuentas; ahora es opcional y sin culpa.",
+    "en": "“Note what prevented it” sounded like accountability; now optional and blame-free."
+   },
+   {
+    "es": "Recuerda los cambios de semanas anteriores (desde W1-D5); se añade línea para quien no los hizo.",
+    "en": "Recalls changes from earlier weeks (from W1-D5 on); added a line for anyone who did not make them."
+   },
+   {
+    "es": "Recoge los cambios de las cuatro semanas anteriores, no solo el de la semana 1.",
+    "en": "Recalls the changes from all four earlier weeks, not only week 1."
+   }
+  ],
+  "resolves": [
+   "tone",
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "RHYTHM-W5-D3",
+  "fields": {
+   "es_q": "¿Qué momento de tu día te gustaría disfrutar sin tener que ser productiva?",
+   "en_q": "What moment of your day would you like to enjoy without having to be productive?"
+  },
+  "reasons": [
+   {
+    "es": "La reescritura pasaba de 90 caracteres; se acorta con la misma idea.",
+    "en": "The rewrite exceeded 90 characters; shortened with the same idea."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "RHYTHM-W5-D5",
+  "fields": {
+   "es_q": "¿Cómo te gustaría revisar tu semana sin juzgarte?",
+   "en_q": "How would you like to review your week without judging yourself?"
+  },
+  "reasons": [
+   {
+    "es": "La reescritura pasaba de 90 caracteres; las opciones ya dan los ejemplos.",
+    "en": "The rewrite exceeded 90 characters; the instruction already gives examples."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "RHYTHM-W5-D7",
+  "fields": {
+   "es_q": "¿Qué instrucciones útiles te dejarías para una semana muy ocupada?",
+   "en_q": "What useful instructions would you leave yourself for a very busy week?"
+  },
+  "reasons": [
+   {
+    "es": "«Tu yo de una semana…» era un calco del inglés.",
+    "en": "“Your self of a busy week” was a calque from English."
+   }
+  ],
+  "resolves": [
+   "audience-fit"
+  ]
+ },
+ {
+  "code": "ENERGY-W1-D3",
+  "fields": {
+   "es_q": "Piensa en ese momento en que ya no podías con más: ¿qué pasaba justo antes?",
+   "en_q": "Think of that moment when you could not take any more: what was happening just before?"
+  },
+  "dep": {
+   "on": "ENERGY-W1-D1",
+   "strategy": "own_situation",
+   "es": "Si no describiste un momento, piensa en uno reciente en que te sentiste muy cansada.",
+   "en": "If you did not describe a moment, think of a recent one when you felt very tired."
+  },
+  "reasons": [
+   {
+    "es": "«Ese cansancio» no lo nombraba W1-D2; se ancla al momento de W1-D1, con línea para quien lo saltó.",
+    "en": "“That tiredness” was not named in W1-D2; anchored to the W1-D1 moment, with a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "ENERGY-W1-D4",
+  "fields": {
+   "es_q": "¿Cómo fue cambiando tu energía ayer a lo largo del día?",
+   "en_q": "How did your energy shift over the course of yesterday?",
+   "es_o": "Una línea o palabras, sin puntuar. Marca un cambio si lo notaste.",
+   "en_o": "A line or words, no score. Mark a change if you noticed one."
+  },
+  "reasons": [
+   {
+    "es": "Unía una orden de dibujo y una segunda pregunta; queda una sola pregunta y el cambio pasa a la instrucción.",
+    "en": "It combined a drawing instruction and a second question; now one question, with the change moved to the instruction."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "ENERGY-W1-D5",
+  "fields": {
+   "es_q": "¿Hubo algún momento en que sentiste menos presión, aunque no fuera un momento feliz?",
+   "en_q": "Was there a moment when you felt less pressure, even if it was not a happy one?",
+   "es_o": "Si no hubo ninguno, escribe qué habría reducido una demanda.",
+   "en_o": "If there was none, write what might have reduced one demand."
+  },
+  "reasons": [
+   {
+    "es": "«Aunque no estuvieras feliz» presuponía cómo estaba; se vuelve al sentido del original. La instrucción concuerda con la nueva pregunta.",
+    "en": "“Even if you were not happy” presumed how she felt; restored the original's sense. The instruction now matches the new question."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "ENERGY-W1-D6",
+  "fields": {
+   "es_q": "¿Qué necesitas primero cuando sientes que ya no puedes con más?",
+   "en_q": "What do you need first when you feel you cannot take any more?"
+  },
+  "reasons": [
+   {
+    "es": "«Así» dependía del estado descrito días antes; se nombra y la pregunta ya no depende de otro día.",
+    "en": "“Like this” relied on the state described days earlier; it is now named so the question stands alone."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "ENERGY-W1-D7",
+  "fields": {
+   "es_o": "Completa: «Esta semana noté…». Una semana no define cómo eres.",
+   "en_o": "Complete: “This week I noticed…”. One week does not define who you are."
+  },
+  "reasons": [
+   {
+    "es": "«No define todo tu cuerpo» era extraño y sonaba a evaluación física.",
+    "en": "“Does not define your body” was odd and sounded like a physical assessment."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "ENERGY-W2-D4",
+  "fields": {
+   "es_o": "No hay tiempo • No tengo quién me cubra • Me siento culpable • No hay espacio • No sé qué ayuda • Otra razón",
+   "en_o": "No time • No one to cover for me • I feel guilty • No space • Unsure what helps • Another reason"
+  },
+  "dep": {
+   "on": "ENERGY-W2-D3",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una pausa, piensa en cualquier descanso breve que te cueste tomar.",
+   "en": "If you did not choose a pause, think of any short break that is hard for you to take."
+  },
+  "reasons": [
+   {
+    "es": "«Nadie puede hacerlo por mí» no encajaba (nadie puede pausar por ella); «No tengo quién me cubra» recupera el sentido de «Nadie me releva» con un giro común en Latinoamérica. Se quita el punto final.",
+    "en": "“Nobody can do it for me” did not fit (no one can pause for her); “No one to cover for me” restores the meaning of “Nadie me releva” with a common Latin American phrasing. Stray period removed."
+   },
+   {
+    "es": "«Esa pausa» depende de W2-D3; se añade línea para quien lo saltó.",
+    "en": "“That pause” relies on W2-D3; added a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "ENERGY-W3-D1",
+  "fields": {
+   "es_q": "¿Qué sueles aceptar sin pensarlo mucho, aunque después lo notes en tu energía?",
+   "en_q": "What do you tend to agree to without much thought, then feel in your energy later?"
+  },
+  "reasons": [
+   {
+    "es": "«Agotada» era más fuerte que el original y orientaba la respuesta.",
+    "en": "“Exhausted” was stronger than the original and steered the answer."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "ENERGY-W3-D2",
+  "fields": {
+   "es_q": "¿Qué parte de eso que sueles aceptar podrías hacer menos exigente?",
+   "en_q": "What part of that thing you tend to agree to could you make less demanding?"
+  },
+  "dep": {
+   "on": "ENERGY-W3-D1",
+   "strategy": "own_situation",
+   "es": "Si no nombraste una demanda, piensa en algo que haces seguido por otras personas, como un favor o un pendiente.",
+   "en": "If you did not name a demand, think of something you often do for others, like a favor or an errand."
+  },
+  "reasons": [
+   {
+    "es": "«Responsabilidad» no encajaba con lo que se acepta en W3-D1 (p. ej. un favor); se retoma esa demanda.",
+    "en": "“Responsibility” did not fit what is agreed to in W3-D1 (e.g. a favor); the question now refers to that demand."
+   },
+   {
+    "es": "Depende de W3-D1; se añade línea para quien lo saltó.",
+    "en": "Relies on W3-D1; added a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "ENERGY-W3-D5",
+  "fields": {
+   "es_o": "Foto opcional de un detalle, sin personas, documentos ni datos de ubicación, o descríbelo. No tiene que verse bonito.",
+   "en_o": "Optional photo of a detail, with no people, documents or location details, or describe it. It need not look nice."
+  },
+  "reasons": [
+   {
+    "es": "La foto sigue siendo opcional con alternativa de texto; ahora excluye personas, documentos y ubicación.",
+    "en": "The photo stays optional with a text alternative; it now excludes people, documents and location."
+   }
+  ],
+  "resolves": [
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "ENERGY-W3-D6",
+  "fields": {
+   "es_q": "¿Qué carga necesita ayuda de otras personas y no otro esfuerzo tuyo?",
+   "en_q": "What load needs help from other people rather than more effort from you?"
+  },
+  "reasons": [
+   {
+    "es": "«Estrategia individual» era abstracto.",
+    "en": "“Individual strategy” was abstract."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "ENERGY-W4-D2",
+  "fields": {
+   "es_o": "Foto opcional, sin personas, documentos ni datos de ubicación, o una frase. Puedes omitirlo si hoy no te sirve.",
+   "en_o": "Optional photo, with no people, documents or location details, or one sentence. You may skip it if it is not useful today."
+  },
+  "reasons": [
+   {
+    "es": "La foto sigue siendo opcional con alternativa de texto; ahora excluye personas, documentos y ubicación.",
+    "en": "The photo stays optional with a text alternative; it now excludes people, documents and location."
+   }
+  ],
+  "resolves": [
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "ENERGY-W4-D4",
+  "dep": {
+   "on": "ENERGY-W4-D3",
+   "strategy": "own_situation",
+   "es": "Si no nombraste un disfrute, piensa en algo pequeño que te guste, como una canción o un rato al sol.",
+   "en": "If you did not name an enjoyment, think of something small you like, such as a song or some time in the sun."
+  },
+  "reasons": [
+   {
+    "es": "«Ese disfrute» depende de W4-D3; se añade línea para quien lo saltó.",
+    "en": "“That enjoyment” relies on W4-D3; added a line for anyone who skipped it."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "ENERGY-W4-D7",
+  "fields": {
+   "es_q": "¿Qué disfrute te gustaría tener a mano para cuando tengas ganas?",
+   "en_q": "What enjoyment would you like to keep within reach for when you feel like it?"
+  },
+  "reasons": [
+   {
+    "es": "«Dejar para otro día» sonaba a posponer y cambiaba el propósito; se recupera tener un disfrute a mano, como en el original.",
+    "en": "“Save for another day” sounded like postponing and changed the day's purpose; restored having an enjoyment within reach, as in the original."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "ENERGY-W5-D6",
+  "fields": {
+   "es_q": "¿Qué se repite en tu energía que quieras seguir observando, aunque aún no lo tengas claro?",
+   "en_q": "What keeps repeating in your energy that you want to keep watching, even if it's unclear?"
+  },
+  "reasons": [
+   {
+    "es": "La reescritura hacía dos preguntas y se salía del área (situaciones de tu vida); vuelve a una sola pregunta sobre la energía, sin pedir explicación ni conclusiones de salud.",
+    "en": "The rewrite asked two questions and left the area (life situations); back to one question about energy, with no explanation or health conclusions asked for."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "clarity"
+  ]
+ }
+]

@@ -1,0 +1,1109 @@
+[
+ {
+  "code": "LOVE-W1-D1",
+  "fields": {
+   "es_q": "¿En qué relación te gustaría sentirte más auténtica esta semana?",
+   "en_q": "In which relationship would you like to feel more authentic this week?",
+   "es_o": "Pareja • Familia • Amistad • Personas del trabajo • Otra relación • Ninguna por ahora",
+   "en_o": "Partner • Family • Friendship • People at work • Another relationship • None for now",
+   "es_s": "Paso opcional / Para llevarte: Si elegiste una relación, obsérvala esta semana sin tener que cambiarla.",
+   "en_s": "Optional step / Takeaway: If you chose a relationship, observe it this week without needing to change it."
+  },
+  "replies": [
+   {
+    "es": "Anotado: tu relación de pareja. Esta semana basta con observar cómo te sientes en ella.",
+    "en": "Noted: your partner relationship. This week it is enough to notice how you feel in it."
+   },
+   {
+    "es": "Anotado: tu familia. Puedes observar con calma, sin tener que cambiar nada.",
+    "en": "Noted: your family. You can observe calmly, without needing to change anything."
+   },
+   {
+    "es": "Anotado: una amistad. Basta con notar cuándo te sientes más tú.",
+    "en": "Noted: a friendship. It is enough to notice when you feel most like yourself."
+   },
+   {
+    "es": "Anotado: el trabajo. Puedes observar sin exponerte ni cambiar nada.",
+    "en": "Noted: work. You can observe without exposing yourself or changing anything."
+   },
+   {
+    "es": "Anotado. No hace falta ponerle nombre para observarla.",
+    "en": "Noted. You do not need to name it to observe it."
+   },
+   {
+    "es": "Está bien. Esta semana puedes simplemente notar cómo te sientes contigo.",
+    "en": "That is fine. This week you can simply notice how you feel with yourself."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien pasar. Puedes volver cuando quieras, o no volver.",
+   "en": "It is fine to skip. You can come back whenever you like, or not at all."
+  },
+  "reasons": [
+   {
+    "es": "La reescritura volvió la pregunta de sí/no con opciones de categoría; se vuelve a «¿En qué relación…?» manteniendo «más auténtica».",
+    "en": "The rewrite made it a yes/no question with category options; back to “In which relationship…?”, keeping “more authentic”."
+   },
+   {
+    "es": "«Prefiero no elegir» duplicaba «Prefiero pasar» de la app; se cambia por «Ninguna por ahora», una respuesta real.",
+    "en": "“Prefer not to choose” duplicated the app’s “Prefer to skip”; replaced by “None for now”, a real answer."
+   },
+   {
+    "es": "«Otro» pasa a «Otra relación» (concordancia). Se añaden respuestas de Elara.",
+    "en": "“Otro” becomes “Otra relación” (agreement). Added Elara replies."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "options"
+  ]
+ },
+ {
+  "code": "LOVE-W1-D3",
+  "fields": {
+   "en_s": "Optional step / Takeaway: Translate that “it's okay” into a private need; if it does not apply, keep a hypothetical example."
+  },
+  "reasons": [
+   {
+    "es": "EN: «if irrelevant» sonaba despectivo; ahora «if it does not apply».",
+    "en": "EN: “if irrelevant” sounded dismissive; now “if it does not apply”."
+   }
+  ],
+  "resolves": [
+   "meaning-mismatch"
+  ]
+ },
+ {
+  "code": "LOVE-W1-D4",
+  "fields": {
+   "es_q": "¿Qué es lo que más necesitas ahora de esa relación (o de una que elijas hoy)?",
+   "en_q": "What do you most need right now from that relationship (or one you choose today)?",
+   "es_o": "Tiempo compartido • Espacio • Claridad • Ayuda concreta • Respeto a un límite • No lo sé",
+   "en_o": "Shared time • Space • Clarity • Practical help • Respect for a boundary • Not sure",
+   "es_s": "Paso opcional / Para llevarte: Si quieres, completa «Me ayudaría…» con una acción concreta; es solo para ti.",
+   "en_s": "Optional step / Takeaway: If you like, complete “It would help me…” with a concrete action; it is just for you."
+  },
+  "replies": [
+   {
+    "es": "Querer tiempo compartido es válido. Puedes pensar con calma qué forma tendría.",
+    "en": "Wanting shared time is valid. You can think calmly about what shape it would take."
+   },
+   {
+    "es": "Necesitar espacio también es cuidarte. No tienes que justificarlo.",
+    "en": "Needing space is also caring for yourself. You do not have to justify it."
+   },
+   {
+    "es": "Querer claridad es razonable. Puedes empezar por nombrar qué te falta saber.",
+    "en": "Wanting clarity is reasonable. You can start by naming what you still need to know."
+   },
+   {
+    "es": "Pedir ayuda concreta no es pedir demasiado. Nombrarla ya cuenta.",
+    "en": "Asking for practical help is not asking too much. Naming it already counts."
+   },
+   {
+    "es": "Que se respete un límite tuyo importa. No tienes que ganarte ese respeto.",
+    "en": "Having your boundary respected matters. You do not have to earn that respect."
+   },
+   {
+    "es": "No saberlo todavía es una respuesta honesta. Puede aclararse con los días.",
+    "en": "Not knowing yet is an honest answer. It may become clearer over the days."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien pasar. Puedes volver cuando quieras, o no volver.",
+   "en": "It is fine to skip. You can come back whenever you like, or not at all."
+  },
+  "dep": {
+   "on": "LOVE-W1-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una relación al inicio de la semana, piensa en cualquiera que tengas presente hoy.",
+   "en": "If you did not choose a relationship at the start of the week, think of any one that is on your mind today."
+  },
+  "reasons": [
+   {
+    "es": "Depende de la relación elegida en W1-D1; se añade «(o de una que elijas hoy)» y línea de respaldo.",
+    "en": "Relies on the relationship chosen on W1-D1; added “(or one you choose today)” and a fallback line."
+   },
+   {
+    "es": "«Tiempo juntas» asumía compañía femenina; ahora «Tiempo compartido».",
+    "en": "“Tiempo juntas” assumed female company; now “Shared time”."
+   },
+   {
+    "es": "El paso queda opcional y privado, coherente con «No lo sé». Se añaden respuestas de Elara.",
+    "en": "The step is now optional and private, consistent with “Not sure”. Added Elara replies."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous",
+   "audience-fit"
+  ]
+ },
+ {
+  "code": "LOVE-W1-D5",
+  "fields": {
+   "es_o": "Ejemplo: «Avísame si vas a llegar tarde», en vez de «Tenme en cuenta». No hace falta decírselo a nadie.",
+   "en_o": "Example: “Tell me if you will be late,” rather than “Keep me in mind.” You do not have to say it to anyone."
+  },
+  "dep": {
+   "on": "LOVE-W1-D4",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una necesidad antes, piensa en una que tengas en cualquier relación, por pequeña que sea.",
+   "en": "If you did not choose a need earlier, think of one you have in any relationship, however small."
+  },
+  "reasons": [
+   {
+    "es": "Depende de «esa necesidad» (W1-D4); se añade línea de respaldo en vez de alargar la pregunta.",
+    "en": "Relies on “that need” (W1-D4); added a fallback line instead of lengthening the question."
+   },
+   {
+    "es": "EN: «Consider me» → «Keep me in mind». Se aclara que la petición no tiene que enviarse.",
+    "en": "EN: “Consider me” → “Keep me in mind”. Clarified the request need not be sent."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous",
+   "meaning-mismatch"
+  ]
+ },
+ {
+  "code": "LOVE-W1-D6",
+  "fields": {
+   "es_q": "Dibuja o describe el tiempo que compartes con otras personas y el que quieres para ti.",
+   "en_q": "Draw or describe the time you share with others and the time you want for yourself."
+  },
+  "reasons": [
+   {
+    "es": "Tenía dos tareas y superaba 90 caracteres; ahora una sola tarea y dice con quién se comparte el tiempo, sin depender de otro día.",
+    "en": "It had two tasks and exceeded 90 characters; now one task that says with whom time is shared, without relying on another day."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "LOVE-W1-D7",
+  "fields": {
+   "es_s": "Paso opcional / Para llevarte: Guarda la frase para ti; úsala en una conversación solo si algún día quieres.",
+   "en_s": "Optional step / Takeaway: Keep the sentence for yourself; use it in a conversation only if you ever want to."
+  },
+  "reasons": [
+   {
+    "es": "El paso suponía una conversación futura; ahora hablar es opcional.",
+    "en": "The step assumed a future conversation; talking is now optional."
+   }
+  ],
+  "resolves": [
+   "tone"
+  ]
+ },
+ {
+  "code": "LOVE-W2-D2",
+  "fields": {
+   "es_q": "¿Qué es lo que más te dificulta decir que no en esa situación?",
+   "en_q": "What makes it hardest for you to say no in that situation?",
+   "es_o": "Temo decepcionar • Necesito su ayuda • No sé qué decir • Temo cómo reaccione • Otra razón • No lo sé",
+   "en_o": "Fear of disappointing • I need their help • I do not know what to say • Fear of how they will react • Another reason • Not sure",
+   "es_s": "Paso opcional / Para llevarte: Si temes cómo reaccione, deja esto en privado y prioriza tu apoyo; no ensayes confrontaciones. Si no te sientes segura con esa persona, no tienes que hablar con ella ni arreglar nada. Puedes buscar ayuda ahora.",
+   "en_s": "Optional step / Takeaway: If you fear how they will react, keep this private and prioritize your support; do not rehearse confrontation. If you do not feel safe with that person, you do not have to talk to them or fix anything. You can get help now."
+  },
+  "replies": [
+   {
+    "es": "Es comprensible no querer decepcionar. Tu no también puede ser una forma de cuidarte.",
+    "en": "It makes sense not to want to disappoint. Your no can also be a way of caring for yourself."
+   },
+   {
+    "es": "Depender de alguien hace el no más difícil. Tiene sentido ir con cuidado y a tu ritmo.",
+    "en": "Depending on someone makes no harder. It makes sense to go carefully, at your pace."
+   },
+   {
+    "es": "No tener las palabras es muy común. Puedes buscarlas en privado, sin prisa.",
+    "en": "Not having the words is very common. You can look for them privately, without hurry."
+   },
+   {
+    "es": "Tu miedo merece atención. No tienes que decir nada; tu seguridad va primero y puedes buscar ayuda ahora.",
+    "en": "Your fear deserves attention. You do not have to say anything; your safety comes first and you can get help now."
+   },
+   {
+    "es": "Gracias por notarlo. Tu razón cuenta, aunque no esté en la lista.",
+    "en": "Thank you for noticing. Your reason counts, even if it is not on the list."
+   },
+   {
+    "es": "Está bien no saberlo. A veces basta con notar que cuesta.",
+    "en": "It is fine not to know. Sometimes it is enough to notice that it is hard."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien pasar. Puedes volver cuando quieras, o no volver.",
+   "en": "It is fine to skip. You can come back whenever you like, or not at all."
+  },
+  "help": true,
+  "dep": {
+   "on": "LOVE-W2-D1",
+   "strategy": "new_example",
+   "es": "Si no anotaste una petición, imagina una pequeña: alguien te pide un favor que no quieres hacer.",
+   "en": "If you did not note a request, imagine a small one: someone asks you for a favor you do not want to do."
+  },
+  "reasons": [
+   {
+    "es": "«Sí quiero, pero no puedo» contradecía la premisa de W2-D1; se sustituye y se añade «No lo sé». Se pregunta por lo que «más» dificulta, para que una sola opción encaje.",
+    "en": "“I want to but cannot” contradicted the W2-D1 premise; replaced, and “Not sure” added. The question asks what makes it “hardest”, so one choice fits."
+   },
+   {
+    "es": "«Temo una reacción» → «Temo cómo reaccione», más claro.",
+    "en": "“Fear of a reaction” → “Fear of how they will react”, clearer."
+   },
+   {
+    "es": "Depende de la situación de W2-D1; se añade un ejemplo nuevo para quien lo saltó.",
+    "en": "Relies on the W2-D1 situation; added a fresh example for anyone who skipped it."
+   },
+   {
+    "es": "Se añade la línea de seguridad y la ruta de ayuda, después de dejar la opción segura (no hablar, no arreglar) como respuesta de primera clase.",
+    "en": "Added the safety line and help route, after making the safe choice (not talking, not fixing) a first-class answer."
+   }
+  ],
+  "resolves": [
+   "options",
+   "depends-on-previous",
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "LOVE-W2-D3",
+  "fields": {
+   "es_q": "Ante una petición que no quieres aceptar del todo, ¿qué sí podrías ofrecer, si algo?",
+   "en_q": "Faced with a request you do not want to fully accept, what could you offer, if anything?",
+   "es_o": "También es válido no ofrecer nada a cambio.",
+   "en_o": "It is also valid to offer nothing in return."
+  },
+  "reasons": [
+   {
+    "es": "«Ofrecer» no tenía destinatario sin W2-D1; la pregunta ahora se sostiene sola y «nada» es respuesta válida.",
+    "en": "“Offer” had no recipient without W2-D1; the question now stands alone and “nothing” is a valid answer."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "LOVE-W2-D4",
+  "fields": {
+   "es_q": "¿Cómo podrías poner un límite breve, sin dar más explicaciones de las que quieres?",
+   "en_q": "How could you set a short boundary without giving more explanation than you want to?",
+   "es_o": "Borrador privado: «Hoy no puedo…» o «Puedo…, pero no…». No hace falta decirlo ni enviarlo.",
+   "en_o": "Private draft: “Today I can't…” or “I can…, but not…”. No need to say or send it.",
+   "es_s": "Paso opcional / Para llevarte: Reduce el borrador a una o dos frases claras, solo para ti. Si no te sientes segura con esa persona, no tienes que hablar con ella ni arreglar nada. Puedes buscar ayuda ahora.",
+   "en_s": "Optional step / Takeaway: Reduce the draft to one or two clear sentences, just for you. If you do not feel safe with that person, you do not have to talk to them or fix anything. You can get help now."
+  },
+  "help": true,
+  "reasons": [
+   {
+    "es": "«tantas explicaciones» presuponía que se justifica de más; se usa la versión neutra sugerida.",
+    "en": "“So many explanations” presumed she over-explains; used the suggested neutral version."
+   },
+   {
+    "es": "Un límite puede ser con alguien controlador: el borrador queda privado y se añade la línea de seguridad.",
+    "en": "A boundary may involve a controlling person: the draft stays private and the safety line is added."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "LOVE-W2-D5",
+  "fields": {
+   "es_q": "Si alguien insiste ante tu no, ¿qué frase podrías repetir sin entrar en una discusión?",
+   "en_q": "If someone insists after your no, what sentence could you repeat without getting into an argument?",
+   "es_o": "Solo ensáyala si resulta seguro. No responder o alejarte también son opciones válidas.",
+   "en_o": "Rehearse only if it feels safe. Not responding or stepping away are also valid options.",
+   "es_s": "Paso opcional / Para llevarte: Guarda una frase para repetir o la opción de no responder. Si no te sientes segura con esa persona, no tienes que hablar con ella ni arreglar nada. Puedes buscar ayuda ahora.",
+   "en_s": "Optional step / Takeaway: Keep a sentence to repeat or the option not to respond. If you do not feel safe with that person, you do not have to talk to them or fix anything. You can get help now."
+  },
+  "help": true,
+  "reasons": [
+   {
+    "es": "«Si insisten» no tenía sujeto; ahora la pregunta se sostiene sola.",
+    "en": "“If they insist” had no subject; the question now stands alone."
+   },
+   {
+    "es": "La insistencia puede venir de alguien controlador: no responder o alejarse son respuestas de primera clase y se añade la línea de seguridad.",
+    "en": "Insistence may come from a controlling person: not responding or stepping away are first-class answers, and the safety line is added."
+   }
+  ],
+  "resolves": [
+   "clarity",
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "LOVE-W2-D6",
+  "fields": {
+   "es_q": "¿Qué opción te cuidaría más en esa situación (o en una hipotética)?",
+   "en_q": "Which option would take the most care of you in that situation (or a hypothetical one)?",
+   "es_o": "Pedir tiempo para pensarlo • Decir que no • Aceptar solo una parte • Pedir apoyo a alguien • No responder por ahora • No lo sé",
+   "en_o": "Ask for time to think • Say no • Accept only part • Ask someone for support • Not respond for now • Not sure",
+   "es_s": "Paso opcional / Para llevarte: Nombra el paso más seguro para ti, aunque sea esperar o no responder. Si no te sientes segura con esa persona, no tienes que hablar con ella ni arreglar nada. Puedes buscar ayuda ahora.",
+   "en_s": "Optional step / Takeaway: Name the safest step for you, even if it is waiting or not responding. If you do not feel safe with that person, you do not have to talk to them or fix anything. You can get help now."
+  },
+  "replies": [
+   {
+    "es": "Tomarte tiempo es una respuesta válida. No tienes que decidir con prisa.",
+    "en": "Taking time is a valid answer. You do not have to decide in a hurry."
+   },
+   {
+    "es": "Un no breve es suficiente. No necesitas convencer a nadie.",
+    "en": "A short no is enough. You do not need to convince anyone."
+   },
+   {
+    "es": "Aceptar solo lo que quieres sostener también es un límite.",
+    "en": "Accepting only what you want to sustain is also a boundary."
+   },
+   {
+    "es": "Buscar apoyo es una forma de cuidarte. No tienes que resolverlo sola.",
+    "en": "Seeking support is a way of caring for yourself. You do not have to solve it alone."
+   },
+   {
+    "es": "No responder por ahora también es válido. Tu calma y tu seguridad van primero.",
+    "en": "Not responding for now is also valid. Your calm and your safety come first."
+   },
+   {
+    "es": "Está bien no tenerlo claro. Esperar mientras lo piensas también te cuida.",
+    "en": "It is fine not to be sure. Waiting while you think also takes care of you."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien pasar. Puedes volver cuando quieras, o no volver.",
+   "en": "It is fine to skip. You can come back whenever you like, or not at all."
+  },
+  "help": true,
+  "dep": {
+   "on": "LOVE-W2-D1",
+   "strategy": "new_example",
+   "es": "Si no anotaste una petición esta semana, imagina una pequeña que no quieras aceptar.",
+   "en": "If you did not note a request this week, imagine a small one you would not want to accept."
+  },
+  "reasons": [
+   {
+    "es": "Se recupera «te cuidaría», que el paso («el más seguro») necesita.",
+    "en": "Restored “take care of you”, which the step (“safest”) relies on."
+   },
+   {
+    "es": "Depende de la situación de W2-D1; se añade «(o en una hipotética)» y un ejemplo nuevo.",
+    "en": "Relies on the W2-D1 situation; added “(or a hypothetical one)” and a fresh example."
+   },
+   {
+    "es": "«Pedir tiempo» puede leerse como pausar una relación de pareja; ahora «Pedir tiempo para pensarlo». «Negociar una parte» → «Aceptar solo una parte».",
+    "en": "“Pedir tiempo” can read as pausing a romantic relationship; now “ask for time to think”. “Negotiate part” → “Accept only part”."
+   },
+   {
+    "es": "Se añade la línea de seguridad y la ruta de ayuda, después de dejar la opción segura (no hablar, no arreglar) como respuesta de primera clase.",
+    "en": "Added the safety line and help route, after making the safe choice (not talking, not fixing) a first-class answer."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "depends-on-previous",
+   "regional",
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "LOVE-W2-D7",
+  "fields": {
+   "es_q": "¿Qué notaste al escribir un límite esta semana, aunque no lo hayas dicho?",
+   "en_q": "What did you notice while drafting a boundary this week, even if you did not say it?",
+   "es_o": "Puede ser claridad, incomodidad o que necesitas apoyo antes de actuar. No decirlo también es válido.",
+   "en_o": "It may be clarity, discomfort, or needing support before acting. Not saying it is also valid.",
+   "es_s": "Paso opcional / Para llevarte: Anota qué apoyo necesitarías si algún día quieres decirlo; no decirlo también es una opción.",
+   "en_s": "Optional step / Takeaway: Note what support you would need if you ever want to say it; not saying it is also an option."
+  },
+  "dep": {
+   "on": "LOVE-W2-D4",
+   "strategy": "own_situation",
+   "es": "Si no escribiste un límite esta semana, piensa en uno que te gustaría tener, aunque no lo escribas.",
+   "en": "If you did not draft a boundary this week, think of one you would like to have, even without writing it."
+  },
+  "reasons": [
+   {
+    "es": "«aprendiste» suponía progreso; ahora «notaste».",
+    "en": "“Learned” assumed progress; now “noticed”."
+   },
+   {
+    "es": "Depende del límite de W2-D4; se añade línea de respaldo. No decirlo queda explícito como válido.",
+    "en": "Relies on the W2-D4 boundary; added a fallback line. Not saying it is explicitly valid."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous",
+   "tone"
+  ]
+ },
+ {
+  "code": "LOVE-W3-D1",
+  "fields": {
+   "es_o": "Conversar sin prisa • Hacer algo en compañía • Reír • Sentirme comprendida • Ayuda cotidiana • No extraño compañía ahora",
+   "en_o": "Unhurried conversation • Doing something with others • Laughing • Feeling understood • Everyday help • I do not miss company now",
+   "es_s": "Paso opcional / Para llevarte: Si elegiste un tipo de compañía, imagina una actividad pequeña posible; si no, no hace falta hacer nada.",
+   "en_s": "Optional step / Takeaway: If you chose a kind of company, imagine one small possible activity; if not, nothing needs doing."
+  },
+  "replies": [
+   {
+    "es": "Conversar sin prisa es una forma honda de compañía. Tiene sentido extrañarla.",
+    "en": "Unhurried conversation is a deep kind of company. It makes sense to miss it."
+   },
+   {
+    "es": "Compartir una actividad puede acercar sin tener que hablar mucho.",
+    "en": "Sharing an activity can bring closeness without much talking."
+   },
+   {
+    "es": "Extrañar la risa dice mucho de lo que te nutre.",
+    "en": "Missing laughter says a lot about what nourishes you."
+   },
+   {
+    "es": "Querer sentirte comprendida es muy humano. No es pedir demasiado.",
+    "en": "Wanting to feel understood is deeply human. It is not asking too much."
+   },
+   {
+    "es": "La ayuda del día a día también es compañía. Necesitarla no te hace menos capaz.",
+    "en": "Everyday help is company too. Needing it does not make you less capable."
+   },
+   {
+    "es": "Está bien. Disfrutar de tu propio espacio también es estar bien.",
+    "en": "That is fine. Enjoying your own space is also a way of being well."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien pasar. Puedes volver cuando quieras, o no volver.",
+   "en": "It is fine to skip. You can come back whenever you like, or not at all."
+  },
+  "reasons": [
+   {
+    "es": "«Hacer algo juntas» asumía compañía femenina; ahora «Hacer algo en compañía».",
+    "en": "“Hacer algo juntas” assumed female company; now “Doing something with others”."
+   },
+   {
+    "es": "El paso ya no exige actuar si no extraña compañía. Se añaden respuestas de Elara.",
+    "en": "The step no longer requires action if she does not miss company. Added Elara replies."
+   }
+  ],
+  "resolves": [
+   "audience-fit"
+  ]
+ },
+ {
+  "code": "LOVE-W3-D2",
+  "fields": {
+   "es_o": "Usa una inicial o describe un espacio; no hace falta un nombre. Solo alguien con quien te sientas segura. También vale: nadie por ahora.",
+   "en_o": "Use an initial or describe a setting; no name needed. Only someone you feel safe with. “No one for now” is also valid."
+  },
+  "reasons": [
+   {
+    "es": "Faltaba la salida «nadie por ahora» y recordar que no tiene que ser alguien con quien se sienta insegura.",
+    "en": "It lacked a “no one for now” answer and a reminder that it need not be someone she feels unsafe with."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "LOVE-W3-D3",
+  "fields": {
+   "es_o": "Borrador con actividad y margen: «¿Te gustaría…? Si no puedes, todo bien». Hoy no invitar a nadie también vale.",
+   "en_o": "Draft an activity with room to decline: “Would you like to…? No worries if you can't.” Not inviting anyone today is also fine."
+  },
+  "reasons": [
+   {
+    "es": "Día de contacto: no invitar a nadie queda explícito como respuesta válida.",
+    "en": "Contact day: not inviting anyone is now an explicit valid answer."
+   }
+  ],
+  "resolves": [
+   "tone"
+  ]
+ },
+ {
+  "code": "LOVE-W3-D4",
+  "fields": {
+   "es_o": "Apartar el teléfono • Elegir un momento tranquilo • Decir que tengo poco tiempo • Escuchar sin resolver • Pedir que me escuchen • Otra cosa • Ahora no quiero conversar",
+   "en_o": "Put away my phone • Choose a calm moment • Say I have little time • Listen without fixing • Ask to be heard • Something else • I do not want to talk right now",
+   "es_s": "Paso opcional / Para llevarte: Si vas a conversar, elige una sola condición; si no, no hace falta hacer nada.",
+   "en_s": "Optional step / Takeaway: If you are going to talk, choose just one condition; if not, nothing needs doing."
+  },
+  "replies": [
+   {
+    "es": "Un gesto pequeño que deja más espacio para escuchar y ser escuchada.",
+    "en": "A small gesture that leaves more room to listen and be heard."
+   },
+   {
+    "es": "Elegir el momento también es cuidarte. No todo tiene que hablarse ya.",
+    "en": "Choosing the moment is also self-care. Not everything has to be talked about now."
+   },
+   {
+    "es": "Poner un límite de tiempo puede hacer la conversación más ligera para ti.",
+    "en": "Setting a time limit can make the conversation lighter for you."
+   },
+   {
+    "es": "Escuchar sin resolver alivia a ambas partes. No tienes que arreglar nada.",
+    "en": "Listening without fixing relieves both sides. You do not have to fix anything."
+   },
+   {
+    "es": "Pedir que te escuchen es justo. Tu voz también merece espacio.",
+    "en": "Asking to be heard is fair. Your voice deserves room too."
+   },
+   {
+    "es": "Gracias. Tú sabes mejor qué te ayuda a estar presente.",
+    "en": "Thank you. You know best what helps you be present."
+   },
+   {
+    "es": "Está bien. No tienes que buscar ninguna conversación esta semana.",
+    "en": "That is fine. You do not have to seek out any conversation this week."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien pasar. Puedes volver cuando quieras, o no volver.",
+   "en": "It is fine to skip. You can come back whenever you like, or not at all."
+  },
+  "reasons": [
+   {
+    "es": "Día de contacto: se añade «Ahora no quiero conversar» como respuesta de primera clase y el paso deja de suponer una próxima conversación.",
+    "en": "Contact day: added “I do not want to talk right now” as a first-class answer, and the step no longer assumes a next conversation."
+   },
+   {
+    "es": "Se añaden respuestas de Elara.",
+    "en": "Added Elara replies."
+   }
+  ],
+  "resolves": [
+   "options"
+  ]
+ },
+ {
+  "code": "LOVE-W3-D5",
+  "fields": {
+   "es_q": "¿Qué le preguntarías a alguien para conocer su experiencia, sin dar consejos enseguida?",
+   "en_q": "What would you ask someone to learn about their experience, without giving advice right away?",
+   "es_o": "Escribe una pregunta que no suponga cómo se siente. No hace falta hacerla.",
+   "en_o": "Write one question that does not assume how they feel. You do not have to ask it."
+  },
+  "reasons": [
+   {
+    "es": "La reescritura chocaba con la instrucción («no supongas cómo se siente»), reforzaba el rol de cuidadora y superaba 90 caracteres; se usa la versión sugerida.",
+    "en": "The rewrite clashed with the hint (“do not assume how they feel”), reinforced the caretaker role and exceeded 90 characters; used the suggested version."
+   },
+   {
+    "es": "Se aclara que hacer la pregunta es opcional.",
+    "en": "Clarified that asking the question is optional."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "LOVE-W3-D6",
+  "fields": {
+   "es_o": "Conectamos • Quedó pendiente • La otra persona no pudo • No me hizo bien • No lo intenté • Elegí estar sola",
+   "en_o": "We connected • Still pending • The other person could not • It did not feel good • I did not try • I chose time alone"
+  },
+  "replies": [
+   {
+    "es": "Gracias por contarlo. Puedes notar qué hizo posible esa conexión.",
+    "en": "Thank you for sharing. You can notice what made that connection possible."
+   },
+   {
+    "es": "Que quede pendiente no le quita valor. No tienes que insistir.",
+    "en": "Being pending does not make it matter less. You do not have to insist."
+   },
+   {
+    "es": "Que no pudiera no dice nada de tu valor. Puedes dejarlo ahí o retomarlo cuando quieras.",
+    "en": "That they could not says nothing about your worth. You can leave it there or return to it when you like."
+   },
+   {
+    "es": "Gracias por notarlo. No tienes que repetirlo; tu bienestar va primero.",
+    "en": "Thank you for noticing. You do not have to repeat it; your wellbeing comes first."
+   },
+   {
+    "es": "Está bien. No intentarlo también es una elección válida.",
+    "en": "That is fine. Not trying is also a valid choice."
+   },
+   {
+    "es": "Elegir tu propio espacio también es cuidarte. Es una respuesta completa.",
+    "en": "Choosing your own space is also self-care. It is a complete answer."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien pasar. Puedes volver cuando quieras, o no volver.",
+   "en": "It is fine to skip. You can come back whenever you like, or not at all."
+  },
+  "dep": {
+   "on": "LOVE-W3-D3",
+   "strategy": "restate",
+   "es": "Si no preparaste una invitación esta semana, piensa en cualquier intento reciente de conectar, o elige «No lo intenté».",
+   "en": "If you did not prepare an invitation this week, think of any recent attempt to connect, or choose “I did not try”."
+  },
+  "reasons": [
+   {
+    "es": "«No pudo» era ambiguo; ahora «La otra persona no pudo».",
+    "en": "“No pudo” was ambiguous; now “The other person could not”."
+   },
+   {
+    "es": "Recuerda el intento de W3-D3; se añade línea de respaldo. Se añaden respuestas de Elara que validan no intentarlo.",
+    "en": "Recalls the W3-D3 attempt; added a fallback line. Added Elara replies that validate not trying."
+   }
+  ],
+  "resolves": [
+   "clarity",
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "LOVE-W3-D7",
+  "fields": {
+   "es_o": "Una respuesta ajena no mide tu valor. Elige por cómo encaja en tu vida. Dejarlo atrás también vale.",
+   "en_o": "Someone else's response does not measure your worth. Choose based on how it fits your life. Leaving it behind is also fine."
+  },
+  "dep": {
+   "on": "LOVE-W3-D6",
+   "strategy": "own_situation",
+   "es": "Si esta semana no hubo ningún gesto, piensa en uno de antes, o en cómo prefieres conectar en general.",
+   "en": "If there was no gesture this week, think of an earlier one, or of how you prefer to connect in general."
+  },
+  "reasons": [
+   {
+    "es": "Supone un gesto previo; se añade línea de respaldo y «dejarlo atrás» queda explícito como válido.",
+    "en": "It assumes an earlier gesture; added a fallback line and made “leaving it behind” explicitly valid."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "LOVE-W4-D1",
+  "fields": {
+   "es_q": "En un desacuerdo pequeño, ¿qué ocurrió y qué interpretaste tú, si algo?",
+   "en_q": "In a small disagreement, what happened and what did you interpret, if anything?",
+   "es_s": "Paso opcional / Para llevarte: Señala una suposición que quieras revisar, solo para ti; tu percepción también cuenta. Si no te sientes segura con esa persona, no tienes que hablar con ella ni arreglar nada. Puedes buscar ayuda ahora.",
+   "en_s": "Optional step / Takeaway: Mark one assumption you would like to revisit, just for yourself; your perception counts too. If you do not feel safe with that person, you do not have to talk to them or fix anything. You can get help now."
+  },
+  "help": true,
+  "reasons": [
+   {
+    "es": "«qué interpretación añadiste tú» presuponía que ella añadió una.",
+    "en": "“What interpretation did you add” presumed she added one."
+   },
+   {
+    "es": "El paso pedía «aclaración», lo que empuja a hablar y a dudar de sí; ahora es privado y valida su percepción.",
+    "en": "The step asked for “clarification”, nudging her to talk and to doubt herself; it is now private and validates her perception."
+   },
+   {
+    "es": "Se añade la línea de seguridad y la ruta de ayuda, después de dejar la opción segura (no hablar, no arreglar) como respuesta de primera clase.",
+    "en": "Added the safety line and help route, after making the safe choice (not talking, not fixing) a first-class answer."
+   }
+  ],
+  "resolves": [
+   "tone",
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "LOVE-W4-D2",
+  "fields": {
+   "es_q": "¿Qué quisieras que la otra persona entendiera, sin que tenga que haber un ganador?",
+   "en_q": "What would you want the other person to understand, without there having to be a winner?",
+   "es_o": "Elige una sola cosa. Es solo para ti: no hace falta decírsela ni conversar.",
+   "en_o": "Choose one thing. It is just for you: no need to tell them or to talk.",
+   "es_s": "Paso opcional / Para llevarte: Si quieres, redacta para ti una frase con lo que observaste y lo que necesitas; no tienes que enviarla. Si no te sientes segura con esa persona, no tienes que hablar con ella ni arreglar nada. Puedes buscar ayuda ahora.",
+   "en_s": "Optional step / Takeaway: If you like, draft for yourself a sentence with what you observed and what you need; you do not have to send it. If you do not feel safe with that person, you do not have to talk to them or fix anything. You can get help now."
+  },
+  "help": true,
+  "dep": {
+   "on": "LOVE-W4-D1",
+   "strategy": "own_situation",
+   "es": "Si no anotaste un desacuerdo, piensa en uno pequeño, real o inventado, o pasa este día.",
+   "en": "If you did not note a disagreement, think of a small one, real or invented, or skip this day."
+  },
+  "reasons": [
+   {
+    "es": "«sin tener que ganar la discusión» insinuaba que ella quiere ganar.",
+    "en": "“Without needing to win the argument” implied she wants to win."
+   },
+   {
+    "es": "Instrucción y paso dejan claro que no hay que hablar ni enviar nada.",
+    "en": "Hint and step make clear she need not talk or send anything."
+   },
+   {
+    "es": "Depende del desacuerdo de W4-D1; se añade línea de respaldo.",
+    "en": "Relies on the W4-D1 disagreement; added a fallback line."
+   },
+   {
+    "es": "Se añade la línea de seguridad y la ruta de ayuda, después de dejar la opción segura (no hablar, no arreglar) como respuesta de primera clase.",
+    "en": "Added the safety line and help route, after making the safe choice (not talking, not fixing) a first-class answer."
+   }
+  ],
+  "resolves": [
+   "tone",
+   "depends-on-previous",
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "LOVE-W4-D3",
+  "fields": {
+   "fmt": "Una opción / One choice",
+   "es_q": "En ese desacuerdo, ¿sientes que alguna parte te corresponde a ti?",
+   "en_q": "In that disagreement, do you feel any part of it is yours?",
+   "es_o": "Ninguna parte es mía • Una parte pequeña • Una parte sí, otra no • Siento que todo fue culpa mía • Aún no lo sé",
+   "en_o": "None of it is mine • A small part • Some of it, not all • I feel it was all my fault • Not sure yet",
+   "es_s": "Paso opcional / Para llevarte: Si reconoces una parte tuya, anota solo para ti qué querrías hacer con ella, si algo; no hace falta decírselo a nadie. Si no te sientes segura con esa persona, no tienes que hablar con ella ni arreglar nada. Puedes buscar ayuda ahora.",
+   "en_s": "Optional step / Takeaway: If you recognize a part as yours, note just for yourself what you would want to do with it, if anything; you do not have to tell anyone. If you do not feel safe with that person, you do not have to talk to them or fix anything. You can get help now."
+  },
+  "replies": [
+   {
+    "es": "Es una respuesta completa. No tienes nada que reparar ni que hablar con nadie.",
+    "en": "That is a complete answer. There is nothing you need to repair or talk through with anyone."
+   },
+   {
+    "es": "Reconocerla no te obliga a nada. Si algún día quieres repararla, será a tu ritmo y solo si es seguro.",
+    "en": "Recognizing it does not oblige you to anything. If you ever want to repair it, it will be at your pace and only if it is safe."
+   },
+   {
+    "es": "Puedes reconocer tu parte sin cargar con la otra. Lo que no es tuyo no te toca resolverlo.",
+    "en": "You can recognize your part without carrying the rest. What is not yours is not yours to solve."
+   },
+   {
+    "es": "Es mucho peso para cargar sola. Un desacuerdo rara vez depende de una sola persona; si alguien te hace sentir así, puedes buscar ayuda ahora.",
+    "en": "That is a lot to carry alone. A disagreement rarely depends on one person; if someone makes you feel this way, you can get help now."
+   },
+   {
+    "es": "Está bien no saberlo todavía. No tienes que decidirlo hoy.",
+    "en": "It is fine not to know yet. You do not have to decide today."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien pasar. No tienes que revisar este desacuerdo si no quieres.",
+   "en": "It is fine to skip. You do not have to revisit this disagreement if you do not want to."
+  },
+  "help": true,
+  "dep": {
+   "on": "LOVE-W4-D1",
+   "strategy": "own_situation",
+   "es": "Si no anotaste un desacuerdo, piensa en uno pequeño, real o inventado, o pasa este día.",
+   "en": "If you did not note a disagreement, think of a small one, real or invented, or skip this day."
+  },
+  "reasons": [
+   {
+    "es": "Se rehace la reescritura del revisor («¿Hay algo que esté en tus manos hacer para mejorar la situación?»): le asignaba arreglar el conflicto, empujaba a apaciguar a una persona dañina y rompía «Ninguna» y el paso.",
+    "en": "Reworked the reviewer’s rewrite (“Is there anything within your power to do to improve the situation?”): it handed her the job of fixing the conflict, nudged appeasement of a harmful person, and broke “None” and the step."
+   },
+   {
+    "es": "Pasa de texto abierto a una opción: «Ninguna parte es mía» es la primera opción y cada respuesta recibe una respuesta de Elara; el detalle opcional queda en el paso, privado.",
+    "en": "Changed from open text to one choice: “None of it is mine” is the first option and each answer gets an Elara reply; the optional detail moves to the private step."
+   },
+   {
+    "es": "Se añade «Siento que todo fue culpa mía» para responder a la autoculpa sin confirmarla.",
+    "en": "Added “I feel it was all my fault” so Elara can answer self-blame without confirming it."
+   },
+   {
+    "es": "El paso ya no prepara una reparación: solo una nota privada, «si algo», sin enviar nada.",
+    "en": "The step no longer prepares a repair: only a private note, “if anything”, sending nothing."
+   },
+   {
+    "es": "Depende del desacuerdo de W4-D1; se añade línea de respaldo.",
+    "en": "Relies on the W4-D1 disagreement; added a fallback line."
+   },
+   {
+    "es": "Se añade la línea de seguridad y la ruta de ayuda, después de dejar la opción segura (no hablar, no arreglar) como respuesta de primera clase.",
+    "en": "Added the safety line and help route, after making the safe choice (not talking, not fixing) a first-class answer."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "safety-privacy",
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "LOVE-W4-D4",
+  "fields": {
+   "es_q": "¿Cómo podrías pedir una pausa en la conversación, sin prometer cuándo volver a ella?",
+   "en_q": "How could you ask to pause the conversation, without promising when you will return to it?",
+   "es_o": "Ensaya una frase solo para ti. No tienes que decirla ni volver a esa conversación. Si no te sientes segura con esa persona, no tienes que hablar con ella ni arreglar nada. Puedes buscar ayuda ahora.",
+   "en_o": "Rehearse a sentence just for yourself. You do not have to say it or return to that conversation. If you do not feel safe with that person, you do not have to talk to them or fix anything. You can get help now.",
+   "es_s": "Paso opcional / Para llevarte: Deja una frase de pausa que no exija resolver el desacuerdo; retomarlo o no sigue siendo tu decisión.",
+   "en_s": "Optional step / Takeaway: Keep a pause sentence that does not require resolving the disagreement; whether to return to it stays your decision."
+  },
+  "help": true,
+  "reasons": [
+   {
+    "es": "«pedir un tiempo» en buena parte de Latinoamérica significa pausar la relación de pareja; ahora «una pausa en la conversación».",
+    "en": "“Pedir un tiempo” in much of Latin America means a break in a romantic relationship; now “a pause in the conversation”."
+   },
+   {
+    "es": "«sin comprometerte a volver antes de sentirte lista» suponía que volvería; ahora no promete cuándo, y no volver queda como opción.",
+    "en": "“Without committing to come back before you feel ready” assumed she would return; now no timing is promised and not returning is an option."
+   },
+   {
+    "es": "Se añade la línea de seguridad y la ruta de ayuda, después de dejar la opción segura (no hablar, no arreglar) como respuesta de primera clase.",
+    "en": "Added the safety line and help route, after making the safe choice (not talking, not fixing) a first-class answer."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "regional",
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "LOVE-W4-D5",
+  "fields": {
+   "es_q": "¿Qué señales necesitarías para seguir una conversación difícil con respeto?",
+   "en_q": "What signs would you need to continue a difficult conversation with respect?",
+   "es_o": "Podemos terminar una frase • No hay insultos ni amenazas • Se respeta la pausa • Puedo discrepar sin miedo • Ninguna está presente ahora • No sé",
+   "en_o": "We can finish a sentence • No insults or threats • A pause is respected • I can disagree without fear • None are present right now • Not sure",
+   "es_s": "Paso opcional / Para llevarte: Identifica una condición mínima para ti; si no está, no conversar es una opción completa. Si no te sientes segura con esa persona, no tienes que hablar con ella ni arreglar nada. Puedes buscar ayuda ahora.",
+   "en_s": "Optional step / Takeaway: Identify one minimum condition for yourself; if it is missing, not talking is a complete option. If you do not feel safe with that person, you do not have to talk to them or fix anything. You can get help now."
+  },
+  "replies": [
+   {
+    "es": "Poder hablar sin interrupciones constantes es una base razonable.",
+    "en": "Being able to speak without constant interruption is a reasonable baseline."
+   },
+   {
+    "es": "Es un mínimo, no un lujo. Sin eso, no tienes que seguir hablando.",
+    "en": "That is a minimum, not a luxury. Without it, you do not have to keep talking."
+   },
+   {
+    "es": "Que se respete tu pausa importa. Pausar no debería costarte nada.",
+    "en": "Having your pause respected matters. Pausing should not cost you anything."
+   },
+   {
+    "es": "Discrepar sin miedo es una señal clara de respeto. Tu voz cuenta.",
+    "en": "Disagreeing without fear is a clear sign of respect. Your voice counts."
+   },
+   {
+    "es": "Gracias por verlo con claridad. No conversar es una opción válida, y puedes buscar ayuda ahora.",
+    "en": "Thank you for seeing it clearly. Not talking is a valid option, and you can get help now."
+   },
+   {
+    "es": "Está bien no saberlo. Puedes darte tiempo antes de decidir si hablar.",
+    "en": "It is fine not to know. You can take time before deciding whether to talk."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien pasar. Puedes volver cuando quieras, o no volver.",
+   "en": "It is fine to skip. You can come back whenever you like, or not at all."
+  },
+  "help": true,
+  "reasons": [
+   {
+    "es": "«esta conversación» dependía de W4-D1; la pregunta ahora se sostiene sola.",
+    "en": "“This conversation” relied on W4-D1; the question now stands alone."
+   },
+   {
+    "es": "«No veo esas condiciones» no encajaba con «qué señal te indicaría» ni se marcaba exclusiva; ahora «Ninguna está presente ahora» (exclusiva) y se añade «No sé» (exclusiva).",
+    "en": "“I do not see those conditions” did not fit “what sign would tell you” and was not exclusive; now “None are present right now” (exclusive), plus “Not sure” (exclusive)."
+   },
+   {
+    "es": "Se añaden «amenazas» y «sin miedo» como señales mínimas de seguridad.",
+    "en": "Added “threats” and “without fear” as minimum safety signs."
+   },
+   {
+    "es": "Se añade la línea de seguridad y la ruta de ayuda, después de dejar la opción segura (no hablar, no arreglar) como respuesta de primera clase.",
+    "en": "Added the safety line and help route, after making the safe choice (not talking, not fixing) a first-class answer."
+   }
+  ],
+  "resolves": [
+   "options",
+   "depends-on-previous",
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "LOVE-W4-D6",
+  "fields": {
+   "es_q": "Por ahora, ¿qué te conviene hacer con ese desacuerdo? Nada también es válido.",
+   "en_q": "For now, what would serve you with that disagreement? Nothing is also valid.",
+   "es_o": "Aclarar algo, si es seguro • Reparar algo que sí es mío • Dejarlo estar, sin hacer nada • Buscar apoyo • Mantener distancia • No decidir aún",
+   "en_o": "Clarify something, if safe • Repair something truly mine • Let it be, do nothing • Seek support • Keep distance • Not decide yet",
+   "es_s": "Paso opcional / Para llevarte: Nombra un paso que dependa solo de ti, aunque sea no hacer nada. Si no te sientes segura con esa persona, no tienes que hablar con ella ni arreglar nada. Puedes buscar ayuda ahora.",
+   "en_s": "Optional step / Takeaway: Name one step that depends only on you, even if it is doing nothing. If you do not feel safe with that person, you do not have to talk to them or fix anything. You can get help now."
+  },
+  "replies": [
+   {
+    "es": "Aclarar puede ayudar cuando hay respeto. Tú decides cuándo, cómo o si lo haces.",
+    "en": "Clarifying can help when there is respect. You decide when, how, or whether to do it."
+   },
+   {
+    "es": "Puedes reparar tu parte sin cargar con la de nadie más. No necesitas una respuesta para que cuente.",
+    "en": "You can repair your part without carrying anyone else’s. You do not need a response for it to count."
+   },
+   {
+    "es": "Es una decisión válida. No todo desacuerdo necesita resolverse.",
+    "en": "That is a valid decision. Not every disagreement needs resolving."
+   },
+   {
+    "es": "Buscar apoyo es una forma de cuidarte. No tienes que llevar esto sola.",
+    "en": "Seeking support is a way of caring for yourself. You do not have to carry this alone."
+   },
+   {
+    "es": "La distancia también puede protegerte. No necesitas justificarla.",
+    "en": "Distance can also protect you. You do not need to justify it."
+   },
+   {
+    "es": "Está bien no decidir todavía. Puedes darte el tiempo que necesites.",
+    "en": "It is fine not to decide yet. You can take the time you need."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien pasar. Puedes volver cuando quieras, o no volver.",
+   "en": "It is fine to skip. You can come back whenever you like, or not at all."
+  },
+  "help": true,
+  "dep": {
+   "on": "LOVE-W4-D1",
+   "strategy": "own_situation",
+   "es": "Si no anotaste un desacuerdo esta semana, piensa en uno pequeño que tengas presente, o pasa este día.",
+   "en": "If you did not note a disagreement this week, think of a small one on your mind, or skip this day."
+  },
+  "reasons": [
+   {
+    "es": "«Reparar mi parte» suponía que ella tiene una parte; ahora «Reparar algo que sí es mío». «Aclarar algo» pasa a «si es seguro».",
+    "en": "“Repair my part” assumed she has a part; now “Repair something truly mine”. “Clarify something” becomes “if safe”."
+   },
+   {
+    "es": "«Dejarlo reposar» suponía volver; se cambia por «Dejarlo estar, sin hacer nada», y la pregunta dice que nada es válido.",
+    "en": "“Let it rest” implied returning; replaced by “Let it be, do nothing”, and the question says nothing is valid."
+   },
+   {
+    "es": "Depende del desacuerdo de W4-D1; se añade línea de respaldo. Se añaden respuestas de Elara.",
+    "en": "Relies on the W4-D1 disagreement; added a fallback line. Added Elara replies."
+   },
+   {
+    "es": "Se añade la línea de seguridad y la ruta de ayuda, después de dejar la opción segura (no hablar, no arreglar) como respuesta de primera clase.",
+    "en": "Added the safety line and help route, after making the safe choice (not talking, not fixing) a first-class answer."
+   }
+  ],
+  "resolves": [
+   "options",
+   "depends-on-previous",
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "LOVE-W5-D2",
+  "fields": {
+   "es_q": "¿Qué te gustaría pedir con claridad en alguna de tus relaciones?",
+   "en_q": "What would you like to ask for clearly in one of your relationships?",
+   "es_s": "Paso opcional / Para llevarte: Deja la petición concreta, para ti; si algún día la haces, deja espacio para una respuesta honesta.",
+   "en_s": "Optional step / Takeaway: Keep the request concrete, for yourself; if you ever make it, leave room for an honest answer."
+  },
+  "reasons": [
+   {
+    "es": "«la próxima vez» no tenía referente y suponía que antes no fue clara.",
+    "en": "“Next time” had no referent and assumed she was unclear before."
+   },
+   {
+    "es": "El paso suponía enviar la petición; ahora es opcional.",
+    "en": "The step assumed sending the request; it is now optional."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "LOVE-W5-D3",
+  "fields": {
+   "es_q": "¿Con qué apoyos te gustaría contar cuando lo necesites?",
+   "en_q": "What kinds of support would you like to count on when you need it?"
+  },
+  "replies": [
+   {
+    "es": "Las amistades pueden sostener mucho. No tienen que ser muchas.",
+    "en": "Friendships can hold a lot. There do not have to be many."
+   },
+   {
+    "es": "La familia elegida también es familia. Puede construirse poco a poco.",
+    "en": "Chosen family is family too. It can be built little by little."
+   },
+   {
+    "es": "Un espacio compartido puede dar pertenencia sin exigir intimidad.",
+    "en": "A shared space can offer belonging without demanding closeness."
+   },
+   {
+    "es": "Buscar apoyo profesional es una forma de cuidarte, no una señal de debilidad.",
+    "en": "Seeking professional support is a way of caring for yourself, not a sign of weakness."
+   },
+   {
+    "es": "Tu propio tiempo también te sostiene. Es un apoyo válido.",
+    "en": "Your own time holds you up too. It is valid support."
+   },
+   {
+    "es": "Está bien no saberlo todavía. Puedes descubrirlo sin prisa.",
+    "en": "It is fine not to know yet. You can discover it without hurry."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien pasar. Puedes volver cuando quieras, o no volver.",
+   "en": "It is fine to skip. You can come back whenever you like, or not at all."
+  },
+  "reasons": [
+   {
+    "es": "«otras personas» no encajaba con «Apoyo profesional» ni «Tiempo propio», y «otras» suponía apoyo previo; ahora «apoyos», sin «otros».",
+    "en": "“Other people” did not fit “Professional support” or “Time of my own”, and “other” presumed existing support; now “support”, without “other”."
+   },
+   {
+    "es": "«Aún no sé» ya se marca exclusiva. Se añaden respuestas de Elara.",
+    "en": "“Not sure yet” is already detected as exclusive. Added Elara replies."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "options"
+  ]
+ },
+ {
+  "code": "LOVE-W5-D5",
+  "fields": {
+   "es_q": "¿Cada cuánto te gustaría estar en contacto con las personas que elijas, en esta etapa?",
+   "en_q": "How often would you like to be in touch with the people you choose, at this stage?",
+   "es_o": "Puede ser espontáneo, ocasional o con un acuerdo. Menos contacto también es válido. Evita prometer una frecuencia por culpa.",
+   "en_o": "It may be spontaneous, occasional, or agreed. Less contact is also valid. Avoid promising a frequency out of guilt."
+  },
+  "reasons": [
+   {
+    "es": "«con los demás» era vago y «sin sentirte abrumada» presuponía agobio; se recupera «esta etapa» y «las personas que elijas».",
+    "en": "“With others” was vague and “without feeling overwhelmed” presumed overwhelm; restored “this stage” and “the people you choose”."
+   },
+   {
+    "es": "Día de contacto: menos contacto queda explícito como válido.",
+    "en": "Contact day: less contact is explicitly valid."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "LOVE-W5-D7",
+  "fields": {
+   "es_q": "¿Qué quieres llevarte de este camino para tus relaciones o tu próxima conversación?",
+   "en_q": "What would you like to carry from this path into your relationships or your next conversation?"
+  },
+  "reasons": [
+   {
+    "es": "«tu próximo vínculo» podía leerse como una nueva pareja, insinuando cerrar la actual.",
+    "en": "“Your next relationship” could read as a new partner, implying ending the current one."
+   }
+  ],
+  "resolves": [
+   "audience-fit"
+  ]
+ }
+]

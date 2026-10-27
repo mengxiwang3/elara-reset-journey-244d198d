@@ -1,0 +1,1728 @@
+[
+ {
+  "code": "MONEY-W1-D1",
+  "fields": {
+   "es_o": "Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa • Aún no lo sé",
+   "en_o": "My income • When it arrives • What I need to pay • My debts • My independence • Something else • Not sure yet"
+  },
+  "reasons": [
+   {
+    "es": "Se añade «Aún no lo sé» como respuesta real, distinta de «Prefiero pasar».",
+    "en": "Adds “Not sure yet” as a real answer, distinct from “Prefer to skip.”"
+   }
+  ],
+  "resolves": [
+   "options"
+  ]
+ },
+ {
+  "code": "MONEY-W1-D2",
+  "fields": {
+   "es_o": "Trabajo • Clientes o ventas • Apoyo de otras personas • Apoyos o programas del gobierno • No tengo ingresos ahora • Otra fuente",
+   "en_o": "Employment • Clients or sales • Support from others • Government support or programs • No income right now • Another source",
+   "es_s": "Paso opcional / Para llevarte: Marca qué ingreso es confirmado y cuál incierto, sin contar promesas como recibidas. Si hoy no entra nada, basta con anotarlo.",
+   "en_s": "Optional step / Takeaway: Mark which income is confirmed and which is uncertain, without counting promises as received. If nothing comes in now, just note that."
+  },
+  "reasons": [
+   {
+    "es": "«No tengo ingresos ahora» contradice a las demás opciones; empieza por «No tengo», así que la app la trata como exclusiva en selección múltiple.",
+    "en": "“No income right now” contradicts the other options; it starts with “No tengo”, so the app treats it as exclusive in multiple choice."
+   },
+   {
+    "es": "Se recupera el matiz temporal («ahora») y queda igual que la opción de MONEY-W1-D4.",
+    "en": "Restores the temporary sense (“right now”) and matches the MONEY-W1-D4 option."
+   },
+   {
+    "es": "«Prestaciones» significa beneficios laborales en México; pasa a «Apoyos o programas del gobierno».",
+    "en": "“Prestaciones” means job benefits in Mexico; changed to “government support or programs.”"
+   },
+   {
+    "es": "El paso ahora sirve también a quien no tiene ingresos.",
+    "en": "The step now also works for someone with no income."
+   }
+  ],
+  "resolves": [
+   "options",
+   "edit-review",
+   "audience-fit"
+  ]
+ },
+ {
+  "code": "MONEY-W1-D4",
+  "fields": {
+   "es_q": "¿Cómo te alcanza el dinero para tus gastos básicos?",
+   "en_q": "How far does your money go for your basic expenses?"
+  },
+  "replies": [
+   {
+    "es": "Queda algo de margen. Es un dato útil para lo que sigue.",
+    "en": "There is some margin left. That is useful for what comes next."
+   },
+   {
+    "es": "Alcanza justo. Saberlo ayuda a ver qué fechas pesan más.",
+    "en": "Just enough. Knowing that helps you see which dates matter most."
+   },
+   {
+    "es": "No alcanza por ahora. Esta semana miramos qué información te falta, sin pedirte cifras.",
+    "en": "Not enough for now. This week we look at what information is missing, without asking for figures."
+   },
+   {
+    "es": "Cambia cada vez. Entonces conviene mirar cuándo entra, más que cuánto.",
+    "en": "It varies. Then it helps to look at when money arrives, more than how much."
+   },
+   {
+    "es": "Ahora no entra dinero propio. Lo que sigue también sirve para ordenar lo que necesitas.",
+    "en": "No income of your own right now. What follows still helps you sort out what you need."
+   },
+   {
+    "es": "Está bien no saberlo todavía. También es algo que se puede aclarar.",
+    "en": "It is fine not to know yet. That can be clarified too."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien. Puedes volver a esto otro día.",
+   "en": "That is fine. You can come back to this another day."
+  },
+  "reasons": [
+   {
+    "es": "«¿Cuánto dinero te queda?» pedía una cantidad sobre opciones cualitativas e invitaba a escribir montos; ahora la pregunta encaja con las opciones y no pide cifras.",
+    "en": "“How much money is left?” asked for an amount over qualitative options and invited figures; the question now fits the options and asks for no amounts."
+   },
+   {
+    "es": "«No tengo ingresos ahora» responde bien a la nueva pregunta y coincide con MONEY-W1-D2.",
+    "en": "“No income right now” fits the new question and matches MONEY-W1-D2."
+   },
+   {
+    "es": "Respuestas breves por opción, sin elogiar ni empujar.",
+    "en": "Short replies per option, without praise or pressure."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "safety-privacy",
+   "options"
+  ]
+ },
+ {
+  "code": "MONEY-W1-D5",
+  "fields": {
+   "es_o": "Puede ser fecha, monto, frecuencia o quién lo confirma. No subas documentos."
+  },
+  "reasons": [
+   {
+    "es": "«Importe» es peninsular; en Latinoamérica se dice «monto».",
+    "en": "“Importe” is Spain-centric; Latin American usage is “monto.”"
+   }
+  ],
+  "resolves": [
+   "audience-fit"
+  ]
+ },
+ {
+  "code": "MONEY-W1-D7",
+  "fields": {
+   "es_o": "Una frase sobre tu situación, sin juzgarte ni prometer cambios. También vale algo que ya sabías.",
+   "en_o": "One factual sentence, without judging yourself or promising change. Something you already knew also counts."
+  },
+  "reasons": [
+   {
+    "es": "La pregunta presupone un descubrimiento; la instrucción da salida a quien no lo tuvo.",
+    "en": "The question presumes a discovery; the instruction gives a way out if there was none."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "MONEY-W2-D1",
+  "fields": {
+   "es_q": "¿Qué vía de ingresos te gustaría explorar primero?",
+   "en_q": "Which income avenue would you like to explore first?"
+  },
+  "reasons": [
+   {
+    "es": "La pregunta del revisor no encajaba con opciones que son vías de acción ni con el paso «Elige una vía»; además repetía MONEY-W1-D1. Se ajusta a la sugerencia de la revisión.",
+    "en": "The reviewer's question did not fit options that are courses of action or the “Choose one avenue” step, and it repeated MONEY-W1-D1. Adjusted per the review's suggestion."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "duplicate"
+  ]
+ },
+ {
+  "code": "MONEY-W2-D2",
+  "fields": {
+   "es_q": "¿Qué sabes hacer que podría ayudarte a aprovechar una oportunidad?",
+   "en_q": "What do you know how to do that could help you make the most of an opportunity?"
+  },
+  "reasons": [
+   {
+    "es": "«Habilidades» suena a currículum y puede hacer sentir que no se tienen; «qué sabes hacer» es más cercano.",
+    "en": "“Skills” sounds like a CV and may make her feel she has none; “what you know how to do” is closer."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "MONEY-W2-D3",
+  "fields": {
+   "es_o": "Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición • Aún no lo sé",
+   "en_o": "Hours • Caring responsibilities • Transport • Internet access • No upfront payment • Another condition • Not sure yet"
+  },
+  "reasons": [
+   {
+    "es": "Se añade «Aún no lo sé»; empieza por «Aún no», así que es exclusiva en selección múltiple.",
+    "en": "Adds “Not sure yet”; it starts with “Aún no”, so it is exclusive in multiple choice."
+   }
+  ],
+  "resolves": [
+   "options"
+  ]
+ },
+ {
+  "code": "MONEY-W2-D4",
+  "fields": {
+   "es_q": "¿Qué dato te gustaría comprobar antes de dedicarle tiempo a una oportunidad?",
+   "en_q": "What fact would you like to check before spending time on an opportunity?"
+  },
+  "reasons": [
+   {
+    "es": "Se recupera «comprobar un dato», que es el antecedente de la instrucción y del paso.",
+    "en": "Restores “check a fact”, which the instruction and step refer back to."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "MONEY-W2-D7",
+  "fields": {
+   "es_q": "¿Qué opción de ingresos te gustaría investigar un poco más, si alguna?",
+   "en_q": "Which income option would you like to look into a little more, if any?",
+   "es_o": "Nombra una y un dato que te falte. «Ninguna por ahora» también vale.",
+   "en_o": "Name one and a fact you are missing. “None for now” is valid."
+  },
+  "dep": {
+   "on": "MONEY-W2-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una vía al inicio de la semana, piensa en cualquier forma de ingreso que te dé curiosidad.",
+   "en": "If you did not choose an avenue earlier this week, think of any kind of income you are curious about."
+  },
+  "reasons": [
+   {
+    "es": "Ya no es una pregunta de sí/no en formato abierto, y evita «ganar dinero» justo después del día sobre fraudes.",
+    "en": "No longer a yes/no question in open format, and avoids “earning money” right after the fraud day."
+   },
+   {
+    "es": "La instrucción vuelve a tener referente.",
+    "en": "The instruction has a referent again."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "MONEY-W3-D1",
+  "fields": {
+   "en_q": "Which recent expense would you like to understand, without deciding yet on any change?",
+   "es_o": "Puedes describir para qué sirvió sin indicar el monto.",
+   "en_o": "Describe what it was for without giving the amount.",
+   "es_s": "Paso opcional / Para llevarte: Pon nombre a la necesidad que cubrió el gasto.",
+   "en_s": "Optional step / Takeaway: Name the need the expense met."
+  },
+  "reasons": [
+   {
+    "es": "El inglés implicaba que habrá que decidir; ahora refleja «sin decidir todavía».",
+    "en": "The English implied a decision was due; it now mirrors “without deciding yet.”"
+   },
+   {
+    "es": "«Importe» → «monto».",
+    "en": "“Importe” → “monto.”"
+   },
+   {
+    "es": "«Antes de juzgarlo» daba por hecho un juicio; se quita.",
+    "en": "“Before judging it” assumed a judgment; removed."
+   }
+  ],
+  "resolves": [
+   "meaning-mismatch",
+   "tone",
+   "audience-fit"
+  ]
+ },
+ {
+  "code": "MONEY-W3-D2",
+  "fields": {},
+  "dep": {
+   "on": "MONEY-W3-D1",
+   "strategy": "own_situation",
+   "es": "Piensa en cualquier gasto reciente, sin indicar el monto.",
+   "en": "Think of any recent expense, without giving the amount."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "MONEY-W3-D3",
+  "fields": {
+   "es_q": "¿Qué pago que haces con regularidad te gustaría entender mejor?",
+   "en_q": "Which payment you make regularly would you like to understand better?"
+  },
+  "reasons": [
+   {
+    "es": "Corrige la concordancia y deja de ser una pregunta de sí/no en formato abierto.",
+    "en": "Fixes the agreement and stops being a yes/no question in open format."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "MONEY-W3-D4",
+  "fields": {
+   "es_q": "Si tienes alguna deuda o un pago que debas hacer, ¿qué dato te gustaría aclarar?",
+   "en_q": "If you have a debt or a payment you owe, which detail would you like to clarify?",
+   "es_o": "Saldo • Fecha de pago • Cuota • Intereses o cargos • Condiciones • Aún no lo sé",
+   "en_o": "Balance • Due date • Instalment • Interest or fees • Terms • Not sure yet"
+  },
+  "reasons": [
+   {
+    "es": "La pregunta de sí/no no encajaba con opciones que son datos; ahora pregunta qué dato aclarar y deja la deuda como condición, no como suposición.",
+    "en": "The yes/no question did not fit options that are facts; it now asks which fact to clarify and makes debt a condition, not an assumption."
+   },
+   {
+    "es": "«Pago que debas hacer» evita la ambigüedad de «pago pendiente» (algo que le deben).",
+    "en": "“A payment you owe” removes the ambiguity of “outstanding payment” (money owed to her)."
+   },
+   {
+    "es": "Se quita «No aplica», que la app ya añade, y se añade «Aún no lo sé».",
+    "en": "Removes “Not applicable”, which the app already adds, and adds “Not sure yet.”"
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "tone",
+   "clarity",
+   "options"
+  ]
+ },
+ {
+  "code": "MONEY-W3-D5",
+  "fields": {
+   "es_o": "Lo básico que debo cubrir • Un acuerdo previo • El deseo de ayudar • La presión que siento • No poder decidir libremente • Otra cosa",
+   "en_o": "My essentials • An existing agreement • Wanting to help • Pressure I feel • Limited freedom to decide • Something else"
+  },
+  "replies": [
+   {
+    "es": "Lo básico pesa más. Es un dato válido al decidir cuánto puedes aportar.",
+    "en": "Your essentials weigh most. That is valid when deciding how much you can give."
+   },
+   {
+    "es": "Hay un acuerdo de por medio. Puede ayudar recordar qué se dijo exactamente.",
+    "en": "There is an agreement involved. It may help to recall exactly what was said."
+   },
+   {
+    "es": "Te mueve el deseo de ayudar. Puedes cuidarlo y mirar también lo que te queda a ti.",
+    "en": "Wanting to help moves you. You can honor that and still look at what is left for you."
+   },
+   {
+    "es": "Sientes presión. No tienes que responder en el momento.",
+    "en": "You feel pressure. You do not have to answer on the spot."
+   },
+   {
+    "es": "Eso importa. Si alguien controla tu dinero o tus decisiones, hay apoyo confidencial disponible.",
+    "en": "That matters. If someone controls your money or your decisions, confidential support is available."
+   },
+   {
+    "es": "Está bien. Lo que pesa en tu caso también cuenta.",
+    "en": "That is fine. Whatever weighs in your case counts too."
+   }
+  ],
+  "softReply": {
+   "es": "Está bien. Puedes volver a esto cuando quieras.",
+   "en": "That is fine. You can come back to this whenever you like."
+  },
+  "help": true,
+  "reasons": [
+   {
+    "es": "«No aplica u otra cosa» se separa: queda «Otra cosa» y «No aplica» lo pone la app.",
+    "en": "“Other or not applicable” is split: “Something else” stays and the app supplies “Not applicable.”"
+   },
+   {
+    "es": "«No poder decidir libremente» puede señalar control económico: respuesta suave y ruta de ayuda visible.",
+    "en": "“Limited freedom to decide” may signal financial control: a gentle reply and the help route are shown."
+   }
+  ],
+  "resolves": [
+   "options",
+   "safety-privacy"
+  ]
+ },
+ {
+  "code": "MONEY-W3-D6",
+  "fields": {
+   "es_q": "¿Qué podrías decir si necesitas pensarlo antes de comprometer dinero?",
+   "en_q": "What could you say if you need to think it over before committing money?"
+  },
+  "reasons": [
+   {
+    "es": "«Comprometer dinero» incluye prestar o aportar a la familia, que es el tema del día anterior.",
+    "en": "“Committing money” includes lending or contributing to family, the previous day's topic."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "MONEY-W3-D7",
+  "fields": {
+   "es_s": "Paso opcional / Para llevarte: Reduce lo que quieres tener en cuenta a una comprobación breve.",
+   "en_s": "Optional step / Takeaway: Reduce what you want to keep in mind to a short check."
+  },
+  "reasons": [
+   {
+    "es": "El paso hablaba de «tu criterio», palabra que ya no está en la pregunta.",
+    "en": "The step referred to “your criterion”, which is no longer in the question."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "MONEY-W4-D1",
+  "fields": {
+   "es_o": "Confirmar un ingreso • Aclarar un pago • Revisar una oportunidad • Ordenar mis notas • Pedir orientación • Dejarlo por ahora",
+   "en_o": "Confirm income • Clarify a payment • Check an opportunity • Organize notes • Ask for guidance • Leave it for now"
+  },
+  "reasons": [
+   {
+    "es": "«Pedir información» se solapaba con confirmar y aclarar; «Pedir orientación» es distinta.",
+    "en": "“Ask for information” overlapped with confirm and clarify; “Ask for guidance” is distinct."
+   }
+  ],
+  "resolves": [
+   "options"
+  ]
+ },
+ {
+  "code": "MONEY-W4-D2",
+  "fields": {
+   "es_q": "¿Cómo podrías adaptar la tarea que elegiste al tiempo y los recursos que tienes?",
+   "en_q": "How could you adapt the task you chose to the time and resources you have?"
+  },
+  "dep": {
+   "on": "MONEY-W4-D1",
+   "strategy": "new_example",
+   "es": "Si no elegiste tarea, toma una pequeña de ejemplo, como confirmar la fecha de un pago.",
+   "en": "If you did not choose a task, take a small example, such as confirming a payment date."
+  },
+  "reasons": [
+   {
+    "es": "Se recupera «recursos», al que se refiere el paso, y se nombra la tarea en lugar de «esta tarea».",
+    "en": "Restores “resources”, which the step refers to, and names the task instead of “this task.”"
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "MONEY-W4-D3",
+  "fields": {
+   "es_q": "¿Qué recordatorio te ayudaría a retomar tu tarea, o algo pendiente, sin empezar de cero?",
+   "en_q": "What reminder would help you resume your task, or something pending, without starting over?",
+   "es_o": "Opcional: foto de una nota sin nombres, montos ni datos; nunca cuentas, tarjetas o documentos. Alternativa: texto."
+  },
+  "dep": {
+   "on": "MONEY-W4-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste tarea esta semana, piensa en cualquier gestión de dinero que quieras retomar.",
+   "en": "If you did not choose a task this week, think of any money errand you would like to return to."
+  },
+  "reasons": [
+   {
+    "es": "La pregunta superaba 90 caracteres y no tenía salida si no hay tarea; ahora admite «algo pendiente».",
+    "en": "The question was over 90 characters with no way out if there is no task; it now allows “something pending.”"
+   },
+   {
+    "es": "«Importes» → «montos».",
+    "en": "“Importes” → “montos.”"
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous",
+   "clarity",
+   "audience-fit"
+  ]
+ },
+ {
+  "code": "MONEY-W4-D4",
+  "fields": {},
+  "dep": {
+   "on": "MONEY-W4-D1",
+   "strategy": "restate",
+   "es": "Si no elegiste tarea esta semana, «No elegí una» es una respuesta válida.",
+   "en": "If you did not choose a task this week, “Did not choose one” is a valid answer."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "MONEY-W4-D5",
+  "fields": {
+   "es_o": "Cuenta un hecho, sin evaluar tu disciplina. Si no elegiste tarea, cuenta qué pasó esta semana. Alternativa: texto.",
+   "en_o": "Describe a fact, without judging your discipline. If you chose no task, say what happened this week. Text alternative."
+  },
+  "dep": {
+   "on": "MONEY-W4-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste tarea, piensa en una gestión de dinero reciente y en qué la facilitó o la frenó.",
+   "en": "If you chose no task, think of a recent money errand and what helped or slowed it."
+  },
+  "reasons": [
+   {
+    "es": "Da salida a quien respondió «No elegí una».",
+    "en": "Gives a way out to anyone who answered “Did not choose one.”"
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "MONEY-W4-D6",
+  "fields": {
+   "es_q": "Para un próximo intento, ¿qué ajustarías, si algo?",
+   "en_q": "For a next attempt, what would you adjust, if anything?",
+   "es_o": "Hacerlo más pequeño • Buscar otra fuente • Elegir otro momento • Pedir apoyo • Cambiar de tarea • Nada, así funciona • No seguir por ahora",
+   "en_o": "Make it smaller • Another source • Another time • Ask for support • Change the task • Nothing, it works • Stop for now"
+  },
+  "dep": {
+   "on": "MONEY-W4-D4",
+   "strategy": "own_situation",
+   "es": "Si no anotaste cómo fue tu tarea, piensa en cualquier gestión de dinero pequeña que quieras retomar.",
+   "en": "If you did not note how your task went, think of any small money errand you would like to return to."
+  },
+  "reasons": [
+   {
+    "es": "«Qué harías diferente» presuponía que algo salió mal; se añade «Nada, así funciona» para quien la hizo.",
+    "en": "“What would you do differently” presumed something went wrong; adds “Nothing, it works” for anyone who did it."
+   },
+   {
+    "es": "La pregunta ya no supone que volverá a intentarlo, así que «No seguir por ahora» encaja.",
+    "en": "The question no longer assumes another attempt, so “Stop for now” fits."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "MONEY-W4-D7",
+  "fields": {},
+  "dep": {
+   "on": "MONEY-W4-D1",
+   "strategy": "new_example",
+   "es": "Aunque no hayas elegido tarea, puede ser una fecha, una pregunta o una frase de cualquier día.",
+   "en": "Even without a task, it can be a date, a question or a phrase from any day."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "MONEY-W5-D1",
+  "fields": {},
+  "dep": {
+   "on": "MONEY-W1-D1",
+   "strategy": "restate",
+   "es": "Al inicio te preguntamos qué querías entender sobre tu dinero; si no respondiste, piensa en algo que antes te confundía.",
+   "en": "At the start we asked what you wanted to understand about your money; if you skipped it, think of something that used to confuse you."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "MONEY-W5-D2",
+  "fields": {
+   "es_q": "Si una semana entra menos dinero de lo habitual, ¿qué te ayudaría a orientarte?",
+   "en_q": "If less money comes in than usual one week, what would help you get your bearings?",
+   "es_o": "Ver fechas y pagos • Confirmar lo que entrará • Conocer apoyos • Pedir aclaraciones • Revisar un acuerdo • Otra cosa • Aún no lo sé",
+   "en_o": "See dates and payments • Confirm expected income • Learn about support • Ask for clarification • Review an agreement • Something else • Not sure yet"
+  },
+  "reasons": [
+   {
+    "es": "«Tomar mejores decisiones» sugería que las actuales son malas; «orientarte» es neutral.",
+    "en": "“Make better decisions” implied current ones are bad; “get your bearings” is neutral."
+   },
+   {
+    "es": "«Entra dinero» incluye a quien no tiene ingresos propios.",
+    "en": "“Money comes in” includes women without income of their own."
+   },
+   {
+    "es": "Se añade «Aún no lo sé», exclusiva en selección múltiple.",
+    "en": "Adds “Not sure yet”, exclusive in multiple choice."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "audience-fit",
+   "options"
+  ]
+ },
+ {
+  "code": "MONEY-W5-D4",
+  "fields": {
+   "es_q": "¿Qué apoyo o información podría ayudarte con un tema de dinero que sigue pendiente?",
+   "en_q": "What support or information could help with a money matter that is still open?"
+  },
+  "reasons": [
+   {
+    "es": "Recupera el foco en dinero y quita la presión de «encontrar una solución».",
+    "en": "Restores the money focus and removes the pressure of “finding a solution.”"
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "MONEY-W5-D5",
+  "fields": {
+   "es_q": "¿Qué parte de tus finanzas te sería útil revisar de vez en cuando?",
+   "en_q": "Which part of your finances would be useful to check from time to time?"
+  },
+  "reasons": [
+   {
+    "es": "«Con más frecuencia» insinuaba que hoy no revisa lo suficiente; con «parte», «Ninguna por ahora» vuelve a concordar.",
+    "en": "“More often” implied she does not check enough; with “part”, “None for now” agrees again."
+   }
+  ],
+  "resolves": [
+   "tone",
+   "edit-review"
+  ]
+ },
+ {
+  "code": "MONEY-W5-D7",
+  "fields": {
+   "es_q": "¿Qué quieres anotar como cierre de este recorrido sobre tu dinero?",
+   "en_q": "What would you like to write down to close this journey about your money?"
+  },
+  "reasons": [
+   {
+    "es": "Recupera la idea de nota de cierre y no insinúa que aún falte claridad.",
+    "en": "Restores the closing-note idea and no longer implies clarity is still lacking."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "PURPOSE-W1-D1",
+  "fields": {
+   "es_q": "¿Qué tema o interés vuelve a tu cabeza cuando por fin tienes un rato para ti?",
+   "en_q": "What topic or interest keeps coming back to you when you finally have time for yourself?"
+  },
+  "reasons": [
+   {
+    "es": "«Interés» orienta hacia la curiosidad y no hacia preocupaciones.",
+    "en": "“Interest” points toward curiosity rather than worries."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "PURPOSE-W1-D3",
+  "fields": {
+   "es_q": "¿Qué podrías investigar durante cinco minutos sobre algo que te da curiosidad?",
+   "en_q": "What could you look into for five minutes about something you are curious about?"
+  },
+  "reasons": [
+   {
+    "es": "«Resolver una duda» en cinco minutos no es realista y no encaja con el paso («algo que desconocías»).",
+    "en": "“Clearing up a question” in five minutes is unrealistic and does not match the step (“something you did not know”)."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "PURPOSE-W1-D4",
+  "fields": {
+   "es_q": "De lo que sientes que «deberías» querer, ¿qué parte sí elegirías tú?",
+   "en_q": "Of what you feel you “should” want, which part would you actually choose?"
+  },
+  "reasons": [
+   {
+    "es": "La reescritura era ambigua y presionaba con «lo que realmente deseas»; se sigue la sugerencia de la revisión, sin hacerla de sí/no.",
+    "en": "The rewrite was ambiguous and pressed for “what you truly want”; follows the review's suggestion without making it yes/no."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "PURPOSE-W1-D5",
+  "fields": {
+   "es_q": "Piensa en un momento reciente que te gustaría repetir. ¿Qué tuvo?",
+   "en_q": "Think of a recent moment you would like to repeat. What did it have?",
+   "es_o": "Calma • Conexión • Aprender • Crear o resolver • Disfrutar • Otra cosa • Nada me viene a la mente",
+   "en_o": "Calm • Connection • Learning • Making or solving • Enjoyment • Something else • Nothing comes to mind"
+  },
+  "reasons": [
+   {
+    "es": "La pregunta pedía un momento sobre una selección múltiple de cualidades; ahora pide qué tuvo ese momento, que es lo que ofrecen las opciones.",
+    "en": "The question asked for a moment over a multiple choice of qualities; it now asks what that moment had, which is what the options offer."
+   },
+   {
+    "es": "Ya no exige un disfrute intenso; «Nada me viene a la mente» empieza por «Nada» y es exclusiva.",
+    "en": "No longer demands intense enjoyment; “Nothing comes to mind” starts with “Nada” and is exclusive."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "tone",
+   "options"
+  ]
+ },
+ {
+  "code": "PURPOSE-W1-D7",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W1-D6",
+   "strategy": "own_situation",
+   "es": "Si no escribiste tu pregunta de foco, vale cualquier cosa que hayas notado esta semana sobre lo que te interesa.",
+   "en": "If you did not write your focus question, anything you noticed this week about your interests counts."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "PURPOSE-W2-D2",
+  "fields": {
+   "es_q": "Si imaginas un cambio, ¿qué condición necesitaría más cuidado?",
+   "en_q": "If you picture a change, which condition would most need protecting?"
+  },
+  "reasons": [
+   {
+    "es": "Ya no presupone que imagina un cambio.",
+    "en": "No longer presumes she pictures a change."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "PURPOSE-W2-D3",
+  "fields": {
+   "es_q": "¿Qué haría más fácil explorar lo que te interesa sin cambiarlo todo de golpe?",
+   "en_q": "What would make it easier to explore your interest without changing everything at once?"
+  },
+  "dep": {
+   "on": "PURPOSE-W1-D6",
+   "strategy": "own_situation",
+   "es": "Piensa en un tema o actividad que te dé curiosidad, aunque sea pequeño.",
+   "en": "Think of a topic or activity you are curious about, even a small one."
+  },
+  "reasons": [
+   {
+    "es": "«Explorar esto» no tenía referente.",
+    "en": "“Explore this” had no referent."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "PURPOSE-W2-D4",
+  "fields": {
+   "es_q": "¿Qué condición tuya podría ser flexible, si alguna?",
+   "en_q": "Which of your conditions could be flexible, if any?"
+  },
+  "dep": {
+   "on": "PURPOSE-W2-D2",
+   "strategy": "restate",
+   "es": "Una condición puede ser tus ingresos básicos, los cuidados, tu tiempo y energía o dónde vives.",
+   "en": "A condition can be your basic income, caregiving, your time and energy, or where you live."
+  },
+  "reasons": [
+   {
+    "es": "Se recupera «condición», con la que concuerda la instrucción, y se quita «si fuera necesario», que sugería ceder por obligación.",
+    "en": "Restores “condition”, which the instruction agrees with, and drops “if needed”, which suggested giving in out of obligation."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "PURPOSE-W2-D7",
+  "fields": {
+   "es_q": "¿Qué cosas importantes de tu vida te gustaría cuidar al tomar una decisión?",
+   "en_q": "What important things in your life would you like to protect when making a decision?"
+  },
+  "reasons": [
+   {
+    "es": "«Qué tres cosas» contradecía «Hasta tres» y presionaba a llegar a tres.",
+    "en": "“Which three things” contradicted “Up to three” and pushed her to reach three."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "PURPOSE-W3-D1",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W1-D6",
+   "strategy": "own_situation",
+   "es": "Si aún no nombraste lo que te interesa, elige cualquier tema que te dé curiosidad para este ejercicio.",
+   "en": "If you have not named an interest yet, pick any topic you are curious about for this exercise."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "PURPOSE-W3-D2",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W3-D1",
+   "strategy": "own_situation",
+   "es": "Si no nombraste dos maneras de explorar, imagina una opción que te interese.",
+   "en": "If you did not name two ways to explore, imagine one option that interests you."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "PURPOSE-W3-D3",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W3-D1",
+   "strategy": "own_situation",
+   "es": "Si no nombraste opciones, piensa en una manera de explorar lo que te interesa.",
+   "en": "If you did not name options, think of one way to explore what interests you."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "PURPOSE-W3-D4",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W3-D1",
+   "strategy": "own_situation",
+   "es": "Si no nombraste opciones, usa una que te interese, aunque sea poco probable.",
+   "en": "If you did not name options, use one that interests you, even if unlikely."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "PURPOSE-W3-D5",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W3-D1",
+   "strategy": "new_example",
+   "es": "Si no nombraste opciones, compara «probar algo nuevo» con «seguir como estás».",
+   "en": "If you did not name options, compare “trying something new” with “staying as you are.”"
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "PURPOSE-W3-D6",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W3-D1",
+   "strategy": "own_situation",
+   "es": "Si no nombraste opciones esta semana, piensa en cualquier tema que te gustaría probar un poco.",
+   "en": "If you did not name options this week, think of any topic you would like to try a little."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "PURPOSE-W3-D7",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W3-D6",
+   "strategy": "new_example",
+   "es": "Si no definiste un intento pequeño, imagina uno: por ejemplo, ver una clase gratuita de prueba.",
+   "en": "If you did not define a small attempt, imagine one: for example, watching a free trial class."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "PURPOSE-W4-D1",
+  "fields": {
+   "es_q": "¿Qué intento pequeño te gustaría probar, si alguno?",
+   "en_q": "Which small attempt would you like to try, if any?",
+   "es_o": "Probar una muestra • Observar una actividad • Hacer un borrador • Comprobar un requisito • Otro intento • Aún no sé cuál • Ninguno por ahora",
+   "en_o": "Try a sample • Observe an activity • Make a draft • Check a requirement • Another attempt • Not sure which yet • None for now"
+  },
+  "reasons": [
+   {
+    "es": "Deja de ser una pregunta de sí/no sobre opciones que son tipos de intento; se añade «Aún no sé cuál».",
+    "en": "No longer a yes/no question over options that are types of attempt; adds “Not sure which yet.”"
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "PURPOSE-W4-D2",
+  "fields": {
+   "es_q": "¿Qué límite podrías poner para que el intento sea manejable?",
+   "en_q": "What limit could you set to keep the attempt manageable?"
+  },
+  "dep": {
+   "on": "PURPOSE-W4-D1",
+   "strategy": "new_example",
+   "es": "Si no elegiste un intento, piensa en uno de ejemplo, como mirar una actividad durante diez minutos.",
+   "en": "If you did not choose an attempt, think of an example, such as watching an activity for ten minutes."
+  },
+  "reasons": [
+   {
+    "es": "«Más fácil intentarlo» empujaba a hacerlo; «manejable» es neutral, como el original.",
+    "en": "“Easier to try” nudged her to do it; “manageable” is neutral, as in the original."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "PURPOSE-W4-D3",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W4-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste un intento, piensa en algo que te interese y en qué te diría que encaja contigo.",
+   "en": "If you did not choose an attempt, think of something that interests you and what would tell you it fits."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "PURPOSE-W4-D4",
+  "fields": {
+   "es_q": "¿Qué necesitas ahora para seguir, cambiar o dejar tu intento?",
+   "en_q": "What do you need now to continue, change or drop your attempt?",
+   "es_o": "Menos pasos • Más información • Otro momento • Apoyo • Nada, puedo seguir así • Nada, prefiero dejarlo",
+   "en_o": "Fewer steps • More information • Another time • Support • Nothing, I can keep going • Nothing, I would rather stop"
+  },
+  "dep": {
+   "on": "PURPOSE-W4-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste un intento, piensa en algo pequeño que te gustaría probar y qué te haría falta.",
+   "en": "If you did not choose an attempt, think of something small you would like to try and what you would need."
+  },
+  "reasons": [
+   {
+    "es": "Las opciones «No necesito cambiarlo» y «Quiero dejarlo» eran decisiones, no ayudas; ahora todas responden a «qué necesitas».",
+    "en": "“No change needed” and “I want to stop” were decisions, not help; all options now answer “what do you need.”"
+   },
+   {
+    "es": "El orden D4/D5 (decidir antes de registrar el estado) no se cambia en este overlay; queda para la revisión de secuencia.",
+    "en": "The D4/D5 order (deciding before recording status) is not changed in this overlay; left for the sequence review."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "PURPOSE-W4-D5",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W4-D1",
+   "strategy": "restate",
+   "es": "Si no elegiste un intento esta semana, «No elegí uno» es una respuesta válida.",
+   "en": "If you did not choose an attempt this week, “Did not choose one” is a valid answer."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "PURPOSE-W4-D6",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W4-D1",
+   "strategy": "own_situation",
+   "es": "Si no hubo intento, piensa en qué barrera te lo impidió o en algo que te sorprendió esta semana.",
+   "en": "If there was no attempt, think of what barrier got in the way or something that surprised you this week."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "PURPOSE-W4-D7",
+  "fields": {
+   "es_o": "Dos líneas separadas. No hace falta haber terminado el intento; «Nada nuevo todavía» también vale.",
+   "en_o": "Two separate lines. Completion of the attempt is not required; “Nothing new yet” also counts."
+  },
+  "dep": {
+   "on": "PURPOSE-W4-D1",
+   "strategy": "own_situation",
+   "es": "Si no hubo intento, escribe qué tienes más claro sobre lo que te interesa y qué dudas quedan.",
+   "en": "If there was no attempt, write what is clearer about your interests and what questions remain."
+  },
+  "reasons": [
+   {
+    "es": "«Más claro» presuponía avance; la instrucción da salida.",
+    "en": "“Clearer” presumed progress; the instruction gives a way out."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "tone"
+  ]
+ },
+ {
+  "code": "PURPOSE-W5-D1",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W1-D6",
+   "strategy": "restate",
+   "es": "En la semana 1 te preguntamos qué querías entender sin decidir tu futuro; si no lo definiste, «No lo sé» vale.",
+   "en": "In week 1 we asked what you wanted to understand without deciding your future; if you did not define it, “Not sure” is fine."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "PURPOSE-W5-D2",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W2-D7",
+   "strategy": "own_situation",
+   "es": "Si no hiciste tu lista de cosas que cuidar, piensa en una condición tuya, como tiempo, ingresos o cuidados.",
+   "en": "If you did not make your list of things to protect, think of one condition, like time, income or caregiving."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "PURPOSE-W5-D4",
+  "fields": {
+   "es_o": "Si elegiste parar o aún no eliges, describe qué dejas de exigirte por ahora.",
+   "en_o": "If you chose to stop or have not chosen yet, describe what you will stop requiring of yourself for now."
+  },
+  "dep": {
+   "on": "PURPOSE-W5-D3",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una dirección, imagina la más probable para ti ahora, aunque sea pausar.",
+   "en": "If you did not choose a direction, imagine the most likely one for you now, even if it is pausing."
+  },
+  "reasons": [
+   {
+    "es": "Da salida a quien eligió «Aún no elegir».",
+    "en": "Gives a way out to anyone who chose “Not choose yet.”"
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "PURPOSE-W5-D5",
+  "fields": {
+   "es_q": "Si te falta algún apoyo para esa dirección, ¿qué parte podrías hacer sin él?",
+   "en_q": "If you lack some support for that direction, what part could you do without it?"
+  },
+  "dep": {
+   "on": "PURPOSE-W5-D3",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una dirección, piensa en un paso pequeño que te interese.",
+   "en": "If you did not choose a direction, think of one small step that interests you."
+  },
+  "reasons": [
+   {
+    "es": "Doble pregunta en una sola; ahora pregunta una cosa y no presupone que falte apoyo.",
+    "en": "It was a double question; it now asks one thing and does not assume support is missing."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "PURPOSE-W5-D6",
+  "fields": {},
+  "dep": {
+   "on": "PURPOSE-W5-D3",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una dirección, piensa en qué te haría volver a pensarlo más adelante.",
+   "en": "If you did not choose a direction, think of what would make you revisit it later."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "PURPOSE-W5-D7",
+  "fields": {
+   "es_q": "¿Qué te gustaría recordar sobre la dirección que tomas por ahora, aunque sea pausar?",
+   "en_q": "What would you like to remember about your direction for now, even if it is pausing?"
+  },
+  "dep": {
+   "on": "PURPOSE-W5-D3",
+   "strategy": "own_situation",
+   "es": "Si no elegiste una dirección, escribe qué te importa ahora y qué necesitas cuidar.",
+   "en": "If you did not choose a direction, write what matters to you now and what you need to protect."
+  },
+  "reasons": [
+   {
+    "es": "«El camino que has elegido» presuponía una elección (D3 permite «Aún no elegir») y era grandilocuente.",
+    "en": "“The path you have chosen” presumed a choice (D3 allows “Not choose yet”) and was grandiose."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "SELF-W1-D1",
+  "fields": {
+   "es_o": "Algo cotidiano, no íntimo. Si no te pasa, piensa en una decisión que dudaste en tomar sola.",
+   "en_o": "Something everyday, not intimate. If this does not apply, think of a decision you hesitated to make alone."
+  },
+  "reasons": [
+   {
+    "es": "La pregunta presupone que busca aprobación; la instrucción da salida.",
+    "en": "The question presumes she seeks approval; the instruction gives a way out."
+   }
+  ],
+  "resolves": [
+   "tone"
+  ]
+ },
+ {
+  "code": "SELF-W1-D3",
+  "fields": {
+   "es_q": "Sobre esa elección, ¿qué sabes con certeza y qué estás imaginando?",
+   "en_q": "About that choice, what do you know for sure, and what are you imagining?"
+  },
+  "dep": {
+   "on": "SELF-W1-D2",
+   "strategy": "own_situation",
+   "es": "Piensa en una elección pequeña sobre la que hoy no tengas certeza.",
+   "en": "Think of a small choice you feel unsure about today."
+  },
+  "reasons": [
+   {
+    "es": "«Esa preocupación» no aparecía en D2, que trata de una elección incierta; se alinea el referente.",
+    "en": "“That concern” did not appear in D2, which is about an uncertain choice; the referent now matches."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "SELF-W1-D5",
+  "fields": {
+   "es_o": "Busqué información • Me preparé • Me adapté • Pedí ayuda • Elegí con lo que sabía • Otra cosa",
+   "en_o": "Looked for information • Prepared • Adapted • Asked for help • Used what I knew • Something else"
+  },
+  "dep": {
+   "on": "SELF-W1-D4",
+   "strategy": "own_situation",
+   "es": "Piensa en una tarea o elección pequeña que resolviste bien hace poco.",
+   "en": "Think of a small task or choice you handled well recently."
+  },
+  "reasons": [
+   {
+    "es": "«Pregunté» se solapaba con «Pedí ayuda».",
+    "en": "“Asked” overlapped with “Asked for help.”"
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "options"
+  ]
+ },
+ {
+  "code": "SELF-W1-D7",
+  "fields": {
+   "es_q": "¿Qué hecho sobre ti te gustaría recordar cuando vuelvas a dudar?",
+   "en_q": "What fact about yourself would you like to remember the next time you doubt?"
+  },
+  "reasons": [
+   {
+    "es": "«Dudar de tus capacidades» presuponía inseguridad sobre su valía; la semana trata de dudas al decidir.",
+    "en": "“Doubting your abilities” presumed insecurity about her worth; the week is about doubts when deciding."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "SELF-W2-D2",
+  "fields": {},
+  "dep": {
+   "on": "SELF-W2-D1",
+   "strategy": "own_situation",
+   "es": "Puedes pensar en cualquier opinión reciente que te haya pesado al decidir.",
+   "en": "You can think of any recent opinion that weighed on a decision."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ },
+ {
+  "code": "SELF-W2-D3",
+  "fields": {
+   "es_q": "¿Qué comparación reciente te hizo sentir que te estabas quedando atrás?",
+   "en_q": "What recent comparison made you feel you were falling behind?"
+  },
+  "reasons": [
+   {
+    "es": "«Ir tarde» suena peninsular; «quedarte atrás» es natural en Latinoamérica.",
+    "en": "“Ir tarde” sounds Spain-centric; “quedarte atrás” is natural in Latin America."
+   }
+  ],
+  "resolves": [
+   "audience-fit"
+  ]
+ },
+ {
+  "code": "SELF-W2-D4",
+  "fields": {
+   "es_q": "Cuando te comparas, ¿qué parte de tu situación queda fuera de la comparación?",
+   "en_q": "When you compare yourself, which part of your situation is left out of the comparison?",
+   "es_o": "Recursos • Cuidados • Salud o energía • Oportunidades • Prioridades distintas • Otra parte • Aún no lo sé",
+   "en_o": "Resources • Care • Health or energy • Opportunities • Different priorities • Another part • Not sure yet"
+  },
+  "reasons": [
+   {
+    "es": "«Dejando de lado» se leía como «descuidando»; se recupera el sentido de omitir en la comparación.",
+    "en": "“Leaving aside” read as “neglecting”; restores the sense of omitting from the comparison."
+   },
+   {
+    "es": "Se añade «Aún no lo sé», exclusiva en selección múltiple.",
+    "en": "Adds “Not sure yet”, exclusive in multiple choice."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "options"
+  ]
+ },
+ {
+  "code": "SELF-W2-D5",
+  "fields": {
+   "es_q": "¿Cómo distingues lo que quieres de lo que sientes que debes demostrar?",
+   "en_q": "How do you tell what you want apart from what you feel you must prove?"
+  },
+  "reasons": [
+   {
+    "es": "La pregunta tenía unos 108 caracteres; se acorta y suena menos a reproche.",
+    "en": "The question was about 108 characters; shortened and less reproachful."
+   }
+  ],
+  "resolves": [
+   "clarity",
+   "tone"
+  ]
+ },
+ {
+  "code": "SELF-W3-D2",
+  "fields": {},
+  "dep": {
+   "on": "SELF-W3-D1",
+   "strategy": "own_situation",
+   "es": "Piensa en cualquier compromiso pequeño contigo misma que te haya costado cumplir.",
+   "en": "Think of any small commitment to yourself that was hard to keep."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "SELF-W3-D3",
+  "fields": {},
+  "dep": {
+   "on": "SELF-W3-D1",
+   "strategy": "new_example",
+   "es": "Si no elegiste un compromiso, usa uno de ejemplo, como caminar diez minutos.",
+   "en": "If you chose no commitment, use an example, such as walking for ten minutes."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "SELF-W3-D4",
+  "fields": {},
+  "dep": {
+   "on": "SELF-W3-D1",
+   "strategy": "new_example",
+   "es": "Si no elegiste un compromiso, piensa en algo pequeño que te gustaría recordar hacer.",
+   "en": "If you chose no commitment, think of something small you would like to remember to do."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "SELF-W3-D5",
+  "fields": {},
+  "dep": {
+   "on": "SELF-W3-D1",
+   "strategy": "restate",
+   "es": "Si no elegiste un compromiso esta semana, «No elegí uno» es una respuesta válida.",
+   "en": "If you did not choose a commitment this week, “Chose none” is a valid answer."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "SELF-W3-D6",
+  "fields": {
+   "es_q": "Si el compromiso no salió como querías, ¿qué ajuste podrías probar?",
+   "en_q": "If the commitment did not go as you wanted, what adjustment could you try?",
+   "es_o": "Puede ser hacerlo más pequeño, cambiar el momento o pedir apoyo. Si salió bien, nombra qué mantendrías.",
+   "en_o": "It could be making it smaller, changing the timing or asking for support. If it went well, name what you would keep."
+  },
+  "dep": {
+   "on": "SELF-W3-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste un compromiso esta semana, piensa en algo pequeño que te propusiste hace poco.",
+   "en": "If you did not choose a commitment this week, think of something small you set out to do recently."
+  },
+  "reasons": [
+   {
+    "es": "La reescritura daba por hecho que no lo logró y que se culpa; ahora es condicional y no habla de culpa.",
+    "en": "The rewrite assumed she failed and blames herself; it is now conditional and does not mention blame."
+   },
+   {
+    "es": "La instrucción «Si esos juicios no aparecen» había perdido su referente; se sustituye por ejemplos de ajuste y una salida si salió bien.",
+    "en": "The instruction “If those judgments do not fit” had lost its referent; replaced with examples of adjustments and a way out if it went well."
+   },
+   {
+    "es": "D6 queda en el ajuste y D7 pasa a las condiciones, así dejan de repetirse.",
+    "en": "D6 stays on the adjustment and D7 moves to conditions, so they no longer repeat."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "edit-review",
+   "duplicate"
+  ]
+ },
+ {
+  "code": "SELF-W3-D7",
+  "fields": {
+   "es_q": "¿Qué condiciones ayudaron o faltaron con tu compromiso esta semana?",
+   "en_q": "Which conditions helped or were missing with your commitment this week?",
+   "es_o": "Por ejemplo: tiempo, energía, apoyo o un momento fijo. Alternativa: texto.",
+   "en_o": "For example: time, energy, support or a set moment. Text alternative."
+  },
+  "dep": {
+   "on": "SELF-W3-D1",
+   "strategy": "own_situation",
+   "es": "Si no elegiste un compromiso, piensa en algo pequeño que hiciste por ti esta semana.",
+   "en": "If you chose no commitment, think of something small you did for yourself this week."
+  },
+  "reasons": [
+   {
+    "es": "Repetía D6 y presuponía autoculpa; se reorienta a las condiciones que ayudaron o faltaron, como pedía su instrucción y su paso.",
+    "en": "It repeated D6 and presumed self-blame; refocused on the conditions that helped or were missing, as its instruction and step asked."
+   },
+   {
+    "es": "La instrucción ya no repite la pregunta; da ejemplos.",
+    "en": "The instruction no longer repeats the question; it gives examples."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "duplicate",
+   "tone"
+  ]
+ },
+ {
+  "code": "SELF-W4-D2",
+  "fields": {
+   "es_q": "¿Qué información te bastaría para tomar esa decisión?",
+   "en_q": "What information would be enough for you to make that decision?"
+  },
+  "dep": {
+   "on": "SELF-W4-D1",
+   "strategy": "new_example",
+   "es": "Si no nombraste una decisión, usa una pequeña y reversible, como elegir un horario para algo.",
+   "en": "If you did not name a decision, use a small reversible one, like choosing a time for something."
+  },
+  "reasons": [
+   {
+    "es": "«Sin pensarlo demasiado» insinuaba que piensa de más; se recupera el vínculo con la decisión de D1.",
+    "en": "“Without overthinking it” implied she overthinks; restores the link to the D1 decision."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "edit-review"
+  ]
+ },
+ {
+  "code": "SELF-W4-D3",
+  "fields": {},
+  "dep": {
+   "on": "SELF-W4-D1",
+   "strategy": "new_example",
+   "es": "Si no nombraste una decisión, usa una pequeña y reversible, como elegir un horario para algo.",
+   "en": "If you did not name a decision, use a small reversible one, like choosing a time for something."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "SELF-W4-D5",
+  "fields": {},
+  "dep": {
+   "on": "SELF-W4-D1",
+   "strategy": "own_situation",
+   "es": "Si no nombraste una decisión, piensa en una pequeña que tengas pendiente hoy.",
+   "en": "If you did not name a decision, think of a small one you have pending today."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "SELF-W4-D6",
+  "fields": {},
+  "dep": {
+   "on": "SELF-W4-D5",
+   "strategy": "own_situation",
+   "es": "Si no anotaste una elección, piensa en una decisión pequeña reciente y en qué pasó después.",
+   "en": "If you did not note a choice, think of a recent small decision and what happened next."
+  },
+  "reasons": [
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": []
+ },
+ {
+  "code": "SELF-W4-D7",
+  "fields": {
+   "es_q": "¿Qué te gustaría recordar cuando decidas sin estar del todo segura?",
+   "en_q": "What would you like to remember when you decide without being fully sure?"
+  },
+  "reasons": [
+   {
+    "es": "Supera 90 caracteres; se acorta.",
+    "en": "Over 90 characters; shortened."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "SELF-W5-D1",
+  "fields": {
+   "es_q": "Si un error pequeño aún te pesa, ¿qué conclusión sobre ti sacaste de él?",
+   "en_q": "If a small mistake still weighs on you, what did you conclude about yourself from it?"
+  },
+  "reasons": [
+   {
+    "es": "Dos frases y más de 90 caracteres; se une en una sola pregunta condicional.",
+    "en": "Two sentences and over 90 characters; merged into one conditional question."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "SELF-W5-D2",
+  "fields": {
+   "es_q": "En ese error, ¿qué parte dependía de ti y qué parte no?",
+   "en_q": "In that mistake, which part depended on you and which did not?",
+   "es_o": "Dos columnas. Nombrar el contexto no borra tu parte ni la hace más grande.",
+   "en_o": "Two columns. Naming the context neither erases your part nor makes it bigger.",
+   "es_s": "Paso opcional / Para llevarte: Nombra una parte que dependía de ti, si la hay, sin asumir la ajena.",
+   "en_s": "Optional step / Takeaway: Name one part that depended on you, if any, without taking on someone else's."
+  },
+  "dep": {
+   "on": "SELF-W5-D1",
+   "strategy": "new_example",
+   "es": "Si no nombraste un error, piensa en algo cotidiano que no salió como esperabas.",
+   "en": "If you did not name a mistake, think of an everyday thing that did not go as expected."
+  },
+  "reasons": [
+   {
+    "es": "«Qué responsabilidad sí te corresponde» y «lo que sí puedes reparar» presuponían culpa y algo que reparar.",
+    "en": "“What responsibility is yours” and “what you can repair” presumed guilt and something to repair."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "tone"
+  ]
+ },
+ {
+  "code": "SELF-W5-D3",
+  "fields": {
+   "es_q": "¿Hay algo que puedas reparar o aprender de ese error, sin condenarte?",
+   "en_q": "Is there anything to repair or learn from that mistake, without condemning yourself?"
+  },
+  "dep": {
+   "on": "SELF-W5-D1",
+   "strategy": "own_situation",
+   "es": "Si no nombraste un error, puedes usar algo cotidiano que no salió como esperabas, o dejarlo aquí.",
+   "en": "If you did not name a mistake, use an everyday thing that did not go as expected, or leave it here."
+  },
+  "reasons": [
+   {
+    "es": "Unos 103 caracteres; se acorta.",
+    "en": "About 103 characters; shortened."
+   },
+   {
+    "es": "Se añade una línea para quien saltó el día del que depende.",
+    "en": "Adds a line for anyone who skipped the day this one relies on."
+   }
+  ],
+  "resolves": [
+   "clarity"
+  ]
+ },
+ {
+  "code": "SELF-W5-D6",
+  "fields": {
+   "es_s": "Paso opcional / Para llevarte: Añade ese ejemplo a tus notas sobre ti.",
+   "en_s": "Optional step / Takeaway: Add that example to your notes about yourself."
+  },
+  "reasons": [
+   {
+    "es": "«Tu lista de evidencia personal» ya no existe como tal desde la reescritura de SELF-W1-D7.",
+    "en": "“Your personal evidence list” no longer exists since SELF-W1-D7 was rewritten."
+   }
+  ],
+  "resolves": [
+   "depends-on-previous"
+  ]
+ }
+]

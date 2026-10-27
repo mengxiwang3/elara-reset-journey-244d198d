@@ -1,0 +1,122 @@
+[
+ {
+  "file": "data.js",
+  "old": "Cada día tiene dos preguntas cortas",
+  "new": "Cada día tiene unas pocas preguntas cortas"
+ },
+ {
+  "file": "data.js",
+  "old": "Each day has two short questions",
+  "new": "Each day has a few short questions"
+ },
+ {
+  "file": "data.js",
+  "old": "¿Qué dinero esperas en las próximas dos semanas?",
+  "new": "¿Esperas dinero en las próximas dos semanas?"
+ },
+ {
+  "file": "data.js",
+  "old": "What money do you expect in the next two weeks?",
+  "new": "Are you expecting money in the next two weeks?"
+ },
+ {
+  "file": "data.js",
+  "old": "Para cada pago:",
+  "new": "Si esperas más de un pago, piensa en el más importante. Elige una:"
+ },
+ {
+  "file": "data.js",
+  "old": "For each payment:",
+  "new": "If you expect more than one, think of the one that matters most. Choose one:"
+ },
+ {
+  "file": "data.js",
+  "old": "Elige una cosa de tu lista, o usa un ejemplo.",
+  "new": "Escribe una cosa que necesites cubrir (puede ser de tu lista del día 3) o un ejemplo."
+ },
+ {
+  "file": "data.js",
+  "old": "Choose a listed need, or use an example.",
+  "new": "Write one thing you need to cover (it can be from your Day 3 list) or an example."
+ },
+ {
+  "file": "data.js",
+  "old": "Revisa la cuenta o el contrato, o pregúntale a la empresa que ya conoces.",
+  "new": "Revisa el recibo o el contrato, o pregúntale a quien te cobra, si es seguro para ti."
+ },
+ {
+  "file": "data.js",
+  "old": "Check the bill, agreement, or known provider.",
+  "new": "Check the bill or agreement, or ask whoever bills you, if that feels safe."
+ },
+ {
+  "file": "data.js",
+  "old": "\"teach\":{\"title\":\"Haz una sola pregunta y averigua si hay costos o condiciones.\"",
+  "new": "\"teach\":{\"title\":\"Si preguntas, haz una sola pregunta y averigua si hay costos o condiciones.\""
+ },
+ {
+  "file": "data.js",
+  "old": "\"teach\":{\"title\":\"Ask one question and check any costs or conditions.\"",
+  "new": "\"teach\":{\"title\":\"If you do ask, keep it to one question and check any costs or conditions.\""
+ },
+ {
+  "file": "data.js",
+  "old": "¿Qué vas a guardar en tu mapa?",
+  "new": "Lo que anotaste esta semana"
+ },
+ {
+  "file": "data.js",
+  "old": "Usa las respuestas anteriores que quieras guardar.",
+  "new": "Al final de hoy puedes pasar a tu mapa lo que quieras de aquí."
+ },
+ {
+  "file": "data.js",
+  "old": "What will you keep in your map?",
+  "new": "What you noted this week"
+ },
+ {
+  "file": "data.js",
+  "old": "Use any earlier answers you want to keep.",
+  "new": "At the end of today you can copy into your map anything you want from here."
+ },
+ {
+  "file": "data.js",
+  "old": "Elige una de las plantillas de abajo.",
+  "new": "Hoy hay tres plantillas, una por paso: trabajo, pago y gasto. Llena solo una y salta las demás."
+ },
+ {
+  "file": "data.js",
+  "old": "Choose one template below.",
+  "new": "Today has three templates, one per step: work, payment and cost. Fill in just one and skip the rest."
+ },
+ {
+  "file": "data.js",
+  "old": "Elige una plantilla, no las tres. Si ahora no puedes trabajar, elige otra o haz una pausa.",
+  "new": "Si ahora no puedes trabajar, salta esta plantilla y usa otra, o haz una pausa."
+ },
+ {
+  "file": "data.js",
+  "old": "Choose one template, not all three. If work isn't possible now, choose another or pause.",
+  "new": "If work isn't possible now, skip this template and use another, or pause."
+ },
+ {
+  "file": "data.js",
+  "old": "\"fields\":[\"Después de\",",
+  "new": "\"fields\":[\"Después de…, voy a…\","
+ },
+ {
+  "file": "data.js",
+  "old": "\"fields\":[\"After\",",
+  "new": "\"fields\":[\"After…, I will…\","
+ },
+ {
+  "file": "data.js",
+  "old": "Lo que causa un atraso",
+  "new": "Lo que pasa si algo se atrasa"
+ },
+ {
+  "file": "content.js",
+  "old": "por ejemplo 120 o 1.250,50.",
+  "new": "por ejemplo 120 o 85.50."
+ }
+]

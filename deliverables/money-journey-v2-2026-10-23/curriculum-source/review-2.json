@@ -1,0 +1,1172 @@
+[
+ {
+  "code": "LOVE-W1-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "La reescritura convierte la pregunta en sí/no («¿Hay alguna…?»), pero las opciones son categorías y no incluyen «ninguna».",
+    "note_en": "The rewrite makes it a yes/no question ('Is there any…?') but the options are categories with no 'none' option.",
+    "suggestion_es": "Añadir opción exclusiva «Ninguna por ahora», o volver a «¿En qué relación…?»."
+   }
+  ],
+  "en_q_new": "Is there a relationship in which you would like to feel more authentic this week?"
+ },
+ {
+  "code": "LOVE-W1-D2",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "LOVE-W1-D3",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "meaning-mismatch",
+    "note_es": "«si no aplica» se tradujo como «if irrelevant», que suena despectivo.",
+    "note_en": "'si no aplica' was rendered 'if irrelevant', which sounds dismissive.",
+    "suggestion_es": "EN: «if it does not apply»."
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W1-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «esa relación» (W1-D1) del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'that relationship' (W1-D1) from the previous day; if that day was skipped or answered 'not sure', the question has no referent.",
+    "suggestion_es": "«¿Qué es lo que más necesitas ahora de esa relación (o de una que elijas hoy)?»"
+   },
+   {
+    "sev": "low",
+    "type": "audience-fit",
+    "note_es": "«Tiempo juntas» asume compañía femenina; no concuerda si la relación es con una pareja o un familiar hombre.",
+    "note_en": "'Tiempo juntas' (feminine) assumes female company; it does not fit a male partner or relative.",
+    "suggestion_es": "«Tiempo compartido»"
+   }
+  ],
+  "en_q_new": "What do you most need from that relationship right now?"
+ },
+ {
+  "code": "LOVE-W1-D5",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «esa necesidad» (W1-D4) del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'that need' (W1-D4) from the previous day; if that day was skipped or answered 'not sure', the question has no referent.",
+    "suggestion_es": "«Piensa en una necesidad tuya en una relación: ¿cómo se vería como una acción que otra persona pudiera entender?»"
+   },
+   {
+    "sev": "low",
+    "type": "meaning-mismatch",
+    "note_es": "«Tenme en cuenta» se tradujo como «Consider me», poco natural en inglés.",
+    "note_en": "'Tenme en cuenta' became 'Consider me', which is unnatural English.",
+    "suggestion_es": "EN: «Keep me in mind»."
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W1-D6",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "clarity",
+    "note_es": "Pide dibujar y además pregunta qué cambiarías (dos tareas) y supera 90 caracteres; tampoco dice con quién se comparte el tiempo.",
+    "note_en": "Asks to draw and also what you would change (two tasks), exceeds 90 chars, and does not say with whom the time is shared.",
+    "suggestion_es": "«Dibuja o describe el tiempo que compartes en esa relación y el que quisieras reservar para ti.»"
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W1-D7",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "LOVE-W2-D1",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "LOVE-W2-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «esa situación» (W2-D1) del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'that situation' (W2-D1) from the previous day; if that day was skipped or answered 'not sure', the question has no referent."
+   },
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "«Sí quiero, pero no puedo» contradice la premisa de W2-D1 («no quiero, pero debería») y falta «No lo sé»; además las razones suelen coexistir.",
+    "note_en": "'I want to but cannot' contradicts the W2-D1 premise ('I don't want to, but I should'), 'Not sure' is missing, and reasons often co-occur.",
+    "suggestion_es": "Cambiar a varias opciones y añadir «No lo sé» exclusiva."
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W2-D3",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "«ofrecer» no tiene destinatario ni petición explícita; sin W2-D1 la pregunta no se entiende.",
+    "note_en": "'Offer' has no explicit recipient or request; without W2-D1 the question is unclear.",
+    "suggestion_es": "«Ante una petición que no quieres aceptar del todo, ¿qué sí podrías ofrecer sin prometer de más?»"
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W2-D4",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«tantas explicaciones» presupone que ella se justifica de más; el original («sin explicar toda tu historia») era más neutro.",
+    "note_en": "'So many explanations' presumes she over-explains; the original ('without explaining your whole story') was more neutral.",
+    "suggestion_es": "«¿Cómo podrías poner un límite breve, sin dar más explicaciones de las que quieres?»"
+   }
+  ],
+  "en_q_new": "How could you set a boundary without having to give so many explanations?"
+ },
+ {
+  "code": "LOVE-W2-D5",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "«Si insisten» no tiene sujeto explícito; depende de recordar la situación de la semana.",
+    "note_en": "'If they insist' has no explicit subject; it relies on remembering the week's situation.",
+    "suggestion_es": "«Si alguien insiste después de tu respuesta, ¿qué frase…?»"
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W2-D6",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "Al cambiar «te cuida» por «te ayudaría» se pierde el matiz de cuidado/seguridad que retoma el paso («el paso más seguro»).",
+    "note_en": "Changing 'cares for you' to 'would help you' drops the care/safety nuance the step relies on ('safest next step').",
+    "suggestion_es": "«¿Qué opción te cuidaría más en esta situación?»"
+   },
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «esta situación» (W2-D1) del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'this situation' (W2-D1) from the previous day; if that day was skipped or answered 'not sure', the question has no referent.",
+    "suggestion_es": "«…en la situación que elegiste esta semana (o una hipotética)?»"
+   }
+  ],
+  "en_q_new": "Which option do you think would help you most in this situation?"
+ },
+ {
+  "code": "LOVE-W2-D7",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de el límite escrito en W2-D4 del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on the boundary drafted on W2-D4 from the previous day; if that day was skipped or answered 'not sure', the question has no referent.",
+    "suggestion_es": "«Si escribiste un límite esta semana, ¿qué aprendiste? Si no, ¿qué te frenó?»"
+   },
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "Supone que hubo aprendizaje (progreso emocional).",
+    "note_en": "Assumes something was learned (emotional progress)."
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W3-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "audience-fit",
+    "note_es": "«Hacer algo juntas» asume compañía femenina.",
+    "note_en": "'Hacer algo juntas' assumes female company.",
+    "suggestion_es": "«Hacer algo en compañía»"
+   },
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "Es de una opción, pero varias formas de compañía pueden faltar a la vez.",
+    "note_en": "It is single-choice, yet several kinds of company may be missed at once."
+   }
+  ],
+  "en_q_new": "What kind of company do you miss, beyond simply being surrounded by people?"
+ },
+ {
+  "code": "LOVE-W3-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "Pasa de «contacto pequeño posible» a «conectar un poco más», lo que supone una relación existente y quita la escala pequeña; no hay salida para «nadie por ahora».",
+    "note_en": "Moves from 'a possible small contact' to 'connect a little more', presuming an existing tie and losing the small scale; no 'no one for now' fallback.",
+    "suggestion_es": "Añadir en la instrucción: «También vale: nadie por ahora»."
+   },
+   {
+    "sev": "low",
+    "type": "safety-privacy",
+    "note_es": "Conviene recordar que no tiene que ser alguien con quien te sientas insegura.",
+    "note_en": "Worth noting it need not be someone with whom she feels unsafe."
+   }
+  ],
+  "en_q_new": "Who would you like to connect with a little more, without having to tell them everything that is going on with you?"
+ },
+ {
+  "code": "LOVE-W3-D3",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "LOVE-W3-D4",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "LOVE-W3-D5",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "La reescritura centra la pregunta en «cómo se siente» la otra persona, en tensión con la instrucción («que no suponga cómo se siente»), refuerza el rol de cuidadora y supera 90 caracteres.",
+    "note_en": "The rewrite focuses on how the other person feels, in tension with the instruction ('does not assume how they feel'), reinforces the caretaker role, and exceeds 90 chars.",
+    "suggestion_es": "«¿Qué le preguntarías a alguien para conocer su experiencia, sin dar consejos enseguida?»"
+   }
+  ],
+  "en_q_new": "What could you ask someone to understand how they feel, without rushing to give them advice?"
+ },
+ {
+  "code": "LOVE-W3-D6",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "«No pudo» es ambiguo en español (¿quién no pudo?); el inglés sí aclara «They could not».",
+    "note_en": "'No pudo' is ambiguous in Spanish (who couldn't?); the English clarifies 'They could not'.",
+    "suggestion_es": "«La otra persona no pudo»"
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W3-D7",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "LOVE-W4-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "«qué interpretación añadiste tú» presupone que ella añadió una.",
+    "note_en": "'What interpretation did you add' presumes she added one.",
+    "suggestion_es": "«…y qué interpretaste tú, si algo»"
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W4-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "«sin tener que ganar la discusión» insinúa que ella quiere ganar.",
+    "note_en": "'Without needing to win the argument' implies she wants to win.",
+    "suggestion_es": "«…sin que tenga que haber un ganador»"
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W4-D3",
+  "verdict": "rethink",
+  "flags": [
+   {
+    "sev": "high",
+    "type": "edit-review",
+    "note_es": "La reescritura cambia «qué parte te corresponde reparar» por «qué está en tus manos para mejorar la situación»: le traslada la tarea de arreglar el conflicto y rompe el vínculo con la instrucción («Ninguna») y el paso (reparación sin asumir la culpa).",
+    "note_en": "The rewrite changes 'what part is yours to repair' into 'what is in your hands to improve the situation': it hands her the job of fixing the conflict and breaks the link with the instruction ('None') and the step (repair without taking all the blame).",
+    "suggestion_es": "«¿Hay alguna parte de este desacuerdo que sí te corresponda? «Ninguna» también es válido.»"
+   },
+   {
+    "sev": "high",
+    "type": "safety-privacy",
+    "note_es": "Con una persona dañina o coercitiva, preguntar qué puede hacer ella para mejorar la situación empuja a apaciguar o autoculparse.",
+    "note_en": "With a harmful or coercive person, asking what she can do to improve things nudges toward appeasement or self-blame.",
+    "suggestion_es": "Añadir: «Si la situación no es segura, mejorarla no es tu responsabilidad; prioriza apoyo.»"
+   }
+  ],
+  "en_q_new": "Is there anything within your power to do to improve the situation?"
+ },
+ {
+  "code": "LOVE-W4-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "«pedir un tiempo» en buena parte de Latinoamérica significa pausar una relación de pareja; se confunde con una pausa en la conversación.",
+    "note_en": "'Pedir un tiempo' in much of Latin America means taking a break from a romantic relationship; it gets confused with pausing a conversation.",
+    "suggestion_es": "«¿Cómo podrías pedir una pausa en la conversación sin comprometerte a volver antes de sentirte lista?»"
+   }
+  ],
+  "en_q_new": "How could you ask for some time without committing to come back before you feel ready?"
+ },
+ {
+  "code": "LOVE-W4-D5",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "«No veo esas condiciones» debe ser exclusiva en varias opciones; falta «No lo sé».",
+    "note_en": "'I do not see those conditions' must be exclusive in a multi-select; 'Not sure' is missing."
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W4-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "LOVE-W4-D7",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "LOVE-W5-D1",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "LOVE-W5-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "«la próxima vez» no tiene referente y presupone que antes no fue clara.",
+    "note_en": "'Next time' has no referent and presumes she was unclear before.",
+    "suggestion_es": "«¿Qué te gustaría pedir con claridad en alguna relación?»"
+   }
+  ]
+ },
+ {
+  "code": "LOVE-W5-D3",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "La nueva pregunta habla de «otras personas», pero las opciones incluyen «Apoyo profesional» y «Tiempo propio», que no son personas; «otras» presupone que ya tiene apoyo.",
+    "note_en": "The new question asks about 'other people', but options include 'Professional support' and 'Time of my own', which are not people; 'other' presumes existing support.",
+    "suggestion_es": "«¿Con qué otros apoyos te gustaría contar cuando lo necesites?»"
+   },
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "«Aún no sé» debe marcarse como exclusiva en varias opciones.",
+    "note_en": "'Not sure yet' must be marked exclusive in this multi-select."
+   }
+  ],
+  "en_q_new": "Which other people would you like to be able to count on when you need support?"
+ },
+ {
+  "code": "LOVE-W5-D4",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "LOVE-W5-D5",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«con los demás» es vago (¿todas las personas?) y «sin sentirte abrumada» presupone agobio; se pierde «esta temporada».",
+    "note_en": "'With others' is vague (everyone?) and 'without feeling overwhelmed' presumes overwhelm; 'this season' is lost.",
+    "suggestion_es": "«¿Con qué frecuencia te gustaría mantener el contacto con las personas que elijas, en esta etapa?»"
+   }
+  ],
+  "en_q_new": "How often would you like to stay in touch with others without feeling overwhelmed?"
+ },
+ {
+  "code": "LOVE-W5-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "LOVE-W5-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "audience-fit",
+    "note_es": "«tu próximo vínculo» (y más aún «next relationship») puede leerse como una nueva pareja, insinuando cerrar la actual.",
+    "note_en": "'Tu próximo vínculo' (even more 'next relationship') can read as a new partner, implying ending the current one.",
+    "suggestion_es": "«…para tus relaciones o tu próxima conversación»"
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W1-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "«Mi horario cambia» no es un momento; falta «Ninguno en particular».",
+    "note_en": "'My schedule changes' is not a moment; 'None in particular' is missing."
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W1-D2",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «ese momento» (W1-D1) y supone que ocurrió ayer del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'that moment' (W1-D1) and assumes it happened yesterday from the previous day; if that day was skipped or answered 'not sure', the question has no referent.",
+    "suggestion_es": "«Piensa en un momento reciente en que todo se te juntó: ¿qué intentabas hacer a la vez?»"
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W1-D3",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "Al quitar «ahí» la pregunta se vuelve general y el paso («añade esa carga a tu descripción del momento») queda algo desconectado; a cambio, ya no depende del día anterior.",
+    "note_en": "Dropping 'there' makes it general, so the step ('add that load to your description of the moment') is slightly disconnected; on the plus side it no longer depends on the previous day."
+   }
+  ],
+  "en_q_new": "What tasks do you do that nobody usually considers work?"
+ },
+ {
+  "code": "RHYTHM-W1-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de un «momento» implícito (W1-D1/D2) del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on an implicit 'moment' (W1-D1/D2) from the previous day; if that day was skipped or answered 'not sure', the question has no referent.",
+    "suggestion_es": "«En ese momento del día (o uno que elijas), ¿qué parte depende de ti…?»"
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W1-D5",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «ese momento» (W1-D1) del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'that moment' (W1-D1) from the previous day; if that day was skipped or answered 'not sure', the question has no referent."
+   },
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "La nueva pregunta habla de «más sencillo» en general, pero el paso sigue pidiendo «qué paso dejaría de ser necesario».",
+    "note_en": "The new question asks for 'simpler' in general, while the step still asks 'which step would no longer be needed'."
+   }
+  ],
+  "en_q_new": "What small change could you make so that moment feels simpler?"
+ },
+ {
+  "code": "RHYTHM-W1-D6",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «ese cambio» (W1-D5) del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'that change' (W1-D5) from the previous day; if that day was skipped or answered 'not sure', the question has no referent.",
+    "suggestion_es": "«…para probar un cambio pequeño (el de ayer u otro)?»"
+   },
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "Es de una opción, pero varios recursos pueden coexistir.",
+    "note_en": "Single choice, yet several resources may coexist."
+   }
+  ],
+  "en_q_new": "What can you count on right now to try making that change?"
+ },
+ {
+  "code": "RHYTHM-W1-D7",
+  "verdict": "ok",
+  "flags": [],
+  "en_q_new": "At what time of day do you need to demand less of yourself rather than push yourself harder?"
+ },
+ {
+  "code": "RHYTHM-W2-D1",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "RHYTHM-W2-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "Falta «No lo sé».",
+    "note_en": "'Not sure' is missing."
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W2-D3",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "safety-privacy",
+    "note_es": "Un «rincón» puede mostrar personas, documentos o señas de la casa; la instrucción solo excluye «datos personales».",
+    "note_en": "A 'corner' may show people, documents or home identifiers; the instruction only excludes 'personal information'.",
+    "suggestion_es": "«…sin personas, documentos, cantidades ni datos de ubicación»"
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W2-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«tu rutina» supone una rutina estable, justo cuando la instrucción contempla horarios cambiantes; el original («un momento que ya ocurre») era más inclusivo.",
+    "note_en": "'Your routine' assumes a stable routine while the instruction covers changing schedules; the original ('a moment that already happens') was more inclusive.",
+    "suggestion_es": "«¿En qué momento que ya ocurre en tu día podrías dar ese primer paso?»"
+   },
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «ese primer paso», que no se definió explícitamente esta semana del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'that first step', never explicitly defined this week from the previous day; if that day was skipped or answered 'not sure', the question has no referent."
+   }
+  ],
+  "en_q_new": "At what point in your routine could you take that first step?"
+ },
+ {
+  "code": "RHYTHM-W2-D5",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «esta actividad» (W2-D1) del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'this activity' (W2-D1) from the previous day; if that day was skipped or answered 'not sure', the question has no referent."
+   },
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "La reescritura supera 90 caracteres y «que te resulte útil» es poco natural para una actividad.",
+    "note_en": "The rewrite exceeds 90 chars and 'so it is useful to you' is awkward for an activity.",
+    "suggestion_es": "«¿Cómo sería una versión más simple de esa tarea para un día difícil?»"
+   }
+  ],
+  "en_q_new": "How could you simplify this activity so it is still useful to you even on a difficult day?"
+ },
+ {
+  "code": "RHYTHM-W2-D6",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "«lo» no tiene referente explícito, aunque «No lo probé» cubre el caso.",
+    "note_en": "'It' has no explicit referent, though 'Did not try' covers the case."
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W2-D7",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "RHYTHM-W3-D1",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "RHYTHM-W3-D2",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "RHYTHM-W3-D3",
+  "verdict": "ok",
+  "flags": [],
+  "en_q_new": "What task could you ask someone to do for you without having to explain every step?"
+ },
+ {
+  "code": "RHYTHM-W3-D4",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "audience-fit",
+    "note_es": "«solicitud» suena burocrático; «petición» es más cotidiano.",
+    "note_en": "'Solicitud' sounds bureaucratic; 'petición' is more everyday."
+   }
+  ],
+  "en_q_new": "How would you tell someone when you can respond to their request?"
+ },
+ {
+  "code": "RHYTHM-W3-D5",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "RHYTHM-W3-D6",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "Cambia «una necesidad importante» (que puede ser de otras personas, p. ej. cuidados) por «tus necesidades», alterando el sentido; además no dice ajuste a qué.",
+    "note_en": "Changes 'an important need' (which may be someone else's, e.g. caregiving) to 'your needs', altering the meaning; it also doesn't say adjusting what.",
+    "suggestion_es": "«¿Qué pequeño ajuste a ese compromiso podrías hacer sin desatender algo importante?»"
+   },
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "Depende de el compromiso de W3-D5 del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on the commitment from W3-D5 from the previous day; if that day was skipped or answered 'not sure', the question has no referent."
+   }
+  ],
+  "en_q_new": "What small adjustment could you make without neglecting your important needs?"
+ },
+ {
+  "code": "RHYTHM-W3-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "«aliviaría más coordinación» es una construcción forzada.",
+    "note_en": "'Would relieve more coordination' is a forced construction.",
+    "suggestion_es": "«¿Qué conversación o ajuste te quitaría más carga de coordinación la próxima semana?»"
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W4-D1",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "RHYTHM-W4-D2",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "RHYTHM-W4-D3",
+  "verdict": "ok",
+  "flags": [],
+  "en_q_new": "What would a day look like in which you do only what is necessary, while still taking care of yourself?"
+ },
+ {
+  "code": "RHYTHM-W4-D4",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "RHYTHM-W4-D5",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "«tiempo perdido» connota tiempo desperdiciado (juicio), a diferencia de «días perdidos» (días sin hacerla); además supera 90 caracteres.",
+    "note_en": "'Lost time' connotes wasted time (judgment), unlike 'missed days'; it also exceeds 90 chars.",
+    "suggestion_es": "«¿Qué te ayudaría a retomar una tarea sin sentir que debes ponerte al día con todo?»"
+   }
+  ],
+  "en_q_new": "What would help you pick a task back up without feeling you have to make up for all the lost time?"
+ },
+ {
+  "code": "RHYTHM-W4-D6",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "«en vez de tratarla como una excusa» introduce la idea de excusa, con matiz de juicio.",
+    "note_en": "'Rather than treating it as an excuse' introduces the notion of excuse, with a judging tinge.",
+    "suggestion_es": "«Ajusta el plan a esa condición; es parte de tu realidad.»"
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W4-D7",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "duplicate",
+    "note_es": "Casi igual a RHYTHM-W4-D4 (dejar por escrito/preparado algo para un día difícil).",
+    "note_en": "Nearly the same as RHYTHM-W4-D4 (leave something written/ready for a difficult day).",
+    "suggestion_es": "Convertir W4-D7 en revisión: «¿Qué de lo que preparaste esta semana conservarías para un día complicado?»"
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W5-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "«anota qué lo impidió» puede sonar a rendición de cuentas.",
+    "note_en": "'Note what prevented it' can sound like accountability.",
+    "suggestion_es": "«…si quieres, anota qué lo hizo difícil»"
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W5-D2",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "RHYTHM-W5-D3",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "La reescritura supera 90 caracteres.",
+    "note_en": "The rewrite exceeds 90 chars.",
+    "suggestion_es": "«¿Qué momento de tu día te gustaría disfrutar sin tener que ser productiva?»"
+   },
+   {
+    "sev": "low",
+    "type": "duplicate",
+    "note_es": "Cercana a ENERGY-W4-D3 (disfrute que parecía poco productivo).",
+    "note_en": "Close to ENERGY-W4-D3 (enjoyment that seemed unproductive)."
+   }
+  ],
+  "en_q_new": "What moment of your day would you like to enjoy without feeling you have to do something productive?"
+ },
+ {
+  "code": "RHYTHM-W5-D4",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "Falta una opción exclusiva para quien no tiene cambios de horario («Mis horarios no cambian»).",
+    "note_en": "Missing an exclusive option for those whose schedule does not change ('My schedule does not change')."
+   }
+  ]
+ },
+ {
+  "code": "RHYTHM-W5-D5",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "La reescritura supera 90 caracteres.",
+    "note_en": "The rewrite exceeds 90 chars.",
+    "suggestion_es": "«¿Cómo te gustaría revisar tu semana sin juzgarte?»"
+   }
+  ],
+  "en_q_new": "How would you like to reflect on your week without judging yourself for what you did or did not do?"
+ },
+ {
+  "code": "RHYTHM-W5-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "RHYTHM-W5-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "duplicate",
+    "note_es": "Muy parecida a ENERGY-W5-D7 (nota a tu yo de un día con poca energía); ambas cierran semana 5.",
+    "note_en": "Very similar to ENERGY-W5-D7 (note to your low-energy self); both close week 5."
+   },
+   {
+    "sev": "low",
+    "type": "audience-fit",
+    "note_es": "«tu yo de una semana muy ocupada» es un calco del inglés.",
+    "note_en": "'Tu yo de una semana muy ocupada' is an anglicism.",
+    "suggestion_es": "«…que te dejarías para una semana muy ocupada»"
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W1-D1",
+  "verdict": "ok",
+  "flags": [],
+  "en_q_new": "When recently did you feel you could not take any more?"
+ },
+ {
+  "code": "ENERGY-W1-D2",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W1-D3",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «ese cansancio», que W1-D2 no nombró del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'that tiredness', which W1-D2 never named from the previous day; if that day was skipped or answered 'not sure', the question has no referent.",
+    "suggestion_es": "«Piensa en un momento reciente de cansancio: ¿qué estaba pasando justo antes?»"
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W1-D4",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "Combina dibujar y una segunda pregunta.",
+    "note_en": "Combines drawing with a second question."
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W1-D5",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "La instrucción («Si ninguno lo hizo») ya no concuerda con la nueva pregunta; «aunque no estuvieras feliz» presupone que no lo estaba.",
+    "note_en": "The instruction ('If none did') no longer matches the new question; 'even if you weren't happy' presumes she wasn't.",
+    "suggestion_es": "Instrucción: «Si no hubo ninguno, escribe qué habría reducido una demanda.»"
+   }
+  ],
+  "en_q_new": "Was there a moment when you felt less pressure, even if you were not happy?"
+ },
+ {
+  "code": "ENERGY-W1-D6",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «así» (estado de W1-D1/D2) del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'like this' (state from W1-D1/D2) from the previous day; if that day was skipped or answered 'not sure', the question has no referent.",
+    "suggestion_es": "«¿Qué necesitas primero cuando sientes que ya no puedes con más?»"
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W1-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "«Una semana no define todo tu cuerpo» es una frase extraña.",
+    "note_en": "'One week does not define your whole body' is an odd phrase.",
+    "suggestion_es": "«Una semana no define cómo eres.»"
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W2-D1",
+  "verdict": "ok",
+  "flags": [],
+  "en_q_new": "What do you do to rest that sometimes ends up feeling like one more obligation?"
+ },
+ {
+  "code": "ENERGY-W2-D2",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W2-D3",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W2-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "«Nadie puede hacerlo por mí» no tiene referente lógico (la pausa no la puede hacer otra persona); el original «Nadie me releva» decía que nadie la cubre. Sobra el punto final.",
+    "note_en": "'No one can do it for me' has no logical referent (no one else can take her pause); the original 'Nobody relieves me' meant no one covers for her. The trailing period is inconsistent.",
+    "suggestion_es": "«Nadie me cubre» o «Nadie puede encargarse por mí»"
+   }
+  ],
+  "en_o_new": "No time • No one can do it for me • I feel guilty • No space • Unsure what helps • Another reason"
+ },
+ {
+  "code": "ENERGY-W2-D5",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W2-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W2-D7",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W3-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«agotada» es más fuerte que el original («lo notas en tu energía») y orienta la respuesta.",
+    "note_en": "'Exhausted' is stronger than the original ('you notice it in your energy') and steers the answer.",
+    "suggestion_es": "«…aunque después lo notes en tu energía»"
+   }
+  ],
+  "en_q_new": "What do you tend to agree to without thinking much, even though you end up feeling exhausted afterward?"
+ },
+ {
+  "code": "ENERGY-W3-D2",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «esa responsabilidad» (W3-D1) del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'that responsibility' (W3-D1) from the previous day; if that day was skipped or answered 'not sure', the question has no referent.",
+    "suggestion_es": "«…de algo que sueles aceptar…»"
+   },
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«responsabilidad» no encaja del todo con W3-D1 (algo que aceptas, p. ej. un favor) ni con opciones como «Disponibilidad».",
+    "note_en": "'Responsibility' does not quite fit W3-D1 (something you agree to, e.g. a favor) or options like 'Availability'.",
+    "suggestion_es": "Mantener «demanda» o «eso que aceptas»."
+   }
+  ],
+  "en_q_new": "What part of that responsibility could you make less demanding?"
+ },
+ {
+  "code": "ENERGY-W3-D3",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W3-D4",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "«Ninguna de estas» debe marcarse como exclusiva.",
+    "note_en": "'None of these' must be marked exclusive."
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W3-D5",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "safety-privacy",
+    "note_es": "Conviene excluir explícitamente personas, documentos y señas del lugar en la foto.",
+    "note_en": "Should explicitly exclude people, documents and location identifiers from the photo."
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W3-D6",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "«estrategia individual» es abstracto.",
+    "note_en": "'Individual strategy' is abstract.",
+    "suggestion_es": "«¿Qué carga necesita ayuda de otras personas y no otro esfuerzo tuyo?»"
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W3-D7",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W4-D1",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W4-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "safety-privacy",
+    "note_es": "La foto opcional no indica evitar personas, documentos o lugares identificables.",
+    "note_en": "The optional photo does not say to avoid people, documents or identifiable places."
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W4-D3",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "duplicate",
+    "note_es": "Cercana a RHYTHM-W5-D3.",
+    "note_en": "Close to RHYTHM-W5-D3."
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W4-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "Depende de «ese disfrute» (W4-D3) del día anterior; si se saltó o se respondió «no sé», la pregunta queda sin referente.",
+    "note_en": "Depends on 'that enjoyment' (W4-D3) from the previous day; if that day was skipped or answered 'not sure', the question has no referent.",
+    "suggestion_es": "«…de un disfrute que tengas en mente…»"
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W4-D5",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W4-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W4-D7",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "«dejar para otro día» suena a posponer (procrastinar) en vez de tener una opción de disfrute a mano; cambia el propósito del día.",
+    "note_en": "'Leave for another day' sounds like postponing rather than keeping an enjoyment option at hand; it changes the day's purpose.",
+    "suggestion_es": "«¿Qué disfrute te gustaría tener a mano para cuando tengas ganas?»"
+   }
+  ],
+  "en_q_new": "What would you like to save for another day and enjoy whenever you feel like it?"
+ },
+ {
+  "code": "ENERGY-W5-D1",
+  "verdict": "ok",
+  "flags": [],
+  "en_q_new": "What signs would you like to learn to recognize before you feel you cannot take any more?"
+ },
+ {
+  "code": "ENERGY-W5-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "duplicate",
+    "note_es": "Cercana a RHYTHM-W4-D3 (día mínimo sin descuidarte).",
+    "note_en": "Close to RHYTHM-W4-D3 (minimum day without neglecting yourself)."
+   }
+  ]
+ },
+ {
+  "code": "ENERGY-W5-D3",
+  "verdict": "ok",
+  "flags": [],
+  "en_q_new": "What has truly helped you, and what advice did not work as well as you had hoped?"
+ },
+ {
+  "code": "ENERGY-W5-D4",
+  "verdict": "ok",
+  "flags": [],
+  "en_q_new": "How would you explain to someone you trust what you need when you are having a difficult day?"
+ },
+ {
+  "code": "ENERGY-W5-D5",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "ENERGY-W5-D6",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "La reescritura crea dos preguntas (rompe «una pregunta principal») y amplía de patrones de energía a «situaciones de tu vida», perdiendo el foco del área.",
+    "note_en": "The rewrite creates two questions (breaking 'one main question') and widens from energy patterns to 'situations in your life', losing the area focus.",
+    "suggestion_es": "«¿Qué se repite en tu energía que quieras seguir observando, aunque aún no lo tengas claro?»"
+   },
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "Supera 90 caracteres.",
+    "note_en": "Exceeds 90 chars."
+   }
+  ],
+  "en_q_new": "What situations keep repeating in your life that you would like to understand better? What are you still unclear about?"
+ },
+ {
+  "code": "ENERGY-W5-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "duplicate",
+    "note_es": "Muy parecida a RHYTHM-W5-D7.",
+    "note_en": "Very similar to RHYTHM-W5-D7."
+   }
+  ]
+ }
+]

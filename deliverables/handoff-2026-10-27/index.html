@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Developer Handoff</title>
+<style>
+:root{--bg:#F9F5EF;--ink:#1F2A24;--mute:#5E584F;--line:#E4DBCD;--card:#FFFDF9;--forest:#1F3A2E;--warn:#8A2F1D;--warnbg:#FBEDE8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171C19;--ink:#ECE6DC;--mute:#B3AA9C;--line:#333B36;--card:#1F2622;--forest:#9CC5AE;--warn:#F0A08C;--warnbg:#2E1F1B}}
+:root[data-theme="dark"]{--bg:#171C19;--ink:#ECE6DC;--mute:#B3AA9C;--line:#333B36;--card:#1F2622;--forest:#9CC5AE;--warn:#F0A08C;--warnbg:#2E1F1B}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px 16px 56px}
+main{max-width:760px;margin:0 auto}h1{font:600 28px/1.15 Georgia,serif;margin:0 0 6px}h2{font:600 19px/1.25 Georgia,serif;margin:30px 0 8px}
+.lead{color:var(--mute);margin:0 0 18px}a{color:var(--forest)}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0}
+.warn{background:var(--warnbg);border-color:var(--warn)}.warn b{color:var(--warn)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:8px 6px}th{font-weight:600;color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+td small{display:block;color:var(--mute)}ol,ul{padding-left:20px}li{margin:4px 0}code{font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1px 5px}
+@media (max-width:560px){th:nth-child(3),td:nth-child(3){display:none}}
+</style></head><body><main>
+<h1>Elara journeys: developer handoff</h1>
+<p class="lead">27 Oct 2026. Prototypes for the six areas of life, the Atlas that starts them, and a UX walkthrough of Circles, onboarding and Explore. Spanish first.</p>
+
+<div class="box warn"><b>Read first.</b>
+<ol>
+<li><b>A local build of the app talks to production.</b> <code>apps/mobile/app.json</code> sets <code>extra.apiUrl</code> to the production API, and <code>resolveApiUrl</code> prefers it over localhost. Anyone running the app on their own machine writes real data. Set <code>EXPO_PUBLIC_API_URL</code> before starting.</li>
+<li><b>The copy is a draft.</b> Build the mechanics now. Only copy María and Alejandra have approved in Spanish can be released. That includes the curriculum edits, the place lines, and Elara's replies in the journeys.</li>
+<li><b>These are prototypes, not the app.</b> Answers live in memory only and reset on reload. Nothing here is migrated into the real app.</li>
+</ol></div>
+
+<h2>The six journeys</h2>
+<p class="lead">One engine, six areas, five weeks each (210 days). Each page shows only its own area.</p>
+<table><tr><th>Area</th><th>Journey</th><th>Photos</th></tr>
+<tr><td>Money<small>weeks 1–5</small></td><td><a href="https://claude.ai/artifact/YWGNudsRfD8LeZERZCGDcf">Asia Journey</a></td><td>5 places, a new one each week</td></tr>
+<tr><td>Purpose</td><td><a href="https://claude.ai/artifact/8a1A1Q3AkKSLxmzrHhQYTF">North America</a></td><td>7 places</td></tr>
+<tr><td>Self</td><td><a href="https://claude.ai/artifact/SVqcNTFFssv7wsLdp1FQuA">Europe</a></td><td>7 places</td></tr>
+<tr><td>Love</td><td><a href="https://claude.ai/artifact/SkkfY98XKjn6Xvh35tNFhX">South America</a></td><td>7 places</td></tr>
+<tr><td>Energy</td><td><a href="https://claude.ai/artifact/Tg7Qz2yfeLuarcJAfT77tL">Africa</a></td><td>7 places</td></tr>
+<tr><td>Daily Rhythm</td><td><a href="https://claude.ai/artifact/G7aoHPDGh7JzPQMkx9zsKJ">Oceania</a></td><td>7 places, dawn to night</td></tr></table>
+<div class="box"><b>What the journeys do.</b>
+<ul>
+<li>Each day opens on a place with one line about it, then one question. Elara answers every answer, never judging it.</li>
+<li>Days 2–7 open with «Ayer dijiste: …». Days that build on earlier answers quote them, or show their own line if she skipped.</li>
+<li>Every choice day offers «Prefiero pasar» and «No aplica». Love days carry a safety note and «Buscar ayuda ahora» (the app's existing <code>/crisis-help</code> route).</li>
+<li>Day 7 closes the week with a card of her answers and the seven places.</li>
+</ul></div>
+
+<h2>The Atlas</h2>
+<p><a href="https://claude.ai/artifact/VbfYudsh9jG1kMu8VVfuGq">Atlas globe</a>. Use «Primera vez» to see a new user: the card «Empieza aquí» opens Lan Hạ, Money week 1. In every area the next place is open, so she can always start. «Solo áreas aprobadas» shows the beta setup, where unreleased areas say «Pronto». Spec: <a href="https://claude.ai/artifact/DaA3rdHqdus1UvT34FgUzD">Atlas handoff</a>.</p>
+
+<h2>Onboarding</h2>
+<ul>
+<li><a href="https://claude.ai/artifact/GcUkuRh5pQbhpitDDri8XL">Ventanita</a>: the three-step flow now in the app's branch.</li>
+<li><a href="https://claude.ai/artifact/8Bdz7VbnRhqAGpsSeD3RW2">Three versions</a>: version 3 (guest start) is the beta candidate, still to be checked with users.</li>
+</ul>
+
+<h2>UX walkthrough</h2>
+<p><a href="https://claude.ai/artifact/CjGsszELbVWYiiAFZE56hr">Findings for Circles, onboarding and Explore</a>, with fixes and screenshots. The top nine to fix before testers:</p>
+<ol>
+<li>Circles: no way into private messages or profiles in the new tab; old screens still show Premium gates.</li>
+<li>Explore: «Incluido con Elara» looks free but opens a paywall.</li>
+<li>Explore: workshops are in English.</li>
+<li>Onboarding: «Empezar el día 1» creates a guest account without saying so.</li>
+<li>Onboarding: Day 1 isn't what the start card promised.</li>
+<li>Onboarding: with an invite code required, the button still says «Empezar el día 1».</li>
+<li>Explore: search finds nothing for «deudas», «pareja» or «ansiedad».</li>
+<li>Explore: guides say «6 min» but are two sentences.</li>
+<li>Circles: «Descubrir primero» lands on the empty Mis círculos.</li>
+</ol>
+
+<h2>Known gaps</h2>
+<ul>
+<li>Each area reuses its seven photos for all five weeks. Money has a new place each week.</li>
+<li>Photos are AI-generated interpretations of real places. Uluru and the Flinders Ranges are Aboriginal Country: keep the whole-rock framing and no rock art.</li>
+<li>Some week themes read clinical on the arrival screen («Notar sin diagnosticar»). They come from the curriculum, for the Spanish review.</li>
+<li><b>Asia (Money) is the odd one out.</b> It keeps its beta flow, so it lacks the place line, «Ayer dijiste», Elara's reply on every answer and the day-7 week card the other five have. Decide whether to bring it in line.</li>
+<li>Open curriculum items for the Spanish review: near-duplicate days (RHYTHM-W5-D7 and ENERGY-W5-D7), «relevo» in ENERGY-W2-D2/D3, the order of PURPOSE-W4-D4/D5, a format question on MONEY-W2-D6, overlapping options in PURPOSE-W2-D5 and W5-D3, and some long steps on days that carry the safety note.</li>
+<li>The real app's Day 1 always opens with the same question, so the tailored first question onboarding shows has no content behind it yet.</li>
+<li>The Atlas globe is cut off on the right at 320 px.</li>
+<li>The real app only has Money week 1. The other areas exist only in these prototypes.</li>
+</ul>
+
+<h2>Files, for the team</h2>
+<p>On branch <code>claude/kind-mendel-raf8hc</code> once pushed:</p>
+<ul>
+<li><code>deliverables/money-journey-v2-2026-10-23/</code>: the journeys. <code>curriculum-source/</code> rebuilds <code>cur.js</code>; <code>tools/</code> has the checks; <code>JOURNEY-PASS-2026-10-27.md</code> lists what changed.</li>
+<li><code>explorations/curriculum-spanish-review-2026-10-26/</code>: the Spanish review of 159 days for María and Alejandra (page and 116-page PDF). Not published as a link yet; the older «Currículo 210» link is out of date.</li>
+<li><code>explorations/atlas-a-flow-2026-10-26/</code>, <code>explorations/ux-walkthrough-2026-10-27/</code>: Atlas and the walkthrough.</li>
+</ul>
+</main></body></html>

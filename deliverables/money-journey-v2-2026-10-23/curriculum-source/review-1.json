@@ -1,0 +1,1209 @@
+[
+ {
+  "code": "MONEY-W1-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "Falta una salida tipo «No lo sé todavía»; «Mi independencia» es más abstracta que las demás opciones.",
+    "note_en": "No 'Not sure yet' exit; 'My independence' is more abstract than the other options.",
+    "suggestion_es": "Añadir «Aún no lo sé»."
+   }
+  ]
+ },
+ {
+  "code": "MONEY-W1-D2",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "options",
+    "note_es": "«No tengo ingresos» debe ser exclusiva en selección múltiple; hoy puede marcarse junto a «Trabajo».",
+    "note_en": "'I have no income' must be exclusive in a multiple-choice list; it can currently be ticked alongside 'Employment'."
+   },
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«No tengo ingresos» pierde el matiz temporal de «Ahora no entra» y suena más definitivo; además el paso (confirmado/incierto) no aplica a quien la elige.",
+    "note_en": "'I have no income' loses the temporary nuance of 'None right now' and sounds more final; the step (confirmed/uncertain) also doesn't apply to whoever picks it.",
+    "suggestion_es": "«Ahora no tengo ingresos»"
+   },
+   {
+    "sev": "low",
+    "type": "audience-fit",
+    "note_es": "«Prestaciones» en México significa beneficios laborales, no ayudas públicas; puede confundir.",
+    "note_en": "In Mexico 'prestaciones' means employment benefits, not public assistance; it may confuse.",
+    "suggestion_es": "«Apoyos o programas del gobierno»"
+   }
+  ],
+  "en_o_new": "Employment • Clients or sales • Support from others • Benefits or assistance • I have no income • Another source"
+ },
+ {
+  "code": "MONEY-W1-D3",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "MONEY-W1-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "high",
+    "type": "edit-review",
+    "note_es": "«¿Cuánto dinero te queda?» pide una cantidad, pero las opciones son cualitativas («No alcanza», «Cambia cada vez»); la pregunta y las respuestas ya no encajan.",
+    "note_en": "'How much money do you have left?' asks for an amount, but the options are qualitative ('Not enough', 'It varies'); question and answers no longer match.",
+    "suggestion_es": "¿Cómo te alcanza el dinero para tus gastos básicos?"
+   },
+   {
+    "sev": "med",
+    "type": "safety-privacy",
+    "note_es": "Preguntar «cuánto» invita a escribir importes, en contra del criterio de no pedir cantidades.",
+    "note_en": "Asking 'how much' invites typing amounts, against the no-amounts guideline."
+   },
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "«No tengo ingresos ahora» no responde bien a «cuánto te queda» y su redacción difiere de la opción de D2.",
+    "note_en": "'No income now' answers 'how much is left' awkwardly and is worded differently from the D2 option."
+   }
+  ],
+  "en_q_new": "How much money do you have left after covering your basic expenses?"
+ },
+ {
+  "code": "MONEY-W1-D5",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "audience-fit",
+    "note_es": "«Importe» es de uso peninsular; en Latinoamérica se entiende mejor «monto» o «cantidad».",
+    "note_en": "'Importe' is Spain-centric; 'monto' or 'cantidad' reads better in Latin America.",
+    "suggestion_es": "«fecha, monto, frecuencia…»"
+   }
+  ]
+ },
+ {
+  "code": "MONEY-W1-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "MONEY-W1-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«Qué has descubierto» presupone un descubrimiento; si no lo hubo, falta una salida en la instrucción.",
+    "note_en": "'What have you discovered' presumes a discovery; the instruction has no fallback if there wasn't one.",
+    "suggestion_es": "Añadir a la instrucción: «También vale algo que ya sabías»."
+   },
+   {
+    "sev": "low",
+    "type": "duplicate",
+    "note_es": "Con la reescritura, varias preguntas de cierre empiezan igual («¿Qué te gustaría recordar…»): MONEY-W1-D7, SELF-W1-D7, SELF-W4-D7, PURPOSE-W5-D7.",
+    "note_en": "After the rewrites several closing questions share the same opener ('What would you like to remember…'): MONEY-W1-D7, SELF-W1-D7, SELF-W4-D7, PURPOSE-W5-D7."
+   }
+  ],
+  "en_q_new": "What have you discovered about your money that you would like to remember?"
+ },
+ {
+  "code": "MONEY-W2-D1",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "«Conocer mejor sobre tus ingresos» no encaja con opciones que son acciones («Encontrar trabajo», «Cobrar un pago pendiente») ni con el paso «Elige una vía para investigar».",
+    "note_en": "'Know more about your income' doesn't fit options that are actions ('Finding work', 'Following up a payment') nor the step 'Choose one avenue to investigate'.",
+    "suggestion_es": "¿Qué vía de ingresos te gustaría explorar primero?"
+   },
+   {
+    "sev": "med",
+    "type": "duplicate",
+    "note_es": "Casi igual a MONEY-W1-D1 («¿Qué te gustaría entender mejor sobre tu dinero?»).",
+    "note_en": "Nearly identical to MONEY-W1-D1 ('What would you like to understand better about your money?')."
+   }
+  ],
+  "en_q_new": "What would you like to know more about when it comes to your income?"
+ },
+ {
+  "code": "MONEY-W2-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«Habilidades» suena a currículum y puede hacer sentir que no se tienen; «Qué sabes hacer» era más cercano (la instrucción lo mitiga con «experiencia informal»).",
+    "note_en": "'Skills' sounds CV-like and may make some feel they have none; 'What can you do' was more accessible (the 'informal experience' instruction mitigates this).",
+    "suggestion_es": "¿Qué sabes hacer que podría ayudarte a aprovechar una oportunidad?"
+   }
+  ],
+  "en_q_new": "What skills do you have that could help you make the most of an opportunity?"
+ },
+ {
+  "code": "MONEY-W2-D3",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "Falta una opción exclusiva tipo «Aún no lo sé».",
+    "note_en": "Missing an exclusive 'Not sure yet' option."
+   }
+  ]
+ },
+ {
+  "code": "MONEY-W2-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "Se pierde la idea de «comprobar un dato»; la instrucción («Comprobarlo es opcional») y el paso («dónde comprobarías el dato») ya no tienen antecedente claro.",
+    "note_en": "The 'check a fact' idea is lost; the instruction ('Checking is optional') and step ('where you would check the fact') no longer have a clear referent.",
+    "suggestion_es": "¿Qué dato te gustaría comprobar antes de dedicarle tiempo a una oportunidad?"
+   }
+  ],
+  "en_q_new": "What would you like to know before spending time on an opportunity?"
+ },
+ {
+  "code": "MONEY-W2-D5",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "MONEY-W2-D6",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "Las señales de alerta suelen darse juntas; sería más natural como selección múltiple, con «No estoy segura» exclusiva.",
+    "note_en": "Warning signs often co-occur; this would work better as multiple choice with an exclusive 'Not sure'."
+   }
+  ],
+  "en_q_new": "What would make you doubt an offer and want to look into it further?"
+ },
+ {
+  "code": "MONEY-W2-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "Pregunta de sí/no en formato abierto; «ganar dinero» puede evocar promesas rápidas justo después del día sobre fraudes, y la instrucción («Elige una opción») ya no tiene referente.",
+    "note_en": "Yes/no question in open-text format; 'ways to earn money' may evoke quick-money promises right after the scam-signals day, and the instruction ('Choose an option') lost its referent.",
+    "suggestion_es": "¿Qué opción de ingresos te gustaría investigar un poco más, si alguna?"
+   }
+  ],
+  "en_q_new": "Is there any way of earning money you would like to look into a little more?"
+ },
+ {
+  "code": "MONEY-W3-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "meaning-mismatch",
+    "note_es": "ES dice «sin decidir todavía si cambiarlo»; EN («before deciding whether to change it») implica que habrá que decidir.",
+    "note_en": "ES says 'without deciding yet whether to change it'; EN ('before deciding whether to change it') implies a decision must follow."
+   },
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "«Antes de juzgarlo» da por hecho que se juzgará el gasto.",
+    "note_en": "'Before judging it' assumes the expense will be judged.",
+    "suggestion_es": "Pon nombre a la necesidad que cubrió el gasto."
+   }
+  ]
+ },
+ {
+  "code": "MONEY-W3-D2",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "MONEY-W3-D3",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "Concordancia: «algún pago que haces… y te gustaría» pide subjuntivo y relativo repetido.",
+    "note_en": "Grammar: 'algún pago que haces… y te gustaría' needs subjunctive and a repeated relative pronoun.",
+    "suggestion_es": "¿Hay algún pago que hagas con regularidad y que te gustaría entender mejor?"
+   }
+  ],
+  "en_q_new": "Is there a payment you make regularly that you would like to understand better?"
+ },
+ {
+  "code": "MONEY-W3-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "La pregunta es de sí/no («¿Tienes alguna deuda…?») pero las opciones son datos a aclarar (Saldo, Fecha, Cuota); no encajan.",
+    "note_en": "The question is yes/no ('Do you have any debt…?') but the options are facts to clarify (Balance, Due date…); they don't match.",
+    "suggestion_es": "Si tienes alguna deuda o pago pendiente, ¿qué dato te gustaría aclarar?"
+   },
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "Preguntar directamente «¿Tienes alguna deuda?» es más intrusivo que el original, que dejaba «si tienes alguna» como salida.",
+    "note_en": "Asking 'Do you have any debt?' directly is more intrusive than the original's 'if you have one' exit."
+   },
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "«Pago pendiente» es ambiguo: puede ser algo que debe o algo que le deben (como en MONEY-W2-D1).",
+    "note_en": "'Outstanding payment' is ambiguous: owed by her or to her (as in MONEY-W2-D1)."
+   },
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "Falta «No lo sé» exclusivo junto a «No aplica».",
+    "note_en": "Missing an exclusive 'Not sure' alongside 'Not applicable'."
+   }
+  ],
+  "en_q_new": "Do you have any debt or outstanding payment you would like to understand better?"
+ },
+ {
+  "code": "MONEY-W3-D5",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "safety-privacy",
+    "note_es": "«No poder decidir libremente» puede señalar control económico; el día necesita una salida suave hacia recursos de apoyo si se elige.",
+    "note_en": "'Limited freedom to decide' may signal financial control; the day needs a gentle path to support resources when chosen."
+   },
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "«No aplica u otra cosa» mezcla dos respuestas distintas; separarlas.",
+    "note_en": "'Other or not applicable' merges two different answers; split them.",
+    "suggestion_es": "… • Otra cosa • No aplica"
+   }
+  ]
+ },
+ {
+  "code": "MONEY-W3-D6",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«Comprometerte a pagar algo» estrecha el tema: deja fuera prestar o aportar dinero a la familia, que es justo el día anterior (D5).",
+    "note_en": "'Committing to pay for something' narrows the topic: it leaves out lending or contributing to family, which is exactly the previous day (D5).",
+    "suggestion_es": "¿Qué podrías decir si necesitas pensarlo antes de comprometer dinero?"
+   }
+  ],
+  "en_q_new": "What could you say if you need to think it over before committing to pay for something?"
+ },
+ {
+  "code": "MONEY-W3-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "La pregunta ya no menciona «criterio», pero el paso dice «Reduce tu criterio»; ajustar el paso.",
+    "note_en": "The question no longer says 'criterion', but the step still says 'Reduce your criterion'; adjust the step.",
+    "suggestion_es": "Reduce lo que quieres tener en cuenta a una comprobación breve."
+   }
+  ],
+  "en_q_new": "What would you like to keep in mind the next time you make a decision about your money?"
+ },
+ {
+  "code": "MONEY-W4-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "«Pedir información» se solapa con «Confirmar un ingreso» y «Aclarar un pago».",
+    "note_en": "'Ask for information' overlaps with 'Confirm income' and 'Clarify a payment'."
+   }
+  ]
+ },
+ {
+  "code": "MONEY-W4-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "Se eliminó «recursos» de la pregunta pero el paso sigue hablando de «si faltan recursos»; y «esta tarea» exige que la app muestre la tarea elegida.",
+    "note_en": "'Resources' was dropped from the question but the step still says 'if resources are missing'; 'this task' requires the app to show the chosen task.",
+    "suggestion_es": "¿Cómo podrías adaptar la tarea que elegiste al tiempo y los recursos que tienes?"
+   }
+  ],
+  "en_q_new": "How could you adapt this task to the time you have?"
+ },
+ {
+  "code": "MONEY-W4-D3",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "depends-on-previous",
+    "note_es": "«Tu tarea» no tiene alternativa si no eligió una (D1/D2 sí la ofrecen).",
+    "note_en": "'Your task' has no fallback if none was chosen (D1/D2 do offer one).",
+    "suggestion_es": "Añadir: «Si no elegiste tarea, piensa en algo que quieras retomar»."
+   },
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "La pregunta supera los 90 caracteres.",
+    "note_en": "Question exceeds 90 characters.",
+    "suggestion_es": "¿Qué recordatorio te ayudaría a retomar tu tarea sin empezar de cero?"
+   }
+  ]
+ },
+ {
+  "code": "MONEY-W4-D4",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "MONEY-W4-D5",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "Si respondió «No elegí una» en D4, la pregunta no ofrece alternativa.",
+    "note_en": "If she answered 'Did not choose one' in D4, the question offers no fallback."
+   }
+  ]
+ },
+ {
+  "code": "MONEY-W4-D6",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«Qué harías diferente» presupone que algo salió mal, aunque en D4 haya respondido «La hice»; y «No seguir por ahora» encaja mal tras «Si decides volver a intentarlo».",
+    "note_en": "'What would you do differently' presumes something went wrong even if she answered 'Done' in D4; 'Stop for now' fits poorly after 'If you decide to try again'."
+   }
+  ],
+  "en_q_new": "If you decide to try again, what would you do differently?"
+ },
+ {
+  "code": "MONEY-W4-D7",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "MONEY-W5-D1",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "MONEY-W5-D2",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "«Tomar mejores decisiones» sugiere que las actuales son malas (juicio); el original hablaba de orientarse.",
+    "note_en": "'Make better decisions' implies current ones are poor (judging); the original was about getting oriented.",
+    "suggestion_es": "Si una semana entra menos dinero de lo habitual, ¿qué te ayudaría a orientarte?"
+   },
+   {
+    "sev": "low",
+    "type": "audience-fit",
+    "note_es": "«Ganas» excluye a quien no tiene ingresos propios o depende de apoyos (opción de MONEY-W1-D2).",
+    "note_en": "'You earn' excludes those without their own income or relying on support (an option in MONEY-W1-D2)."
+   },
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "Falta una opción exclusiva «No lo sé».",
+    "note_en": "Missing an exclusive 'Not sure' option."
+   }
+  ],
+  "en_q_new": "If one week you earn less than usual, what would help you make better decisions?"
+ },
+ {
+  "code": "MONEY-W5-D3",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "MONEY-W5-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "«Algo que te preocupa» pierde el foco en dinero y abre cualquier tema; «encontrar una solución» añade presión por resolver.",
+    "note_en": "'Something that worries you' loses the money focus and opens any topic; 'find a solution' adds pressure to solve.",
+    "suggestion_es": "¿Qué apoyo o información podría ayudarte con un tema de dinero que sigue pendiente?"
+   }
+  ],
+  "en_q_new": "What could help you find a solution to something that worries you?"
+ },
+ {
+  "code": "MONEY-W5-D5",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "La opción «Ninguna por ahora» concordaba con «revisión»; con la nueva pregunta debería ser «Nada por ahora».",
+    "note_en": "The option 'Ninguna por ahora' agreed with 'revisión'; with the new question it should be 'Nada por ahora'."
+   },
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "«Con más frecuencia» insinúa que ahora no revisa lo suficiente.",
+    "note_en": "'More often' hints that she doesn't review enough now.",
+    "suggestion_es": "¿Qué parte de tus finanzas te sería útil revisar de vez en cuando?"
+   }
+  ],
+  "en_q_new": "What would you like to check in your finances more often?"
+ },
+ {
+  "code": "MONEY-W5-D6",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "duplicate",
+    "note_es": "Tras las reescrituras, D5 y D6 repiten «revisar… tus finanzas» en días seguidos.",
+    "note_en": "After the rewrites, D5 and D6 repeat 'review… your finances' on consecutive days."
+   }
+  ],
+  "en_q_new": "When would you like to check in again on how your finances are going?"
+ },
+ {
+  "code": "MONEY-W5-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "Se pierde la idea de «nota de cierre» del recorrido; «para tener más claridad» insinúa que aún falta claridad tras cinco semanas.",
+    "note_en": "The 'closing note' idea of the journey is lost; 'to gain more clarity' hints she still lacks clarity after five weeks."
+   }
+  ],
+  "en_q_new": "What would you like to write down to get more clarity about your money?"
+ },
+ {
+  "code": "PURPOSE-W1-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "«Qué tema vuelve a tu cabeza» puede traer preocupaciones o rumiación en vez de intereses; conviene orientarlo.",
+    "note_en": "'What keeps returning to your mind' may surface worries or rumination rather than interests; consider steering it.",
+    "suggestion_es": "¿Qué tema o interés vuelve a tu cabeza cuando por fin tienes un rato para ti?"
+   }
+  ]
+ },
+ {
+  "code": "PURPOSE-W1-D2",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W1-D3",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«Resolver una duda» en cinco minutos es poco realista y cambia curiosidad por obligación; el paso habla de «algo que desconocías», no de resolver.",
+    "note_en": "'Resolve a question' in five minutes is unrealistic and swaps curiosity for obligation; the step talks about 'something you did not know', not resolving.",
+    "suggestion_es": "¿Qué podrías investigar durante cinco minutos sobre algo que te da curiosidad?"
+   }
+  ],
+  "en_q_new": "What could you look into for five minutes to clear up a question you have?"
+ },
+ {
+  "code": "PURPOSE-W1-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "El original pedía qué parte de los «debería» sí elegiría; la nueva versión es ambigua (¿dentro o fuera de esa lista?) y «lo que realmente deseas» presiona por una respuesta profunda.",
+    "note_en": "The original asked which of the 'shoulds' she would choose; the rewrite is ambiguous (within or outside that list?) and 'what you truly want' pressures for a deep answer.",
+    "suggestion_es": "De lo que sientes que «deberías» querer, ¿hay algo que sí elegirías tú?"
+   }
+  ],
+  "en_q_new": "Of everything you feel you should want, what is it that you truly want?"
+ },
+ {
+  "code": "PURPOSE-W1-D5",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "high",
+    "type": "edit-review",
+    "note_es": "La nueva pregunta pide un momento (respuesta abierta), pero el formato es selección múltiple de cualidades (Calma, Conexión…); ya no encajan.",
+    "note_en": "The new question asks for a moment (open answer), but the format is a multiple choice of qualities (Calm, Connection…); they no longer fit.",
+    "suggestion_es": "Piensa en un momento reciente que te gustaría repetir. ¿Qué tuvo?"
+   },
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "«Disfrutaste tanto» exige un disfrute intenso que quizá no hubo; falta «No recuerdo uno».",
+    "note_en": "'Enjoyed so much' demands an intense enjoyment that may not exist; 'I can't think of one' is missing."
+   }
+  ],
+  "en_q_new": "What recent moment did you enjoy so much that you would like to repeat it?"
+ },
+ {
+  "code": "PURPOSE-W1-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W1-D7",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W2-D1",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W2-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "«El cambio que imaginas» presupone un cambio; falta «No imagino un cambio concreto».",
+    "note_en": "'The change you imagine' presumes one; 'I'm not imagining a specific change' is missing."
+   }
+  ]
+ },
+ {
+  "code": "PURPOSE-W2-D3",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "«Explorar esto» no tiene referente si se saltó el día anterior.",
+    "note_en": "'Explore this' has no referent if the previous day was skipped.",
+    "suggestion_es": "¿Qué haría más fácil explorar lo que te interesa sin cambiarlo todo de golpe?"
+   }
+  ]
+ },
+ {
+  "code": "PURPOSE-W2-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "«Qué aspectos» pierde la referencia a «tus condiciones» (la instrucción dice «Puede que ninguna sea flexible», concordando con un sustantivo que ya no está) y «si fuera necesario» sugiere ceder por obligación.",
+    "note_en": "'What aspects' loses the reference to 'your conditions' (the instruction says 'None may be flexible', agreeing with a noun no longer present) and 'if needed' suggests giving in by obligation.",
+    "suggestion_es": "¿Qué condición tuya podría ser flexible, si alguna?"
+   }
+  ],
+  "en_q_new": "What aspects could you change or adapt if needed?"
+ },
+ {
+  "code": "PURPOSE-W2-D5",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "«Solo quiero mirar» no es una cantidad de espacio; mezcla dos ejes.",
+    "note_en": "'Just looking' is not an amount of room; it mixes two axes."
+   }
+  ]
+ },
+ {
+  "code": "PURPOSE-W2-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W2-D7",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«Qué tres cosas» contradice la instrucción «Hasta tres» y presiona a llegar a tres; además se pierde el vínculo con «una opción» que se está explorando.",
+    "note_en": "'Which three things' contradicts the 'Up to three' instruction and pushes for three; the link to 'an option' being explored is also lost.",
+    "suggestion_es": "¿Qué cosas importantes de tu vida te gustaría cuidar al tomar una decisión? (hasta tres)"
+   },
+   {
+    "sev": "low",
+    "type": "duplicate",
+    "note_es": "Cercana a PURPOSE-W2-D1 (lo que no quieres perder).",
+    "note_en": "Close to PURPOSE-W2-D1 (what you don't want to lose)."
+   }
+  ],
+  "en_q_new": "What three important things in your life would you like to protect when making a decision?"
+ },
+ {
+  "code": "PURPOSE-W3-D1",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W3-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "«Esas opciones» depende de D1 sin alternativa (también D3 «esa opción»).",
+    "note_en": "'Those options' depends on D1 with no fallback (also D3 'that option').",
+    "suggestion_es": "Añadir: «Si no nombraste opciones, imagina una que te interese»."
+   }
+  ]
+ },
+ {
+  "code": "PURPOSE-W3-D3",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W3-D4",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W3-D5",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W3-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W3-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "«Ese pequeño intento» no tiene alternativa si D6 se saltó.",
+    "note_en": "'That small attempt' has no fallback if D6 was skipped."
+   }
+  ]
+ },
+ {
+  "code": "PURPOSE-W4-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "Pregunta de sí/no con opciones de tipos de intento; funciona, pero falta una opción «Sí, aún no sé cuál».",
+    "note_en": "Yes/no question with attempt-type options; it works, but a 'Yes, not sure which yet' option is missing."
+   }
+  ],
+  "en_q_new": "Is there something small you would like to try?"
+ },
+ {
+  "code": "PURPOSE-W4-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«Más fácil intentarlo» empuja un poco a hacerlo; el original («manejable») era más neutro.",
+    "note_en": "'Easier to try' nudges toward doing it; the original ('manageable') was more neutral."
+   }
+  ],
+  "en_q_new": "What limit could you set to make it easier to try?"
+ },
+ {
+  "code": "PURPOSE-W4-D3",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W4-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "La pregunta pide qué ayudaría a decidir, pero «No necesito cambiarlo» y «Quiero dejarlo» son decisiones, no ayudas; además «dejarlo para después» no equivale a «Quiero dejarlo».",
+    "note_en": "The question asks what would help her decide, but 'No change needed' and 'I want to stop' are decisions, not aids; 'leave it for later' also isn't 'I want to stop'.",
+    "suggestion_es": "¿Qué necesitas ahora para seguir, cambiar o dejar tu intento?"
+   },
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "El estado del intento se pregunta en D5, después de decidir en D4; el orden parece invertido.",
+    "note_en": "The attempt's status is asked in D5, after deciding in D4; the order seems reversed."
+   }
+  ],
+  "en_q_new": "What would help you decide whether to continue, change something, or leave it for later?"
+ },
+ {
+  "code": "PURPOSE-W4-D5",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W4-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W4-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "«Más claro» presupone avance; la instrucción podría admitir «Nada nuevo todavía».",
+    "note_en": "'Clearer' presumes progress; the instruction could allow 'Nothing new yet'."
+   }
+  ],
+  "en_q_new": "What is clearer to you now, and what questions do you still have?"
+ },
+ {
+  "code": "PURPOSE-W5-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "Remite a PURPOSE-W1-D6, cinco semanas antes; la app debería mostrar esa respuesta o ofrecer «No lo había definido».",
+    "note_en": "Refers back to PURPOSE-W1-D6, five weeks earlier; the app should show that answer or offer 'I hadn't defined it'."
+   }
+  ]
+ },
+ {
+  "code": "PURPOSE-W5-D2",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W5-D3",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "«Quedarme como estoy», «Dejarlo por ahora» y «Aún no elegir» se solapan.",
+    "note_en": "'Stay as I am', 'Set it aside' and 'Not choose yet' overlap."
+   }
+  ]
+ },
+ {
+  "code": "PURPOSE-W5-D4",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "Si en D3 eligió «Aún no elegir», «esa decisión» no tiene alternativa.",
+    "note_en": "If she chose 'Not choose yet' in D3, 'that decision' has no fallback."
+   }
+  ]
+ },
+ {
+  "code": "PURPOSE-W5-D5",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "Doble pregunta en un solo día.",
+    "note_en": "Double question in one day."
+   }
+  ]
+ },
+ {
+  "code": "PURPOSE-W5-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "PURPOSE-W5-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«El camino que has elegido» presupone una elección (D3 permite «Aún no elegir») y «camino» es más grandilocuente que «dirección».",
+    "note_en": "'The path you have chosen' presumes a choice (D3 allows 'Not choose yet') and 'path' is grander than 'direction'.",
+    "suggestion_es": "¿Qué te gustaría recordar sobre la dirección que tomas por ahora, aunque sea pausar?"
+   }
+  ],
+  "en_q_new": "What would you like to remember about the path you have chosen for now?"
+ },
+ {
+  "code": "SELF-W1-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "Presupone que busca aprobación; falta salida si no se reconoce.",
+    "note_en": "Presumes she seeks approval; no exit if she doesn't recognise it."
+   }
+  ]
+ },
+ {
+  "code": "SELF-W1-D2",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W1-D3",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "«Esa preocupación» no se nombra en D2 (que trata de lo que te dices); el vínculo es débil, aunque la instrucción da alternativa.",
+    "note_en": "'That concern' isn't named in D2 (about self-talk); the link is weak, though the instruction gives a fallback."
+   }
+  ]
+ },
+ {
+  "code": "SELF-W1-D4",
+  "verdict": "ok",
+  "flags": [],
+  "en_q_new": "What decision did you make in the past that worked for you, even if it wasn't perfect?"
+ },
+ {
+  "code": "SELF-W1-D5",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "«Pregunté» y «Pedí ayuda» se solapan.",
+    "note_en": "'Asked' and 'Asked for help' overlap."
+   }
+  ]
+ },
+ {
+  "code": "SELF-W1-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W1-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«Dudar de tus capacidades» presupone inseguridad sobre su valía (la semana trata de dudas al decidir); y al quitar «evidencia» el paso de SELF-W5-D6 («lista de evidencia personal») pierde su antecedente.",
+    "note_en": "'Doubt your abilities' presumes doubts about her worth (the week is about decision doubts); dropping 'evidence' also leaves SELF-W5-D6's 'personal evidence list' without an antecedent.",
+    "suggestion_es": "¿Qué hecho sobre ti te gustaría recordar cuando vuelvas a dudar?"
+   }
+  ],
+  "en_q_new": "What would you like to remember about yourself the next time you doubt your abilities?"
+ },
+ {
+  "code": "SELF-W2-D1",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W2-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "«Esa opinión» no tiene alternativa si se saltó D1.",
+    "note_en": "'That opinion' has no fallback if D1 was skipped.",
+    "suggestion_es": "Añadir: «Puedes pensar en cualquier opinión reciente que te haya pesado»."
+   }
+  ]
+ },
+ {
+  "code": "SELF-W2-D3",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "audience-fit",
+    "note_es": "«Ir tarde» suena peninsular; en Latinoamérica es más natural «ir atrasada» o «quedarte atrás».",
+    "note_en": "'Ir tarde' sounds Spain-centric; 'ir atrasada' or 'quedarte atrás' is more natural in Latin America.",
+    "suggestion_es": "¿Qué comparación reciente te hizo sentir que te estabas quedando atrás?"
+   }
+  ]
+ },
+ {
+  "code": "SELF-W2-D4",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "edit-review",
+    "note_es": "«Dejando de lado» se puede leer como «descuidando» (juicio) en lugar de «omitiendo en la comparación», que era el sentido original.",
+    "note_en": "'Leaving aside' can read as 'neglecting' (judging) rather than 'omitting from the comparison', the original meaning.",
+    "suggestion_es": "Cuando te comparas, ¿qué parte de tu situación queda fuera de la comparación?"
+   },
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "Falta una opción exclusiva «No lo sé».",
+    "note_en": "Missing an exclusive 'Not sure' option."
+   }
+  ],
+  "en_q_new": "What parts of your life are you leaving out when you compare yourself with others?"
+ },
+ {
+  "code": "SELF-W2-D5",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "clarity",
+    "note_es": "La pregunta reescrita tiene unos 108 caracteres (máximo 90) y plantea una disyuntiva larga.",
+    "note_en": "The rewritten question is about 108 characters (max 90) and poses a long either/or.",
+    "suggestion_es": "¿Cómo distingues lo que quieres de lo que sientes que debes demostrar?"
+   },
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "«Tienes algo que demostrar» puede sonar a reproche.",
+    "note_en": "'You have something to prove' can sound reproachful."
+   }
+  ],
+  "en_q_new": "How can you tell whether you do something because you truly want it or because you feel you have something to prove?"
+ },
+ {
+  "code": "SELF-W2-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W2-D7",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "duplicate",
+    "note_es": "Muy cercana a MONEY-W3-D7 (criterio para una decisión próxima).",
+    "note_en": "Very close to MONEY-W3-D7 (a criterion for an upcoming decision)."
+   }
+  ]
+ },
+ {
+  "code": "SELF-W3-D1",
+  "verdict": "ok",
+  "flags": [],
+  "en_q_new": "What small commitment to yourself could you keep this week?"
+ },
+ {
+  "code": "SELF-W3-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "options",
+    "note_es": "Falta «No elegí uno / No lo sé» para quien no fijó compromiso en D1.",
+    "note_en": "Missing 'I didn't choose one / Not sure' for those who set no commitment in D1."
+   }
+  ]
+ },
+ {
+  "code": "SELF-W3-D3",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W3-D4",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W3-D5",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W3-D6",
+  "verdict": "rethink",
+  "flags": [
+   {
+    "sev": "high",
+    "type": "edit-review",
+    "note_es": "La reescritura da por hecho que no lo logró y que se culpa (asunción de culpa); la instrucción «Si esos juicios no aparecen» ya no tiene referente porque se quitó «incapaz o floja».",
+    "note_en": "The rewrite assumes she failed and blames herself (assumption of guilt); the instruction 'If those judgments do not fit' lost its referent since 'incapable or lazy' was removed.",
+    "suggestion_es": "Si el compromiso no salió como querías, ¿qué ajuste podrías probar?"
+   },
+   {
+    "sev": "high",
+    "type": "duplicate",
+    "note_es": "Ahora es casi idéntica a SELF-W3-D7 («¿qué ajuste sería más justo que culparte?»): dos días seguidos con la misma pregunta.",
+    "note_en": "Now nearly identical to SELF-W3-D7 ('what adjustment would be fairer than blaming yourself?'): two consecutive days ask the same thing."
+   }
+  ],
+  "en_q_new": "What could you do differently instead of blaming yourself for not achieving it?"
+ },
+ {
+  "code": "SELF-W3-D7",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "duplicate",
+    "note_es": "Repite SELF-W3-D6 (ajuste en vez de culparse); la instrucción (condiciones que ayudaron o faltaron) sugiere que este día debería tratar de condiciones.",
+    "note_en": "Repeats SELF-W3-D6 (adjustment instead of self-blame); the instruction (conditions that helped or were missing) suggests this day should be about conditions.",
+    "suggestion_es": "¿Qué condiciones ayudaron o faltaron con tu compromiso esta semana?"
+   },
+   {
+    "sev": "low",
+    "type": "tone",
+    "note_es": "«Más justo que culparte» presupone autoculpa.",
+    "note_en": "'Fairer than blaming yourself' presumes self-blame."
+   }
+  ]
+ },
+ {
+  "code": "SELF-W4-D1",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W4-D2",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«Sin pensarlo demasiado» insinúa que piensa de más (juicio leve) y se pierde el vínculo con «ese pequeño asunto» de D1.",
+    "note_en": "'Without overthinking it' hints she overthinks (mild judgment) and loses the link to 'that small matter' from D1.",
+    "suggestion_es": "¿Qué información sería suficiente para decidir ese pequeño asunto?"
+   }
+  ],
+  "en_q_new": "What information would help you decide without overthinking it?"
+ },
+ {
+  "code": "SELF-W4-D3",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W4-D4",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W4-D5",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W4-D6",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W4-D7",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "La pregunta reescrita supera los 90 caracteres (unos 94).",
+    "note_en": "Rewritten question exceeds 90 characters (about 94).",
+    "suggestion_es": "¿Qué te gustaría recordar cuando decidas sin estar del todo segura?"
+   },
+   {
+    "sev": "low",
+    "type": "duplicate",
+    "note_es": "Mismo arranque que SELF-W1-D7 y otros cierres («¿Qué te gustaría recordar…»).",
+    "note_en": "Same opener as SELF-W1-D7 and other closers ('What would you like to remember…')."
+   }
+  ],
+  "en_q_new": "What would you like to remember when you have to make a decision without being completely sure?"
+ },
+ {
+  "code": "SELF-W5-D1",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "Supera los 90 caracteres (dos frases).",
+    "note_en": "Exceeds 90 characters (two sentences)."
+   }
+  ]
+ },
+ {
+  "code": "SELF-W5-D2",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "med",
+    "type": "tone",
+    "note_es": "«Qué responsabilidad sí te corresponde» y «lo que sí puedes reparar» presuponen culpa y algo que reparar.",
+    "note_en": "'What responsibility is yours' and 'what you can repair' presume guilt and something to repair.",
+    "suggestion_es": "¿Qué parte dependía de ti y qué parte no estaba bajo tu control?"
+   }
+  ]
+ },
+ {
+  "code": "SELF-W5-D3",
+  "verdict": "revise",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "clarity",
+    "note_es": "Supera los 90 caracteres (unos 103).",
+    "note_en": "Exceeds 90 characters (about 103).",
+    "suggestion_es": "¿Hay algo que puedas reparar o aprender de ese error, sin condenarte?"
+   }
+  ]
+ },
+ {
+  "code": "SELF-W5-D4",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "edit-review",
+    "note_es": "«Consejo» se acerca a SELF-W2-D6 (consejo como información) y el borrador pide perspectiva, no consejo; diferencia leve.",
+    "note_en": "'Advice' moves close to SELF-W2-D6 (advice as information) while the draft asks for perspective, not advice; minor difference."
+   }
+  ],
+  "en_q_new": "What advice would you ask a trusted person for, while still making your own decision?"
+ },
+ {
+  "code": "SELF-W5-D5",
+  "verdict": "ok",
+  "flags": []
+ },
+ {
+  "code": "SELF-W5-D6",
+  "verdict": "ok",
+  "flags": [
+   {
+    "sev": "low",
+    "type": "depends-on-previous",
+    "note_es": "«Tu lista de evidencia personal» no existe como tal (SELF-W1-D7 ya no habla de evidencia).",
+    "note_en": "'Your personal evidence list' doesn't exist as such (SELF-W1-D7 no longer mentions evidence).",
+    "suggestion_es": "Añade ese ejemplo a tus notas sobre ti."
+   }
+  ]
+ },
+ {
+  "code": "SELF-W5-D7",
+  "verdict": "ok",
+  "flags": []
+ }
+]
