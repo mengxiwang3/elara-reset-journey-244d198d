@@ -1,0 +1,97 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Elara beta fixes: developer handoff</title>
+<style>
+body{font:10.5pt/1.45 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#1a1615;margin:0}
+h1{font:600 22pt Georgia,serif;color:#16382a;margin:0 0 4px}h2{font:600 14pt Georgia,serif;color:#16382a;margin:18px 0 6px;break-after:avoid}h3{font-size:11pt;margin:12px 0 4px;break-after:avoid}
+.eye{font-size:8.5pt;letter-spacing:.08em;text-transform:uppercase;color:#5a514b}.lede{color:#3d3631;max-width:170mm}
+table{border-collapse:collapse;width:100%;margin:6px 0 10px;font-size:9.2pt}th,td{border:1px solid #d9d2c7;padding:4px 6px;text-align:left;vertical-align:top}th{background:#f2ede4}tr{break-inside:avoid}
+code{font:8.8pt Menlo,Consolas,monospace;background:#f2ede4;padding:0 3px;border-radius:3px}
+.box{border:1px solid #d9d2c7;border-left:4px solid #b5461b;border-radius:6px;padding:8px 10px;margin:8px 0;break-inside:avoid}
+ul,ol{margin:4px 0 8px;padding-left:20px}li{margin:2px 0}
+</style></head><body>
+<p class="eye">Elara · 3 Nov 2026 · for the developers</p>
+<h1>Beta fixes and hardening</h1>
+<p class="lede">These fixes stop answers being lost, the app showing the wrong state, and dead ends in the beta's core journey: onboarding, the daily session, leaving and resuming, finishing, and coming back later. Each fix was reproduced before it was changed, has a regression test, and was checked in a web build of the real app against a local API. None of it has been tested on a phone. Nothing was pushed, deployed or migrated.</p>
+
+<div class="box"><b>How to apply.</b> <code>1-beta-fixes-and-hardening.mbox</code> is a <code>git format-patch</code> series on top of <code>main</code> at <code>1363407</code>. Apply it with <code>git am 1-beta-fixes-and-hardening.mbox</code>.
+<ul>
+<li>It contains 11 commits: the approved UI polish (<code>f24224d</code>), the day-session fixes, the hardening fixes, a merge, and one commit that makes the two branches work together.</li>
+<li>In total: 47 files, +1604/−145.</li>
+<li>Recommended order: review, merge, run the checks below, then build for TestFlight or ship an OTA update on the beta channel.</li>
+</ul></div>
+
+<h2>Fixed (ranked by impact on testers)</h2>
+<table>
+<tr><th>#</th><th>Problem</th><th>Fix</th><th>Commit · test</th></tr>
+<tr><td>1</td><td><b>Lost work.</b> After signing in on a new phone, or after a session expired, Hoy offered Week 1 · Day 1 until her progress loaded (forever if the load failed). Answering overwrote her real Day 1 answer on the server.</td><td>The store records whose progress it holds (<code>progressSyncedFor</code>). Hoy and the Atlas offer no day until her own progress is read. A read is applied only for the account it was made for.</td><td><code>8e7d820</code>, <code>deceec0</code> · progressSync, accountState, query tests</td></tr>
+<tr><td>2</td><td><b>Lost work.</b> Log out deleted answers that hadn't synced, while the dialog said they were kept.</td><td>Log out first tries to send her answers. If any are still unsent, the dialog warns her.</td><td><code>c72c2bb</code> · sessionEnd</td></tr>
+<tr><td>3</td><td><b>Lost work.</b> «Prefiero pasar» discarded text she had typed.</td><td>Her input is kept as the step's draft.</td><td><code>2c22c4a</code> · draft</td></tr>
+<tr><td>4</td><td><b>Lost work, dishonest message.</b> An answer the server refused for good (400/403/404/422, for example a lapsed subscription mid-day) was dropped from the queue with her words, while the screens said «guardadas».</td><td>The queue's new <code>onDropped</code> hook puts her words back in the step, marked as not saved. The step and the completion screen say so, and she can resend.</td><td><code>2c22c4a</code> · stepQueue, draft</td></tr>
+<tr><td>5</td><td><b>Wrong state.</b> After a day finished offline late at night and synced after midnight, the phone offered the next day. The server (which stamps completion at upload) then refused it with 403 <code>day_locked</code>.</td><td>The day gate counts a day that's still queued from now, which is the server's rule.</td><td><code>2c22c4a</code>, <code>eaa4ede</code> · dayGate</td></tr>
+<tr><td>6</td><td><b>Wrong copy and failed saves.</b> A day opened cold (direct link, onboarding's Día 1, a notification, a slow network) pinned the bundled copy for the whole visit. Where step ids differ from the server's, answers get a 404.</td><td>The bundled pin gives way once to the server copy (<code>lib/dayPin.ts</code>).</td><td><code>7115dcc</code> · dayPin (7)</td></tr>
+<tr><td>7</td><td><b>Dead end.</b> A free account at the week-2 gate looped: «se abre mañana» → membership screen «Continúa…» → back to Hoy.</td><td>An honest locked-week line and badge. The membership screen says there is nothing to buy and links to support.</td><td><code>55d5c43</code> · todayEntry</td></tr>
+<tr><td>8</td><td><b>Misleading.</b> «Guardamos lo que escribiste» showed over a day she had only opened.</td><td>The line shows only when an answer or a draft with words is kept.</td><td><code>98bcf3f</code>, <code>9ff8d44</code></td></tr>
+<tr><td>9</td><td><b>Stale state.</b> After an offline launch, failed reads (content, «Para hoy», streak, config) were never retried once back online.</td><td>Going from offline to online refetches every failed on-screen query.</td><td><code>f248a9b</code> · query</td></tr>
+<tr><td>10</td><td>Small fixes: the old weather art beside Money Día 1's income options; «De vuelta en la vuelta.»; the input placeholder at 3.4:1 contrast (now 5.9:1).</td><td>Leftover removed; proposed string; readable ink.</td><td><code>2c22c4a</code></td></tr>
+</table>
+<p><b>Merge note.</b> <code>qk.myPaths</code> query data is now <code>{ owner, list }</code>. Any other branch reading it must use <code>.list</code>.</p>
+
+<h2>Checks on the integrated branch (HEAD <code>eaa4ede</code>)</h2>
+<table>
+<tr><th>Command</th><th>Result</th></tr>
+<tr><td><code>pnpm --filter @elara/mobile typecheck</code></td><td>pass</td></tr>
+<tr><td><code>pnpm --filter @elara/mobile test</code></td><td>pass (exit 0)</td></tr>
+<tr><td><code>pnpm --filter @elara/mobile lint</code></td><td>exit 1 with the same 12 errors and 377 warnings as main. All the errors predate these changes, in <code>atlas/globe/{GlobeScreen,Sheets,Postcard}.tsx</code>; nothing new.</td></tr>
+<tr><td><code>pnpm --filter @elara/api typecheck</code> / <code>test</code></td><td>pass / pass (exit 0)</td></tr>
+<tr><td><code>apps/api/scripts/check-content-parity.mjs</code></td><td>fails on main as well (82 drifts since <code>75694f6</code>; see blocker 3)</td></tr>
+</table>
+
+<h3>What "verified" means here</h3>
+<ul>
+<li><b>Code and unit tests:</b> every fix.</li>
+<li><b>Browser:</b> every fix was reproduced in the web build at 393×852 and 360×780, before and after. The integrated build was walked from onboarding to Day 1, leaving halfway with a draft, resuming and finishing. The rest of the integrated walk (next day, offline sync, Log out, a fresh sign-in) passed on the individual branches. The run on the merged build was cut short by a usage limit.</li>
+<li><b>Device:</b> none. There was no phone or simulator. See the device checks below.</li>
+</ul>
+
+<h2>Remaining beta blockers (ranked)</h2>
+<ol>
+<li><b>Week-2 access for testers</b> (owner and production database). The only way past week 2 is a hand-given <code>beta_grant</code> row (90 days; the admin button or <code>scripts/grant-beta-all.sql</code>, which covers only accounts that already exist). New testers and lapsed grants are stuck. Testers are on week 2 (Wuzhen). Check every tester, or grant automatically while <code>BETA</code> is on (an API change and a deploy). Also: <code>wrangler.toml</code> says the beta runs on the production backend, which contradicts <code>docs/BETA-BACKEND.md</code>.</li>
+<li><b>Ship it.</b> It's unknown which commit TestFlight is running (Gate 0 in <code>docs/BETA-GATES.md</code>).</li>
+<li><b>Content drift.</b> <code>75694f6</code> changed the app copy without regenerating <code>seed-content.sql</code>. Regenerate it (<code>db:seed:gen</code>) and reseed after deploying the API. The copy is still marked as needing native review.</li>
+<li><b>Server pacing</b> (product decision plus an API deploy). Completion is stamped when the answers arrive, so a day finished offline late at night costs her the next day. Proposed: base <code>assertDayOpen</code> on her claimed local date (<code>completedOn</code>).</li>
+<li><b>Day screen</b> (handled by the session redesign):
+<ul>
+<li>Reopening yesterday's day says «Listo por hoy / Mañana…».</li>
+<li>«Ver lo que respondiste» opens the completion card, not her answers.</li>
+<li>Day 1 opened from onboarding may skip the week-1 opening with its safety note (seen once).</li>
+</ul></li>
+<li><code>/api/me</code> returning 5xx at sign-in lands her on the welcome screen and polls about twice a second. Not fixed; work had started but is unfinished and not in the patch.</li>
+<li>The offline banner covers the top controls (taps still work). Needs design.</li>
+<li>Owner decisions:
+<ul>
+<li>expired-session copy;</li>
+<li>Log out keeping unsent answers;</li>
+<li>a link from Hoy back to week 1 (the route exists via Atlas → «Ver lista»);</li>
+<li>legal URLs (Gate 1).</li>
+</ul></li>
+<li>Círculos: «Mis círculos» stays on «Cargando…» after she picks interests without joining a circle.</li>
+</ol>
+
+<h2>Device checks still needed</h2>
+<ul>
+<li><b>Keyboard</b> (Android 360-wide edge-to-edge, and iOS): «Terminar por hoy» and «Prefiero pasar» stay above the keys. The field, mic row, photo caption and long answers stay visible. The auth and onboarding fields stay usable.</li>
+<li><b>Voice answers</b> (days 9 and 26).</li>
+<li><b>Android</b> back button on the membership screen and the Log out dialog.</li>
+<li><b>Offline cold start</b> with the SecureStore session (including fix 1).</li>
+<li><b>expo-network</b> transitions (fix 9) and captive portals.</li>
+<li><b>App foreground triggers</b> for queue flushing.</li>
+</ul>
+
+<h2>New Spanish strings (pending María and Alejandra)</h2>
+<ul>
+<li>«¿Cerrar sesión sin sincronizar?» · «Algunas de tus respuestas todavía no llegaron a tu cuenta. Si cierras sesión ahora, se borrarán de este teléfono.» · «Cerrar sesión igualmente»</li>
+<li>«Una de tus respuestas no se pudo guardar en tu cuenta. Tus palabras siguen en ese paso, en este teléfono.»</li>
+<li>«Esta respuesta no se pudo guardar en tu cuenta. Tus palabras siguen aquí para que puedas enviarlas de nuevo.»</li>
+<li>«De nuevo en la vuelta.» (was «De vuelta en la vuelta.»)</li>
+</ul>
+<p class="eye">The full reports, screenshots and logs are in the project repo under <code>deliverables/beta-fixes-2026-11-03</code> and <code>deliverables/beta-hardening-2026-11-03</code>.</p>
+</body></html>

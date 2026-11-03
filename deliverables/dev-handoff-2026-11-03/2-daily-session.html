@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Elara daily session redesign: developer handoff</title>
+<style>
+body{font:10.5pt/1.45 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#1a1615;margin:0}
+h1{font:600 22pt Georgia,serif;color:#16382a;margin:0 0 4px}h2{font:600 14pt Georgia,serif;color:#16382a;margin:18px 0 6px;break-after:avoid}
+.eye{font-size:8.5pt;letter-spacing:.08em;text-transform:uppercase;color:#5a514b}.lede{color:#3d3631;max-width:170mm}
+table{border-collapse:collapse;width:100%;margin:6px 0 10px;font-size:9.2pt}th,td{border:1px solid #d9d2c7;padding:4px 6px;text-align:left;vertical-align:top}th{background:#f2ede4}tr{break-inside:avoid}
+code{font:8.8pt Menlo,Consolas,monospace;background:#f2ede4;padding:0 3px;border-radius:3px}
+.box{border:1px solid #d9d2c7;border-left:4px solid #b5461b;border-radius:6px;padding:8px 10px;margin:8px 0;break-inside:avoid}
+ul,ol{margin:4px 0 8px;padding-left:20px}li{margin:2px 0}
+</style></head><body>
+<p class="eye">Elara · 3 Nov 2026 · for the developers · proposal, not yet approved to ship</p>
+<h1>Daily session redesign</h1>
+<p class="lede">A reworked daily session, driven by content. Each day opens with its purpose and a preview of what she'll take away. The second question is visibly linked to her first answer. The close shows her takeaway in her own words, and it stays at the top of Hoy. It is switched on only for days whose content has a <code>purpose</code>; today that is Money days 8–9. Every other day behaves as before, except that skipped steps no longer get a model reply.</p>
+
+<div class="box"><b>Status.</b> The implementation is complete and its checks pass. The final round of after-screenshots was interrupted by a usage limit, so the visual evidence is incomplete.
+<ul>
+<li><b>Not tested yet:</b> no users, no device. The new Spanish needs María and Alejandra.</li>
+<li><b>How to apply:</b> <code>2-daily-session-redesign.mbox</code> holds 5 commits on top of <code>f24224d</code> (the UI polish, which is also the first commit in the beta-fixes series): 38 files, +2417/−248.</li>
+<li><b>Apply it after the beta fixes.</b> Expect conflicts in <code>app/(tabs)/index.tsx</code>, <code>app/path/day.tsx</code> and <code>StepScreen.tsx</code>.</li>
+</ul></div>
+
+<h2>Why</h2>
+<p>Testers reported:</p>
+<ul>
+<li>an unclear purpose;</li>
+<li>the second question not connecting to the first (María on Wuzhen Día 1);</li>
+<li>a crowded second screen;</li>
+<li>no takeaway to find again.</li>
+</ul>
+<p>The code showed that «Ninguna por ahora» was quoted back as «Hoy dijiste», and that the server called the model for skipped steps. The design reasoning, the A/B/C comparison and a usability-test plan that could disprove it are in <code>deliverables/daily-session-2026-11-03/</code>.</p>
+
+<h2>What changed</h2>
+<table>
+<tr><th>Area</th><th>Change</th></tr>
+<tr><td>Contract (shared, API, seed)</td><td>New optional fields: day <code>purpose</code>, step <code>card {label, hint}</code>, and choose <code>noneOption</code> (an index). Copy and seed rows for Money days 8–9. Pure helpers for the «Ninguna» and skip outcomes.</td></tr>
+<tr><td>Server</td><td>No model call and no stored reply for a skipped step, on every day. The V2 reply prompt applies only on days with a <code>purpose</code>. It has one useful move, is grounded in her words, and contains no praise, no question, and no assumptions about consequences or timing. «No sé» is accepted on those days.</td></tr>
+<tr><td>Opening</td><td>«Por qué hoy» plus the purpose, «Hoy te llevas» with the empty takeaway card, and on later days «La última vez anotaste». It is skipped when she resumes mid-day.</td></tr>
+<tr><td>Second question</td><td>Her choice in a compact row with «Cambiar» (the draft is kept). The field has priority. Elara's note sits under the field and folds away while she types. If her choice changes, a note says so. «Ninguna» or a skip uses <code>bodyFallback</code>.</td></tr>
+<tr><td>Close</td><td>«Hoy te llevas», showing her exact words, «Editar», and Elara's note as secondary. «Pedir la nota de Elara» appears if the reply failed. «Mañana: next day's first question». «Listo por hoy» when nothing was written.</td></tr>
+<tr><td>Hoy</td><td>The takeaway card goes at the top when today is done, and under the hero card on the next day. A «Ninguna» or skipped answer is never quoted.</td></tr>
+<tr><td>Fix of an existing bug</td><td>A "try again" reply (to «No sé» or a greeting) could show as Elara's note on a later screen, where she can't act on it.</td></tr>
+</table>
+
+<h2>Checks (HEAD <code>be1a05e</code>)</h2>
+<table>
+<tr><th>Command</th><th>Result</th></tr>
+<tr><td>mobile typecheck · test</td><td>pass · 123 files, 1325 tests</td></tr>
+<tr><td>mobile lint</td><td>the same 12 pre-existing errors (Atlas globe) and 377 warnings as the base</td></tr>
+<tr><td>api typecheck · test</td><td>pass · 113 files, 1396 tests (<code>daily-session.test.ts</code>: 27)</td></tr>
+<tr><td>shared and admin typecheck</td><td>pass</td></tr>
+<tr><td>content parity</td><td>78 drifts, all of them older than this branch; none for days 8–9</td></tr>
+</table>
+
+<h2>Release order and risks</h2>
+<ol>
+<li><b>Deploy the API before applying the seed rows.</b> The rows switch the session on in the app, while the skip rule, the prompt and the «No sé» acceptance live in the API.</li>
+<li><b>The admin CMS has no fields for</b> <code>purpose</code>/<code>card</code>/<code>noneOption</code>. They pass through <code>cleanConfig</code> and zod accepts them.</li>
+<li><b>Day 9 has no <code>bodyFallback</code>.</b> If she skips its first question, the second refers to an example she didn't give. This needs approved copy.</li>
+<li><b>Layout:</b> at 360×780, the opening and the close need one scroll. Q1's last options, including «Ninguna por ahora», sit below the fold at 393×852, as before.</li>
+<li><b>Not verified:</b> the native keyboard, Dynamic Type at 160% (only imitated in the browser), and replies from the production model (local replies were mocks labelled «[Simulado]»).</li>
+</ol>
+
+<h2>Spanish for approval (María and Alejandra)</h2>
+<ul>
+<li>Day 8 purpose: «Hoy eliges por dónde empezar a mirar tus ingresos y lo conviertes en algo concreto para averiguar.»</li>
+<li>Day 8 second question: «¿Qué podrías averiguar sobre esta opción? Escribe una pregunta o un pequeño paso.» Fallback: «¿Hay algo sobre tus ingresos que te gustaría entender mejor? Si quieres, escríbelo como una pregunta o un pequeño paso.»</li>
+<li>Day 9 purpose: «Hoy buscas en lo que ya sabes hacer un ejemplo concreto y lo conviertes en una frase que podrías usar.»</li>
+<li>Session strings: «Por qué hoy», «Hoy te llevas», «La última vez anotaste», «Cambiaste tu elección. Revisa si lo que escribiste sigue encajando.», «Pasaste esta pregunta», «Sin nota por hoy», «Mañana: …», «Pedir la nota de Elara».</li>
+</ul>
+</body></html>

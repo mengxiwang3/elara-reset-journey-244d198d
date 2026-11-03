@@ -1,0 +1,3620 @@
+From f24224dbb408d354e897b57a3e1ac1d05ef0db61 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 05:36:24 +0000
+Subject: [PATCH 01/11] =?UTF-8?q?UI=20polish=20pass=20(photo=20step,=20typ?=
+ =?UTF-8?q?ing=20header,=20reply=20space,=20Hoy=20card,=20C=C3=ADrculos,?=
+ =?UTF-8?q?=20Atlas=20labels)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ apps/mobile/app/(tabs)/index.tsx              |  28 ++++-
+ apps/mobile/app/path/day.tsx                  |  10 +-
+ .../components/atlas/globe/GlobeScreen.tsx    |   7 +-
+ .../src/components/atlas/globe/paintGlobe.ts  | 119 +++++++++++++++---
+ .../src/components/circles/circulos/parts.tsx |   6 +-
+ .../circles/topics/CirclesTopicsScreen.tsx    |  33 +++--
+ .../mobile/src/components/hoy/HoyPostcard.tsx |   5 +-
+ .../src/components/practice/PhotoInput.tsx    |  96 ++++++++------
+ .../src/components/practice/StepScreen.tsx    |  19 ++-
+ .../components/practice/landscape/BandDay.tsx |  26 +++-
+ .../practice/landscape/WorldDay.tsx           |  11 +-
+ .../practice/landscape/photoDay.test.ts       |   9 ++
+ .../components/practice/landscape/photoDay.ts |  11 +-
+ 13 files changed, 291 insertions(+), 89 deletions(-)
+
+diff --git a/apps/mobile/app/(tabs)/index.tsx b/apps/mobile/app/(tabs)/index.tsx
+index 4ac1ac7..1303175 100644
+--- a/apps/mobile/app/(tabs)/index.tsx
++++ b/apps/mobile/app/(tabs)/index.tsx
+@@ -164,7 +164,9 @@ export default function TodayScreen() {
+   // week's card shows the week's place instead, the one its line names.
+   const placeDef = place?.placeId ? placeById(place.placeId) : null;
+   const dayPlace = entry && placeDef && entry.kind !== "week" ? dayPlaceWords(t.dayPlaces, placeDef.area, entry.dayInWeek) : null;
+-  const card = entry ? postcardWords(entry, t, question, content?.config?.minutes, now.getTime(), locale, dayPlace?.where) : null;
++  // The card names the day in short; the full question waits inside the session.
++  const dayTitle = shortDayTitle(content?.title, question, place?.worldId && entry ? landmark(t, place.worldId, entry.dayInWeek).toward : null);
++  const card = entry ? postcardWords(entry, t, dayTitle, content?.config?.minutes, now.getTime(), locale, dayPlace?.name ?? place?.name) : null;
+   const photo =
+     entry && placeDef
+       ? entry.kind === "week"
+@@ -199,7 +201,7 @@ export default function TodayScreen() {
+       scroll
+       scrollToTopOnTabPress
+       edges={["top"]}
+-      contentContainerStyle={{ paddingBottom: tabClearance, gap: spacing[6] + 2 }}
++      contentContainerStyle={{ paddingBottom: tabClearance, gap: spacing[6] }}
+       scrollProps={{
+         refreshControl: (
+           <RefreshControl refreshing={refreshing} onRefresh={() => void onRefresh()} tintColor={colors.brand} />
+@@ -245,15 +247,15 @@ export default function TodayScreen() {
+             stampName={place.name}
+             compact={windowHeight < 700}
+           >
+-            <AppText variant="bodySmall" color={colors.secondary} style={styles.placeLine}>
++            <AppText variant="bodySmall" color={colors.secondary} style={styles.placeLine} numberOfLines={1}>
+               {card.placeLine}
+             </AppText>
+             {card.done ? <DoneLine label={card.done} /> : null}
+-            <AppText variant="editorialTitle" accessibilityRole="header">
++            <AppText variant="editorialTitle" accessibilityRole="header" numberOfLines={3}>
+               {card.title}
+             </AppText>
+             {card.meta ? (
+-              <AppText variant="body" color={colors.textSecondary}>
++              <AppText variant="bodySmall" color={colors.textSecondary}>
+                 {card.meta}
+               </AppText>
+             ) : null}
+@@ -360,6 +362,22 @@ function daypartFor(hour: number): Daypart {
+   return "night";
+ }
+ 
++/** Longest day title the postcard shows as is; past it, the day's place line stands in. */
++const SHORT_TITLE_MAX = 48;
++
++/**
++ * The postcard's title: the day in a few words, never the full question (that
++ * opens the session). The shortest of the day's own title and its first
++ * question when either is short, else the day's "Toward …" line from the
++ * session header, else the question as before.
++ */
++function shortDayTitle(dayTitle: string | undefined, question: string, toward: string | null): string {
++  const short = [dayTitle, question]
++    .filter((x): x is string => !!x && x.length <= SHORT_TITLE_MAX)
++    .sort((a, b) => a.length - b.length)[0];
++  return short ?? toward ?? question;
++}
++
+ /** The postcard's words for the entry's state. */
+ function postcardWords(
+   entry: TodayEntry,
+diff --git a/apps/mobile/app/path/day.tsx b/apps/mobile/app/path/day.tsx
+index 4d6297d..d0ed5cc 100644
+--- a/apps/mobile/app/path/day.tsx
++++ b/apps/mobile/app/path/day.tsx
+@@ -1367,7 +1367,15 @@ function DayScreenInner() {
+             if (opening?.kind === "poster" || opening?.kind === "name") useWorldLedger.getState().markEntered(w);
+             if (opening?.kind === "return") useWorldLedger.getState().markReturnShown(dayKey(new Date()));
+           }}
+-          header={{ toward: wd.here.toward, placeDay, steps: progressNow.total, on: progressNow.on }}
++          header={{
++            toward: wd.here.toward,
++            placeDay,
++            steps: progressNow.total,
++            on: progressNow.on,
++            // The question in short, for the line kept above the field while she types.
++            title: resolveTemplate(step.title, step.config?.titleFallback, ctx)?.text ?? fillTemplate(step.title, ctx).text,
++            reply: !!carried && (carried.pending || !!carried.reply),
++          }}
+           backLabel={index > 0 ? t.practice.header.backA11y : t.practice.header.leaveA11y}
+           onBack={back}
+           trailing={
+diff --git a/apps/mobile/src/components/atlas/globe/GlobeScreen.tsx b/apps/mobile/src/components/atlas/globe/GlobeScreen.tsx
+index 8326fa9..aedebf6 100644
+--- a/apps/mobile/src/components/atlas/globe/GlobeScreen.tsx
++++ b/apps/mobile/src/components/atlas/globe/GlobeScreen.tsx
+@@ -22,7 +22,7 @@ import { claimRedoWeek, useMyRedoWeek, useRedoWeek } from "@/store/useRedoWeek";
+ import { fontFamily } from "@/theme";
+ import { AtlasGlobe, GLOBE_START, type GlobeHandle } from "./AtlasGlobe";
+ import { placeCopy } from "./copy";
+-import { setGlobeLabels } from "./paintGlobe";
++import { setGlobeLabels, setGlobePlaceNames } from "./paintGlobe";
+ import { buildGlobe, currentPlace, pathFor, totals, traySlots, type GlobeArea, type GlobePlace } from "./model";
+ import { Postcard, SoonCard, CARD_W } from "./Postcard";
+ import { Arrival, arrivalDay, PlaceList, PlaceSheet } from "./Sheets";
+@@ -70,6 +70,11 @@ export function GlobeScreen({ atlas, prompt }: { atlas: AtlasDTO; /** The kept-w
+   const tray = useRef(new Animated.Value(0)).current;
+ 
+   useEffect(() => {
++    setGlobePlaceNames(
++      Object.fromEntries(
++        Object.entries(t.globe.places as Record<string, { name: string } | undefined>).map(([id, p]) => [id, p?.name ?? ""]),
++      ) as Partial<Record<PlaceId, string>>,
++    );
+     setGlobeLabels(
+       Object.fromEntries(GLOBE_AREAS.map((a) => [a, { theme: t.globe.areas[a].theme, name: t.globe.areas[a].continent }])) as Record<AreaKey, { theme: string; name: string }>,
+     );
+diff --git a/apps/mobile/src/components/atlas/globe/paintGlobe.ts b/apps/mobile/src/components/atlas/globe/paintGlobe.ts
+index 138a14e..4624986 100644
+--- a/apps/mobile/src/components/atlas/globe/paintGlobe.ts
++++ b/apps/mobile/src/components/atlas/globe/paintGlobe.ts
+@@ -1,7 +1,7 @@
+ import { Image } from "react-native";
+ import type { SkCanvas, SkFont, SkImage, SkPaint, SkPath, SkPicture, SkShader, SkTypeface } from "@shopify/react-native-skia";
+ import type { AreaKey } from "@elara/shared";
+-import { CONTINENTS, type PlaceId } from "@/content/places";
++import { CONTINENTS, placeById, type PlaceId } from "@/content/places";
+ import { PLACE_THUMB } from "@/content/placeImages";
+ import { color } from "@/components/world25d/paint";
+ import { loadSkia } from "@/components/world25d/skia";
+@@ -93,6 +93,7 @@ export async function loadGlobeAssets(): Promise<GlobeAssets> {
+ 
+ export class GlobePainter {
+   private fonts = new Map<number, SkFont>();
++  private lastWidth = 0;
+ 
+   constructor(private readonly assets: GlobeAssets) {}
+ 
+@@ -108,12 +109,15 @@ export class GlobePainter {
+ 
+   record(view: GlobeView, areas: readonly GlobeArea[], width: number, height: number): { picture: SkPicture; pins: Pin[] } {
+     const { Skia } = loadSkia();
++    this.lastWidth = width;
+     const rec = Skia.PictureRecorder();
+     const c = rec.beginRecording(Skia.XYWHRect(0, 0, width, height));
+     const started = new Map<AreaKey, boolean>(areas.map((a) => [a.area, a.started]));
+     this.globe(c, view, started);
+-    if (!view.zone) this.labels(c, view, started);
+     const pins = this.places(c, view, areas, started);
++    // Labels go on last, placed around the medallions rather than under them.
++    // In a zone only the selected place is named (the tray lists the rest).
++    this.labels(c, view, started, pins);
+     return { picture: rec.finishRecordingAsPicture(), pins };
+   }
+ 
+@@ -292,27 +296,105 @@ export class GlobePainter {
+ 
+   /* ───── continent labels ───── */
+ 
+-  private labels(c: SkCanvas, v: GlobeView, started: Map<AreaKey, boolean>) {
++  /**
++   * The continents' names, placed so they never sit on a medallion or on each
++   * other. The selected place's continent goes first and always shows; a
++   * label that cannot find a clear spot near its continent, or that would
++   * crowd the selected place, is left out (the list view names every place).
++   */
++  private labels(c: SkCanvas, v: GlobeView, started: Map<AreaKey, boolean>, pins: readonly Pin[]) {
+     const big = this.font(11);
+     const small = this.font(10);
+     if (!big || !small) return;
+-    for (const area of Object.keys(CONTINENTS) as AreaKey[]) {
++    const selPin = v.sel ? pins.find((p) => p.id === v.sel) ?? null : null;
++    const selArea = v.sel ? placeById(v.sel)?.area ?? null : null;
++    type Cand = { area: AreaKey; x: number; y: number; z: number; t1: string; name: string; w: number };
++    const cands: Cand[] = [];
++    for (const area of v.zone ? [] : (Object.keys(CONTINENTS) as AreaKey[])) {
+       const def = CONTINENTS[area];
+       const q = project(def.lon, def.lat, v.l0, v.p0);
+       if (q[2] <= 0.4) continue;
+-      const x = v.cx + q[0] * v.R;
+-      const y = v.cy - q[1] * v.R + (area === "self" ? -40 : 0) + (area === "money" ? -34 : 0) + (area === "everyday" ? -46 : 0);
+       const label = LABELS.get(area);
+       if (!label) continue;
+-      const col = started.get(area) ? def.col : UNSTARTED.col;
+-      const halo = this.stroke("rgb(255,255,255)", 4, 0.92);
++      const x = v.cx + q[0] * v.R;
++      const y = v.cy - q[1] * v.R + (area === "self" ? -40 : 0) + (area === "money" ? -34 : 0) + (area === "everyday" ? -46 : 0);
+       const t1 = label.theme.toUpperCase();
+-      const w1 = big.getTextWidth(t1);
+-      c.drawText(t1, x - w1 / 2, y, halo, big);
+-      c.drawText(t1, x - w1 / 2, y, this.fill(col), big);
+-      const w2 = small.getTextWidth(label.name);
+-      c.drawText(label.name, x - w2 / 2, y + 12, halo, small);
+-      c.drawText(label.name, x - w2 / 2, y + 12, this.fill("#5e5650"), small);
++      const w = Math.max(big.getTextWidth(t1), small.getTextWidth(label.name));
++      cands.push({ area, x, y, z: q[2], t1, name: label.name, w });
++    }
++    const rank = (k: Cand) => (k.area === selArea ? 0 : started.get(k.area) ? 1 : 2);
++    cands.sort((a, b) => rank(a) - rank(b) || b.z - a.z);
++    const placed: { l: number; t: number; r: number; b: number }[] = [];
++    const PADB = 3;
++    const boxAt = (k: Cand, y: number) => ({ l: k.x - k.w / 2 - PADB, t: y - 11 - PADB, r: k.x + k.w / 2 + PADB, b: y + 14 + PADB });
++    const hitsPin = (bx: { l: number; t: number; r: number; b: number }) =>
++      pins.some((p) => {
++        const nx = Math.max(bx.l, Math.min(p.x, bx.r));
++        const ny = Math.max(bx.t, Math.min(p.y, bx.b));
++        return Math.hypot(p.x - nx, p.y - ny) < p.r + 6;
++      });
++    const hitsLabel = (bx: { l: number; t: number; r: number; b: number }) =>
++      placed.some((o) => bx.l < o.r && bx.r > o.l && bx.t < o.b && bx.b > o.t);
++    const halo = this.stroke("rgb(255,255,255)", 4, 0.92);
++    // The selected place names itself first, beside its medallion on a paper tag,
++    // on the first side clear of the other medallions: it wins every overlap.
++    const selName = v.sel ? PLACE_NAMES.get(v.sel) : undefined;
++    if (selPin && selName) {
++      const w = big.getTextWidth(selName);
++      const off = selPin.r + 10;
++      const others = pins.filter((p) => p.id !== selPin.id);
++      const spots: [number, number][] = [
++        [selPin.x, selPin.y + off + 8],
++        [selPin.x, selPin.y - off],
++        [selPin.x + off + w / 2, selPin.y + 4],
++        [selPin.x - off - w / 2, selPin.y + 4],
++      ];
++      const tag = (x: number, y: number) => ({ l: x - w / 2 - 6, t: y - 13, r: x + w / 2 + 6, b: y + 5 });
++      const clear = (bx: { l: number; t: number; r: number; b: number }) =>
++        !others.some((p) => {
++          const nx = Math.max(bx.l, Math.min(p.x, bx.r));
++          const ny = Math.max(bx.t, Math.min(p.y, bx.b));
++          return Math.hypot(p.x - nx, p.y - ny) < p.r + 4;
++        });
++      const clamp = (x: number) => Math.max(w / 2 + 8, Math.min(this.lastWidth - w / 2 - 8, x));
++      const [sx, sy] = spots.map(([x, y]) => [clamp(x), y] as [number, number]).find(([x, y]) => clear(tag(x, y))) ?? [clamp(spots[0]![0]), spots[0]![1]];
++      const bx = tag(sx, sy);
++      const { Skia } = loadSkia();
++      c.drawRRect(Skia.RRectXY(Skia.XYWHRect(bx.l, bx.t, bx.r - bx.l, bx.b - bx.t), 9, 9), this.fill("#fffdf8", 0.95));
++      c.drawText(selName, sx - w / 2, sy, this.fill("#2b2622"), big);
++      placed.push({ l: bx.l - PADB, t: bx.t - PADB, r: bx.r + PADB, b: bx.b + PADB });
++    }
++    for (const k of cands) {
++      const selected = k.area === selArea;
++      // Above the cluster first (the eye reads down to the places), then below, then further out.
++      const tries = [k.y, k.y - 30, k.y + 30, k.y - 56, k.y + 56];
++      let y: number | null = null;
++      for (const ty of tries) {
++        const bx = boxAt(k, ty);
++        if (!hitsPin(bx) && !hitsLabel(bx)) {
++          y = ty;
++          break;
++        }
++      }
++      if (y === null) {
++        if (!selected) continue;
++        y = tries.find((ty) => !hitsLabel(boxAt(k, ty))) ?? k.y;
++      }
++      // Another continent's name right beside the selected place competes with it: leave it out.
++      if (!selected && selPin) {
++        const bx = boxAt(k, y);
++        const nx = Math.max(bx.l, Math.min(selPin.x, bx.r));
++        const ny = Math.max(bx.t, Math.min(selPin.y, bx.b));
++        if (Math.hypot(selPin.x - nx, selPin.y - ny) < selPin.r * 4) continue;
++      }
++      placed.push(boxAt(k, y));
++      const col = started.get(k.area) ? CONTINENTS[k.area].col : UNSTARTED.col;
++      const w1 = big.getTextWidth(k.t1);
++      c.drawText(k.t1, k.x - w1 / 2, y, halo, big);
++      c.drawText(k.t1, k.x - w1 / 2, y, this.fill(col), big);
++      const w2 = small.getTextWidth(k.name);
++      c.drawText(k.name, k.x - w2 / 2, y + 12, halo, small);
++      c.drawText(k.name, k.x - w2 / 2, y + 12, this.fill("#5e5650"), small);
+     }
+   }
+ 
+@@ -444,6 +526,15 @@ export function setGlobeLabels(labels: Record<AreaKey, { theme: string; name: st
+   for (const k of Object.keys(labels) as AreaKey[]) LABELS.set(k, labels[k]);
+ }
+ 
++/** The places' names (the catalogue's), set by the screen: the selected one is printed on the globe. */
++const PLACE_NAMES = new Map<PlaceId, string>();
++export function setGlobePlaceNames(names: Partial<Record<PlaceId, string>>) {
++  for (const k of Object.keys(names) as PlaceId[]) {
++    const n = names[k];
++    if (n) PLACE_NAMES.set(k, n);
++  }
++}
++
+ /** `rgb(r,g,b)` back to `#rrggbb`: the land tints are hex, the mixes are rgb. */
+ function rgbHex(c: string): string {
+   if (c.startsWith("#")) return c;
+diff --git a/apps/mobile/src/components/circles/circulos/parts.tsx b/apps/mobile/src/components/circles/circulos/parts.tsx
+index a2155c8..769cec5 100644
+--- a/apps/mobile/src/components/circles/circulos/parts.tsx
++++ b/apps/mobile/src/components/circles/circulos/parts.tsx
+@@ -19,7 +19,7 @@ import { authorName } from "@/components/circles/topics/ui";
+ import { useT } from "@/i18n";
+ import { timeAgo } from "@/lib/dates";
+ import { ease, haptics, interaction, PressableScale, useReducedMotion } from "@/motion";
+-import { colors, radius, shadow, spacing } from "@/theme";
++import { colors, layout, radius, shadow, spacing } from "@/theme";
+ import { canContact, undoLeft } from "./model";
+ import { useBlockUndo, useCirculosBlocks } from "./seams/blocks";
+ import { showToast } from "@/components/Toast";
+@@ -48,8 +48,8 @@ export const ink = {
+ 
+ export const DOT = " · ";
+ 
+-/** A screen's side margin: the prototype's 16, on every width. */
+-export const GUT = 16;
++/** A screen's side margin: the app's screen margin token (24), the same gutter as Hoy and the day screens. */
++export const GUT = layout.screenMargin;
+ 
+ /**
+  * Her name and how long ago. The name is a button to the profile only for
+diff --git a/apps/mobile/src/components/circles/topics/CirclesTopicsScreen.tsx b/apps/mobile/src/components/circles/topics/CirclesTopicsScreen.tsx
+index d51295c..d89f27d 100644
+--- a/apps/mobile/src/components/circles/topics/CirclesTopicsScreen.tsx
++++ b/apps/mobile/src/components/circles/topics/CirclesTopicsScreen.tsx
+@@ -359,22 +359,26 @@ export function Explore({
+           )
+         ) : (
+           <>
+-            <AppText variant="body">{c.membersOnly}</AppText>
+-            <View style={styles.between}>
+-              <View style={{ flexShrink: 1 }}>
+-                <AppText variant="body">{fromInterests ? c.explore.yourInterests(interestNames.join(", ")) : c.explore.noInterests}</AppText>
+-              </View>
+-              <TertiaryAction
+-                wrap
+-                label={fromInterests ? c.explore.editInterests : c.explore.pickInterests}
+-                color={colors.buttonForest}
+-                accessibilityHint={fromInterests ? c.explore.editInterestsA11y : undefined}
+-                onPress={onEditInterests}
+-              />
+-            </View>
++            {/* One heading, then her interests in one quiet line with Edit as a
++                small link beside it: the list leads, not the settings. */}
+             <View>
+               <SectionHeading label={fromInterests ? c.explore.suggestedTitle : c.explore.startTitle} />
++              <View style={styles.interestsRow}>
++                <AppText variant="bodySmall" color={colors.textSecondary} numberOfLines={1} style={styles.interestsText}>
++                  {fromInterests ? c.explore.yourInterests(interestNames.join(", ")) : c.explore.noInterests}
++                </AppText>
++                <TertiaryAction
++                  wrap={false}
++                  label={fromInterests ? c.explore.editInterests : c.explore.pickInterests}
++                  color={fromInterests ? colors.textSecondary : colors.buttonForest}
++                  accessibilityHint={fromInterests ? c.explore.editInterestsA11y : undefined}
++                  onPress={onEditInterests}
++                />
++              </View>
+               {suggested.map(row)}
++              <AppText variant="bodySmall" color={colors.textSecondary} style={styles.membersOnly}>
++                {c.membersOnly}
++              </AppText>
+             </View>
+             {/* The one way to the full list. */}
+             <PrimaryPill slim case="gentle" variant="outline" label={showAll ? c.explore.hideAll : c.explore.showAll(topics.length)} onPress={() => setShowAll((s) => !s)} />
+@@ -435,6 +439,9 @@ const styles = StyleSheet.create({
+   row: { minHeight: 48, paddingVertical: spacing[2], borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: colors.border, gap: 2 },
+   linkRow: { minHeight: 44, flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: spacing[2] },
+   between: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", columnGap: spacing[2] },
++  interestsRow: { flexDirection: "row", alignItems: "center", gap: spacing[2], marginBottom: spacing[1] },
++  interestsText: { flex: 1, minWidth: 0 },
++  membersOnly: { marginTop: spacing[3] },
+   card: { ...paperSheet, paddingHorizontal: spacing[4], paddingVertical: spacing[1] },
+ });
+ 
+diff --git a/apps/mobile/src/components/hoy/HoyPostcard.tsx b/apps/mobile/src/components/hoy/HoyPostcard.tsx
+index dc09c83..669b2e1 100644
+--- a/apps/mobile/src/components/hoy/HoyPostcard.tsx
++++ b/apps/mobile/src/components/hoy/HoyPostcard.tsx
+@@ -68,7 +68,8 @@ export function HoyPostcard({
+     [size],
+   );
+   const printW = size ? size.w - PAD * 2 : 0;
+-  const printH = Math.round(Math.min(262, Math.max(150, printW * (compact ? 0.56 : 0.78))));
++  // A landscape strip, not a square: the day's title and its action stay in the first screen.
++  const printH = Math.round(Math.min(200, Math.max(132, printW * (compact ? 0.42 : 0.52))));
+ 
+   return (
+     <View style={styles.lean}>
+@@ -217,7 +218,7 @@ export function SavedNote({ label }: { label: string }) {
+ 
+ const styles = StyleSheet.create({
+   lean: { transform: [{ rotate: "-0.4deg" }] },
+-  card: { paddingTop: PAD, paddingHorizontal: PAD, paddingBottom: spacing[6], gap: spacing[5] + 2 },
++  card: { paddingTop: PAD, paddingHorizontal: PAD, paddingBottom: spacing[5], gap: spacing[5] },
+   print: { overflow: "visible", backgroundColor: colors.sagePale },
+   clip: { overflow: "hidden" },
+   tear: { position: "absolute", left: 0, bottom: -1 },
+diff --git a/apps/mobile/src/components/practice/PhotoInput.tsx b/apps/mobile/src/components/practice/PhotoInput.tsx
+index 878a98c..5786b38 100644
+--- a/apps/mobile/src/components/practice/PhotoInput.tsx
++++ b/apps/mobile/src/components/practice/PhotoInput.tsx
+@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
+ import { ActivityIndicator, Image, Keyboard, Linking, StyleSheet, TextInput, View } from "react-native";
+ import { AppText } from "../AppText";
+ import { Icon } from "../Icon";
+-import { useKeyboard } from "@/hooks/useKeyboard";
+ import { useT } from "@/i18n";
+ import { api, photoSource } from "@/lib/api";
+ import { pickPracticePhoto } from "@/lib/imagePicker";
+@@ -91,7 +90,6 @@ export function PhotoInput({
+   captionPlaceholder?: string;
+ }) {
+   const t = useT();
+-  const keyboard = useKeyboard();
+   const theme = usePracticeTheme();
+   const has = !!(draft.uri || draft.photo);
+   const set = (patch: Partial<PhotoDraft>) => onChange({ ...draft, ...patch });
+@@ -162,36 +160,54 @@ export function PhotoInput({
+   }
+ 
+   const source = draft.uri ? { uri: draft.uri } : draft.photo ? photoSource(draft.photo.id) : null;
++  const captionMissing = !draft.caption.trim();
++  // The photo and the words it needs sit together: a compact thumbnail with
++  // Retake / Library beside it, and the required caption straight under them,
++  // so the caption is never pushed below the fold and the disabled Next always
++  // has its reason on screen.
+   return (
+     <FadeIn style={styles.stack}>
+-      <View style={[styles.preview, keyboard.visible && { height: 120, aspectRatio: undefined }, { borderColor: theme.cardBorder, backgroundColor: theme.card }]}>
+-        {source ? (
+-          <Image
+-            source={source}
+-            style={StyleSheet.absoluteFill}
+-            resizeMode="cover"
+-            accessibilityIgnoresInvertColors
+-            accessibilityLabel={draft.caption || t.practice.photo.yourPhoto}
+-          />
+-        ) : null}
+-        {status === "uploading" ? (
+-          <View style={styles.overlay}>
+-            <ActivityIndicator color={theme.ctaInk} />
+-            <AppText variant="caption" color={theme.ctaInk}>
++      <View style={styles.photoRow}>
++        <View style={[styles.preview, { backgroundColor: theme.card }]}>
++          {source ? (
++            <Image
++              source={source}
++              style={StyleSheet.absoluteFill}
++              resizeMode="cover"
++              accessibilityIgnoresInvertColors
++              accessibilityLabel={draft.caption || t.practice.photo.yourPhoto}
++            />
++          ) : null}
++          {status === "uploading" ? (
++            <View style={styles.overlay}>
++              <ActivityIndicator color={theme.ctaInk} />
++            </View>
++          ) : null}
++        </View>
++        <View style={styles.photoSide}>
++          {status === "uploading" ? (
++            <AppText variant="caption" color={theme.muted} accessibilityLiveRegion="polite">
+               {t.practice.photo.uploading}
+             </AppText>
+-          </View>
+-        ) : null}
+-      </View>
+-      {status === "failed" ? (
+-        <View style={styles.failed}>
+-          <AppText variant="caption" color={theme.accent}>
+-            {t.practice.photo.failed}
+-          </AppText>
+-          <Link label={t.practice.photo.retry} onPress={onRetry} />
++          ) : null}
++          {status === "failed" ? (
++            <>
++              <AppText variant="caption" color={theme.accent}>
++                {t.practice.photo.failed}
++              </AppText>
++              <Link label={t.practice.photo.retry} onPress={onRetry} start />
++            </>
++          ) : null}
++          {/* "Photo saved. Tap Next" only once Next can actually be tapped. */}
++          {draft.photo && status === "idle" && !captionMissing ? (
++            <AppText variant="caption" color={theme.muted} accessibilityLiveRegion="polite">
++              {t.ux.photoSaved}
++            </AppText>
++          ) : null}
++          <Link label={t.practice.photo.retake} onPress={onRetake} start />
++          <Link label={t.practice.photo.library} onPress={() => onPick("library")} start />
+         </View>
+-      ) : null}
+-      {draft.photo && status === "idle" ? <AppText variant="body" color={theme.ink} accessibilityLiveRegion="polite">{t.ux.photoSaved}</AppText> : null}
++      </View>
+       <View style={styles.captionBlock}>
+         <AppText variant="label" color={theme.accent}>
+           {t.practice.photo.captionLabel}
+@@ -206,22 +222,18 @@ export function PhotoInput({
+           accessibilityLabel={t.practice.photo.captionLabel}
+         />
+       </View>
+-      <View style={styles.row}>
+-        <Link label={t.practice.photo.retake} onPress={onRetake} />
+-        <Link label={t.practice.photo.library} onPress={() => onPick("library")} />
+-      </View>
+     </FadeIn>
+   );
+ }
+ 
+-function Link({ label, onPress }: { label: string; onPress: () => void }) {
++function Link({ label, onPress, start }: { label: string; onPress: () => void; start?: boolean }) {
+   const theme = usePracticeTheme();
+   return (
+     <PressableScale
+       size="chip"
+       dim={0.6}
+       onPress={onPress}
+-      style={styles.link}
++      style={[styles.link, start && styles.linkStart]}
+       accessibilityRole="button"
+       accessibilityLabel={label}
+     >
+@@ -232,6 +244,9 @@ function Link({ label, onPress }: { label: string; onPress: () => void }) {
+   );
+ }
+ 
++/** The chosen photo's thumbnail (spacing[24] + spacing[4]). */
++const PREVIEW = spacing[24] + spacing[4];
++
+ const styles = StyleSheet.create({
+   stack: { gap: spacing[3], width: "100%" },
+   empty: {
+@@ -265,15 +280,15 @@ const styles = StyleSheet.create({
+   },
+   libraryWrap: { width: "100%", maxWidth: 320, alignSelf: "center" },
+   denied: { gap: spacing[1], alignItems: "center" },
++  photoRow: { flexDirection: "row", alignItems: "center", gap: spacing[4] },
++  /** A thumbnail, not a hero: the caption it needs stays in the first screen. */
+   preview: {
+-    width: "100%",
+-    aspectRatio: 1,
+-    maxHeight: 340,
+-    alignSelf: "center",
+-    borderWidth: 1,
+-    borderRadius: radius.feature,
++    width: PREVIEW,
++    height: PREVIEW,
++    borderRadius: radius.content,
+     overflow: "hidden",
+   },
++  photoSide: { flex: 1, minWidth: 0, gap: spacing[1] },
+   overlay: {
+     position: "absolute",
+     top: 0,
+@@ -285,7 +300,6 @@ const styles = StyleSheet.create({
+     justifyContent: "center",
+     gap: spacing[2],
+   },
+-  failed: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
+   captionBlock: { gap: spacing[2] },
+   caption: {
+     ...type.body,
+@@ -304,7 +318,7 @@ const styles = StyleSheet.create({
+     minHeight: 120,
+     textAlignVertical: "top",
+   },
+-  row: { flexDirection: "row", justifyContent: "center", gap: spacing[6] },
+   link: { minHeight: 44, justifyContent: "center", paddingHorizontal: spacing[2], alignSelf: "center" },
++  linkStart: { alignSelf: "flex-start", paddingHorizontal: 0 },
+   underline: { textDecorationLine: "underline" },
+ });
+diff --git a/apps/mobile/src/components/practice/StepScreen.tsx b/apps/mobile/src/components/practice/StepScreen.tsx
+index 339f968..0c6d6e8 100644
+--- a/apps/mobile/src/components/practice/StepScreen.tsx
++++ b/apps/mobile/src/components/practice/StepScreen.tsx
+@@ -37,7 +37,7 @@ import { openLink } from "@/lib/legal";
+ import { duration, FadeIn, PressableScale, Reveal, stagger, interaction, useReducedMotion } from "@/motion";
+ import { useScreenReader } from "@/hooks/useScreenReader";
+ import { photoSource } from "@/lib/api";
+-import { colors, radius, spacing, type, withAlpha } from "@/theme";
++import { colors, layout, radius, spacing, type, withAlpha } from "@/theme";
+ import { BlanksInput } from "./BlanksInput";
+ import { PracticeCta } from "./DayChrome";
+ import { CtaTone } from "./CenteredDayHeader";
+@@ -245,6 +245,14 @@ export function StepScreen({
+   useEffect(() => {
+     reportScroll?.(0);
+   }, [reportScroll]);
++  // Her reply lands under the field: bring the whole card up above the fixed
++  // footer instead of leaving it to start below the fold.
++  const replyLanded = beat && locked && !pending && !!reply;
++  useEffect(() => {
++    if (!replyLanded) return;
++    const id = setTimeout(() => keyboardScroll.props.ref.current?.scrollToEnd({ animated: !reducedLead }), REPLY_SCROLL_MS);
++    return () => clearTimeout(id);
++  }, [replyLanded]); // eslint-disable-line react-hooks/exhaustive-deps
+   const [noticeReady, setNoticeReady] = useState(false);
+   useEffect(() => {
+     setNoticeReady(false);
+@@ -892,6 +900,9 @@ function dayTwoSource(stepId: string): number {
+   );
+ }
+ 
++/** After the reply card's fade starts, so the scroll measures its full height. */
++const REPLY_SCROLL_MS = 450;
++
+ const KNOWN = new Set([
+   "reflect",
+   "choose",
+@@ -1417,9 +1428,9 @@ const styles = StyleSheet.create({
+   scroll: {
+     paddingHorizontal: spacing[6],
+     paddingTop: spacing[6],
+-    // Clears the fixed action area so the final option remains fully readable
+-    // and tappable on shorter phones.
+-    paddingBottom: 112,
++    // Clears the fixed action area so the final option, and the last line of
++    // Elara's reply, remain fully readable and tappable on shorter phones.
++    paddingBottom: layout.scrollPadBottom,
+     gap: spacing[5],
+   },
+   recapScroll: { flexGrow: 1, justifyContent: "center", paddingBottom: spacing[6] },
+diff --git a/apps/mobile/src/components/practice/landscape/BandDay.tsx b/apps/mobile/src/components/practice/landscape/BandDay.tsx
+index 178e20b..ac180fb 100644
+--- a/apps/mobile/src/components/practice/landscape/BandDay.tsx
++++ b/apps/mobile/src/components/practice/landscape/BandDay.tsx
+@@ -26,7 +26,7 @@ import { useKeyboard } from "@/hooks/useKeyboard";
+ import { useScreenReader } from "@/hooks/useScreenReader";
+ import { useT } from "@/i18n";
+ import { duration as dur, ease, FadeIn, PressableScale, useLoopProgress, useReducedMotion } from "@/motion";
+-import { colors, shellHitTarget, spacing, withAlpha } from "@/theme";
++import { colors, layout, shellHitTarget, spacing, withAlpha } from "@/theme";
+ import { LandscapeScene, type SceneHandle } from "./LandscapeScene";
+ import {
+   BAND_MS,
+@@ -185,7 +185,7 @@ export const BandDay = forwardRef<WorldDayHandle, BandDayProps>(function BandDay
+ 
+   const state: BandState = phase === "arrive" ? "arrive" : phase === "walk" ? "step" : phase === "done" ? "done" : "atlas";
+   const dims = { height: win.height, fontScale: win.fontScale, topInset: insets.top };
+-  const target = bandHeight(state, { ...dims, keyboard: keyboard.visible && phase === "walk" });
++  const target = bandHeight(state, { ...dims, keyboard: keyboard.visible && phase === "walk", reply: !!header.reply && phase === "walk" });
+   const hMax = bandMax(dims);
+   const compact = bandSize(dims) === "compact";
+   const [band] = useState(() => new Animated.Value(target));
+@@ -365,6 +365,10 @@ export const BandDay = forwardRef<WorldDayHandle, BandDayProps>(function BandDay
+     setScrolled((was) => (was ? y > 4 : y > 12));
+   }, []);
+   const folded = phase === "walk" && (keyboard.visible || scrolled);
++  // Typing with the question scrolled away: a short version of it stays above
++  // the field (two lines at most), so she never writes without seeing what
++  // she is answering. Under the folded strip, never over the picture.
++  const questionLine = phase === "walk" && keyboard.visible && scrolled && header.title ? header.title : null;
+   const showControls = phase !== "horizon";
+   const backPress = phase === "done" || phase === "revealed" ? onLeave : onBack;
+ 
+@@ -417,6 +421,13 @@ export const BandDay = forwardRef<WorldDayHandle, BandDayProps>(function BandDay
+           ) : phase === "walk" ? (
+             <KeyboardAvoider toScreenBottom>
+               <View style={[styles.steps, { paddingTop: pad.top - STEP_TOP }]}>
++                {questionLine ? (
++                  <View style={styles.questionLine} pointerEvents="none">
++                    <AppText variant="label" color={colors.foreground} numberOfLines={2} accessibilityRole="header">
++                      {questionLine}
++                    </AppText>
++                  </View>
++                ) : null}
+                 {/* "Saving your place": its own slot in the page, under the
+                     pill's overhang, never drawn over the pill or a heading. */}
+                 <View style={[styles.savingSlot, saving && { paddingTop: folded ? spacing[2] : PILL_OVERHANG }]} pointerEvents="none">
+@@ -906,7 +917,7 @@ function FaceGlyph() {
+ 
+ type Pad = { top: number; side: number };
+ /** The page's padding under the band (prototype: 42 / 22, and 38 / 16 in its 320 mode). */
+-const PAD: Pad = { top: 42, side: 22 };
++const PAD: Pad = { top: 42, side: layout.screenMargin };
+ const COMPACT_PAD: Pad = { top: 38, side: 16 };
+ /** The step screen's own top padding, taken off the page's so the question sits where the prototype's does. */
+ const STEP_TOP = spacing[6];
+@@ -956,6 +967,15 @@ const styles = StyleSheet.create({
+     backgroundColor: withAlpha(WHITE, 0.9),
+   },
+   savingSlot: { alignItems: "center" },
++  // The step page's own gutter (StepScreen), so the line sits over the question it shortens.
++  questionLine: {
++    paddingHorizontal: spacing[6],
++    paddingTop: spacing[2],
++    paddingBottom: spacing[2],
++    borderBottomWidth: StyleSheet.hairlineWidth,
++    borderBottomColor: LINE,
++    backgroundColor: colors.cream,
++  },
+   savedRow: { flexDirection: "row", alignItems: "flex-start", gap: spacing[2], marginTop: spacing[2] },
+   asks: { marginTop: spacing[5] },
+   orb: { position: "absolute", left: 22, top: 24 - ORB, width: ORB, height: ORB },
+diff --git a/apps/mobile/src/components/practice/landscape/WorldDay.tsx b/apps/mobile/src/components/practice/landscape/WorldDay.tsx
+index d92f038..fa6e5f2 100644
+--- a/apps/mobile/src/components/practice/landscape/WorldDay.tsx
++++ b/apps/mobile/src/components/practice/landscape/WorldDay.tsx
+@@ -167,7 +167,16 @@ export interface WorldDayProps {
+   onOpened?: () => void;
+   /** The arrival's words are up (the day's asks may follow). Not called when opening already arrived. */
+   onArrived?: () => void;
+-  header: { toward: string; placeDay: string; steps: number; on: number };
++  header: {
++    toward: string;
++    placeDay: string;
++    steps: number;
++    on: number;
++    /** The step's own question, for the short line kept above the field while she types (photo band). */
++    title?: string;
++    /** The step opens on Elara's reply to the step before (photo band: the compact band). */
++    reply?: boolean;
++  };
+   backLabel: string;
+   onBack: () => void;
+   trailing?: ReactNode;
+diff --git a/apps/mobile/src/components/practice/landscape/photoDay.test.ts b/apps/mobile/src/components/practice/landscape/photoDay.test.ts
+index 7d1718d..e7ec2f5 100644
+--- a/apps/mobile/src/components/practice/landscape/photoDay.test.ts
++++ b/apps/mobile/src/components/practice/landscape/photoDay.test.ts
+@@ -51,6 +51,15 @@ describe("the band's height (prototype index.html)", () => {
+     expect(bandHeight("arrive", { ...phone, keyboard: true })).toBe(430);
+   });
+ 
++  it("gives a step that opens on Elara's reply the compact band, so the reply clears the footer", () => {
++    expect(bandHeight("step", { ...phone, reply: true })).toBe(BAND_HEIGHTS.compact.step);
++    expect(bandHeight("step", { ...small, reply: true })).toBe(BAND_HEIGHTS.compact.step);
++    // Typing still wins: the strip for the controls.
++    expect(bandHeight("step", { ...phone, reply: true, keyboard: true })).toBe(KEYBOARD_BAND);
++    // Only a step: the arrival and the done screen keep theirs.
++    expect(bandHeight("done", { ...phone, reply: true })).toBe(290);
++  });
++
+   it("keeps the phone's proportions on a taller window", () => {
+     expect(bandHeight("step", { height: 1180 })).toBe(Math.round(290 * (1180 / 844)));
+   });
+diff --git a/apps/mobile/src/components/practice/landscape/photoDay.ts b/apps/mobile/src/components/practice/landscape/photoDay.ts
+index f1c8035..6f100f9 100644
+--- a/apps/mobile/src/components/practice/landscape/photoDay.ts
++++ b/apps/mobile/src/components/practice/landscape/photoDay.ts
+@@ -31,12 +31,21 @@ export function bandSize({ height, fontScale = 1 }: { height: number; fontScale?
+  */
+ export function bandHeight(
+   state: BandState,
+-  { height, fontScale = 1, keyboard = false, topInset = 0 }: { height: number; fontScale?: number; keyboard?: boolean; topInset?: number },
++  {
++    height,
++    fontScale = 1,
++    keyboard = false,
++    reply = false,
++    topInset = 0,
++  }: { height: number; fontScale?: number; keyboard?: boolean; reply?: boolean; topInset?: number },
+ ): number {
+   const table = BAND_HEIGHTS[bandSize({ height, fontScale })];
+   // The back circle (44) and the pill above the band's foot (about 41) must both fit under the status bar.
+   const floor = Math.round(topInset + CIRCLE + PILL_RISE + 8);
+   if (keyboard && state === "step") return Math.max(KEYBOARD_BAND, Math.round(topInset + CIRCLE + KEYBOARD_GAP));
++  // A step that opens on Elara's reply gives the page the compact band, so her
++  // whole reply has room above the fixed footer (it can run to several lines).
++  if (reply && state === "step") return Math.max(BAND_HEIGHTS.compact.step, floor);
+   // A very tall window (an iPad) keeps the phone's proportions rather than a fixed height.
+   const scaled = height > PHONE_H ? Math.round(table[state] * (height / PHONE_H)) : table[state];
+   return Math.max(scaled, floor);
+-- 
+2.43.0
+
+
+From 7115dccc3b62ff2170d864fec2cdc00d8f029e4f Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 05:41:12 +0000
+Subject: [PATCH 02/11] Day screen: let the server copy replace a bundled copy
+ pinned on a cold open
+
+A day opened before GET /api/paths had landed (direct link, Onboarding's
+Day 1, a notification, a slow network) pinned the bundled fallback for the
+life of the screen. She saw different words from the CMS copy everyone else
+saw, and where the two copies name a step differently every answer was
+refused (404 step_not_found) and stayed queued behind "Guardando tu lugar".
+
+The bundled pin is now provisional (lib/dayPin): it gives way to the CMS copy
+once, when that arrives, while she has not answered from this screen, or later
+when the server day has the same steps (only the words change). The resume
+position is taken again for the new copy, and the screens memo now follows the
+pinned steps so the words actually change.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MRH1FyKGTN3zfVru4KrGk9
+---
+ apps/mobile/app/path/day.tsx       | 52 +++++++++++++++++++++-----
+ apps/mobile/src/hooks/usePaths.ts  | 10 +++++
+ apps/mobile/src/lib/dayPin.test.ts | 59 ++++++++++++++++++++++++++++++
+ apps/mobile/src/lib/dayPin.ts      | 53 +++++++++++++++++++++++++++
+ 4 files changed, 165 insertions(+), 9 deletions(-)
+ create mode 100644 apps/mobile/src/lib/dayPin.test.ts
+ create mode 100644 apps/mobile/src/lib/dayPin.ts
+
+diff --git a/apps/mobile/app/path/day.tsx b/apps/mobile/app/path/day.tsx
+index d0ed5cc..236ff97 100644
+--- a/apps/mobile/app/path/day.tsx
++++ b/apps/mobile/app/path/day.tsx
+@@ -79,7 +79,8 @@ import { opensWhen, useDayGate } from "@/hooks/useDayGate";
+ import { closeWayOn, isAheadOfGate, opensOnWeekIntro } from "@/lib/dayEntry";
+ import { buildScreens, cursorIndex, mayHaveMoreAfter, nextScreenId, questionProgress, type Screen } from "@/lib/offeredScreens";
+ import { completionAsks, daySummary, finishAction, isDeclinedDay, type CompletionAsk } from "@/lib/dayFinish";
+-import { usePathsMap } from "@/hooks/usePaths";
++import { useHasServerPath, usePathsMap } from "@/hooks/usePaths";
++import { nextDayPin, sameSteps, type DayPin } from "@/lib/dayPin";
+ import { useKeyboard } from "@/hooks/useKeyboard";
+ import { useLocale, useT } from "@/i18n";
+ import { haptics, PressableScale } from "@/motion";
+@@ -174,10 +175,30 @@ function DayScreenInner() {
+   // is replaced by the CMS copy when the fetch lands (`usePathsMap`), and a
+   // swap mid-day rebuilt the open day under her: new steps, a cursor that
+   // moved, a StepScreen remounted with her half-typed words. Taken again only
+-  // for a new language.
+-  const [pinned, setPinned] = useState<{ locale: string; path: Path } | null>(null);
++  // for a new language — and once, from the bundled copy to the CMS copy when
++  // that arrives (`lib/dayPin`): before she has sent anything from here, or
++  // later when only the words differ. A day opened cold otherwise kept the
++  // bundled words for good, and its answers were refused wherever the two
++  // copies name a step differently.
++  const [pinned, setPinned] = useState<DayPin<Path> | null>(null);
+   const livePath = livePaths[area];
+-  if (livePath?.days[dayNum - 1] && (!pinned || pinned.locale !== locale)) setPinned({ locale, path: livePath });
++  const liveFromServer = useHasServerPath(area);
++  /** She has sent an answer or a skip from this screen: from here the pin moves only for the same steps. */
++  const [answeredHere, setAnsweredHere] = useState(false);
++  const liveDay = livePath?.days[dayNum - 1];
++  const pinnedDay = pinned?.path.days[dayNum - 1];
++  const repin = nextDayPin(
++    pinned,
++    {
++      locale,
++      path: livePath,
++      hasDay: !!liveDay,
++      fromServer: liveFromServer,
++      sameSteps: !!liveDay && !!pinnedDay && sameSteps(stepsOf(liveDay), stepsOf(pinnedDay)),
++    },
++    answeredHere,
++  );
++  if (repin) setPinned(repin);
+   const path = pinned && pinned.locale === locale ? pinned.path : livePath;
+   const content = path?.days[dayNum - 1];
+ 
+@@ -230,7 +251,9 @@ function DayScreenInner() {
+     const built = buildScreens(offered, (followUp) => !!followUpSource(followUp, ctx));
+     return { screens: built.screens, hidden: built.skipped };
+     // `offeredKey` and `sources` stand in for `offered` and `ctx` here — see above.
+-  }, [offeredKey, sources]); // eslint-disable-line react-hooks/exhaustive-deps
++    // `steps` changes only when the pinned copy does (the CMS copy replacing the
++    // bundled one, a new language): the screens carry the steps' words.
++  }, [offeredKey, sources, steps]); // eslint-disable-line react-hooks/exhaustive-deps
+   const authoredIds = useMemo(() => steps.map((s) => s.id), [steps]);
+ 
+   // Where she is, as a step id: a list that changes with her answers never
+@@ -246,13 +269,16 @@ function DayScreenInner() {
+   // A finished day has no unanswered step and still replays from the start.
+   // Adjusted during render rather than in an effect, so the first frame with
+   // content is already the right step.
+-  const [resumed, setResumed] = useState(false);
++  // Taken again if the day's copy is replaced before she has answered
++  // (`lib/dayPin`): the bundled copy's step ids may not be the server's.
++  const [resumedFor, setResumedFor] = useState<Path | null>(null);
++  const resumed = resumedFor !== null;
+   // Whether the day was already complete when she opened it, taken once with
+   // the resume: a redo is a replay only of a finished day (`isReplay`), and a
+   // day that becomes complete under her is closed like any other.
+   const [doneOnArrival, setDoneOnArrival] = useState(false);
+-  if (!resumed && screens.length) {
+-    setResumed(true);
++  if (path && resumedFor !== path && screens.length && !answeredHere) {
++    setResumedFor(path);
+     setDoneOnArrival(!!progress?.completedDays.includes(dayNum));
+     // The exact step (Atlas A5): a step named by the link, else the one this
+     // phone remembers her on in this unfinished day (she may have stepped
+@@ -282,7 +308,7 @@ function DayScreenInner() {
+           ? -1
+           : screens.findIndex((s) => unanswered(s.step.id) && !(dayAnswers && isAside(s.step)));
+     const at = first >= 0 ? first : Math.max(0, screens.findIndex((s) => !isAside(s.step)));
+-    if (at > 0) setCursor(screens[at]?.step.id ?? null);
++    setCursor(at > 0 ? (screens[at]?.step.id ?? null) : null);
+   }
+   const screen: Screen | undefined = screens[index];
+   const step = screen?.step;
+@@ -772,6 +798,8 @@ function DayScreenInner() {
+     /** `auto`: sent for her on arrival (the carried Day 1 feeling), so no step beat. */
+     async (value: DayValue, mode?: ReflectMode, auto = false) => {
+       if (!step || sending.current || movingFrom.current === step.id) return;
++      // What she does fixes the day's copy from here (`lib/dayPin`).
++      if (!auto) setAnsweredHere(true);
+       const attempt = Symbol("step submission");
+       sending.current = attempt;
+       try {
+@@ -962,6 +990,8 @@ function DayScreenInner() {
+     // through still earns its day credit when it closes — which is the honest
+     // reading: she walked it.
+     if (!heldAnswer(storedAnswer(step.id))) persist(step, null, { auto: true })?.catch(() => {});
++    // A skip is hers too (`lib/dayPin`).
++    setAnsweredHere(true);
+     goNext();
+   }, [area, dayAnswers, dayNum, goNext, persist, screen, step, storedAnswer]);
+ 
+@@ -974,6 +1004,7 @@ function DayScreenInner() {
+   const onStateAnswer = useCallback(
+     (state: AnswerState) => {
+       if (!step || state === "answered" || state === "declined" || state === "notOffered") return;
++      setAnsweredHere(true);
+       useAppStore.getState().setDraft(stepDraftKey(area, dayNum, step.id), null);
+       if (screen?.lead && !dayAnswers?.[screen.lead.id]) persist(screen.lead, null, { auto: true })?.catch(() => {});
+       persist(step, null, { state })
+@@ -1057,6 +1088,7 @@ function DayScreenInner() {
+   /** Through the breathing, or past it: on to the first question, no reply, no signal. */
+   const onBreathed = useCallback(() => {
+     if (!step) return;
++    setAnsweredHere(true);
+     persist(step, null, { replyless: true })?.catch(() => {});
+     goNext();
+   }, [goNext, persist, step]);
+@@ -1162,9 +1194,11 @@ function DayScreenInner() {
+         // as it was — Skip looked like it did nothing.
+         skipped: !!dayAnswers?.[lead.id] && dayAnswers[lead.id].value == null,
+         onAnswer: (option) => {
++          setAnsweredHere(true);
+           persist(lead, option)?.catch(() => {});
+         },
+         onSkip: () => {
++          setAnsweredHere(true);
+           persist(lead, null)?.catch(() => {});
+         },
+       }
+diff --git a/apps/mobile/src/hooks/usePaths.ts b/apps/mobile/src/hooks/usePaths.ts
+index e0845bd..002600f 100644
+--- a/apps/mobile/src/hooks/usePaths.ts
++++ b/apps/mobile/src/hooks/usePaths.ts
+@@ -162,6 +162,16 @@ export function usePathsMap(): Record<AreaKey, Path> {
+   }, [data, custom, t]);
+ }
+ 
++/**
++ * Whether `usePathsMap()[area]` is the CMS copy yet, rather than the bundled
++ * fallback. Same query as `usePathsMap` (one request, one cache entry).
++ */
++export function useHasServerPath(area: AreaKey): boolean {
++  const locale = useLocale();
++  const { data } = useQuery({ queryKey: qk.paths(locale), queryFn: api.getPaths });
++  return !!data?.some((dto) => dto.area === area);
++}
++
+ /** Ordered list of paths for the Journeys / Explore / Clarity Assessment screens. */
+ export function usePathList(): Path[] {
+   const map = usePathsMap();
+diff --git a/apps/mobile/src/lib/dayPin.test.ts b/apps/mobile/src/lib/dayPin.test.ts
+new file mode 100644
+index 0000000..daafa1d
+--- /dev/null
++++ b/apps/mobile/src/lib/dayPin.test.ts
+@@ -0,0 +1,59 @@
++import { describe, expect, it } from "vitest";
++import { nextDayPin, sameSteps, type DayPin, type LiveDay } from "./dayPin";
++
++const bundled = { name: "bundled" };
++const server = { name: "server" };
++const serverAgain = { name: "server, refetched" };
++
++const live = (path: object, fromServer: boolean, locale = "es", same = false): LiveDay<object> => ({
++  locale,
++  path,
++  hasDay: true,
++  fromServer,
++  sameSteps: same,
++});
++const pin = (path: object, fromServer: boolean, locale = "es"): DayPin<object> => ({ locale, path, fromServer });
++
++describe("the day screen's pinned copy", () => {
++  it("pins the first copy it gets", () => {
++    expect(nextDayPin(null, live(bundled, false), false)).toEqual(pin(bundled, false));
++    expect(nextDayPin(null, live(server, true), false)).toEqual(pin(server, true));
++  });
++
++  // The regression: a day opened cold (direct link, notification, Onboarding's
++  // Day 1, a slow network) pinned the bundled copy and never let go, so she
++  // saw other words than the server's, and answers to steps the server names
++  // differently were refused (404) and stuck on the phone.
++  it("lets the server copy replace the bundled one when it arrives, before she has answered", () => {
++    expect(nextDayPin(pin(bundled, false), live(server, true), false)).toEqual(pin(server, true));
++  });
++
++  it("after she has answered, takes the server copy only when its steps are the same (only the words change)", () => {
++    expect(nextDayPin(pin(bundled, false), live(server, true, "es", true), true)).toEqual(pin(server, true));
++    expect(nextDayPin(pin(bundled, false), live(server, true, "es", false), true)).toBeNull();
++  });
++
++  it("compares steps by id and kind, in order", () => {
++    const a = [{ id: "ask", kind: "choose" }, { id: "take", kind: "reflect" }];
++    expect(sameSteps(a, [{ id: "ask", kind: "choose" }, { id: "take", kind: "reflect" }])).toBe(true);
++    expect(sameSteps(a, [{ id: "hardest", kind: "choose" }, { id: "take", kind: "reflect" }])).toBe(false);
++    expect(sameSteps(a, [{ id: "ask", kind: "multi" }, { id: "take", kind: "reflect" }])).toBe(false);
++    expect(sameSteps(a, [...a, { id: "more", kind: "reflect" }])).toBe(false);
++  });
++
++  it("keeps the server copy against later refetches, as before", () => {
++    expect(nextDayPin(pin(server, true), live(serverAgain, true), false)).toBeNull();
++    expect(nextDayPin(pin(server, true), live(bundled, false), false)).toBeNull();
++  });
++
++  it("takes a new copy for a new language, as before", () => {
++    expect(nextDayPin(pin(server, true, "es"), live(bundled, false, "en"), true)).toEqual(pin(bundled, false, "en"));
++  });
++
++  it("waits while the live path has no such day", () => {
++    expect(nextDayPin(null, { locale: "es", path: bundled, hasDay: false, fromServer: false, sameSteps: false }, false)).toBeNull();
++    expect(
++      nextDayPin(pin(bundled, false), { locale: "es", path: undefined, hasDay: false, fromServer: true, sameSteps: false }, false),
++    ).toBeNull();
++  });
++});
+diff --git a/apps/mobile/src/lib/dayPin.ts b/apps/mobile/src/lib/dayPin.ts
+new file mode 100644
+index 0000000..87754ce
+--- /dev/null
++++ b/apps/mobile/src/lib/dayPin.ts
+@@ -0,0 +1,53 @@
++/**
++ * Which copy of a day the day screen keeps on screen (`app/path/day.tsx`).
++ *
++ * The day's content is pinned for the life of the screen so a refetch cannot
++ * rebuild the day under her. But the first copy available on a cold open (a
++ * direct link, a notification, Onboarding's "start Day 1", a slow network) is
++ * the bundled fallback, not the CMS copy the server checks answers against.
++ * Pinned for good, that showed different words from the ones everyone else
++ * saw, and where the two copies name a step differently every answer was
++ * refused (`step_not_found`, 404) and sat on the phone as "Guardando tu lugar".
++ *
++ * So the bundled pin is provisional: it gives way to the server copy once,
++ * when that arrives — at once while she has not sent an answer from this
++ * screen, and after that only when the server's day has exactly the same steps
++ * (ids and kinds), so only the words change and no screen, cursor or answer
++ * moves under her. A server day shaped differently after she has answered is
++ * left as it was, as before. Pure, so it runs in Node (`dayPin.test.ts`).
++ */
++export interface DayPin<P> {
++  locale: string;
++  path: P;
++  /** The CMS copy (as opposed to the bundled fallback). */
++  fromServer: boolean;
++}
++
++export interface LiveDay<P> {
++  locale: string;
++  path: P | undefined;
++  /** The live path has this day at all. */
++  hasDay: boolean;
++  /** The live path is the CMS copy for this area. */
++  fromServer: boolean;
++  /** The live day has the same steps (ids and kinds, in order) as the pinned one. */
++  sameSteps: boolean;
++}
++
++/** The same steps, in order, by id and kind: what screens, answers and the cursor are keyed by. */
++export function sameSteps(a: readonly { id: string; kind: string }[], b: readonly { id: string; kind: string }[]): boolean {
++  return a.length === b.length && a.every((s, i) => s.id === b[i]!.id && s.kind === b[i]!.kind);
++}
++
++/**
++ * The pin to set now, or `null` to keep the current one.
++ *
++ * `answered`: she has sent an answer (or a skip) from this screen.
++ */
++export function nextDayPin<P>(pinned: DayPin<P> | null, live: LiveDay<P>, answered: boolean): DayPin<P> | null {
++  if (!live.path || !live.hasDay) return null;
++  const take = { locale: live.locale, path: live.path, fromServer: live.fromServer };
++  if (!pinned || pinned.locale !== live.locale) return take;
++  if (!pinned.fromServer && live.fromServer && pinned.path !== live.path && (!answered || live.sameSteps)) return take;
++  return null;
++}
+-- 
+2.43.0
+
+
+From 8e7d820301e30517ef9ddba6103c098228312f44 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 06:33:48 +0000
+Subject: [PATCH 03/11] Hoy waits for her own progress before offering a day
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+After a sign-in on a new phone, or again after her session expired, the
+store's progress is either a fresh Day 1 or empty until /api/me/paths
+lands. Hoy (and the Atlas "Continue") read that as "Semana 1 · Día 1 ·
+Empezar el día 1": a member in week 2 was offered Day 1, forever if the
+read failed, and answering it rewrote the Day 1 answers she gave weeks ago.
+
+The store now records whose progress it holds (progressSyncedFor): set by
+a server read made for the signed-in account, or by a brand-new account's
+own start in finalizeOnboarding, persisted with the progress, cleared by
+accountReset. Today's entry is null until it names her; Hoy shows a
+placeholder while the read is on its way and the existing "No pudimos
+cargar esto ahora…" + "Reintentar" if it failed. A read made for another
+account is never applied. Stores persisted before the field count as the
+last account's, so an offline first launch after the update still works.
+
+Tests: progressSync.test.ts (through the real store), accountState.test.ts.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MRH1FyKGTN3zfVru4KrGk9
+---
+ apps/mobile/app/(tabs)/index.tsx           |  24 ++++-
+ apps/mobile/src/hooks/useTodayEntry.ts     |  27 ++++-
+ apps/mobile/src/lib/SessionSync.tsx        |  18 +++-
+ apps/mobile/src/lib/onboarding.ts          |   7 ++
+ apps/mobile/src/store/accountState.test.ts |  62 ++++++++++-
+ apps/mobile/src/store/accountState.ts      |  55 ++++++++++
+ apps/mobile/src/store/progressSync.test.ts | 116 +++++++++++++++++++++
+ apps/mobile/src/store/useAppStore.ts       |  38 ++++++-
+ 8 files changed, 335 insertions(+), 12 deletions(-)
+ create mode 100644 apps/mobile/src/store/progressSync.test.ts
+
+diff --git a/apps/mobile/app/(tabs)/index.tsx b/apps/mobile/app/(tabs)/index.tsx
+index 1303175..3437ef6 100644
+--- a/apps/mobile/app/(tabs)/index.tsx
++++ b/apps/mobile/app/(tabs)/index.tsx
+@@ -32,7 +32,7 @@ import { useAssessments } from "@/hooks/useAssessments";
+ import { useResources } from "@/hooks/useResources";
+ import { useTabBarClearance } from "@/hooks/useTabBarClearance";
+ import { calendarDaysBetween, recallFor, type ResolvedEntry } from "@/hooks/todayEntry";
+-import { placeWordsFor, useTodayEntry, type TodayEntry } from "@/hooks/useTodayEntry";
++import { placeWordsFor, useProgressStatus, useTodayEntry, type TodayEntry } from "@/hooks/useTodayEntry";
+ import { formatLocale, useT, type Strings } from "@/i18n";
+ import { api } from "@/lib/api";
+ import { mastheadParts } from "@/lib/dates";
+@@ -40,7 +40,8 @@ import { greetingName } from "@/lib/greetingName";
+ import { HELP_NOW_ROUTE } from "@/lib/helpNow";
+ import { welcomeLine } from "@/lib/onboardingAnswers";
+ import { qk, queryClient } from "@/lib/query";
+-import { FadeIn, PressableScale, stagger, useFocusEntrance } from "@/motion";
++import { DelayedLoader, FadeIn, PressableScale, SkeletonCard, stagger, useFocusEntrance } from "@/motion";
++import { TertiaryAction } from "@/components/system/TertiaryAction";
+ import { useAppStore } from "@/store/useAppStore";
+ import { colors, fontFamily, padding, radius, spacing, withAlpha } from "@/theme";
+ 
+@@ -66,6 +67,9 @@ export default function TodayScreen() {
+   const t = useT();
+   const router = useRouter();
+   const entry = useTodayEntry({ source: "today" });
++  // Until her own progress is read (a new phone, a sign-in after her session
++  // ended) there is no day to offer: a placeholder, or a retry if the read failed.
++  const progressRead = useProgressStatus();
+   const { area, path, progress } = useWeekWorld();
+   const user = useAppStore((s) => s.user);
+   const { data: resources, refetch: refetchResources } = useResources();
+@@ -236,6 +240,21 @@ export default function TodayScreen() {
+         </FadeIn>
+       ) : null}
+ 
++      {/* Her progress is not read yet: hold the postcard's place rather than
++          offer a day that may not be hers to start. */}
++      {progressRead.status === "loading" ? (
++        <DelayedLoader active>
++          <SkeletonCard />
++        </DelayedLoader>
++      ) : progressRead.status === "failed" ? (
++        <View style={styles.progressFailed}>
++          <AppText variant="body" center color={colors.textSecondary}>
++            {t.common.state.loadFailed}
++          </AppText>
++          <TertiaryAction label={t.common.action.retry} onPress={progressRead.retry} />
++        </View>
++      ) : null}
++
+       {/* The postcard: today's place and the one action. */}
+       {entry && card && place ? (
+         <FadeIn runKey={entrance} delay={stagger.step} from="none" duration={450}>
+@@ -467,6 +486,7 @@ const styles = StyleSheet.create({
+     borderColor: withAlpha(colors.brand, 0.18),
+   },
+   welcomeText: { flex: 1, gap: spacing[2] },
++  progressFailed: { alignItems: "center", gap: spacing[3], paddingVertical: spacing[6] },
+   // Clear of the stamp, which hangs over the top of the card's words.
+   placeLine: { paddingRight: 66, fontFamily: fontFamily.sansSemibold },
+   action: { marginTop: spacing[1.5] },
+diff --git a/apps/mobile/src/hooks/useTodayEntry.ts b/apps/mobile/src/hooks/useTodayEntry.ts
+index 7aec137..7ecaefc 100644
+--- a/apps/mobile/src/hooks/useTodayEntry.ts
++++ b/apps/mobile/src/hooks/useTodayEntry.ts
+@@ -1,3 +1,4 @@
++import { useQuery } from "@tanstack/react-query";
+ import { useRouter } from "expo-router";
+ import { useCallback, useMemo } from "react";
+ import { useWeekWorld } from "@/components/journey/useWeekWorld";
+@@ -6,6 +7,8 @@ import type { WorldId } from "@/components/world/types";
+ import { placeOfWorld, type PlaceId } from "@/content/places";
+ import type { AreaKey } from "@/content/types";
+ import { useT, type Strings } from "@/i18n";
++import { qk, queryClient } from "@/lib/query";
++import { progressReady, progressStatus, type ProgressStatus } from "@/store/accountState";
+ import { useAppStore } from "@/store/useAppStore";
+ import { useDayPlace } from "@/store/useDayPlace";
+ import { entryWords, resolveTodayEntry, type EntrySource, type ResolvedEntry } from "./todayEntry";
+@@ -75,6 +78,9 @@ export function useTodayEntry({ area, source = "today" }: { area?: AreaKey; sour
+   // calendar fact, so the entry is re-read when the day turns.
+   const todayKey = useAppStore((s) => s.todayKey);
+   const userId = useAppStore((s) => s.user?.id ?? null);
++  // No door into a day until the progress in the store is hers: before her
++  // own progress is read, the store says "Week 1 · Day 1" (`progressReady`).
++  const ready = useAppStore((s) => progressReady(s.progressSyncedFor, s.user?.id));
+   // Where she was inside an unfinished day, on this phone. Only her own.
+   const place = useDayPlace((s) => (s.owner != null && s.owner === userId ? s.places[key] : undefined));
+   // The steps of this Area holding a draft, as one string so typing (a new
+@@ -88,7 +94,7 @@ export function useTodayEntry({ area, source = "today" }: { area?: AreaKey; sour
+   });
+ 
+   const resolved = useMemo(() => {
+-    if (!path) return null;
++    if (!path || !ready) return null;
+     const drafts = new Set(draftKeys ? draftKeys.split("\n") : []);
+     return resolveTodayEntry({
+       area: key,
+@@ -105,7 +111,7 @@ export function useTodayEntry({ area, source = "today" }: { area?: AreaKey; sour
+     // `todayKey` is not read inside: it is what re-reads the clock at midnight.
+     // The gate is a fresh object every render; its three fields are what count.
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+-  }, [key, path, progress, started, gate?.finishedDay, gate?.nextDay, gate?.opensAt, rule, premium, place, draftKeys, source, todayKey]);
++  }, [key, path, ready, progress, started, gate?.finishedDay, gate?.nextDay, gate?.opensAt, rule, premium, place, draftKeys, source, todayKey]);
+ 
+   const href = resolved?.href;
+   const go = useCallback(() => {
+@@ -118,3 +124,20 @@ export function useTodayEntry({ area, source = "today" }: { area?: AreaKey; sour
+     return { ...resolved, ...entryWords(resolved, t.home.hoy.entry, words.name), place: words, go };
+   }, [resolved, t, key, go]);
+ }
++
++/**
++ * Whether her progress is ready for today's entry, and, while it is not,
++ * whether the read is still on its way or failed (`accountState.progressStatus`).
++ * Hoy shows a placeholder or a retry where the day would be, instead of a
++ * Day 1 that is not hers. Observes the progress read SessionSync makes; it
++ * never fetches on its own.
++ */
++export function useProgressStatus(): { status: ProgressStatus; retry: () => void } {
++  const ready = useAppStore((s) => progressReady(s.progressSyncedFor, s.user?.id));
++  const read = useQuery({ queryKey: qk.myPaths, enabled: false });
++  const status = progressStatus({ ready, query: read.status, fetching: read.fetchStatus === "fetching" });
++  const retry = useCallback(() => {
++    void queryClient.refetchQueries({ queryKey: qk.myPaths });
++  }, []);
++  return { status, retry };
++}
+diff --git a/apps/mobile/src/lib/SessionSync.tsx b/apps/mobile/src/lib/SessionSync.tsx
+index f5d3f35..eb9ae11 100644
+--- a/apps/mobile/src/lib/SessionSync.tsx
++++ b/apps/mobile/src/lib/SessionSync.tsx
+@@ -154,7 +154,14 @@ export function SessionSync() {
+   useEffect(() => {
+     setWorld25dEnabled(world25d);
+   }, [world25d]);
+-  const pathsQ = useQuery({ queryKey: qk.myPaths, queryFn: api.getMyPaths, enabled: authed });
++  // Her progress, tagged with the account it was read for: it is what lets
++  // Hoy offer her day (`progressSyncedFor`), and a read that lands after the
++  // session changed hands is never taken for the next account's.
++  const pathsQ = useQuery({
++    queryKey: qk.myPaths,
++    queryFn: async () => ({ owner: userId ?? null, list: await api.getMyPaths() }),
++    enabled: authed,
++  });
+   const obQ = useQuery({ queryKey: qk.onboarding, queryFn: api.getOnboarding, enabled: authed });
+   const subQ = useQuery({
+     queryKey: qk.subscription,
+@@ -455,9 +462,12 @@ export function SessionSync() {
+     });
+   }, [authed, router]);
+ 
++  // Applied again when the store changes hands: a sign-in that resets the
++  // store after her read has landed would otherwise leave it empty.
++  const storeUserId = useAppStore((s) => s.user?.id ?? null);
+   useEffect(() => {
+-    if (pathsQ.data) hydrateProgress(pathsQ.data);
+-  }, [pathsQ.data, hydrateProgress]);
++    if (pathsQ.data) hydrateProgress(pathsQ.data.list, pathsQ.data.owner);
++  }, [pathsQ.data, hydrateProgress, storeUserId]);
+ 
+   // Onboarding's recommended Area, only while she has not started another
+   // (`adoptRecommendedArea`): applied on every read, it put a member who had
+@@ -469,7 +479,7 @@ export function SessionSync() {
+     const adopt = adoptRecommendedArea({
+       activeArea,
+       recommended,
+-      serverAreas: pathsQ.data.map((p) => p.area),
++      serverAreas: pathsQ.data.list.map((p) => p.area),
+       local: progress[activeArea],
+     });
+     if (adopt) setActiveArea(recommended);
+diff --git a/apps/mobile/src/lib/onboarding.ts b/apps/mobile/src/lib/onboarding.ts
+index 7b4bb73..9963594 100644
+--- a/apps/mobile/src/lib/onboarding.ts
++++ b/apps/mobile/src/lib/onboarding.ts
+@@ -73,6 +73,13 @@ export async function finalizeOnboarding(): Promise<boolean> {
+   // Today's first visit opens with a line from her summary (spec §3).
+   st.setTodayWelcomePending(true);
+   await refetchAccount();
++  // Her account is brand new, so the path this phone starts for her is all
++  // the progress there is: Hoy may offer it without waiting on a read, which
++  // offline would never come (`accountState.progressReady`).
++  const owner = useAppStore.getState().user?.id;
++  if (owner && useAppStore.getState().progressSyncedFor !== owner) {
++    useAppStore.getState().markProgressSynced(owner);
++  }
+   return ok;
+ }
+ 
+diff --git a/apps/mobile/src/store/accountState.test.ts b/apps/mobile/src/store/accountState.test.ts
+index 81e7a84..1d3aa5a 100644
+--- a/apps/mobile/src/store/accountState.test.ts
++++ b/apps/mobile/src/store/accountState.test.ts
+@@ -1,5 +1,12 @@
+ import { describe, expect, it } from "vitest";
+-import { accountReset, accountSettings, freshOnboarding } from "./accountState";
++import {
++  accountReset,
++  accountSettings,
++  freshOnboarding,
++  progressReady,
++  progressStatus,
++  progressSyncedOnLaunch,
++} from "./accountState";
+ import type { Settings } from "./useAppStore";
+ 
+ /**
+@@ -117,6 +124,7 @@ describe("accountReset", () => {
+         "pendingFeedback",
+         "pendingSteps",
+         "progress",
++        "progressSyncedFor",
+         "recentResourceIds",
+         "safetyPauses",
+         "settings",
+@@ -128,4 +136,56 @@ describe("accountReset", () => {
+       ].sort(),
+     );
+   });
++
++  it("makes the progress no one's, so the next account's is read before a day is offered", () => {
++    expect(accountReset(settingsWith()).progressSyncedFor).toBeNull();
++  });
++});
++
++describe("progressReady (beta hardening, 3 Nov 2026)", () => {
++  // Before: a member in week 2 who signed in on a new phone, or again after her
++  // session expired, was offered «Semana 1 · Día 1 · Empezar el día 1» until her
++  // progress arrived (forever if the read failed), and answering it rewrote the
++  // Day 1 answers she gave weeks ago.
++  it("is not ready until her own progress has been read", () => {
++    expect(progressReady(null, "u1")).toBe(false);
++    expect(progressReady(undefined, "u1")).toBe(false);
++    expect(progressReady("u0", "u1")).toBe(false);
++    expect(progressReady("u1", "u1")).toBe(true);
++  });
++
++  it("gates nothing while signed out", () => {
++    expect(progressReady(null, null)).toBe(true);
++    expect(progressReady(undefined, undefined)).toBe(true);
++  });
++});
++
++describe("progressSyncedOnLaunch", () => {
++  it("counts a store from a build before the field as the last account's", () => {
++    expect(progressSyncedOnLaunch(undefined, "u1")).toBe("u1");
++    expect(progressSyncedOnLaunch(undefined, null)).toBeNull();
++  });
++
++  it("keeps what this build wrote", () => {
++    expect(progressSyncedOnLaunch(null, "u1")).toBeNull();
++    expect(progressSyncedOnLaunch("u1", "u1")).toBe("u1");
++  });
++});
++
++describe("progressStatus", () => {
++  it("is ready once her progress is hers, whatever the read is doing", () => {
++    expect(progressStatus({ ready: true, query: "error", fetching: false })).toBe("ready");
++    expect(progressStatus({ ready: true, query: "pending", fetching: true })).toBe("ready");
++  });
++
++  it("is loading while the read is on its way", () => {
++    expect(progressStatus({ ready: false, query: "pending", fetching: true })).toBe("loading");
++    expect(progressStatus({ ready: false, query: "pending", fetching: false })).toBe("loading");
++    // A retry after a failure is on its way again.
++    expect(progressStatus({ ready: false, query: "error", fetching: true })).toBe("loading");
++  });
++
++  it("offers a retry once the read failed and nothing is in flight", () => {
++    expect(progressStatus({ ready: false, query: "error", fetching: false })).toBe("failed");
++  });
+ });
+diff --git a/apps/mobile/src/store/accountState.ts b/apps/mobile/src/store/accountState.ts
+index 5be2f31..43f1633 100644
+--- a/apps/mobile/src/store/accountState.ts
++++ b/apps/mobile/src/store/accountState.ts
+@@ -73,6 +73,9 @@ export function accountReset(current: Settings): Partial<AppState> {
+     betaOpenAreas: undefined,
+     activeArea: "money",
+     progress: {} as AppState["progress"],
++    // The progress above is no one's yet: the next account's is read again
++    // before any door into a day is offered (`progressReady`).
++    progressSyncedFor: null,
+     onboarding: freshOnboarding(),
+     // Her summary's line belongs to her; the next person is never greeted with it.
+     todayWelcomePending: false,
+@@ -103,6 +106,58 @@ export function accountReset(current: Settings): Partial<AppState> {
+   };
+ }
+ 
++// ── Whose progress this is ──────────────────────────────────────────────────
++
++/**
++ * Whether the path progress in the store is this account's, so a door into a
++ * day may be offered from it (Hoy's postcard, the Atlas "Continue").
++ *
++ * The store starts every install with a fresh Day 1 for Money, and a session
++ * change resets progress to nothing. Until her own progress is read, both
++ * read as "Week 1 · Day 1, Start". A member in week 2 who signed in on a new
++ * phone, or again after her session expired, was offered Day 1, and answering
++ * it rewrote the Day 1 answers she gave weeks ago. So the doors wait for
++ * `progressSyncedFor` to name her: set by a server read of her progress
++ * (`hydrateProgress`) or by her own brand-new account's start
++ * (`finalizeOnboarding`), persisted with the progress it vouches for, and
++ * cleared by `accountReset`. Signed out, nothing is gated here.
++ */
++export function progressReady(syncedFor: string | null | undefined, userId: string | null | undefined): boolean {
++  if (!userId) return true;
++  return syncedFor === userId;
++}
++
++/**
++ * `progressSyncedFor` as a launch should read it. A store persisted by a build
++ * before the field existed has no value at all (`undefined`): its progress was
++ * kept for the account in `lastUserId` (a different account always reset it),
++ * so it counts as that account's rather than making every member wait for a
++ * network read on the first launch of this build, offline included.
++ */
++export function progressSyncedOnLaunch(
++  syncedFor: string | null | undefined,
++  lastUserId: string | null | undefined,
++): string | null {
++  return syncedFor === undefined ? (lastUserId ?? null) : syncedFor;
++}
++
++/**
++ * What Hoy shows in place of the day while her progress is not ready: the
++ * read is still on its way (`loading`), or it failed and nothing is in flight
++ * (`failed`, with a retry). `ready` once `progressReady` holds.
++ */
++export type ProgressStatus = "ready" | "loading" | "failed";
++
++export function progressStatus(o: {
++  ready: boolean;
++  /** The progress query's status (`/api/me/paths`). */
++  query: "pending" | "error" | "success";
++  fetching: boolean;
++}): ProgressStatus {
++  if (o.ready) return "ready";
++  return o.query === "error" && !o.fetching ? "failed" : "loading";
++}
++
+ // ── When a session ends ─────────────────────────────────────────────────────
+ 
+ /**
+diff --git a/apps/mobile/src/store/progressSync.test.ts b/apps/mobile/src/store/progressSync.test.ts
+new file mode 100644
+index 0000000..73d2b33
+--- /dev/null
++++ b/apps/mobile/src/store/progressSync.test.ts
+@@ -0,0 +1,116 @@
++import { beforeEach, describe, expect, it, vi } from "vitest";
++
++/**
++ * Whose progress the store holds (beta hardening, 3 Nov 2026), through the
++ * real store: a new phone starts on a Day 1 that is no one's, a sign-in or an
++ * ended session makes the progress no one's again, and only a read made for
++ * the signed-in account (or her brand-new account's own start) makes it hers.
++ * Hoy offers a day only then (`progressReady`); before, a week-2 member who
++ * signed in on a new phone was offered Day 1 and answering it rewrote her
++ * Day 1 answers.
++ *
++ * The network, the string catalogue and storage are stubbed; nothing else is.
++ */
++
++vi.mock("@/lib/api", () => ({ api: {}, ApiError: class extends Error {} }));
++vi.mock("@/i18n", () => ({ LAUNCH_LOCALE: "es", setActiveLocale: () => {} }));
++vi.mock("@/lib/query", () => ({ qk: { myPaths: ["myPaths"] }, queryClient: { invalidateQueries: vi.fn() } }));
++vi.mock("./persistStorage", () => {
++  const m = new Map<string, string>();
++  return {
++    makePersistStorage: () => ({
++      getItem: (k: string) => m.get(k) ?? null,
++      setItem: (k: string, v: string) => void m.set(k, v),
++      removeItem: (k: string) => void m.delete(k),
++    }),
++  };
++});
++
++const { useAppStore } = await import("./useAppStore");
++const { progressReady } = await import("./accountState");
++
++const store = () => useAppStore.getState();
++const ready = () => progressReady(store().progressSyncedFor, store().user?.id);
++const member = (id: string) => ({ id, name: "Lucía Prueba", email: `${id}@example.com`, avatar: null, isAnonymous: false });
++
++/** Week 1 walked: today is week 2, day 1 (path day 8). */
++const weekOneDone = {
++  area: "money" as const,
++  currentDay: 8,
++  completedDays: [1, 2, 3, 4, 5, 6, 7],
++  responses: {},
++  stepAnswers: { 1: { ask: { value: "Lo que gano", answeredAt: 1_793_127_540_000 } } },
++  dayCompletedAt: { 7: 1_793_646_000_000 },
++  startedAt: 1_793_124_000_000,
++};
++
++beforeEach(() => {
++  // A fresh install: the store's own Day 1 for Money, and no account.
++  useAppStore.setState({
++    user: null,
++    lastUserId: null,
++    progressSyncedFor: null,
++    pendingSteps: [],
++    progress: { money: { currentDay: 1, completedDays: [], responses: {}, stepAnswers: {}, startedAt: 1 } } as never,
++  });
++});
++
++describe("progress the store can vouch for", () => {
++  it("a new phone's Day 1 is no one's: a member who signs in waits for her own", () => {
++    store().setSessionUser(member("u1"));
++    // The store still says Day 1, and it is not hers.
++    expect(store().progress.money?.currentDay).toBe(1);
++    expect(ready()).toBe(false);
++
++    store().hydrateProgress([weekOneDone], "u1");
++    expect(ready()).toBe(true);
++    expect(store().progress.money?.currentDay).toBe(8);
++  });
++
++  it("a read made for another account is not applied", () => {
++    store().setSessionUser(member("u1"));
++    store().hydrateProgress([weekOneDone], "u2");
++    expect(ready()).toBe(false);
++    expect(store().progress.money?.currentDay).toBe(1);
++  });
++
++  it("a read that lands before the profile is still hers once the profile says so", () => {
++    // SessionSync can read her progress before `/api/me` names her.
++    store().hydrateProgress([weekOneDone], "u1");
++    store().setSessionUser(member("u1"));
++    expect(ready()).toBe(true);
++    expect(store().progress.money?.currentDay).toBe(8);
++  });
++
++  it("an expired session makes it no one's again", () => {
++    store().setSessionUser(member("u1"));
++    store().hydrateProgress([weekOneDone], "u1");
++    store().endSession("expired");
++    store().setSessionUser(member("u1"));
++    expect(ready()).toBe(false);
++  });
++
++  it("another account signing in on this phone waits for its own", () => {
++    store().setSessionUser(member("u1"));
++    store().hydrateProgress([weekOneDone], "u1");
++    store().setSessionUser(member("u2"));
++    expect(ready()).toBe(false);
++    expect(store().progress.money).toBeUndefined();
++  });
++
++  it("an offline relaunch keeps her progress hers (the flag is persisted with it)", () => {
++    store().setSessionUser(member("u1"));
++    store().hydrateProgress([weekOneDone], "u1");
++    // Same account, same store: nothing resets it.
++    store().setSessionUser(member("u1"));
++    expect(ready()).toBe(true);
++    expect(store().progressSyncedFor).toBe("u1");
++  });
++
++  it("a brand-new account's own start is hers without a read", () => {
++    store().setSessionUser(member("u3"));
++    expect(ready()).toBe(false);
++    store().markProgressSynced("u3");
++    expect(ready()).toBe(true);
++  });
++});
+diff --git a/apps/mobile/src/store/useAppStore.ts b/apps/mobile/src/store/useAppStore.ts
+index e3ba951..463d4b0 100644
+--- a/apps/mobile/src/store/useAppStore.ts
++++ b/apps/mobile/src/store/useAppStore.ts
+@@ -35,6 +35,7 @@ import {
+   endSession,
+   expireHeld,
+   freshOnboarding,
++  progressSyncedOnLaunch,
+   startSession,
+   type SessionEnd,
+ } from "./accountState";
+@@ -322,7 +323,22 @@ export interface AppState {
+   setHasOnboarded: (value: boolean) => void;
+   setAuthLoaded: (value: boolean) => void;
+   setActiveArea: (area: AreaKey) => void;
+-  hydrateProgress: (list: ServerProgress[]) => void;
++  /**
++   * Her progress as the server read it. `owner` is the account the read was
++   * made for: it marks the progress as hers (`progressSyncedFor`), and a read
++   * made for another account than the one signed in here is not applied.
++   */
++  hydrateProgress: (list: ServerProgress[], owner?: string | null) => void;
++  /**
++   * The account whose path progress the store holds from a server read, or
++   * from her own brand-new account's start. Until it names the signed-in
++   * account, no door into a day is offered from the store's progress
++   * (`accountState.progressReady`). `undefined` only in a store persisted
++   * before it existed (`progressSyncedOnLaunch`).
++   */
++  progressSyncedFor: string | null | undefined;
++  /** A brand-new account's progress is what this phone started (`finalizeOnboarding`). */
++  markProgressSynced: (owner: string) => void;
+ 
+   // entitlement / subscription
+   subscription: SubscriptionDTO | null;
+@@ -847,8 +863,13 @@ export const useAppStore = create<AppState>()(
+       setHasOnboarded: (value) => set({ hasOnboarded: value }),
+       setAuthLoaded: (value) => set({ authLoaded: value }),
+       setActiveArea: (area) => set({ activeArea: area }),
+-      hydrateProgress: (list) =>
++      progressSyncedFor: undefined,
++      markProgressSynced: (owner) => set({ progressSyncedFor: owner }),
++      hydrateProgress: (list, owner) =>
+         set((s) => {
++          // A read made for another account (a session that changed while it
++          // was in flight) is not hers: the read for her is on its way.
++          if (owner && s.user && s.user.id !== owner) return {};
+           const progress = {} as AppState["progress"];
+           for (const p of list) progress[p.area] = fromServer(p, s.progress[p.area]);
+           // What the queue holds and the server has not heard about, laid back
+@@ -858,7 +879,10 @@ export const useAppStore = create<AppState>()(
+           // Completion is left to the server: the flush invalidates this query
+           // once the queue lands.
+           overlayPending(progress, s.pendingSteps);
+-          return { progress: localizeProgress(progress, s.locale) };
++          return {
++            progress: localizeProgress(progress, s.locale),
++            ...(owner ? { progressSyncedFor: owner } : {}),
++          };
+         }),
+ 
+       subscription: null,
+@@ -1345,6 +1369,8 @@ export const useAppStore = create<AppState>()(
+         // offline relaunch opened on Day 1. Kept with the queue that feeds it,
+         // so an answer given offline is still on screen after a restart.
+         progress: s.progress,
++        // Whose that progress is, so an offline relaunch can still offer her day.
++        progressSyncedFor: s.progressSyncedFor,
+         activeArea: s.activeArea,
+         pendingSteps: s.pendingSteps,
+         // Only behind the review gate (off): see `safetyAck.ts`.
+@@ -1406,6 +1432,12 @@ export const useAppStore = create<AppState>()(
+           queueMicrotask(() => useAppStore.setState({ locale: LAUNCH_LOCALE }));
+           setActiveLocale(LAUNCH_LOCALE);
+         } else if (state?.locale) setActiveLocale(state.locale);
++        // Progress persisted by a build before `progressSyncedFor` existed is
++        // the last account's (`progressSyncedOnLaunch`).
++        if (state && state.progressSyncedFor === undefined) {
++          const syncedFor = progressSyncedOnLaunch(state.progressSyncedFor, state.lastUserId);
++          queueMicrotask(() => useAppStore.setState({ progressSyncedFor: syncedFor }));
++        }
+         // Held work is kept for a bounded window, never indefinitely.
+         if (state?.heldForSignIn && !expireHeld(state.heldForSignIn, Date.now())) {
+           queueMicrotask(() => useAppStore.setState({ heldForSignIn: null }));
+-- 
+2.43.0
+
+
+From c72c2bb812f190d32e7a178af3ec1afdc15d84ae Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 06:54:40 +0000
+Subject: [PATCH 04/11] Log out asks first when answers have not reached her
+ account
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Log out clears the step, check-in and feedback queues (a deliberate end),
+but its dialog promised «Tu avance y tus reflexiones se quedan aquí,
+guardados, para cuando vuelvas.» An answer given offline and then a Log out
+was gone after signing back in.
+
+The dialog now tries the queues once more as it opens and again before the
+session ends (capped at 4 s), and while anything is still unsent it says so
+instead (unsentCount): «¿Cerrar sesión sin sincronizar?» / «Algunas de tus
+respuestas todavía no llegaron a tu cuenta. Si cierras sesión ahora, se
+borrarán de este teléfono.» / «Cerrar sesión igualmente». New copy is a
+draft pending María and Alejandra (English alongside).
+
+Tests: sessionEnd.test.ts (unsentCount).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MRH1FyKGTN3zfVru4KrGk9
+---
+ apps/mobile/app/(modals)/logout.tsx        | 34 +++++++++++++++++++++-
+ apps/mobile/src/i18n/locales/en/account.ts |  4 +++
+ apps/mobile/src/i18n/locales/es/account.ts |  5 ++++
+ apps/mobile/src/store/accountState.ts      | 19 ++++++++++++
+ apps/mobile/src/store/sessionEnd.test.ts   | 34 ++++++++++++++++++++++
+ 5 files changed, 95 insertions(+), 1 deletion(-)
+
+diff --git a/apps/mobile/app/(modals)/logout.tsx b/apps/mobile/app/(modals)/logout.tsx
+index 997b535..734e446 100644
+--- a/apps/mobile/app/(modals)/logout.tsx
++++ b/apps/mobile/app/(modals)/logout.tsx
+@@ -1,4 +1,5 @@
+ import { useRouter } from "expo-router";
++import { useEffect } from "react";
+ import { Dialog } from "@/components";
+ import { useT } from "@/i18n";
+ import { signOut } from "@/lib/authClient";
+@@ -9,14 +10,27 @@ import { logoutPurchases } from "@/lib/purchases";
+ import { queryClient } from "@/lib/query";
+ import { beginDeliberateEnd } from "@/lib/sessionEnd";
+ import { setSigningOut } from "@/lib/signingOut";
++import { unsentCount } from "@/store/accountState";
+ import { useAppStore } from "@/store/useAppStore";
+ 
+ /** The longest the push-token removal may hold up the sign-out itself. */
+ const UNREGISTER_MAX_MS = 4000;
+ /** The longest the rest may take before the phone signs her out locally anyway. */
+ const TEARDOWN_MAX_MS = 6000;
++/** The longest a last try at sending her unsent answers may hold up the sign-out. */
++const FLUSH_MAX_MS = 4000;
+ const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+ 
++/**
++ * Send what she has not sent yet, while there is still a session to send it
++ * under. Log out clears the queues (`endSession("signedOut")`): whatever is
++ * still in them after this is gone, which is why the dialog asks first.
++ */
++function flushUnsent(): Promise<unknown> {
++  const s = useAppStore.getState();
++  return Promise.all([s.flushSteps(), s.flushCheckIns(), s.flushFeedback()]).catch(() => {});
++}
++
+ /**
+  * Only the push-token removal is capped *before* the sign-out. It used to be
+  * awaited whole (its own timeout is 15 s), the overall cap then fired first,
+@@ -25,6 +39,8 @@ const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve,
+  * and the server session both survived a closed app.
+  */
+ async function teardown() {
++  // Her answers first, while the session that owns them is still here.
++  await Promise.race([flushUnsent(), wait(FLUSH_MAX_MS)]);
+   // Drop this device's push token first: it still needs the session.
+   await Promise.race([unregisterFromPush().catch(() => {}), wait(UNREGISTER_MAX_MS)]);
+   // Started now and never skipped. Its request hook clears the stored cookie
+@@ -51,6 +67,15 @@ export default function LogoutModal() {
+   // usual "it'll be here when you return" would be untrue, so she is told
+   // plainly and offered the way to keep it instead.
+   const guest = useAppStore((s) => !!s.user?.isAnonymous);
++  // Answers given on this phone that have not reached her account. Logging
++  // out deletes them, so «se quedan aquí, guardados» would be untrue: she is
++  // asked instead, and the queue is tried once more while she reads.
++  const unsent = useAppStore((s) => unsentCount(s, s.user?.id));
++  useEffect(() => {
++    if (unsent > 0) void flushUnsent();
++    // On arrival only; the count above follows the queue as it drains.
++    // eslint-disable-next-line react-hooks/exhaustive-deps
++  }, []);
+   const copy = guest
+     ? {
+         title: t.account.guest.logoutTitle,
+@@ -58,7 +83,14 @@ export default function LogoutModal() {
+         confirm: t.account.guest.logoutConfirm,
+         cancel: t.account.guest.logoutSave,
+       }
+-    : t.account.logout;
++    : unsent > 0
++      ? {
++          title: t.account.logout.unsentTitle,
++          body: t.account.logout.unsentBody,
++          confirm: t.account.logout.unsentConfirm,
++          cancel: t.account.logout.cancel,
++        }
++      : t.account.logout;
+   return (
+     <Dialog
+       icon="solar:logout-bold"
+diff --git a/apps/mobile/src/i18n/locales/en/account.ts b/apps/mobile/src/i18n/locales/en/account.ts
+index f100db5..dab1a76 100644
+--- a/apps/mobile/src/i18n/locales/en/account.ts
++++ b/apps/mobile/src/i18n/locales/en/account.ts
+@@ -689,6 +689,10 @@ export const account = {
+     body: "Your progress and reflections will be safely stored here whenever you return.",
+     confirm: "Log out",
+     cancel: "Stay logged in",
++    // DRAFT (beta hardening, 3 Nov 2026): when answers given on this phone have not reached her account yet.
++    unsentTitle: "Log out without syncing?",
++    unsentBody: "Some of your answers haven't reached your account yet. If you log out now, they'll be deleted from this phone.",
++    unsentConfirm: "Log out anyway",
+   },
+ 
+   requestSent: {
+diff --git a/apps/mobile/src/i18n/locales/es/account.ts b/apps/mobile/src/i18n/locales/es/account.ts
+index 4291f18..8be848e 100644
+--- a/apps/mobile/src/i18n/locales/es/account.ts
++++ b/apps/mobile/src/i18n/locales/es/account.ts
+@@ -598,6 +598,11 @@ export const account: Strings["account"] = {
+     body: "Tu avance y tus reflexiones se quedan aquí, guardados, para cuando vuelvas.",
+     confirm: "Cerrar sesión",
+     cancel: "Seguir con la sesión abierta",
++    // BORRADOR (beta hardening, 3 nov 2026), pendiente de María y Alejandra: cuando hay
++    // respuestas dadas en este teléfono que todavía no llegaron a su cuenta.
++    unsentTitle: "¿Cerrar sesión sin sincronizar?",
++    unsentBody: "Algunas de tus respuestas todavía no llegaron a tu cuenta. Si cierras sesión ahora, se borrarán de este teléfono.",
++    unsentConfirm: "Cerrar sesión igualmente",
+   },
+ 
+   requestSent: {
+diff --git a/apps/mobile/src/store/accountState.ts b/apps/mobile/src/store/accountState.ts
+index 43f1633..c51c697 100644
+--- a/apps/mobile/src/store/accountState.ts
++++ b/apps/mobile/src/store/accountState.ts
+@@ -239,6 +239,25 @@ export function heldCount(held: HeldForSignIn | null | undefined): number {
+   return held.pendingSteps.length + held.pendingCheckIns.length + held.pendingFeedback.length;
+ }
+ 
++/**
++ * What she has sent from this phone that has not reached her account yet: her
++ * queued answers (an entry with no owner is the store's account's, as for the
++ * flush), check-ins and day feedback.
++ *
++ * Log out clears all of it (`endSession("signedOut")`), and the Log out dialog
++ * used to promise «Tu avance y tus reflexiones se quedan aquí, guardados» over
++ * it: an answer given offline was gone after logging out and back in. The
++ * dialog now asks first while this is above zero (beta hardening, 3 Nov 2026).
++ */
++export function unsentCount(
++  s: Pick<SessionSlice, "pendingSteps" | "pendingCheckIns" | "pendingFeedback" | "lastUserId">,
++  userId: string | null | undefined,
++): number {
++  if (!userId) return 0;
++  const steps = s.pendingSteps.filter((q) => (q.owner ?? s.lastUserId ?? userId) === userId).length;
++  return steps + s.pendingCheckIns.length + s.pendingFeedback.length;
++}
++
+ const sameStep = (a: PendingStep, b: PendingStep) =>
+   a.area === b.area && a.day === b.day && a.body.stepId === b.body.stepId;
+ 
+diff --git a/apps/mobile/src/store/sessionEnd.test.ts b/apps/mobile/src/store/sessionEnd.test.ts
+index 85ad9d2..8bdd0cf 100644
+--- a/apps/mobile/src/store/sessionEnd.test.ts
++++ b/apps/mobile/src/store/sessionEnd.test.ts
+@@ -9,6 +9,7 @@ import {
+   heldCount,
+   heldUsable,
+   startSession,
++  unsentCount,
+   type SessionSlice,
+ } from "./accountState";
+ import { belongsTo, flushQueueOnce, sameEntry } from "./stepQueue";
+@@ -227,3 +228,36 @@ describe("an offline restart", () => {
+     expect(apply(empty, endSession(empty, "expired", NOW)).heldForSignIn).toBeNull();
+   });
+ });
++
++describe("unsentCount: what Log out would delete (beta hardening, 3 Nov 2026)", () => {
++  // Before: an answer given offline, then Log out under «Tu avance y tus
++  // reflexiones se quedan aquí, guardados»: after signing back in it was gone.
++  it("is what she sent from this phone that has not reached her account", () => {
++    // Two queued answers (one from an older build, with no owner), a check-in, a day's feedback.
++    expect(unsentCount(signedInAsA(), A.id)).toBe(4);
++  });
++
++  it("is exactly what a deliberate Log out clears", () => {
++    const out = apply(signedInAsA(), endSession(signedInAsA(), "signedOut", NOW));
++    expect(out.pendingSteps).toEqual([]);
++    expect(out.pendingCheckIns).toEqual([]);
++    expect(out.pendingFeedback).toEqual([]);
++    expect(out.heldForSignIn).toBeNull();
++    expect(unsentCount(out, A.id)).toBe(0);
++  });
++
++  it("does not count an answer queued for another account", () => {
++    const mixed: SessionSlice = { ...signedInAsA(), pendingSteps: [step("hers", NOW, B.id)], pendingCheckIns: [], pendingFeedback: [] };
++    expect(unsentCount(mixed, A.id)).toBe(0);
++    expect(unsentCount(mixed, B.id)).toBe(1);
++  });
++
++  it("is nothing while signed out", () => {
++    expect(unsentCount(signedInAsA(), null)).toBe(0);
++  });
++
++  it("is nothing once the queue has drained", () => {
++    const sent: SessionSlice = { ...signedInAsA(), pendingSteps: [], pendingCheckIns: [], pendingFeedback: [] };
++    expect(unsentCount(sent, A.id)).toBe(0);
++  });
++});
+-- 
+2.43.0
+
+
+From 55d5c43d1bca3bb5031b9bf8c3221654b98d1578 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 06:54:40 +0000
+Subject: [PATCH 05/11] Tell a free account the truth at the week-2 gate
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+A free account that closed week 1 read «La semana 2, Wuzhen, se abre
+mañana»; the next morning «Empezar el día 1» opened the membership screen,
+which said «Tu camino gratis está listo. … Continúa con el camino que
+elegimos para ti.» with nothing on sale, and «Continuar» went back to the
+same Hoy: a loop with no way forward. Beta testers created after the last
+beta-grant sweep (or whose 90-day grant ends) land exactly here.
+
+- Hoy no longer promises a membership week to an account without one
+  (promisesNextWeek), and a locked week's line carries the path page's
+  existing «· Premium» badge.
+- The membership screen, reached from a locked week with nothing to buy,
+  says «Las membresías no están a la venta en este momento.» and what the
+  free plan holds (freeNoteWithArea), with «Contactar a soporte» to ask.
+  All existing, approved strings.
+
+The way through for testers is still a beta grant (admin, or
+scripts/grant-beta-all.sql re-run after new sign-ups): an owner action.
+
+Tests: todayEntry.test.ts (promisesNextWeek).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MRH1FyKGTN3zfVru4KrGk9
+---
+ apps/mobile/app/(tabs)/index.tsx         | 19 +++++++++++----
+ apps/mobile/app/paywall.tsx              | 23 ++++++++++++++++++
+ apps/mobile/src/hooks/todayEntry.test.ts | 30 ++++++++++++++++++++++++
+ apps/mobile/src/hooks/todayEntry.ts      | 13 ++++++++++
+ 4 files changed, 81 insertions(+), 4 deletions(-)
+
+diff --git a/apps/mobile/app/(tabs)/index.tsx b/apps/mobile/app/(tabs)/index.tsx
+index 3437ef6..8650068 100644
+--- a/apps/mobile/app/(tabs)/index.tsx
++++ b/apps/mobile/app/(tabs)/index.tsx
+@@ -31,7 +31,7 @@ import { useScreenExplainer } from "@/explainers/useExplainer";
+ import { useAssessments } from "@/hooks/useAssessments";
+ import { useResources } from "@/hooks/useResources";
+ import { useTabBarClearance } from "@/hooks/useTabBarClearance";
+-import { calendarDaysBetween, recallFor, type ResolvedEntry } from "@/hooks/todayEntry";
++import { calendarDaysBetween, promisesNextWeek, recallFor, type ResolvedEntry } from "@/hooks/todayEntry";
+ import { placeWordsFor, useProgressStatus, useTodayEntry, type TodayEntry } from "@/hooks/useTodayEntry";
+ import { formatLocale, useT, type Strings } from "@/i18n";
+ import { api } from "@/lib/api";
+@@ -70,6 +70,9 @@ export default function TodayScreen() {
+   // Until her own progress is read (a new phone, a sign-in after her session
+   // ended) there is no day to offer: a placeholder, or a retry if the read failed.
+   const progressRead = useProgressStatus();
++  // Membership, `null` while it loads: a week it does not cover is said to be
++  // one, rather than promised to open.
++  const premium = useAppStore((s) => (s.subscription === null ? null : s.isPremium));
+   const { area, path, progress } = useWeekWorld();
+   const user = useAppStore((s) => s.user);
+   const { data: resources, refetch: refetchResources } = useResources();
+@@ -170,7 +173,9 @@ export default function TodayScreen() {
+   const dayPlace = entry && placeDef && entry.kind !== "week" ? dayPlaceWords(t.dayPlaces, placeDef.area, entry.dayInWeek) : null;
+   // The card names the day in short; the full question waits inside the session.
+   const dayTitle = shortDayTitle(content?.title, question, place?.worldId && entry ? landmark(t, place.worldId, entry.dayInWeek).toward : null);
+-  const card = entry ? postcardWords(entry, t, dayTitle, content?.config?.minutes, now.getTime(), locale, dayPlace?.name ?? place?.name) : null;
++  const card = entry
++    ? postcardWords(entry, t, dayTitle, content?.config?.minutes, now.getTime(), locale, dayPlace?.name ?? place?.name, premium)
++    : null;
+   const photo =
+     entry && placeDef
+       ? entry.kind === "week"
+@@ -407,6 +412,8 @@ function postcardWords(
+   locale: string,
+   /** The place the day's photograph shows, when it is not the week's own ("Paris, France"). */
+   dayWhere?: string,
++  /** Membership, `null` while it loads. */
++  premium: boolean | null = null,
+ ): { placeLine: string; done?: string; title: string; meta?: string } {
+   const h = t.home.hoy;
+   if (entry.kind === "week") {
+@@ -414,10 +421,14 @@ function postcardWords(
+     return {
+       placeLine: h.placeWeek(entry.place.full, entry.week, weeks),
+       title: entry.state === "pathDone" ? h.pathDoneTitle : h.weekDoneTitle(entry.place.name),
+-      meta: opensLine(entry, t, now, locale) ?? undefined,
++      // A next week her membership does not cover does not open for her.
++      meta: promisesNextWeek(entry, premium) ? (opensLine(entry, t, now, locale) ?? undefined) : undefined,
+     };
+   }
+-  const placeLine = h.placeLine(dayWhere ?? entry.place.full, entry.week, entry.dayInWeek);
++  const line = h.placeLine(dayWhere ?? entry.place.full, entry.week, entry.dayInWeek);
++  // A week her membership does not cover says so where the path page does
++  // ("Semana 2 · Premium"): its button opens the membership screen, not the day.
++  const placeLine = entry.membershipRequired ? `${line} · ${t.account.membership.premiumBadge}` : line;
+   if (entry.kind === "review") {
+     return {
+       placeLine,
+diff --git a/apps/mobile/app/paywall.tsx b/apps/mobile/app/paywall.tsx
+index d0695ba..c839ae4 100644
+--- a/apps/mobile/app/paywall.tsx
++++ b/apps/mobile/app/paywall.tsx
+@@ -12,6 +12,7 @@ import {
+   Screen,
+ } from "@/components";
+ import { StickyFooter } from "@/components/system/StickyFooter";
++import { TertiaryAction } from "@/components/system/TertiaryAction";
+ import { useSession } from "@/lib/authClient";
+ import {
+   CrossFade,
+@@ -233,6 +234,10 @@ export default function Paywall() {
+   // Read once per render: `proceed` runs after an await, where a hook call throws.
+   const pathsMap = usePathsMap();
+   const freeAreaName = pathsMap[recommendedArea]?.areaName ?? null;
++  // Sent here by a day in a week her membership does not cover (Hoy, the
++  // Atlas, a locked day), rather than at the end of onboarding.
++  const isPremium = useAppStore((s) => s.isPremium);
++  const lockedWeek = hasOnboarded && !isPremium && returnToIsLockedWeek(returnTo, pathsMap);
+ 
+   const [packages, setPackages] = useState<PurchasesPackage[]>([]);
+   // Prices only ever come from the store. When payments aren't configured the
+@@ -708,6 +713,24 @@ export default function Paywall() {
+                   );
+                 })}
+               </View>
++            ) : lockedWeek ? (
++              // Sent here by a week her membership does not cover, with nothing
++              // to buy: «Tu camino gratis está listo» was untrue (her free week
++              // is behind her) and «Continuar» led back to the same locked day.
++              // Say what the free plan holds, and give her a person to ask.
++              <View style={styles.freeNote}>
++                <AppText variant="cardTitle" center color={colors.foreground}>
++                  {t.account.membership.notOnSale}
++                </AppText>
++                <AppText variant="bodySmall" center color={colors.textSecondary}>
++                  {freeAreaName ? t.account.paywall.freeNoteWithArea(freeAreaName) : t.account.paywall.freeNote}
++                </AppText>
++                <TertiaryAction
++                  label={t.account.settings.contactSupport}
++                  onPress={() => router.push("/support")}
++                  style={{ alignSelf: "center" }}
++                />
++              </View>
+             ) : (
+               <View style={styles.freeNote}>
+                 <AppText variant="cardTitle" center color={colors.foreground}>
+diff --git a/apps/mobile/src/hooks/todayEntry.test.ts b/apps/mobile/src/hooks/todayEntry.test.ts
+index 5dace49..0279dd3 100644
+--- a/apps/mobile/src/hooks/todayEntry.test.ts
++++ b/apps/mobile/src/hooks/todayEntry.test.ts
+@@ -7,6 +7,7 @@ import {
+   entryWords,
+   isEntryRoute,
+   openedAt,
++  promisesNextWeek,
+   recallFor,
+   resolveTodayEntry,
+   type EntryProgress,
+@@ -247,3 +248,32 @@ describe("isEntryRoute (Pregunta marked as the current tab)", () => {
+     expect(isEntryRoute(["(tabs)", "atlas"])).toBe(false);
+   });
+ });
++
++describe("promisesNextWeek: the week card for a free account (beta hardening, 3 Nov 2026)", () => {
++  // Before: a free account that closed week 1 read «La semana 2, Wuzhen, se abre
++  // mañana», and the next morning «Empezar el día 1» opened a membership screen
++  // with nothing on sale, whose «Continuar» led back to the same Hoy.
++  const closedWeekOne = progressThrough(7, at("2026-10-18T20:00"));
++  const now = at("2026-10-18T20:30");
++
++  it("does not promise a membership week to an account without one", () => {
++    const e = resolve({ progress: closedWeekOne, now, premium: false })!;
++    expect(e.kind).toBe("week");
++    expect(e.opensAt).not.toBeNull();
++    expect(promisesNextWeek(e, false)).toBe(false);
++  });
++
++  it("promises it to a member, and while the entitlement is still loading", () => {
++    const e = resolve({ progress: closedWeekOne, now, premium: true })!;
++    expect(promisesNextWeek(e, true)).toBe(true);
++    expect(promisesNextWeek(e, null)).toBe(true);
++  });
++
++  it("only speaks to the week card", () => {
++    const e = resolve({ progress: progressThrough(9, at("2026-10-26T21:00")), now: at("2026-10-27T21:00"), premium: false })!;
++    expect(e.kind).toBe("practice");
++    expect(promisesNextWeek(e, false)).toBe(true);
++    // The practice behind it goes through the membership screen, which Hoy marks.
++    expect(e.membershipRequired).toBe(true);
++  });
++});
+diff --git a/apps/mobile/src/hooks/todayEntry.ts b/apps/mobile/src/hooks/todayEntry.ts
+index ca0d497..12b310c 100644
+--- a/apps/mobile/src/hooks/todayEntry.ts
++++ b/apps/mobile/src/hooks/todayEntry.ts
+@@ -278,6 +278,19 @@ export function entryWords(entry: ResolvedEntry, words: EntryWords, place: strin
+   return { label: words.start(entry.dayInWeek) };
+ }
+ 
++/**
++ * Whether the week card may say when the next week opens («La semana 2,
++ * Wuzhen, se abre mañana»). Not when that week is membership and she has
++ * none: it does not open for her, and the next morning's «Empezar el día 1»
++ * went to a membership screen with nothing on sale (beta hardening, 3 Nov
++ * 2026). `premium` is null while the entitlement loads: the line stays, as
++ * every other door waits for the entitlement rather than guessing.
++ */
++export function promisesNextWeek(entry: Pick<ResolvedEntry, "kind" | "week">, premium: boolean | null): boolean {
++  if (entry.kind !== "week") return true;
++  return !(premium === false && !weekIsFree(entry.week + 1));
++}
++
+ /** How many calendar days from `now`'s day to `at`'s day, in local time. */
+ export function calendarDaysBetween(now: number, at: number): number {
+   return Math.round((startOfLocalDay(at) - startOfLocalDay(now)) / 86_400_000);
+-- 
+2.43.0
+
+
+From 98bcf3f99b5bc1f38d59588484a57e5834fbdd97 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 06:55:57 +0000
+Subject: [PATCH 06/11] =?UTF-8?q?Hoy=20says=20=C2=ABGuardamos=20lo=20que?=
+ =?UTF-8?q?=20escribiste=C2=BB=20only=20over=20something=20kept?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Opening a day and going back to Hoy (or an answer lost to a Log out) left
+«Seguir con el día 1 · Vas en el paso 1 de 2. Guardamos lo que escribiste.»
+over a day with nothing written: the step this phone remembers her on made
+the day "in progress", and the hint always claimed her words were kept.
+
+The entry now knows whether anything of hers is kept for the day (an answer
+on the server or this phone, or an unsent draft: `saved`). A day she only
+opened still reads «Seguir con el día N», without the claim. No new copy.
+
+Tests: todayEntry.test.ts.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MRH1FyKGTN3zfVru4KrGk9
+---
+ apps/mobile/src/hooks/todayEntry.test.ts | 19 +++++++++++++++++++
+ apps/mobile/src/hooks/todayEntry.ts      | 17 +++++++++++++++--
+ 2 files changed, 34 insertions(+), 2 deletions(-)
+
+diff --git a/apps/mobile/src/hooks/todayEntry.test.ts b/apps/mobile/src/hooks/todayEntry.test.ts
+index 0279dd3..af9a4ca 100644
+--- a/apps/mobile/src/hooks/todayEntry.test.ts
++++ b/apps/mobile/src/hooks/todayEntry.test.ts
+@@ -104,6 +104,25 @@ describe("resolveTodayEntry, the four account states", () => {
+     expect(e.href.params.step).toBe("ask");
+   });
+ 
++  it("a day she only opened resumes without claiming her words were kept (beta hardening, 3 Nov 2026)", () => {
++    // Before: opening Day 1 and going back to Hoy read «Vas en el paso 1 de 2.
++    // Guardamos lo que escribiste.» over a day with nothing written.
++    const e = resolve({ progress: progressThrough(9, MON_21), now: at("2026-10-27T21:00"), remembered: "ask" })!;
++    expect(e.state).toBe("inProgress");
++    expect(e.saved).toBe(false);
++    const w = entryWords(e, es.home.hoy.entry, "Wuzhen");
++    expect(w.label).toBe("Seguir con el día 3");
++    expect(w.hint).toBeUndefined();
++  });
++
++  it("an answer kept for the day still says so", () => {
++    const p = progressThrough(9, MON_21);
++    p.stepAnswers[10] = { ask: { value: "La tarjeta.", answeredAt: at("2026-10-27T20:00") } };
++    const e = resolve({ progress: p, now: at("2026-10-27T21:00"), remembered: "take" })!;
++    expect(e.saved).toBe(true);
++    expect(entryWords(e, es.home.hoy.entry, "Wuzhen").hint).toBe("Vas en el paso 2 de 2. Guardamos lo que escribiste.");
++  });
++
+   it("in progress: an answered first step resumes on the second, and the remembered step wins", () => {
+     const p = progressThrough(9, MON_21);
+     p.stepAnswers[10] = { ask: { value: "La tarjeta.", answeredAt: at("2026-10-27T20:00") } };
+diff --git a/apps/mobile/src/hooks/todayEntry.ts b/apps/mobile/src/hooks/todayEntry.ts
+index 12b310c..e6b3231 100644
+--- a/apps/mobile/src/hooks/todayEntry.ts
++++ b/apps/mobile/src/hooks/todayEntry.ts
+@@ -74,6 +74,12 @@ export interface ResolvedEntry {
+   missed: boolean;
+   /** Where an unfinished day resumes: the step and its place among the day's steps. */
+   step: { id: string; index: number; total: number } | null;
++  /**
++   * Something of hers is kept for this day: an answer the server or this phone
++   * holds, or an unsent draft. Only then may the entry say «Guardamos lo que
++   * escribiste»; a day she only opened is resumed without that claim.
++   */
++  saved: boolean;
+   /** The day that opens next, and when (only while it waits). */
+   nextDay: number | null;
+   opensAt: number | null;
+@@ -201,6 +207,7 @@ export function resolveTodayEntry(input: ResolveInput): ResolvedEntry | null {
+       ...pos,
+       missed: false,
+       step: null,
++      saved: false,
+       nextDay: pathDone ? null : gate?.nextDay ?? null,
+       opensAt: pathDone ? null : gate?.opensAt ?? null,
+       membershipRequired: false,
+@@ -220,7 +227,10 @@ export function resolveTodayEntry(input: ResolveInput): ResolvedEntry | null {
+   const ids = content ? stepsOf(content).map((s) => s.id) : [];
+   const drafted = !!input.drafted && ids.some((id) => input.drafted!(day, id));
+   const remembered = input.remembered && ids.includes(input.remembered) ? input.remembered : null;
+-  const started = !dayDone && (hasStarted(progress, day) || drafted || !!remembered);
++  // Kept for her: an answer, or an unsent draft. A step this phone remembers
++  // her on means she was in the day, not that anything of hers was kept.
++  const saved = !dayDone && (hasStarted(progress, day) || drafted);
++  const started = saved || (!dayDone && !!remembered);
+   const opened = openedAt(progress, day, rule);
+   const missed = !dayDone && opened !== null && opened < startOfLocalDay(now);
+   const membershipRequired = premium === false && !weekIsFree(pos.week);
+@@ -249,6 +259,7 @@ export function resolveTodayEntry(input: ResolveInput): ResolvedEntry | null {
+     ...pos,
+     missed,
+     step,
++    saved,
+     nextDay: null,
+     opensAt: null,
+     membershipRequired,
+@@ -272,7 +283,9 @@ export function entryWords(entry: ResolvedEntry, words: EntryWords, place: strin
+   if (entry.state === "inProgress") {
+     return {
+       label: words.continue(entry.dayInWeek),
+-      hint: entry.step ? words.stepHint(entry.step.index, entry.step.total) : undefined,
++      // «Guardamos lo que escribiste» only over something kept: after a day she
++      // only opened, it promised words that were never written (beta hardening).
++      hint: entry.step && entry.saved ? words.stepHint(entry.step.index, entry.step.total) : undefined,
+     };
+   }
+   return { label: words.start(entry.dayInWeek) };
+-- 
+2.43.0
+
+
+From f248a9bf624e96fdb52b461f53e6a1fb141dd529 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 06:57:44 +0000
+Subject: [PATCH 07/11] Ask again for what failed when the phone is back online
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+After a launch without signal, everything that failed to load stayed
+failed once the connection returned: the CMS paths the day screen walks,
+Hoy's «Para hoy» guide and rhythm, the assessments and the app's switches.
+React Query is not told about the phone's connection (onlineManager has no
+listener in React Native), and SessionSync only re-asked for the session
+and /api/me. Hoy kept a missing guide and the bundled copy of the paths
+until a screen remounted or she pulled to refresh.
+
+On the way back online (expo-network, the same signal as the offline
+banner), SessionSync now refetches every query on screen whose last read
+failed (reconnectRefetch): nothing that worked is re-read and nothing off
+screen is fetched.
+
+Tests: query.test.ts.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MRH1FyKGTN3zfVru4KrGk9
+---
+ apps/mobile/src/lib/SessionSync.tsx | 13 +++++++-
+ apps/mobile/src/lib/query.test.ts   | 50 +++++++++++++++++++++++++++--
+ apps/mobile/src/lib/query.ts        | 18 +++++++++++
+ 3 files changed, 78 insertions(+), 3 deletions(-)
+
+diff --git a/apps/mobile/src/lib/SessionSync.tsx b/apps/mobile/src/lib/SessionSync.tsx
+index eb9ae11..a4ed6dd 100644
+--- a/apps/mobile/src/lib/SessionSync.tsx
++++ b/apps/mobile/src/lib/SessionSync.tsx
+@@ -23,7 +23,7 @@ import { flushPendingOnboarding } from "@/lib/onboarding";
+ import { configurePurchases, loginPurchases } from "@/lib/purchases";
+ import { refreshForLanguage } from "@/lib/languageSwitch";
+ import { routeForTap } from "@/lib/notificationRoute";
+-import { clearAccountQueries, profileFor, qk, queryClient } from "@/lib/query";
++import { clearAccountQueries, profileFor, qk, queryClient, reconnected, reconnectRefetch } from "@/lib/query";
+ import { classifySessionEnd } from "@/store/accountState";
+ import { adoptRecommendedArea } from "@/store/activeArea";
+ import { keepPending, prefPending } from "@/store/prefWrites";
+@@ -119,6 +119,17 @@ export function SessionSync() {
+   useEffect(() => {
+     if (!networkOffline && sessionUnread) void refetchSession();
+   }, [networkOffline, sessionUnread, refetchSession]);
++  // Everything else a launch without signal failed to read (the CMS paths the
++  // day screen walks, Hoy's guide and rhythm, the app's switches) stayed failed
++  // after the connection came back: React Query is not told about the phone's
++  // connection, so nothing asked again until a screen remounted. Ask once for
++  // whatever is on screen and failed, on the way back online (`reconnectRefetch`).
++  const wasOffline = useRef(networkOffline);
++  useEffect(() => {
++    const back = reconnected(wasOffline.current, networkOffline);
++    wasOffline.current = networkOffline;
++    if (back) void queryClient.refetchQueries(reconnectRefetch);
++  }, [networkOffline]);
+   // App-wide switches. Not tied to the session, and re-read on a foreground
+   // once stale (the focus wiring above) so a flipped switch, the Circle kill
+   // switch included, lands without a relaunch.
+diff --git a/apps/mobile/src/lib/query.test.ts b/apps/mobile/src/lib/query.test.ts
+index 0aae7b1..7368a09 100644
+--- a/apps/mobile/src/lib/query.test.ts
++++ b/apps/mobile/src/lib/query.test.ts
+@@ -1,6 +1,6 @@
+-import { QueryClient } from "@tanstack/react-query";
++import { QueryClient, QueryObserver } from "@tanstack/react-query";
+ import { describe, expect, it } from "vitest";
+-import { clearAccountQueries, profileFor, qk } from "./query";
++import { clearAccountQueries, profileFor, qk, reconnected, reconnectRefetch } from "./query";
+ 
+ describe("a session that ends without Log out", () => {
+   it("drops every account's cache but the phone's app-config", async () => {
+@@ -28,3 +28,49 @@ describe("the cached profile", () => {
+     expect(profileFor(undefined, "a")).toBeUndefined();
+   });
+ });
++
++describe("back online after a launch without signal (beta hardening, 3 Nov 2026)", () => {
++  // Before: the CMS paths, Hoy's guide and the app's switches that failed on
++  // an offline launch stayed failed once the phone was back online; only the
++  // session and /api/me were asked for again.
++  it("is the moment the phone goes from offline to online, and no other", () => {
++    expect(reconnected(true, false)).toBe(true);
++    expect(reconnected(false, false)).toBe(false);
++    expect(reconnected(false, true)).toBe(false);
++    expect(reconnected(true, true)).toBe(false);
++  });
++
++  it("asks again for what is on screen and failed, and nothing else", async () => {
++    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
++    const calls: Record<string, number> = { paths: 0, resources: 0, offScreen: 0 };
++    let online = false;
++    const read = (key: string) => async () => {
++      calls[key]++;
++      if (!online) throw new TypeError("Network request failed");
++      return key;
++    };
++    const ok = async () => {
++      calls.streak = (calls.streak ?? 0) + 1;
++      return 3;
++    };
++    // On screen: two reads that failed offline, one that had landed.
++    const watch = [
++      new QueryObserver(client, { queryKey: ["paths", "es"], queryFn: read("paths") }),
++      new QueryObserver(client, { queryKey: ["resources", "es"], queryFn: read("resources") }),
++      new QueryObserver(client, { queryKey: ["streak"], queryFn: ok }),
++    ];
++    const subs = watch.map((o) => o.subscribe(() => {}));
++    // Off screen: failed too, but no one is looking at it.
++    await client.prefetchQuery({ queryKey: ["offScreen"], queryFn: read("offScreen") });
++    await new Promise((r) => setTimeout(r, 0));
++    expect(client.getQueryState(["paths", "es"])?.status).toBe("error");
++
++    online = true;
++    await client.refetchQueries(reconnectRefetch);
++    expect(client.getQueryData(["paths", "es"])).toBe("paths");
++    expect(client.getQueryData(["resources", "es"])).toBe("resources");
++    expect(calls.streak).toBe(1);
++    expect(calls.offScreen).toBe(1);
++    subs.forEach((u) => u());
++  });
++});
+diff --git a/apps/mobile/src/lib/query.ts b/apps/mobile/src/lib/query.ts
+index 639b14d..db55e84 100644
+--- a/apps/mobile/src/lib/query.ts
++++ b/apps/mobile/src/lib/query.ts
+@@ -25,6 +25,24 @@ export function clearAccountQueries(client: Pick<QueryClient, "removeQueries">):
+   client.removeQueries({ predicate: (q) => q.queryKey[0] !== "appConfig" });
+ }
+ 
++/** The phone came back online: it was offline on the last reading and is not now. */
++export function reconnected(wasOffline: boolean, offline: boolean): boolean {
++  return wasOffline && !offline;
++}
++
++/**
++ * What to ask for again when the phone is back online (beta hardening, 3 Nov
++ * 2026): every query on screen whose last read failed. React Query is not told
++ * about the phone's connection (`onlineManager` has no listener on a phone),
++ * so after a launch without signal the CMS paths, Hoy's guide and the app's
++ * switches stayed failed until a screen remounted. Only failed ones: a working
++ * cache is not re-read, and nothing off screen is fetched.
++ */
++export const reconnectRefetch = {
++  type: "active" as const,
++  predicate: (q: { state: { status: string } }) => q.state.status === "error",
++};
++
+ /**
+  * The cached profile, only when it is this session's account's. A cache that
+  * outlived a sign-out holds someone else's, and must read as "not loaded yet".
+-- 
+2.43.0
+
+
+From deceec0fef5af3ba035f4dda6155cba83823a041 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 07:03:16 +0000
+Subject: [PATCH 08/11] Apply a progress read only for the account signed in
+ now
+
+Follow-up to "Hoy waits for her own progress": the progress read is now
+re-applied when the store changes hands, and without a check a read that
+outlived a Log out (or a change of account) could hand the signed-out
+store the last account's progress and mark it hers. SessionSync applies
+the read only when the account it was made for is the session's own
+(readFor), as profileFor already does for /api/me.
+
+Tests: query.test.ts (readFor).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MRH1FyKGTN3zfVru4KrGk9
+---
+ apps/mobile/src/lib/SessionSync.tsx | 12 ++++++++----
+ apps/mobile/src/lib/query.test.ts   | 16 +++++++++++++++-
+ apps/mobile/src/lib/query.ts        | 10 ++++++++++
+ 3 files changed, 33 insertions(+), 5 deletions(-)
+
+diff --git a/apps/mobile/src/lib/SessionSync.tsx b/apps/mobile/src/lib/SessionSync.tsx
+index a4ed6dd..bb4563d 100644
+--- a/apps/mobile/src/lib/SessionSync.tsx
++++ b/apps/mobile/src/lib/SessionSync.tsx
+@@ -23,7 +23,7 @@ import { flushPendingOnboarding } from "@/lib/onboarding";
+ import { configurePurchases, loginPurchases } from "@/lib/purchases";
+ import { refreshForLanguage } from "@/lib/languageSwitch";
+ import { routeForTap } from "@/lib/notificationRoute";
+-import { clearAccountQueries, profileFor, qk, queryClient, reconnected, reconnectRefetch } from "@/lib/query";
++import { clearAccountQueries, profileFor, qk, queryClient, readFor, reconnected, reconnectRefetch } from "@/lib/query";
+ import { classifySessionEnd } from "@/store/accountState";
+ import { adoptRecommendedArea } from "@/store/activeArea";
+ import { keepPending, prefPending } from "@/store/prefWrites";
+@@ -474,11 +474,15 @@ export function SessionSync() {
+   }, [authed, router]);
+ 
+   // Applied again when the store changes hands: a sign-in that resets the
+-  // store after her read has landed would otherwise leave it empty.
++  // store after her read has landed would otherwise leave it empty. Only a
++  // read made for the account signed in now: never one that outlived a
++  // Log out (the store would take back the last account's progress) or a
++  // change of account.
+   const storeUserId = useAppStore((s) => s.user?.id ?? null);
+   useEffect(() => {
+-    if (pathsQ.data) hydrateProgress(pathsQ.data.list, pathsQ.data.owner);
+-  }, [pathsQ.data, hydrateProgress, storeUserId]);
++    const read = readFor(pathsQ.data, userId);
++    if (read) hydrateProgress(read.list, read.owner);
++  }, [pathsQ.data, hydrateProgress, storeUserId, userId]);
+ 
+   // Onboarding's recommended Area, only while she has not started another
+   // (`adoptRecommendedArea`): applied on every read, it put a member who had
+diff --git a/apps/mobile/src/lib/query.test.ts b/apps/mobile/src/lib/query.test.ts
+index 7368a09..891726b 100644
+--- a/apps/mobile/src/lib/query.test.ts
++++ b/apps/mobile/src/lib/query.test.ts
+@@ -1,6 +1,6 @@
+ import { QueryClient, QueryObserver } from "@tanstack/react-query";
+ import { describe, expect, it } from "vitest";
+-import { clearAccountQueries, profileFor, qk, reconnected, reconnectRefetch } from "./query";
++import { clearAccountQueries, profileFor, qk, readFor, reconnected, reconnectRefetch } from "./query";
+ 
+ describe("a session that ends without Log out", () => {
+   it("drops every account's cache but the phone's app-config", async () => {
+@@ -74,3 +74,17 @@ describe("back online after a launch without signal (beta hardening, 3 Nov 2026)
+     subs.forEach((u) => u());
+   });
+ });
++
++describe("a progress read, applied only for the account signed in now (beta hardening, 3 Nov 2026)", () => {
++  const read = { owner: "a", list: [] };
++  it("is hers while her session is the one signed in", () => {
++    expect(readFor(read, "a")).toBe(read);
++  });
++  it("is no one's after a Log out, or once another account signed in", () => {
++    expect(readFor(read, null)).toBeNull();
++    expect(readFor(read, undefined)).toBeNull();
++    expect(readFor(read, "b")).toBeNull();
++    expect(readFor({ owner: null, list: [] }, "a")).toBeNull();
++    expect(readFor(undefined, "a")).toBeNull();
++  });
++});
+diff --git a/apps/mobile/src/lib/query.ts b/apps/mobile/src/lib/query.ts
+index db55e84..f9e54f9 100644
+--- a/apps/mobile/src/lib/query.ts
++++ b/apps/mobile/src/lib/query.ts
+@@ -43,6 +43,16 @@ export const reconnectRefetch = {
+   predicate: (q: { state: { status: string } }) => q.state.status === "error",
+ };
+ 
++/**
++ * A read tagged with the account it was made for (her progress, `owner`),
++ * only when that is the account signed in now: never one that outlived a
++ * Log out or a change of account, which would hand the store someone else's
++ * progress.
++ */
++export function readFor<T extends { owner: string | null }>(read: T | undefined, sessionUserId: string | null | undefined): T | null {
++  return read && sessionUserId && read.owner === sessionUserId ? read : null;
++}
++
+ /**
+  * The cached profile, only when it is this session's account's. A cache that
+  * outlived a sign-out holds someone else's, and must read as "not loaded yet".
+-- 
+2.43.0
+
+
+From 9ff8d4496ebf2e6d6c17be5aa18333cb4892a6a3 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 07:07:11 +0000
+Subject: [PATCH 09/11] An opened step is not a kept answer on Hoy
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Follow-up to "Hoy says «Guardamos lo que escribiste» only over something
+kept": the step screen saves its draft a moment after it opens, untouched
+or not, so a draft's existence only said she had been on the step, and a
+day she only opened still read «Vas en el paso 1 de 2. Guardamos lo que
+escribiste.» Today's entry now counts a draft only when it holds something
+she gave: words, a choice, a mark, a photo (draftHasWords).
+
+Tests: todayEntry.test.ts (draftHasWords).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MRH1FyKGTN3zfVru4KrGk9
+---
+ apps/mobile/src/hooks/todayEntry.test.ts | 47 ++++++++++++++++++++++++
+ apps/mobile/src/hooks/todayEntry.ts      | 26 +++++++++++++
+ apps/mobile/src/hooks/useTodayEntry.ts   |  9 +++--
+ 3 files changed, 78 insertions(+), 4 deletions(-)
+
+diff --git a/apps/mobile/src/hooks/todayEntry.test.ts b/apps/mobile/src/hooks/todayEntry.test.ts
+index af9a4ca..6a6c943 100644
+--- a/apps/mobile/src/hooks/todayEntry.test.ts
++++ b/apps/mobile/src/hooks/todayEntry.test.ts
+@@ -5,6 +5,7 @@ import { es } from "@/i18n/locales/es";
+ import { dayGateFor } from "@/lib/dayGate";
+ import {
+   entryWords,
++  draftHasWords,
+   isEntryRoute,
+   openedAt,
+   promisesNextWeek,
+@@ -296,3 +297,49 @@ describe("promisesNextWeek: the week card for a free account (beta hardening, 3
+     expect(e.membershipRequired).toBe(true);
+   });
+ });
++
++describe("draftHasWords: an opened step is not a kept answer (beta hardening, 3 Nov 2026)", () => {
++  // The step screen saves its draft a moment after it opens, untouched or not:
++  // this is what that untouched draft looks like for a choice and a reflection.
++  const empty = {
++    choice: null,
++    picks: [],
++    other: "",
++    detail: "",
++    sorted: {},
++    scale: null,
++    reflect: { mode: "write", text: "", drawing: null, caption: "" },
++    done: false,
++    blanks: ["", ""],
++    photo: { photo: null, uri: null, caption: "", describe: false },
++  };
++
++  it("an untouched draft holds nothing of hers", () => {
++    expect(draftHasWords(empty)).toBe(false);
++    expect(draftHasWords({ ...empty, reflect: { ...empty.reflect, text: "   " } })).toBe(false);
++    expect(draftHasWords(undefined)).toBe(false);
++    expect(draftHasWords(null)).toBe(false);
++  });
++
++  it("anything she gave counts", () => {
++    expect(draftHasWords({ ...empty, choice: "Lo que gano" })).toBe(true);
++    expect(draftHasWords({ ...empty, picks: ["Trabajo"] })).toBe(true);
++    expect(draftHasWords({ ...empty, reflect: { ...empty.reflect, text: "Pago tarde." } })).toBe(true);
++    expect(draftHasWords({ ...empty, blanks: ["", "alquiler"] })).toBe(true);
++    expect(draftHasWords({ ...empty, scale: 0 })).toBe(true);
++    expect(draftHasWords({ ...empty, photo: { ...empty.photo, uri: "file:///x.jpg" } })).toBe(true);
++  });
++
++  it("a day she only opened (an empty draft, the step remembered) reads «Seguir» without the claim", () => {
++    const drafts: Record<string, unknown> = { "money:10:ask": empty };
++    const e = resolve({
++      progress: progressThrough(9, at("2026-10-26T21:00")),
++      now: at("2026-10-27T21:00"),
++      remembered: "ask",
++      drafted: (day, id) => draftHasWords(drafts[`money:${day}:${id}`]),
++    })!;
++    const w = entryWords(e, es.home.hoy.entry, "Wuzhen");
++    expect(w.label).toBe("Seguir con el día 3");
++    expect(w.hint).toBeUndefined();
++  });
++});
+diff --git a/apps/mobile/src/hooks/todayEntry.ts b/apps/mobile/src/hooks/todayEntry.ts
+index e6b3231..f1ba638 100644
+--- a/apps/mobile/src/hooks/todayEntry.ts
++++ b/apps/mobile/src/hooks/todayEntry.ts
+@@ -11,8 +11,34 @@ import {
+   type DayUnlockRule,
+   type PathDayDTO,
+ } from "@elara/shared";
++import type { StepDraft } from "@/components/practice/draft";
+ import { completionAnchor, hasStarted, type DayGateState, type GateProgress } from "@/lib/dayGate";
+ 
++/**
++ * Whether a step's draft on this phone holds anything she gave: words, a
++ * choice, a mark, a photo. The step screen saves its draft a moment after it
++ * opens, untouched or not, so a draft's existence only says she was on the
++ * step (beta hardening, 3 Nov 2026: Hoy read that as «Guardamos lo que
++ * escribiste» over a day she had only opened).
++ */
++export function draftHasWords(draft: unknown): boolean {
++  if (!draft || typeof draft !== "object") return false;
++  const d = draft as Partial<StepDraft>;
++  const said = (s: unknown) => typeof s === "string" && s.trim().length > 0;
++  return (
++    said(d.choice) ||
++    (Array.isArray(d.picks) && d.picks.length > 0) ||
++    said(d.other) ||
++    said(d.detail) ||
++    (!!d.sorted && Object.keys(d.sorted).length > 0) ||
++    typeof d.scale === "number" ||
++    d.done === true ||
++    (Array.isArray(d.blanks) && d.blanks.some(said)) ||
++    (!!d.reflect && (said(d.reflect.text) || d.reflect.drawing != null || said(d.reflect.caption))) ||
++    (!!d.photo && (d.photo.photo != null || d.photo.uri != null || said(d.photo.caption)))
++  );
++}
++
+ /**
+  * "Today's entry": the one rule behind every door into today's practice
+  * (Final Pass FX 1). Hoy's main button, the Pregunta tab (the orb) and the
+diff --git a/apps/mobile/src/hooks/useTodayEntry.ts b/apps/mobile/src/hooks/useTodayEntry.ts
+index 7ecaefc..630d3fb 100644
+--- a/apps/mobile/src/hooks/useTodayEntry.ts
++++ b/apps/mobile/src/hooks/useTodayEntry.ts
+@@ -11,7 +11,7 @@ import { qk, queryClient } from "@/lib/query";
+ import { progressReady, progressStatus, type ProgressStatus } from "@/store/accountState";
+ import { useAppStore } from "@/store/useAppStore";
+ import { useDayPlace } from "@/store/useDayPlace";
+-import { entryWords, resolveTodayEntry, type EntrySource, type ResolvedEntry } from "./todayEntry";
++import { draftHasWords, entryWords, resolveTodayEntry, type EntrySource, type ResolvedEntry } from "./todayEntry";
+ 
+ /**
+  * Today's entry: the ONE function behind Hoy's main button, the Pregunta tab
+@@ -83,12 +83,13 @@ export function useTodayEntry({ area, source = "today" }: { area?: AreaKey; sour
+   const ready = useAppStore((s) => progressReady(s.progressSyncedFor, s.user?.id));
+   // Where she was inside an unfinished day, on this phone. Only her own.
+   const place = useDayPlace((s) => (s.owner != null && s.owner === userId ? s.places[key] : undefined));
+-  // The steps of this Area holding a draft, as one string so typing (a new
+-  // draft every 300 ms) does not re-render every door.
++  // The steps of this Area holding a draft with something of hers in it
++  // (`draftHasWords`: opening a step saves an empty one), as one string so
++  // typing (a new draft every 300 ms) does not re-render every door.
+   const draftKeys = useAppStore((s) => {
+     const prefix = `${key}:`;
+     return Object.keys(s.drafts)
+-      .filter((k) => k.startsWith(prefix))
++      .filter((k) => k.startsWith(prefix) && draftHasWords(s.drafts[k]))
+       .sort()
+       .join("\n");
+   });
+-- 
+2.43.0
+
+
+From 2c22c4ad301191c819f12ff179e7e6e2a95a7bf7 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 07:14:21 +0000
+Subject: [PATCH 10/11] Day screen: keep her words on skip and on refusals,
+ never offer a day the server will refuse
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Found and reproduced in the browser (beta-fixes, 3 Nov):
+
+- «Prefiero pasar» threw away what she had typed on the step. Her input is
+  now kept as the step's draft (saved at once, not lost to the debounce), so
+  going back to the step brings it back. It is still cleared over an answer
+  she already holds, as before.
+- An answer the server refused for good (a week that locked under her, a
+  step the content no longer has, a shape it no longer takes) was dropped by
+  the queue with her words, while the completion screen said they were saved.
+  The flush now hands such an entry over first (onDropped) and the store puts
+  her words back in that step as a kept answer: the step opens with them and a
+  line saying they could not be saved, and the completion line says so.
+- A day finished offline late in the evening, synced after midnight: the
+  phone opened the next day, the server stamped the first day at upload and
+  refused the next one (403 day_locked). The day gate now counts a finished
+  day whose answers are still queued from now, as the server will.
+- Money Día 1 still drew the old feelings-check-in weather (stressed, calm,
+  unsure) beside its income options; the art now belongs to the feelings step
+  only.
+- The return line read «De vuelta en la vuelta.» at the generic stop «La
+  vuelta»; proposed «De nuevo en la vuelta.».
+- The reflection placeholder was 3.4:1 on the card and the paper; it uses the
+  readable secondary ink now (5.9:1), and sits above the paper art on web.
+
+New Spanish strings are proposals for native review.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MRH1FyKGTN3zfVru4KrGk9
+---
+ apps/mobile/app/path/day.tsx                  | 23 ++++--
+ apps/mobile/app/path/week-intro.tsx           |  2 +-
+ apps/mobile/app/profile.tsx                   |  2 +-
+ .../src/components/journey/useWeekWorld.ts    |  2 +-
+ .../src/components/practice/ReflectInput.tsx  |  8 +-
+ .../src/components/practice/StepScreen.tsx    | 43 +++++++++--
+ .../src/components/practice/draft.test.ts     | 59 +++++++++++++-
+ apps/mobile/src/components/practice/draft.ts  | 77 +++++++++++++++++++
+ apps/mobile/src/hooks/useDayGate.ts           | 14 +++-
+ apps/mobile/src/i18n/locales/en/practice.ts   |  7 ++
+ apps/mobile/src/i18n/locales/es/day.ts        |  7 +-
+ apps/mobile/src/i18n/locales/es/practice.ts   |  7 ++
+ apps/mobile/src/i18n/returnLine.test.ts       | 24 ++++++
+ apps/mobile/src/lib/dayGate.test.ts           | 31 ++++++++
+ apps/mobile/src/lib/dayGate.ts                | 13 +++-
+ apps/mobile/src/store/stepQueue.test.ts       | 32 ++++++++
+ apps/mobile/src/store/stepQueue.ts            |  7 ++
+ apps/mobile/src/store/useAppStore.ts          | 14 ++++
+ 18 files changed, 350 insertions(+), 22 deletions(-)
+ create mode 100644 apps/mobile/src/i18n/returnLine.test.ts
+
+diff --git a/apps/mobile/app/path/day.tsx b/apps/mobile/app/path/day.tsx
+index 236ff97..901e39c 100644
+--- a/apps/mobile/app/path/day.tsx
++++ b/apps/mobile/app/path/day.tsx
+@@ -93,6 +93,7 @@ import { nextRedoDay, redoFor } from "@/store/redoWeek";
+ import { claimRedoWeek, useRedoWeek } from "@/store/useRedoWeek";
+ import { spacing } from "@/theme";
+ import { PAPER_WEEK_ONE } from "@/components/practice/theme";
++import { isRefusedDraft } from "@/components/practice/draft";
+ 
+ /**
+  * One day of a path, walked one screen at a time.
+@@ -400,7 +401,7 @@ function DayScreenInner() {
+     ? PAPER_WEEK_ONE
+     : themeForWeek(week, area);
+   const total = path?.days.length ?? 0;
+-  const gate = useDayGate(progress, total);
++  const gate = useDayGate(progress, total, area);
+ 
+   // One day of a week's redo: only for this day's own world, and only when
+   // the day is a replay. The redo is kept here too (a resume, a return from
+@@ -474,6 +475,9 @@ function DayScreenInner() {
+     return () => clearTimeout(id);
+   }, [oldestQueued]);
+   const stuck = oldestQueued !== null && Date.now() - oldestQueued > SAVING_AFTER_MS;
++  // An answer of this day the server refused for good, put back in its step
++  // for her (`keptAnswer`, by the step queue's flush).
++  const refusedToday = useAppStore((s) => steps.some((st) => isRefusedDraft(s.drafts[stepDraftKey(area, dayNum, st.id)])));
+   const saving = oldestQueued !== null && (networkOffline || stuck);
+   // An answer of this day left queued by a failed write is sent again while
+   // she is here and online, as `useSavingPlace` does on the Atlas: nothing on
+@@ -977,9 +981,12 @@ function DayScreenInner() {
+ 
+   const onSkip = useCallback(() => {
+     if (!step) return;
+-    // Whatever she had typed is not kept as a draft either (as on a submit):
+-    // left behind, it came back on the next visit over her saved answer.
+-    useAppStore.getState().setDraft(stepDraftKey(area, dayNum, step.id), null);
++    // What she had typed stays as this step's draft (the step screen has just
++    // saved it), so going back to the step brings her words back: «Prefiero
++    // pasar» moved on, it did not mean "throw this away". Cleared only over an
++    // answer she already holds, where a left-behind draft came back on the next
++    // visit over her saved answer.
++    if (heldAnswer(storedAnswer(step.id))) useAppStore.getState().setDraft(stepDraftKey(area, dayNum, step.id), null);
+     if (screen?.lead && !dayAnswers?.[screen.lead.id]) persist(screen.lead, null, { auto: true })?.catch(() => {});
+     // A step she already answered (she came back to re-read it, a replay, an
+     // edit from the collection) keeps her answer: Skip only moves on. Writing
+@@ -1445,7 +1452,13 @@ function DayScreenInner() {
+             // What she did and what is kept, on the one completion screen. A
+             // redone day says only that it is kept: it is not new work.
+             summary: replaying ? null : t.practice.dayComplete.summary(summary.answered, summary.total),
+-            saved: saving ? t.practice.dayComplete.savedOffline : t.practice.dayComplete.saved,
++            // An answer the server refused for good is said so (its words are
++            // back in its step, `keptAnswer`), not covered by "saved".
++            saved: refusedToday
++              ? t.practice.dayComplete.notSaved
++              : saving
++                ? t.practice.dayComplete.savedOffline
++                : t.practice.dayComplete.saved,
+             asks: replaying || !asks.length ? null : <CompletionAsks area={area} day={dayNum} asks={asks} />,
+             // Partway through a week's redo she can stop here; it resumes from the week.
+             again: wd.frozen.startArrived
+diff --git a/apps/mobile/app/path/week-intro.tsx b/apps/mobile/app/path/week-intro.tsx
+index e44e18c..b83ed28 100644
+--- a/apps/mobile/app/path/week-intro.tsx
++++ b/apps/mobile/app/path/week-intro.tsx
+@@ -74,7 +74,7 @@ function WeekIntroInner() {
+   // A week whose first day has not opened yet (a notification, a stale link):
+   // the day screen says when it opens. "Begin" is never offered early.
+   const progress = useAppStore((s) => s.progress[area]);
+-  const gate = useDayGate(progress, path?.days.length ?? 0);
++  const gate = useDayGate(progress, path?.days.length ?? 0, area);
+   const aheadOfGate = isAheadOfGate(gate, dayNum, !!progress?.stepAnswers?.[dayNum]);
+   useEffect(() => {
+     if (!aheadOfGate || preview) return;
+diff --git a/apps/mobile/app/profile.tsx b/apps/mobile/app/profile.tsx
+index 02bde05..b680598 100644
+--- a/apps/mobile/app/profile.tsx
++++ b/apps/mobile/app/profile.tsx
+@@ -50,7 +50,7 @@ export default function ProfileScreen() {
+   // opened yet (then "Continue" would only say when it does).
+   const pathTotal = path.days.length;
+   const pathDay = Math.min(progress.currentDay, pathTotal);
+-  const gate = useDayGate(progress, pathTotal);
++  const gate = useDayGate(progress, pathTotal, area);
+   const pathOpen = progress.completedDays.length < pathTotal && !gate;
+   const pathWeek = weekOf(pathDay, path.days[pathDay - 1]?.config);
+   const pathDayInWeek = Math.max(
+diff --git a/apps/mobile/src/components/journey/useWeekWorld.ts b/apps/mobile/src/components/journey/useWeekWorld.ts
+index b858b52..2e1d367 100644
+--- a/apps/mobile/src/components/journey/useWeekWorld.ts
++++ b/apps/mobile/src/components/journey/useWeekWorld.ts
+@@ -21,7 +21,7 @@ export function useWeekWorld(area?: AreaKey) {
+   const path = usePathsMap()[key];
+   const stored = useAppStore((s) => s.progress[key]);
+   const progress = stored ?? EMPTY;
+-  const gate = useDayGate(stored, path?.days.length ?? 0);
++  const gate = useDayGate(stored, path?.days.length ?? 0, key);
+   const model = useMemo(
+     () => weekWorld({ area: key, days: path?.days ?? [], progress, gate }),
+     [key, path?.days, progress, gate?.finishedDay, gate?.nextDay], // eslint-disable-line react-hooks/exhaustive-deps
+diff --git a/apps/mobile/src/components/practice/ReflectInput.tsx b/apps/mobile/src/components/practice/ReflectInput.tsx
+index f50f6ba..5b7c625 100644
+--- a/apps/mobile/src/components/practice/ReflectInput.tsx
++++ b/apps/mobile/src/components/practice/ReflectInput.tsx
+@@ -229,7 +229,7 @@ export function ReflectInput({
+                 value={draft.caption}
+                 onChangeText={(caption) => set({ caption })}
+                 placeholder={t.practice.reflect.pad.caption}
+-                placeholderTextColor={withAlpha(theme.muted, 0.75)}
++                placeholderTextColor={theme.muted}
+                 maxLength={280}
+                 style={[styles.caption, { color: theme.ink, borderColor: theme.cardBorder, backgroundColor: theme.card }]}
+                 accessibilityLabel={t.practice.reflect.pad.caption}
+@@ -327,7 +327,7 @@ function WritePanel({
+             value={text}
+             onChangeText={onText}
+             placeholder={placeholder}
+-            placeholderTextColor={withAlpha(theme.muted, 0.75)}
++            placeholderTextColor={theme.muted}
+             multiline
+             maxLength={2000}
+             autoFocus={editInPlace}
+@@ -649,6 +649,10 @@ const styles = StyleSheet.create({
+   input: {
+     ...type.body,
+     color: colors.textBody,
++    // Above the paper art (`reflectionSheet`, absolute) on web too. Native draws
++    // the later sibling on top and is unchanged (relative is Yoga's default);
++    // react-native-web stacked the art over the field, words included.
++    position: "relative",
+     minHeight: 148,
+     paddingHorizontal: spacing[4],
+     paddingTop: spacing[5],
+diff --git a/apps/mobile/src/components/practice/StepScreen.tsx b/apps/mobile/src/components/practice/StepScreen.tsx
+index 0c6d6e8..01e4fa9 100644
+--- a/apps/mobile/src/components/practice/StepScreen.tsx
++++ b/apps/mobile/src/components/practice/StepScreen.tsx
+@@ -43,7 +43,17 @@ import { PracticeCta } from "./DayChrome";
+ import { CtaTone } from "./CenteredDayHeader";
+ import { DayScrollContext } from "./dayScroll";
+ import { DrawingView } from "./DrawPad";
+-import { draftValue, initialDraft, minWordsOf, modesOf, tooShort, type StepDraft } from "./draft";
++import {
++  draftFromStored,
++  draftHoldsInput,
++  draftValue,
++  initialDraft,
++  minWordsOf,
++  modesOf,
++  stepDraftKey,
++  tooShort,
++  type StepDraft,
++} from "./draft";
+ import { ElaraCard, Parts } from "./ElaraCard";
+ import { elaraNoticed } from "./elaraLabel";
+ import { FollowUpCard } from "./FollowUpCard";
+@@ -273,7 +283,8 @@ export function StepScreen({
+   const draftKey = stepDraftKey(area, dayNum, step.id);
+   const [draft, setDraft] = useState<StepDraft>(
+     () =>
+-      (useAppStore.getState().drafts[draftKey] as StepDraft | undefined) ??
++      // Or an answer the server refused for good, kept for her (`keptAnswer`).
++      draftFromStored(useAppStore.getState().drafts[draftKey], step, options, dayAnswers, ctx) ??
+       // A hidden step's saved answer is not put back in the field on a revisit:
+       // it waits behind the control below until she asks for it.
+       initialDraft(step, c.hidden ? undefined : savedValue, options, dayAnswers, ctx),
+@@ -668,6 +679,13 @@ export function StepScreen({
+             {t.day.engine.saved[savedState as Exclude<AnswerState, "answered" | "notOffered">]}
+           </AppText>
+         ) : null}
++        {/* Her answer to this step was refused by the server for good and put
++            back in the field (`keptAnswer`): say so, rather than show it as new. */}
++        {draft.refused && !locked ? (
++          <AppText variant="body" color={theme.muted} accessibilityLiveRegion="polite">
++            {t.practice.refused.step}
++          </AppText>
++        ) : null}
+ 
+         {/* The input. Dimmed and inert once submitted — the answer is in, and
+             the eye belongs on what she said back. */}
+@@ -871,6 +889,13 @@ export function StepScreen({
+               size="chip"
+               dim={0.6}
+               onPress={() => {
++                // What she typed or picked is kept as this step's draft, at once
++                // (the debounced save may still be waiting): «Prefiero pasar»
++                // moves on, it does not throw her words away. The day screen
++                // clears it only over an answer she already holds (`onSkip`).
++                if (!inert && draftHoldsInput(step, draft)) {
++                  useAppStore.getState().setDraft(draftKey, { ...draft, refused: undefined });
++                }
+                 leaving();
+                 onSkip();
+               }}
+@@ -1013,6 +1038,12 @@ function Input({
+       }
+     : undefined;
+   const isDayOneCommitment = editorial && step.id === "commit";
++  // The paper weather beside each option (`EMOTION_ART`: stressed, calm,
++  // unsure…) was drawn for the Day 1 feelings check-in, `feeling`, and its
++  // four moods. Day 1 has asked about her income since the curriculum (23 Oct,
++  // step `ask`), and a storm beside «Lo que gano» reads as a verdict on it, so
++  // every other editorial list is bare (its paper treatment stays).
++  const weatherArt = editorial && step.id === "feeling";
+ 
+   switch (step.kind) {
+     case "choose":
+@@ -1036,7 +1067,7 @@ function Input({
+           startDelay={0}
+           layout={c.layout}
+           editorial={editorial}
+-          editorialBare={isDayOneCommitment}
++          editorialBare={isDayOneCommitment || !weatherArt}
+           other={other}
+         />
+       );
+@@ -1413,10 +1444,8 @@ function Shake({ trigger, children }: { trigger: number; children: ReactNode })
+   return <Animated.View style={{ transform: [{ translateX: x }] }}>{children}</Animated.View>;
+ }
+ 
+-/** Where a practice step's unsent input is kept (`useAppStore.drafts`). */
+-export function stepDraftKey(area: string, day: number, stepId: string): string {
+-  return `${area}:${day}:${stepId}`;
+-}
++/** Where a practice step's unsent input is kept (`useAppStore.drafts`); lives in `./draft` so the store can use it. */
++export { stepDraftKey };
+ 
+ const styles = StyleSheet.create({
+   pendingNote: { marginTop: spacing[2] },
+diff --git a/apps/mobile/src/components/practice/draft.test.ts b/apps/mobile/src/components/practice/draft.test.ts
+index 2615efa..2b626fe 100644
+--- a/apps/mobile/src/components/practice/draft.test.ts
++++ b/apps/mobile/src/components/practice/draft.test.ts
+@@ -1,6 +1,17 @@
+ import { OTHER_KEY, SCALE_ESCAPE, togglePick, validateStepValue, type DayStep } from "@elara/shared";
+ import { describe, expect, it } from "vitest";
+-import { draftValue, initialDraft, minWordsOf, tooShort } from "./draft";
++import {
++  draftFromStored,
++  draftHoldsInput,
++  draftValue,
++  holdsWords,
++  initialDraft,
++  isRefusedDraft,
++  keptAnswer,
++  minWordsOf,
++  stepDraftKey,
++  tooShort,
++} from "./draft";
+ 
+ const CHOOSE: DayStep = {
+   id: "when",
+@@ -205,3 +216,49 @@ describe("short reflections (O3)", () => {
+     expect(tooShort(NOTE, "No sé")).toBe(false);
+   });
+ });
++
++describe("her words are kept when she skips a step or the server refuses it (beta-fixes 3 Nov)", () => {
++  const TAKE: DayStep = { id: "take", kind: "reflect", title: "Para llevarte", config: { minWords: 1 } };
++  const ASK: DayStep = { id: "ask", kind: "choose", title: "¿Qué parte?", config: { options: ["Encontrar trabajo", "Mejorar mi trabajo actual"] } };
++
++  it("a draft holds input as soon as she has typed or picked anything, complete or not", () => {
++    const empty = initialDraft(TAKE, undefined, [], {});
++    expect(draftHoldsInput(TAKE, empty)).toBe(false);
++    expect(draftHoldsInput(TAKE, { ...empty, reflect: { ...empty.reflect, text: "  " } })).toBe(false);
++    // One word under a two-word minimum is not an answer yet, but it is hers.
++    const two: DayStep = { ...TAKE, config: { minWords: 2 } };
++    expect(draftValue(two, { ...empty, reflect: { ...empty.reflect, text: "Horario" } }).answered).toBe(false);
++    expect(draftHoldsInput(two, { ...empty, reflect: { ...empty.reflect, text: "Horario" } })).toBe(true);
++    const choice = initialDraft(ASK, undefined, ASK.config!.options!, {});
++    expect(draftHoldsInput(ASK, choice)).toBe(false);
++    expect(draftHoldsInput(ASK, { ...choice, choice: "Mejorar mi trabajo actual" })).toBe(true);
++  });
++
++  it("a refused answer comes back as its step's draft: her words in the field, and the refusal", () => {
++    const stored = keptAnswer("Palabras que el servidor rechazó.", "premium_required");
++    expect(isRefusedDraft(stored)).toBe(true);
++    const d = draftFromStored(stored, TAKE, [], {});
++    expect(d?.reflect.text).toBe("Palabras que el servidor rechazó.");
++    expect(d?.refused).toBe("premium_required");
++    // Saved back as a draft by the step screen, it is still marked refused until she sends it again.
++    expect(isRefusedDraft(d)).toBe(true);
++    const picked = draftFromStored(keptAnswer("Mejorar mi trabajo actual", "step_value_mismatch"), ASK, ASK.config!.options!, {});
++    expect(picked?.choice).toBe("Mejorar mi trabajo actual");
++  });
++
++  it("an ordinary draft comes back as it was, and nothing stored means start from her saved answer", () => {
++    const own = initialDraft(TAKE, "Mis palabras.", [], {});
++    expect(draftFromStored(own, TAKE, [], {})).toBe(own);
++    expect(isRefusedDraft(own)).toBe(false);
++    expect(draftFromStored(undefined, TAKE, [], {})).toBeNull();
++  });
++
++  it("only something worth keeping is kept: not an empty skip, not blanks left empty", () => {
++    expect(holdsWords(null)).toBe(false);
++    expect(holdsWords("   ")).toBe(false);
++    expect(holdsWords(["", " "])).toBe(false);
++    expect(holdsWords(["Renta", ""])).toBe(true);
++    expect(holdsWords("Una frase.")).toBe(true);
++    expect(stepDraftKey("money", 8, "take")).toBe("money:8:take");
++  });
++});
+diff --git a/apps/mobile/src/components/practice/draft.ts b/apps/mobile/src/components/practice/draft.ts
+index 27284cb..3d40c84 100644
+--- a/apps/mobile/src/components/practice/draft.ts
++++ b/apps/mobile/src/components/practice/draft.ts
+@@ -45,6 +45,12 @@ export interface PhotoDraft {
+ }
+ 
+ export interface StepDraft {
++  /**
++   * The server refused this answer for good (its error code), and it was put
++   * back here so it is not lost (`keptAnswer`). Shown as a line on the step
++   * until she sends it again or moves on.
++   */
++  refused?: string;
+   choice: string | null;
+   picks: string[];
+   other: string;
+@@ -222,3 +228,74 @@ export function minWordsOf(step: DayStep): number {
+ export function wordCount(text: string): number {
+   return (text.match(/[\p{L}\p{N}]+(?:['’][\p{L}]+)?/gu) ?? []).length;
+ }
++
++/** Where a practice step's unsent input is kept (`useAppStore.drafts`). */
++export function stepDraftKey(area: string, day: number, stepId: string): string {
++  return `${area}:${day}:${stepId}`;
++}
++
++/**
++ * Whether a draft holds anything she put in it: words, a pick, a mark. Not the
++ * same as `draftValue(...).answered`, which asks whether it is a *complete*
++ * answer: two words under the minimum, or a "Something else" with its words
++ * still to come, are not answers yet but are still hers.
++ */
++export function draftHoldsInput(step: DayStep, draft: StepDraft): boolean {
++  if (draft.choice || draft.picks.length || draft.other.trim() || draft.detail.trim()) return true;
++  if (draft.reflect.text.trim() || draft.reflect.caption.trim() || draft.reflect.drawing?.paths.length) return true;
++  if (draft.blanks.some((b) => b.trim())) return true;
++  if (draft.photo.photo || draft.photo.uri || draft.photo.caption.trim()) return true;
++  if (Object.keys(draft.sorted).length) return true;
++  return step.kind === "scale" ? draft.scale !== null : false;
++}
++
++/**
++ * An answer the server refused for good (a week that locked under her, a step
++ * the content no longer has, a shape it no longer takes), kept on the phone
++ * as the step's draft instead of being dropped with the queue entry. The step
++ * screen turns it back into a draft for that step (`draftFromStored`), with
++ * her words in the field and a line saying what happened.
++ */
++export interface KeptAnswer {
++  kept: DayValue;
++  /** The server's error code (or status). */
++  refused: string;
++}
++
++export function keptAnswer(value: DayValue, refused: string): KeptAnswer {
++  return { kept: value, refused };
++}
++
++export function isKeptAnswer(x: unknown): x is KeptAnswer {
++  return !!x && typeof x === "object" && "kept" in x && typeof (x as KeptAnswer).refused === "string";
++}
++
++/** Something worth keeping for her: words, a pick, a mark. Nothing, or only blanks left empty, is not. */
++export function holdsWords(value: DayValue | undefined): boolean {
++  if (value == null) return false;
++  if (typeof value === "string") return value.trim().length > 0;
++  if (Array.isArray(value)) return value.some((v) => typeof v === "string" && v.trim().length > 0);
++  return true;
++}
++
++/** Whether what is stored under a step's draft key is a refused answer kept for her. */
++export function isRefusedDraft(x: unknown): boolean {
++  return isKeptAnswer(x) || (!!x && typeof x === "object" && typeof (x as StepDraft).refused === "string");
++}
++
++/**
++ * The draft a step opens with, from what is stored under its key: a draft she
++ * left, a refused answer kept for her (`KeptAnswer`, rebuilt for this step,
++ * carrying its `refused` line), or nothing (`null`: start from her saved
++ * answer).
++ */
++export function draftFromStored(
++  stored: unknown,
++  step: DayStep,
++  options: string[],
++  dayAnswers: DayStepAnswers | undefined,
++  ctx?: TemplateContext,
++): StepDraft | null {
++  if (isKeptAnswer(stored)) return { ...initialDraft(step, stored.kept, options, dayAnswers, ctx), refused: stored.refused };
++  return (stored as StepDraft | undefined) ?? null;
++}
+diff --git a/apps/mobile/src/hooks/useDayGate.ts b/apps/mobile/src/hooks/useDayGate.ts
+index 8d69db7..b400562 100644
+--- a/apps/mobile/src/hooks/useDayGate.ts
++++ b/apps/mobile/src/hooks/useDayGate.ts
+@@ -1,4 +1,5 @@
+-import { useEffect, useState } from "react";
++import { useEffect, useMemo, useState } from "react";
++import type { AreaKey } from "@/content/types";
+ import { AppState } from "react-native";
+ import { formatLocale, type Strings } from "@/i18n";
+ import { dayGateFor } from "@/lib/dayGate";
+@@ -27,11 +28,20 @@ const MAX_TIMER_MS = 2_147_483_647;
+ export function useDayGate(
+   progress: PathProgress | undefined,
+   totalDays: number,
++  /** The path's area: its days still queued on this phone count from now (`dayGateFor`). */
++  area?: AreaKey,
+ ): { finishedDay: number; nextDay: number; opensAt: number } | null {
+   const rule = useAppStore((s) => s.dayUnlock);
+   const [now, setNow] = useState(() => Date.now());
++  // As a string, so a queue that changes elsewhere does not re-render this.
++  const unsyncedKey = useAppStore((s) =>
++    area
++      ? [...new Set(s.pendingSteps.filter((q) => q.area === area).map((q) => q.day))].sort((a, b) => a - b).join(",")
++      : "",
++  );
++  const unsynced = useMemo(() => (unsyncedKey ? unsyncedKey.split(",").map(Number) : []), [unsyncedKey]);
+ 
+-  const gate = dayGateFor(progress, totalDays, rule, now);
++  const gate = dayGateFor(progress, totalDays, rule, now, unsynced);
+   const opensAt = gate?.opensAt ?? null;
+ 
+   useEffect(() => {
+diff --git a/apps/mobile/src/i18n/locales/en/practice.ts b/apps/mobile/src/i18n/locales/en/practice.ts
+index 310aeb2..906fbf5 100644
+--- a/apps/mobile/src/i18n/locales/en/practice.ts
++++ b/apps/mobile/src/i18n/locales/en/practice.ts
+@@ -235,10 +235,17 @@ export const practice = {
+     /** What is saved, said plainly. */
+     saved: "Your answers are saved. You can come back to them in your Atlas.",
+     savedOffline: "Your answers are saved on this phone. They will sync when you are back online.",
++    /** An answer of the day was refused by the server for good; its words are back in its step on this phone. */
++    notSaved: "One of your answers couldn't be saved to your account. Your words are still in that step, on this phone.",
+     fallbackTitle: "You showed up for today.",
+     fallbackElara: "What you looked at today stays with you for what comes next.",
+   },
+ 
++  /** An answer the server refused for good, put back in its step (`keptAnswer`). */
++  refused: {
++    step: "This answer couldn't be saved to your account. Your words are still here, so you can send them again.",
++  },
++
+   synthesis: {
+     weekComplete: (week: number) => `Week ${week} complete`,
+     title: "A pattern is starting to emerge.",
+diff --git a/apps/mobile/src/i18n/locales/es/day.ts b/apps/mobile/src/i18n/locales/es/day.ts
+index 544b946..ada56e0 100644
+--- a/apps/mobile/src/i18n/locales/es/day.ts
++++ b/apps/mobile/src/i18n/locales/es/day.ts
+@@ -36,7 +36,12 @@ export const day: Strings["day"] = {
+   },
+ 
+   return: {
+-    back: (at: string) => `De vuelta ${at.charAt(0).toLowerCase()}${at.slice(1)}.`,
++    back: (at: string) => {
++      const place = `${at.charAt(0).toLowerCase()}${at.slice(1)}`;
++      // PROPUESTA (beta-fixes 3 nov, pendiente de revisión nativa): con la parada
++      // genérica «La vuelta» la línea decía «De vuelta en la vuelta.».
++      return /\bvuelta\b/.test(place) ? `De nuevo ${place}.` : `De vuelta ${place}.`;
++    },
+     away: "Tu camino sigue aquí.",
+     reduced: (line: string, toward: string) => `${line} ${toward}.`,
+   },
+diff --git a/apps/mobile/src/i18n/locales/es/practice.ts b/apps/mobile/src/i18n/locales/es/practice.ts
+index 4f28699..c1f5245 100644
+--- a/apps/mobile/src/i18n/locales/es/practice.ts
++++ b/apps/mobile/src/i18n/locales/es/practice.ts
+@@ -217,10 +217,17 @@ export const practice: Strings["practice"] = {
+           : `Respondiste ${answered} de ${total} preguntas.`,
+     saved: "Tus respuestas están guardadas. Puedes volver a ellas en tu Atlas.",
+     savedOffline: "Tus respuestas están guardadas en este teléfono. Se sincronizarán cuando vuelvas a tener conexión.",
++    // PROPUESTA (beta-fixes 3 nov, pendiente de revisión nativa).
++    notSaved: "Una de tus respuestas no se pudo guardar en tu cuenta. Tus palabras siguen en ese paso, en este teléfono.",
+     fallbackTitle: "Hoy te presentaste.",
+     fallbackElara: "Lo que miraste hoy queda contigo para lo que sigue.",
+   },
+ 
++  refused: {
++    // PROPUESTA (beta-fixes 3 nov, pendiente de revisión nativa).
++    step: "Esta respuesta no se pudo guardar en tu cuenta. Tus palabras siguen aquí para que puedas enviarlas de nuevo.",
++  },
++
+   synthesis: {
+     weekComplete: (week: number) => `Semana ${week} completada`,
+     title: "Empieza a aparecer un patrón.",
+diff --git a/apps/mobile/src/i18n/returnLine.test.ts b/apps/mobile/src/i18n/returnLine.test.ts
+new file mode 100644
+index 0000000..8937cc5
+--- /dev/null
++++ b/apps/mobile/src/i18n/returnLine.test.ts
+@@ -0,0 +1,24 @@
++import { describe, expect, it } from "vitest";
++import { stopLandmarks } from "@/content/placeDay";
++import { en } from "./locales/en";
++import { es } from "./locales/es";
++
++/**
++ * The line a day opens on when she comes back to a place (\`useWorldDay\`):
++ * "De vuelta" + the previous stop's "En …" form. With the generic stop «La
++ * vuelta» it read «De vuelta en la vuelta.» (beta-fixes 3 Nov, day 24).
++ */
++describe("the return line", () => {
++  it("does not say «De vuelta en la vuelta.» at any generic stop", () => {
++    const lines = stopLandmarks(es.globe.stops.generic, "es").map((l) => es.day.return.back(l.at));
++    expect(lines).not.toContain("De vuelta en la vuelta.");
++    expect(lines.filter((l) => (l.match(/vuelta/g) ?? []).length > 1)).toEqual([]);
++    expect(es.day.return.back("En la vuelta")).toBe("De nuevo en la vuelta.");
++  });
++
++  it("is unchanged everywhere else", () => {
++    expect(es.day.return.back("En el seto")).toBe("De vuelta en el seto.");
++    expect(es.day.return.back("En la puerta")).toBe("De vuelta en la puerta.");
++    expect(en.day.return.back("At the turn")).toBe("Back at the turn.");
++  });
++});
+diff --git a/apps/mobile/src/lib/dayGate.test.ts b/apps/mobile/src/lib/dayGate.test.ts
+index 82b9085..c03f6c1 100644
+--- a/apps/mobile/src/lib/dayGate.test.ts
++++ b/apps/mobile/src/lib/dayGate.test.ts
+@@ -107,6 +107,37 @@ describe("a day she has already started", () => {
+   });
+ });
+ 
++describe("a finished day whose answers are still on this phone (beta-fixes 3 Nov)", () => {
++  // Reproduced in the browser: Day 1 finished offline on Thursday evening; after
++  // midnight the phone opened Day 2 and she walked it, still offline. On
++  // reconnecting, the server stamped Day 1 when it landed and refused Day 2
++  // (\`day_locked\`), so the phone had shown open a day the server would not take.
++  it("counts from now while they are queued, so Day 2 is not shown open before Day 1 has landed", () => {
++    const p = answer(fresh(), 1, THU_21);
++    // Without the queue (Day 1 already on the server) Friday 09:00 is open, as before.
++    expect(dayGateFor(p, 7, MIDNIGHT, FRI_09)).toBeNull();
++    // Day 1 still queued: the server will stamp it no earlier than now, so Day 2 opens Saturday 00:00.
++    expect(dayGateFor(p, 7, MIDNIGHT, FRI_09, [1])).toEqual({ finishedDay: 1, nextDay: 2, opensAt: SAT_00 });
++  });
++
++  it("before midnight it is the same wait as without the queue", () => {
++    const p = answer(fresh(), 1, THU_21);
++    expect(dayGateFor(p, 7, MIDNIGHT, THU_21 + 60_000, [1])?.opensAt).toBe(FRI_00);
++  });
++
++  it("only the finished day's own queue counts, and a started next day is still never taken back", () => {
++    const p = answer(fresh(), 1, THU_21);
++    expect(dayGateFor(p, 7, MIDNIGHT, FRI_09, [3])).toBeNull();
++    const started = answer(p, 2, FRI_09, "Synthetic words.", TWO_STEPS, "a");
++    expect(dayGateFor(started, 7, MIDNIGHT, FRI_09 + 60_000, [1])).toBeNull();
++  });
++
++  it("with the 24-hour rule it counts 24 hours from now", () => {
++    const p = answer(fresh(), 1, THU_21);
++    expect(dayGateFor(p, 7, { kind: "after", hours: 24 }, FRI_09, [1])?.opensAt).toBe(FRI_09 + 24 * 3_600_000);
++  });
++});
++
+ describe("the server's first completion and the phone's", () => {
+   it("the server's wins, even when it is later (an offline finish dated by its upload)", () => {
+     // Closed here offline at Thursday 21:00; landed Friday 09:00.
+diff --git a/apps/mobile/src/lib/dayGate.ts b/apps/mobile/src/lib/dayGate.ts
+index f244901..ec1af19 100644
+--- a/apps/mobile/src/lib/dayGate.ts
++++ b/apps/mobile/src/lib/dayGate.ts
+@@ -71,13 +71,24 @@ export function dayGateFor(
+   totalDays: number,
+   rule: DayUnlockRule,
+   now: number,
++  /** Days of this path with answers still queued on this phone (`pendingSteps`), not yet on the server. */
++  unsynced: readonly number[] = [],
+ ): DayGateState | null {
+   if (!progress || rule.kind === "open") return null;
+   const finishedDay = (progress.currentDay ?? 1) - 1;
+   const nextDay = finishedDay + 1;
+   if (finishedDay < 1 || nextDay > totalDays || !progress.completedDays.includes(finishedDay)) return null;
+   if (hasStarted(progress, nextDay)) return null;
+-  const finishedAt = completionAnchor(progress, finishedDay);
++  let finishedAt = completionAnchor(progress, finishedDay);
++  // A day finished here whose answers are still queued has not finished on the
++  // server: it finishes there when they land, and its first completion is
++  // stamped then. So the next day cannot open there before the moment counted
++  // from *now*. Counting from this phone's own close instead opened a day the
++  // server then refused (`day_locked`): a day finished offline last night,
++  // synced after midnight, and the next one walked in between. The moment
++  // re-counts as long as they stay queued, and the server's own time replaces
++  // it once they land (`reconcileAnchors`).
++  if (unsynced.includes(finishedDay)) finishedAt = Math.max(finishedAt ?? now, now);
+   if (finishedAt === null) return null;
+   const opensAt = nextDayOpensAt(rule, finishedAt);
+   if (opensAt === null || !isInstant(now) || opensAt <= now) return null;
+diff --git a/apps/mobile/src/store/stepQueue.test.ts b/apps/mobile/src/store/stepQueue.test.ts
+index 9159dae..c2f3532 100644
+--- a/apps/mobile/src/store/stepQueue.test.ts
++++ b/apps/mobile/src/store/stepQueue.test.ts
+@@ -41,6 +41,38 @@ const entry = (stepId: string, queuedAt = at, day = 2, area = "money"): QueueEnt
+   queuedAt,
+ });
+ 
++describe("flushQueueOnce: an answer refused for good (beta-fixes 3 Nov)", () => {
++  // Reproduced in the browser with a real 403 premium_required: the entry was
++  // dropped and her words went with it. The flush now hands it over first.
++  it("hands an entry refused for good to onDropped before removing it, and nothing else", async () => {
++    const dropped: string[] = [];
++    const now = Date.now();
++    const h = harness(
++      [entry("refused", now), entry("locked", now, 3), entry("missing", now), entry("fine", now)],
++      (e) =>
++        e.body.stepId === "refused"
++          ? { status: 403, code: "premium_required" }
++          : e.body.stepId === "locked"
++            ? { status: 403, code: "day_locked" }
++            : e.body.stepId === "missing"
++              ? { status: 404, code: "step_not_found" }
++              : null,
++    );
++    await flushQueueOnce({ ...h.deps, onDropped: (e) => dropped.push(e.body.stepId) });
++    expect(dropped).toEqual(["refused"]);
++    // Kept (day_locked) and retried (step_not_found) entries stay for a later pass.
++    expect(h.queue().map((e) => e.body.stepId)).toEqual(["locked", "missing"]);
++  });
++
++  it("a step the content no longer has, past its grace, is handed over too", async () => {
++    const dropped: string[] = [];
++    const h = harness([entry("gone", Date.now() - STEP_NOT_FOUND_GRACE_MS - 60_000)], () => ({ status: 404, code: "step_not_found" }));
++    await flushQueueOnce({ ...h.deps, onDropped: (e) => dropped.push(e.body.stepId) });
++    expect(dropped).toEqual(["gone"]);
++    expect(h.queue()).toEqual([]);
++  });
++});
++
+ describe("flushQueueOnce", () => {
+   it("sends both answers queued in the same tick (a lead card and the step under it)", async () => {
+     // Money Clarity Day 2: the follow-up card answered with nothing and the
+diff --git a/apps/mobile/src/store/stepQueue.ts b/apps/mobile/src/store/stepQueue.ts
+index 4546666..41b6e9c 100644
+--- a/apps/mobile/src/store/stepQueue.ts
++++ b/apps/mobile/src/store/stepQueue.ts
+@@ -108,6 +108,12 @@ export interface FlushDeps<E extends QueueEntry> {
+   sendable?: (entry: E) => boolean;
+   /** What the server answered for an entry that landed (before it is removed). */
+   onLanded?: (entry: E, result: unknown) => void;
++  /**
++   * An entry the server refused for good (`drop`), before it is removed: the
++   * last moment her words for it exist anywhere but this call. Dropping it
++   * used to lose them silently; the store keeps them (`keptAnswer`).
++   */
++  onDropped?: (entry: E, err: unknown) => void;
+ }
+ 
+ /**
+@@ -148,6 +154,7 @@ export async function flushQueueOnce<E extends QueueEntry>(deps: FlushDeps<E>):
+         lockedFrom.set(entry.area, Math.min(locked ?? entry.day, entry.day));
+         continue;
+       }
++      deps.onDropped?.(entry, err);
+     }
+     deps.remove(entry);
+   }
+diff --git a/apps/mobile/src/store/useAppStore.ts b/apps/mobile/src/store/useAppStore.ts
+index e3ba951..1656f3b 100644
+--- a/apps/mobile/src/store/useAppStore.ts
++++ b/apps/mobile/src/store/useAppStore.ts
+@@ -51,6 +51,7 @@ import {
+ import { flushCheckInQueue, moodFor, sameCheckIn, type CheckInEntry } from "./checkIns";
+ import { createLocaleSync, refreshForLanguage } from "@/lib/languageSwitch";
+ import { progressAfterAnswer } from "./stepAnswer";
++import { holdsWords, keptAnswer, stepDraftKey } from "@/components/practice/draft";
+ import {
+   belongsTo,
+   decideFailure,
+@@ -753,6 +754,19 @@ const flushStepsOnce = singleFlight(async () => {
+       const card = safetyCardOf<SafetyCardDTO>(result);
+       if (card) get().pauseForSafety(entry.area, card);
+     },
++    // Refused for good (a week that locked under her, a step the content no
++    // longer has, a shape it no longer takes): her words go back to the step
++    // as its draft, marked refused, instead of leaving with the entry. Not
++    // over a newer draft (she has typed since), and not for a decline or an
++    // empty skip, which carry no words.
++    onDropped: (entry, err) => {
++      if (entry.decline || !holdsWords(entry.body.value)) return;
++      const key = stepDraftKey(entry.area, entry.day, entry.body.stepId);
++      if (get().drafts[key]) return;
++      const e = (err && typeof err === "object" ? err : {}) as { code?: unknown; status?: unknown };
++      const code = typeof e.code === "string" ? e.code : String(e.status ?? "refused");
++      get().setDraft(key, keptAnswer(entry.body.value ?? null, code));
++    },
+     // Exactly this write. Two entries queued in the same tick share a
+     // `queuedAt` (a lead card and the step under it), and removing by
+     // `queuedAt` alone took the second one out unsent (`stepQueue.ts`).
+-- 
+2.43.0
+
+
+From eaa4edee2d83a0bc35c6fa76b5a210ad8eb8f296 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 07:48:05 +0000
+Subject: [PATCH 11/11] Hoy reads a refused answer kept for her as hers, and
+ waits for her progress before the gate
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Composition of the two branches on Hoy's entry:
+
+- A refused answer is kept under the step's draft key as { kept, refused }
+  (beta-session-fixes, onDropped). draftHasWords only knew StepDraft, so
+  Hoy resumed that day without «Guardamos lo que escribiste» over words
+  the phone was keeping. It now reads a kept answer by its words.
+- The progress-ready rule and the gate are one pure step
+  (todayEntryWhenReady): no door before her progress is read, whatever
+  the gate says; once it is, a day still queued waits counted from now.
+  Tests pin both orders against dayGateFor(..., unsynced).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MRH1FyKGTN3zfVru4KrGk9
+---
+ apps/mobile/src/hooks/todayEntry.test.ts | 54 ++++++++++++++++++++++++
+ apps/mobile/src/hooks/todayEntry.ts      | 18 +++++++-
+ apps/mobile/src/hooks/useTodayEntry.ts   |  6 +--
+ 3 files changed, 74 insertions(+), 4 deletions(-)
+
+diff --git a/apps/mobile/src/hooks/todayEntry.test.ts b/apps/mobile/src/hooks/todayEntry.test.ts
+index 6a6c943..d3421a8 100644
+--- a/apps/mobile/src/hooks/todayEntry.test.ts
++++ b/apps/mobile/src/hooks/todayEntry.test.ts
+@@ -2,6 +2,7 @@ import type { DayStepAnswers, DayUnlockRule, PathDayDTO } from "@elara/shared";
+ import { afterAll, beforeAll, describe, expect, it } from "vitest";
+ import { en } from "@/i18n/locales/en";
+ import { es } from "@/i18n/locales/es";
++import { keptAnswer } from "@/components/practice/draft";
+ import { dayGateFor } from "@/lib/dayGate";
+ import {
+   entryWords,
+@@ -11,6 +12,7 @@ import {
+   promisesNextWeek,
+   recallFor,
+   resolveTodayEntry,
++  todayEntryWhenReady,
+   type EntryProgress,
+   type ResolveInput,
+ } from "./todayEntry";
+@@ -330,6 +332,13 @@ describe("draftHasWords: an opened step is not a kept answer (beta hardening, 3
+     expect(draftHasWords({ ...empty, photo: { ...empty.photo, uri: "file:///x.jpg" } })).toBe(true);
+   });
+ 
++  it("an answer the server refused, kept under the step's key, is hers too", () => {
++    // `onDropped` (beta session fixes) stores `{ kept, refused }`, not a StepDraft.
++    expect(draftHasWords(keptAnswer("Pago tarde porque no quiero ver el saldo.", "premium_required"))).toBe(true);
++    expect(draftHasWords(keptAnswer(["", "alquiler"], "invalid_value"))).toBe(true);
++    expect(draftHasWords(keptAnswer("  ", "invalid_value"))).toBe(false);
++  });
++
+   it("a day she only opened (an empty draft, the step remembered) reads «Seguir» without the claim", () => {
+     const drafts: Record<string, unknown> = { "money:10:ask": empty };
+     const e = resolve({
+@@ -343,3 +352,48 @@ describe("draftHasWords: an opened step is not a kept answer (beta hardening, 3
+     expect(w.hint).toBeUndefined();
+   });
+ });
++
++describe("todayEntryWhenReady: her own progress first, then the gate (beta hardening x beta session fixes)", () => {
++  // Day 9 closed on this phone last night at 23:50, offline: its answers are
++  // still queued. Ten past midnight, the phone's own close would open day 10;
++  // the server, which has not heard of day 9 yet, would refuse it.
++  const p = progressThrough(9, at("2026-10-26T23:50"));
++  const now = at("2026-10-27T00:10");
++  const base: ResolveInput = { area: "money", days: DAYS, progress: p, gate: null, rule: MIDNIGHT, now, premium: true, source: "today" };
++  // Read inside each test: the gate counts in the phone's zone, set in `beforeAll`.
++  let queued: ReturnType<typeof dayGateFor>;
++  let unqueued: ReturnType<typeof dayGateFor>;
++  beforeAll(() => {
++    queued = dayGateFor(p, DAYS.length, MIDNIGHT, now, [9]);
++    unqueued = dayGateFor(p, DAYS.length, MIDNIGHT, now);
++  });
++
++  it("a day still queued waits counted from now (the gate both rules see)", () => {
++    expect(queued).toEqual({ finishedDay: 9, nextDay: 10, opensAt: at("2026-10-28T00:00") });
++    expect(unqueued).toBeNull();
++  });
++
++  it("before her progress is read there is no door, whatever the gate says", () => {
++    // The store's empty progress would read as Day 1.
++    expect(resolveTodayEntry({ ...base, progress: undefined })!.day).toBe(1);
++    expect(todayEntryWhenReady(false, { ...base, progress: undefined })).toBeNull();
++    expect(todayEntryWhenReady(false, { ...base, gate: queued })).toBeNull();
++    expect(todayEntryWhenReady(false, { ...base, gate: unqueued })).toBeNull();
++  });
++
++  it("once it is hers, the queued day still holds the next one", () => {
++    const e = todayEntryWhenReady(true, { ...base, gate: queued })!;
++    expect([e.kind, e.state, e.day, e.nextDay, e.opensAt]).toEqual(["review", "done", 9, 10, at("2026-10-28T00:00")]);
++    // Without the queue counted, the day the server would refuse (`day_locked`).
++    const early = todayEntryWhenReady(true, { ...base, gate: unqueued })!;
++    expect([early.kind, early.day]).toEqual(["practice", 10]);
++  });
++
++  it("when the queue lands, the server's own stamp keeps the same wait", () => {
++    const landed: EntryProgress = { ...p, dayCompletedAt: { ...p.dayCompletedAt, 9: at("2026-10-27T00:15") } };
++    const later = at("2026-10-27T00:20");
++    const gate = dayGateFor(landed, DAYS.length, MIDNIGHT, later);
++    const e = todayEntryWhenReady(true, { ...base, progress: landed, now: later, gate })!;
++    expect([e.kind, e.day, e.opensAt]).toEqual(["review", 9, at("2026-10-28T00:00")]);
++  });
++});
+diff --git a/apps/mobile/src/hooks/todayEntry.ts b/apps/mobile/src/hooks/todayEntry.ts
+index f1ba638..b88e2b5 100644
+--- a/apps/mobile/src/hooks/todayEntry.ts
++++ b/apps/mobile/src/hooks/todayEntry.ts
+@@ -11,7 +11,7 @@ import {
+   type DayUnlockRule,
+   type PathDayDTO,
+ } from "@elara/shared";
+-import type { StepDraft } from "@/components/practice/draft";
++import { holdsWords, isKeptAnswer, type StepDraft } from "@/components/practice/draft";
+ import { completionAnchor, hasStarted, type DayGateState, type GateProgress } from "@/lib/dayGate";
+ 
+ /**
+@@ -20,9 +20,13 @@ import { completionAnchor, hasStarted, type DayGateState, type GateProgress } fr
+  * opens, untouched or not, so a draft's existence only says she was on the
+  * step (beta hardening, 3 Nov 2026: Hoy read that as «Guardamos lo que
+  * escribiste» over a day she had only opened).
++ *
++ * An answer the server refused for good is kept under the same key, as
++ * `{ kept, refused }` (`keptAnswer`): its words are hers, and kept.
+  */
+ export function draftHasWords(draft: unknown): boolean {
+   if (!draft || typeof draft !== "object") return false;
++  if (isKeptAnswer(draft)) return holdsWords(draft.kept);
+   const d = draft as Partial<StepDraft>;
+   const said = (s: unknown) => typeof s === "string" && s.trim().length > 0;
+   return (
+@@ -293,6 +297,18 @@ export function resolveTodayEntry(input: ResolveInput): ResolvedEntry | null {
+   };
+ }
+ 
++/**
++ * The entry once the progress in the store is hers (`progressReady`), and
++ * none before: until her own progress is read, the store's empty progress
++ * reads as "Day 1" (beta hardening, 3 Nov 2026). Once it is ready the gate
++ * decides as always, including a day whose answers are still queued on this
++ * phone, which waits counted from now (`dayGateFor`'s `unsynced`). Neither
++ * rule opens a day the other holds.
++ */
++export function todayEntryWhenReady(ready: boolean, input: ResolveInput): ResolvedEntry | null {
++  return ready ? resolveTodayEntry(input) : null;
++}
++
+ /** The strings the entry is told in (`t.home.hoy.entry`). Structural, so tests can pass the catalogue. */
+ export interface EntryWords {
+   start: (day: number) => string;
+diff --git a/apps/mobile/src/hooks/useTodayEntry.ts b/apps/mobile/src/hooks/useTodayEntry.ts
+index 630d3fb..d535977 100644
+--- a/apps/mobile/src/hooks/useTodayEntry.ts
++++ b/apps/mobile/src/hooks/useTodayEntry.ts
+@@ -11,7 +11,7 @@ import { qk, queryClient } from "@/lib/query";
+ import { progressReady, progressStatus, type ProgressStatus } from "@/store/accountState";
+ import { useAppStore } from "@/store/useAppStore";
+ import { useDayPlace } from "@/store/useDayPlace";
+-import { draftHasWords, entryWords, resolveTodayEntry, type EntrySource, type ResolvedEntry } from "./todayEntry";
++import { draftHasWords, entryWords, todayEntryWhenReady, type EntrySource, type ResolvedEntry } from "./todayEntry";
+ 
+ /**
+  * Today's entry: the ONE function behind Hoy's main button, the Pregunta tab
+@@ -95,9 +95,9 @@ export function useTodayEntry({ area, source = "today" }: { area?: AreaKey; sour
+   });
+ 
+   const resolved = useMemo(() => {
+-    if (!path || !ready) return null;
++    if (!path) return null;
+     const drafts = new Set(draftKeys ? draftKeys.split("\n") : []);
+-    return resolveTodayEntry({
++    return todayEntryWhenReady(ready, {
+       area: key,
+       days: path.days,
+       progress: started ? progress : undefined,
+-- 
+2.43.0
+
