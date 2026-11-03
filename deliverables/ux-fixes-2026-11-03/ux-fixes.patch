@@ -1,0 +1,2942 @@
+diff --git a/apps/api/src/routes/me.ts b/apps/api/src/routes/me.ts
+index dfbd3c2..a0838a3 100644
+--- a/apps/api/src/routes/me.ts
++++ b/apps/api/src/routes/me.ts
+@@ -51,6 +51,7 @@ import {
+   assertDayOpen,
+   assertDayUnlocked,
+   declineDay,
++  setPhraseSaved,
+   listMyPaths,
+   saveDay,
+   saveStep,
+@@ -676,6 +677,29 @@ me.post(
+   },
+ );
+ 
++/**
++ * «Guardar esta frase» (issue 05, 3 Nov 2026): her explicit choice to keep a
++ * `keep` step's words in «Frases que guardaste», or to take them off. The
++ * answer stays in the day's history either way. Only reads and sets one flag
++ * on an answer she already gave, so it needs no day gate beyond the path.
++ */
++me.put(
++  "/paths/:area/days/:day/steps/:stepId/saved",
++  zValidator(
++    "param",
++    z.object({ area: areaKeySchema, day: z.coerce.number().int().min(1), stepId: z.string().min(1).max(64) }),
++  ),
++  zValidator("json", z.object({ saved: z.boolean() })),
++  async (c) => {
++    const db = createDb(c.env.DB);
++    const { area, day, stepId } = c.req.valid("param");
++    await assertPathAccess(c.env, db, c.get("user")!, area, "day");
++    return c.json(
++      await setPhraseSaved(db, c.get("user")!.id, area, day, stepId, c.req.valid("json").saved, c.get("locale")),
++    );
++  },
++);
++
+ /**
+  * The personalised questions this member should currently see, across every
+  * path they have open.
+diff --git a/apps/api/src/services/progress.ts b/apps/api/src/services/progress.ts
+index 850a62b..7793dd1 100644
+--- a/apps/api/src/services/progress.ts
++++ b/apps/api/src/services/progress.ts
+@@ -4,6 +4,7 @@ import {
+   allStepsAnswered,
+   ANSWER_STATES,
+   answerRecord,
++  savedAfterEdit,
+   DEFAULT_LOCALE,
+   hasStateAnswer,
+   headlineValue,
+@@ -694,12 +695,18 @@ export async function saveStep(
+   // Elara's previous reply to this step is deliberately dropped when the answer
+   // changes: a reply to words the member has since rewritten is worse than no
+   // reply at all, and the caller regenerates one immediately.
++  const answeredAt = Date.now();
+   answers[input.stepId] = {
+     ...answerRecord(state, value),
+-    answeredAt: Date.now(),
++    answeredAt,
+     answeredOn,
+     ...(input.mode ? { mode: input.mode } : {}),
+     ...(safetyTier ? { safety: safetyTier } : {}),
++    // Issue 05: a `keep` answer reaches «Frases que guardaste» only when she
++    // saves it. Recorded `false` from here on, so it is told apart from an
++    // answer written before (absent: shelved automatically then, kept saved).
++    // An edit of words she saved stays saved.
++    ...(step.config?.keep ? { saved: stated ? false : savedAfterEdit(existing?.stepAnswers?.[input.stepId], answeredAt) } : {}),
+   };
+   // A resonance check rates the line quoted above it: her pick is kept as
+   // feedback on *that* reply (Interaction States spec §2), where whoever
+@@ -1298,3 +1305,37 @@ export function nextDayIsOpen(
+   const minutes = here.localHour * 60 + here.localMinute;
+   return !(here.localDate === nextDate && minutes < rule.hour * 60 + rule.minute);
+ }
++
++/**
++ * Save her words to «Frases que guardaste», or take them off (issue 05, 3 Nov
++ * 2026). Her answer stays in the day's history either way: this only sets the
++ * one flag (`StepAnswer.saved`), in one statement, and only on a step that
++ * keeps a phrase and holds her written answer. Answers made through the steps
++ * route are untouched by it, and it touches nothing else on the answer.
++ */
++export async function setPhraseSaved(
++  db: Db,
++  userId: string,
++  area: AreaKey,
++  day: number,
++  stepId: string,
++  saved: boolean,
++  locale: Locale = DEFAULT_LOCALE,
++): Promise<{ saved: number | false }> {
++  const state = await loadDayState(db, userId, area, day);
++  const row = state.rows.find((r) => r.day === day);
++  const answer = row?.stepAnswers?.[stepId];
++  if (!state.path || !row || !answer) throw notFound("No answer to save", "answer_not_found");
++  const authored = (await authoredPath(db, area, locale, state.contentVersion)).days.find((d) => d.day === day);
++  const step = authored ? stepsOf(authored).find((s) => s.id === stepId) : undefined;
++  if (!step?.config?.keep || step.config.hidden) throw badRequest("This step keeps no phrase", "not_a_phrase");
++  if (answer.value == null || answer.safety || hasStateAnswer(answer)) {
++    throw badRequest("Only her written words can be saved", "not_a_phrase");
++  }
++  const value: number | false = saved ? (typeof answer.saved === "number" ? answer.saved : Date.now()) : false;
++  await db
++    .update(dayResponse)
++    .set({ stepAnswers: sql`json_set(${dayResponse.stepAnswers}, ${`${jsonKey(stepId)}.saved`}, json(${JSON.stringify(value)}))` })
++    .where(and(eq(dayResponse.id, row.id), sql`json_type(${dayResponse.stepAnswers}, ${jsonKey(stepId)}) is not null`));
++  return { saved: value };
++}
+diff --git a/apps/api/src/services/stepReply.ts b/apps/api/src/services/stepReply.ts
+index bc80c17..3758cc5 100644
+--- a/apps/api/src/services/stepReply.ts
++++ b/apps/api/src/services/stepReply.ts
+@@ -131,10 +131,34 @@ Respond only to what they actually said in this answer, to this question.
+ - Never infer people, names or relationships that are not stated as such. A name on its own is not a family member, a partner or a friend.
+ - Never state their feelings, needs, motives or progress as facts. Reflect back what they chose or wrote; anything beyond it is offered tentatively ("maybe", "it sounds like") and easy for them to correct.
+ - The background notes above help you understand them. Do not bring people, events or details from them into this reply unless this answer raised them.
+-- If the answer is very short, off-topic, a greeting, a test, or does not answer the question, do not build meaning from it. Gently acknowledge it and invite them to try the question again in their own words.
++${readingRule(o.position, o.total)}
+ - Never use em dashes (\u2014). Use a comma or a full stop instead.`;
+ }
+ 
++/**
++ * How to read a short or off-topic answer, which depends on where the step
++ * sits (issue 02, 3 Nov 2026).
++ *
++ * A short answer is a real answer: «Todo bien» is never rejected for its
++ * length. Mid-day, words that do not answer the question (a greeting, a test,
++ * something off-topic) may still be invited to try again, because the next
++ * question is right there. On the last step nothing follows: the reply closes
++ * the day and must never ask for another answer, which used to contradict the
++ * job line's «Do not ask a question» on the same prompt.
++ */
++export function readingRule(position: number, total: number): string {
++  if (position >= total) {
++    return [
++      "- A short answer is a real answer (for example \"todo bien\" or \"bien\"). Do not build meaning from it and do not interpret it: acknowledge it plainly, in one sentence, as her answer.",
++      "- This is the last step: close the day. Never ask for another answer, never invite her to try again or to add more, and do not ask a question.",
++    ].join("\n");
++  }
++  return [
++    "- A short answer is a real answer (for example \"todo bien\" or \"bien\"). Do not build meaning from it and do not interpret it: acknowledge it plainly as her answer.",
++    "- If the answer is off-topic, a greeting, a test, or does not answer the question, do not build meaning from it. Gently acknowledge it and invite them to try the question again in their own words.",
++  ].join("\n");
++}
++
+ /**
+  * The reply's own instructions on a daily-session day (one with a `purpose`):
+  * where the step sits, then the one move and the
+@@ -170,8 +194,11 @@ Before writing, decide silently which ONE move fits her answer best:
+ If she skipped, said she cannot today, or is unsure, the move is to accept it plainly and close: no task, no persuasion.
+ If she said there is none right now, accept it plainly: no task and no suggestion of one.
+ If her answer is long, the move is a one-line version of it, in her own words.
+-If her answer is vague, offer one way to narrow it, as an option she can take or leave, never as an order.
+-If she corrects an earlier reading, take the correction as true and update without arguing.
++${
++  o.position >= o.total
++    ? "If her answer is vague, take it as it is: this is the close, so do not ask her to narrow it or to add more.\n"
++    : "If her answer is vague, offer one way to narrow it, as an option she can take or leave, never as an order.\n"
++}If she corrects an earlier reading, take the correction as true and update without arguing.
+ Write only that move, grounded in her exact words. No praise and no grading of what she wrote ("buena idea", "muy bien", "great idea", "well done"). No interpretation of her feelings or motives. No new task. Do not ask her a question.
+ Never add people, places, employers, institutions or facts she did not mention.
+ Never say that an action is safe, free, easy, guaranteed or without consequences.
+@@ -183,7 +210,7 @@ Respond only to what they actually said in this answer, to this question.
+ - Never infer people, names or relationships that are not stated as such. A name on its own is not a family member, a partner or a friend.
+ - Never state their feelings, needs, motives or progress as facts. Reflect back what they chose or wrote; anything beyond it is offered tentatively ("maybe", "it sounds like") and easy for them to correct.
+ - The background notes above help you understand them. Do not bring people, events or details from them into this reply unless this answer raised them.
+-- If the answer is very short, off-topic, a greeting, a test, or does not answer the question, do not build meaning from it. Gently acknowledge it and invite them to try the question again in their own words.
++${readingRule(o.position, o.total)}
+ - Never use em dashes (\u2014). Use a comma or a full stop instead.`;
+ }
+ 
+@@ -360,12 +387,12 @@ export function fallbackFor(step: DayStep): StepReply {
+  * A reply that is merely mediocre is still shown; one that is empty, enormous,
+  * or visibly a model talking about itself is not.
+  */
+-function sanitize(raw: string): string | null {
++export function sanitize(raw: string): string | null {
+   let text = raw.trim();
+   if (!text) return null;
+   // Models like to wrap a "quote" in quotes. The screen already presents it as
+   // her speaking, so the marks read as a second layer of quotation.
+-  text = text.replace(/^["“”']+|["“”']+$/g, "").trim();
++  text = unwrapQuotes(text);
+   text = text.replace(/```[\s\S]*?```/g, "").trim();
+   if (text.length < STEP_REPLY_MIN) return null;
+   if (TELLS.some((t) => t.test(text))) return null;
+@@ -383,3 +410,34 @@ function sanitize(raw: string): string | null {
+   const trimmed = kept.join(" ").trim();
+   return trimmed.length >= STEP_REPLY_MIN ? trimmed : null;
+ }
++
++/** The quote pairs a model wraps a whole reply in: open, close. */
++const QUOTE_PAIRS: readonly (readonly [string, string])[] = [
++  ['"', '"'],
++  ["“", "”"],
++  ["«", "»"],
++  ["'", "'"],
++  ["‘", "’"],
++];
++/** Marks that, inside the text, mean a quoted phrase of its own: an apostrophe in "don't" is not one, unless the pair is apostrophes. */
++const DOUBLE_MARKS = /["“”«»]/;
++const ANY_MARKS = /["“”«»'‘’]/;
++
++/**
++ * Strip quotation marks only when ONE matching pair wraps the whole reply,
++ * with no quote mark of any kind inside it. A quote that opens or closes a
++ * phrase inside the reply (`"Todo bien" no deja claro…`, `Dijiste "todo
++ * bien"`) is part of the reply and is never touched; nor is a single unmatched
++ * mark at either end. (Issue 02: the old `^["“”']+|["“”']+$` strip took one
++ * side of an embedded quote and left the other.)
++ */
++export function unwrapQuotes(text: string): string {
++  for (const [open, close] of QUOTE_PAIRS) {
++    if (text.length > 2 && text.startsWith(open) && text.endsWith(close)) {
++      const inner = text.slice(open.length, text.length - close.length);
++      const single = open === "'" || open === "‘";
++      if (!(single ? ANY_MARKS : DOUBLE_MARKS).test(inner)) return inner.trim();
++    }
++  }
++  return text;
++}
+diff --git a/apps/api/src/services/wellbeing.ts b/apps/api/src/services/wellbeing.ts
+index 3a1cc18..f1eabe4 100644
+--- a/apps/api/src/services/wellbeing.ts
++++ b/apps/api/src/services/wellbeing.ts
+@@ -1,8 +1,8 @@
+-import { and, count, desc, eq, gte, lt } from "drizzle-orm";
++import { and, count, desc, eq, gte, isNotNull, lt } from "drizzle-orm";
+ import type { WellbeingDimension, WellbeingSnapshotDTO } from "@elara/shared";
+ import { defaultSnapshot, MOOD_VALENCE } from "@elara/shared";
+ import type { Db } from "../db";
+-import { checkIn, message, reflection, signal, wellbeingSnapshot } from "../db/schema";
++import { checkIn, dayResponse, message, reflection, signal, userPath, wellbeingSnapshot } from "../db/schema";
+ import { newId } from "../lib/ids";
+ import { localToday, zoneFor } from "./time";
+ 
+@@ -248,7 +248,8 @@ export async function listSnapshots(
+   userId: string,
+   now = new Date(),
+ ): Promise<WellbeingSnapshotDTO[]> {
+-  const today = localToday(await zoneFor(db, userId), now);
++  const zone = await zoneFor(db, userId);
++  const today = localToday(zone, now);
+   const { periodStart: latest } = lastCompleteWeek(today);
+   const earliest = shiftDate(latest, -(HISTORY_WEEKS - 1) * 7);
+ 
+@@ -260,12 +261,14 @@ export async function listSnapshots(
+     .limit(HISTORY_WEEKS)
+     .all();
+   const byStart = new Map(rows.map((r) => [r.periodStart, r]));
++  const sessions = await sessionsByWeek(db, userId, zone, earliest, shiftDate(latest, 6));
+ 
+   const out: WellbeingSnapshotDTO[] = [];
+   for (let i = HISTORY_WEEKS - 1; i >= 0; i--) {
+     const start = shiftDate(latest, -i * 7);
+     const end = shiftDate(start, 6);
+     const row = byStart.get(start);
++    const done = sessions.get(start) ?? 0;
+     out.push(
+       row
+         ? {
+@@ -276,9 +279,54 @@ export async function listSnapshots(
+             topThemes: row.topThemes ?? [],
+             checkIns: row.checkIns,
+             daysActive: row.daysActive,
++            // A stored week was observed: no completed day there is a real 0.
++            sessionsCompleted: done,
+           }
+-        : defaultSnapshot(start, end),
++        : { ...defaultSnapshot(start, end), sessionsCompleted: done > 0 ? done : null },
+     );
+   }
+   return out;
+ }
++
++/**
++ * Completed daily sessions per week (keyed by the week's Monday), between two
++ * local dates inclusive: one per path day whose completion date falls in the
++ * week. Read live from `day_response`, which stores the member's own calendar
++ * day at completion (`completed_on`); rows written before migration 0054 have
++ * none and fall back to `completed_at` in her zone, as the Atlas does.
++ *
++ * Issue 04 (3 Nov 2026): «Sesiones completadas» replaces «Acción», whose
++ * `agency` score counted every answered step. The stored snapshot is not
++ * touched: this count sits alongside it, so past weeks keep their scores.
++ */
++export async function sessionsByWeek(
++  db: Db,
++  userId: string,
++  zone: string | null,
++  from: string,
++  to: string,
++): Promise<Map<string, number>> {
++  const rows = await db
++    .select({ completedOn: dayResponse.completedOn, completedAt: dayResponse.completedAt })
++    .from(dayResponse)
++    .innerJoin(userPath, eq(userPath.id, dayResponse.userPathId))
++    .where(
++      and(
++        eq(userPath.userId, userId),
++        isNotNull(dayResponse.completedAt),
++        // A day finished up to a day either side of the range in UTC can still
++        // be inside it in her zone; the date check below is the exact one.
++        gte(dayResponse.completedAt, new Date(`${shiftDate(from, -1)}T00:00:00Z`)),
++        lt(dayResponse.completedAt, new Date(`${shiftDate(to, 2)}T00:00:00Z`)),
++      ),
++    )
++    .all();
++  const out = new Map<string, number>();
++  for (const r of rows) {
++    const date = r.completedOn ?? (r.completedAt ? localToday(zone, r.completedAt) : null);
++    if (!date || date < from || date > to) continue;
++    const week = weekStart(date);
++    out.set(week, (out.get(week) ?? 0) + 1);
++  }
++  return out;
++}
+diff --git a/apps/api/test/daily-session.test.ts b/apps/api/test/daily-session.test.ts
+index fbdee96..6a275ab 100644
+--- a/apps/api/test/daily-session.test.ts
++++ b/apps/api/test/daily-session.test.ts
+@@ -23,7 +23,7 @@ import type { AppEnv, Bindings } from "../src/env";
+ import { renderError } from "../src/lib/errors";
+ import { attachLocale } from "../src/middleware/locale";
+ import me from "../src/routes/me";
+-import { jobFor, stepInstructions } from "../src/services/stepReply";
++import { jobFor, legacyStepInstructions, readingRule, sanitize, stepInstructions, unwrapQuotes } from "../src/services/stepReply";
+ import { createSqlite, d1Over } from "./helpers/d1";
+ import { schema, seedUser } from "./helpers/db";
+ 
+@@ -133,7 +133,14 @@ function harness() {
+     await Promise.all(pending.splice(0));
+     return res;
+   };
+-  return { db, ai, step };
++  const saved = (day: number, stepId: string, value: boolean) =>
++    app.request(
++      `/api/me/paths/money/days/${day}/steps/${stepId}/saved`,
++      { method: "PUT", headers: { "content-type": "application/json", "accept-language": "es" }, body: JSON.stringify({ saved: value }) },
++      env,
++      { waitUntil: () => {}, passThroughOnException() {} } as never,
++    );
++  return { db, ai, step, saved };
+ }
+ 
+ async function seedPath(db: Db) {
+@@ -481,3 +488,171 @@ describe("the takeaway card", () => {
+     expect(lastTakeaway(days, progress, 7)).toBeNull();
+   });
+ });
++
++/**
++ * Issue 02 (UI/UX handoff, 3 Nov 2026): «Todo bien» on the last step of a day.
++ * A short answer is a real answer, and the close never asks for another one,
++ * on either prompt (the previous one for days without a purpose, and V2).
++ */
++describe("issue 02: a short answer on the last step", () => {
++  const RETRY = /invite (them|her) to try the question again/;
++
++  it("V2 (a day with a purpose): the last step closes, accepts a short answer, and never invites a retry", () => {
++    const last = stepInstructions({ dayNumber: 25, dayTitle: "T", position: 2, total: 2, purpose: PURPOSE });
++    expect(last).toContain("A short answer is a real answer");
++    expect(last).toContain("This is the last step: close the day. Never ask for another answer, never invite her to try again");
++    expect(last).not.toMatch(RETRY);
++    expect(last).not.toContain("offer one way to narrow it");
++    expect(last).toContain("Do not ask her a question.");
++    // Nothing on the close says "very short" means "not an answer".
++    expect(last).not.toContain("If the answer is very short");
++  });
++
++  it("the previous prompt (no purpose, e.g. Money W4D4): the same close, no contradiction with «Do not ask a question»", () => {
++    const last = legacyStepInstructions({ dayNumber: 25, dayTitle: "T", position: 2, total: 2 });
++    expect(last).toContain("Close the day");
++    expect(last).toContain("Do not ask a question.");
++    expect(last).toContain("A short answer is a real answer");
++    expect(last).toContain("Never ask for another answer");
++    expect(last).not.toMatch(RETRY);
++    expect(last).not.toContain("If the answer is very short");
++    // A one-step day is its own last step.
++    expect(legacyStepInstructions({ dayNumber: 1, dayTitle: "T", position: 1, total: 1 })).not.toMatch(RETRY);
++    expect(stepInstructions({ dayNumber: 1, dayTitle: "T", position: 1, total: 1 })).not.toMatch(RETRY);
++  });
++
++  it("mid-day, both prompts still accept a short answer and may invite a retry only for words that do not answer", () => {
++    for (const mid of [
++      legacyStepInstructions({ dayNumber: 3, dayTitle: "T", position: 1, total: 2 }),
++      stepInstructions({ dayNumber: 3, dayTitle: "T", position: 1, total: 2, purpose: PURPOSE }),
++    ]) {
++      expect(mid).toContain("A short answer is a real answer");
++      expect(mid).toMatch(RETRY);
++      expect(mid).toContain("If the answer is off-topic, a greeting, a test, or does not answer the question");
++      expect(mid).not.toContain("This is the last step");
++    }
++    expect(readingRule(2, 2)).not.toMatch(RETRY);
++    expect(readingRule(1, 2)).toMatch(RETRY);
++  });
++
++  describe("through the route", () => {
++    let h: ReturnType<typeof harness>;
++    beforeEach(async () => {
++      vi.spyOn(console, "error").mockImplementation(() => {});
++      vi.spyOn(console, "warn").mockImplementation(() => {});
++      h = harness();
++      await seedUser(h.db, "ana");
++      await seedPath(h.db);
++      // A two-step day with no purpose, like Money W4D4 (`ask` then `take`, keep: sentence).
++      await h.db.insert(schema.pathDay).values({
++        id: "money-es-3",
++        pathContentId: "path-money-es",
++        day: 3,
++        level: "L",
++        title: "¿Qué necesitarías saber?",
++        kind: "reflect",
++        config: { minutes: 3 },
++        steps: [{ ...ASK, config: { ...ASK.config, card: undefined } }, { ...TAKE, config: { ...TAKE.config, card: undefined } }],
++      });
++    });
++
++    it("«Todo bien» on the last step of a day without a purpose reaches the model, under the closing rule, with no retry", async () => {
++      await h.step(3, { stepId: "ask", value: "Mejorar mi trabajo actual" });
++      const res = await h.step(3, { stepId: "take", value: "Todo bien" });
++      const body = (await res.json()) as StepResponse;
++      expect(body.reply.retry).toBeFalsy();
++      expect(body.reply.generated).toBe(true);
++      const last = h.ai.replies[h.ai.replies.length - 1]!;
++      expect(last.user).toContain("Todo bien");
++      expect(last.system).toContain("This is the last step: close the day.");
++      expect(last.system).not.toMatch(RETRY);
++    });
++
++    it("«Todo bien» on the last step of a session day: the same", async () => {
++      await h.step(1, { stepId: "ask", value: "Mejorar mi trabajo actual" });
++      const res = await h.step(1, { stepId: "take", value: "Todo bien" });
++      const body = (await res.json()) as StepResponse;
++      expect(body.reply.retry).toBeFalsy();
++      const last = h.ai.replies[h.ai.replies.length - 1]!;
++      expect(last.system).toContain("Purpose of today");
++      expect(last.system).toContain("This is the last step: close the day.");
++      expect(last.system).not.toMatch(RETRY);
++    });
++  });
++});
++
++describe("issue 02: sanitize keeps a quoted phrase inside the reply", () => {
++  it("never strips a quote that belongs to an embedded quoted phrase", () => {
++    expect(sanitize('"Todo bien" no deja claro qué sigue, y está bien así.')).toBe('"Todo bien" no deja claro qué sigue, y está bien así.');
++    expect(sanitize('Dijiste "todo bien", y con eso cierras el día.')).toBe('Dijiste "todo bien", y con eso cierras el día.');
++    expect(sanitize('Hoy cierras con "todo bien"')).toBe('Hoy cierras con "todo bien"');
++    expect(sanitize("Dijiste «todo bien». Con eso cierras el día de hoy.")).toBe("Dijiste «todo bien». Con eso cierras el día de hoy.");
++    expect(sanitize("“Todo bien” es lo que te llevas de hoy, tal cual.")).toBe("“Todo bien” es lo que te llevas de hoy, tal cual.");
++    // Two quoted phrases at either end are not one wrapping pair.
++    expect(unwrapQuotes('"Todo bien", dijiste, y "nada más"')).toBe('"Todo bien", dijiste, y "nada más"');
++  });
++
++  it("strips one balanced pair that wraps the whole reply", () => {
++    expect(sanitize('"Dijiste todo bien, y con eso cierras el día."')).toBe("Dijiste todo bien, y con eso cierras el día.");
++    expect(sanitize("«Dijiste todo bien, y con eso cierras el día.»")).toBe("Dijiste todo bien, y con eso cierras el día.");
++    expect(sanitize("“Dijiste todo bien, y con eso cierras el día.”")).toBe("Dijiste todo bien, y con eso cierras el día.");
++    // An apostrophe inside a double-quoted reply does not stop the unwrap.
++    expect(unwrapQuotes('"You said it\'s fine, and that closes the day."')).toBe("You said it's fine, and that closes the day.");
++  });
++
++  it("leaves unquoted text and a single unmatched quote alone", () => {
++    expect(sanitize("Dijiste todo bien, y con eso cierras el día.")).toBe("Dijiste todo bien, y con eso cierras el día.");
++    expect(sanitize('"Dijiste todo bien, y con eso cierras el día.')).toBe('"Dijiste todo bien, y con eso cierras el día.');
++    expect(sanitize('Dijiste todo bien, y con eso cierras el día."')).toBe('Dijiste todo bien, y con eso cierras el día."');
++    expect(sanitize("«Dijiste todo bien, y con eso cierras el día.")).toBe("«Dijiste todo bien, y con eso cierras el día.");
++  });
++});
++
++/**
++ * Issue 05 (3 Nov 2026): answers are saved in the day's history automatically;
++ * a phrase reaches «Frases que guardaste» only when she saves it.
++ */
++describe("issue 05: saving a phrase is her choice", () => {
++  let h: ReturnType<typeof harness>;
++  beforeEach(async () => {
++    vi.spyOn(console, "error").mockImplementation(() => {});
++    vi.spyOn(console, "warn").mockImplementation(() => {});
++    h = harness();
++    await seedUser(h.db, "ana");
++    await seedPath(h.db);
++  });
++
++  it("answering a keep step stores the answer, marked not saved", async () => {
++    await h.step(1, { stepId: "ask", value: "Mejorar mi trabajo actual" });
++    await h.step(1, { stepId: "take", value: "Todo bien" });
++    const answers = await storedAnswers(h.db, 1);
++    expect(answers.take!.value).toBe("Todo bien");
++    expect(answers.take!.saved).toBe(false);
++    // A step that keeps nothing carries no flag.
++    expect("saved" in answers.ask!).toBe(false);
++  });
++
++  it("«Guardar esta frase» sets it, taking it off clears it, and the answer stays in the day", async () => {
++    await h.step(1, { stepId: "ask", value: "Mejorar mi trabajo actual" });
++    await h.step(1, { stepId: "take", value: "Todo bien" });
++    const on = await h.saved(1, "take", true);
++    expect(on.status).toBe(200);
++    const body = (await on.json()) as { saved: number | false };
++    expect(typeof body.saved).toBe("number");
++    expect((await storedAnswers(h.db, 1)).take!.saved).toBe(body.saved);
++    // An edit of saved words stays saved.
++    await h.step(1, { stepId: "take", value: "Todo bien, de verdad" });
++    expect((await storedAnswers(h.db, 1)).take!.saved).toBe(body.saved);
++    const off = await h.saved(1, "take", false);
++    expect(off.status).toBe(200);
++    const after = await storedAnswers(h.db, 1);
++    expect(after.take!.saved).toBe(false);
++    expect(after.take!.value).toBe("Todo bien, de verdad");
++  });
++
++  it("refuses a step that keeps no phrase, and one with no answer", async () => {
++    await h.step(1, { stepId: "ask", value: "Mejorar mi trabajo actual" });
++    expect((await h.saved(1, "ask", true)).status).toBe(400);
++    expect((await h.saved(1, "take", true)).status).toBe(404);
++  });
++});
+diff --git a/apps/api/test/wellbeing-sessions.test.ts b/apps/api/test/wellbeing-sessions.test.ts
+new file mode 100644
+index 0000000..30f8582
+--- /dev/null
++++ b/apps/api/test/wellbeing-sessions.test.ts
+@@ -0,0 +1,98 @@
++import { describe, expect, it } from "vitest";
++import { listSnapshots, score, snapshotWeek } from "../src/services/wellbeing";
++import { createTestDb, schema, seedUser } from "./helpers/db";
++
++/**
++ * Issue 04 (3 Nov 2026): «Sesiones completadas» counts completed daily
++ * sessions (path days finished that week), read live from `day_response`
++ * alongside the frozen snapshot, which is never rewritten.
++ *
++ * NOW is Sunday 15 Mar 2026: the last complete week is 2-8 Mar.
++ */
++const NOW = new Date("2026-03-15T12:00:00Z");
++
++async function seed() {
++  const db = createTestDb();
++  await seedUser(db, "u1");
++  await db.insert(schema.userPath).values({ id: "p1", userId: "u1", area: "money", startedAt: new Date("2026-02-01T00:00:00Z") });
++  return db;
++}
++
++async function done(db: ReturnType<typeof createTestDb>, day: number, at: string, on: string | null) {
++  await db.insert(schema.dayResponse).values({
++    id: `d${day}`,
++    userPathId: "p1",
++    day,
++    stepAnswers: {},
++    completedAt: new Date(at),
++    completedOn: on,
++  });
++}
++
++describe("completed sessions per week", () => {
++  it("zero-data: no snapshot and nothing completed is missing (null), never 0", async () => {
++    const db = await seed();
++    const weeks = await listSnapshots(db, "u1", NOW);
++    expect(weeks.every((w) => w.sessionsCompleted === null)).toBe(true);
++  });
++
++  it("sparse: a stored week with no finished day is a real 0; answered steps are not sessions", async () => {
++    const db = await seed();
++    // Two active days with four answered steps (the recording's week): agency 80 in the stored score.
++    const sig = (d: string) => ({
++      id: `s${d}`,
++      userId: "u1",
++      source: "path_day",
++      kind: "answered",
++      refId: null,
++      payload: null,
++      derived: null,
++      at: new Date(`2026-03-${d}T20:00:00Z`),
++      localDate: `2026-03-${d}`,
++      annotatedAt: null,
++      annotateAttempts: 0,
++    });
++    const signals = ["02", "02", "03", "03"].map((d, i) => ({ ...sig(d), id: `s${i}` })) as never[];
++    const scored = score({ periodStart: "2026-03-02", periodEnd: "2026-03-08" }, [], signals, 0);
++    expect(scored.scores.agency).toBe(80);
++    expect(scored.scores.engagement).toBe(29);
++    expect(scored.daysActive).toBe(2);
++    await db.insert(schema.wellbeingSnapshot).values({
++      id: "w1",
++      userId: "u1",
++      periodStart: "2026-03-02",
++      periodEnd: "2026-03-08",
++      scores: scored.scores,
++      confidence: Math.round(scored.confidence * 100),
++      topThemes: [],
++      checkIns: 0,
++      daysActive: 2,
++    });
++    const weeks = await listSnapshots(db, "u1", NOW);
++    const last = weeks[weeks.length - 1]!;
++    expect(last.periodStart).toBe("2026-03-02");
++    expect(last.sessionsCompleted).toBe(0);
++    // The frozen scores are returned as stored.
++    expect(last.scores.agency).toBe(80);
++  });
++
++  it("complete: counts days finished in the week by their stored date, with the pre-0054 fallback", async () => {
++    const db = await seed();
++    await snapshotWeek(db, "u1", { periodStart: "2026-03-02", periodEnd: "2026-03-08" });
++    await done(db, 1, "2026-03-02T20:00:00Z", "2026-03-02");
++    await done(db, 2, "2026-03-03T20:00:00Z", "2026-03-03");
++    // Finished late on Sunday 8 Mar in her zone, already Monday in UTC: counted by completed_on.
++    await done(db, 3, "2026-03-09T02:00:00Z", "2026-03-08");
++    // An older row with no completed_on: dated from completed_at (UTC here, no zone stored).
++    await done(db, 4, "2026-03-05T10:00:00Z", null);
++    // Not finished in that week.
++    await done(db, 5, "2026-03-10T10:00:00Z", "2026-03-10");
++    await done(db, 6, "2026-02-23T10:00:00Z", "2026-02-23");
++    const weeks = await listSnapshots(db, "u1", NOW);
++    const byStart = new Map(weeks.map((w) => [w.periodStart, w]));
++    expect(byStart.get("2026-03-02")!.sessionsCompleted).toBe(4);
++    // A week with no stored snapshot but a finished day still shows the count.
++    expect(byStart.get("2026-02-23")!.sessionsCompleted).toBe(1);
++    expect(byStart.get("2026-02-23")!.confidence).toBe(0);
++  });
++});
+diff --git a/apps/mobile/app/(tabs)/atlas/world/[worldId].tsx b/apps/mobile/app/(tabs)/atlas/world/[worldId].tsx
+index cb7994a..4c9cb69 100644
+--- a/apps/mobile/app/(tabs)/atlas/world/[worldId].tsx
++++ b/apps/mobile/app/(tabs)/atlas/world/[worldId].tsx
+@@ -647,8 +647,9 @@ function Continuity({
+ }) {
+   const c = record.continuity!;
+   const world = t.world.worlds[c.worldId];
+-  const toward = world.landmarks[c.index - 1]?.toward ?? "";
+-  const line = t.atlas.record.continuity(world.name, lower(toward));
++  // The day's identity is where she stands (placeDay.dayStopIndex).
++  const here = world.landmarks[c.index - 1]?.at ?? "";
++  const line = t.atlas.record.continuity(world.name, lower(here));
+   return (
+     <PressableScale
+       size="card"
+diff --git a/apps/mobile/app/(tabs)/explore/event-detail/[id].tsx b/apps/mobile/app/(tabs)/explore/event-detail/[id].tsx
+index cddad0a..71244b1 100644
+--- a/apps/mobile/app/(tabs)/explore/event-detail/[id].tsx
++++ b/apps/mobile/app/(tabs)/explore/event-detail/[id].tsx
+@@ -348,6 +348,7 @@ export default function WorkshopDetail() {
+           tone={notIncluded && !full ? "outline" : "forest"}
+           disabled={full}
+           loading={busy}
++          loadingLabel={t.common.action.saving}
+           onPress={() => void savePlace()}
+           hint={full ? t.explore.workshopPage.fullNote : undefined}
+         />
+diff --git a/apps/mobile/app/(tabs)/explore/index.tsx b/apps/mobile/app/(tabs)/explore/index.tsx
+index cb902c1..54d6bc1 100644
+--- a/apps/mobile/app/(tabs)/explore/index.tsx
++++ b/apps/mobile/app/(tabs)/explore/index.tsx
+@@ -26,7 +26,7 @@ import { Skeleton } from "@/motion";
+ import { useExploreCatalogue } from "@/hooks/useExploreCatalogue";
+ import { useSectionOpened } from "@/hooks/useExplore";
+ import { useExploreNav } from "@/hooks/useExploreNav";
+-import { OVERVIEW, type Category } from "@/lib/exploreCatalogue";
++import { OVERVIEW, visibleCategories, type Category } from "@/lib/exploreCatalogue";
+ import { useAppStore } from "@/store/useAppStore";
+ import { reportExplore } from "@/lib/exploreAnalytics";
+ import { colors, radius, spacing } from "@/theme";
+@@ -52,11 +52,15 @@ import { colors, radius, spacing } from "@/theme";
+ export default function ExploreHome() {
+   const t = useT();
+   const nav = useExploreNav();
+-  const { catalogue: c, now, savedCount, loading, failed, refetch, refresh } = useExploreCatalogue();
++  const { catalogue: c, now, savedCount, loading, failed, loaded, refetch, refresh } = useExploreCatalogue();
+   const recordingKnown = useAppStore((st) => st.workshopRecording);
+   const opened = useSectionOpened();
+   const scroller = useRef<ScrollView>(null);
+-  const [category, setCategory] = useState<Category>("all");
++  const [chosen, setCategory] = useState<Category>("all");
++  // Issue 08: a kind with nothing in it after a successful read has no tab; a
++  // tab that disappears while chosen falls back to «Todo».
++  const tabs = visibleCategories(c, loaded);
++  const category: Category = tabs.includes(chosen) ? chosen : "all";
+ 
+   const choose = useCallback(
+     (next: Category) => {
+@@ -104,7 +108,7 @@ export default function ExploreHome() {
+   return (
+     <ExploreFrame root topFill={colors.buttonForest} scrollRef={scroller} scrollProps={{ stickyHeaderIndices: [1] }}>
+       <ExploreBand savedCount={savedCount} onSearch={() => nav.all({ focus: "1" })} onSaved={() => nav.saved()} />
+-      <CategoryTabs value={category} onChange={choose} />
++      <CategoryTabs value={category} onChange={choose} categories={tabs} />
+       <TornEdge />
+ 
+       {loading ? (
+diff --git a/apps/mobile/app/(tabs)/explore/resource/[id].tsx b/apps/mobile/app/(tabs)/explore/resource/[id].tsx
+index 445e5e4..0242f4f 100644
+--- a/apps/mobile/app/(tabs)/explore/resource/[id].tsx
++++ b/apps/mobile/app/(tabs)/explore/resource/[id].tsx
+@@ -434,6 +434,7 @@ function PromptCard({
+             label={t.explore.guide.promptKeep}
+             disabled={!text.trim()}
+             loading={busy}
++            loadingLabel={t.common.action.saving}
+             onPress={() => {
+               Keyboard.dismiss();
+               setBusy(true);
+diff --git a/apps/mobile/app/(tabs)/index.tsx b/apps/mobile/app/(tabs)/index.tsx
+index ae4c5e0..09f2354 100644
+--- a/apps/mobile/app/(tabs)/index.tsx
++++ b/apps/mobile/app/(tabs)/index.tsx
+@@ -1,5 +1,5 @@
+ import { useQuery } from "@tanstack/react-query";
+-import { dayPosition, isAside, pickFeaturedResource, stepsOf } from "@elara/shared";
++import { dayPosition, isAside, pickFeaturedResource, stepsOf, takeawayStepOf } from "@elara/shared";
+ import { useIsFocused, useRouter } from "expo-router";
+ import { useEffect, useMemo, useState } from "react";
+ import { RefreshControl, StyleSheet, useWindowDimensions, View } from "react-native";
+@@ -33,6 +33,7 @@ import { useResources } from "@/hooks/useResources";
+ import { useTabBarClearance } from "@/hooks/useTabBarClearance";
+ import { calendarDaysBetween, promisesNextWeek, type ResolvedEntry } from "@/hooks/todayEntry";
+ import { hoyTakeaway, type HoyTakeaway } from "@/lib/session";
++import { questionLine } from "@/lib/phrase";
+ import { placeWordsFor, useProgressStatus, useTodayEntry, type TodayEntry } from "@/hooks/useTodayEntry";
+ import { formatLocale, useT, type Strings } from "@/i18n";
+ import { api } from "@/lib/api";
+@@ -161,10 +162,26 @@ export default function TodayScreen() {
+     progressRead.status === "ready"
+       ? hoyTakeaway(entry, days, progress, now.getTime(), (day, stepId) => isRefusedDraft(drafts[stepDraftKey(area, day, stepId)]))
+       : null;
++  // The question her words answer, as she saw it (issue 05): «Todo bien» with its question, never alone.
++  const keptQuestion = (() => {
++    if (!kept) return null;
++    const day = days.find((d) => d.day === kept.day);
++    const step = day ? takeawayStepOf(stepsOf(day)) : undefined;
++    if (!step) return null;
++    return questionLine(step, {
++      book: progress.stepAnswers,
++      day: kept.day,
++      stepAt: (d, id) => {
++        const at = days.find((x) => x.day === d);
++        return at ? stepsOf(at).find((s) => s.id === id) : undefined;
++      },
++    });
++  })();
+   const keptCard = kept && entry ? (
+     <FadeIn runKey={entrance} delay={kept.placement === "top" ? stagger.step : stagger.group}>
+       <TakeawayRow
+         label={takeawayLabel(kept, entry, t)}
++        question={keptQuestion}
+         quote={t.home.hoy.takeaway.quoted(kept.text)}
+         hint={t.home.hoy.takeaway.openHint}
+         onPress={() =>
+@@ -196,7 +213,7 @@ export default function TodayScreen() {
+   const placeDef = place?.placeId ? placeById(place.placeId) : null;
+   const dayPlace = entry && placeDef && entry.kind !== "week" ? dayPlaceWords(t.dayPlaces, placeDef.area, entry.dayInWeek) : null;
+   // The card names the day in short; the full question waits inside the session.
+-  const dayTitle = shortDayTitle(content?.title, question, place?.worldId && entry ? landmark(t, place.worldId, entry.dayInWeek).toward : null);
++  const dayTitle = shortDayTitle(content?.title, question, place?.worldId && entry ? landmark(t, place.worldId, entry.dayInWeek).at : null);
+   const card = entry
+     ? postcardWords(entry, t, dayTitle, content?.config?.minutes, now.getTime(), locale, dayPlace?.name ?? place?.name, premium)
+     : null;
+@@ -328,11 +345,8 @@ export default function TodayScreen() {
+       {/* «Tu semana en Wuzhen»: seven discs, the count, the week's theme. */}
+       {entry && place ? (
+         <FadeIn runKey={entrance} delay={stagger.group}>
+-          <HoySection
+-            title={t.home.hoy.week.title(place.name)}
+-            aside={t.home.hoy.week.count(entry.doneInWeek, entry.daysInWeek)}
+-            asideA11y={t.home.hoy.week.countA11y(entry.doneInWeek, entry.daysInWeek)}
+-          >
++          {/* Issue 06: no «4 de 7» beside the title; the seven discs already show it. */}
++          <HoySection title={t.home.hoy.week.title(place.name)}>
+             <WeekDiscs discs={discs} todayLabel={t.home.hoy.week.today} />
+             {weekTitle ? (
+               <AppText variant="body" color={colors.foreground}>
+@@ -439,7 +453,11 @@ function postcardWords(
+       meta: promisesNextWeek(entry, premium) ? (opensLine(entry, t, now, locale) ?? undefined) : undefined,
+     };
+   }
+-  const line = h.placeLine(dayWhere ?? entry.place.full, entry.week, entry.dayInWeek);
++  // Issue 06: a done day says its number once («Día 4 hecho»), not again in the place line.
++  const line =
++    entry.kind === "review"
++      ? h.placeLineDone(dayWhere ?? entry.place.full, entry.week)
++      : h.placeLine(dayWhere ?? entry.place.full, entry.week, entry.dayInWeek);
+   // A week her membership does not cover says so where the path page does
+   // ("Semana 2 · Premium"): its button opens the membership screen, not the day.
+   const placeLine = entry.membershipRequired ? `${line} · ${t.account.membership.premiumBadge}` : line;
+diff --git a/apps/mobile/app/path/[area].tsx b/apps/mobile/app/path/[area].tsx
+index 2e5c73e..af824ef 100644
+--- a/apps/mobile/app/path/[area].tsx
++++ b/apps/mobile/app/path/[area].tsx
+@@ -214,7 +214,7 @@ export default function PathsScreen() {
+               topCopy && here
+                 ? model.pathComplete
+                   ? t.home.journey.walkedA11y(topCopy.name)
+-                  : t.home.journey.hereA11y(topCopy.name, topDone ? here.at : here.toward, topDay, topWeekDays)
++                  : t.home.journey.hereA11y(topCopy.name, here.at, topDay, topWeekDays)
+                 : ""
+             }
+           >
+@@ -226,7 +226,7 @@ export default function PathsScreen() {
+               <>
+                 <View style={styles.placeLine}>
+                   <AppText variant="control" color={colors.cream} style={styles.flex}>
+-                    {here ? (topDone ? here.at : here.toward) : t.home.today.weekDayLabel(topStop.week, topDay)}
++                    {here ? (here.at) : t.home.today.weekDayLabel(topStop.week, topDay)}
+                   </AppText>
+                   <AppText variant="caption" color={WORLD_MINT} style={tabular}>
+                     {t.atlas.card.dayOf(topDay, topWeekDays)}
+diff --git a/apps/mobile/app/path/day.tsx b/apps/mobile/app/path/day.tsx
+index 025c18b..9c06917 100644
+--- a/apps/mobile/app/path/day.tsx
++++ b/apps/mobile/app/path/day.tsx
+@@ -16,6 +16,7 @@ import {
+   isAside,
+   isBreathe,
+   isQuiet,
++  isSavedPhrase,
+   offeredSteps,
+   resolveTemplate,
+   stateOf,
+@@ -76,9 +77,10 @@ import type { SessionClose } from "@/components/practice/landscape/WorldDay";
+ import type { TakeawaySlotView } from "@/components/practice/TakeawayCard";
+ import { draftHasContent, isRefusedDraft } from "@/components/practice/draft";
+ import { nextQuestion, opensOnSession } from "@/lib/session";
++import { phraseOf, questionLine } from "@/lib/phrase";
+ import { shiftedRows } from "@/components/practice/landscape/photoDay";
+ import { dayPhoto } from "@/content/dayImages";
+-import { bandLayoutFor, dayPlaceWords, hereIndexFor, photoPlaceFor, stopsKeyFor } from "@/content/placeDay";
++import { bandLayoutFor, dayPlaceWords, dayStopName, photoPlaceFor, stopsKeyFor } from "@/content/placeDay";
+ import { PLACE_HERO } from "@/content/placeImages";
+ import { CompletionAsks } from "@/components/practice/CompletionAsks";
+ import { initialSceneState } from "@/components/world/scene";
+@@ -217,6 +219,7 @@ function DayScreenInner() {
+   const saveStepAnswer = useAppStore((s) => s.saveStepAnswer);
+   const saveStepReply = useAppStore((s) => s.saveStepReply);
+   const declineDay = useAppStore((s) => s.declineDay);
++  const setPhraseSaved = useAppStore((s) => s.setPhraseSaved);
+   const sendStep = useAppStore((s) => s.sendStep);
+   const progress = useAppStore((s) => s.progress[area]);
+   const insets = useSafeAreaInsets();
+@@ -1406,6 +1409,19 @@ function DayScreenInner() {
+                   : S.skipped,
+         }));
+     const nextQ = path ? nextQuestion(path.days, dayNum, ctx) : null;
++    // «Guardar esta frase» (issue 05): her phrase reaches «Frases que guardaste»
++    // only when she saves it. Offered on the close and on the reopened day, for
++    // words the server has (never a refused draft).
++    const phrase = phraseOf(steps, dayAnswers);
++    const phraseSave =
++      phrase && !refusedStep(phrase.step.id) && !lastPending
++        ? {
++            question: questionLine(phrase.step, ctx),
++            text: phrase.text,
++            saved: isSavedPhrase(dayAnswers?.[phrase.step.id]),
++            onToggle: () => setPhraseSaved(area, dayNum, phrase.step.id, !isSavedPhrase(dayAnswers?.[phrase.step.id])),
++          }
++        : null;
+     const sessionClose: SessionClose | null = sessionDay
+       ? {
+           slots: slotViews,
+@@ -1559,7 +1575,7 @@ function DayScreenInner() {
+           id: place.id,
+           name: dayPlace?.name ?? weekPlaceName,
+           where: dayPlace?.where ?? t.photoDay.placeCountry(weekPlaceName, placeWords(place.id)?.country ?? ""),
+-          line: dayPlace?.line ?? t.globe.stops[stopsKeyFor(place)][hereIndexFor(position0.dayInWeek)] ?? "",
++          line: dayPlace?.line ?? dayStopName(t.globe.stops[stopsKeyFor(place)], position0.dayInWeek),
+           photo: dayPhoto(place.area, place.week, position0.dayInWeek),
+         }
+       : null;
+@@ -1573,7 +1589,7 @@ function DayScreenInner() {
+       purpose && band
+         ? {
+             eyebrow: t.common.format.join(placeDay, minutes ? S.minutes(minutes) : null),
+-            title: wd.here.toward,
++            title: wd.here.at,
+             whyLabel: S.whyToday,
+             purpose,
+             cardLabel: S.takeAway,
+@@ -1619,7 +1635,7 @@ function DayScreenInner() {
+             setOpeningDone(true);
+           }}
+           header={{
+-            toward: wd.here.toward,
++            toward: wd.here.at,
+             placeDay,
+             steps: progressNow.total,
+             on: progressNow.on,
+@@ -1654,6 +1670,7 @@ function DayScreenInner() {
+             elara: lastPending && !live && !lastSkipped ? null : elaraLine,
+             elaraHidden: lastSkipped,
+             session: band ? sessionClose : null,
++            phrase: band ? phraseSave : null,
+             // A redone day has no "tomorrow": it is not the day her path is on.
+             // A session day names tomorrow's first question when it can.
+             tomorrow:
+@@ -1661,8 +1678,8 @@ function DayScreenInner() {
+                 ? band
+                   ? sessionDay && nextQ
+                     ? S.tomorrow(nextQ)
+-                    : t.photoDay.tomorrow(wd.next.toward)
+-                  : t.day.arrival.tomorrow(wd.next.toward)
++                    : t.photoDay.tomorrow(wd.next.at)
++                  : t.day.arrival.tomorrow(wd.next.at)
+                 : null,
+             cta: replaying
+               ? redoWeekId
+@@ -1674,7 +1691,7 @@ function DayScreenInner() {
+                 band
+                 ? t.practice.dayComplete.backToday
+                 : t.day.arrival.done,
+-            announce: t.day.arrival.announce(wd.here.at, position0.dayInWeek, 7, replaying ? null : (wd.next?.toward ?? null)),
++            announce: t.day.arrival.announce(wd.here.at, position0.dayInWeek, 7, replaying ? null : (wd.next?.at ?? null)),
+             line: t.day.arrival.line(wd.here.at),
+             lineSmall: placeDay,
+             onDone: replaying ? afterRedo : () => router.replace("/(tabs)"),
+diff --git a/apps/mobile/app/progress.tsx b/apps/mobile/app/progress.tsx
+index 52bb260..19366ac 100644
+--- a/apps/mobile/app/progress.tsx
++++ b/apps/mobile/app/progress.tsx
+@@ -2,12 +2,12 @@ import { useQuery } from "@tanstack/react-query";
+ import { useRouter } from "expo-router";
+ import { useMemo } from "react";
+ import { ActivityIndicator, StyleSheet, View } from "react-native";
+-import type { WellbeingDimension, WellbeingSnapshotDTO } from "@elara/shared";
+-import { WELLBEING_DIMENSIONS } from "@elara/shared";
++import type { WellbeingSnapshotDTO } from "@elara/shared";
+ import { AppText, Icon, ScreenHeader, ScreenShell, SectionHeading } from "@/components";
+ import { formatLocale, useT } from "@/i18n";
+ import { api } from "@/lib/api";
+ import { qk } from "@/lib/query";
++import { comparison, metricRows, pickWeeks, sparseWeek, type MetricRow } from "@/lib/weekMetrics";
+ import { FadeIn, PressableScale, stagger, staggerDelay } from "@/motion";
+ import { colors, layout, radius, shadow, shellHitTarget, spacing, withAlpha } from "@/theme";
+ 
+@@ -33,12 +33,13 @@ export default function Progress() {
+   });
+ 
+   const weeks = data ?? [];
+-  const latest = useMemo(() => [...weeks].reverse().find((w) => w.confidence > 0), [weeks]);
+-  const previous = useMemo(() => {
+-    if (!latest) return undefined;
+-    const i = weeks.findIndex((w) => w.periodStart === latest.periodStart);
+-    return [...weeks.slice(0, i)].reverse().find((w) => w.confidence > 0);
+-  }, [weeks, latest]);
++  const { latest, previous } = useMemo(() => pickWeeks(weeks), [weeks]);
++  const rows = useMemo(() => (latest ? metricRows(latest, previous) : []), [latest, previous]);
++  // Every change shown says which week it is compared with, and says so when
++  // that is not the calendar week just before (a gap with no data between).
++  const against = comparison(latest, previous);
++  const againstWeek = against ? formatWeek(against.periodStart) : null;
++  const anyDelta = rows.some((r) => r.delta);
+ 
+   return (
+     <ScreenShell
+@@ -91,24 +92,26 @@ export default function Progress() {
+                 {t.account.progress.weekOf(formatWeek(latest.periodStart))}
+               </AppText>
+               <View style={styles.card}>
+-                {WELLBEING_DIMENSIONS.map((d, i) => (
++                {rows.map((row, i) => (
+                   <DimensionRow
+-                    key={d}
+-                    dimension={d}
+-                    value={latest.scores[d]}
+-                    before={previous?.scores[d] ?? null}
++                    key={row.dimension}
++                    row={row}
++                    againstWeek={againstWeek}
+                     delay={staggerDelay(i)}
+-                    last={i === WELLBEING_DIMENSIONS.length - 1}
++                    last={i === rows.length - 1}
+                   />
+                 ))}
+               </View>
+               <AppText variant="bodySmall" color={colors.textActionTertiary}>
+-                {t.account.progress.weekBasis(
+-                  latest.daysActive,
+-                  latest.checkIns,
+-                  Math.round(latest.confidence * 100),
+-                )}
++                {t.account.progress.weekBasis(latest.daysActive, latest.checkIns, sparseWeek(latest))}
+               </AppText>
++              {anyDelta && against && againstWeek ? (
++                <AppText variant="bodySmall" color={colors.textActionTertiary}>
++                  {against.adjacent
++                    ? t.account.progress.comparedTo(againstWeek)
++                    : t.account.progress.comparedToEarlier(againstWeek)}
++                </AppText>
++              ) : null}
+             </FadeIn>
+ 
+             {latest.topThemes.length ? (
+@@ -148,25 +151,37 @@ function themeLabel(key: string, themes: Record<string, string>): string {
+ // `account.progress.dimensions` — same shape, one per language.
+ 
+ function DimensionRow({
+-  dimension,
+-  value,
+-  before,
++  row,
++  againstWeek,
+   delay,
+   last,
+ }: {
+-  dimension: WellbeingDimension;
+-  value: number | null;
+-  before: number | null;
++  row: MetricRow;
++  againstWeek: string | null;
+   delay: number;
+   last: boolean;
+ }) {
+   const t = useT();
+-  const copy = t.account.progress.dimensions[dimension];
+-  const delta = value != null && before != null ? value - before : null;
++  const p = t.account.progress;
++  const copy = p.dimensions[row.dimension];
++  const { value, delta } = row;
++  const shown = value == null ? p.noReading : row.unit === "days" ? p.daysOf(value) : String(value);
++  const deltaText = delta ? (row.unit === "days" ? p.deltaDays(delta) : `${delta > 0 ? "+" : ""}${delta}`) : null;
+ 
+   return (
+     <FadeIn delay={delay}>
+-      <View style={[styles.row, !last && styles.rowBorder]}>
++      <View
++        style={[styles.row, !last && styles.rowBorder]}
++        accessible
++        accessibilityLabel={[
++          copy.label,
++          copy.hint,
++          value == null ? p.noData : shown,
++          deltaText && againstWeek ? p.deltaA11y(deltaText, againstWeek) : null,
++        ]
++          .filter(Boolean)
++          .join(". ")}
++      >
+         <View style={styles.rowText}>
+           <AppText variant="control">
+             {copy.label}
+@@ -176,23 +191,23 @@ function DimensionRow({
+           </AppText>
+           <View style={styles.meterTrack}>
+             {/* A dimension with nothing behind it draws no bar at all, rather
+-                than a zero — "we couldn't tell" and "it was bad" are different. */}
+-            {value != null ? (
+-              <View style={[styles.meterFill, { width: `${Math.max(value, 2)}%` }]} />
++                than a zero — "we couldn't tell" and "it was bad" are different.
++                A measured zero draws the 2% sliver. */}
++            {row.meter != null ? (
++              <View style={[styles.meterFill, { width: `${Math.max(row.meter, 2)}%` }]} />
+             ) : null}
+           </View>
+         </View>
+         <View style={styles.rowValue}>
+-          <AppText variant="cardTitle" color={value == null ? colors.textActionTertiary : colors.foreground}>
+-            {value == null ? t.account.progress.noReading : value}
++          <AppText variant={row.unit === "days" ? "control" : "cardTitle"} color={value == null ? colors.textActionTertiary : colors.foreground}>
++            {shown}
+           </AppText>
+-          {delta ? (
++          {deltaText ? (
+             <AppText
+               variant="caption"
+-              color={delta > 0 ? colors.success : colors.textActionTertiary}
++              color={delta! > 0 ? colors.success : colors.textActionTertiary}
+             >
+-              {delta > 0 ? "+" : ""}
+-              {delta}
++              {deltaText}
+             </AppText>
+           ) : null}
+         </View>
+diff --git a/apps/mobile/app/topic-compose.tsx b/apps/mobile/app/topic-compose.tsx
+index c53911a..123aa1e 100644
+--- a/apps/mobile/app/topic-compose.tsx
++++ b/apps/mobile/app/topic-compose.tsx
+@@ -164,6 +164,7 @@ export default function TopicCompose() {
+             variant="forest"
+             label={label}
+             loading={send.isPending}
++            loadingLabel={t.circle.feedBeta.publishing}
+             disabled={!ready}
+             onPress={() => {
+               if (!body.trim() && !title.trim()) {
+diff --git a/apps/mobile/src/components/Button.tsx b/apps/mobile/src/components/Button.tsx
+index 9ea674f..5bf9b7f 100644
+--- a/apps/mobile/src/components/Button.tsx
++++ b/apps/mobile/src/components/Button.tsx
+@@ -15,6 +15,11 @@ type BaseProps = {
+   label: string;
+   onPress?: () => void;
+   loading?: boolean;
++  /**
++   * What the button says while `loading` («Guardando…»), next to a small
++   * spinner (issue 08). Absent: the label itself stays beside the spinner.
++   */
++  loadingLabel?: string;
+   /**
+    * The action succeeded: a check replaces the label for the beat before the
+    * screen moves on (Interaction States: "the button shows a check for
+@@ -46,27 +51,34 @@ function Label({ children, color }: { children: string; color: string }) {
+ }
+ 
+ /**
+- * Label ⇄ spinner without a layout jump. The button keeps its height while
++ * Label ⇄ busy label without a layout jump. The button keeps its height while
+  * the two states cross-fade, so tapping "continue" doesn't make the CTA
+- * flicker to a different size.
++ * flicker to a different size. While loading, a small spinner sits next to
++ * words (`loadingText`), never alone (issue 08): a bare spinner said nothing
++ * about what was happening.
+  */
+ function Content({
+   loading,
+   done,
+   children,
+   spinnerColor,
++  loadingText,
+ }: {
+   loading?: boolean;
+   done?: boolean;
+   children: ReactNode;
+   spinnerColor: string;
++  loadingText: string;
+ }) {
+   return (
+     <CrossFade contentKey={done ? "done" : loading ? "loading" : "label"}>
+       {done ? (
+         <Icon name="solar:check-read-bold" size={22} color={spinnerColor} />
+       ) : loading ? (
+-        <ActivityIndicator color={spinnerColor} />
++        <View style={styles.row}>
++          <ActivityIndicator size="small" color={spinnerColor} />
++          <Label color={spinnerColor}>{loadingText}</Label>
++        </View>
+       ) : (
+         children
+       )}
+@@ -82,6 +94,7 @@ export function GradientButton({
+   label,
+   onPress,
+   loading,
++  loadingLabel,
+   done,
+   doneLabel,
+   disabled,
+@@ -93,7 +106,7 @@ export function GradientButton({
+ }: BaseProps) {
+   const fg = onDark ? colors.cream : colors.white;
+   const body = (
+-    <Content loading={loading} done={done} spinnerColor={fg}>
++    <Content loading={loading} done={done} spinnerColor={fg} loadingText={loadingLabel ?? label}>
+       <Row>
+         {icon ? <Icon name={icon} size={18} color={fg} /> : null}
+         <Label color={fg}>
+@@ -111,7 +124,7 @@ export function GradientButton({
+       onPress={onPress}
+       disabled={disabled || loading || done}
+       accessibilityRole="button"
+-      accessibilityLabel={done ? (doneLabel ?? label) : label}
++      accessibilityLabel={done ? (doneLabel ?? label) : loading ? (loadingLabel ?? label) : label}
+       accessibilityState={{ busy: !!loading, disabled: !!(disabled || loading || done) }}
+       containerStyle={[
+         fullWidth && styles.fullWidth,
+@@ -143,6 +156,7 @@ export function Button({
+   label,
+   onPress,
+   loading,
++  loadingLabel,
+   disabled,
+   icon,
+   iconRight,
+@@ -159,7 +173,7 @@ export function Button({
+       // While loading the label is hidden behind a spinner; the screen reader
+       // still reads it, marked busy (Interaction States spec).
+       accessibilityRole="button"
+-      accessibilityLabel={label}
++      accessibilityLabel={loading ? (loadingLabel ?? label) : label}
+       accessibilityState={{ busy: !!loading, disabled: !!(disabled || loading) }}
+       containerStyle={[
+         fullWidth && styles.fullWidth,
+@@ -169,7 +183,7 @@ export function Button({
+       ]}
+       style={styles.solid}
+     >
+-      <Content loading={loading} spinnerColor={fg}>
++      <Content loading={loading} spinnerColor={fg} loadingText={loadingLabel ?? label}>
+         <Row>
+           {icon ? <Icon name={icon} size={18} color={fg} /> : null}
+           <Label color={fg}>
+@@ -190,6 +204,7 @@ export function CommitButton({
+   label,
+   onPress,
+   loading,
++  loadingLabel,
+   disabled,
+   icon,
+   iconRight,
+@@ -204,12 +219,12 @@ export function CommitButton({
+       onPress={onPress}
+       disabled={disabled || loading}
+       accessibilityRole="button"
+-      accessibilityLabel={label}
++      accessibilityLabel={loading ? (loadingLabel ?? label) : label}
+       accessibilityState={{ busy: !!loading, disabled: !!(disabled || loading) }}
+       containerStyle={[fullWidth && styles.fullWidth, disabled && styles.dimmed, style]}
+       style={styles.commit}
+     >
+-      <Content loading={loading} spinnerColor={fg}>
++      <Content loading={loading} spinnerColor={fg} loadingText={loadingLabel ?? label}>
+         <Row>
+           {icon ? <Icon name={icon} size={18} color={colors.mint} /> : null}
+           <Label color={fg}>
+diff --git a/apps/mobile/src/components/atlas/WorldCard.tsx b/apps/mobile/src/components/atlas/WorldCard.tsx
+index b8b5415..ab5bf3b 100644
+--- a/apps/mobile/src/components/atlas/WorldCard.tsx
++++ b/apps/mobile/src/components/atlas/WorldCard.tsx
+@@ -160,7 +160,7 @@ export function ActiveCard({
+   const crop: [number, number, number, number] | undefined =
+     artHeight < full ? [0, 360 - rows, 300, rows] : undefined;
+   const total = world.days.length;
+-  const landmark = current.done ? copy.at(current.index) : copy.toward(current.index);
++  const landmark = copy.at(current.index);
+   const meta = t.common.format.join(
+     t.atlas.card.dayOf(current.index, total),
+     dayTitle,
+diff --git a/apps/mobile/src/components/circles/circulos/CircleScreen.tsx b/apps/mobile/src/components/circles/circulos/CircleScreen.tsx
+index d0cba00..df047a9 100644
+--- a/apps/mobile/src/components/circles/circulos/CircleScreen.tsx
++++ b/apps/mobile/src/components/circles/circulos/CircleScreen.tsx
+@@ -148,7 +148,7 @@ export function CircleScreen() {
+             {c.topic.readersNote}
+           </AppText>
+           {/* Two clear choices (v6.2): joining posts nothing; a draft joins nobody until «Unirme y publicar» (C6). */}
+-          <PrimaryPill slim case="gentle" variant="forest" label={c.topic.join} loading={join.isPending} onPress={() => join.mutate(tp.id, joinedNote)} />
++          <PrimaryPill slim case="gentle" variant="forest" label={c.topic.join} loading={join.isPending} loadingLabel={t.circle.circles.joining} onPress={() => join.mutate(tp.id, joinedNote)} />
+           <PrimaryPill slim case="gentle" variant="outline" label={c.topic.write} onPress={() => router.push({ pathname: "/topic-compose", params: { topicId: tp.id } })} />
+           <TertiaryAction wrap label={c.topic.guidelines} onPress={() => router.push("/community-guidelines")} style={styles.start} />
+         </View>
+diff --git a/apps/mobile/src/components/circles/circulos/CompartirSheet.tsx b/apps/mobile/src/components/circles/circulos/CompartirSheet.tsx
+index acf9545..f4c4bbc 100644
+--- a/apps/mobile/src/components/circles/circulos/CompartirSheet.tsx
++++ b/apps/mobile/src/components/circles/circulos/CompartirSheet.tsx
+@@ -15,6 +15,7 @@ import { StyleSheet, View } from "react-native";
+ import { Sheet } from "@/components";
+ import { AppText } from "@/components/AppText";
+ import { PrimaryPill } from "@/components/system/PrimaryPill";
++import { TertiaryAction } from "@/components/system/TertiaryAction";
+ import { TextField } from "@/components/TextField";
+ import { Chip, NameChoice } from "@/components/circles/topics/ui";
+ import { showToast } from "@/components/Toast";
+@@ -87,6 +88,11 @@ export function CompartirSheet({
+ 
+   const ready = canPublish({ circleId, joinedIds, text, busy: send.isPending });
+   const who = !dest ? k.whoSeesNone : anonymous ? k.whoSeesAnon : k.whoSeesNamed(myName);
++  // Issue 07: the circle and how she appears stay beside «Publicar» while she
++  // types (the body scrolls under the keyboard; the footer does not).
++  const as = anonymous ? c.compose.nameAnon : k.namedShort(myName);
++  const other = anonymous ? k.namedShort(myName) : c.compose.nameAnon;
++  const postingAs = dest ? k.postingAs(dest.name, as) : k.postingAsNoCircle(as);
+ 
+   return (
+     <Sheet
+@@ -98,6 +104,22 @@ export function CompartirSheet({
+       title={k.title}
+       footer={
+         <View style={styles.footer}>
++          <View style={styles.identity}>
++            <AppText
++              variant="bodySmall"
++              color={ink.ink2}
++              style={styles.identityText}
++              accessibilityLiveRegion="polite"
++            >
++              {postingAs}
++            </AppText>
++            <TertiaryAction
++              label={k.change}
++              accessibilityHint={k.changeHint(other)}
++              onPress={() => setAnonymous((a) => !a)}
++              wrap={false}
++            />
++          </View>
+           <PrimaryPill
+             slim
+             case="gentle"
+@@ -105,6 +127,7 @@ export function CompartirSheet({
+             label={dest ? k.publish : k.publishNoCircle}
+             disabled={!ready}
+             loading={send.isPending}
++            loadingLabel={t.circle.feedBeta.publishing}
+             onPress={() => ready && send.mutate()}
+           />
+           <PrimaryPill slim case="gentle" variant="outline" label={t.common.action.cancel} onPress={onClose} />
+@@ -166,4 +189,6 @@ const styles = StyleSheet.create({
+   chips: { flexDirection: "row", flexWrap: "wrap", gap: spacing[2] },
+   input: { minHeight: 120, textAlignVertical: "top", fontSize: 16, lineHeight: 23 },
+   footer: { gap: spacing[1] },
++  identity: { flexDirection: "row", alignItems: "center", gap: spacing[2], flexWrap: "wrap" },
++  identityText: { flexShrink: 1, flexGrow: 1 },
+ });
+diff --git a/apps/mobile/src/components/circles/circulos/identityLine.test.ts b/apps/mobile/src/components/circles/circulos/identityLine.test.ts
+new file mode 100644
+index 0000000..119a145
+--- /dev/null
++++ b/apps/mobile/src/components/circles/circulos/identityLine.test.ts
+@@ -0,0 +1,14 @@
++import { describe, expect, it } from "vitest";
++import { es } from "@/i18n/locales/es";
++
++/** Issue 07: the line pinned beside «Publicar» says the circle and how she appears. */
++describe("the composer's identity line", () => {
++  const k = es.circleTopics.circulos.compose;
++  it("names the circle and «Anónima», or her name", () => {
++    expect(k.postingAs("Primer empleo", es.circleTopics.compose.nameAnon)).toBe("Primer empleo · Anónima");
++    expect(k.postingAs("Primer empleo", k.namedShort("Lucía"))).toBe("Primer empleo · Lucía");
++    expect(k.namedShort("  ")).toBe("Con tu nombre");
++    expect(k.postingAsNoCircle("Anónima")).toBe("Sin círculo elegido · Anónima");
++    expect(k.changeHint("Anónima")).toBe("Publicar como Anónima");
++  });
++});
+diff --git a/apps/mobile/src/components/directions/PathPreview.tsx b/apps/mobile/src/components/directions/PathPreview.tsx
+index 05ebd74..756ed1b 100644
+--- a/apps/mobile/src/components/directions/PathPreview.tsx
++++ b/apps/mobile/src/components/directions/PathPreview.tsx
+@@ -250,7 +250,7 @@ function WeekLedger({ direction }: { direction: Direction }) {
+                 {d.practices[i]}
+               </AppText>
+               <AppText variant="caption" color={soft} numberOfLines={1}>
+-                {state === "laid" ? where.at : where.toward}
++                {where.at}
+               </AppText>
+               {canOpen && open === day ? (
+                 <AppText variant="body" color={ink} style={styles.wrote}>
+diff --git a/apps/mobile/src/components/directions/TodayPreview.tsx b/apps/mobile/src/components/directions/TodayPreview.tsx
+index c2a6451..3aa9cf0 100644
+--- a/apps/mobile/src/components/directions/TodayPreview.tsx
++++ b/apps/mobile/src/components/directions/TodayPreview.tsx
+@@ -77,7 +77,7 @@ export function TodayPreview({
+         day={state.day}
+         dayDone={state.walked}
+         walked={state.walked}
+-        artLabel={state.walked ? t.home.journey.walkedA11y(world.name) : t.home.journey.hereA11y(world.name, here.toward, state.day, 7)}
++        artLabel={state.walked ? t.home.journey.walkedA11y(world.name) : t.home.journey.hereA11y(world.name, here.at, state.day, 7)}
+         sky={sky}
+         tag={state.walked ? undefined : t.home.today.todayMarker}
+         headerAction={{ label: t.home.journey.pathsTitle, onPress: () => {} }}
+@@ -115,7 +115,7 @@ export function TodayPreview({
+           <>
+             <View style={styles.place}>
+               <AppText variant="control" color={colors.cream} style={styles.flex}>
+-                {here.toward}
++                {here.at}
+               </AppText>
+               <AppText variant="caption" color={WORLD_MINT} style={tabular}>
+                 {dayLine}
+diff --git a/apps/mobile/src/components/explore/Catalogue.tsx b/apps/mobile/src/components/explore/Catalogue.tsx
+index c378cda..a7e5b5e 100644
+--- a/apps/mobile/src/components/explore/Catalogue.tsx
++++ b/apps/mobile/src/components/explore/Catalogue.tsx
+@@ -146,7 +146,16 @@ export function ExploreBand({
+  * underline; the row is solid forest with the grain so it never looks
+  * see-through over the page it stays above.
+  */
+-export function CategoryTabs({ value, onChange }: { value: Category; onChange: (c: Category) => void }) {
++export function CategoryTabs({
++  value,
++  onChange,
++  categories = CATEGORIES,
++}: {
++  value: Category;
++  onChange: (c: Category) => void;
++  /** The tabs to draw (`visibleCategories`); every tab when not given. */
++  categories?: readonly Category[];
++}) {
+   const t = useT();
+   const scroller = useRef<ScrollView>(null);
+   const spots = useRef(new Map<Category, { x: number; w: number }>());
+@@ -170,7 +179,7 @@ export function CategoryTabs({ value, onChange }: { value: Category; onChange: (
+         accessibilityRole="tablist"
+         accessibilityLabel={t.explore.catalogue.tabsA11y}
+       >
+-        {CATEGORIES.map((c) => {
++        {categories.map((c) => {
+           const on = c === value;
+           return (
+             <PressableScale
+diff --git a/apps/mobile/src/components/explore/Detail.tsx b/apps/mobile/src/components/explore/Detail.tsx
+index e8b75eb..8b80c72 100644
+--- a/apps/mobile/src/components/explore/Detail.tsx
++++ b/apps/mobile/src/components/explore/Detail.tsx
+@@ -75,6 +75,7 @@ export function PrimaryButton({
+   tone = "forest",
+   disabled,
+   loading,
++  loadingLabel,
+   a11y,
+   hint,
+   style,
+@@ -82,6 +83,8 @@ export function PrimaryButton({
+   label: string;
+   onPress?: () => void;
+   icon?: string;
++  /** What it says while `loading`, next to a small spinner (issue 08); absent, the label stays. */
++  loadingLabel?: string;
+   /** `outline`: the secondary step after access is said, such as «Ver cómo pagar». */
+   tone?: "forest" | "ember" | "outline";
+   disabled?: boolean;
+@@ -100,7 +103,7 @@ export function PrimaryButton({
+       onPress={onPress}
+       disabled={disabled || loading}
+       accessibilityRole="button"
+-      accessibilityLabel={a11y ?? label}
++      accessibilityLabel={loading ? (loadingLabel ?? a11y ?? label) : (a11y ?? label)}
+       accessibilityHint={hint}
+       accessibilityState={{ disabled: !!disabled, busy: !!loading }}
+       containerStyle={style}
+@@ -112,7 +115,13 @@ export function PrimaryButton({
+       ]}
+     >
+       {loading ? (
+-        <ActivityIndicator color={outline ? colors.buttonForest : colors.cream} />
++        // Issue 08: never a bare spinner; the words say what is happening.
++        <>
++          <ActivityIndicator size="small" color={outline ? colors.buttonForest : colors.cream} />
++          <AppText variant="control" color={outline ? colors.buttonForest : colors.cream} style={styles.primaryLabel}>
++            {loadingLabel ?? label}
++          </AppText>
++        </>
+       ) : (
+         <>
+           {icon ? <Icon name={icon} size={16} color={ink} /> : null}
+diff --git a/apps/mobile/src/components/hoy/HoyRows.tsx b/apps/mobile/src/components/hoy/HoyRows.tsx
+index 59556ab..0830ba5 100644
+--- a/apps/mobile/src/components/hoy/HoyRows.tsx
++++ b/apps/mobile/src/components/hoy/HoyRows.tsx
+@@ -31,13 +31,26 @@ export function HoySection({ title, aside, asideA11y, children }: { title: strin
+  * the top once today is done, «La última vez anotaste · Día 1» under a new
+  * day. Her words, three lines at most; the whole card opens that day's close.
+  */
+-export function TakeawayRow({ label, quote, hint, onPress }: { label: string; quote: string; hint: string; onPress: () => void }) {
++export function TakeawayRow({
++  label,
++  question,
++  quote,
++  hint,
++  onPress,
++}: {
++  label: string;
++  /** The question or task her words answer (issue 05): her words never stand alone. */
++  question?: string | null;
++  quote: string;
++  hint: string;
++  onPress: () => void;
++}) {
+   return (
+     <PressableScale
+       size="card"
+       onPress={onPress}
+       accessibilityRole="button"
+-      accessibilityLabel={`${label}. ${quote}`}
++      accessibilityLabel={[label, question, quote].filter(Boolean).join(". ")}
+       accessibilityHint={hint}
+       style={styles.takeaway}
+     >
+@@ -47,6 +60,11 @@ export function TakeawayRow({ label, quote, hint, onPress }: { label: string; qu
+         </AppText>
+         <Icon name="solar:alt-arrow-right-linear" size={18} color={colors.textSecondary} />
+       </View>
++      {question ? (
++        <AppText variant="bodySmall" color={colors.textSecondary} numberOfLines={2}>
++          {question}
++        </AppText>
++      ) : null}
+       <AppText color={colors.foreground} numberOfLines={3} style={styles.takeawayQuote}>
+         {quote}
+       </AppText>
+diff --git a/apps/mobile/src/components/practice/collection.test.ts b/apps/mobile/src/components/practice/collection.test.ts
+index 7fba3a3..b4d7a08 100644
+--- a/apps/mobile/src/components/practice/collection.test.ts
++++ b/apps/mobile/src/components/practice/collection.test.ts
+@@ -70,3 +70,20 @@ describe("collectionFor — the collection is derived, never stored", () => {
+     expect(week.items).toEqual([]);
+   });
+ });
++
++describe("issue 05: a phrase is on the shelf only when she saved it", () => {
++  it("leaves an answer written under explicit saving off the shelf until she saves it", () => {
++    const [week] = collectionFor(DAYS, { 2: { boundary: { value: "Todo bien", saved: false } } }, [2]);
++    expect(week.items.filter((i) => i.kind === "sentence")).toEqual([]);
++  });
++
++  it("shelves a phrase she saved, her words verbatim, however short", () => {
++    const [week] = collectionFor(DAYS, { 2: { boundary: { value: "Todo bien", saved: 1_700_000_000_000 } } }, [2]);
++    expect(week.items).toEqual([{ kind: "sentence", day: 2, step: "boundary", text: "Todo bien", rule: false }]);
++  });
++
++  it("keeps a phrase shelved automatically before the change (no flag) visible as saved", () => {
++    const [week] = collectionFor(DAYS, { 2: { boundary: { value: "No takeout on weeknights" } } }, [2]);
++    expect(week.items.map((i) => i.kind)).toEqual(["sentence"]);
++  });
++});
+diff --git a/apps/mobile/src/components/practice/collection.ts b/apps/mobile/src/components/practice/collection.ts
+index bcf8a51..6641cb7 100644
+--- a/apps/mobile/src/components/practice/collection.ts
++++ b/apps/mobile/src/components/practice/collection.ts
+@@ -3,6 +3,7 @@ import {
+   hasStateAnswer,
+   isDrawn,
+   isPhoto,
++  isSavedPhrase,
+   offeredAnswers,
+   stepsOf,
+   weekOf,
+@@ -14,7 +15,7 @@ import {
+ /**
+  * "Your collection" — what she has made along the way, derived entirely from
+  * her stored answers. There is no collection table: a sentence is a step
+- * marked `keep`, a scribble is any drawn answer, and the letter
++ * marked `keep` whose answer she saved (`StepAnswer.saved`), a scribble is any drawn answer, and the letter
+  * arrive with the day that carries the week's letter. Deriving it means it can
+  * never disagree with the answers it shows, and editing an answer edits the
+  * collection.
+@@ -89,6 +90,11 @@ export function collectionFor(
+         }
+         const keep = step.config?.keep;
+         if (!keep) continue;
++        // Issue 05: a phrase is on the shelf because she saved it («Guardar
++        // esta frase»), never because the step keeps one. Answers written
++        // before that choice existed were shelved automatically and stay
++        // (`isSavedPhrase`); her answer is in the day's history either way.
++        if (!isSavedPhrase(answers[step.id])) continue;
+         const text = answerText(value, step).replace(/^[“"]\s*|\s*[”"]$/g, "");
+         if (text) {
+           items.push({
+diff --git a/apps/mobile/src/components/practice/landscape/BandDay.tsx b/apps/mobile/src/components/practice/landscape/BandDay.tsx
+index fca069d..50268cc 100644
+--- a/apps/mobile/src/components/practice/landscape/BandDay.tsx
++++ b/apps/mobile/src/components/practice/landscape/BandDay.tsx
+@@ -53,7 +53,7 @@ import {
+ import { DayScrollContext } from "../dayScroll";
+ import { NextHorizon } from "./WeekClose";
+ import { SavingChip } from "./WorldChrome";
+-import type { SessionClose, WorldDayHandle, WorldDayProps } from "./WorldDay";
++import type { PhraseSave, SessionClose, WorldDayHandle, WorldDayProps } from "./WorldDay";
+ 
+ /**
+  * One day inside a world, in the photo band (Oct 2026 "Money Journey"
+@@ -498,6 +498,7 @@ export const BandDay = forwardRef<WorldDayHandle, BandDayProps>(function BandDay
+                 elara={arrival.elara}
+                 elaraHidden={!!arrival.elaraHidden}
+                 session={arrival.session ?? null}
++                phrase={arrival.phrase ?? null}
+                 tomorrow={closing ? null : arrival.tomorrow}
+                 cta={closing ? seeWhere : arrival.cta}
+                 onCta={closing ? reveal : arrival.onDone}
+@@ -852,6 +853,7 @@ function DoneScreen({
+   elara,
+   elaraHidden = false,
+   session = null,
++  phrase = null,
+   tomorrow,
+   cta,
+   onCta,
+@@ -873,6 +875,8 @@ function DoneScreen({
+   elaraHidden?: boolean;
+   /** The daily session's close: her card first, Elara's note under it. */
+   session?: SessionClose | null;
++  /** «Guardar esta frase» (issue 05). */
++  phrase?: PhraseSave | null;
+   tomorrow: string | null;
+   cta: string;
+   onCta: () => void;
+@@ -903,6 +907,12 @@ function DoneScreen({
+               <TakeawayCard slots={session.slots} edit={session.edit} />
+             </FadeIn>
+           ) : null}
++          {phrase ? (
++            <FadeIn delay={dur.fast}>
++              {/* Her words are on the card above: only the choice here. */}
++              <PhraseSaveRow phrase={phrase} quote={!session.slots.some((x) => x.text === phrase.text)} />
++            </FadeIn>
++          ) : null}
+           {session.note ? (
+             <FadeIn delay={dur.fast * 2}>
+               <ElaraNote label={session.note.label} text={session.note.text} pending={session.note.pending} />
+@@ -1003,6 +1013,11 @@ function DoneScreen({
+             </View>
+           </FadeIn>
+         )}
++        {phrase ? (
++          <FadeIn delay={dur.fast * 2}>
++            <PhraseSaveRow phrase={phrase} quote />
++          </FadeIn>
++        ) : null}
+         {tomorrow ? (
+           <FadeIn delay={dur.fast * 2}>
+             <AppText variant="bodySmall" color={colors.textSecondary} style={styles.tomorrow}>
+@@ -1024,6 +1039,68 @@ function DoneScreen({
+   );
+ }
+ 
++/**
++ * «Guardar esta frase» (issue 05, 3 Nov 2026): her phrase (with the question
++ * it answers, when no card shows it already) and the one control that puts it
++ * in «Frases que guardaste» or takes it off. Saving is her choice, never a
++ * side effect of answering; the answer is in the day's history either way.
++ */
++function PhraseSaveRow({ phrase, quote }: { phrase: PhraseSave; quote: boolean }) {
++  const t = useT();
++  const P = t.practice.dayComplete.phrase;
++  const [busy, setBusy] = useState(false);
++  const [failed, setFailed] = useState(false);
++  const toggle = () => {
++    // One choice at a time: a second tap while the first is on its way does nothing.
++    if (busy) return;
++    setBusy(true);
++    setFailed(false);
++    phrase
++      .onToggle()
++      .then((ok) => setFailed(!ok))
++      .finally(() => setBusy(false));
++  };
++  return (
++    <View style={styles.phrase}>
++      {quote ? (
++        <View style={styles.phraseQuote}>
++          {phrase.question ? (
++            <AppText variant="bodySmall" color={colors.textSecondary}>
++              {phrase.question}
++            </AppText>
++          ) : null}
++          <AppText variant="body" color={colors.foreground}>
++            {t.common.format.quote(phrase.text)}
++          </AppText>
++        </View>
++      ) : null}
++      <PressableScale
++        size="chip"
++        onPress={toggle}
++        disabled={busy}
++        accessibilityRole="button"
++        accessibilityLabel={phrase.saved ? P.savedA11y : P.saveA11y}
++        accessibilityState={{ selected: phrase.saved, busy }}
++        style={[styles.phraseButton, phrase.saved && styles.phraseButtonOn]}
++      >
++        <Icon
++          name={phrase.saved ? "solar:bookmark-bold" : "solar:bookmark-linear"}
++          size={16}
++          color={phrase.saved ? colors.buttonForest : colors.foreground}
++        />
++        <AppText variant="control" color={phrase.saved ? colors.buttonForest : colors.foreground}>
++          {phrase.saved ? P.saved : P.save}
++        </AppText>
++      </PressableScale>
++      {failed ? (
++        <AppText variant="bodySmall" color={colors.textSecondary} accessibilityLiveRegion="polite">
++          {P.failed}
++        </AppText>
++      ) : null}
++    </View>
++  );
++}
++
+ function RevealedScreen({
+   title,
+   line,
+@@ -1133,6 +1210,20 @@ const ORB = 46;
+ const RETURN_LINE_MS = 4000;
+ 
+ const styles = StyleSheet.create({
++  phrase: { gap: spacing[2], marginTop: spacing[4] },
++  phraseQuote: { gap: spacing[1] },
++  phraseButton: {
++    flexDirection: "row",
++    alignItems: "center",
++    alignSelf: "flex-start",
++    gap: spacing[2],
++    minHeight: shellHitTarget,
++    paddingHorizontal: spacing[4],
++    borderRadius: 999,
++    borderWidth: 1,
++    borderColor: withAlpha(colors.foreground, 0.2),
++  },
++  phraseButtonOn: { borderColor: withAlpha(colors.buttonForest, 0.45), backgroundColor: withAlpha(colors.buttonForest, 0.08) },
+   root: { flex: 1, overflow: "hidden", backgroundColor: colors.cream },
+   flex: { flex: 1, minWidth: 0 },
+   scene: { position: "absolute", left: 0, right: 0, top: 0, overflow: "hidden", backgroundColor: SCENE_BG },
+diff --git a/apps/mobile/src/components/practice/landscape/WorldDay.tsx b/apps/mobile/src/components/practice/landscape/WorldDay.tsx
+index 5f549ee..48c2d89 100644
+--- a/apps/mobile/src/components/practice/landscape/WorldDay.tsx
++++ b/apps/mobile/src/components/practice/landscape/WorldDay.tsx
+@@ -132,6 +132,22 @@ export interface ArrivalContent {
+   elaraHidden?: boolean;
+   /** The close's own layout on a day with a takeaway card (photo band only). */
+   session?: SessionClose | null;
++  /** «Guardar esta frase»: her explicit choice to keep the day's phrase (issue 05). */
++  phrase?: PhraseSave | null;
++}
++
++/**
++ * The day's phrase and her choice to keep it in «Frases que guardaste»
++ * (issue 05, 3 Nov 2026). Her answer is in the day's history either way.
++ */
++export interface PhraseSave {
++  /** The question or task it answers, as she saw it; shown with her words when no card already shows them. */
++  question: string | null;
++  /** Her words, verbatim. */
++  text: string;
++  saved: boolean;
++  /** Resolves to whether the choice stuck. */
++  onToggle: () => Promise<boolean>;
+ }
+ 
+ /**
+diff --git a/apps/mobile/src/components/practice/landscape/useWorldDay.ts b/apps/mobile/src/components/practice/landscape/useWorldDay.ts
+index c136c1a..77e8f58 100644
+--- a/apps/mobile/src/components/practice/landscape/useWorldDay.ts
++++ b/apps/mobile/src/components/practice/landscape/useWorldDay.ts
+@@ -29,7 +29,11 @@ export function responseCaption(t: T, world: WorldId, day: number, response: Wor
+   return response === "lay" ? (w.captions[day - 1] ?? "") : w.responses[response];
+ }
+ 
+-/** A world's landmark copy for a day (1..7). */
++/**
++ * THE day-data helper every surface reads: a world's landmark copy for a day
++ * (1..7). `at` is the day's identity (where she stands, placeDay.dayStopIndex);
++ * `toward` is optional transition copy naming the next day's stop.
++ */
+ export function landmark(t: T, world: WorldId, day: number): { at: string; toward: string } {
+   const list = (words25d(world, getLocale()) ?? t.world.worlds[world]).landmarks;
+   return list[Math.max(0, Math.min(list.length - 1, day - 1))];
+@@ -204,7 +208,7 @@ export function useWorldDay({
+             kind: "return",
+             line: text,
+             small: placeDay,
+-            reducedLine: t.day.return.reduced(text, here.toward),
++            reducedLine: t.day.return.reduced(text, here.at),
+             today: initialSceneState(world, dayInWeek, Math.max(1, plan.length)),
+           };
+         }
+diff --git a/apps/mobile/src/components/system/PrimaryPill.tsx b/apps/mobile/src/components/system/PrimaryPill.tsx
+index da288cb..85432d3 100644
+--- a/apps/mobile/src/components/system/PrimaryPill.tsx
++++ b/apps/mobile/src/components/system/PrimaryPill.tsx
+@@ -40,6 +40,11 @@ type PrimaryPillProps = {
+   icon?: string;
+   iconRight?: string;
+   loading?: boolean;
++  /**
++   * What the pill says while `loading` («Uniéndote…», «Publicando…»), next to
++   * a small spinner (issue 08). Absent: the label itself stays beside it.
++   */
++  loadingLabel?: string;
+   disabled?: boolean;
+   fullWidth?: boolean;
+   compact?: boolean;
+@@ -76,6 +81,7 @@ export function PrimaryPill({
+   icon,
+   iconRight,
+   loading,
++  loadingLabel,
+   disabled,
+   fullWidth = true,
+   compact = false,
+@@ -102,12 +108,18 @@ export function PrimaryPill({
+           ? coloredShadow(colors.buttonOnDark, 0.25)
+         : null;
+ 
+-  // Label ⇄ spinner cross-fade: the pill keeps its height, so a commit
+-  // never makes the CTA flicker to a different size.
++  // Label ⇄ busy label cross-fade: the pill keeps its height, so a commit
++  // never makes the CTA flicker to a different size. While loading, a small
++  // spinner sits next to words, never alone (issue 08); repeat taps stay
++  // blocked by `disabled` below.
++  const busyLabel = loadingLabel ?? label;
+   const inner = (
+     <CrossFade contentKey={loading ? "loading" : "label"}>
+       {loading ? (
+-        <ActivityIndicator color={fg} />
++        <View style={styles.row}>
++          <ActivityIndicator size="small" color={fg} />
++          <AppText style={[styles.label, { color: fg }]}>{busyLabel}</AppText>
++        </View>
+       ) : (
+         <View style={styles.row}>
+           {icon ? <Icon name={icon} size={20} color={fg} /> : null}
+@@ -125,10 +137,9 @@ export function PrimaryPill({
+       onPress={onPress}
+       pressableRef={pressableRef}
+       disabled={off || loading}
+-      // The spinner hides the label, so the label moves to the accessibility
+-      // layer and the state says why nothing happens yet (Interaction States spec).
++      // The state says why nothing happens yet (Interaction States spec).
+       accessibilityRole="button"
+-      accessibilityLabel={label}
++      accessibilityLabel={loading ? busyLabel : label}
+       accessibilityHint={accessibilityHint}
+       accessibilityState={{ busy: !!loading, disabled: off || !!loading }}
+       containerStyle={[fullWidth && styles.fullWidth, glow, off && { opacity: interaction.disabledOpacity }, style]}
+diff --git a/apps/mobile/src/components/system/loadingLabel.test.ts b/apps/mobile/src/components/system/loadingLabel.test.ts
+new file mode 100644
+index 0000000..7d9ccad
+--- /dev/null
++++ b/apps/mobile/src/components/system/loadingLabel.test.ts
+@@ -0,0 +1,41 @@
++import { readFileSync } from "node:fs";
++import { resolve } from "node:path";
++import { describe, expect, it } from "vitest";
++
++/**
++ * Issue 08: a loading button keeps words next to its spinner, and still blocks
++ * a second tap. There is no renderer in these Node tests, so the three button
++ * components are read as source: each loading branch draws a label beside a
++ * small spinner, and each keeps `disabled` while loading.
++ */
++const src = (p: string) => readFileSync(resolve(__dirname, p), "utf8");
++/** The busy rendering: from its small spinner to a few lines after it. */
++const loadingBranch = (code: string) => {
++  const i = code.indexOf('ActivityIndicator size="small"');
++  return i < 0 ? "" : code.slice(i, i + 400);
++};
++
++describe("loading buttons say what is happening (issue 08)", () => {
++  for (const [name, file, blocked] of [
++    ["PrimaryPill", "./PrimaryPill.tsx", "disabled={off || loading}"],
++    ["Button (Gradient/Forest/Outline)", "../Button.tsx", "disabled={disabled || loading"],
++    ["Explore PrimaryButton", "../explore/Detail.tsx", "disabled={disabled || loading}"],
++  ] as const) {
++    it(`${name}: a small spinner and a label, never the spinner alone; repeat taps blocked`, () => {
++      const code = src(file);
++      const branch = loadingBranch(code);
++      expect(branch).toContain('ActivityIndicator size="small"');
++      expect(branch).toMatch(/AppText|<Label/);
++      expect(branch).toMatch(/loadingLabel \?\?|loadingText|busyLabel/);
++      expect(code).toContain(blocked);
++    });
++  }
++
++  it("the affected call sites name their busy words", () => {
++    expect(src("../circles/circulos/CircleScreen.tsx")).toContain("loadingLabel={t.circle.circles.joining}");
++    expect(src("../circles/circulos/CompartirSheet.tsx")).toContain("loadingLabel={t.circle.feedBeta.publishing}");
++    expect(src("../../../app/topic-compose.tsx")).toContain("loadingLabel={t.circle.feedBeta.publishing}");
++    expect(src("../../../app/(tabs)/explore/resource/[id].tsx")).toContain("loadingLabel={t.common.action.saving}");
++    expect(src("../../../app/(tabs)/explore/event-detail/[id].tsx")).toContain("loadingLabel={t.common.action.saving}");
++  });
++});
+diff --git a/apps/mobile/src/components/world/WorldArt.tsx b/apps/mobile/src/components/world/WorldArt.tsx
+index feeec7a..46da1be 100644
+--- a/apps/mobile/src/components/world/WorldArt.tsx
++++ b/apps/mobile/src/components/world/WorldArt.tsx
+@@ -132,7 +132,7 @@ function PaperWorldArt({
+         ? t.world.a11y.resolved(strings.name)
+         : st.complete
+           ? t.world.a11y.arrived(strings.name, strings.landmarks[st.day - 1].at)
+-          : t.world.a11y.active(strings.name, strings.landmarks[st.day - 1].toward));
++          : t.world.a11y.active(strings.name, strings.landmarks[st.day - 1].at));
+ 
+   return (
+     <View
+@@ -179,7 +179,7 @@ export function WorldArt(props: WorldArtProps) {
+         ? t.world.a11y.resolved(name)
+         : st.complete
+           ? t.world.a11y.arrived(name, copy?.landmarks[day - 1].at ?? "")
+-          : t.world.a11y.active(name, copy?.landmarks[day - 1].toward ?? ""));
++          : t.world.a11y.active(name, copy?.landmarks[day - 1].at ?? ""));
+   const veil = variant === "distant" ? 0.38 + 0.14 * ((distance ?? 1) - 1) : 0;
+   return (
+     <View accessible accessibilityRole="image" accessibilityLabel={label} style={[{ width, height, overflow: "hidden" }, style]}>
+diff --git a/apps/mobile/src/components/world/WorldScene.tsx b/apps/mobile/src/components/world/WorldScene.tsx
+index ecfa9d2..657a1f3 100644
+--- a/apps/mobile/src/components/world/WorldScene.tsx
++++ b/apps/mobile/src/components/world/WorldScene.tsx
+@@ -331,7 +331,7 @@ export const WorldScene = forwardRef<WorldSceneHandle, WorldSceneProps>(function
+ 
+   const arriveInfo = (s: SceneState) => {
+     const L = t.world.worlds[s.worldId].landmarks;
+-    return { day: s.day, at: L[s.day - 1].at, toward: s.day < 7 ? L[s.day].toward : null };
++    return { day: s.day, at: L[s.day - 1].at, toward: s.day < 7 ? L[s.day - 1].toward : null };
+   };
+ 
+   const advance = (response: WorldResponse) => {
+diff --git a/apps/mobile/src/components/world/copy.ts b/apps/mobile/src/components/world/copy.ts
+index a7274be..2db2253 100644
+--- a/apps/mobile/src/components/world/copy.ts
++++ b/apps/mobile/src/components/world/copy.ts
+@@ -17,7 +17,7 @@ export function landmarkAt(t: Pick<Strings, "world">, worldId: WorldId, day: num
+   return t.world.worlds[worldId].landmarks[Math.max(1, Math.min(7, Math.round(day))) - 1].at;
+ }
+ 
+-/** "Toward the gate" for a day (where today is heading). */
++/** "Toward the gate": transition copy only, naming the stop the NEXT day stands at (placeDay.stopLandmarks). Never a day's name. */
+ export function landmarkToward(t: Pick<Strings, "world">, worldId: WorldId, day: number): string {
+   return t.world.worlds[worldId].landmarks[Math.max(1, Math.min(7, Math.round(day))) - 1].toward;
+ }
+diff --git a/apps/mobile/src/components/world/engine/engine.test.ts b/apps/mobile/src/components/world/engine/engine.test.ts
+index 5ea74cb..ccd73cb 100644
+--- a/apps/mobile/src/components/world/engine/engine.test.ts
++++ b/apps/mobile/src/components/world/engine/engine.test.ts
+@@ -163,8 +163,8 @@ describe("worlds metadata", () => {
+       expect(es.worlds[id].captions).toHaveLength(7);
+     }
+     // Since the Money Journey prototype the photographed worlds' landmarks are their place's stops (`wearPlaces`).
+-    expect(WORLDS["mist-meadow"].landmarkLabels[0]).toBe("At the mist pass");
+-    expect(WORLDS["celestial-night"].landmarkLabels[0]).toBe("At the path ahead");
++    expect(WORLDS["mist-meadow"].landmarkLabels[0]).toBe("At open sea");
++    expect(WORLDS["celestial-night"].landmarkLabels[0]).toBe("At the first view");
+   });
+ 
+   it("no em or en dashes in any world copy", () => {
+diff --git a/apps/mobile/src/components/world25d/copy.test.ts b/apps/mobile/src/components/world25d/copy.test.ts
+index 84f283a..8487685 100644
+--- a/apps/mobile/src/components/world25d/copy.test.ts
++++ b/apps/mobile/src/components/world25d/copy.test.ts
+@@ -29,8 +29,10 @@ describe("2.5D day-screen copy", () => {
+   });
+   it("keeps a place name's capitals and lowers only the article", () => {
+     const c = copy25dFor("mist-meadow", "es")!;
+-    expect(c.landmarks[0]).toEqual({ at: "En la canasta", toward: "Hacia la canasta" });
+-    expect(copy25dFor("mist-meadow", "en")!.landmarks[0]).toEqual({ at: "At the basket", toward: "Toward the basket" });
++    expect(c.landmarks[0]!.at).toBe("En la canasta");
++    // «Hacia …» is transition copy: the next day's stop (placeDay.stopLandmarks).
++    expect(c.landmarks[0]!.toward).toBe(c.landmarks[1]!.at.replace(/^En /, "Hacia "));
++    expect(copy25dFor("mist-meadow", "en")!.landmarks[0]!.at).toBe("At the basket");
+   });
+   it("names the canyon's seven places in each language, and says nothing the art does not show", () => {
+     for (const loc of ["es", "en"] as const) {
+@@ -39,12 +41,12 @@ describe("2.5D day-screen copy", () => {
+       expect(c.captions.every((x) => x === "")).toBe(true);
+       expect(`${c.name} ${c.line} ${c.opening} ${c.completion} ${c.landmarks.map((l) => `${l.at} ${l.toward}`).join(" ")}`).not.toMatch(/[—–]/);
+     }
+-    expect(copy25dFor("moss-forest", "es")!.landmarks[1]).toEqual({ at: "En la pared del eco", toward: "Hacia la pared del eco" });
++    expect(copy25dFor("moss-forest", "es")!.landmarks[1]!.at).toBe("En la pared del eco");
+     expect(copy25dFor("moss-forest", "en")!.name).toBe("The echo hollow");
+   });
+   it("says nothing the art does not show: no response captions", () => {
+     const c = copy25dFor("celestial-night", "es")!;
+-    expect(c.landmarks[1]).toEqual({ at: "En la cornisa", toward: "Hacia la cornisa" });
++    expect(c.landmarks[1]!.at).toBe("En la cornisa");
+     expect(c.captions.every((x) => x === "")).toBe(true);
+     expect(Object.values(c.responses).every((x) => x === "")).toBe(true);
+   });
+diff --git a/apps/mobile/src/components/world25d/copy.ts b/apps/mobile/src/components/world25d/copy.ts
+index b20c2e6..59d7eeb 100644
+--- a/apps/mobile/src/components/world25d/copy.ts
++++ b/apps/mobile/src/components/world25d/copy.ts
+@@ -15,6 +15,7 @@ import w2 from "./data/w2.json";
+ import w3 from "./data/w3.json";
+ import { paperFor, week25dFor } from "./flag";
+ import { PAPER_NAMES, type PaperId } from "./paper/names";
++import { stopLandmarks } from "@/content/placeDay";
+ import type { WeekScene } from "./types";
+ 
+ /** The same shape as `t.world.worlds[id]` (widened from its literal types), so a caller can use either. */
+@@ -43,7 +44,7 @@ function paperCopy(id: PaperId, locale: Locale): WorldCopy | null {
+     line: c.line,
+     opening: es ? `${c.name} se va abriendo, un día a la vez.` : `${c.name} is opening, one day at a time.`,
+     completion: es ? `Siete días en ${lower(c.name)}.` : `Seven days in ${lower(c.name)}.`,
+-    landmarks: c.places.map((p) => (es ? { at: `En ${lower(p)}`, toward: `Hacia ${lower(p)}` } : { at: `At ${lower(p)}`, toward: `Toward ${lower(p)}` })),
++    landmarks: stopLandmarks(c.places, es ? "es" : "en"),
+     captions: c.places.map(() => ""),
+     responses: { mist: "", breeze: "", birds: "", bloom: "", light: "", seeds: "" },
+   };
+@@ -63,10 +64,10 @@ export function copy25dFor(worldId: WorldId, locale: Locale): WorldCopy | null {
+     line: scene.weekTitle[L],
+     opening: es ? `${name} se va abriendo, un día a la vez.` : `${name} is opening, one day at a time.`,
+     completion: es ? `Siete días en ${lower(name)}.` : `Seven days in ${lower(name)}.`,
+-    landmarks: scene.stops.map((s) => {
+-      const place = lower(s.name[L]);
+-      return es ? { at: `En ${place}`, toward: `Hacia ${place}` } : { at: `At ${place}`, toward: `Toward ${place}` };
+-    }),
++    landmarks: stopLandmarks(
++      scene.stops.map((s) => s.name[L]),
++      es ? "es" : "en",
++    ),
+     captions: scene.stops.map(() => ""),
+     responses: { mist: "", breeze: "", birds: "", bloom: "", light: "", seeds: "" },
+   };
+diff --git a/apps/mobile/src/content/placeDay.test.ts b/apps/mobile/src/content/placeDay.test.ts
+index 971df70..037d636 100644
+--- a/apps/mobile/src/content/placeDay.test.ts
++++ b/apps/mobile/src/content/placeDay.test.ts
+@@ -4,9 +4,9 @@ import { en } from "@/i18n/locales/en";
+ import { es } from "@/i18n/locales/es";
+ import {
+   dayPlaceWords,
+-  hereIndexFor,
++  dayStopIndex,
++  dayStopName,
+   photoPlaceFor,
+-  stopIndexFor,
+   stopLandmarks,
+   stopsKeyFor,
+ } from "./placeDay";
+@@ -15,36 +15,102 @@ import { placeById, placeOfWorld, PLACES } from "./places";
+ const lh = placeById("lh")!;
+ const wz = placeById("wz")!;
+ 
+-describe("the stops a day names (Money Journey prototype pill)", () => {
+-  it("heads for the next stop: Day 1 is at open sea, toward the mist pass; Days 6 and 7 head for the last", () => {
+-    expect([1, 2, 3, 4, 5, 6, 7].map(stopIndexFor)).toEqual([1, 2, 3, 4, 5, 6, 6]);
+-    expect([1, 2, 3, 4, 5, 6, 7].map(hereIndexFor)).toEqual([0, 1, 2, 3, 4, 5, 6]);
++describe("the stop a day names: one rule, where she stands", () => {
++  it("day N stands at stop N, the only index rule", () => {
++    expect([1, 2, 3, 4, 5, 6, 7].map(dayStopIndex)).toEqual([0, 1, 2, 3, 4, 5, 6]);
+   });
+ 
+   it("clamps a day outside the week", () => {
+-    expect(stopIndexFor(0)).toBe(1);
+-    expect(stopIndexFor(12)).toBe(6);
+-    expect(hereIndexFor(-3)).toBe(0);
+-    expect(hereIndexFor(9)).toBe(6);
++    expect(dayStopIndex(0)).toBe(0);
++    expect(dayStopIndex(-3)).toBe(0);
++    expect(dayStopIndex(9)).toBe(6);
++    expect(dayStopIndex(12)).toBe(6);
+   });
+ 
+-  it("words the landmarks as the prototype does, in both languages", () => {
++  it("names the day by where she stands; «toward» is only the next day's stop", () => {
+     const enL = stopLandmarks(en.globe.stops.lh, "en");
+-    expect(enL[0]).toEqual({ at: "At the mist pass", toward: "Toward the mist pass" });
+-    // The prototype's Day 3 capture: the rafts in the picture, "Toward the cave" in the pill.
+-    expect(enL[2]!.toward).toBe("Toward the cave");
+-    expect(enL[6]!.toward).toBe("Toward the lookout");
++    expect(enL[0]).toEqual({ at: "At open sea", toward: "Toward the mist pass" });
++    // The prototype's Day 3 capture: the rafts in the picture. The day IS the rafts now; the cave is tomorrow.
++    expect(enL[2]).toEqual({ at: "At the rafts", toward: "Toward the cave" });
++    // Day 7 has no next stop: its transition copy names its own, never another day's.
++    expect(enL[6]).toEqual({ at: "At the lookout", toward: "Toward the lookout" });
+     const esL = stopLandmarks(es.globe.stops.lh, "es");
+-    expect(esL[0]).toEqual({ at: "En el paso de la niebla", toward: "Hacia el paso de la niebla" });
++    expect(esL[0]).toEqual({ at: "En mar abierto", toward: "Hacia el paso de la niebla" });
+     expect(esL).toHaveLength(7);
+   });
+ 
++  it("never names one stop as both where she is and where she heads on the same day (days 1-6)", () => {
++    for (const stops of [es.globe.stops.generic, es.globe.stops.lh, en.globe.stops.generic, en.globe.stops.lh]) {
++      const L = stopLandmarks(stops, stops === es.globe.stops.generic || stops === es.globe.stops.lh ? "es" : "en");
++      for (let i = 0; i < 6; i++) {
++        const strip = (s: string) => s.replace(/^(En|Hacia|At|Toward) /, "");
++        expect(strip(L[i]!.at)).not.toBe(strip(L[i]!.toward));
++        // The transition copy of day N is exactly day N + 1's place.
++        expect(strip(L[i]!.toward)).toBe(strip(L[i + 1]!.at));
++      }
++    }
++  });
++
+   it("uses Lan Hạ Bay's own stops and the neutral seven everywhere else", () => {
+     expect(stopsKeyFor(lh)).toBe("lh");
+     expect(stopsKeyFor(wz)).toBe("generic");
+   });
+ });
+ 
++describe("issue 01: every surface names Arashiyama's days (Money week 4) by the same stop", () => {
++  const ky = placeById("ky")!;
++  const kyWorld = WORLD_IDS.find((id) => placeOfWorld(id)?.id === "ky")!;
++  const lhWorld = WORLD_IDS.find((id) => placeOfWorld(id)?.id === "lh")!;
++  // What each surface reads (useWorldDay.landmark is the one helper): the Atlas week list
++  // and record strip read `at`; the session pill and header read `at`; the completion
++  // screen's «Mañana, …» reads tomorrow's `at`; the photo line reads dayStopName.
++  const L = (world: string, day: number) => es.world.worlds[world as keyof typeof es.world.worlds].landmarks[day - 1]!;
++
++  it("is Money week 4 on the generic stops", () => {
++    expect(ky.area).toBe("money");
++    expect(ky.week).toBe(4);
++    expect(stopsKeyFor(ky)).toBe("generic");
++  });
++
++  it("days 1-7: Atlas, pill, photo line and tomorrow's preview agree", () => {
++    const expected = [
++      "La primera vista",
++      "El camino adelante",
++      "La vuelta",
++      "El lugar de descanso",
++      "La subida",
++      "El mirador",
++      "El horizonte",
++    ];
++    for (let day = 1; day <= 7; day++) {
++      const name = expected[day - 1]!;
++      expect(dayStopName(es.globe.stops.generic, day), `photo line day ${day}`).toBe(name);
++      expect(L(kyWorld, day).at, `Atlas/pill day ${day}`).toBe(`En ${name.charAt(0).toLowerCase()}${name.slice(1)}`);
++      if (day < 7) {
++        const tomorrow = es.photoDay.tomorrow(L(kyWorld, day + 1).at);
++        const next = expected[day]!;
++        expect(tomorrow, `tomorrow day ${day}`).toBe(`Mañana, en ${next.charAt(0).toLowerCase()}${next.slice(1)}.`);
++      }
++    }
++    // The tester's Day 4: «El lugar de descanso» in the picture, the Atlas and the pill alike.
++    expect(L(kyWorld, 4).at).toBe("En el lugar de descanso");
++    expect(es.photoDay.tomorrow(L(kyWorld, 5).at)).toBe("Mañana, en la subida.");
++    // Days 6 and 7 are no longer both «En el horizonte».
++    expect(L(kyWorld, 6).at).toBe("En el mirador");
++    expect(L(kyWorld, 7).at).toBe("En el horizonte");
++  });
++
++  it("holds for another world too (Lan Hạ Bay, Money week 1, its own stops)", () => {
++    const stops = es.globe.stops.lh;
++    for (let day = 1; day <= 7; day++) {
++      const name = stops[day - 1]!;
++      expect(L(lhWorld, day).at).toBe(`En ${name.charAt(0).toLowerCase()}${name.slice(1)}`);
++      expect(dayStopName(stops, day)).toBe(name);
++    }
++    expect(L(lhWorld, 3).at).toBe("En las balsas");
++  });
++});
++
+ describe("the place a day's photograph shows", () => {
+   const OTHERS = ["purpose", "self", "love", "energy", "everyday"] as const;
+ 
+@@ -105,11 +171,11 @@ describe("the worlds wear their places", () => {
+   });
+ 
+   it("gives a photographed world its stops as landmarks, and leaves its line and captions", () => {
+-    expect(en.world.worlds["mist-meadow"].landmarks[0]).toEqual({ at: "At the mist pass", toward: "Toward the mist pass" });
+-    expect(en.world.worlds["celestial-night"].landmarks[0]).toEqual({ at: "At the path ahead", toward: "Toward the path ahead" });
++    expect(en.world.worlds["mist-meadow"].landmarks[0]).toEqual({ at: "At open sea", toward: "Toward the mist pass" });
++    expect(en.world.worlds["celestial-night"].landmarks[0]).toEqual({ at: "At the first view", toward: "Toward the path ahead" });
+     expect(es.world.worlds["celestial-night"].landmarks[6]).toEqual({ at: "En el horizonte", toward: "Hacia el horizonte" });
+     expect(en.world.worlds["mist-meadow"].captions).toHaveLength(7);
+-    expect(en.world.worlds["market-morning"].landmarks[0]!.at).toBe("At the path ahead");
++    expect(en.world.worlds["market-morning"].landmarks[0]!.at).toBe("At the first view");
+     // The "is opening" line named the old world: it names the place now.
+     expect(en.world.worlds["mist-meadow"].opening).toBe("Lan Hạ Bay is opening, one day at a time.");
+     expect(es.world.worlds["mist-meadow"].opening).toBe("Bahía de Lan Hạ se va abriendo, un día a la vez.");
+diff --git a/apps/mobile/src/content/placeDay.ts b/apps/mobile/src/content/placeDay.ts
+index 3fbf9ab..ffb81fb 100644
+--- a/apps/mobile/src/content/placeDay.ts
++++ b/apps/mobile/src/content/placeDay.ts
+@@ -29,17 +29,20 @@ export function bandLayoutFor(_world: string): boolean {
+ const clampDay = (day: number) => Math.max(1, Math.min(7, Math.round(day) || 1));
+ 
+ /**
+- * The stop a day heads toward, as an index into the place's seven stops.
+- * The prototype's pill: Day 1 is at the first stop (open sea) and heads for
+- * the second ("Toward the mist pass"); Day 6 and Day 7 both head for the last.
++ * THE day-to-stop rule, the only one: day N of a week stands at stop N
++ * (index N - 1 of the place's seven). The day's identity everywhere (Hoy, the
++ * Atlas, the session pill and header, the completion screen, tomorrow's
++ * preview) is this stop: where she stands, the place the day's picture shows.
++ * "Heading toward" survives only as transition copy (the landmarks' `toward`), and it
++ * names the NEXT day's stop, read from this same rule.
+  */
+-export function stopIndexFor(day: number): number {
+-  return Math.min(clampDay(day), 6);
++export function dayStopIndex(day: number): number {
++  return clampDay(day) - 1;
+ }
+ 
+-/** The stop the day's picture shows (where she stands): the "Where is this?" card. */
+-export function hereIndexFor(day: number): number {
+-  return clampDay(day) - 1;
++/** The bare stop name day N stands at ("El lugar de descanso"), from the place's seven stops. */
++export function dayStopName(stops: readonly string[], day: number): string {
++  return stops[Math.min(dayStopIndex(day), stops.length - 1)] ?? "";
+ }
+ 
+ /** Which list of stop names a place uses: its own, or the neutral seven. */
+@@ -51,13 +54,17 @@ export function stopsKeyFor(place: Pick<PlaceDef, "id">): "lh" | "generic" {
+ export const lowerFirst = (s: string) => (s ? s.charAt(0).toLowerCase() + s.slice(1) : s);
+ 
+ /**
+- * A place's seven landmarks in the catalogue's shape, from its stop names:
+- * day N arrives at, and heads toward, the stop `stopIndexFor(N)`.
++ * A place's seven landmarks in the catalogue's shape, from its stop names and
++ * the one rule above: day N is `at` stop N (its identity: «En el lugar de
++ * descanso»); its `toward` is transition copy naming the stop day N + 1 stands
++ * at («Hacia la subida»). Day 7 has no next stop, so its `toward` names its
++ * own (the week's end), and nothing reads it as the day's name.
+  */
+ export function stopLandmarks(stops: readonly string[], lang: "en" | "es"): { at: string; toward: string }[] {
+   return Array.from({ length: 7 }, (_, i) => {
+-    const stop = lowerFirst(stops[Math.min(stopIndexFor(i + 1), stops.length - 1)] ?? "");
+-    return lang === "es" ? { at: `En ${stop}`, toward: `Hacia ${stop}` } : { at: `At ${stop}`, toward: `Toward ${stop}` };
++    const here = lowerFirst(dayStopName(stops, i + 1));
++    const next = lowerFirst(dayStopName(stops, Math.min(i + 2, 7)));
++    return lang === "es" ? { at: `En ${here}`, toward: `Hacia ${next}` } : { at: `At ${here}`, toward: `Toward ${next}` };
+   });
+ }
+ 
+diff --git a/apps/mobile/src/hooks/useExploreCatalogue.ts b/apps/mobile/src/hooks/useExploreCatalogue.ts
+index ebc02d9..6aaf37b 100644
+--- a/apps/mobile/src/hooks/useExploreCatalogue.ts
++++ b/apps/mobile/src/hooks/useExploreCatalogue.ts
+@@ -58,5 +58,9 @@ export function useExploreCatalogue() {
+     void saved.refetch();
+   }, [home, saved]);
+ 
+-  return { catalogue, all: all.data, now, savedCount, loading, failed, refetch, refresh };
++  // Which reads have an answer (issue 08): a tab is hidden only for a read that
++  // succeeded with nothing, never for one still loading or that failed.
++  const loaded = { programme: !!programme.data, all: !!all.data };
++
++  return { catalogue, all: all.data, now, savedCount, loading, failed, loaded, refetch, refresh };
+ }
+diff --git a/apps/mobile/src/i18n/locales/en/account.ts b/apps/mobile/src/i18n/locales/en/account.ts
+index dab1a76..9b30ef1 100644
+--- a/apps/mobile/src/i18n/locales/en/account.ts
++++ b/apps/mobile/src/i18n/locales/en/account.ts
+@@ -601,10 +601,17 @@ export const account = {
+     title: "How you've been",
+     body: "A read on the last twelve weeks, drawn from your check-ins and what you've written. It's a mirror, not a measurement, and it only knows the weeks you were here.",
+     /** The week's own line: how much showing up the numbers above rest on. */
+-    weekBasis: (activeDays: number, checkIns: number, percent: number) =>
++    weekBasis: (activeDays: number, checkIns: number, sparse: boolean) =>
+       `${activeDays} active day${activeDays === 1 ? "" : "s"} · ${checkIns} check-in${
+         checkIns === 1 ? "" : "s"
+-      } · based on ${percent}% of a full week`,
++      }${sparse ? " · a reading from little data" : ""}`,
++    daysOf: (days: number) => `${days} of 7 days`,
++    comparedTo: (week: string) => `Changes are compared with the week of ${week}.`,
++    comparedToEarlier: (week: string) =>
++      `Changes are compared with the week of ${week}, the last one with data before this one (not the week just before).`,
++    deltaDays: (delta: number) => `${delta > 0 ? "+" : ""}${delta} day${Math.abs(delta) === 1 ? "" : "s"}`,
++    deltaA11y: (delta: string, week: string) => `${delta} compared with the week of ${week}`,
++    noData: "No data",
+     trailA11y: (weeks: number) => `Mood over ${weeks} weeks.`,
+     weekNoData: (week: string) => `Week of ${week}, no data`,
+     weekScore: (week: string, score: number) => `Week of ${week}, ${score} out of 100`,
+@@ -652,7 +659,7 @@ export const account = {
+       mood: { label: "Mood", hint: "How you said you felt." },
+       stability: { label: "Steadiness", hint: "How much your days swung." },
+       engagement: { label: "Showing up", hint: "Days you were here at all." },
+-      agency: { label: "Doing", hint: "Days and actions you finished." },
++      agency: { label: "Sessions completed", hint: "Days you finished the day's session." },
+       connection: { label: "Reaching out", hint: "Times you spoke to someone." },
+       outlook: { label: "Outlook", hint: "The tone of your own writing." },
+     },
+diff --git a/apps/mobile/src/i18n/locales/en/circleTopics.ts b/apps/mobile/src/i18n/locales/en/circleTopics.ts
+index 3af769a..d727ba0 100644
+--- a/apps/mobile/src/i18n/locales/en/circleTopics.ts
++++ b/apps/mobile/src/i18n/locales/en/circleTopics.ts
+@@ -298,6 +298,11 @@ export const circleTopics = {
+       whoSeesNone: "Pick a circle to see who reads it.",
+       publish: "Post",
+       publishNoCircle: "Pick a circle to post",
++      postingAs: (circle: string, who: string) => `${circle} · ${who}`,
++      postingAsNoCircle: (who: string) => `No circle chosen · ${who}`,
++      namedShort: (name: string) => (name.trim() ? name.trim() : "With your name"),
++      change: "Change",
++      changeHint: (to: string) => `Post as ${to}`,
+       published: (circle: string) => `Posted in ${circle}`,
+       error: "Couldn't post. Your text is still here.",
+       noCircles: "Join a circle to share in it.",
+diff --git a/apps/mobile/src/i18n/locales/en/home.ts b/apps/mobile/src/i18n/locales/en/home.ts
+index 0ea2fa2..517b01c 100644
+--- a/apps/mobile/src/i18n/locales/en/home.ts
++++ b/apps/mobile/src/i18n/locales/en/home.ts
+@@ -416,6 +416,7 @@ export const home = {
+     /** "Wuzhen, China". */
+     placeName: (name: string, country: string) => `${name}, ${country}`,
+     placeLine: (place: string, week: number, day: number) => `${place} · Week ${week} · Day ${day}`,
++    placeLineDone: (place: string, week: number) => `${place} · Week ${week}`,
+     placeWeek: (place: string, week: number, weeks: number) => `${place} · Week ${week} of ${weeks}`,
+     photoA11y: (place: string) => `A photograph of ${place}.`,
+     dayDone: (day: number) => `Day ${day} done`,
+diff --git a/apps/mobile/src/i18n/locales/en/practice.ts b/apps/mobile/src/i18n/locales/en/practice.ts
+index 906fbf5..fc8ed27 100644
+--- a/apps/mobile/src/i18n/locales/en/practice.ts
++++ b/apps/mobile/src/i18n/locales/en/practice.ts
+@@ -216,6 +216,13 @@ export const practice = {
+   },
+ 
+   dayComplete: {
++    phrase: {
++      save: "Save this phrase",
++      saved: "Saved to your phrases",
++      saveA11y: "Save this phrase to Sentences you kept",
++      savedA11y: "Saved to Sentences you kept. Tap to remove it.",
++      failed: "Couldn't save. Try again.",
++    },
+     /** Under her line on the dawn close. */
+     signature: "Elara",
+     weekEyebrow: (week: number, day: number) => `Week ${week} · Day ${day} complete`,
+diff --git a/apps/mobile/src/i18n/locales/es/account.ts b/apps/mobile/src/i18n/locales/es/account.ts
+index 8be848e..ac6054c 100644
+--- a/apps/mobile/src/i18n/locales/es/account.ts
++++ b/apps/mobile/src/i18n/locales/es/account.ts
+@@ -516,10 +516,20 @@ export const account: Strings["account"] = {
+   progress: {
+     title: "Cómo has estado",
+     body: "Una lectura de las últimas doce semanas, a partir de tus registros y de lo que has escrito. Es un espejo, no una calificación, y solo conoce las semanas en las que estuviste aquí.",
+-    weekBasis: (activeDays: number, checkIns: number, percent: number) =>
++    // PROPUESTA (ux-fixes 3 nov, pendiente de María y Alejandra): sin el porcentaje de confianza.
++    weekBasis: (activeDays: number, checkIns: number, sparse: boolean) =>
+       `${activeDays} ${activeDays === 1 ? "día activo" : "días activos"} · ${checkIns} ${
+         checkIns === 1 ? "registro" : "registros"
+-      } · basado en el ${percent}% de una semana completa`,
++      }${sparse ? " · lectura con pocos datos" : ""}`,
++    // PROPUESTA (ux-fixes 3 nov): Presencia como recuento, «2 de 7 días».
++    daysOf: (days: number) => `${days} de 7 días`,
++    // PROPUESTA (ux-fixes 3 nov): cada cambio dice contra qué semana se compara.
++    comparedTo: (week: string) => `Los cambios se comparan con la semana del ${week}.`,
++    comparedToEarlier: (week: string) =>
++      `Los cambios se comparan con la semana del ${week}, la última con datos antes de esta (no la semana inmediatamente anterior).`,
++    deltaDays: (delta: number) => `${delta > 0 ? "+" : ""}${delta} ${Math.abs(delta) === 1 ? "día" : "días"}`,
++    deltaA11y: (delta: string, week: string) => `${delta} frente a la semana del ${week}`,
++    noData: "Sin datos",
+     trailA11y: (weeks: number) => `Ánimo a lo largo de ${weeks} semanas.`,
+     weekNoData: (week: string) => `Semana del ${week}, sin datos`,
+     weekScore: (week: string, score: number) => `Semana del ${week}, ${score} de 100`,
+@@ -562,7 +572,8 @@ export const account: Strings["account"] = {
+       mood: { label: "Ánimo", hint: "Cómo dijiste que te sentías." },
+       stability: { label: "Estabilidad", hint: "Cuánto oscilaron tus días." },
+       engagement: { label: "Presencia", hint: "Días en los que estuviste aquí." },
+-      agency: { label: "Acción", hint: "Días y acciones que terminaste." },
++      // PROPUESTA (ux-fixes 3 nov): reemplaza «Acción»; cuenta días terminados, no preguntas respondidas.
++      agency: { label: "Sesiones completadas", hint: "Días en los que terminaste la sesión del día." },
+       connection: { label: "Acercamiento", hint: "Veces que hablaste con alguien." },
+       outlook: { label: "Perspectiva", hint: "El tono de lo que tú misma escribes." },
+     },
+diff --git a/apps/mobile/src/i18n/locales/es/circleTopics.ts b/apps/mobile/src/i18n/locales/es/circleTopics.ts
+index f272739..844789a 100644
+--- a/apps/mobile/src/i18n/locales/es/circleTopics.ts
++++ b/apps/mobile/src/i18n/locales/es/circleTopics.ts
+@@ -302,6 +302,12 @@ export const circleTopics: Strings["circleTopics"] = {
+       whoSeesNone: "Elige un círculo para ver quién lo lee.",
+       publish: "Publicar",
+       publishNoCircle: "Elige un círculo para publicar",
++      // PROPUESTA (ux-fixes 3 nov, pendiente de María y Alejandra): círculo e identidad junto a «Publicar».
++      postingAs: (circle, who) => `${circle} · ${who}`,
++      postingAsNoCircle: (who) => `Sin círculo elegido · ${who}`,
++      namedShort: (name) => (name.trim() ? name.trim() : "Con tu nombre"),
++      change: "Cambiar",
++      changeHint: (to) => `Publicar como ${to}`,
+       published: (circle) => `Publicado en ${circle}`,
+       error: "No se pudo publicar. Tu texto sigue aquí.",
+       noCircles: "Únete a un círculo para compartir en él.",
+diff --git a/apps/mobile/src/i18n/locales/es/home.ts b/apps/mobile/src/i18n/locales/es/home.ts
+index 4b758b3..3b76f6a 100644
+--- a/apps/mobile/src/i18n/locales/es/home.ts
++++ b/apps/mobile/src/i18n/locales/es/home.ts
+@@ -313,6 +313,8 @@ export const home: Strings["home"] = {
+     missed: (day: number) => `Tu día ${day} te espera. No se pierde nada.`,
+     placeName: (name: string, country: string) => `${name}, ${country}`,
+     placeLine: (place: string, week: number, day: number) => `${place} · Semana ${week} · Día ${day}`,
++    // PROPUESTA (ux-fixes 3 nov): con el día hecho, «Día 4 hecho» ya dice el día; la línea dice solo la semana.
++    placeLineDone: (place: string, week: number) => `${place} · Semana ${week}`,
+     placeWeek: (place: string, week: number, weeks: number) => `${place} · Semana ${week} de ${weeks}`,
+     photoA11y: (place: string) => `Fotografía de ${place}.`,
+     dayDone: (day: number) => `Día ${day} hecho`,
+diff --git a/apps/mobile/src/i18n/locales/es/practice.ts b/apps/mobile/src/i18n/locales/es/practice.ts
+index c1f5245..63a1e97 100644
+--- a/apps/mobile/src/i18n/locales/es/practice.ts
++++ b/apps/mobile/src/i18n/locales/es/practice.ts
+@@ -200,6 +200,14 @@ export const practice: Strings["practice"] = {
+   },
+ 
+   dayComplete: {
++    // PROPUESTA (ux-fixes 3 nov, pendiente de María y Alejandra): guardar una frase es su elección.
++    phrase: {
++      save: "Guardar esta frase",
++      saved: "Guardada en tus frases",
++      saveA11y: "Guardar esta frase en Frases que guardaste",
++      savedA11y: "Guardada en Frases que guardaste. Toca para quitarla.",
++      failed: "No se pudo guardar. Inténtalo de nuevo.",
++    },
+     /** Under her line on the dawn close. */
+     signature: "Elara",
+     weekEyebrow: (week: number, day: number) => `Semana ${week} · Día ${day} completado`,
+diff --git a/apps/mobile/src/lib/api.ts b/apps/mobile/src/lib/api.ts
+index 07005b9..d287648 100644
+--- a/apps/mobile/src/lib/api.ts
++++ b/apps/mobile/src/lib/api.ts
+@@ -407,6 +407,15 @@ export const api = {
+       `/api/me/paths/${area}/days/${day}/decline`,
+       { method: "POST", body: JSON.stringify(body) },
+     ),
++  /**
++   * «Guardar esta frase» (issue 05): keep a `keep` step's words in «Frases que
++   * guardaste», or take them off. The answer stays in the day either way.
++   */
++  setPhraseSaved: (area: AreaKey, day: number, stepId: string, saved: boolean) =>
++    req<{ saved: number | false }>(
++      `/api/me/paths/${area}/days/${day}/steps/${encodeURIComponent(stepId)}/saved`,
++      { method: "PUT", body: JSON.stringify({ saved }) },
++    ),
+   // Check-ins
+   /**
+    * The check-in rhythm over the member's whole history — current streak,
+diff --git a/apps/mobile/src/lib/exploreCatalogue.test.ts b/apps/mobile/src/lib/exploreCatalogue.test.ts
+index ecb18ac..5d0b17e 100644
+--- a/apps/mobile/src/lib/exploreCatalogue.test.ts
++++ b/apps/mobile/src/lib/exploreCatalogue.test.ts
+@@ -1,6 +1,6 @@
+ import { describe, expect, it } from "vitest";
+ import type { ExploreContinueDTO, ExploreItemDTO, ExploreWorkshopDTO } from "@elara/shared";
+-import { catalogueOf, hasAny, progressOf, resumeOf, workshopWhen, zoneNames } from "./exploreCatalogue";
++import { CATEGORIES, catalogueOf, hasAny, progressOf, resumeOf, visibleCategories, workshopWhen, zoneNames } from "./exploreCatalogue";
+ 
+ const item = (over: Partial<ExploreItemDTO> & Pick<ExploreItemDTO, "id" | "kind">): ExploreItemDTO => ({
+   format: null,
+@@ -166,3 +166,24 @@ describe("a time in her zone", () => {
+     expect(() => workshopWhen(oct22, "es", "Not/AZone")).not.toThrow();
+   });
+ });
++
++describe("issue 08: a tab is hidden only after a successful read with nothing in it", () => {
++  const empty = catalogueOf({ now: 0 });
++  it("keeps every tab while the reads are loading or after they failed (no data)", () => {
++    expect(visibleCategories(empty, { programme: false, all: false })).toEqual([...CATEGORIES]);
++  });
++
++  it("hides the kinds a successful read holds none of, and always keeps «Todo»", () => {
++    expect(visibleCategories(empty, { programme: true, all: true })).toEqual(["all"]);
++  });
++
++  it("decides each tab by its own read: a failed programme keeps «Talleres», an empty list hides the rest", () => {
++    expect(visibleCategories(empty, { programme: false, all: true })).toEqual(["all", "workshop"]);
++    expect(visibleCategories(empty, { programme: true, all: false })).toEqual(["all", "listen", "watch", "guide"]);
++  });
++
++  it("shows a kind that has something", () => {
++    const withGuide = { ...empty, guides: [item({ id: "g1", kind: "guide" })] };
++    expect(visibleCategories(withGuide, { programme: true, all: true })).toEqual(["all", "guide"]);
++  });
++});
+diff --git a/apps/mobile/src/lib/exploreCatalogue.ts b/apps/mobile/src/lib/exploreCatalogue.ts
+index c840a7e..a026a53 100644
+--- a/apps/mobile/src/lib/exploreCatalogue.ts
++++ b/apps/mobile/src/lib/exploreCatalogue.ts
+@@ -83,7 +83,9 @@ export function progressOf(r: Pick<ExploreContinueDTO, "positionSec" | "duration
+ export function hasAny(c: Catalogue, category: Category): boolean {
+   switch (category) {
+     case "workshop":
+-      return !!c.featured || c.recordings.length > 0;
++      // `upcoming` is every workshop after `featured`, so it is empty when
++      // that is; named anyway so the tab and the page's empty check agree.
++      return !!c.featured || c.upcoming.length > 0 || c.recordings.length > 0;
+     case "listen":
+       return c.listens.length > 0;
+     case "watch":
+@@ -95,6 +97,24 @@ export function hasAny(c: Catalogue, category: Category): boolean {
+   }
+ }
+ 
++/**
++ * The tabs to draw (issue 08, 3 Nov 2026). A kind's tab is hidden only when
++ * the read it comes from has SUCCEEDED and holds none of it: workshops come
++ * from the programme, listens, films and guides from the full list. While a
++ * read is loading or after it failed, every tab stays, with the page's own
++ * loading and error states; «Todo» always stays.
++ */
++export function visibleCategories(
++  c: Catalogue,
++  loaded: { programme: boolean; all: boolean },
++): Category[] {
++  return CATEGORIES.filter((cat) => {
++    if (cat === "all") return true;
++    const read = cat === "workshop" ? loaded.programme : loaded.all;
++    return !read || hasAny(c, cat);
++  });
++}
++
+ /* ── a time in her zone ──────────────────────────────────────────────────── */
+ 
+ /** The device's own zone, or "UTC" when the engine cannot say. */
+diff --git a/apps/mobile/src/lib/phrase.test.ts b/apps/mobile/src/lib/phrase.test.ts
+new file mode 100644
+index 0000000..cf27166
+--- /dev/null
++++ b/apps/mobile/src/lib/phrase.test.ts
+@@ -0,0 +1,70 @@
++import { describe, expect, it } from "vitest";
++import { isSavedPhrase, savedAfterEdit, type DayStep } from "@elara/shared";
++import { progressAfterAnswer, progressWithSaved, type AnswerProgress } from "@/store/stepAnswer";
++import { phraseOf, questionLine } from "./phrase";
++
++/** Issue 05: saving a phrase is her choice; her words always come with their question. */
++const ASK: DayStep = { id: "ask", kind: "choose", title: "¿Qué describe mejor cómo va tu tarea?", config: { options: ["La hice", "Aún no"] } };
++const TAKE: DayStep = {
++  id: "take",
++  kind: "reflect",
++  title: "Para llevarte",
++  body: "Dijiste «{ask|lower}». ¿Qué es lo siguiente que necesitarías saber? También puedes escribir que lo dejas aquí por ahora.",
++  config: {
++    keep: "sentence",
++    bodyFallback: "¿Qué es lo siguiente que necesitarías saber sobre tu tarea? También puedes escribir que lo dejas aquí por ahora.",
++  },
++};
++const STEPS = [ASK, TAKE];
++
++describe("the saved flag", () => {
++  it("reads an absent flag (shelved automatically before) as saved, false as not, a time as saved", () => {
++    expect(isSavedPhrase({})).toBe(true);
++    expect(isSavedPhrase({ saved: false })).toBe(false);
++    expect(isSavedPhrase({ saved: 5 })).toBe(true);
++    expect(isSavedPhrase(undefined)).toBe(false);
++  });
++
++  it("is not set by answering; an edit of saved words stays saved", () => {
++    expect(savedAfterEdit(undefined, 9)).toBe(false);
++    expect(savedAfterEdit({ value: "Todo bien", saved: false }, 9)).toBe(false);
++    expect(savedAfterEdit({ value: "Todo bien", saved: 3 }, 9)).toBe(3);
++    // Written before explicit saving, so shelved then: still saved after the edit.
++    expect(savedAfterEdit({ value: "Todo bien" }, 9)).toBe(9);
++    // A state was there, not her words: nothing to carry.
++    expect(savedAfterEdit({ value: null, state: "skipped" }, 9)).toBe(false);
++  });
++
++  it("answering on this phone records `saved: false` on a keep step, and the toggle sets and clears it", () => {
++    const p0: AnswerProgress = { currentDay: 1, completedDays: [], responses: {}, stepAnswers: {} };
++    const p1 = progressAfterAnswer(p0, { day: 25, steps: STEPS, stepId: "take", value: "Todo bien", now: 1, totalDays: 30 });
++    expect(p1.stepAnswers[25]!.take!.saved).toBe(false);
++    const p2 = progressAfterAnswer(p1, { day: 25, steps: STEPS, stepId: "ask", value: "Aún no", now: 2, totalDays: 30 });
++    expect("saved" in p2.stepAnswers[25]!.ask!).toBe(false);
++    const p3 = progressWithSaved(p2, 25, "take", 7);
++    expect(isSavedPhrase(p3.stepAnswers[25]!.take)).toBe(true);
++    // Her history keeps the answer either way.
++    expect(progressWithSaved(p3, 25, "take", false).stepAnswers[25]!.take!.value).toBe("Todo bien");
++  });
++});
++
++describe("her phrase and its question", () => {
++  it("shows «Todo bien» as her answer, never filtered by length", () => {
++    expect(phraseOf(STEPS, { ask: { value: 1 }, take: { value: "Todo bien" } })).toEqual({ step: TAKE, text: "Todo bien" });
++  });
++
++  it("is nothing for a skip, a state or a flagged answer", () => {
++    expect(phraseOf(STEPS, { take: { value: null, state: "skipped" } })).toBeNull();
++    expect(phraseOf(STEPS, { take: { value: "x", safety: 2 } })).toBeNull();
++  });
++
++  it("names the question she was asked, filled with her own choice, else its fallback", () => {
++    const book = { 25: { ask: { value: 1 } } };
++    const stepAt = (_d: number, id: string) => STEPS.find((s) => s.id === id);
++    expect(questionLine(TAKE, { book, day: 25, stepAt })).toBe("¿Qué es lo siguiente que necesitarías saber?");
++    expect(questionLine(TAKE, { book: {}, day: 25, stepAt })).toBe("¿Qué es lo siguiente que necesitarías saber sobre tu tarea?");
++    // A task, not a question: the line as written.
++    const task: DayStep = { id: "t", kind: "reflect", title: "Para llevarte", body: "Crea un recordatorio sin datos financieros, en foto o texto." };
++    expect(questionLine(task, { book: {}, day: 1 })).toBe("Crea un recordatorio sin datos financieros, en foto o texto.");
++  });
++});
+diff --git a/apps/mobile/src/lib/phrase.ts b/apps/mobile/src/lib/phrase.ts
+new file mode 100644
+index 0000000..8fd9bb1
+--- /dev/null
++++ b/apps/mobile/src/lib/phrase.ts
+@@ -0,0 +1,43 @@
++import {
++  answerText,
++  resolveTemplate,
++  stepOutcome,
++  type DayStep,
++  type DayStepAnswers,
++  type TemplateContext,
++} from "@elara/shared";
++
++/**
++ * Issue 05 (3 Nov 2026): her phrase, and the question it answers.
++ *
++ * Her words are quoted verbatim and never filtered by length: «Todo bien» is
++ * an honest answer, shown as her answer with its question. Never a skip, a
++ * state, a hidden step or an answer that matched the safety list.
++ */
++export function phraseOf(
++  steps: readonly DayStep[],
++  answers: DayStepAnswers | undefined,
++): { step: DayStep; text: string } | null {
++  for (const step of [...steps].reverse()) {
++    if (!step.config?.keep || step.config.hidden) continue;
++    const answer = answers?.[step.id];
++    if (!answer || answer.safety || stepOutcome(step, answer) !== "answered") continue;
++    const text = answerText(answer.value, step).trim();
++    if (text) return { step, text };
++  }
++  return null;
++}
++
++/**
++ * The question or task a step put to her, as she saw it, in one line: its
++ * line under the heading (templates filled, its fallback when they cannot
++ * be), cut to the sentence that asks, else the heading. «Para llevarte» is a
++ * heading; «¿Qué es lo siguiente que necesitarías saber?» is the question.
++ */
++export function questionLine(step: DayStep, ctx: TemplateContext): string | null {
++  const body = resolveTemplate(step.body, step.config?.bodyFallback, ctx)?.text?.trim();
++  const source = body || step.config?.prompt?.trim() || step.title?.trim() || "";
++  if (!source) return null;
++  const asking = source.match(/¿[^?]*\?|[^.!?¿]*\?/);
++  return (asking ? asking[0] : source).trim() || null;
++}
+diff --git a/apps/mobile/src/lib/weekMetrics.test.ts b/apps/mobile/src/lib/weekMetrics.test.ts
+new file mode 100644
+index 0000000..d83e30a
+--- /dev/null
++++ b/apps/mobile/src/lib/weekMetrics.test.ts
+@@ -0,0 +1,94 @@
++import { describe, expect, it } from "vitest";
++import { defaultSnapshot, type WellbeingSnapshotDTO } from "@elara/shared";
++import { es } from "@/i18n/locales/es";
++import { comparison, metricRows, pickWeeks, sparseWeek } from "./weekMetrics";
++
++/** Issue 04: Presencia as days, «Sesiones completadas», no percentage, honest gaps and comparisons. */
++const week = (start: string, over: Partial<WellbeingSnapshotDTO> = {}): WellbeingSnapshotDTO => ({
++  ...defaultSnapshot(start, start),
++  ...over,
++});
++const row = (rows: ReturnType<typeof metricRows>, d: string) => rows.find((r) => r.dimension === d)!;
++
++describe("weekly metrics (issue 04)", () => {
++  it("a zero-data history has no week to show and nothing to compare", () => {
++    const weeks = [week("2026-10-13"), week("2026-10-20"), week("2026-10-27")];
++    expect(pickWeeks(weeks)).toEqual({ latest: undefined, previous: undefined });
++    expect(comparison(undefined, undefined)).toBeNull();
++    // A week with no snapshot: every row is missing, never 0.
++    const rows = metricRows(week("2026-10-27"));
++    expect(rows.every((r) => r.value === null && r.meter === null && r.delta === null)).toBe(true);
++  });
++
++  it("a sparse week (the recording: 2 days, 0 check-ins, 4 answered steps, 1 session): counts, no %", () => {
++    const latest = week("2026-10-27", {
++      // The old stored scores stay in the snapshot; Presencia and Sesiones no longer read them.
++      scores: { mood: null, stability: null, engagement: 29, agency: 80, connection: 0, outlook: null },
++      confidence: 0.24,
++      daysActive: 2,
++      checkIns: 0,
++      sessionsCompleted: 1,
++    });
++    const rows = metricRows(latest);
++    expect(row(rows, "engagement")).toMatchObject({ unit: "days", value: 2 });
++    expect(es.account.progress.daysOf(row(rows, "engagement").value!)).toBe("2 de 7 días");
++    expect(row(rows, "agency")).toMatchObject({ unit: "count", value: 1 });
++    expect(es.account.progress.dimensions.agency.label).toBe("Sesiones completadas");
++    // Missing stays missing; a measured zero stays zero.
++    expect(row(rows, "mood").value).toBeNull();
++    expect(row(rows, "connection").value).toBe(0);
++    expect(row(rows, "connection").meter).toBe(0);
++    expect(sparseWeek(latest)).toBe(true);
++    const basis = es.account.progress.weekBasis(latest.daysActive, latest.checkIns, sparseWeek(latest));
++    expect(basis).toBe("2 días activos · 0 registros · lectura con pocos datos");
++    expect(basis).not.toMatch(/%/);
++  });
++
++  it("an observed week with no session finished shows 0, not «Sin datos»; an older API without the field shows «—»", () => {
++    const zero = metricRows(week("2026-10-27", { confidence: 0.12, daysActive: 1, sessionsCompleted: 0 }));
++    expect(row(zero, "agency").value).toBe(0);
++    const old = metricRows(week("2026-10-27", { confidence: 0.12, daysActive: 1 }));
++    expect(row(old, "agency").value).toBeNull();
++  });
++
++  it("a complete week compared with the calendar week before it", () => {
++    const prev = week("2026-10-20", {
++      scores: { mood: 60, stability: 70, engagement: 71, agency: 100, connection: 20, outlook: 55 },
++      confidence: 0.8,
++      daysActive: 5,
++      checkIns: 3,
++      sessionsCompleted: 4,
++    });
++    const latest = week("2026-10-27", {
++      scores: { mood: 72, stability: 70, engagement: 100, agency: 100, connection: 40, outlook: null },
++      confidence: 1,
++      daysActive: 7,
++      checkIns: 6,
++      sessionsCompleted: 7,
++    });
++    const { latest: l, previous: p } = pickWeeks([prev, latest]);
++    expect(l).toBe(latest);
++    expect(comparison(l, p)).toEqual({ periodStart: "2026-10-20", adjacent: true });
++    const rows = metricRows(latest, prev);
++    expect(row(rows, "engagement")).toMatchObject({ value: 7, delta: 2, meter: 100 });
++    expect(row(rows, "agency")).toMatchObject({ value: 7, delta: 3 });
++    expect(row(rows, "mood").delta).toBe(12);
++    expect(row(rows, "outlook").delta).toBeNull();
++    expect(sparseWeek(latest)).toBe(false);
++    expect(es.account.progress.weekBasis(7, 6, false)).toBe("7 días activos · 6 registros");
++    expect(es.account.progress.deltaDays(2)).toBe("+2 días");
++    expect(es.account.progress.comparedTo("20 oct")).toBe("Los cambios se comparan con la semana del 20 oct.");
++  });
++
++  it("says so when the comparison week is not the calendar week before", () => {
++    const weeks = [
++      week("2026-10-06", { confidence: 0.6, daysActive: 5, sessionsCompleted: 3 }),
++      week("2026-10-13"),
++      week("2026-10-20"),
++      week("2026-10-27", { confidence: 0.24, daysActive: 2, sessionsCompleted: 1 }),
++    ];
++    const { latest, previous } = pickWeeks(weeks);
++    expect(comparison(latest, previous)).toEqual({ periodStart: "2026-10-06", adjacent: false });
++    expect(es.account.progress.comparedToEarlier("6 oct")).toContain("no la semana inmediatamente anterior");
++  });
++});
+diff --git a/apps/mobile/src/lib/weekMetrics.ts b/apps/mobile/src/lib/weekMetrics.ts
+new file mode 100644
+index 0000000..fdd7b8c
+--- /dev/null
++++ b/apps/mobile/src/lib/weekMetrics.ts
+@@ -0,0 +1,88 @@
++import type { WellbeingDimension, WellbeingSnapshotDTO } from "@elara/shared";
++import { WELLBEING_DIMENSIONS } from "@elara/shared";
++
++/**
++ * The weekly metrics on «Cómo has estado», as rows the screen draws (issue 04,
++ * 3 Nov 2026). Pure, so the rules are tested without a screen:
++ *
++ * - Presencia is a count of days («2 de 7 días»), not a percentage.
++ * - The `agency` row is «Sesiones completadas»: daily sessions finished that
++ *   week (`sessionsCompleted`), not answered questions. The stored `agency`
++ *   score is left in the snapshot and no longer shown.
++ * - Missing is not zero: `value: null` means no data («—», «Sin datos»), a
++ *   real 0 stays 0.
++ * - A change is only shown with the week it is compared with, and whether that
++ *   week is the calendar week just before.
++ */
++export type MetricUnit = "score" | "days" | "count";
++
++export interface MetricRow {
++  dimension: WellbeingDimension;
++  unit: MetricUnit;
++  /** Null: nothing measured that week. 0: measured, and zero. */
++  value: number | null;
++  /** 0-100 for the meter, null for no bar. */
++  meter: number | null;
++  /** Change against the comparison week, or null when either side is missing. */
++  delta: number | null;
++}
++
++/** A week counts as read when it has a stored snapshot behind it. */
++export const hasData = (w: WellbeingSnapshotDTO) => w.confidence > 0;
++
++/** The last week with data, and the one with data before it (not necessarily adjacent). */
++export function pickWeeks(weeks: readonly WellbeingSnapshotDTO[]): {
++  latest: WellbeingSnapshotDTO | undefined;
++  previous: WellbeingSnapshotDTO | undefined;
++} {
++  const latest = [...weeks].reverse().find(hasData);
++  if (!latest) return { latest: undefined, previous: undefined };
++  const i = weeks.findIndex((w) => w.periodStart === latest.periodStart);
++  const previous = [...weeks.slice(0, i)].reverse().find(hasData);
++  return { latest, previous };
++}
++
++function daysBetween(a: string, b: string): number {
++  return Math.round((Date.parse(`${b}T00:00:00Z`) - Date.parse(`${a}T00:00:00Z`)) / 86_400_000);
++}
++
++/** The comparison week, and whether it is the calendar week just before `latest`. */
++export function comparison(
++  latest: WellbeingSnapshotDTO | undefined,
++  previous: WellbeingSnapshotDTO | undefined,
++): { periodStart: string; adjacent: boolean } | null {
++  if (!latest || !previous) return null;
++  return { periodStart: previous.periodStart, adjacent: daysBetween(previous.periodStart, latest.periodStart) === 7 };
++}
++
++function valueOf(w: WellbeingSnapshotDTO | undefined, d: WellbeingDimension): { unit: MetricUnit; value: number | null } {
++  if (!w) return { unit: d === "engagement" ? "days" : d === "agency" ? "count" : "score", value: null };
++  if (d === "engagement") return { unit: "days", value: hasData(w) ? w.daysActive : null };
++  if (d === "agency") return { unit: "count", value: w.sessionsCompleted ?? null };
++  return { unit: "score", value: w.scores[d] ?? null };
++}
++
++export function metricRows(latest: WellbeingSnapshotDTO, previous?: WellbeingSnapshotDTO): MetricRow[] {
++  return WELLBEING_DIMENSIONS.map((dimension) => {
++    const now = valueOf(latest, dimension);
++    const before = previous ? valueOf(previous, dimension).value : null;
++    const meter =
++      now.value == null
++        ? null
++        : now.unit === "score"
++          ? now.value
++          : Math.round((Math.min(now.value, 7) / 7) * 100);
++    return {
++      dimension,
++      unit: now.unit,
++      value: now.value,
++      meter,
++      delta: now.value != null && before != null ? now.value - before : null,
++    };
++  });
++}
++
++/** A week read from little data: fewer than five days or check-ins behind it (the old 24% line, in words). */
++export function sparseWeek(w: WellbeingSnapshotDTO): boolean {
++  return w.confidence < 0.5;
++}
+diff --git a/apps/mobile/src/store/stepAnswer.ts b/apps/mobile/src/store/stepAnswer.ts
+index 14422ea..b70ebc9 100644
+--- a/apps/mobile/src/store/stepAnswer.ts
++++ b/apps/mobile/src/store/stepAnswer.ts
+@@ -2,6 +2,7 @@ import {
+   allStepsAnswered,
+   answerRecord,
+   headlineValue,
++  savedAfterEdit,
+   type AnswerState,
+   type DayStep,
+   type DayStepAnswers,
+@@ -45,7 +46,14 @@ export function progressAfterAnswer<P extends AnswerProgress>(
+   const forDay: DayStepAnswers = {
+     ...(p.stepAnswers[a.day] ?? {}),
+     // The previous reply is dropped with the answer it belonged to.
+-    [a.stepId]: { ...answerRecord(a.state ?? "answered", a.value), answeredAt: a.now },
++    [a.stepId]: {
++      ...answerRecord(a.state ?? "answered", a.value),
++      answeredAt: a.now,
++      // Issue 05: a phrase is saved only when she saves it; an edit of words she saved stays saved.
++      ...(keeps(a.steps, a.stepId)
++        ? { saved: (a.state ?? "answered") !== "answered" ? false : savedAfterEdit(p.stepAnswers[a.day]?.[a.stepId], a.now) }
++        : {}),
++    },
+   };
+   const done = allStepsAnswered(a.steps, forDay);
+   const completedDays =
+@@ -62,3 +70,19 @@ export function progressAfterAnswer<P extends AnswerProgress>(
+     currentDay: Math.min(maxCompleted + 1, a.totalDays + 1),
+   };
+ }
++
++const keeps = (steps: readonly DayStep[], id: string) => !!steps.find((s) => s.id === id)?.config?.keep;
++
++/** Her saved-phrase choice on one answer, locally (`setPhraseSaved` sends it). */
++export function progressWithSaved<P extends AnswerProgress>(
++  p: P,
++  day: number,
++  stepId: string,
++  saved: number | false | undefined,
++): P {
++  const answer = p.stepAnswers[day]?.[stepId];
++  if (!answer) return p;
++  const { saved: _was, ...rest } = answer;
++  const next = saved === undefined ? rest : { ...rest, saved };
++  return { ...p, stepAnswers: { ...p.stepAnswers, [day]: { ...p.stepAnswers[day], [stepId]: next } } };
++}
+diff --git a/apps/mobile/src/store/useAppStore.ts b/apps/mobile/src/store/useAppStore.ts
+index 33b2c61..9ab2fc8 100644
+--- a/apps/mobile/src/store/useAppStore.ts
++++ b/apps/mobile/src/store/useAppStore.ts
+@@ -51,7 +51,7 @@ import {
+ } from "./safetyAck";
+ import { flushCheckInQueue, moodFor, sameCheckIn, type CheckInEntry } from "./checkIns";
+ import { createLocaleSync, refreshForLanguage } from "@/lib/languageSwitch";
+-import { progressAfterAnswer } from "./stepAnswer";
++import { progressAfterAnswer, progressWithSaved } from "./stepAnswer";
+ import { holdsWords, keptAnswer, stepDraftKey } from "@/components/practice/draft";
+ import {
+   belongsTo,
+@@ -400,6 +400,12 @@ export interface AppState {
+    * day complete, locally at once, and queued for the server like a step.
+    */
+   declineDay: (area: AreaKey, day: number, steps: DayStep[]) => ReturnType<typeof api.declineDay>;
++  /**
++   * «Guardar esta frase» (issue 05): her choice, at once on this phone, then
++   * on the server. Undone here if the server refuses or cannot be reached;
++   * resolves to whether it stuck.
++   */
++  setPhraseSaved: (area: AreaKey, day: number, stepId: string, saved: boolean) => Promise<boolean>;
+   saveStepReply: (
+     area: AreaKey,
+     day: number,
+@@ -1062,6 +1068,28 @@ export const useAppStore = create<AppState>()(
+         return request;
+       },
+ 
++      setPhraseSaved: async (area, day, stepId, saved) => {
++        const before = get().progress[area]?.stepAnswers[day]?.[stepId];
++        if (!before) return false;
++        // `undefined` puts back exactly what was there (an absent flag included).
++        const apply = (value: number | false | undefined) =>
++          set((s) => {
++            const p = s.progress[area];
++            if (!p) return {};
++            return { progress: { ...s.progress, [area]: progressWithSaved(p, day, stepId, value) } };
++          });
++        apply(saved ? Date.now() : false);
++        try {
++          const res = await api.setPhraseSaved(area, day, stepId, saved);
++          apply(res.saved);
++          queryClient.invalidateQueries({ queryKey: qk.myPaths });
++          return true;
++        } catch {
++          apply(before.saved);
++          return false;
++        }
++      },
++
+       /** Attach Elara's reply to a step already answered. */
+       saveStepReply: (area, day, stepId, reply, generated, retry) =>
+         set((s) => {
+diff --git a/packages/shared/src/steps.ts b/packages/shared/src/steps.ts
+index 88df2aa..abab77c 100644
+--- a/packages/shared/src/steps.ts
++++ b/packages/shared/src/steps.ts
+@@ -162,6 +162,35 @@ export interface StepAnswer {
+    * (spec §2). Written by the server when the check is answered.
+    */
+   resonance?: ReplyResonance;
++  /**
++   * Her choice to keep these words in «Frases que guardaste» (issue 05, 3 Nov
++   * 2026): when she saved it (epoch ms), or `false` when the answer was written
++   * under explicit saving and she has not saved it. Absent on answers written
++   * before that: every `keep` answer was shelved automatically then, so an
++   * absent flag reads as saved (`isSavedPhrase`), and she can remove it.
++   */
++  saved?: number | false;
++}
++
++/**
++ * Whether an answer is in her saved phrases. `saved` absent: written before
++ * saving became her choice, when it was shelved automatically; it stays
++ * saved, deliberately, so nothing she already had disappears.
++ */
++export function isSavedPhrase(answer: Pick<StepAnswer, "saved"> | undefined): boolean {
++  if (!answer) return false;
++  if (answer.saved === undefined) return true;
++  return answer.saved !== false && answer.saved > 0;
++}
++
++/**
++ * The `saved` flag a new answer to a `keep` step carries: an edit of words
++ * she saved stays saved (the phrase is the step's answer, now reworded); a
++ * first answer, or one replacing a state, is not saved until she says so.
++ */
++export function savedAfterEdit(prior: StepAnswer | undefined, now: number): number | false {
++  if (!prior || prior.value == null || prior.saved === false) return false;
++  return typeof prior.saved === "number" ? prior.saved : now;
+ }
+ 
+ 
+diff --git a/packages/shared/src/types.ts b/packages/shared/src/types.ts
+index ccb3c9e..f3aa1b6 100644
+--- a/packages/shared/src/types.ts
++++ b/packages/shared/src/types.ts
+@@ -1712,6 +1712,15 @@ export interface WellbeingSnapshotDTO {
+   topThemes: string[];
+   checkIns: number;
+   daysActive: number;
++  /**
++   * Daily sessions she completed that week: path days whose completion date
++   * (`day_response.completed_on`) falls in it. A plain count, read live from
++   * the day rows rather than frozen in the snapshot, so it is available for
++   * past weeks too and never changes the stored scores. Null when the week has
++   * no snapshot and nothing completed (no data, not a zero). Optional: older
++   * API builds do not send it.
++   */
++  sessionsCompleted?: number | null;
+ }
+ 
+ /**

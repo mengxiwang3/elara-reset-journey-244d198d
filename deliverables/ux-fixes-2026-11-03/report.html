@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Elara UI/UX fixes 01-08</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">body{font:10pt/1.45 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#1a1615;margin:0}
+h1{font:600 20pt Georgia,serif;color:#16382a;margin:0 0 6px}h2{font:600 13.5pt Georgia,serif;color:#16382a;margin:18px 0 6px;break-after:avoid;border-top:1px solid #d9d2c7;padding-top:8px}h3{font-size:11pt;margin:10px 0 4px;break-after:avoid}
+table{border-collapse:collapse;width:100%;margin:6px 0 10px;font-size:8.6pt}th,td{border:1px solid #d9d2c7;padding:4px 5px;text-align:left;vertical-align:top}th{background:#f2ede4}tr{break-inside:avoid}
+code{font:8.3pt Menlo,Consolas,monospace;background:#f2ede4;padding:0 2px;border-radius:3px;word-break:break-word}pre{background:#f2ede4;padding:6px;font-size:8pt;white-space:pre-wrap;break-inside:avoid}
+ul,ol{padding-left:20px}li{margin:2px 0}blockquote{border-left:3px solid #b5461b;margin:6px 0;padding:2px 10px;color:#3d3631}
+</style>
+</head>
+<body>
+<p style="font-size:8.5pt;letter-spacing:.08em;text-transform:uppercase;color:#5a514b">Elara · 3 Nov 2026 · for the developers</p><h1 id="uiux-handoff-fixes-0108-3-nov-2026">UI/UX handoff fixes 01–08 (3
+Nov 2026)</h1>
+<ul>
+<li><strong>Branch:</strong> <code>ux-fixes-2026-11-03</code>, cut from
+<code>daily-session</code> 5387605, which is origin/main + UI polish +
+beta fixes + the session redesign. Local commits only.</li>
+<li><strong>Not done:</strong> nothing was pushed, deployed or sent to a
+remote database, and no real AI was called.</li>
+<li><strong>No new app build was made.</strong> For developers:
+<ul>
+<li><code>combined.mbox</code> holds 27 patches (the 20 from
+<code>daily-session</code>, then these 7); apply it with
+<code>git am</code> on main.</li>
+<li><code>ux-fixes.patch</code> holds only this work: 60 files,
++1500/−160.</li>
+</ul></li>
+<li><strong>Screenshots:</strong> <code>before/</code> (38, at 5387605)
+and <code>after/</code> (40, at HEAD), at 393×852 and 360×780.</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Commit</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01</td>
+<td><code>2492aed</code></td>
+<td>One rule maps a day to its stop; every surface names the day by
+where she stands</td>
+</tr>
+<tr class="even">
+<td>02</td>
+<td><code>1b5f270</code></td>
+<td>A short last answer is accepted and the day closes; quotes are
+stripped only as a wrapping pair</td>
+</tr>
+<tr class="odd">
+<td>03</td>
+<td>—</td>
+<td>Traced and documented; no defect shown, no change</td>
+</tr>
+<tr class="even">
+<td>04</td>
+<td><code>2c7b571</code></td>
+<td>Weekly metrics as counts, with the comparison week named and missing
+data shown apart from zero</td>
+</tr>
+<tr class="odd">
+<td>05</td>
+<td><code>13dcab4</code></td>
+<td>Saving a phrase is her explicit choice; Hoy shows her words with
+their question</td>
+</tr>
+<tr class="even">
+<td>06</td>
+<td><code>5ab3e66</code></td>
+<td>Hoy says the day once; there is no Atlas banner in this code</td>
+</tr>
+<tr class="odd">
+<td>07</td>
+<td><code>e85513a</code></td>
+<td>The circle and how she appears stay beside «Publicar»</td>
+</tr>
+<tr class="even">
+<td>08</td>
+<td><code>7f9a913</code></td>
+<td>Loading buttons keep their words; an empty Explore tab is hidden
+only after a successful load</td>
+</tr>
+</tbody>
+</table>
+<h2 id="step-0-build-reconciliation">Step 0: build reconciliation</h2>
+<h3 id="the-three-recorded-strings-not-found-in-inspected-refs">The
+three recorded strings: not found in inspected refs</h3>
+<p><strong>Search:</strong> <code>git grep -F</code> over all 47 refs,
+then <code>git log --all -S</code> and <code>-i -G</code> over all 426
+commits (which covers deleted files), plus the three dangling commits.
+The observations from the recording are kept exactly as recorded.</p>
+<ul>
+<li><strong>«Tu camino por Asia»:</strong> no hit. The nearest strings
+are «El camino de {continent}: …» in the Atlas globe sheet and «El
+camino por delante».</li>
+<li><strong>«Empleos»:</strong> no hit in any case. The nearest are the
+circle «Primer empleo» and some recommendation keywords.</li>
+<li><strong>«Te llevas»:</strong> no hit as a standalone string.
+Lowercase «te llevas» appears only inside longer strings: «Hoy te llevas
+· Día N» (Hoy label, <code>daily-session</code>), «Hoy te llevas»
+(session close), and «Lo que te llevas» (workshop agendas in
+<code>seed-explore.sql</code>). This is not treated as a paraphrase of
+any of them.</li>
+</ul>
+<h3 id="could-they-come-from-server-content">Could they come from server
+content?</h3>
+<ul>
+<li><strong>Explore tabs:</strong> no. They are a fixed client list:
+all, workshop, listen, watch, guide.</li>
+<li><strong>Hoy:</strong> no server-driven banner exists.
+<code>/api/app-config</code> carries only feature switches and safety
+strings.</li>
+<li><strong>Day and step copy:</strong> comes from D1
+(<code>path_content</code> / <code>path_day</code>, versioned in
+<code>content_version</code>, migration 0066). The repo seeds contain
+none of the three strings, and production or beta D1 could not be
+inspected.</li>
+</ul>
+<h3 id="ota-and-build-number-configuration">OTA and build-number
+configuration</h3>
+<ul>
+<li><strong>Self-hosted updates:</strong> served by the
+<code>apps/updates</code> Worker from
+<code>https://elara-updates.vasantakmr6.workers.dev/api/manifest</code>
+(<code>app.config.ts</code>).</li>
+<li><strong>Channel:</strong> taken from
+<code>EXPO_UPDATE_CHANNEL</code>. The beta and preview profiles use
+<code>beta</code>; production and apk use <code>production</code>.</li>
+<li><strong>Runtime version:</strong> policy <code>appVersion</code>,
+which is 0.1.0.</li>
+<li><strong>Update records don’t name a commit:</strong>
+<code>publish.mjs</code> stores <code>metadata: {}</code>.</li>
+<li><strong>Build numbers live in EAS:</strong>
+<code>appVersionSource: remote</code>, with
+<code>autoIncrement</code>.</li>
+</ul>
+<h3 id="what-someone-with-access-must-read">What someone with access
+must read</h3>
+<ol type="1">
+<li><strong>The EAS build page for the TestFlight build:</strong>
+<ul>
+<li>its Git commit and profile;</li>
+<li>the <code>EXPO_UPDATE_CHANNEL</code> and
+<code>EXPO_PUBLIC_API_URL</code> it was built with;</li>
+<li>its runtime version, 0.1.0.</li>
+</ul></li>
+<li><strong>The OTA update the device is running:</strong>
+<ul>
+<li><code>pnpm --filter @elara/updates publish:ota --channel beta --list</code>
+(needs <code>ELARA_PUBLISH_TOKEN</code>) lists releases, upload times
+and which one is live.</li>
+<li><code>Updates.updateId</code> on the device names the running
+update.</li>
+<li>Because no commit is recorded, match it by publish time, or by
+comparing launch-asset hashes against <code>expo export</code> builds of
+candidate commits.</li>
+</ul></li>
+<li><strong>The backend the build used:</strong> its
+<code>content_version</code>, the <code>path_day</code> rows for Money
+day 25, the kinds returned by <code>/api/explore/all</code>, and its
+<code>/api/app-config</code>.</li>
+</ol>
+<h3 id="could-the-recorded-build-differ-per-issue">Could the recorded
+build differ, per issue?</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Issue</th>
+<th>Could the recording differ from this code?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01</td>
+<td>Yes</td>
+<td>Its Atlas labels follow a different naming rule</td>
+</tr>
+<tr class="even">
+<td>02</td>
+<td>Possibly</td>
+<td>Only in the model’s wording</td>
+</tr>
+<tr class="odd">
+<td>03</td>
+<td>Unknown</td>
+<td>No device capture</td>
+</tr>
+<tr class="even">
+<td>04</td>
+<td>No</td>
+<td>Same code</td>
+</tr>
+<tr class="odd">
+<td>05</td>
+<td>Yes</td>
+<td>«Te llevas» not found</td>
+</tr>
+<tr class="even">
+<td>06</td>
+<td>Yes</td>
+<td>«Tu camino por Asia» not found</td>
+</tr>
+<tr class="odd">
+<td>07</td>
+<td>No</td>
+<td>Same code</td>
+</tr>
+<tr class="even">
+<td>08a</td>
+<td>No</td>
+<td>Same code</td>
+</tr>
+<tr class="odd">
+<td>08b</td>
+<td>Yes</td>
+<td>«Empleos» not found</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-day-is-named-by-where-she-stands">01 · The day is named by
+where she stands</h2>
+<p><strong>Change</strong> - <code>placeDay.ts</code> now has one rule:
+<code>dayStopIndex(day) = day − 1</code>, plus <code>dayStopName</code>.
+The duplicate rules <code>stopIndexFor</code> and
+<code>hereIndexFor</code> are removed. - <code>stopLandmarks</code>
+builds two names: - <code>at</code> («En …»), the day’s identity, from
+that one rule; - <code>toward</code> («Hacia …»), now only transition
+copy. It names the next day’s stop; on day 7, its own.</p>
+<p><strong>Surfaces that now read <code>at</code></strong> - the session
+pill and opening title; - the «Mañana, …» line, the arrival announcement
+and the return line; - Hoy’s day title; - the Atlas
+<code>WorldCard</code> and the record strip; - <code>path/[area]</code>,
+<code>TodayPreview</code> and <code>PathPreview</code>; - the world-art
+accessibility labels and <code>WorldScene</code>.</p>
+<p>The photo line uses <code>dayStopName</code>.</p>
+<p><strong>Arashiyama (Money week 4):</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Pill and Atlas</th>
+<th>Tomorrow line</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>La primera vista</td>
+<td>Mañana, en el camino adelante.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>El camino adelante</td>
+<td>Mañana, en la vuelta.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>La vuelta</td>
+<td>Mañana, en el lugar de descanso.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>El lugar de descanso</td>
+<td>Mañana, en la subida.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>La subida</td>
+<td>Mañana, en el mirador.</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>El mirador</td>
+<td>Mañana, en el horizonte.</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>El horizonte</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Lan Hạ Bay follows the same rule; its days 6 and 7 are no longer both
+«En el horizonte».</p>
+<p><strong>Files:</strong> <code>placeDay.ts</code> (+test),
+<code>useWorldDay.ts</code>, <code>day.tsx</code>,
+<code>(tabs)/index.tsx</code>, <code>path/[area].tsx</code>,
+<code>atlas/world/[worldId].tsx</code>, <code>WorldCard</code>,
+<code>TodayPreview</code>, <code>PathPreview</code>,
+<code>WorldArt</code>, <code>WorldScene</code>,
+<code>world/copy.ts</code>, <code>world25d/copy.ts</code> (+test),
+<code>engine.test.ts</code>.</p>
+<p><strong>Tests</strong> (<code>placeDay.test.ts</code> replaces the
+test that pinned <code>at == toward</code>): - there is one rule; -
+<code>at ≠ toward</code> on days 1–6; -
+<code>toward(N) == at(N+1)</code>; - Arashiyama days 1–7 across the
+Atlas, the pill, the photo line and «Mañana»; - Lan Hạ Bay.</p>
+<p><strong>Screenshots:</strong> <code>01-session-pill-q1</code>,
+<code>01-atlas-week</code> and <code>05-done-screen</code>. - Pill:
+«Hacia la subida» → «En el lugar de descanso». - Tomorrow line: «Mañana,
+hacia el mirador.» → «Mañana, en la subida.» - Atlas day 4: «En la
+subida» → «En el lugar de descanso».</p>
+<h2 id="short-answers-and-the-closing-reply">02 · Short answers and the
+closing reply</h2>
+<p><strong>Prompt (<code>stepReply.ts</code>):</strong> a new
+<code>readingRule(position, total)</code> is used by both prompt paths,
+the old one (days without a purpose, e.g. W4D4) and V2. - <strong>Every
+step:</strong> a short answer is a real answer (e.g. “todo bien”);
+acknowledge it plainly. - <strong>Mid-day:</strong> a retry may be
+invited only for off-topic answers, greetings, tests, or words that
+don’t answer the question. - <strong>Last step:</strong> acknowledge in
+one sentence without interpreting, close, never ask for another answer
+or invite a retry, and don’t ask a question. This removes the old
+contradiction. V2’s “narrow it” becomes “take it as it is”. - Nothing
+was added to <code>NON_ANSWER_PHRASES</code>, and nothing is rejected
+for being short.</p>
+<p><strong>Quotes:</strong> <code>sanitize</code> →
+<code>unwrapQuotes</code>. Quotes are stripped only when a matching pair
+(“…”, “…”, «…», ‘…’, ‘…’) wraps the whole reply and no other quote mark
+is inside it.</p>
+<p><strong>Tests (API):</strong> - Prompt assertions for both paths:
+last step, mid-day, and a one-step day. - Through the real route, «Todo
+bien» on the last step of both day types reaches the model with
+<code>retry</code> falsy. - <code>sanitize</code>: embedded quotes are
+kept; balanced outer «», “” and “” are stripped; unquoted text and a
+single unmatched quote are left as they are.</p>
+<p><strong>Not visible in screenshots:</strong> the local API has no
+model, so the authored line shows.</p>
+<h2 id="pregunta-keyboard-traced-no-change">03 · Pregunta keyboard:
+traced, no change</h2>
+<p><strong>Path traced</strong> - <code>app/(tabs)/ask.tsx</code>
+renders <code>ScreenShell</code>, then the shared
+<code>KeyboardAvoider</code> (not the <code>toScreenBottom</code>
+variant). - <code>KeyboardAvoider</code> passes
+<code>measureInWindow</code> as the <code>keyboardVerticalOffset</code>
+to React Native’s <code>KeyboardAvoidingView</code> (padding). -
+<code>KeyboardAvoidingView</code> (RN 0.86) listens to
+<code>keyboardWillShow</code> on iOS and <code>keyboardDidShow</code> on
+Android, and animates the padding with <code>LayoutAnimation</code>. -
+<code>useKeyboard()</code> changes the composer’s bottom inset in a
+separate render. - 50 ms after the keyboard opens,
+<code>scrollToEnd</code> runs (<code>ask.tsx:178–184</code>). - BandDay
+and the step screen’s two-pass reveal are not on this path.</p>
+<p><strong>Hypothesis:</strong> - iOS: the composer rises with the
+keyboard, while the last bubble returns only with the delayed
+<code>scrollToEnd</code>. - Android: everything waits for
+<code>keyboardDidShow</code>, so the composer is briefly covered, then
+jumps.</p>
+<p>No defect was shown without a device; the shared components are
+untouched.</p>
+<p><strong>Device retest (a small iPhone and one Android phone)</strong>
+1. Use a long conversation and record at 60 fps. 2. Tap the composer,
+then step through the frames: is the composer or the last bubble
+covered, and for how long? 3. Repeat with QuickType on and off, and with
+dictation. 4. Type multiple lines, up to the 120 pt limit. 5. Repeat at
+the largest Dynamic Type size. 6. Check the VoiceOver order: field,
+send, mic. 7. Send a message with the keyboard open.</p>
+<p>If only the bubble lags, move <code>scrollToEnd</code> to
+<code>keyboardDidShow</code>.</p>
+<h2 id="weekly-metrics-cómo-has-estado">04 · Weekly metrics («Cómo has
+estado»)</h2>
+<p><strong>Historical snapshots</strong> (documented before any change):
+- <strong>Stored:</strong> one frozen row per member per week in
+<code>wellbeing_snapshot</code> (<code>memory.ts:175</code>). -
+<strong>Written:</strong> by the weekly cron (<code>rollup.ts</code>),
+only for the last complete week, as an idempotent upsert. Older weeks
+are never recomputed. - <strong>Read:</strong>
+<code>listSnapshots</code> returns 12 weeks, with gaps filled as
+confidence 0. - <strong>This change rewrites nothing:</strong> -
+<code>score()</code>, the rollup and stored rows are unchanged. -
+Presencia uses the stored active-day count. -
+<code>sessionsCompleted</code> is computed on read
+(<code>sessionsByWeek</code>) from
+<code>day_response.completed_on</code>, falling back to
+<code>completed_at</code> in her time zone for rows written before 0054.
+Past weeks get it with no rewrite and no migration.</p>
+<p><strong>Screen</strong> (<code>progress.tsx</code>, through
+<code>lib/weekMetrics.ts</code>): - <strong>Presencia:</strong> «2 de 7
+días», with a change shown in days. - <strong>«Acción»</strong> →
+<strong>«Sesiones completadas»</strong>: completed daily sessions. -
+<strong>Footer:</strong> the confidence percentage is removed. It now
+reads «2 días activos · 0 registros · lectura con pocos datos»; «pocos
+datos» shows when confidence is below 0.5. - <strong>Comparison
+week:</strong> any change shown names its week, «Los cambios se comparan
+con la semana del {semana}.». When that isn’t the calendar week before,
+it adds «…la última con datos antes de esta (no la semana inmediatamente
+anterior)». - <strong>Missing data:</strong> shows «—» (VoiceOver «Sin
+datos»). A measured 0 stays 0. An older API without the new field shows
+«—».</p>
+<p><strong>Files:</strong> <code>wellbeing.ts</code>,
+<code>shared/types.ts</code>, <code>progress.tsx</code>,
+<code>lib/weekMetrics.ts</code>, es/en <code>account.ts</code>.</p>
+<p><strong>Tests:</strong> - <code>weekMetrics.test.ts</code>: zero
+data; a sparse week with the recording’s numbers; zero vs missing; a
+complete week; a non-adjacent comparison. - API
+<code>wellbeing-sessions.test.ts</code>.</p>
+<p><strong>Screenshots</strong> (fictional snapshots),
+<code>04-progress</code>: - «29 −42» → «2 de 7 días −3 días». - «Acción
+80» → «Sesiones completadas 2 −3». - «…basado en el 24%» → «…lectura con
+pocos datos», plus the comparison-week line.</p>
+<h2 id="saving-phrases">05 · Saving phrases</h2>
+<p>Answers are still saved in the day’s history automatically. What
+changed is how a phrase gets into «Frases que guardaste».</p>
+<p><strong>Change</strong> - <strong>Flag:</strong>
+<code>saved?: number | false</code> on the answer record, with
+<code>isSavedPhrase</code> and <code>savedAfterEdit</code>. The server
+(<code>saveStep</code>) and the phone (<code>progressAfterAnswer</code>)
+record <code>saved: false</code> on every new keep answer, which stops
+the automatic promotion. Editing saved words keeps them saved. -
+<strong>Endpoint:</strong>
+<code>PUT /api/me/paths/:area/days/:day/steps/:stepId/saved</code> sets
+only that flag (<code>json_set</code>). It returns 400 for a step that
+keeps nothing and 404 when there is no answer. - <strong>Phone:</strong>
+<code>setPhraseSaved</code> updates at once, rolls back if the server
+fails, then refreshes. - <strong>Completion screen</strong> (also on a
+reopened day): - her phrase verbatim, with its question or task; - one
+control, «Guardar esta frase» ↔︎ «Guardada en tus frases» (tap again to
+remove); - repeat taps are ignored; - a failure line if saving fails; -
+hidden while Elara’s reply is pending. - <strong>Shelf:</strong>
+<code>collection.ts</code> shows only saved phrases. -
+<strong>Hoy:</strong> <code>TakeawayRow</code> puts the question or task
+above her verbatim words. Nothing is filtered by length, so «Todo bien»
+shows with its question.</p>
+<p><strong>Existing users:</strong> phrases promoted automatically
+before this change stay saved, because an absent flag reads as saved.
+There is no migration, and she can remove any of them with the same
+control. This is reversible later with a one-off migration.</p>
+<p><strong>Files:</strong> <code>shared/steps.ts</code>,
+<code>api/services/progress.ts</code>, <code>api/routes/me.ts</code>,
+<code>mobile/lib/api.ts</code>, <code>store/stepAnswer.ts</code>,
+<code>store/useAppStore.ts</code>, <code>practice/collection.ts</code>,
+<code>BandDay.tsx</code>, <code>WorldDay.tsx</code>,
+<code>path/day.tsx</code>, <code>lib/phrase.ts</code>,
+<code>hoy/HoyRows.tsx</code>, <code>(tabs)/index.tsx</code>, es/en
+<code>practice.ts</code>.</p>
+<p><strong>Tests:</strong> <code>lib/phrase.test.ts</code>,
+<code>collection.test.ts</code>, and API tests for the flag, save, edit,
+unsave, 400 and 404.</p>
+<p><strong>Screenshots:</strong> <code>05-done-screen</code>,
+<code>05-done-saved</code>, <code>05-shelf</code>,
+<code>06-hoy-day-done</code>.</p>
+<h2 id="hoy">06 · Hoy</h2>
+<ul>
+<li><strong>No Atlas banner:</strong> «Tu camino por Asia», or any
+equivalent, isn’t in this code, so nothing changed there.</li>
+<li><strong>Kept:</strong> today’s card and the weekly tracker.</li>
+<li><strong>Repetition removed:</strong>
+<ul>
+<li>When the day is done, the place line drops «· Día N»
+(<code>placeLineDone</code>).</li>
+<li>«Tu semana en …» drops its «N de 7». The discs show it, and each
+keeps its VoiceOver label.</li>
+</ul></li>
+<li><strong>Files:</strong> <code>(tabs)/index.tsx</code>, es/en
+<code>home.ts</code>.</li>
+<li><strong>Screenshots:</strong> <code>06-hoy-day-done</code>,
+<code>06-hoy-week-tracker</code>, <code>06-hoy-before-day</code>.</li>
+</ul>
+<h2 id="posting-identity-in-the-composer">07 · Posting identity in the
+composer</h2>
+<ul>
+<li><code>CompartirSheet</code>’s pinned footer shows «Primer empleo ·
+Anónima» (or her name, or «Sin círculo elegido · …») with «Cambiar»,
+just above «Publicar».</li>
+<li><strong>Cambiar</strong> switches between her name and «Anónima»;
+its VoiceOver hint is «Publicar como …».</li>
+<li>The body keeps the full choice. The anonymous flag sent is
+unchanged.</li>
+<li><strong>Test:</strong> <code>identityLine.test.ts</code>.</li>
+<li><strong>Screenshots:</strong> <code>07-composer-open-kbheight</code>
+and <code>07-composer-typing</code>, at the height left above a
+keyboard. On web the field doesn’t grow, so the “before” shot
+understates the problem.</li>
+</ul>
+<h2 id="loading-labels-and-empty-explore-tabs">08 · Loading labels and
+empty Explore tabs</h2>
+<p><strong>08a: loading labels</strong> - <code>PrimaryPill</code>, the
+<code>Button.tsx</code> variants and Explore’s
+<code>PrimaryButton</code> show a small spinner next to words. - The
+words come from <code>loadingLabel</code>, defaulting to the button’s
+label; VoiceOver reads the same words. - Duplicate taps stay blocked. -
+Call sites use existing strings: «Uniéndote…», «Publicando…» (twice) and
+«Guardando…» (twice).</p>
+<p><strong>08b: empty Explore tabs</strong> -
+<code>visibleCategories</code> hides a tab only when its read succeeded
+with zero items. - While loading or after a failed read, every tab
+stays. «Todo» always stays. - If the selected tab disappears, the screen
+falls back to «Todo». - <code>hasAny(&#39;workshop&#39;)</code> now counts
+<code>upcoming</code>.</p>
+<p><strong>Tests:</strong> the Explore catalogue tests, and
+<code>loadingLabel.test.ts</code>, a source-level check.</p>
+<p><strong>Screenshots:</strong> <code>08-publish-loading</code>,
+<code>08-explore-empty-watch</code>,
+<code>08-explore-all-failed</code>.</p>
+<h2 id="checks-head-vs-5387605-same-commands-clean-worktrees">Checks:
+HEAD vs 5387605 (same commands, clean worktrees)</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Check</th>
+<th>5387605</th>
+<th>HEAD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mobile typecheck</td>
+<td>pass</td>
+<td>pass</td>
+</tr>
+<tr class="even">
+<td>Mobile tests</td>
+<td>1385 / 126 files, all pass</td>
+<td><strong>1412 / 130 files, all pass</strong></td>
+</tr>
+<tr class="odd">
+<td>Mobile lint</td>
+<td>12 errors, 377 warnings</td>
+<td>the same 12 pre-existing Atlas errors, 376 warnings</td>
+</tr>
+<tr class="even">
+<td>API typecheck</td>
+<td>pass</td>
+<td>pass</td>
+</tr>
+<tr class="odd">
+<td>API tests</td>
+<td>1396 / 113, all pass</td>
+<td><strong>1410 / 114, all pass</strong></td>
+</tr>
+<tr class="even">
+<td>Shared typecheck, admin typecheck</td>
+<td>pass</td>
+<td>pass</td>
+</tr>
+<tr class="odd">
+<td>Content parity</td>
+<td>78 problems</td>
+<td>78, identical (the seed vs bundled-copy drift that predates this
+work)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-the-screenshots-were-made">How the screenshots were
+made</h2>
+<ul>
+<li><strong>Builds:</strong> web exports of each tree against its own
+local <code>wrangler dev</code> and local D1 (repo migrations and
+seeds).</li>
+<li><strong>Account:</strong> one fictional account, «Lucía»
+(qa24@example.com), with Money days 1–24 answered through the API and a
+local premium row.</li>
+<li><strong>Fictional harness data:</strong> weekly snapshots and
+back-dated completions for 04; flags removed on days 1–20 to stand in
+for older answers in 05.</li>
+<li><strong>Flow:</strong> day 25 (W4D4) walked from Hoy with «Aún no»,
+then «Todo bien».</li>
+<li><strong>No mocked replies.</strong> The local API has no model, so
+the authored line shows.</li>
+<li><strong>Harness-only shims, not in any commit:</strong>
+react-native-web, react-dom 19.2.3, CanvasKit, an asset shim and
+<code>.dev.vars</code>.</li>
+<li><strong>Caveats:</strong>
+<ul>
+<li>The browser clock was pinned while the API used real time, so Hoy
+shows «La última vez anotaste» in both builds.</li>
+<li>The seed’s Money copy differs from the bundled copy.</li>
+<li>Web has no keyboard and no Dynamic Type.</li>
+</ul></li>
+</ul>
+<h2 id="spanish-strings-for-review-proposals-for-maría-and-alejandra">Spanish
+strings for review (proposals for María and Alejandra)</h2>
+<p><strong>04</strong> - «{n} días activos · {n} registros · lectura con
+pocos datos» - «{n} de 7 días» - «Los cambios se comparan con la semana
+del {semana}.» - the non-adjacent variant: «Los cambios se comparan con
+la semana del {semana}, la última con datos antes de esta (no la semana
+inmediatamente anterior).» - «+{n} días» / «-1 día» - «{cambio} frente a
+la semana del {semana}» (VoiceOver) - «Sin datos» - «Sesiones
+completadas» (hint: «Días en los que terminaste la sesión del día.»)</p>
+<p><strong>05</strong> - «Guardar esta frase» / «Guardada en tus frases»
+- the VoiceOver labels for both states - «No se pudo guardar. Inténtalo
+de nuevo.»</p>
+<p><strong>06</strong> - «{lugar} · Semana {n}»</p>
+<p><strong>07</strong> - «{círculo} · {identidad}» - «Sin círculo
+elegido · {identidad}» - «Con tu nombre» - «Cambiar» - «Publicar como
+{identidad}»</p>
+<p><strong>01</strong> (existing templates now given the day’s own stop)
+- «Mañana, en la subida.» - the pill «En el lugar de descanso»</p>
+<p>08 reuses existing strings. English counterparts were added for
+all.</p>
+<h2 id="remaining-device-tests-no-device-was-available">Remaining device
+tests (no device was available)</h2>
+<ol type="1">
+<li><strong>Pregunta keyboard</strong> on a small iPhone and on Android
+(the steps under 03).</li>
+<li><strong>Multiline:</strong> the composer field growing while the
+identity line and «Publicar» stay visible; the reflection field.</li>
+<li><strong>Mic and dictation</strong> with the keyboard open.</li>
+<li><strong>Largest Dynamic Type:</strong> the save control, the
+identity line, the metrics rows, and loading buttons with words.</li>
+<li><strong>VoiceOver order:</strong> completion screen; composer
+footer; metrics rows (value or «Sin datos»); a loading button announced
+as busy.</li>
+<li><strong>Relaunch persistence:</strong>
+<ul>
+<li>a saved phrase survives a relaunch;</li>
+<li>unsaving offline rolls back;</li>
+<li>edited words stay saved.</li>
+</ul></li>
+<li><strong>An old build against the new server:</strong> it ignores the
+flag and shelves every answer. Expected; check nothing breaks.</li>
+</ol>
+<h2 id="decisions-still-open">Decisions still open</h2>
+<ul>
+<li><strong>01:</strong> a copy pass on «Mañana, en …»; day 7’s
+transition text.</li>
+<li><strong>02:</strong> the default 2-word minimum still blocks a bare
+«Bien» on steps without their own minimum. «Todo bien» passes. Not
+changed.</li>
+<li><strong>04:</strong>
+<ul>
+<li>the «pocos datos» threshold (0.5);</li>
+<li>whether Acercamiento becomes a count;</li>
+<li>whether to show a change of 0.</li>
+</ul></li>
+<li><strong>05:</strong>
+<ul>
+<li>keeping older auto-saved phrases as saved;</li>
+<li>whether the shelf should show each phrase’s question;</li>
+<li>whether drawings and photos become opt-in.</li>
+</ul></li>
+<li><strong>06:</strong> any further reduction, once the recorded build
+is identified.</li>
+<li><strong>08b:</strong> whether «Todo» should mention a hidden
+kind.</li>
+</ul>
+<h2 id="still-uncertain">Still uncertain</h2>
+<ul>
+<li>The recorded build may not be any commit inspected here: three of
+its strings are not found in inspected refs.</li>
+<li>03 rests on a code trace, not a device.</li>
+</ul>
+</body>
+</html>
