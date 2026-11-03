@@ -1,0 +1,306 @@
+/* =====================================================================
+ * Concept C v2. A complete stylesheet (shared.css is not included, so A, B
+ * and C v1 cannot change). Colours from packages/tokens/src/colors.ts.
+ *
+ * Readability rules for this file:
+ *  - Text inside the phone is set in rem: the reviewer's text-size toggle
+ *    (100 / 130 / 160 %) changes the root size. Status bar, tab bar and the
+ *    simulated keyboard stay in px, as iOS keeps them fixed.
+ *  - Product UI: labels and meta 14px+, body and inputs 16px+. Only the reviewer-only
+ *    tags («Respuesta simulada», «Guardado simulado») and panel small print are 13px.
+ *  - Ember (#C94A1C, 4.3:1 on the canvas) is used for fills only. Ember TEXT
+ *    uses the token primaryPressed #B8441A (4.9:1 on the canvas).
+ *  - Every control is at least 44 x 44.
+ * ===================================================================== */
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces_400Regular.ttf) format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces_400Regular_Italic.ttf) format("truetype");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces_600SemiBold.ttf) format("truetype");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(assets/fonts/InstrumentSans_400Regular.ttf) format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(assets/fonts/InstrumentSans_500Medium.ttf) format("truetype");font-weight:500;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(assets/fonts/InstrumentSans_600SemiBold.ttf) format("truetype");font-weight:600;font-display:swap}
+
+:root{
+  --bg:#F9F5EF;--warm:#FAF6F0;--ink:#1A1615;--body:#524944;--muted:#635A54;
+  --ember:#C94A1C;--ember-ink:#B8441A;
+  --forest:#16382A;--forest-ink:#0E261D;--mint:#A3E5C7;--mint-pale:#E8F5EE;
+  --peach:#FFF1EC;--accent:#FFEADB;--border:#E8E0D5;--line:#8C827A;--surface:#F4EFEA;--sage:#E7EEE7;--paper:#FFFDF8;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --sb:44px;
+}
+*{box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{background:#E9E2D8;color:var(--ink);font-family:var(--sans);font-size:1rem;line-height:1.45;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+p,h1,h2,h3{margin:0}
+ul{margin:0;padding:0;list-style:none}
+img{display:block;max-width:100%}
+
+/* ---------- stage + reviewer panel (px: the text toggle scales only the phone) ---------- */
+.stage{min-height:100vh;display:flex;align-items:flex-start;justify-content:center;gap:32px;padding:32px 24px}
+.phone{position:relative;width:393px;height:852px;flex:none;border-radius:44px;overflow:hidden;background:var(--bg);container-type:inline-size;
+  box-shadow:0 0 0 10px #1d1a19,0 0 0 11px #3a3533,0 30px 60px rgba(0,0,0,.25)}
+#app{position:absolute;inset:0}
+.rev{width:340px;flex:none;font-size:15px;line-height:1.45;color:var(--body)}
+.rev h1{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--ink);margin:0 0 6px;line-height:1.2}
+.rev p{margin:0 0 14px}
+.rev h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px;font-weight:600}
+.rev .row{display:flex;flex-wrap:wrap;gap:6px}
+.rev button{min-height:44px;border:1px solid #CFC5B8;background:#fff;border-radius:999px;padding:6px 14px;font-size:14px;cursor:pointer;color:var(--ink)}
+.rev button.on{background:var(--forest);color:#fff;border-color:var(--forest)}
+.rev a{color:var(--ember-ink)}
+.rev .fine{font-size:13px;color:var(--muted)}
+.rev .rtag{font-size:13px}
+@media (max-width:500px){
+  body{background:var(--bg)}
+  .stage{display:block;padding:0}
+  .phone{width:100%;height:100vh;height:100dvh;min-height:600px;border-radius:0;box-shadow:none}
+  .rev{width:auto;padding:24px 16px 48px;border-top:1px solid var(--border);background:#F1EBE2}
+}
+
+/* ---------- status bar (px) ---------- */
+.sbar{position:absolute;top:0;left:0;right:0;height:var(--sb);z-index:40;display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px 0 32px;font-weight:600;font-size:15px;line-height:1;pointer-events:none;color:var(--ink);background:var(--bg)}
+.sbar i{display:inline-block;width:24px;height:11px;border:1.5px solid currentColor;border-radius:3px;position:relative;margin-left:6px;vertical-align:-1px}
+.sbar i:after{content:"";position:absolute;inset:1.5px;right:6px;background:currentColor;border-radius:1px}
+.sbar b{display:inline-flex;gap:2px;align-items:flex-end;height:11px;vertical-align:-1px}
+.sbar b s{display:block;width:3px;background:currentColor;border-radius:1px}
+
+/* ---------- screen scaffolding ---------- */
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);padding-top:var(--sb)}
+.scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.foot{flex:none;padding:10px 20px 18px;background:var(--bg);display:flex;flex-direction:column;gap:2px}
+.pad{padding:6px 20px 0}
+.sp44{width:44px;height:44px;flex:none}
+.flex1{flex:1}
+.tagline{margin-top:12px}
+
+/* ---------- atoms ---------- */
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:999px;
+  background:var(--forest);color:#fff;font-weight:600;font-size:1.0625rem;line-height:1.25;cursor:pointer;padding:.5rem 1.375rem;text-align:center}
+.btn svg{flex:none}
+.btn:disabled{background:#BEC2B8;color:#2F332E;cursor:default}
+.btn.ghost{background:transparent;color:var(--muted);min-height:48px;font-size:1rem}
+.btn.line{background:transparent;color:var(--forest);border:1.5px solid var(--forest)}
+.btn.sm{min-height:44px;font-size:1rem;padding:.375rem 1rem}
+.icon-btn{width:44px;height:44px;border-radius:50%;border:0;background:var(--surface);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+.icon-btn svg{width:22px;height:22px}
+.btn:focus-visible,.icon-btn:focus-visible,.opt:focus-visible,.choice-row button:focus-visible,.en-hd:focus-visible,.tabs button:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+.eyebrow{font-size:.875rem;font-weight:600;letter-spacing:.01em;color:var(--forest)}
+.eyebrow.ember{color:var(--ember-ink)}
+.h-display{font-family:var(--serif);font-weight:600;font-size:1.875rem;line-height:1.15;letter-spacing:-.01em;margin-top:4px}
+.h-display.sm{font-size:1.6875rem}
+.h-q{font-weight:600;font-size:1.4375rem;line-height:1.25}
+.sub{color:var(--body);font-size:1.0625rem;margin-top:6px}
+.orb{border-radius:50%;flex:none;background:url(assets/orb.png) center/cover}
+
+/* reviewer tags: fixed 13px, dashed, never mistaken for product UI */
+.rtag{display:inline-flex;align-items:center;gap:6px;font-size:13px;line-height:1.25;font-weight:600;letter-spacing:.01em;color:#5E5249;
+  border:1px dashed #8C827A;border-radius:6px;padding:3px 7px;background:#FFFFFF;vertical-align:middle}
+.rtag.sim{color:#7E3514;border-color:#C98A6B;background:#FFF7F2}
+
+.dots{display:inline-flex;gap:5px;align-items:center;color:var(--ember)}
+.dots span{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.3;animation:dot 1.2s infinite}
+.dots span:nth-child(2){animation-delay:.2s}.dots span:nth-child(3){animation-delay:.4s}
+@keyframes dot{0%,80%,100%{opacity:.25}40%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.dots span{animation:none;opacity:.6}}
+
+/* ---------- top bar with A's step-by-step progress ---------- */
+.topbar{flex:none;padding:4px 12px 8px;display:flex;align-items:center;gap:8px;background:var(--bg)}
+.prog{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;padding:0 4px}
+.prog .segs{display:flex;gap:4px}
+.prog .segs i{flex:1;height:5px;border-radius:3px;background:#DED6CC}
+.prog .segs i.done{background:var(--forest)}
+.prog .segs i.now{background:var(--ember)}
+.prog .lbl{font-size:.875rem;color:var(--muted);text-align:center;font-weight:500;line-height:1.3}
+
+/* ---------- options ---------- */
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:.625rem 1rem .625rem 1.25rem;border-radius:14px;
+  border:1px solid var(--border);background:var(--surface);text-align:left;cursor:pointer;font-size:1.0625rem;line-height:1.3;width:100%}
+.opt .rad{width:26px;height:26px;border-radius:50%;border:1.5px solid #7A726C;flex:none;display:flex;align-items:center;justify-content:center}
+.opt[aria-checked=true]{background:var(--sage);border:2px solid var(--forest);font-weight:600}
+.opt[aria-checked=true] .rad{background:var(--forest);border-color:var(--forest)}
+.opt[aria-checked=true] .rad:after{content:"";width:10px;height:6px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+
+/* ---------- writing field ---------- */
+textarea.write{display:block;width:100%;min-height:120px;border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:14px 16px;
+  font:inherit;font-size:1.0625rem;line-height:1.45;color:var(--ink);resize:none}
+textarea.write::placeholder{color:var(--muted);opacity:1}
+textarea.write:focus{outline:3px solid var(--forest);outline-offset:1px;border-color:var(--forest)}
+.sample-btn{border:1px dashed var(--line);background:transparent;border-radius:999px;min-height:44px;padding:.25rem 1rem;font-size:.875rem;color:var(--muted);cursor:pointer;margin-top:10px}
+
+/* ---------- the card ---------- */
+.tcard{position:relative;background:var(--paper);border-radius:20px;border:1px solid #E0D5C6;box-shadow:0 10px 26px rgba(60,40,20,.10);overflow:hidden}
+.tcard .ph{height:92px;background:url(assets/wuzhen-d1.webp) 30% 55%/cover}
+.tcard .k{position:absolute;right:16px;top:58px;width:64px;height:72px;background:var(--paper) url(assets/keepsake-d1.webp) center/48px no-repeat;border-radius:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,.14);transform:rotate(4deg)}
+.tcard .k.off{filter:grayscale(1);opacity:.5}
+.tcard.ghost .ph{height:64px}
+.tcard.ghost .k{top:30px}
+.tcard .in{padding:12px 18px 18px}
+.tcard .meta{font-size:.875rem;color:var(--muted);font-weight:600;padding-right:72px;line-height:1.35}
+.tcard.slim{box-shadow:0 6px 18px rgba(60,40,20,.08)}
+.tcard.slim .in{padding:14px 16px 16px}
+.slot{border-top:1px dashed #CFC4B6;padding:12px 0 4px;margin-top:10px}
+.slot.first{border-top:0;margin-top:4px}
+.slot .lab{display:flex;align-items:center;gap:8px;font-size:.875rem;font-weight:600;color:var(--ember-ink);line-height:1.3}
+.n{width:1.75em;height:1.75em;border-radius:50%;border:1.5px solid currentColor;display:inline-flex;align-items:center;justify-content:center;
+  font-size:.875rem;font-weight:600;flex:none;line-height:1}
+.n.n-filled{background:var(--forest);border-color:var(--forest);color:#fff}
+.n.n-skipped{color:var(--muted)}
+.slot .val{font-size:1.125rem;font-weight:600;margin-top:4px;line-height:1.3}
+.slot .val.serif{font-family:var(--serif);font-weight:400;font-size:1.3125rem;line-height:1.35}
+.slot .skipped,.skipped{font-size:1rem;color:var(--muted);margin-top:4px}
+.slot .hint{font-size:1rem;color:var(--body);margin-top:4px}
+.slot .empty{margin-top:8px;height:12px;border-radius:6px;background:#EFE8DE;width:70%}
+.slot .empty.w2{width:88%}
+
+/* step 2: compact choice row, then heading + instruction + field */
+.choice-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--sage);border-radius:14px;padding:6px 6px 6px 14px}
+.choice-row .cv{flex:1;min-width:8em}
+.choice-row .cv small{display:block;font-size:.875rem;color:var(--muted);font-weight:600;line-height:1.3}
+.choice-row .cv span{display:block;font-size:1rem;font-weight:600;line-height:1.3}
+.choice-row .cv span.skipped{font-weight:400;margin:0}
+.choice-row button{border:0;background:transparent;color:var(--forest);font-weight:600;font-size:1rem;min-height:44px;min-width:44px;padding:0 10px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;border-radius:10px}
+.take-h{font-weight:600;font-size:1.5rem;line-height:1.25;margin-top:18px}
+.take-i{font-size:1.0625rem;color:var(--body);margin:6px 0 12px;line-height:1.45}
+.notice{background:var(--accent);border-left:3px solid var(--ember-ink);border-radius:8px;padding:10px 12px;font-size:1rem;line-height:1.4;margin:0 0 12px}
+.banner{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--sage);border-radius:12px;padding:10px 14px;font-size:1rem;line-height:1.35;margin-bottom:12px}
+
+/* Elara's note: secondary on step 2, collapsible */
+.enote2{margin-top:14px;background:var(--peach);border-radius:14px}
+.en-hd{display:flex;align-items:center;gap:8px;width:100%;min-height:48px;padding:6px 12px;border:0;background:transparent;text-align:left;flex-wrap:wrap;border-radius:14px}
+button.en-hd{cursor:pointer}
+.en-hd .who{font-size:.875rem;font-weight:600;color:var(--forest)}
+.en-hd .orb{width:24px;height:24px}
+.en-hd .ic{color:var(--muted);display:inline-flex}
+.en-hd .tg{margin-left:auto;display:inline-flex;align-items:center;gap:4px;font-size:.875rem;font-weight:600;color:var(--forest)}
+.enote2 .txt{padding:0 14px 14px;font-family:var(--serif);font-style:italic;font-size:1rem;line-height:1.5}
+.enote2 .simrow{margin-top:8px;font-family:var(--sans);font-style:normal}
+.enote2.err .body .simrow{margin:0 0 10px}
+.enote2.main .txt{font-size:1.125rem}
+.enote2.closed .txt{display:none}
+.enote2.load{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 14px;color:var(--muted);font-size:1rem}
+.enote2.load .orb{width:24px;height:24px}
+.enote2.err{background:#fff;border:1px solid var(--border)}
+.enote2.err .body{padding:0 14px 14px}
+.enote2.err .body p{font-size:1rem;color:var(--body);line-height:1.45;margin-bottom:10px}
+.enote2.err .acts{display:flex;flex-direction:column;gap:4px}
+
+/* opening screen: A's «Por qué hoy» card */
+.why{background:var(--forest);color:var(--mint-pale);border-radius:20px;padding:18px 18px 16px;margin-top:16px}
+.why h2{font-size:.875rem;font-weight:600;color:var(--mint)}
+.why p{margin-top:6px;font-size:1.0625rem;line-height:1.45}
+.why .payoff{margin-top:12px;padding-top:12px;border-top:1px solid rgba(163,229,199,.3);font-size:1rem;color:#D5ECE0}
+.sec-h{font-size:.9375rem;font-weight:600;color:var(--ember-ink);margin:22px 0 10px}
+.note{font-size:1rem;color:var(--muted);margin-top:14px;line-height:1.45}
+
+/* step 1 */
+.minicard{display:flex;gap:10px;align-items:center;background:var(--paper);border:1px solid #E0D5C6;border-radius:16px;padding:10px 12px;box-shadow:0 4px 12px rgba(60,40,20,.06)}
+.minicard .k{width:40px;height:44px;background:url(assets/keepsake-d1.webp) center/contain no-repeat;flex:none;filter:grayscale(1);opacity:.5}
+.minicard .s{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.minicard .s>div{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.3;color:var(--muted)}
+.minicard .s>div .n.n-empty{color:var(--muted)}
+.minicard .s>div.on{color:var(--ink);font-weight:600}
+.qhead{margin-top:20px}
+
+/* completion */
+.summary{font-size:1rem;color:var(--body);margin-top:14px;line-height:1.45}
+.where-list{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.where-list li{display:flex;gap:10px;align-items:flex-start;font-size:1rem;color:var(--forest);line-height:1.4}
+.where-list svg{flex:none;width:20px;height:20px;margin-top:1px}
+.tom2{margin-top:18px;display:flex;gap:12px;align-items:center;background:var(--forest);color:#fff;border-radius:18px;padding:14px}
+.tom2 .k{width:52px;height:56px;background:rgba(255,255,255,.1) url(assets/keepsake-d2.webp) center/42px no-repeat;border-radius:12px;flex:none}
+.tom2 .t1{font-size:.875rem;font-weight:600;color:var(--mint)}
+.tom2 .t2{font-size:1rem;line-height:1.4;margin-top:2px}
+
+/* collection */
+.coll h1{font-family:var(--serif);font-weight:600;font-size:1.875rem;line-height:1.15;margin-top:4px}
+.coll .wk{font-size:.9375rem;font-weight:600;color:var(--muted);margin:20px 0 8px}
+.chip{display:inline-block;font-size:.875rem;font-weight:600;color:var(--forest);background:var(--sage);border-radius:999px;padding:3px 12px;margin-bottom:10px}
+
+/* ---------- Hoy ---------- */
+.hoy .scroll{padding-top:6px}
+.hoy-date{font-size:.9375rem;color:var(--muted);padding:0 24px}
+.hoy-hi{font-family:var(--serif);font-weight:600;font-size:2rem;margin:2px 24px 14px;line-height:1.15}
+.post{margin:0 16px;background:var(--paper);border-radius:6px;padding:10px 10px 18px;box-shadow:0 2px 10px rgba(60,40,20,.10)}
+.post .ph{height:150px;border-radius:3px;background:url(assets/wuzhen-d1.webp) 30% center/cover}
+.post.compact .ph{height:84px}
+.post.compact{padding-bottom:14px}
+.post .in{padding:14px 12px 0}
+.post .where{font-size:.875rem;font-weight:600;color:var(--forest);line-height:1.35}
+.post h2{font-family:var(--serif);font-weight:600;font-size:1.625rem;margin:6px 0 4px;line-height:1.15}
+.post .min{color:var(--muted);font-size:.9375rem;margin-bottom:14px}
+.post.compact .min{margin-bottom:0}
+.post .resume{font-size:.9375rem;color:var(--ember-ink);font-weight:600;margin:-4px 0 6px;line-height:1.35}
+.post .draft{font-size:1rem;color:var(--body);line-height:1.4}
+.post .draft .l{font-weight:600;color:var(--ink)}
+.post .tagline{margin:8px 0 12px}
+.week{padding:22px 24px 6px}
+.week h3{font-size:1.1875rem;font-weight:600;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;line-height:1.3}
+.week h3 small{font-weight:400;color:var(--muted);font-size:.9375rem}
+.discs{display:flex;justify-content:space-between;margin-top:12px}
+.disc{min-width:40px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.875rem;color:var(--muted)}
+.disc .c{width:40px;height:40px;border-radius:50%;border:1.5px dashed var(--line);background:center/cover no-repeat}
+.disc.today .c{border:2.5px solid var(--ember)}
+.disc.today{color:var(--ember-ink);font-weight:600}
+.disc.done .c{border:0;background-color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.12);background-size:86%}
+.wk-theme{color:var(--body);font-size:1rem;margin-top:6px}
+.hoy-sec{padding:6px 16px 0}
+.today-card{margin:0 16px 18px;background:var(--paper);border:1px solid #E0D5C6;border-radius:18px;padding:14px 16px 14px;box-shadow:0 4px 14px rgba(60,40,20,.08)}
+.today-card .hd{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.today-card h2{font-size:.9375rem;font-weight:600;color:var(--ember-ink)}
+.today-card .row{display:flex;gap:12px;margin:10px 0 12px;align-items:flex-start}
+.today-card .k{width:44px;height:52px;background:url(assets/keepsake-d1.webp) center/contain no-repeat;flex:none}
+.today-card .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.today-card .tline{font-size:1rem;line-height:1.4}
+.today-card .tline .l{color:var(--muted);font-weight:600;font-size:.875rem;display:block}
+.today-card .tline strong{font-weight:600}
+.today-card .tline .q{font-family:var(--serif);font-size:1.125rem;line-height:1.35}
+.today-card .tline .skipped{margin:0}
+.tabs{flex:none;display:flex;justify-content:space-around;border-top:1px solid var(--border);background:var(--warm);padding:6px 0 18px}
+.tabs button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:14px;line-height:1.2;color:var(--muted);min-width:56px;min-height:48px;cursor:pointer}
+.tabs button.on{color:var(--ember-ink);font-weight:600}
+.tabs svg{width:24px;height:24px}
+.tabs .orb{width:24px;height:24px}
+
+/* ---------- sheet + toast ---------- */
+#sheet{position:absolute;inset:0;z-index:60;display:none}
+#sheet.on{display:block}
+#sheet .scrim{position:absolute;inset:0;background:rgba(26,22,21,.38)}
+#sheet .panel{position:absolute;left:0;right:0;bottom:0;background:var(--warm);border-radius:24px 24px 0 0;padding:26px 20px 22px}
+#sheet h3{font-family:var(--serif);font-weight:600;font-size:1.5rem;line-height:1.2;margin-bottom:8px}
+#sheet p{color:var(--body);font-size:1.0625rem;line-height:1.45}
+#sheet .tagline{margin:10px 0 16px}
+#toast{position:absolute;left:16px;right:16px;bottom:96px;z-index:70;background:var(--forest-ink);color:#fff;border-radius:14px;padding:12px 16px;
+  font-size:1rem;line-height:1.35;opacity:0;transform:translateY(8px);transition:.25s;pointer-events:none}
+#toast.on{opacity:1;transform:none}
+
+/* ---------- simulated iOS keyboard (px / container units, not scaled) ---------- */
+.kbd{display:none;flex:none;height:85.5cqw;background:#D2D5DB;padding:0 .8cqw;flex-direction:column;border-top:1px solid #B9BDC4}
+.scr.kb .kbd{display:flex}
+.kb-sug{display:flex;align-items:center;height:10.7cqw;font:16px/1.2 -apple-system,"Instrument Sans",sans-serif;color:#1A1615}
+.kb-sug span{flex:1;text-align:center}
+.kb-sug span+span{border-left:1px solid #A9AEB6}
+.kb-row{display:flex;justify-content:center;gap:1.5cqw;margin-top:2.8cqw}
+.kb-row.r2{padding:0 4.4cqw}
+.key{flex:1 1 0;max-width:8.6cqw;height:10.7cqw;border-radius:5px;background:#FFFFFF;box-shadow:0 1px 0 #898C92;display:flex;align-items:center;justify-content:center;
+  font:22px/1 -apple-system,"Instrument Sans",sans-serif;color:#000}
+.key.mod{background:#ABB0BA;flex:0 0 11cqw;max-width:11cqw}
+.r3 .key.mod:first-child{margin-right:2.2cqw}
+.r3 .key.mod:last-child{margin-left:2.2cqw}
+.r4 .key{font-size:16px}
+.r4 .key.sp{flex:1;max-width:none}
+.r4 .key.w2{flex:0 0 22cqw;max-width:22cqw}
+.kb-bot{display:flex;justify-content:space-between;padding:2.6cqw 5cqw 0;color:#3A3D42}
+/* keyboard open: the field and the primary button stay above it, Elara's note folds */
+.scr.kb .prog .lbl{display:none}
+.scr.kb .enote2 .txt,.scr.kb .enote2 .body,.scr.kb .enote2 .tg{display:none}
+.scr.kb .foot{flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:8px 12px 8px}
+.scr.kb .foot .btn{min-height:48px;font-size:1rem;padding:.375rem .875rem}
+.scr.kb .foot .btn.ghost{order:-1;width:auto;flex:0 1 auto;padding:.375rem .625rem}
+/* side by side at 100 %; at larger text the primary button takes its own row instead of squeezing */
+.scr.kb .foot .btn:not(.ghost){flex:1 1 12rem;width:auto}
