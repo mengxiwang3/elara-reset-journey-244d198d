@@ -1,0 +1,1220 @@
+diff --git a/apps/mobile/app/(modals)/logout.tsx b/apps/mobile/app/(modals)/logout.tsx
+index 997b535..734e446 100644
+--- a/apps/mobile/app/(modals)/logout.tsx
++++ b/apps/mobile/app/(modals)/logout.tsx
+@@ -1,4 +1,5 @@
+ import { useRouter } from "expo-router";
++import { useEffect } from "react";
+ import { Dialog } from "@/components";
+ import { useT } from "@/i18n";
+ import { signOut } from "@/lib/authClient";
+@@ -9,14 +10,27 @@ import { logoutPurchases } from "@/lib/purchases";
+ import { queryClient } from "@/lib/query";
+ import { beginDeliberateEnd } from "@/lib/sessionEnd";
+ import { setSigningOut } from "@/lib/signingOut";
++import { unsentCount } from "@/store/accountState";
+ import { useAppStore } from "@/store/useAppStore";
+ 
+ /** The longest the push-token removal may hold up the sign-out itself. */
+ const UNREGISTER_MAX_MS = 4000;
+ /** The longest the rest may take before the phone signs her out locally anyway. */
+ const TEARDOWN_MAX_MS = 6000;
++/** The longest a last try at sending her unsent answers may hold up the sign-out. */
++const FLUSH_MAX_MS = 4000;
+ const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+ 
++/**
++ * Send what she has not sent yet, while there is still a session to send it
++ * under. Log out clears the queues (`endSession("signedOut")`): whatever is
++ * still in them after this is gone, which is why the dialog asks first.
++ */
++function flushUnsent(): Promise<unknown> {
++  const s = useAppStore.getState();
++  return Promise.all([s.flushSteps(), s.flushCheckIns(), s.flushFeedback()]).catch(() => {});
++}
++
+ /**
+  * Only the push-token removal is capped *before* the sign-out. It used to be
+  * awaited whole (its own timeout is 15 s), the overall cap then fired first,
+@@ -25,6 +39,8 @@ const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve,
+  * and the server session both survived a closed app.
+  */
+ async function teardown() {
++  // Her answers first, while the session that owns them is still here.
++  await Promise.race([flushUnsent(), wait(FLUSH_MAX_MS)]);
+   // Drop this device's push token first: it still needs the session.
+   await Promise.race([unregisterFromPush().catch(() => {}), wait(UNREGISTER_MAX_MS)]);
+   // Started now and never skipped. Its request hook clears the stored cookie
+@@ -51,6 +67,15 @@ export default function LogoutModal() {
+   // usual "it'll be here when you return" would be untrue, so she is told
+   // plainly and offered the way to keep it instead.
+   const guest = useAppStore((s) => !!s.user?.isAnonymous);
++  // Answers given on this phone that have not reached her account. Logging
++  // out deletes them, so «se quedan aquí, guardados» would be untrue: she is
++  // asked instead, and the queue is tried once more while she reads.
++  const unsent = useAppStore((s) => unsentCount(s, s.user?.id));
++  useEffect(() => {
++    if (unsent > 0) void flushUnsent();
++    // On arrival only; the count above follows the queue as it drains.
++    // eslint-disable-next-line react-hooks/exhaustive-deps
++  }, []);
+   const copy = guest
+     ? {
+         title: t.account.guest.logoutTitle,
+@@ -58,7 +83,14 @@ export default function LogoutModal() {
+         confirm: t.account.guest.logoutConfirm,
+         cancel: t.account.guest.logoutSave,
+       }
+-    : t.account.logout;
++    : unsent > 0
++      ? {
++          title: t.account.logout.unsentTitle,
++          body: t.account.logout.unsentBody,
++          confirm: t.account.logout.unsentConfirm,
++          cancel: t.account.logout.cancel,
++        }
++      : t.account.logout;
+   return (
+     <Dialog
+       icon="solar:logout-bold"
+diff --git a/apps/mobile/app/(tabs)/index.tsx b/apps/mobile/app/(tabs)/index.tsx
+index 1303175..8650068 100644
+--- a/apps/mobile/app/(tabs)/index.tsx
++++ b/apps/mobile/app/(tabs)/index.tsx
+@@ -31,8 +31,8 @@ import { useScreenExplainer } from "@/explainers/useExplainer";
+ import { useAssessments } from "@/hooks/useAssessments";
+ import { useResources } from "@/hooks/useResources";
+ import { useTabBarClearance } from "@/hooks/useTabBarClearance";
+-import { calendarDaysBetween, recallFor, type ResolvedEntry } from "@/hooks/todayEntry";
+-import { placeWordsFor, useTodayEntry, type TodayEntry } from "@/hooks/useTodayEntry";
++import { calendarDaysBetween, promisesNextWeek, recallFor, type ResolvedEntry } from "@/hooks/todayEntry";
++import { placeWordsFor, useProgressStatus, useTodayEntry, type TodayEntry } from "@/hooks/useTodayEntry";
+ import { formatLocale, useT, type Strings } from "@/i18n";
+ import { api } from "@/lib/api";
+ import { mastheadParts } from "@/lib/dates";
+@@ -40,7 +40,8 @@ import { greetingName } from "@/lib/greetingName";
+ import { HELP_NOW_ROUTE } from "@/lib/helpNow";
+ import { welcomeLine } from "@/lib/onboardingAnswers";
+ import { qk, queryClient } from "@/lib/query";
+-import { FadeIn, PressableScale, stagger, useFocusEntrance } from "@/motion";
++import { DelayedLoader, FadeIn, PressableScale, SkeletonCard, stagger, useFocusEntrance } from "@/motion";
++import { TertiaryAction } from "@/components/system/TertiaryAction";
+ import { useAppStore } from "@/store/useAppStore";
+ import { colors, fontFamily, padding, radius, spacing, withAlpha } from "@/theme";
+ 
+@@ -66,6 +67,12 @@ export default function TodayScreen() {
+   const t = useT();
+   const router = useRouter();
+   const entry = useTodayEntry({ source: "today" });
++  // Until her own progress is read (a new phone, a sign-in after her session
++  // ended) there is no day to offer: a placeholder, or a retry if the read failed.
++  const progressRead = useProgressStatus();
++  // Membership, `null` while it loads: a week it does not cover is said to be
++  // one, rather than promised to open.
++  const premium = useAppStore((s) => (s.subscription === null ? null : s.isPremium));
+   const { area, path, progress } = useWeekWorld();
+   const user = useAppStore((s) => s.user);
+   const { data: resources, refetch: refetchResources } = useResources();
+@@ -166,7 +173,9 @@ export default function TodayScreen() {
+   const dayPlace = entry && placeDef && entry.kind !== "week" ? dayPlaceWords(t.dayPlaces, placeDef.area, entry.dayInWeek) : null;
+   // The card names the day in short; the full question waits inside the session.
+   const dayTitle = shortDayTitle(content?.title, question, place?.worldId && entry ? landmark(t, place.worldId, entry.dayInWeek).toward : null);
+-  const card = entry ? postcardWords(entry, t, dayTitle, content?.config?.minutes, now.getTime(), locale, dayPlace?.name ?? place?.name) : null;
++  const card = entry
++    ? postcardWords(entry, t, dayTitle, content?.config?.minutes, now.getTime(), locale, dayPlace?.name ?? place?.name, premium)
++    : null;
+   const photo =
+     entry && placeDef
+       ? entry.kind === "week"
+@@ -236,6 +245,21 @@ export default function TodayScreen() {
+         </FadeIn>
+       ) : null}
+ 
++      {/* Her progress is not read yet: hold the postcard's place rather than
++          offer a day that may not be hers to start. */}
++      {progressRead.status === "loading" ? (
++        <DelayedLoader active>
++          <SkeletonCard />
++        </DelayedLoader>
++      ) : progressRead.status === "failed" ? (
++        <View style={styles.progressFailed}>
++          <AppText variant="body" center color={colors.textSecondary}>
++            {t.common.state.loadFailed}
++          </AppText>
++          <TertiaryAction label={t.common.action.retry} onPress={progressRead.retry} />
++        </View>
++      ) : null}
++
+       {/* The postcard: today's place and the one action. */}
+       {entry && card && place ? (
+         <FadeIn runKey={entrance} delay={stagger.step} from="none" duration={450}>
+@@ -388,6 +412,8 @@ function postcardWords(
+   locale: string,
+   /** The place the day's photograph shows, when it is not the week's own ("Paris, France"). */
+   dayWhere?: string,
++  /** Membership, `null` while it loads. */
++  premium: boolean | null = null,
+ ): { placeLine: string; done?: string; title: string; meta?: string } {
+   const h = t.home.hoy;
+   if (entry.kind === "week") {
+@@ -395,10 +421,14 @@ function postcardWords(
+     return {
+       placeLine: h.placeWeek(entry.place.full, entry.week, weeks),
+       title: entry.state === "pathDone" ? h.pathDoneTitle : h.weekDoneTitle(entry.place.name),
+-      meta: opensLine(entry, t, now, locale) ?? undefined,
++      // A next week her membership does not cover does not open for her.
++      meta: promisesNextWeek(entry, premium) ? (opensLine(entry, t, now, locale) ?? undefined) : undefined,
+     };
+   }
+-  const placeLine = h.placeLine(dayWhere ?? entry.place.full, entry.week, entry.dayInWeek);
++  const line = h.placeLine(dayWhere ?? entry.place.full, entry.week, entry.dayInWeek);
++  // A week her membership does not cover says so where the path page does
++  // ("Semana 2 · Premium"): its button opens the membership screen, not the day.
++  const placeLine = entry.membershipRequired ? `${line} · ${t.account.membership.premiumBadge}` : line;
+   if (entry.kind === "review") {
+     return {
+       placeLine,
+@@ -467,6 +497,7 @@ const styles = StyleSheet.create({
+     borderColor: withAlpha(colors.brand, 0.18),
+   },
+   welcomeText: { flex: 1, gap: spacing[2] },
++  progressFailed: { alignItems: "center", gap: spacing[3], paddingVertical: spacing[6] },
+   // Clear of the stamp, which hangs over the top of the card's words.
+   placeLine: { paddingRight: 66, fontFamily: fontFamily.sansSemibold },
+   action: { marginTop: spacing[1.5] },
+diff --git a/apps/mobile/app/paywall.tsx b/apps/mobile/app/paywall.tsx
+index d0695ba..c839ae4 100644
+--- a/apps/mobile/app/paywall.tsx
++++ b/apps/mobile/app/paywall.tsx
+@@ -12,6 +12,7 @@ import {
+   Screen,
+ } from "@/components";
+ import { StickyFooter } from "@/components/system/StickyFooter";
++import { TertiaryAction } from "@/components/system/TertiaryAction";
+ import { useSession } from "@/lib/authClient";
+ import {
+   CrossFade,
+@@ -233,6 +234,10 @@ export default function Paywall() {
+   // Read once per render: `proceed` runs after an await, where a hook call throws.
+   const pathsMap = usePathsMap();
+   const freeAreaName = pathsMap[recommendedArea]?.areaName ?? null;
++  // Sent here by a day in a week her membership does not cover (Hoy, the
++  // Atlas, a locked day), rather than at the end of onboarding.
++  const isPremium = useAppStore((s) => s.isPremium);
++  const lockedWeek = hasOnboarded && !isPremium && returnToIsLockedWeek(returnTo, pathsMap);
+ 
+   const [packages, setPackages] = useState<PurchasesPackage[]>([]);
+   // Prices only ever come from the store. When payments aren't configured the
+@@ -708,6 +713,24 @@ export default function Paywall() {
+                   );
+                 })}
+               </View>
++            ) : lockedWeek ? (
++              // Sent here by a week her membership does not cover, with nothing
++              // to buy: «Tu camino gratis está listo» was untrue (her free week
++              // is behind her) and «Continuar» led back to the same locked day.
++              // Say what the free plan holds, and give her a person to ask.
++              <View style={styles.freeNote}>
++                <AppText variant="cardTitle" center color={colors.foreground}>
++                  {t.account.membership.notOnSale}
++                </AppText>
++                <AppText variant="bodySmall" center color={colors.textSecondary}>
++                  {freeAreaName ? t.account.paywall.freeNoteWithArea(freeAreaName) : t.account.paywall.freeNote}
++                </AppText>
++                <TertiaryAction
++                  label={t.account.settings.contactSupport}
++                  onPress={() => router.push("/support")}
++                  style={{ alignSelf: "center" }}
++                />
++              </View>
+             ) : (
+               <View style={styles.freeNote}>
+                 <AppText variant="cardTitle" center color={colors.foreground}>
+diff --git a/apps/mobile/src/hooks/todayEntry.test.ts b/apps/mobile/src/hooks/todayEntry.test.ts
+index 5dace49..6a6c943 100644
+--- a/apps/mobile/src/hooks/todayEntry.test.ts
++++ b/apps/mobile/src/hooks/todayEntry.test.ts
+@@ -5,8 +5,10 @@ import { es } from "@/i18n/locales/es";
+ import { dayGateFor } from "@/lib/dayGate";
+ import {
+   entryWords,
++  draftHasWords,
+   isEntryRoute,
+   openedAt,
++  promisesNextWeek,
+   recallFor,
+   resolveTodayEntry,
+   type EntryProgress,
+@@ -103,6 +105,25 @@ describe("resolveTodayEntry, the four account states", () => {
+     expect(e.href.params.step).toBe("ask");
+   });
+ 
++  it("a day she only opened resumes without claiming her words were kept (beta hardening, 3 Nov 2026)", () => {
++    // Before: opening Day 1 and going back to Hoy read «Vas en el paso 1 de 2.
++    // Guardamos lo que escribiste.» over a day with nothing written.
++    const e = resolve({ progress: progressThrough(9, MON_21), now: at("2026-10-27T21:00"), remembered: "ask" })!;
++    expect(e.state).toBe("inProgress");
++    expect(e.saved).toBe(false);
++    const w = entryWords(e, es.home.hoy.entry, "Wuzhen");
++    expect(w.label).toBe("Seguir con el día 3");
++    expect(w.hint).toBeUndefined();
++  });
++
++  it("an answer kept for the day still says so", () => {
++    const p = progressThrough(9, MON_21);
++    p.stepAnswers[10] = { ask: { value: "La tarjeta.", answeredAt: at("2026-10-27T20:00") } };
++    const e = resolve({ progress: p, now: at("2026-10-27T21:00"), remembered: "take" })!;
++    expect(e.saved).toBe(true);
++    expect(entryWords(e, es.home.hoy.entry, "Wuzhen").hint).toBe("Vas en el paso 2 de 2. Guardamos lo que escribiste.");
++  });
++
+   it("in progress: an answered first step resumes on the second, and the remembered step wins", () => {
+     const p = progressThrough(9, MON_21);
+     p.stepAnswers[10] = { ask: { value: "La tarjeta.", answeredAt: at("2026-10-27T20:00") } };
+@@ -247,3 +268,78 @@ describe("isEntryRoute (Pregunta marked as the current tab)", () => {
+     expect(isEntryRoute(["(tabs)", "atlas"])).toBe(false);
+   });
+ });
++
++describe("promisesNextWeek: the week card for a free account (beta hardening, 3 Nov 2026)", () => {
++  // Before: a free account that closed week 1 read «La semana 2, Wuzhen, se abre
++  // mañana», and the next morning «Empezar el día 1» opened a membership screen
++  // with nothing on sale, whose «Continuar» led back to the same Hoy.
++  const closedWeekOne = progressThrough(7, at("2026-10-18T20:00"));
++  const now = at("2026-10-18T20:30");
++
++  it("does not promise a membership week to an account without one", () => {
++    const e = resolve({ progress: closedWeekOne, now, premium: false })!;
++    expect(e.kind).toBe("week");
++    expect(e.opensAt).not.toBeNull();
++    expect(promisesNextWeek(e, false)).toBe(false);
++  });
++
++  it("promises it to a member, and while the entitlement is still loading", () => {
++    const e = resolve({ progress: closedWeekOne, now, premium: true })!;
++    expect(promisesNextWeek(e, true)).toBe(true);
++    expect(promisesNextWeek(e, null)).toBe(true);
++  });
++
++  it("only speaks to the week card", () => {
++    const e = resolve({ progress: progressThrough(9, at("2026-10-26T21:00")), now: at("2026-10-27T21:00"), premium: false })!;
++    expect(e.kind).toBe("practice");
++    expect(promisesNextWeek(e, false)).toBe(true);
++    // The practice behind it goes through the membership screen, which Hoy marks.
++    expect(e.membershipRequired).toBe(true);
++  });
++});
++
++describe("draftHasWords: an opened step is not a kept answer (beta hardening, 3 Nov 2026)", () => {
++  // The step screen saves its draft a moment after it opens, untouched or not:
++  // this is what that untouched draft looks like for a choice and a reflection.
++  const empty = {
++    choice: null,
++    picks: [],
++    other: "",
++    detail: "",
++    sorted: {},
++    scale: null,
++    reflect: { mode: "write", text: "", drawing: null, caption: "" },
++    done: false,
++    blanks: ["", ""],
++    photo: { photo: null, uri: null, caption: "", describe: false },
++  };
++
++  it("an untouched draft holds nothing of hers", () => {
++    expect(draftHasWords(empty)).toBe(false);
++    expect(draftHasWords({ ...empty, reflect: { ...empty.reflect, text: "   " } })).toBe(false);
++    expect(draftHasWords(undefined)).toBe(false);
++    expect(draftHasWords(null)).toBe(false);
++  });
++
++  it("anything she gave counts", () => {
++    expect(draftHasWords({ ...empty, choice: "Lo que gano" })).toBe(true);
++    expect(draftHasWords({ ...empty, picks: ["Trabajo"] })).toBe(true);
++    expect(draftHasWords({ ...empty, reflect: { ...empty.reflect, text: "Pago tarde." } })).toBe(true);
++    expect(draftHasWords({ ...empty, blanks: ["", "alquiler"] })).toBe(true);
++    expect(draftHasWords({ ...empty, scale: 0 })).toBe(true);
++    expect(draftHasWords({ ...empty, photo: { ...empty.photo, uri: "file:///x.jpg" } })).toBe(true);
++  });
++
++  it("a day she only opened (an empty draft, the step remembered) reads «Seguir» without the claim", () => {
++    const drafts: Record<string, unknown> = { "money:10:ask": empty };
++    const e = resolve({
++      progress: progressThrough(9, at("2026-10-26T21:00")),
++      now: at("2026-10-27T21:00"),
++      remembered: "ask",
++      drafted: (day, id) => draftHasWords(drafts[`money:${day}:${id}`]),
++    })!;
++    const w = entryWords(e, es.home.hoy.entry, "Wuzhen");
++    expect(w.label).toBe("Seguir con el día 3");
++    expect(w.hint).toBeUndefined();
++  });
++});
+diff --git a/apps/mobile/src/hooks/todayEntry.ts b/apps/mobile/src/hooks/todayEntry.ts
+index ca0d497..f1ba638 100644
+--- a/apps/mobile/src/hooks/todayEntry.ts
++++ b/apps/mobile/src/hooks/todayEntry.ts
+@@ -11,8 +11,34 @@ import {
+   type DayUnlockRule,
+   type PathDayDTO,
+ } from "@elara/shared";
++import type { StepDraft } from "@/components/practice/draft";
+ import { completionAnchor, hasStarted, type DayGateState, type GateProgress } from "@/lib/dayGate";
+ 
++/**
++ * Whether a step's draft on this phone holds anything she gave: words, a
++ * choice, a mark, a photo. The step screen saves its draft a moment after it
++ * opens, untouched or not, so a draft's existence only says she was on the
++ * step (beta hardening, 3 Nov 2026: Hoy read that as «Guardamos lo que
++ * escribiste» over a day she had only opened).
++ */
++export function draftHasWords(draft: unknown): boolean {
++  if (!draft || typeof draft !== "object") return false;
++  const d = draft as Partial<StepDraft>;
++  const said = (s: unknown) => typeof s === "string" && s.trim().length > 0;
++  return (
++    said(d.choice) ||
++    (Array.isArray(d.picks) && d.picks.length > 0) ||
++    said(d.other) ||
++    said(d.detail) ||
++    (!!d.sorted && Object.keys(d.sorted).length > 0) ||
++    typeof d.scale === "number" ||
++    d.done === true ||
++    (Array.isArray(d.blanks) && d.blanks.some(said)) ||
++    (!!d.reflect && (said(d.reflect.text) || d.reflect.drawing != null || said(d.reflect.caption))) ||
++    (!!d.photo && (d.photo.photo != null || d.photo.uri != null || said(d.photo.caption)))
++  );
++}
++
+ /**
+  * "Today's entry": the one rule behind every door into today's practice
+  * (Final Pass FX 1). Hoy's main button, the Pregunta tab (the orb) and the
+@@ -74,6 +100,12 @@ export interface ResolvedEntry {
+   missed: boolean;
+   /** Where an unfinished day resumes: the step and its place among the day's steps. */
+   step: { id: string; index: number; total: number } | null;
++  /**
++   * Something of hers is kept for this day: an answer the server or this phone
++   * holds, or an unsent draft. Only then may the entry say «Guardamos lo que
++   * escribiste»; a day she only opened is resumed without that claim.
++   */
++  saved: boolean;
+   /** The day that opens next, and when (only while it waits). */
+   nextDay: number | null;
+   opensAt: number | null;
+@@ -201,6 +233,7 @@ export function resolveTodayEntry(input: ResolveInput): ResolvedEntry | null {
+       ...pos,
+       missed: false,
+       step: null,
++      saved: false,
+       nextDay: pathDone ? null : gate?.nextDay ?? null,
+       opensAt: pathDone ? null : gate?.opensAt ?? null,
+       membershipRequired: false,
+@@ -220,7 +253,10 @@ export function resolveTodayEntry(input: ResolveInput): ResolvedEntry | null {
+   const ids = content ? stepsOf(content).map((s) => s.id) : [];
+   const drafted = !!input.drafted && ids.some((id) => input.drafted!(day, id));
+   const remembered = input.remembered && ids.includes(input.remembered) ? input.remembered : null;
+-  const started = !dayDone && (hasStarted(progress, day) || drafted || !!remembered);
++  // Kept for her: an answer, or an unsent draft. A step this phone remembers
++  // her on means she was in the day, not that anything of hers was kept.
++  const saved = !dayDone && (hasStarted(progress, day) || drafted);
++  const started = saved || (!dayDone && !!remembered);
+   const opened = openedAt(progress, day, rule);
+   const missed = !dayDone && opened !== null && opened < startOfLocalDay(now);
+   const membershipRequired = premium === false && !weekIsFree(pos.week);
+@@ -249,6 +285,7 @@ export function resolveTodayEntry(input: ResolveInput): ResolvedEntry | null {
+     ...pos,
+     missed,
+     step,
++    saved,
+     nextDay: null,
+     opensAt: null,
+     membershipRequired,
+@@ -272,12 +309,27 @@ export function entryWords(entry: ResolvedEntry, words: EntryWords, place: strin
+   if (entry.state === "inProgress") {
+     return {
+       label: words.continue(entry.dayInWeek),
+-      hint: entry.step ? words.stepHint(entry.step.index, entry.step.total) : undefined,
++      // «Guardamos lo que escribiste» only over something kept: after a day she
++      // only opened, it promised words that were never written (beta hardening).
++      hint: entry.step && entry.saved ? words.stepHint(entry.step.index, entry.step.total) : undefined,
+     };
+   }
+   return { label: words.start(entry.dayInWeek) };
+ }
+ 
++/**
++ * Whether the week card may say when the next week opens («La semana 2,
++ * Wuzhen, se abre mañana»). Not when that week is membership and she has
++ * none: it does not open for her, and the next morning's «Empezar el día 1»
++ * went to a membership screen with nothing on sale (beta hardening, 3 Nov
++ * 2026). `premium` is null while the entitlement loads: the line stays, as
++ * every other door waits for the entitlement rather than guessing.
++ */
++export function promisesNextWeek(entry: Pick<ResolvedEntry, "kind" | "week">, premium: boolean | null): boolean {
++  if (entry.kind !== "week") return true;
++  return !(premium === false && !weekIsFree(entry.week + 1));
++}
++
+ /** How many calendar days from `now`'s day to `at`'s day, in local time. */
+ export function calendarDaysBetween(now: number, at: number): number {
+   return Math.round((startOfLocalDay(at) - startOfLocalDay(now)) / 86_400_000);
+diff --git a/apps/mobile/src/hooks/useTodayEntry.ts b/apps/mobile/src/hooks/useTodayEntry.ts
+index 7aec137..630d3fb 100644
+--- a/apps/mobile/src/hooks/useTodayEntry.ts
++++ b/apps/mobile/src/hooks/useTodayEntry.ts
+@@ -1,3 +1,4 @@
++import { useQuery } from "@tanstack/react-query";
+ import { useRouter } from "expo-router";
+ import { useCallback, useMemo } from "react";
+ import { useWeekWorld } from "@/components/journey/useWeekWorld";
+@@ -6,9 +7,11 @@ import type { WorldId } from "@/components/world/types";
+ import { placeOfWorld, type PlaceId } from "@/content/places";
+ import type { AreaKey } from "@/content/types";
+ import { useT, type Strings } from "@/i18n";
++import { qk, queryClient } from "@/lib/query";
++import { progressReady, progressStatus, type ProgressStatus } from "@/store/accountState";
+ import { useAppStore } from "@/store/useAppStore";
+ import { useDayPlace } from "@/store/useDayPlace";
+-import { entryWords, resolveTodayEntry, type EntrySource, type ResolvedEntry } from "./todayEntry";
++import { draftHasWords, entryWords, resolveTodayEntry, type EntrySource, type ResolvedEntry } from "./todayEntry";
+ 
+ /**
+  * Today's entry: the ONE function behind Hoy's main button, the Pregunta tab
+@@ -75,20 +78,24 @@ export function useTodayEntry({ area, source = "today" }: { area?: AreaKey; sour
+   // calendar fact, so the entry is re-read when the day turns.
+   const todayKey = useAppStore((s) => s.todayKey);
+   const userId = useAppStore((s) => s.user?.id ?? null);
++  // No door into a day until the progress in the store is hers: before her
++  // own progress is read, the store says "Week 1 · Day 1" (`progressReady`).
++  const ready = useAppStore((s) => progressReady(s.progressSyncedFor, s.user?.id));
+   // Where she was inside an unfinished day, on this phone. Only her own.
+   const place = useDayPlace((s) => (s.owner != null && s.owner === userId ? s.places[key] : undefined));
+-  // The steps of this Area holding a draft, as one string so typing (a new
+-  // draft every 300 ms) does not re-render every door.
++  // The steps of this Area holding a draft with something of hers in it
++  // (`draftHasWords`: opening a step saves an empty one), as one string so
++  // typing (a new draft every 300 ms) does not re-render every door.
+   const draftKeys = useAppStore((s) => {
+     const prefix = `${key}:`;
+     return Object.keys(s.drafts)
+-      .filter((k) => k.startsWith(prefix))
++      .filter((k) => k.startsWith(prefix) && draftHasWords(s.drafts[k]))
+       .sort()
+       .join("\n");
+   });
+ 
+   const resolved = useMemo(() => {
+-    if (!path) return null;
++    if (!path || !ready) return null;
+     const drafts = new Set(draftKeys ? draftKeys.split("\n") : []);
+     return resolveTodayEntry({
+       area: key,
+@@ -105,7 +112,7 @@ export function useTodayEntry({ area, source = "today" }: { area?: AreaKey; sour
+     // `todayKey` is not read inside: it is what re-reads the clock at midnight.
+     // The gate is a fresh object every render; its three fields are what count.
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+-  }, [key, path, progress, started, gate?.finishedDay, gate?.nextDay, gate?.opensAt, rule, premium, place, draftKeys, source, todayKey]);
++  }, [key, path, ready, progress, started, gate?.finishedDay, gate?.nextDay, gate?.opensAt, rule, premium, place, draftKeys, source, todayKey]);
+ 
+   const href = resolved?.href;
+   const go = useCallback(() => {
+@@ -118,3 +125,20 @@ export function useTodayEntry({ area, source = "today" }: { area?: AreaKey; sour
+     return { ...resolved, ...entryWords(resolved, t.home.hoy.entry, words.name), place: words, go };
+   }, [resolved, t, key, go]);
+ }
++
++/**
++ * Whether her progress is ready for today's entry, and, while it is not,
++ * whether the read is still on its way or failed (`accountState.progressStatus`).
++ * Hoy shows a placeholder or a retry where the day would be, instead of a
++ * Day 1 that is not hers. Observes the progress read SessionSync makes; it
++ * never fetches on its own.
++ */
++export function useProgressStatus(): { status: ProgressStatus; retry: () => void } {
++  const ready = useAppStore((s) => progressReady(s.progressSyncedFor, s.user?.id));
++  const read = useQuery({ queryKey: qk.myPaths, enabled: false });
++  const status = progressStatus({ ready, query: read.status, fetching: read.fetchStatus === "fetching" });
++  const retry = useCallback(() => {
++    void queryClient.refetchQueries({ queryKey: qk.myPaths });
++  }, []);
++  return { status, retry };
++}
+diff --git a/apps/mobile/src/i18n/locales/en/account.ts b/apps/mobile/src/i18n/locales/en/account.ts
+index f100db5..dab1a76 100644
+--- a/apps/mobile/src/i18n/locales/en/account.ts
++++ b/apps/mobile/src/i18n/locales/en/account.ts
+@@ -689,6 +689,10 @@ export const account = {
+     body: "Your progress and reflections will be safely stored here whenever you return.",
+     confirm: "Log out",
+     cancel: "Stay logged in",
++    // DRAFT (beta hardening, 3 Nov 2026): when answers given on this phone have not reached her account yet.
++    unsentTitle: "Log out without syncing?",
++    unsentBody: "Some of your answers haven't reached your account yet. If you log out now, they'll be deleted from this phone.",
++    unsentConfirm: "Log out anyway",
+   },
+ 
+   requestSent: {
+diff --git a/apps/mobile/src/i18n/locales/es/account.ts b/apps/mobile/src/i18n/locales/es/account.ts
+index 4291f18..8be848e 100644
+--- a/apps/mobile/src/i18n/locales/es/account.ts
++++ b/apps/mobile/src/i18n/locales/es/account.ts
+@@ -598,6 +598,11 @@ export const account: Strings["account"] = {
+     body: "Tu avance y tus reflexiones se quedan aquí, guardados, para cuando vuelvas.",
+     confirm: "Cerrar sesión",
+     cancel: "Seguir con la sesión abierta",
++    // BORRADOR (beta hardening, 3 nov 2026), pendiente de María y Alejandra: cuando hay
++    // respuestas dadas en este teléfono que todavía no llegaron a su cuenta.
++    unsentTitle: "¿Cerrar sesión sin sincronizar?",
++    unsentBody: "Algunas de tus respuestas todavía no llegaron a tu cuenta. Si cierras sesión ahora, se borrarán de este teléfono.",
++    unsentConfirm: "Cerrar sesión igualmente",
+   },
+ 
+   requestSent: {
+diff --git a/apps/mobile/src/lib/SessionSync.tsx b/apps/mobile/src/lib/SessionSync.tsx
+index f5d3f35..bb4563d 100644
+--- a/apps/mobile/src/lib/SessionSync.tsx
++++ b/apps/mobile/src/lib/SessionSync.tsx
+@@ -23,7 +23,7 @@ import { flushPendingOnboarding } from "@/lib/onboarding";
+ import { configurePurchases, loginPurchases } from "@/lib/purchases";
+ import { refreshForLanguage } from "@/lib/languageSwitch";
+ import { routeForTap } from "@/lib/notificationRoute";
+-import { clearAccountQueries, profileFor, qk, queryClient } from "@/lib/query";
++import { clearAccountQueries, profileFor, qk, queryClient, readFor, reconnected, reconnectRefetch } from "@/lib/query";
+ import { classifySessionEnd } from "@/store/accountState";
+ import { adoptRecommendedArea } from "@/store/activeArea";
+ import { keepPending, prefPending } from "@/store/prefWrites";
+@@ -119,6 +119,17 @@ export function SessionSync() {
+   useEffect(() => {
+     if (!networkOffline && sessionUnread) void refetchSession();
+   }, [networkOffline, sessionUnread, refetchSession]);
++  // Everything else a launch without signal failed to read (the CMS paths the
++  // day screen walks, Hoy's guide and rhythm, the app's switches) stayed failed
++  // after the connection came back: React Query is not told about the phone's
++  // connection, so nothing asked again until a screen remounted. Ask once for
++  // whatever is on screen and failed, on the way back online (`reconnectRefetch`).
++  const wasOffline = useRef(networkOffline);
++  useEffect(() => {
++    const back = reconnected(wasOffline.current, networkOffline);
++    wasOffline.current = networkOffline;
++    if (back) void queryClient.refetchQueries(reconnectRefetch);
++  }, [networkOffline]);
+   // App-wide switches. Not tied to the session, and re-read on a foreground
+   // once stale (the focus wiring above) so a flipped switch, the Circle kill
+   // switch included, lands without a relaunch.
+@@ -154,7 +165,14 @@ export function SessionSync() {
+   useEffect(() => {
+     setWorld25dEnabled(world25d);
+   }, [world25d]);
+-  const pathsQ = useQuery({ queryKey: qk.myPaths, queryFn: api.getMyPaths, enabled: authed });
++  // Her progress, tagged with the account it was read for: it is what lets
++  // Hoy offer her day (`progressSyncedFor`), and a read that lands after the
++  // session changed hands is never taken for the next account's.
++  const pathsQ = useQuery({
++    queryKey: qk.myPaths,
++    queryFn: async () => ({ owner: userId ?? null, list: await api.getMyPaths() }),
++    enabled: authed,
++  });
+   const obQ = useQuery({ queryKey: qk.onboarding, queryFn: api.getOnboarding, enabled: authed });
+   const subQ = useQuery({
+     queryKey: qk.subscription,
+@@ -455,9 +473,16 @@ export function SessionSync() {
+     });
+   }, [authed, router]);
+ 
++  // Applied again when the store changes hands: a sign-in that resets the
++  // store after her read has landed would otherwise leave it empty. Only a
++  // read made for the account signed in now: never one that outlived a
++  // Log out (the store would take back the last account's progress) or a
++  // change of account.
++  const storeUserId = useAppStore((s) => s.user?.id ?? null);
+   useEffect(() => {
+-    if (pathsQ.data) hydrateProgress(pathsQ.data);
+-  }, [pathsQ.data, hydrateProgress]);
++    const read = readFor(pathsQ.data, userId);
++    if (read) hydrateProgress(read.list, read.owner);
++  }, [pathsQ.data, hydrateProgress, storeUserId, userId]);
+ 
+   // Onboarding's recommended Area, only while she has not started another
+   // (`adoptRecommendedArea`): applied on every read, it put a member who had
+@@ -469,7 +494,7 @@ export function SessionSync() {
+     const adopt = adoptRecommendedArea({
+       activeArea,
+       recommended,
+-      serverAreas: pathsQ.data.map((p) => p.area),
++      serverAreas: pathsQ.data.list.map((p) => p.area),
+       local: progress[activeArea],
+     });
+     if (adopt) setActiveArea(recommended);
+diff --git a/apps/mobile/src/lib/onboarding.ts b/apps/mobile/src/lib/onboarding.ts
+index 7b4bb73..9963594 100644
+--- a/apps/mobile/src/lib/onboarding.ts
++++ b/apps/mobile/src/lib/onboarding.ts
+@@ -73,6 +73,13 @@ export async function finalizeOnboarding(): Promise<boolean> {
+   // Today's first visit opens with a line from her summary (spec §3).
+   st.setTodayWelcomePending(true);
+   await refetchAccount();
++  // Her account is brand new, so the path this phone starts for her is all
++  // the progress there is: Hoy may offer it without waiting on a read, which
++  // offline would never come (`accountState.progressReady`).
++  const owner = useAppStore.getState().user?.id;
++  if (owner && useAppStore.getState().progressSyncedFor !== owner) {
++    useAppStore.getState().markProgressSynced(owner);
++  }
+   return ok;
+ }
+ 
+diff --git a/apps/mobile/src/lib/query.test.ts b/apps/mobile/src/lib/query.test.ts
+index 0aae7b1..891726b 100644
+--- a/apps/mobile/src/lib/query.test.ts
++++ b/apps/mobile/src/lib/query.test.ts
+@@ -1,6 +1,6 @@
+-import { QueryClient } from "@tanstack/react-query";
++import { QueryClient, QueryObserver } from "@tanstack/react-query";
+ import { describe, expect, it } from "vitest";
+-import { clearAccountQueries, profileFor, qk } from "./query";
++import { clearAccountQueries, profileFor, qk, readFor, reconnected, reconnectRefetch } from "./query";
+ 
+ describe("a session that ends without Log out", () => {
+   it("drops every account's cache but the phone's app-config", async () => {
+@@ -28,3 +28,63 @@ describe("the cached profile", () => {
+     expect(profileFor(undefined, "a")).toBeUndefined();
+   });
+ });
++
++describe("back online after a launch without signal (beta hardening, 3 Nov 2026)", () => {
++  // Before: the CMS paths, Hoy's guide and the app's switches that failed on
++  // an offline launch stayed failed once the phone was back online; only the
++  // session and /api/me were asked for again.
++  it("is the moment the phone goes from offline to online, and no other", () => {
++    expect(reconnected(true, false)).toBe(true);
++    expect(reconnected(false, false)).toBe(false);
++    expect(reconnected(false, true)).toBe(false);
++    expect(reconnected(true, true)).toBe(false);
++  });
++
++  it("asks again for what is on screen and failed, and nothing else", async () => {
++    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
++    const calls: Record<string, number> = { paths: 0, resources: 0, offScreen: 0 };
++    let online = false;
++    const read = (key: string) => async () => {
++      calls[key]++;
++      if (!online) throw new TypeError("Network request failed");
++      return key;
++    };
++    const ok = async () => {
++      calls.streak = (calls.streak ?? 0) + 1;
++      return 3;
++    };
++    // On screen: two reads that failed offline, one that had landed.
++    const watch = [
++      new QueryObserver(client, { queryKey: ["paths", "es"], queryFn: read("paths") }),
++      new QueryObserver(client, { queryKey: ["resources", "es"], queryFn: read("resources") }),
++      new QueryObserver(client, { queryKey: ["streak"], queryFn: ok }),
++    ];
++    const subs = watch.map((o) => o.subscribe(() => {}));
++    // Off screen: failed too, but no one is looking at it.
++    await client.prefetchQuery({ queryKey: ["offScreen"], queryFn: read("offScreen") });
++    await new Promise((r) => setTimeout(r, 0));
++    expect(client.getQueryState(["paths", "es"])?.status).toBe("error");
++
++    online = true;
++    await client.refetchQueries(reconnectRefetch);
++    expect(client.getQueryData(["paths", "es"])).toBe("paths");
++    expect(client.getQueryData(["resources", "es"])).toBe("resources");
++    expect(calls.streak).toBe(1);
++    expect(calls.offScreen).toBe(1);
++    subs.forEach((u) => u());
++  });
++});
++
++describe("a progress read, applied only for the account signed in now (beta hardening, 3 Nov 2026)", () => {
++  const read = { owner: "a", list: [] };
++  it("is hers while her session is the one signed in", () => {
++    expect(readFor(read, "a")).toBe(read);
++  });
++  it("is no one's after a Log out, or once another account signed in", () => {
++    expect(readFor(read, null)).toBeNull();
++    expect(readFor(read, undefined)).toBeNull();
++    expect(readFor(read, "b")).toBeNull();
++    expect(readFor({ owner: null, list: [] }, "a")).toBeNull();
++    expect(readFor(undefined, "a")).toBeNull();
++  });
++});
+diff --git a/apps/mobile/src/lib/query.ts b/apps/mobile/src/lib/query.ts
+index 639b14d..f9e54f9 100644
+--- a/apps/mobile/src/lib/query.ts
++++ b/apps/mobile/src/lib/query.ts
+@@ -25,6 +25,34 @@ export function clearAccountQueries(client: Pick<QueryClient, "removeQueries">):
+   client.removeQueries({ predicate: (q) => q.queryKey[0] !== "appConfig" });
+ }
+ 
++/** The phone came back online: it was offline on the last reading and is not now. */
++export function reconnected(wasOffline: boolean, offline: boolean): boolean {
++  return wasOffline && !offline;
++}
++
++/**
++ * What to ask for again when the phone is back online (beta hardening, 3 Nov
++ * 2026): every query on screen whose last read failed. React Query is not told
++ * about the phone's connection (`onlineManager` has no listener on a phone),
++ * so after a launch without signal the CMS paths, Hoy's guide and the app's
++ * switches stayed failed until a screen remounted. Only failed ones: a working
++ * cache is not re-read, and nothing off screen is fetched.
++ */
++export const reconnectRefetch = {
++  type: "active" as const,
++  predicate: (q: { state: { status: string } }) => q.state.status === "error",
++};
++
++/**
++ * A read tagged with the account it was made for (her progress, `owner`),
++ * only when that is the account signed in now: never one that outlived a
++ * Log out or a change of account, which would hand the store someone else's
++ * progress.
++ */
++export function readFor<T extends { owner: string | null }>(read: T | undefined, sessionUserId: string | null | undefined): T | null {
++  return read && sessionUserId && read.owner === sessionUserId ? read : null;
++}
++
+ /**
+  * The cached profile, only when it is this session's account's. A cache that
+  * outlived a sign-out holds someone else's, and must read as "not loaded yet".
+diff --git a/apps/mobile/src/store/accountState.test.ts b/apps/mobile/src/store/accountState.test.ts
+index 81e7a84..1d3aa5a 100644
+--- a/apps/mobile/src/store/accountState.test.ts
++++ b/apps/mobile/src/store/accountState.test.ts
+@@ -1,5 +1,12 @@
+ import { describe, expect, it } from "vitest";
+-import { accountReset, accountSettings, freshOnboarding } from "./accountState";
++import {
++  accountReset,
++  accountSettings,
++  freshOnboarding,
++  progressReady,
++  progressStatus,
++  progressSyncedOnLaunch,
++} from "./accountState";
+ import type { Settings } from "./useAppStore";
+ 
+ /**
+@@ -117,6 +124,7 @@ describe("accountReset", () => {
+         "pendingFeedback",
+         "pendingSteps",
+         "progress",
++        "progressSyncedFor",
+         "recentResourceIds",
+         "safetyPauses",
+         "settings",
+@@ -128,4 +136,56 @@ describe("accountReset", () => {
+       ].sort(),
+     );
+   });
++
++  it("makes the progress no one's, so the next account's is read before a day is offered", () => {
++    expect(accountReset(settingsWith()).progressSyncedFor).toBeNull();
++  });
++});
++
++describe("progressReady (beta hardening, 3 Nov 2026)", () => {
++  // Before: a member in week 2 who signed in on a new phone, or again after her
++  // session expired, was offered «Semana 1 · Día 1 · Empezar el día 1» until her
++  // progress arrived (forever if the read failed), and answering it rewrote the
++  // Day 1 answers she gave weeks ago.
++  it("is not ready until her own progress has been read", () => {
++    expect(progressReady(null, "u1")).toBe(false);
++    expect(progressReady(undefined, "u1")).toBe(false);
++    expect(progressReady("u0", "u1")).toBe(false);
++    expect(progressReady("u1", "u1")).toBe(true);
++  });
++
++  it("gates nothing while signed out", () => {
++    expect(progressReady(null, null)).toBe(true);
++    expect(progressReady(undefined, undefined)).toBe(true);
++  });
++});
++
++describe("progressSyncedOnLaunch", () => {
++  it("counts a store from a build before the field as the last account's", () => {
++    expect(progressSyncedOnLaunch(undefined, "u1")).toBe("u1");
++    expect(progressSyncedOnLaunch(undefined, null)).toBeNull();
++  });
++
++  it("keeps what this build wrote", () => {
++    expect(progressSyncedOnLaunch(null, "u1")).toBeNull();
++    expect(progressSyncedOnLaunch("u1", "u1")).toBe("u1");
++  });
++});
++
++describe("progressStatus", () => {
++  it("is ready once her progress is hers, whatever the read is doing", () => {
++    expect(progressStatus({ ready: true, query: "error", fetching: false })).toBe("ready");
++    expect(progressStatus({ ready: true, query: "pending", fetching: true })).toBe("ready");
++  });
++
++  it("is loading while the read is on its way", () => {
++    expect(progressStatus({ ready: false, query: "pending", fetching: true })).toBe("loading");
++    expect(progressStatus({ ready: false, query: "pending", fetching: false })).toBe("loading");
++    // A retry after a failure is on its way again.
++    expect(progressStatus({ ready: false, query: "error", fetching: true })).toBe("loading");
++  });
++
++  it("offers a retry once the read failed and nothing is in flight", () => {
++    expect(progressStatus({ ready: false, query: "error", fetching: false })).toBe("failed");
++  });
+ });
+diff --git a/apps/mobile/src/store/accountState.ts b/apps/mobile/src/store/accountState.ts
+index 5be2f31..c51c697 100644
+--- a/apps/mobile/src/store/accountState.ts
++++ b/apps/mobile/src/store/accountState.ts
+@@ -73,6 +73,9 @@ export function accountReset(current: Settings): Partial<AppState> {
+     betaOpenAreas: undefined,
+     activeArea: "money",
+     progress: {} as AppState["progress"],
++    // The progress above is no one's yet: the next account's is read again
++    // before any door into a day is offered (`progressReady`).
++    progressSyncedFor: null,
+     onboarding: freshOnboarding(),
+     // Her summary's line belongs to her; the next person is never greeted with it.
+     todayWelcomePending: false,
+@@ -103,6 +106,58 @@ export function accountReset(current: Settings): Partial<AppState> {
+   };
+ }
+ 
++// ── Whose progress this is ──────────────────────────────────────────────────
++
++/**
++ * Whether the path progress in the store is this account's, so a door into a
++ * day may be offered from it (Hoy's postcard, the Atlas "Continue").
++ *
++ * The store starts every install with a fresh Day 1 for Money, and a session
++ * change resets progress to nothing. Until her own progress is read, both
++ * read as "Week 1 · Day 1, Start". A member in week 2 who signed in on a new
++ * phone, or again after her session expired, was offered Day 1, and answering
++ * it rewrote the Day 1 answers she gave weeks ago. So the doors wait for
++ * `progressSyncedFor` to name her: set by a server read of her progress
++ * (`hydrateProgress`) or by her own brand-new account's start
++ * (`finalizeOnboarding`), persisted with the progress it vouches for, and
++ * cleared by `accountReset`. Signed out, nothing is gated here.
++ */
++export function progressReady(syncedFor: string | null | undefined, userId: string | null | undefined): boolean {
++  if (!userId) return true;
++  return syncedFor === userId;
++}
++
++/**
++ * `progressSyncedFor` as a launch should read it. A store persisted by a build
++ * before the field existed has no value at all (`undefined`): its progress was
++ * kept for the account in `lastUserId` (a different account always reset it),
++ * so it counts as that account's rather than making every member wait for a
++ * network read on the first launch of this build, offline included.
++ */
++export function progressSyncedOnLaunch(
++  syncedFor: string | null | undefined,
++  lastUserId: string | null | undefined,
++): string | null {
++  return syncedFor === undefined ? (lastUserId ?? null) : syncedFor;
++}
++
++/**
++ * What Hoy shows in place of the day while her progress is not ready: the
++ * read is still on its way (`loading`), or it failed and nothing is in flight
++ * (`failed`, with a retry). `ready` once `progressReady` holds.
++ */
++export type ProgressStatus = "ready" | "loading" | "failed";
++
++export function progressStatus(o: {
++  ready: boolean;
++  /** The progress query's status (`/api/me/paths`). */
++  query: "pending" | "error" | "success";
++  fetching: boolean;
++}): ProgressStatus {
++  if (o.ready) return "ready";
++  return o.query === "error" && !o.fetching ? "failed" : "loading";
++}
++
+ // ── When a session ends ─────────────────────────────────────────────────────
+ 
+ /**
+@@ -184,6 +239,25 @@ export function heldCount(held: HeldForSignIn | null | undefined): number {
+   return held.pendingSteps.length + held.pendingCheckIns.length + held.pendingFeedback.length;
+ }
+ 
++/**
++ * What she has sent from this phone that has not reached her account yet: her
++ * queued answers (an entry with no owner is the store's account's, as for the
++ * flush), check-ins and day feedback.
++ *
++ * Log out clears all of it (`endSession("signedOut")`), and the Log out dialog
++ * used to promise «Tu avance y tus reflexiones se quedan aquí, guardados» over
++ * it: an answer given offline was gone after logging out and back in. The
++ * dialog now asks first while this is above zero (beta hardening, 3 Nov 2026).
++ */
++export function unsentCount(
++  s: Pick<SessionSlice, "pendingSteps" | "pendingCheckIns" | "pendingFeedback" | "lastUserId">,
++  userId: string | null | undefined,
++): number {
++  if (!userId) return 0;
++  const steps = s.pendingSteps.filter((q) => (q.owner ?? s.lastUserId ?? userId) === userId).length;
++  return steps + s.pendingCheckIns.length + s.pendingFeedback.length;
++}
++
+ const sameStep = (a: PendingStep, b: PendingStep) =>
+   a.area === b.area && a.day === b.day && a.body.stepId === b.body.stepId;
+ 
+diff --git a/apps/mobile/src/store/progressSync.test.ts b/apps/mobile/src/store/progressSync.test.ts
+new file mode 100644
+index 0000000..73d2b33
+--- /dev/null
++++ b/apps/mobile/src/store/progressSync.test.ts
+@@ -0,0 +1,116 @@
++import { beforeEach, describe, expect, it, vi } from "vitest";
++
++/**
++ * Whose progress the store holds (beta hardening, 3 Nov 2026), through the
++ * real store: a new phone starts on a Day 1 that is no one's, a sign-in or an
++ * ended session makes the progress no one's again, and only a read made for
++ * the signed-in account (or her brand-new account's own start) makes it hers.
++ * Hoy offers a day only then (`progressReady`); before, a week-2 member who
++ * signed in on a new phone was offered Day 1 and answering it rewrote her
++ * Day 1 answers.
++ *
++ * The network, the string catalogue and storage are stubbed; nothing else is.
++ */
++
++vi.mock("@/lib/api", () => ({ api: {}, ApiError: class extends Error {} }));
++vi.mock("@/i18n", () => ({ LAUNCH_LOCALE: "es", setActiveLocale: () => {} }));
++vi.mock("@/lib/query", () => ({ qk: { myPaths: ["myPaths"] }, queryClient: { invalidateQueries: vi.fn() } }));
++vi.mock("./persistStorage", () => {
++  const m = new Map<string, string>();
++  return {
++    makePersistStorage: () => ({
++      getItem: (k: string) => m.get(k) ?? null,
++      setItem: (k: string, v: string) => void m.set(k, v),
++      removeItem: (k: string) => void m.delete(k),
++    }),
++  };
++});
++
++const { useAppStore } = await import("./useAppStore");
++const { progressReady } = await import("./accountState");
++
++const store = () => useAppStore.getState();
++const ready = () => progressReady(store().progressSyncedFor, store().user?.id);
++const member = (id: string) => ({ id, name: "Lucía Prueba", email: `${id}@example.com`, avatar: null, isAnonymous: false });
++
++/** Week 1 walked: today is week 2, day 1 (path day 8). */
++const weekOneDone = {
++  area: "money" as const,
++  currentDay: 8,
++  completedDays: [1, 2, 3, 4, 5, 6, 7],
++  responses: {},
++  stepAnswers: { 1: { ask: { value: "Lo que gano", answeredAt: 1_793_127_540_000 } } },
++  dayCompletedAt: { 7: 1_793_646_000_000 },
++  startedAt: 1_793_124_000_000,
++};
++
++beforeEach(() => {
++  // A fresh install: the store's own Day 1 for Money, and no account.
++  useAppStore.setState({
++    user: null,
++    lastUserId: null,
++    progressSyncedFor: null,
++    pendingSteps: [],
++    progress: { money: { currentDay: 1, completedDays: [], responses: {}, stepAnswers: {}, startedAt: 1 } } as never,
++  });
++});
++
++describe("progress the store can vouch for", () => {
++  it("a new phone's Day 1 is no one's: a member who signs in waits for her own", () => {
++    store().setSessionUser(member("u1"));
++    // The store still says Day 1, and it is not hers.
++    expect(store().progress.money?.currentDay).toBe(1);
++    expect(ready()).toBe(false);
++
++    store().hydrateProgress([weekOneDone], "u1");
++    expect(ready()).toBe(true);
++    expect(store().progress.money?.currentDay).toBe(8);
++  });
++
++  it("a read made for another account is not applied", () => {
++    store().setSessionUser(member("u1"));
++    store().hydrateProgress([weekOneDone], "u2");
++    expect(ready()).toBe(false);
++    expect(store().progress.money?.currentDay).toBe(1);
++  });
++
++  it("a read that lands before the profile is still hers once the profile says so", () => {
++    // SessionSync can read her progress before `/api/me` names her.
++    store().hydrateProgress([weekOneDone], "u1");
++    store().setSessionUser(member("u1"));
++    expect(ready()).toBe(true);
++    expect(store().progress.money?.currentDay).toBe(8);
++  });
++
++  it("an expired session makes it no one's again", () => {
++    store().setSessionUser(member("u1"));
++    store().hydrateProgress([weekOneDone], "u1");
++    store().endSession("expired");
++    store().setSessionUser(member("u1"));
++    expect(ready()).toBe(false);
++  });
++
++  it("another account signing in on this phone waits for its own", () => {
++    store().setSessionUser(member("u1"));
++    store().hydrateProgress([weekOneDone], "u1");
++    store().setSessionUser(member("u2"));
++    expect(ready()).toBe(false);
++    expect(store().progress.money).toBeUndefined();
++  });
++
++  it("an offline relaunch keeps her progress hers (the flag is persisted with it)", () => {
++    store().setSessionUser(member("u1"));
++    store().hydrateProgress([weekOneDone], "u1");
++    // Same account, same store: nothing resets it.
++    store().setSessionUser(member("u1"));
++    expect(ready()).toBe(true);
++    expect(store().progressSyncedFor).toBe("u1");
++  });
++
++  it("a brand-new account's own start is hers without a read", () => {
++    store().setSessionUser(member("u3"));
++    expect(ready()).toBe(false);
++    store().markProgressSynced("u3");
++    expect(ready()).toBe(true);
++  });
++});
+diff --git a/apps/mobile/src/store/sessionEnd.test.ts b/apps/mobile/src/store/sessionEnd.test.ts
+index 85ad9d2..8bdd0cf 100644
+--- a/apps/mobile/src/store/sessionEnd.test.ts
++++ b/apps/mobile/src/store/sessionEnd.test.ts
+@@ -9,6 +9,7 @@ import {
+   heldCount,
+   heldUsable,
+   startSession,
++  unsentCount,
+   type SessionSlice,
+ } from "./accountState";
+ import { belongsTo, flushQueueOnce, sameEntry } from "./stepQueue";
+@@ -227,3 +228,36 @@ describe("an offline restart", () => {
+     expect(apply(empty, endSession(empty, "expired", NOW)).heldForSignIn).toBeNull();
+   });
+ });
++
++describe("unsentCount: what Log out would delete (beta hardening, 3 Nov 2026)", () => {
++  // Before: an answer given offline, then Log out under «Tu avance y tus
++  // reflexiones se quedan aquí, guardados»: after signing back in it was gone.
++  it("is what she sent from this phone that has not reached her account", () => {
++    // Two queued answers (one from an older build, with no owner), a check-in, a day's feedback.
++    expect(unsentCount(signedInAsA(), A.id)).toBe(4);
++  });
++
++  it("is exactly what a deliberate Log out clears", () => {
++    const out = apply(signedInAsA(), endSession(signedInAsA(), "signedOut", NOW));
++    expect(out.pendingSteps).toEqual([]);
++    expect(out.pendingCheckIns).toEqual([]);
++    expect(out.pendingFeedback).toEqual([]);
++    expect(out.heldForSignIn).toBeNull();
++    expect(unsentCount(out, A.id)).toBe(0);
++  });
++
++  it("does not count an answer queued for another account", () => {
++    const mixed: SessionSlice = { ...signedInAsA(), pendingSteps: [step("hers", NOW, B.id)], pendingCheckIns: [], pendingFeedback: [] };
++    expect(unsentCount(mixed, A.id)).toBe(0);
++    expect(unsentCount(mixed, B.id)).toBe(1);
++  });
++
++  it("is nothing while signed out", () => {
++    expect(unsentCount(signedInAsA(), null)).toBe(0);
++  });
++
++  it("is nothing once the queue has drained", () => {
++    const sent: SessionSlice = { ...signedInAsA(), pendingSteps: [], pendingCheckIns: [], pendingFeedback: [] };
++    expect(unsentCount(sent, A.id)).toBe(0);
++  });
++});
+diff --git a/apps/mobile/src/store/useAppStore.ts b/apps/mobile/src/store/useAppStore.ts
+index e3ba951..463d4b0 100644
+--- a/apps/mobile/src/store/useAppStore.ts
++++ b/apps/mobile/src/store/useAppStore.ts
+@@ -35,6 +35,7 @@ import {
+   endSession,
+   expireHeld,
+   freshOnboarding,
++  progressSyncedOnLaunch,
+   startSession,
+   type SessionEnd,
+ } from "./accountState";
+@@ -322,7 +323,22 @@ export interface AppState {
+   setHasOnboarded: (value: boolean) => void;
+   setAuthLoaded: (value: boolean) => void;
+   setActiveArea: (area: AreaKey) => void;
+-  hydrateProgress: (list: ServerProgress[]) => void;
++  /**
++   * Her progress as the server read it. `owner` is the account the read was
++   * made for: it marks the progress as hers (`progressSyncedFor`), and a read
++   * made for another account than the one signed in here is not applied.
++   */
++  hydrateProgress: (list: ServerProgress[], owner?: string | null) => void;
++  /**
++   * The account whose path progress the store holds from a server read, or
++   * from her own brand-new account's start. Until it names the signed-in
++   * account, no door into a day is offered from the store's progress
++   * (`accountState.progressReady`). `undefined` only in a store persisted
++   * before it existed (`progressSyncedOnLaunch`).
++   */
++  progressSyncedFor: string | null | undefined;
++  /** A brand-new account's progress is what this phone started (`finalizeOnboarding`). */
++  markProgressSynced: (owner: string) => void;
+ 
+   // entitlement / subscription
+   subscription: SubscriptionDTO | null;
+@@ -847,8 +863,13 @@ export const useAppStore = create<AppState>()(
+       setHasOnboarded: (value) => set({ hasOnboarded: value }),
+       setAuthLoaded: (value) => set({ authLoaded: value }),
+       setActiveArea: (area) => set({ activeArea: area }),
+-      hydrateProgress: (list) =>
++      progressSyncedFor: undefined,
++      markProgressSynced: (owner) => set({ progressSyncedFor: owner }),
++      hydrateProgress: (list, owner) =>
+         set((s) => {
++          // A read made for another account (a session that changed while it
++          // was in flight) is not hers: the read for her is on its way.
++          if (owner && s.user && s.user.id !== owner) return {};
+           const progress = {} as AppState["progress"];
+           for (const p of list) progress[p.area] = fromServer(p, s.progress[p.area]);
+           // What the queue holds and the server has not heard about, laid back
+@@ -858,7 +879,10 @@ export const useAppStore = create<AppState>()(
+           // Completion is left to the server: the flush invalidates this query
+           // once the queue lands.
+           overlayPending(progress, s.pendingSteps);
+-          return { progress: localizeProgress(progress, s.locale) };
++          return {
++            progress: localizeProgress(progress, s.locale),
++            ...(owner ? { progressSyncedFor: owner } : {}),
++          };
+         }),
+ 
+       subscription: null,
+@@ -1345,6 +1369,8 @@ export const useAppStore = create<AppState>()(
+         // offline relaunch opened on Day 1. Kept with the queue that feeds it,
+         // so an answer given offline is still on screen after a restart.
+         progress: s.progress,
++        // Whose that progress is, so an offline relaunch can still offer her day.
++        progressSyncedFor: s.progressSyncedFor,
+         activeArea: s.activeArea,
+         pendingSteps: s.pendingSteps,
+         // Only behind the review gate (off): see `safetyAck.ts`.
+@@ -1406,6 +1432,12 @@ export const useAppStore = create<AppState>()(
+           queueMicrotask(() => useAppStore.setState({ locale: LAUNCH_LOCALE }));
+           setActiveLocale(LAUNCH_LOCALE);
+         } else if (state?.locale) setActiveLocale(state.locale);
++        // Progress persisted by a build before `progressSyncedFor` existed is
++        // the last account's (`progressSyncedOnLaunch`).
++        if (state && state.progressSyncedFor === undefined) {
++          const syncedFor = progressSyncedOnLaunch(state.progressSyncedFor, state.lastUserId);
++          queueMicrotask(() => useAppStore.setState({ progressSyncedFor: syncedFor }));
++        }
+         // Held work is kept for a bounded window, never indefinitely.
+         if (state?.heldForSignIn && !expireHeld(state.heldForSignIn, Date.now())) {
+           queueMicrotask(() => useAppStore.setState({ heldForSignIn: null }));
