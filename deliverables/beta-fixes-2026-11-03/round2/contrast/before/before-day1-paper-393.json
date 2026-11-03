@@ -1,0 +1,15 @@
+{
+ "x": 25,
+ "y": 378,
+ "w": 343,
+ "h": 148,
+ "ph": "Con tus propias palabras…",
+ "phColor": "rgba(99, 90, 84, 0.75)",
+ "textColor": "rgb(26, 22, 21)",
+ "clip": {
+  "x": 25,
+  "y": 378,
+  "width": 343,
+  "height": 60
+ }
+}
