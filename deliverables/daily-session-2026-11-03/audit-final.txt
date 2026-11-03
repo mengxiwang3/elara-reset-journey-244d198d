@@ -1,0 +1,25 @@
+108 screens, 1355 text runs, 710 touch targets
+
+## Text under 14px: 15
+- 13px «Martes · 3 nov» — 22 screen(s): 06-hoy-done_360x780, 06-hoy-done_393x852, 07b-hoy-next-day-qa9_360x780, 07b-hoy-next-day-qa9_393x852 …
+- 12px «Atlas» — 22 screen(s): 06-hoy-done_360x780, 06-hoy-done_393x852, 07b-hoy-next-day-qa9_360x780, 07b-hoy-next-day-qa9_393x852 …
+- 12px «Pregunta» — 22 screen(s): 06-hoy-done_360x780, 06-hoy-done_393x852, 07b-hoy-next-day-qa9_360x780, 07b-hoy-next-day-qa9_393x852 …
+- 12px «Explorar» — 22 screen(s): 06-hoy-done_360x780, 06-hoy-done_393x852, 07b-hoy-next-day-qa9_360x780, 07b-hoy-next-day-qa9_393x852 …
+- 12px «Círculos» — 22 screen(s): 06-hoy-done_360x780, 06-hoy-done_393x852, 07b-hoy-next-day-qa9_360x780, 07b-hoy-next-day-qa9_393x852 …
+- 13px «Semana 1 · Mirar sin juzgar» — 4 screen(s): 14c-collection_360x780, 14c-collection_393x852, 24d-editar-hoy-collection_360x780, 24d-editar-hoy-collection_393x852
+- 13px «Frase» — 4 screen(s): 14c-collection_360x780, 14c-collection_393x852, 24d-editar-hoy-collection_360x780, 24d-editar-hoy-collection_393x852
+- 12px «Día 7» — 4 screen(s): 14c-collection_360x780, 14c-collection_393x852, 24d-editar-hoy-collection_360x780, 24d-editar-hoy-collection_393x852
+- 12px «Día 1» — 4 screen(s): 14c-collection_360x780, 14c-collection_393x852, 24d-editar-hoy-collection_360x780, 24d-editar-hoy-collection_393x852
+- 12px «Día 2» — 4 screen(s): 14c-collection_360x780, 14c-collection_393x852, 24d-editar-hoy-collection_360x780, 24d-editar-hoy-collection_393x852
+- 12px «Día 3» — 4 screen(s): 14c-collection_360x780, 14c-collection_393x852, 24d-editar-hoy-collection_360x780, 24d-editar-hoy-collection_393x852
+- 12px «Día 4» — 4 screen(s): 14c-collection_360x780, 14c-collection_393x852, 24d-editar-hoy-collection_360x780, 24d-editar-hoy-collection_393x852
+- 12px «Día 5» — 4 screen(s): 14c-collection_360x780, 14c-collection_393x852, 24d-editar-hoy-collection_360x780, 24d-editar-hoy-collection_393x852
+- 8px «WUZHEN» — 2 screen(s): 18-large-hoy_360x780_x1.6, 18-large-hoy_393x852_x1.6
+- 13px «De Elara» — 2 screen(s): 20b-day7-q2_360x780, 20b-day7-q2_393x852
+
+## Contrast under 4.5:1 (3:1 for large text): 2
+- 4.25:1 15px «LU» rgb(201,74,28) on rgb(255,241,236) — 22 screen(s): 06-hoy-done_360x780, 06-hoy-done_393x852, 07b-hoy-next-day-qa9_360x780, 07b-hoy-next-day-qa9_393x852 …
+- 4.32:1 13px «Semana 1 · Mirar sin juzgar» rgb(201,74,28) on rgb(249,245,239) — 4 screen(s): 14c-collection_360x780, 14c-collection_393x852, 24d-editar-hoy-collection_360x780, 24d-editar-hoy-collection_393x852
+
+## Touch targets under 44x44: 1
+- 38x38 «Tu perfil» — 22 screen(s): 06-hoy-done_360x780, 06-hoy-done_393x852, 07b-hoy-next-day-qa9_360x780, 07b-hoy-next-day-qa9_393x852 …
