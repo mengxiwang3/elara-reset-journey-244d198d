@@ -1,0 +1,70 @@
+/* ---------- A · guided step-by-step ---------- */
+.band{position:relative;flex:none;background:url(assets/wuzhen-d1.webp) 30% center/cover}
+.band.tall{height:250px}
+.band.short{height:132px}
+.band:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:18px;background:var(--bg);
+  clip-path:polygon(0 60%,6% 35%,12% 55%,20% 30%,28% 60%,36% 40%,45% 62%,55% 35%,63% 58%,72% 32%,80% 55%,88% 38%,95% 58%,100% 40%,100% 100%,0 100%)}
+.band .nav{position:absolute;top:calc(var(--sb) + 2px);left:16px;right:16px;display:flex;justify-content:space-between}
+.topbar{flex:none;padding:calc(var(--sb) + 2px) 16px 6px;display:flex;align-items:center;gap:10px;background:var(--bg)}
+.topbar .icon-btn{background:var(--surface);box-shadow:none}
+.prog{flex:1;display:flex;flex-direction:column;gap:6px;align-items:stretch;padding:0 4px}
+.prog .segs{display:flex;gap:4px}
+.prog .segs i{flex:1;height:5px;border-radius:3px;background:#DED6CC}
+.prog .segs i.done{background:var(--forest)}
+.prog .segs i.now{background:var(--ember)}
+.prog .lbl{font-size:13px;color:var(--muted);text-align:center;font-weight:500}
+.why{background:var(--forest);color:var(--mint-pale);border-radius:20px;padding:18px 18px 16px;margin-top:18px}
+.why .eyebrow{color:var(--mint)}
+.why p{margin:6px 0 0;font-size:16.5px;line-height:1.45}
+.why .payoff{margin-top:12px;padding-top:12px;border-top:1px solid rgba(163,229,199,.25);font-size:15px;color:#cfe9dc}
+.plan{margin:22px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.plan li{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:16px;padding:14px}
+.plan .n{width:30px;height:30px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font-weight:600;flex:none;color:var(--forest)}
+.plan b{display:block;font-size:13px;color:var(--muted);font-weight:600;margin-bottom:2px}
+.plan span{font-size:16px;line-height:1.35}
+.note{display:flex;gap:10px;margin-top:16px;color:var(--muted);font-size:14.5px;line-height:1.45}
+.note svg{flex:none;margin-top:2px}
+.echo{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--sage);border-radius:14px;padding:10px 8px 10px 14px;margin:6px 0 18px}
+.echo small{display:block;font-size:12.5px;color:var(--muted);font-weight:600}
+.echo span{font-weight:600}
+.echo button{border:0;background:none;color:var(--forest);font-weight:600;font-size:14px;min-height:44px;padding:0 10px;cursor:pointer;display:flex;align-items:center;gap:4px}
+/* reply screen */
+.rep-wrap{padding:8px 20px 0}
+.rep-orb{width:84px;height:84px;margin:34px auto 30px;box-shadow:0 0 0 10px rgba(242,147,92,.14),0 0 0 22px rgba(242,147,92,.07)}
+.rep-orb.pulse{animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 14px rgba(242,147,92,.2),0 0 0 30px rgba(242,147,92,.08)}}
+@media (prefers-reduced-motion:reduce){.rep-orb.pulse{animation:none}}
+.rep{background:var(--peach);border-radius:22px;padding:18px 20px 16px}
+.rep .hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.rep .hd b{color:var(--forest);font-size:15px}
+.rep q{display:block;font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.45;quotes:none;color:var(--ink)}
+.rep.loading{text-align:center;color:var(--muted);font-size:17px;padding:26px 20px}
+.rep.loading .dots{color:var(--ember);margin-left:6px}
+.rep.err{background:#fff;border:1px solid var(--border);text-align:left}
+.rep.err h3{margin:6px 0 6px;font-size:19px}
+.rep.err p{margin:0 0 14px;color:var(--body);font-size:15.5px}
+.rep.err .row2{display:flex;flex-direction:column;gap:6px}
+.youchose{margin:16px 0 0;font-size:15px;color:var(--muted);text-align:center}
+.youchose b{color:var(--ink)}
+/* close */
+.done-band{position:relative;height:210px;flex:none;background:url(assets/wuzhen-d1.webp) 30% center/cover}
+.done-band .stamp{position:absolute;right:22px;bottom:-26px;width:96px;height:112px;background:#FFFDF8;padding:8px;transform:rotate(4deg);
+  box-shadow:0 4px 12px rgba(0,0,0,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:10.5px;letter-spacing:.08em;color:var(--forest);font-weight:600;text-transform:uppercase}
+.done-band .stamp div{width:64px;height:64px;background:url(assets/keepsake-d1.webp) center/contain no-repeat}
+.keep{background:#FFFDF8;border:1px solid var(--border);border-radius:20px;padding:18px;margin-top:14px;box-shadow:0 2px 8px rgba(60,40,20,.06)}
+.keep .eyebrow{color:var(--ember)}
+.keep blockquote{margin:8px 0 10px;font-family:var(--serif);font-size:21px;line-height:1.35}
+.keep .from{font-size:14px;color:var(--muted)}
+.saved{display:flex;gap:8px;align-items:flex-start;margin-top:12px;font-size:14px;color:var(--forest)}
+.saved svg{flex:none;width:18px;height:18px}
+.weekline{margin-top:20px;font-size:14.5px;color:var(--muted);line-height:1.45}
+.weekline b{color:var(--ink)}
+.tomorrow{margin-top:18px;background:var(--forest);color:var(--mint-pale);border-radius:20px;overflow:hidden}
+.tomorrow .ph{height:86px;background:url(assets/wuzhen-d2.webp) center 40%/cover}
+.tomorrow .in{padding:14px 18px 18px}
+.tomorrow .eyebrow{color:var(--mint)}
+.tomorrow p{margin:6px 0 0;font-size:17px;line-height:1.4;color:#fff}
+.tomorrow small{display:block;margin-top:8px;color:#cfe9dc;font-size:14px}
+.hoy-retake{background:#fff;border:1px solid var(--border);border-radius:16px;padding:14px 16px}
+.hoy-retake b{display:block;color:var(--forest);font-size:14px;margin-bottom:4px}
+.hoy-retake span{font-family:var(--serif);font-size:17px;line-height:1.35}

@@ -1,0 +1,66 @@
+/* ---------- B · mentor conversation ---------- */
+.chat{background:var(--warm)}
+.chat-hd{flex:none;padding:calc(var(--sb) + 2px) 12px 8px;display:flex;align-items:center;gap:10px;background:var(--warm);border-bottom:1px solid var(--border)}
+.chat-hd .icon-btn{background:transparent;box-shadow:none}
+.chat-hd .who{flex:1;display:flex;align-items:center;gap:10px;min-width:0}
+.chat-hd .who .orb{width:38px;height:38px}
+.chat-hd .who b{display:block;font-size:17px}
+.chat-hd .who small{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-hd .steps{display:flex;gap:4px;align-items:center;margin-right:6px}
+.chat-hd .steps i{width:22px;height:5px;border-radius:3px;background:#DED6CC}
+.chat-hd .steps i.done{background:var(--forest)}.chat-hd .steps i.now{background:var(--ember)}
+.thread{padding:14px 14px 20px;display:flex;flex-direction:column;gap:10px}
+.mini-post{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:16px;padding:8px;margin:2px 0 6px}
+.mini-post .ph{width:76px;height:56px;border-radius:10px;background:url(assets/wuzhen-d1.webp) 30% center/cover;flex:none}
+.mini-post b{display:block;font-family:var(--serif);font-weight:600;font-size:18px;line-height:1.2}
+.mini-post small{font-size:13px;color:var(--muted)}
+.divider{text-align:center;font-size:12.5px;color:var(--faint);margin:6px 0;display:flex;align-items:center;gap:10px}
+.divider:before,.divider:after{content:"";flex:1;height:1px;background:var(--border)}
+.divider.ember{color:var(--ember);font-weight:600}
+.msg{display:flex;gap:8px;align-items:flex-end;max-width:100%}
+.msg .orb{width:28px;height:28px;margin-bottom:2px}
+.msg .orb.ghost{visibility:hidden}
+.bub{background:var(--peach);border-radius:20px 20px 20px 6px;padding:12px 15px;max-width:86%;font-size:16.5px;line-height:1.45}
+.bub.voice{font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.45}
+.bub .hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px;flex-wrap:wrap;font-family:var(--sans);font-style:normal}
+.bub .hd b{font-size:13.5px;color:var(--forest)}
+.bub.q{background:#fff;border:1px solid var(--border)}
+.bub.q .eyebrow{color:var(--ember);font-size:12.5px;margin-bottom:4px}
+.bub.q .t{font-weight:600;font-size:19px;line-height:1.3}
+.bub.q .d{color:var(--body);font-size:15.5px;margin-top:4px}
+.bub.small{font-size:14px;color:var(--muted);background:transparent;padding:4px 4px 0;font-style:normal;font-family:var(--sans)}
+.mine{align-self:flex-end;display:flex;flex-direction:column;align-items:flex-end;gap:2px;max-width:86%}
+.mine .bub{background:var(--forest);color:#fff;border-radius:20px 20px 6px 20px;max-width:100%}
+.mine .bub.skip{background:var(--surface);color:var(--muted)}
+.mine button{border:0;background:none;color:var(--forest);font-size:14px;font-weight:600;min-height:44px;min-width:44px;padding:0 6px;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.typing{display:inline-flex;align-items:center;gap:10px;color:var(--muted);font-size:15px}
+.typing .dots{color:var(--ember)}
+.bub.err{background:#fff;border:1px solid var(--border)}
+.bub.err b{display:block;font-size:16px;margin:4px 0}
+.bub.err p{margin:0 0 10px;font-size:14.5px;color:var(--body)}
+.bub.err .row2{display:flex;gap:8px;flex-wrap:wrap}
+.bub.err .row2 button{min-height:44px;border-radius:999px;padding:0 16px;font-weight:600;font-size:15px;cursor:pointer}
+.bub.err .row2 .p{background:var(--forest);color:#fff;border:0}
+.bub.err .row2 .s{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.keepcard{color:var(--ink);background:#FFFDF8;border:1px solid var(--border);border-radius:18px;padding:14px;display:flex;gap:12px;margin-top:8px;font-family:var(--sans);font-style:normal}
+.keepcard .k{width:52px;height:60px;background:url(assets/keepsake-d1.webp) center/contain no-repeat;flex:none}
+.keepcard .eyebrow{color:var(--ember);font-size:12.5px}
+.keepcard q{display:block;quotes:none;font-family:var(--serif);font-size:18px;line-height:1.35;margin:4px 0}
+.keepcard small{color:var(--muted);font-size:13px}
+.tomcard{margin-top:8px;border-radius:16px;overflow:hidden;background:var(--forest);color:#fff;font-family:var(--sans);font-style:normal}
+.tomcard .ph{height:70px;background:url(assets/wuzhen-d2.webp) center 40%/cover}
+.tomcard .in{padding:10px 14px 14px}
+.tomcard .eyebrow{color:var(--mint);font-size:12.5px}
+.tomcard p{margin:4px 0 0;font-size:16px;line-height:1.35}
+/* docked structured input (the "composer") */
+.dock{flex:none;background:#fff;border-top:1px solid var(--border);border-radius:22px 22px 0 0;box-shadow:0 -6px 20px rgba(60,40,20,.08);padding:12px 14px 18px}
+.dock .lbl{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--muted);margin:0 4px 8px;font-weight:600}
+.dock .opts{gap:6px}
+.dock .opt{min-height:48px;font-size:16px;padding:8px 12px 8px 16px;border-radius:12px}
+.dock .opt .rad{width:22px;height:22px}
+.dock .acts{display:flex;gap:8px;margin-top:10px;align-items:center}
+.dock .acts .btn{min-height:52px;font-size:16px}
+.dock .acts .btn.ghost{width:auto;flex:none;padding:0 12px;min-height:48px;font-size:15px}
+.dock textarea.write{min-height:96px;font-size:16.5px;background:var(--warm)}
+.dock .sample-btn{margin-top:8px}
+.dock.end{background:var(--warm);box-shadow:none;border-radius:0}

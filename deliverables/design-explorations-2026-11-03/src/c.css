@@ -1,0 +1,71 @@
+/* ---------- C · action-first, tangible takeaway card ---------- */
+.c-top{flex:none;padding:calc(var(--sb) + 2px) 16px 4px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg)}
+.c-top .icon-btn{background:var(--surface);box-shadow:none}
+.c-top .t{flex:1;text-align:center;font-size:14px;color:var(--muted);font-weight:500}
+/* the card itself */
+.tcard{position:relative;background:#FFFDF8;border-radius:20px;border:1px solid #E6DCCD;box-shadow:0 10px 26px rgba(60,40,20,.12);overflow:hidden}
+.tcard .ph{height:92px;background:url(assets/wuzhen-d1.webp) 30% 55%/cover}
+.tcard .k{position:absolute;right:16px;top:58px;width:64px;height:72px;background:#FFFDF8 url(assets/keepsake-d1.webp) center/48px no-repeat;border-radius:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,.14);transform:rotate(4deg)}
+.tcard .k.ghost{filter:grayscale(1);opacity:.45}
+.tcard .in{padding:12px 18px 18px}
+.tcard .meta{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em;padding-right:70px}
+.slot{border-top:1px dashed #D9CFC2;padding:12px 0 10px;margin-top:10px}
+.slot:first-of-type{border-top:0;margin-top:2px}
+.slot .lab{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--ember);letter-spacing:.02em}
+.slot .lab .n{width:20px;height:20px;border-radius:50%;border:1.5px solid currentColor;display:inline-flex;align-items:center;justify-content:center;font-size:11px}
+.slot.filled .lab .n{background:var(--forest);border-color:var(--forest);color:#fff}
+.slot .val{font-size:18px;font-weight:600;margin-top:4px;line-height:1.3}
+.slot .val.serif{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.35}
+.slot .empty{margin-top:6px;height:12px;border-radius:6px;background:#EFE8DE;width:70%}
+.slot .empty.w2{width:88%}
+.slot .hint{font-size:15px;color:var(--body);margin-top:4px}
+.slot textarea.write{margin-top:10px;min-height:104px;background:#fff}
+.enote{margin-top:12px;background:var(--peach);border-radius:14px;padding:12px 14px}
+.enote .hd{display:flex;align-items:center;gap:8px;justify-content:space-between;flex-wrap:wrap;margin-bottom:4px}
+.enote .hd span.w{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--forest)}
+.enote .hd .orb{width:22px;height:22px}
+.enote q{display:block;quotes:none;font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.45}
+.enote.load{color:var(--muted);font-size:15px;display:flex;align-items:center;gap:10px}
+.enote.load .orb{width:22px;height:22px}
+.enote.load .dots{color:var(--ember)}
+.enote.err{background:#fff;border:1px solid var(--border)}
+.enote.err p{margin:2px 0 10px;font-size:14.5px;color:var(--body)}
+.enote.err .row2{display:flex;gap:8px;flex-wrap:wrap}
+.enote.err .row2 button{min-height:44px;border-radius:999px;padding:0 14px;font-weight:600;font-size:14.5px;cursor:pointer}
+.enote.err .row2 .p{background:var(--forest);color:#fff;border:0}
+.enote.err .row2 .s{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.ghostcard .slot .lab{color:var(--faint)}
+/* preview screen */
+.pv h1{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.15;margin:6px 0 14px}
+.pv .why{font-size:16px;color:var(--body);margin:16px 2px 0}
+.pv .why b{color:var(--ink)}
+.pv .note{font-size:14px;color:var(--muted);margin-top:12px;line-height:1.45}
+/* step screen: question below the live card */
+.qhead{margin-top:20px}
+.minicard{display:flex;gap:10px;align-items:center;background:#FFFDF8;border:1px solid #E6DCCD;border-radius:16px;padding:10px 12px;box-shadow:0 4px 12px rgba(60,40,20,.07)}
+.minicard .k{width:40px;height:44px;background:url(assets/keepsake-d1.webp) center/contain no-repeat;flex:none;filter:grayscale(1);opacity:.45}
+.minicard .s{flex:1;min-width:0}
+.minicard .s div{display:flex;align-items:center;gap:8px;font-size:14px;min-height:24px}
+.minicard .s .n{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--faint);flex:none;display:inline-flex;align-items:center;justify-content:center;font-size:10px;color:var(--faint)}
+.minicard .s .on .n{background:var(--forest);border-color:var(--forest);color:#fff}
+.minicard .s span.v{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+.minicard .s .on span.v{color:var(--ink);font-weight:600}
+/* done */
+.where-list{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.where-list div{display:flex;gap:10px;align-items:center;font-size:15px;color:var(--forest)}
+.where-list svg{flex:none}
+.tom2{margin-top:18px;display:flex;gap:12px;align-items:center;background:var(--forest);color:#fff;border-radius:18px;padding:14px}
+.tom2 .k{width:52px;height:56px;background:rgba(255,255,255,.1) url(assets/keepsake-d2.webp) center/42px no-repeat;border-radius:12px;flex:none}
+.tom2 b{display:block;font-size:12.5px;color:var(--mint);letter-spacing:.02em}
+.tom2 span{font-size:15.5px;line-height:1.35}
+.tom2 small{display:block;color:#cfe9dc;font-size:13.5px;margin-top:4px}
+/* collection */
+.coll h1{font-family:var(--serif);font-weight:600;font-size:30px;margin:4px 0 2px}
+.coll .wk{font-size:14px;font-weight:600;color:var(--muted);margin:20px 0 8px}
+.coll .chip{display:inline-block;font-size:12px;font-weight:600;color:var(--forest);background:var(--sage);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.pinned{margin:18px 16px 0}
+.pinned h3{font-size:19px;font-weight:600;margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline}
+.pinned h3 button{border:0;background:none;color:var(--ember);font-weight:600;font-size:14px;min-height:44px;cursor:pointer;padding:0 4px}
+.tcard.slim .meta{padding-right:0}
+.tcard.slim .in{padding-top:14px}

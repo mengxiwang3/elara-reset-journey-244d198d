@@ -1,0 +1,122 @@
+<title>Daily session concepts</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Instrument+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column; three concept cards side by side on wide screens, stacked on phones; trade-offs as a table. */
+:root{
+  --bg:#F7F3EC;--surface:#FFFDF8;--fg:#1A1615;--mute:#5A514B;--line:#E3DACD;--forest:#16382A;--ember:#B5461B;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;--sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141A16;--surface:#1C241F;--fg:#ECE7DF;--mute:#B3AAA1;--line:#33403A;--forest:#A9CDB8;--ember:#E79A75;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141A16;--surface:#1C241F;--fg:#ECE7DF;--mute:#B3AAA1;--line:#33403A;--forest:#A9CDB8;--ember:#E79A75;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--sans);padding-block:28px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:1000px;margin:0 auto;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--forest);margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(1.9rem,5vw,2.4rem)}h2{font-size:1.4rem}h3{font-size:1.15rem}
+p,li{max-width:70ch;margin:0}ul,ol{margin:0;padding-left:22px;display:grid;gap:6px}
+section{display:grid;gap:14px}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.lede{color:var(--mute)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:.8rem;font-weight:600;border:1px dashed var(--mute);color:var(--mute);border-radius:6px;padding:2px 8px}
+.tag.sim{border-color:var(--ember);color:var(--ember)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.card img{display:block;width:100%;aspect-ratio:393/600;object-fit:cover;object-position:top;border-bottom:1px solid var(--line)}
+.card .body{padding:16px;display:grid;gap:10px;align-content:start}
+.card .letter{font-family:var(--serif);color:var(--ember);font-size:1rem}
+.card p{color:var(--mute);font-size:.95rem}
+.open{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border-radius:999px;background:var(--forest);color:var(--bg);font-weight:600;text-decoration:none;justify-self:start}
+.open:focus-visible,a:focus-visible{outline:3px solid var(--ember);outline-offset:2px}
+.rec{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--ember);border-radius:10px;padding:16px;display:grid;gap:8px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.92rem}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+tr:last-child td{border-bottom:0}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px}
+.note{font-size:.9rem;color:var(--mute)}
+</style>
+<main>
+<header style="display:grid;gap:10px">
+  <p class="eyebrow">Elara · 3 Nov 2026 · prototype</p>
+  <h1>Daily session concepts</h1>
+  <p class="lede">Three ways to run the same day: Money path, Wuzhen, «Hacia el camino adelante», the day María tested on 2 Nov. Same questions, same sample answers and same mentor feedback in all three; only the structure and pacing change.</p>
+  <div class="tags"><span class="tag">Contenido actual de la app (aprobación por confirmar)</span><span class="tag sim">Respuestas de Elara simuladas</span><span class="tag">Not tested with users</span></div>
+</header>
+
+<section aria-labelledby="c">
+  <h2 id="c">The three concepts</h2>
+  <div class="cards">
+    <article class="card"><img src="shots/a-393-02-por-que-hoy.png" alt="Concept A: the «Por qué hoy» screen before step 1">
+      <div class="body"><span class="letter">A</span><h3>Step by step</h3><p>One screen per moment: why today, step 1, Elara's note, step 2, Elara's note, a closing screen with tomorrow. Clearest, cheapest to build, slowest.</p><a class="open" href="a.html">Open A</a></div></article>
+    <article class="card"><img src="shots/b-393-05-para-llevarte-escrito.png" alt="Concept B: a conversation thread with the takeaway box docked at the bottom">
+      <div class="body"><span class="letter">B</span><h3>Conversation with Elara</h3><p>One thread. Elara explains why today and asks; her answers become bubbles, and the choices and takeaway stay as structured inputs. Most likely to feel understood, most exposed to weak replies.</p><a class="open" href="b.html">Open B</a></div></article>
+    <article class="card"><img src="shots/c-393-02-lo-que-te-llevas.png" alt="Concept C: an empty takeaway card shown before she starts">
+      <div class="body"><span class="letter">C</span><h3>Action first, a card to keep</h3><p>She sees an empty card first; each step fills it. The finished card stays on Hoy all week and in Tu colección. Clearest payoff and reason to return.</p><a class="open" href="c.html">Open C</a></div></article>
+  </div>
+  <p class="note">Each prototype has a reviewer panel to jump between screens and see the loading, offline, resumed and finished states.</p>
+</section>
+
+<section aria-labelledby="r">
+  <h2 id="r">Recommendation to test</h2>
+  <div class="rec">
+    <p><b>C's card, with A's «Por qué hoy» line on the first screen.</b> Showing what she leaves with before she answers makes the purpose concrete, and the card on Hoy gives a reason to come back that doesn't depend on how good Elara's reply is. It also costs less than B to build on the current app.</p>
+    <p>This is a hypothesis based on design reasoning and a few comments, not research. Keep B in the test: if testers feel much more understood with it, that outweighs its cost.</p>
+    <p class="note">Suggested test: 5–6 testers, each doing this day in two of the three concepts (rotate the order), then asking «¿Para qué era hoy?», «¿Qué te llevas?», «¿Sentiste que Elara te escuchó?» and «¿Volverías mañana? ¿Por qué?».</p>
+  </div>
+</section>
+
+<section aria-labelledby="t">
+  <h2 id="t">Trade-offs</h2>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>A · Step by step</th><th>B · Conversation</th><th>C · Card to keep</th></tr></thead>
+    <tbody>
+      <tr><td>Clear purpose</td><td>Highest: a whole screen on why today</td><td>Good: Elara says it, may be skimmed</td><td>High on what she leaves with; less in words</td></tr>
+      <tr><td>Feeling understood</td><td>Moderate; a generic reply looks emptier on its own screen</td><td>Potentially highest; weak replies hurt most</td><td>Moderate; the note sits on her own card</td></tr>
+      <tr><td>Effort for her</td><td>Most taps (7 screens for a 3-minute day)</td><td>Low per step; long thread</td><td>Low; payoff visible throughout</td></tr>
+      <tr><td>Reason to return</td><td>A «Mañana» card at the end</td><td>A «Mañana» card at the end</td><td>Card on Hoy all week plus «Mañana»</td></tr>
+      <tr><td>Build cost on the current app</td><td>Low: today's step pager already works this way</td><td>Medium to high: new thread layout, resume, «Cambiar»</td><td>Medium: card component and a slot on Hoy</td></tr>
+      <tr><td>Main risk</td><td>Still feels like a form</td><td>Testers expect free chat; overlaps with Pregunta</td><td>A thin card on skipped days; may feel like homework</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<div class="two">
+<section aria-labelledby="m">
+  <h2 id="m">Preguntas para María</h2>
+  <ol>
+    <li>¿Con cuál de las tres entendiste mejor para qué era el día de hoy?</li>
+    <li>En la C, ¿te ayuda ver la tarjeta vacía al principio, o te parece una tarea más?</li>
+    <li>En la B, ¿esperarías poder escribirle a Elara libremente? ¿Te molestaría no poder?</li>
+    <li>¿Te gustaría ver tu tarjeta en Hoy toda la semana, o prefieres que se guarde sin estar a la vista?</li>
+    <li>Las dos respuestas simuladas de Elara, ¿suenan a ella? ¿Hay alguna palabra que no dirías?</li>
+    <li>Con la frase actual de «Para llevarte», ¿qué habrías escrito tú después de elegir «Mejorar mi trabajo actual»?</li>
+    <li>¿La propuesta de Kara te parece más clara? ¿Funcionaría también para «Cobrar un pago pendiente» o «Conocer apoyos disponibles»?</li>
+    <li>¿Qué te haría volver mañana: ver la pregunta de mañana, tu tarjeta, o ninguna de las dos?</li>
+  </ol>
+</section>
+<section aria-labelledby="s">
+  <h2 id="s">Suggested content changes</h2>
+  <p class="note">Proposals only. None is applied in the prototypes, so all three use the same current wording.</p>
+  <ul>
+    <li><b>«Para llevarte»:</b> Kara's «¿Qué podrías hacer esta semana para mejorar tu situación en tu trabajo actual?» ties it to her choice, but needs a version per option, or a template that quotes the option she chose.</li>
+    <li><b>A clearer version already exists</b> in the app's built-in copy but not on the server: «Nombra una cosa sobre la parte que elegiste que podrías averiguar esta semana…». Check whether it was meant to ship.</li>
+    <li><b>One example under the box</b>, for example «Por ejemplo: preguntar si hay formación gratuita».</li>
+    <li><b>«Ninguna por ahora»</b> leads to the same takeaway, which then makes no sense. Skip or adapt it.</li>
+    <li><b>New prototype lines</b> such as «Hoy eliges por dónde empezar a mirar tus ingresos…» need María and Alejandra's approval.</li>
+  </ul>
+</section>
+</div>
+
+<section aria-labelledby="k">
+  <h2 id="k">Keep in mind</h2>
+  <ul>
+    <li>These are HTML approximations of the app; spacing and bars are close, not exact.</li>
+    <li>Elara's replies are written by hand to the app's rules, not by the model. Judge the structure, not the wording.</li>
+    <li>In the app this is path week 2, day 1 (Wuzhen is the week-2 place), so the prototypes say «Semana 2 · Día 1».</li>
+    <li>Offline only simulates the reply failing. No screen-reader or large-text check yet.</li>
+  </ul>
+</section>
+</main>

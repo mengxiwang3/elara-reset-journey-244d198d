@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión diaria: tres propuestas</title>
+<style>
+@font-face{font-family:"Fraunces";src:url(assets/fonts/Fraunces_600SemiBold.ttf) format("truetype");font-weight:600}
+@font-face{font-family:"Instrument Sans";src:url(assets/fonts/InstrumentSans_400Regular.ttf) format("truetype");font-weight:400}
+@font-face{font-family:"Instrument Sans";src:url(assets/fonts/InstrumentSans_600SemiBold.ttf) format("truetype");font-weight:600}
+:root{--bg:#F9F5EF;--ink:#1A1615;--body:#524944;--muted:#635A54;--ember:#C94A1C;--forest:#16382A;--border:#E8E0D5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Instrument Sans",-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:40px 16px 64px}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(28px,5vw,40px);line-height:1.1;margin:0 0 10px}
+.lead{max-width:720px;color:var(--body);margin:0 0 8px}
+.tag{display:inline-block;font-size:12.5px;font-weight:600;color:#6b5e55;border:1px dashed #a79c93;border-radius:6px;padding:3px 8px;margin:6px 6px 0 0}
+.tag.sim{color:#8a3b17;border-color:#d9a184;background:#fff7f2}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;margin-top:28px}
+.card{background:#fff;border:1px solid var(--border);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.card:hover{box-shadow:0 8px 24px rgba(60,40,20,.12)}
+.shots{display:flex;gap:6px;padding:14px 14px 0;background:#F1EBE2}
+.shots img{flex:1;min-width:0;width:33%;border-radius:10px 10px 0 0;display:block}
+.in{padding:16px 18px 20px}
+.in b{display:block;font-size:13px;color:var(--ember);letter-spacing:.03em}
+.in h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:23px;margin:4px 0 6px;line-height:1.2}
+.in p{margin:0;color:var(--body);font-size:15px}
+.go{margin-top:12px;display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--forest)}
+.foot{margin-top:28px;color:var(--muted);font-size:14px;max-width:760px}
+.foot a{color:var(--ember)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Una sesión diaria de Elara, tres maneras</h1>
+  <p class="lead">Dinero · Semana 2 en Wuzhen · Día 1, «Hacia el camino adelante». Las mismas preguntas, el mismo objetivo, las mismas respuestas de ejemplo y la misma respuesta simulada de Elara en las tres. Cambian la estructura, el ritmo y la presentación.</p>
+  <span class="tag">Contenido actual de la app (aprobación por confirmar)</span><span class="tag sim">Respuestas de Elara simuladas</span><span class="tag">Prototipo, no producción</span>
+  <div class="grid">
+    <a class="card" href="a.html">
+      <div class="shots"><img src="shots/a-393-02-por-que-hoy.png" alt="A: por qué hoy"><img src="shots/a-393-04-elara-noto-1.png" alt="A: Elara notó"><img src="shots/a-393-08-cierre.png" alt="A: cierre"></div>
+      <div class="in"><b>A</b><h2>Camino guiado, paso a paso</h2>
+        <p>Una pantalla por momento: por qué hoy, elegir, lo que notó Elara, «Para llevarte», cierre con mañana. Barra de progreso de cuatro tramos. Lo más cercano a la app actual.</p><span class="go">Abrir prototipo A →</span></div></a>
+    <a class="card" href="b.html">
+      <div class="shots"><img src="shots/b-393-02-inicio.png" alt="B: inicio de la conversación"><img src="shots/b-393-05-para-llevarte-escrito.png" alt="B: para llevarte"><img src="shots/b-393-07-cierre.png" alt="B: cierre"></div>
+      <div class="in"><b>B</b><h2>Conversación con Elara</h2>
+        <p>Un hilo con Elara. La elección y «Para llevarte» aparecen abajo como entradas estructuradas (no chat libre); su respuesta queda en el hilo y se puede cambiar.</p><span class="go">Abrir prototipo B →</span></div></a>
+    <a class="card" href="c.html">
+      <div class="shots"><img src="shots/c-393-02-lo-que-te-llevas.png" alt="C: lo que te llevas"><img src="shots/c-393-05-paso-2-nota.png" alt="C: la tarjeta se llena"><img src="shots/c-393-10-hoy-despues.png" alt="C: tarjeta en Hoy"></div>
+      <div class="in"><b>C</b><h2>Primero la tarjeta que te llevas</h2>
+        <p>Empieza enseñando lo que se lleva hoy. Cada paso llena una tarjeta, que se queda en Hoy toda la semana y en Tu colección.</p><span class="go">Abrir prototipo C →</span></div></a>
+  </div>
+  <p class="foot">En cada prototipo, el panel «Ver estado» enseña: cargando («Elara está pensando…»), sin conexión con reintento, reanudar tras salir a mitad y sesión terminada. En el móvil, el panel está debajo del teléfono. Capturas en <code>shots/</code>; notas, decisiones y preguntas para María en <code>NOTES.md</code>. Ningún dato real ni llamada a IA: todo es sintético.</p>
+</main>
+</body>
+</html>
