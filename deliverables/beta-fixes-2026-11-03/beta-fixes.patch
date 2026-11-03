@@ -1,0 +1,279 @@
+diff --git a/apps/mobile/app/path/day.tsx b/apps/mobile/app/path/day.tsx
+index 4d6297d..983cecc 100644
+--- a/apps/mobile/app/path/day.tsx
++++ b/apps/mobile/app/path/day.tsx
+@@ -79,7 +79,8 @@ import { opensWhen, useDayGate } from "@/hooks/useDayGate";
+ import { closeWayOn, isAheadOfGate, opensOnWeekIntro } from "@/lib/dayEntry";
+ import { buildScreens, cursorIndex, mayHaveMoreAfter, nextScreenId, questionProgress, type Screen } from "@/lib/offeredScreens";
+ import { completionAsks, daySummary, finishAction, isDeclinedDay, type CompletionAsk } from "@/lib/dayFinish";
+-import { usePathsMap } from "@/hooks/usePaths";
++import { useHasServerPath, usePathsMap } from "@/hooks/usePaths";
++import { nextDayPin, sameSteps, type DayPin } from "@/lib/dayPin";
+ import { useKeyboard } from "@/hooks/useKeyboard";
+ import { useLocale, useT } from "@/i18n";
+ import { haptics, PressableScale } from "@/motion";
+@@ -174,10 +175,30 @@ function DayScreenInner() {
+   // is replaced by the CMS copy when the fetch lands (`usePathsMap`), and a
+   // swap mid-day rebuilt the open day under her: new steps, a cursor that
+   // moved, a StepScreen remounted with her half-typed words. Taken again only
+-  // for a new language.
+-  const [pinned, setPinned] = useState<{ locale: string; path: Path } | null>(null);
++  // for a new language — and once, from the bundled copy to the CMS copy when
++  // that arrives (`lib/dayPin`): before she has sent anything from here, or
++  // later when only the words differ. A day opened cold otherwise kept the
++  // bundled words for good, and its answers were refused wherever the two
++  // copies name a step differently.
++  const [pinned, setPinned] = useState<DayPin<Path> | null>(null);
+   const livePath = livePaths[area];
+-  if (livePath?.days[dayNum - 1] && (!pinned || pinned.locale !== locale)) setPinned({ locale, path: livePath });
++  const liveFromServer = useHasServerPath(area);
++  /** She has sent an answer or a skip from this screen: from here the pin moves only for the same steps. */
++  const [answeredHere, setAnsweredHere] = useState(false);
++  const liveDay = livePath?.days[dayNum - 1];
++  const pinnedDay = pinned?.path.days[dayNum - 1];
++  const repin = nextDayPin(
++    pinned,
++    {
++      locale,
++      path: livePath,
++      hasDay: !!liveDay,
++      fromServer: liveFromServer,
++      sameSteps: !!liveDay && !!pinnedDay && sameSteps(stepsOf(liveDay), stepsOf(pinnedDay)),
++    },
++    answeredHere,
++  );
++  if (repin) setPinned(repin);
+   const path = pinned && pinned.locale === locale ? pinned.path : livePath;
+   const content = path?.days[dayNum - 1];
+ 
+@@ -230,7 +251,9 @@ function DayScreenInner() {
+     const built = buildScreens(offered, (followUp) => !!followUpSource(followUp, ctx));
+     return { screens: built.screens, hidden: built.skipped };
+     // `offeredKey` and `sources` stand in for `offered` and `ctx` here — see above.
+-  }, [offeredKey, sources]); // eslint-disable-line react-hooks/exhaustive-deps
++    // `steps` changes only when the pinned copy does (the CMS copy replacing the
++    // bundled one, a new language): the screens carry the steps' words.
++  }, [offeredKey, sources, steps]); // eslint-disable-line react-hooks/exhaustive-deps
+   const authoredIds = useMemo(() => steps.map((s) => s.id), [steps]);
+ 
+   // Where she is, as a step id: a list that changes with her answers never
+@@ -246,13 +269,16 @@ function DayScreenInner() {
+   // A finished day has no unanswered step and still replays from the start.
+   // Adjusted during render rather than in an effect, so the first frame with
+   // content is already the right step.
+-  const [resumed, setResumed] = useState(false);
++  // Taken again if the day's copy is replaced before she has answered
++  // (`lib/dayPin`): the bundled copy's step ids may not be the server's.
++  const [resumedFor, setResumedFor] = useState<Path | null>(null);
++  const resumed = resumedFor !== null;
+   // Whether the day was already complete when she opened it, taken once with
+   // the resume: a redo is a replay only of a finished day (`isReplay`), and a
+   // day that becomes complete under her is closed like any other.
+   const [doneOnArrival, setDoneOnArrival] = useState(false);
+-  if (!resumed && screens.length) {
+-    setResumed(true);
++  if (path && resumedFor !== path && screens.length && !answeredHere) {
++    setResumedFor(path);
+     setDoneOnArrival(!!progress?.completedDays.includes(dayNum));
+     // The exact step (Atlas A5): a step named by the link, else the one this
+     // phone remembers her on in this unfinished day (she may have stepped
+@@ -282,7 +308,7 @@ function DayScreenInner() {
+           ? -1
+           : screens.findIndex((s) => unanswered(s.step.id) && !(dayAnswers && isAside(s.step)));
+     const at = first >= 0 ? first : Math.max(0, screens.findIndex((s) => !isAside(s.step)));
+-    if (at > 0) setCursor(screens[at]?.step.id ?? null);
++    setCursor(at > 0 ? (screens[at]?.step.id ?? null) : null);
+   }
+   const screen: Screen | undefined = screens[index];
+   const step = screen?.step;
+@@ -772,6 +798,8 @@ function DayScreenInner() {
+     /** `auto`: sent for her on arrival (the carried Day 1 feeling), so no step beat. */
+     async (value: DayValue, mode?: ReflectMode, auto = false) => {
+       if (!step || sending.current || movingFrom.current === step.id) return;
++      // What she does fixes the day's copy from here (`lib/dayPin`).
++      if (!auto) setAnsweredHere(true);
+       const attempt = Symbol("step submission");
+       sending.current = attempt;
+       try {
+@@ -962,6 +990,8 @@ function DayScreenInner() {
+     // through still earns its day credit when it closes — which is the honest
+     // reading: she walked it.
+     if (!heldAnswer(storedAnswer(step.id))) persist(step, null, { auto: true })?.catch(() => {});
++    // A skip is hers too (`lib/dayPin`).
++    setAnsweredHere(true);
+     goNext();
+   }, [area, dayAnswers, dayNum, goNext, persist, screen, step, storedAnswer]);
+ 
+@@ -974,6 +1004,7 @@ function DayScreenInner() {
+   const onStateAnswer = useCallback(
+     (state: AnswerState) => {
+       if (!step || state === "answered" || state === "declined" || state === "notOffered") return;
++      setAnsweredHere(true);
+       useAppStore.getState().setDraft(stepDraftKey(area, dayNum, step.id), null);
+       if (screen?.lead && !dayAnswers?.[screen.lead.id]) persist(screen.lead, null, { auto: true })?.catch(() => {});
+       persist(step, null, { state })
+@@ -1057,6 +1088,7 @@ function DayScreenInner() {
+   /** Through the breathing, or past it: on to the first question, no reply, no signal. */
+   const onBreathed = useCallback(() => {
+     if (!step) return;
++    setAnsweredHere(true);
+     persist(step, null, { replyless: true })?.catch(() => {});
+     goNext();
+   }, [goNext, persist, step]);
+@@ -1162,9 +1194,11 @@ function DayScreenInner() {
+         // as it was — Skip looked like it did nothing.
+         skipped: !!dayAnswers?.[lead.id] && dayAnswers[lead.id].value == null,
+         onAnswer: (option) => {
++          setAnsweredHere(true);
+           persist(lead, option)?.catch(() => {});
+         },
+         onSkip: () => {
++          setAnsweredHere(true);
+           persist(lead, null)?.catch(() => {});
+         },
+       }
+diff --git a/apps/mobile/src/hooks/usePaths.ts b/apps/mobile/src/hooks/usePaths.ts
+index e0845bd..002600f 100644
+--- a/apps/mobile/src/hooks/usePaths.ts
++++ b/apps/mobile/src/hooks/usePaths.ts
+@@ -162,6 +162,16 @@ export function usePathsMap(): Record<AreaKey, Path> {
+   }, [data, custom, t]);
+ }
+ 
++/**
++ * Whether `usePathsMap()[area]` is the CMS copy yet, rather than the bundled
++ * fallback. Same query as `usePathsMap` (one request, one cache entry).
++ */
++export function useHasServerPath(area: AreaKey): boolean {
++  const locale = useLocale();
++  const { data } = useQuery({ queryKey: qk.paths(locale), queryFn: api.getPaths });
++  return !!data?.some((dto) => dto.area === area);
++}
++
+ /** Ordered list of paths for the Journeys / Explore / Clarity Assessment screens. */
+ export function usePathList(): Path[] {
+   const map = usePathsMap();
+diff --git a/apps/mobile/src/lib/dayPin.test.ts b/apps/mobile/src/lib/dayPin.test.ts
+new file mode 100644
+index 0000000..daafa1d
+--- /dev/null
++++ b/apps/mobile/src/lib/dayPin.test.ts
+@@ -0,0 +1,59 @@
++import { describe, expect, it } from "vitest";
++import { nextDayPin, sameSteps, type DayPin, type LiveDay } from "./dayPin";
++
++const bundled = { name: "bundled" };
++const server = { name: "server" };
++const serverAgain = { name: "server, refetched" };
++
++const live = (path: object, fromServer: boolean, locale = "es", same = false): LiveDay<object> => ({
++  locale,
++  path,
++  hasDay: true,
++  fromServer,
++  sameSteps: same,
++});
++const pin = (path: object, fromServer: boolean, locale = "es"): DayPin<object> => ({ locale, path, fromServer });
++
++describe("the day screen's pinned copy", () => {
++  it("pins the first copy it gets", () => {
++    expect(nextDayPin(null, live(bundled, false), false)).toEqual(pin(bundled, false));
++    expect(nextDayPin(null, live(server, true), false)).toEqual(pin(server, true));
++  });
++
++  // The regression: a day opened cold (direct link, notification, Onboarding's
++  // Day 1, a slow network) pinned the bundled copy and never let go, so she
++  // saw other words than the server's, and answers to steps the server names
++  // differently were refused (404) and stuck on the phone.
++  it("lets the server copy replace the bundled one when it arrives, before she has answered", () => {
++    expect(nextDayPin(pin(bundled, false), live(server, true), false)).toEqual(pin(server, true));
++  });
++
++  it("after she has answered, takes the server copy only when its steps are the same (only the words change)", () => {
++    expect(nextDayPin(pin(bundled, false), live(server, true, "es", true), true)).toEqual(pin(server, true));
++    expect(nextDayPin(pin(bundled, false), live(server, true, "es", false), true)).toBeNull();
++  });
++
++  it("compares steps by id and kind, in order", () => {
++    const a = [{ id: "ask", kind: "choose" }, { id: "take", kind: "reflect" }];
++    expect(sameSteps(a, [{ id: "ask", kind: "choose" }, { id: "take", kind: "reflect" }])).toBe(true);
++    expect(sameSteps(a, [{ id: "hardest", kind: "choose" }, { id: "take", kind: "reflect" }])).toBe(false);
++    expect(sameSteps(a, [{ id: "ask", kind: "multi" }, { id: "take", kind: "reflect" }])).toBe(false);
++    expect(sameSteps(a, [...a, { id: "more", kind: "reflect" }])).toBe(false);
++  });
++
++  it("keeps the server copy against later refetches, as before", () => {
++    expect(nextDayPin(pin(server, true), live(serverAgain, true), false)).toBeNull();
++    expect(nextDayPin(pin(server, true), live(bundled, false), false)).toBeNull();
++  });
++
++  it("takes a new copy for a new language, as before", () => {
++    expect(nextDayPin(pin(server, true, "es"), live(bundled, false, "en"), true)).toEqual(pin(bundled, false, "en"));
++  });
++
++  it("waits while the live path has no such day", () => {
++    expect(nextDayPin(null, { locale: "es", path: bundled, hasDay: false, fromServer: false, sameSteps: false }, false)).toBeNull();
++    expect(
++      nextDayPin(pin(bundled, false), { locale: "es", path: undefined, hasDay: false, fromServer: true, sameSteps: false }, false),
++    ).toBeNull();
++  });
++});
+diff --git a/apps/mobile/src/lib/dayPin.ts b/apps/mobile/src/lib/dayPin.ts
+new file mode 100644
+index 0000000..87754ce
+--- /dev/null
++++ b/apps/mobile/src/lib/dayPin.ts
+@@ -0,0 +1,53 @@
++/**
++ * Which copy of a day the day screen keeps on screen (`app/path/day.tsx`).
++ *
++ * The day's content is pinned for the life of the screen so a refetch cannot
++ * rebuild the day under her. But the first copy available on a cold open (a
++ * direct link, a notification, Onboarding's "start Day 1", a slow network) is
++ * the bundled fallback, not the CMS copy the server checks answers against.
++ * Pinned for good, that showed different words from the ones everyone else
++ * saw, and where the two copies name a step differently every answer was
++ * refused (`step_not_found`, 404) and sat on the phone as "Guardando tu lugar".
++ *
++ * So the bundled pin is provisional: it gives way to the server copy once,
++ * when that arrives — at once while she has not sent an answer from this
++ * screen, and after that only when the server's day has exactly the same steps
++ * (ids and kinds), so only the words change and no screen, cursor or answer
++ * moves under her. A server day shaped differently after she has answered is
++ * left as it was, as before. Pure, so it runs in Node (`dayPin.test.ts`).
++ */
++export interface DayPin<P> {
++  locale: string;
++  path: P;
++  /** The CMS copy (as opposed to the bundled fallback). */
++  fromServer: boolean;
++}
++
++export interface LiveDay<P> {
++  locale: string;
++  path: P | undefined;
++  /** The live path has this day at all. */
++  hasDay: boolean;
++  /** The live path is the CMS copy for this area. */
++  fromServer: boolean;
++  /** The live day has the same steps (ids and kinds, in order) as the pinned one. */
++  sameSteps: boolean;
++}
++
++/** The same steps, in order, by id and kind: what screens, answers and the cursor are keyed by. */
++export function sameSteps(a: readonly { id: string; kind: string }[], b: readonly { id: string; kind: string }[]): boolean {
++  return a.length === b.length && a.every((s, i) => s.id === b[i]!.id && s.kind === b[i]!.kind);
++}
++
++/**
++ * The pin to set now, or `null` to keep the current one.
++ *
++ * `answered`: she has sent an answer (or a skip) from this screen.
++ */
++export function nextDayPin<P>(pinned: DayPin<P> | null, live: LiveDay<P>, answered: boolean): DayPin<P> | null {
++  if (!live.path || !live.hasDay) return null;
++  const take = { locale: live.locale, path: live.path, fromServer: live.fromServer };
++  if (!pinned || pinned.locale !== live.locale) return take;
++  if (!pinned.fromServer && live.fromServer && pinned.path !== live.path && (!answered || live.sameSteps)) return take;
++  return null;
++}
