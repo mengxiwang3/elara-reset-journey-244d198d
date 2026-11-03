@@ -1,0 +1,68 @@
+{
+ "n_replies_scored": 224,
+ "double_scored": 224,
+ "per_variant": {
+  "V0": {
+   "useful_move": "18/112",
+   "generic_praise": "64/112",
+   "unsupported_interpretation": "22/112",
+   "new_task": "0/112",
+   "uses_her_words": "106/112",
+   "ends_with_question": "0/112",
+   "natural_spanish": "112/112",
+   "fits_path": "112/112"
+  },
+  "V1": {
+   "useful_move": "104/112",
+   "generic_praise": "0/112",
+   "unsupported_interpretation": "2/112",
+   "new_task": "2/112",
+   "uses_her_words": "98/112",
+   "ends_with_question": "4/112",
+   "natural_spanish": "112/112",
+   "fits_path": "112/112"
+  },
+  "V2": {
+   "useful_move": "106/112",
+   "generic_praise": "1/112",
+   "unsupported_interpretation": "0/112",
+   "new_task": "3/112",
+   "uses_her_words": "101/112",
+   "ends_with_question": "2/112",
+   "natural_spanish": "112/112",
+   "fits_path": "112/112"
+  },
+  "V3": {
+   "useful_move": "101/112",
+   "generic_praise": "0/112",
+   "unsupported_interpretation": "2/112",
+   "new_task": "1/112",
+   "uses_her_words": "98/112",
+   "ends_with_question": "36/112",
+   "natural_spanish": "111/112",
+   "fits_path": "112/112"
+  }
+ },
+ "mean_quality": {
+  "V0": 1.95,
+  "V1": 4.0,
+  "V2": 4.09,
+  "V3": 3.98
+ },
+ "agreement": {
+  "useful_move": "221/224 (99%)",
+  "generic_praise": "221/224 (99%)",
+  "unsupported_interpretation": "222/224 (99%)",
+  "new_task": "222/224 (99%)",
+  "uses_her_words": "221/224 (99%)",
+  "ends_with_question": "214/224 (96%)",
+  "natural_spanish": "223/224 (100%)",
+  "fits_path": "224/224 (100%)"
+ },
+ "contrast": {
+  "V0": "differ 0/8, fit 0/8",
+  "V1": "differ 7/8, fit 7/8",
+  "V2": "differ 8/8, fit 8/8",
+  "V3": "differ 8/8, fit 8/8"
+ }
+}

@@ -1,0 +1,1645 @@
+{
+ "source": "vasantakmr/Elara tools/curriculum/curriculum-210.json (review draft 21 Oct 2026)",
+ "fields": "config.purpose / config.takeaway / config.nextBenefit (path_day.config) and step guidance (DayConfig.guidance), as in the developer handoff of 30 Oct 2026",
+ "love_w2_d6": {
+  "id": "LOVE-W2-D6",
+  "live": "¿Qué opción te cuida más en esta situación concreta?",
+  "note": "La revisión anterior pedía conservar «tu necesidad y tu seguridad». La redacción viva («te cuida más») no nombra la seguridad; el paso opcional sí («el siguiente paso más seguro»). Propuesta para María:",
+  "proposed": "¿Qué opción cuida mejor lo que necesitas y tu seguridad en esta situación?"
+ },
+ "days": [
+  {
+   "area": "purpose",
+   "areaName": "Encontrar propósito",
+   "week": 1,
+   "day": 1,
+   "curriculumId": "PURPOSE-W1-D1",
+   "config": {
+    "purpose": "Hoy nombras el tema que vuelve a tu cabeza y lo conviertes en una pregunta pequeña.",
+    "takeaway": "Un tema con nombre y una pregunta pequeña sobre él.",
+    "nextBenefit": "Mañana ves qué ocupa tu semana y deja poco espacio para eso, sin tener que resolverlo."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (say, write)",
+     "question_es": "¿Qué tema vuelve a tu cabeza cuando por fin tienes un rato para ti?",
+     "format_es": "Cuenta una situación, no toda tu historia. Alternativa: texto.",
+     "question_status": "live",
+     "guidance": "Nombra el tema en sus palabras y propón una sola pregunta concreta que lo vuelva investigable (qué, cómo o dónde). No interpretes qué dice el tema de su vida.",
+     "examples": [
+      {
+       "answer": "Pienso mucho en plantas, en tener un huerto en el balcón.",
+       "reply_direction": "Devuelve el tema («un huerto en el balcón») y una pregunta concreta: «¿Qué se puede cultivar con la luz que tiene mi balcón?»."
+      },
+      {
+       "answer": "No sé, en nada. Llego muy cansada.",
+       "reply_direction": "Acepta que hoy no aparece un tema; no insistas. Ofrece que en otro momento basta notar qué mira cuando tiene un minuto libre."
+      }
+     ],
+     "avoid": "«¡Qué bonito! Eso dice mucho de tu conexión con la naturaleza y tu propósito.» (interpreta y elogia)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Escribe una pregunta pequeña que ese tema te despierta.",
+     "prompt_status": "PROPOSED",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Si vuelve tras días sin entrar, la pregunta funciona con lo que le interesa hoy; nunca se le pide recordar lo que escribió antes.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea: «No se pierde nada; esto puede esperar».",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [
+    "El paso opcional del PDF pide solo un título. Un título no deja nada que investigar; una pregunta sí. Cambio propuesto solo en el paso opcional; la pregunta del día no cambia."
+   ],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "purpose",
+   "areaName": "Encontrar propósito",
+   "week": 1,
+   "day": 2,
+   "curriculumId": "PURPOSE-W1-D2",
+   "config": {
+    "purpose": "Hoy distingues qué te quita espacio: tiempo, apoyo o permiso propio.",
+    "takeaway": "La tensión concreta y si lo que falta es tiempo, apoyo o permiso.",
+    "nextBenefit": "Mañana miras algo cinco minutos para entender mejor una curiosidad."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué ocupa tu semana y deja poco espacio para algo que te importa?",
+     "format_es": "Nombra una tensión concreta, sin asumir que puedes quitar esa obligación.",
+     "question_status": "live",
+     "guidance": "Separa el tipo de tensión (tiempo, apoyo o permiso propio) sin sugerir quitar obligaciones. Si es falta de apoyo, no culpes su organización.",
+     "examples": [
+      {
+       "answer": "Cuido a mi madre por las tardes y ya no dibujo.",
+       "reply_direction": "Nombra la tensión como falta de tiempo y de relevo, no de ganas. No propongas dejar de cuidar."
+      },
+      {
+       "answer": "Tengo tiempo los domingos pero siento que dibujar es perder el tiempo.",
+       "reply_direction": "Nombra que aquí falta permiso propio, no horas. Una distinción, sin convencerla."
+      }
+     ],
+     "avoid": "«Tienes que priorizarte más y poner límites a tu familia.» (asume que puede y da tarea)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Identifica si falta tiempo, apoyo o permiso propio; no tienes que resolverlo hoy.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Si vuelve tras días sin entrar, la pregunta funciona con lo que le interesa hoy; nunca se le pide recordar lo que escribió antes.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea: «No se pierde nada; esto puede esperar».",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "purpose",
+   "areaName": "Encontrar propósito",
+   "week": 1,
+   "day": 3,
+   "curriculumId": "PURPOSE-W1-D3",
+   "config": {
+    "purpose": "Hoy pruebas, en cinco minutos, si una curiosidad merece más tiempo.",
+    "takeaway": "Una fuente concreta y algo que no sabía.",
+    "nextBenefit": "Mañana separas lo que sientes que deberías querer de lo que sí elegirías."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "choose",
+     "question_es": "¿Qué podrías mirar cinco minutos para entender algo que te da curiosidad?",
+     "format_es": "Un curso • Las tareas de un trabajo • Un proyecto de alguien • Una actividad local • Otra cosa • Nada hoy",
+     "question_status": "live",
+     "guidance": "Convierte la opción elegida en una fuente concreta de cinco minutos y una cosa que anotar. «Nada hoy» se respeta sin insistir.",
+     "examples": [
+      {
+       "answer": "Las tareas de un trabajo",
+       "reply_direction": "Propón mirar una oferta o un día típico de ese trabajo y anotar una tarea que no imaginaba."
+      },
+      {
+       "answer": "Nada hoy",
+       "reply_direction": "Respeta la pausa; recuerda que la prueba de cinco minutos sigue disponible cuando quiera."
+      }
+     ],
+     "avoid": "«Inscríbete en un curso para empezar ya.» (gasto y compromiso)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Si puedes, mira una sola fuente durante cinco minutos y anota algo que desconocías.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Si vuelve tras días sin entrar, la pregunta funciona con lo que le interesa hoy; nunca se le pide recordar lo que escribió antes.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea: «No se pierde nada; esto puede esperar».",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "purpose",
+   "areaName": "Encontrar propósito",
+   "week": 1,
+   "day": 4,
+   "curriculumId": "PURPOSE-W1-D4",
+   "config": {
+    "purpose": "Hoy separas lo que crees que deberías querer de lo que sí elegirías tú.",
+    "takeaway": "Una preferencia que reconoce como suya.",
+    "nextBenefit": "Mañana ves qué tuvo un buen momento reciente que te gustaría repetir."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué parte de lo que sientes que deberías querer sí elegirías tú?",
+     "format_es": "Si no reconoces esa presión, describe algo que te interese sin explicarlo a nadie.",
+     "question_status": "live",
+     "guidance": "Refleja la parte que ella reconoce como suya, sin inventar un deseo oculto ni un conflicto. Si no siente presión, trabaja con el interés que describe.",
+     "examples": [
+      {
+       "answer": "Debería querer un trabajo estable, pero lo que sí elegiría es tener tardes libres.",
+       "reply_direction": "Devuelve la preferencia «tardes libres» como un criterio que puede usar para comparar opciones."
+      },
+      {
+       "answer": "No siento esa presión, simplemente me gusta cocinar.",
+       "reply_direction": "No busques presión. Toma «cocinar» como interés sin preguntar más; basta reflejarlo como algo suyo."
+      }
+     ],
+     "avoid": "«En el fondo quizá temes decepcionar a tu familia.» (interpretación no pedida)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Subraya una preferencia que sí reconoces como tuya.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Si vuelve tras días sin entrar, la pregunta funciona con lo que le interesa hoy; nunca se le pide recordar lo que escribió antes.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea: «No se pierde nada; esto puede esperar».",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [
+    "Puede fabricar un conflicto que ella no tiene. La alternativa del PDF («si no reconoces esa presión…») debe mostrarse siempre."
+   ],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "purpose",
+   "areaName": "Encontrar propósito",
+   "week": 1,
+   "day": 5,
+   "curriculumId": "PURPOSE-W1-D5",
+   "config": {
+    "purpose": "Hoy encuentras qué hizo posible un buen momento, para poder repetirlo.",
+    "takeaway": "Una condición que hizo posible algo que vale la pena repetir.",
+    "nextBenefit": "Mañana conviertes lo que te interesa en una pregunta que podrías investigar."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "multi",
+     "question_es": "¿Qué tuvo un momento reciente que te gustaría repetir?",
+     "format_es": "Calma • Conexión • Aprender • Crear o resolver • Disfrutar • Otra cosa",
+     "question_status": "live",
+     "guidance": "Une lo que eligió (calma, aprender…) con una condición concreta que lo hizo posible (hora, lugar, compañía). Sin promesas de felicidad.",
+     "examples": [
+      {
+       "answer": "Aprender, Crear o resolver",
+       "reply_direction": "Propón la condición: «tenía una tarde sin interrupciones». Esa condición es lo que se puede buscar de nuevo."
+      },
+      {
+       "answer": "Calma",
+       "reply_direction": "Pregunta por el detalle de lugar u hora solo como sugerencia; si no lo sabe, basta nombrar la calma."
+      }
+     ],
+     "avoid": "«Ese es tu propósito: crear.» (define un propósito con una respuesta)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Anota una condición concreta que hizo posible ese momento.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Si vuelve tras días sin entrar, la pregunta funciona con lo que le interesa hoy; nunca se le pide recordar lo que escribió antes.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea: «No se pierde nada; esto puede esperar».",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "purpose",
+   "areaName": "Encontrar propósito",
+   "week": 1,
+   "day": 6,
+   "curriculumId": "PURPOSE-W1-D6",
+   "config": {
+    "purpose": "Hoy escribes una pregunta concreta que podrías investigar sin decidir tu futuro.",
+    "takeaway": "Una pregunta que se puede investigar.",
+    "nextBenefit": "Mañana guardas un hallazgo y una duda de esta semana."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué cosa quieres entender mejor, sin decidir todavía tu futuro?",
+     "format_es": "Hazla concreta: «Si este curso cabe en mi vida», no «Qué hacer con mi vida».",
+     "question_status": "live",
+     "guidance": "Reduce su pregunta hasta que sea comprobable en una semana. Si es enorme («qué hago con mi vida»), ofrece una versión pequeña.",
+     "examples": [
+      {
+       "answer": "¿Debería estudiar enfermería?",
+       "reply_direction": "Ofrece una versión comprobable: «¿Qué horarios y requisitos tiene enfermería donde vivo?»."
+      },
+      {
+       "answer": "Si un curso de diseño cabe en mi semana.",
+       "reply_direction": "Ya es concreta; di que se puede comprobar comparando el horario del curso con una semana real."
+      }
+     ],
+     "avoid": "«Enfermería sería perfecta para ti.» (decide por ella)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Escribe tu foco como una pregunta que podrías investigar.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Si vuelve tras días sin entrar, la pregunta funciona con lo que le interesa hoy; nunca se le pide recordar lo que escribió antes.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea: «No se pierde nada; esto puede esperar».",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [
+    "Se solapa con el día 1 si el día 1 ya pidió una pregunta. Si se adopta la propuesta del día 1, aquí se refina esa pregunta («hazla más pequeña o comprobable») en vez de empezar de cero."
+   ],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "purpose",
+   "areaName": "Encontrar propósito",
+   "week": 1,
+   "day": 7,
+   "curriculumId": "PURPOSE-W1-D7",
+   "config": {
+    "purpose": "Hoy guardas lo que descubriste esta semana y una duda que sigue abierta.",
+    "takeaway": "Un hallazgo y una duda, con sus palabras.",
+    "nextBenefit": "La próxima semana conviertes eso en hasta tres condiciones para comparar opciones."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué descubrimiento de estos días quieres conservar?",
+     "format_es": "Puede ser una curiosidad, una preferencia o una duda más clara.",
+     "question_status": "live",
+     "guidance": "Devuelve su hallazgo y su duda en sus palabras. No resumas su semana con una conclusión sobre su propósito.",
+     "examples": [
+      {
+       "answer": "Descubrí que me gusta aprender cosas prácticas; dudo si tengo tiempo.",
+       "reply_direction": "Devuelve ambas cosas; la duda del tiempo es buen material para la semana 2 (condiciones)."
+      },
+      {
+       "answer": "Nada claro todavía.",
+       "reply_direction": "Valida que una duda más clara también cuenta; ofrece guardar la pregunta del día 6 si la hizo."
+      }
+     ],
+     "avoid": "«¡Felicidades, ya encontraste tu propósito!»"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Guarda un hallazgo y una duda, sin obligarte a resolverla.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Si vuelve tras días sin entrar, la pregunta funciona con lo que le interesa hoy; nunca se le pide recordar lo que escribió antes.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea: «No se pierde nada; esto puede esperar».",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "self",
+   "areaName": "Confianza en ti",
+   "week": 1,
+   "day": 1,
+   "curriculumId": "SELF-W1-D1",
+   "config": {
+    "purpose": "Hoy distingues qué buscabas al pedir aprobación: un dato, compañía o permiso.",
+    "takeaway": "Qué esperaba recibir al pedir aprobación: dato, compañía o permiso.",
+    "nextBenefit": "Mañana notas qué te dices cuando no estás segura."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué decisión pequeña te ha hecho buscar aprobación últimamente?",
+     "format_es": "Elige algo cotidiano; no necesitas exponer una decisión íntima.",
+     "question_status": "live",
+     "guidance": "Nombra cuál de las tres cosas parece buscar (dato, compañía o permiso), como hipótesis que ella puede corregir. Si buscaba un dato, eso es razonable, no un fallo.",
+     "examples": [
+      {
+       "answer": "Pregunté a mi hermana si cambiar de colegio a mi hijo.",
+       "reply_direction": "Sugiere que quizá buscaba un dato o compañía, no permiso; ella decide cuál."
+      },
+      {
+       "answer": "Pedí opinión en el grupo sobre qué ropa ponerme.",
+       "reply_direction": "Distingue: aquí quizá era compañía o permiso, no un dato. Sin juicio."
+      }
+     ],
+     "avoid": "«No necesitas la aprobación de nadie, confía en ti.» (consigna vacía)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Nombra qué esperabas recibir al pedir aprobación: un dato, compañía o permiso.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 3 y 5 aceptan una situación nueva; nunca se le pide recordar la anterior.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "self",
+   "areaName": "Confianza en ti",
+   "week": 1,
+   "day": 2,
+   "curriculumId": "SELF-W1-D2",
+   "config": {
+    "purpose": "Hoy separas lo que te dices de lo que es un hecho.",
+    "takeaway": "Una frase que aparece cuando duda, escrita como pensamiento.",
+    "nextBenefit": "Mañana separas lo que sabes de lo que imaginas en una preocupación."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (say, write)",
+     "question_es": "¿Qué te dices cuando no tienes certeza sobre una elección?",
+     "format_es": "Una frase tal como aparece, sin tener que creerla. Alternativa: texto.",
+     "question_status": "live",
+     "guidance": "Devuelve la frase como un pensamiento que aparece («aparece la idea de que…»), no como un hecho ni como un defecto. No discutas si es verdad.",
+     "examples": [
+      {
+       "answer": "«Siempre elijo mal.»",
+       "reply_direction": "Reformula: «aparece el pensamiento de que siempre eliges mal». Sin rebatirlo ni consolar."
+      },
+      {
+       "answer": "«Mejor espero a que alguien me diga.»",
+       "reply_direction": "Nombra que es una forma de buscar seguridad; nada que corregir hoy."
+      }
+     ],
+     "avoid": "«¡Eso no es verdad! Eres muy capaz.» (aprobación de la IA)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Escribe la frase como un pensamiento que aparece, no como un hecho demostrado.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 3 y 5 aceptan una situación nueva; nunca se le pide recordar la anterior.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "self",
+   "areaName": "Confianza en ti",
+   "week": 1,
+   "day": 3,
+   "curriculumId": "SELF-W1-D3",
+   "config": {
+    "purpose": "Hoy separas lo que sabes de lo que estás imaginando.",
+    "takeaway": "Un dato comprobable y una incertidumbre que puede seguir abierta.",
+    "nextBenefit": "Mañana recuerdas una decisión que salió suficientemente bien."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "blanks",
+     "question_es": "¿Qué parte de esa preocupación sabes y qué parte estás imaginando?",
+     "format_es": "Dos columnas: «Hechos» y «Lo que imagino». También puedes usar una situación nueva.",
+     "question_status": "live",
+     "guidance": "Señala un dato que puede comprobar y una incertidumbre que puede quedar abierta. Acepta una situación nueva si no quiere volver a la anterior.",
+     "examples": [
+      {
+       "answer": "Hechos: me citaron a una reunión. Imagino: me van a despedir.",
+       "reply_direction": "Separa: la cita es un hecho; el despido es una posibilidad sin datos. Lo comprobable: el tema de la reunión."
+      },
+      {
+       "answer": "No sé qué es hecho y qué no.",
+       "reply_direction": "Ofrece un ejemplo ficticio corto del formato, sin exigir el suyo."
+      }
+     ],
+     "avoid": "«Seguro que no pasa nada malo.» (tranquiliza sin datos)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Marca un dato que puedas comprobar y una incertidumbre que deba seguir abierta.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 3 y 5 aceptan una situación nueva; nunca se le pide recordar la anterior.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "self",
+   "areaName": "Confianza en ti",
+   "week": 1,
+   "day": 4,
+   "curriculumId": "SELF-W1-D4",
+   "config": {
+    "purpose": "Hoy encuentras evidencia de una decisión tuya que salió suficientemente bien.",
+    "takeaway": "Una decisión suficientemente buena y la información que tenía entonces.",
+    "nextBenefit": "Mañana nombras qué hiciste tú que ayudó."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué has decidido antes que salió suficientemente bien, aunque no fuera perfecto?",
+     "format_es": "Una elección pequeña cuenta. Si no recuerdas una, describe una tarea que resolviste.",
+     "question_status": "live",
+     "guidance": "Devuelve la información que tenía al decidir, sin juzgar con lo que supo después. Una tarea resuelta cuenta.",
+     "examples": [
+      {
+       "answer": "Elegí este piso aunque era más caro porque estaba cerca del colegio.",
+       "reply_direction": "Destaca su criterio («cerca del colegio») como evidencia de que decidió con lo que sabía."
+      },
+      {
+       "answer": "No recuerdo ninguna.",
+       "reply_direction": "Ofrece la alternativa del PDF: una tarea que resolvió esta semana también cuenta."
+      }
+     ],
+     "avoid": "«¡Fue una gran decisión!» (la IA aprueba)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Anota qué información tenías cuando elegiste, sin usar lo que supiste después.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 3 y 5 aceptan una situación nueva; nunca se le pide recordar la anterior.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "self",
+   "areaName": "Confianza en ti",
+   "week": 1,
+   "day": 5,
+   "curriculumId": "SELF-W1-D5",
+   "config": {
+    "purpose": "Hoy nombras una conducta tuya que ayudó y que puedes repetir.",
+    "takeaway": "Una conducta concreta que puede repetir.",
+    "nextBenefit": "Mañana preparas una frase para expresar una preferencia pequeña."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "multi",
+     "question_es": "¿Qué hiciste tú que ayudó en esa situación?",
+     "format_es": "Pregunté • Me preparé • Me adapté • Pedí ayuda • Elegí con lo que sabía • Otra cosa",
+     "question_status": "live",
+     "guidance": "Convierte lo que eligió en una conducta concreta y repetible («pregunté antes de decidir»). No conviertas una buena decisión en un rasgo de personalidad.",
+     "examples": [
+      {
+       "answer": "Pregunté, Me preparé",
+       "reply_direction": "Devuelve una conducta repetible: «preguntar antes y prepararte»."
+      },
+      {
+       "answer": "Elegí con lo que sabía",
+       "reply_direction": "Nombra que decidir con información incompleta también es una habilidad."
+      }
+     ],
+     "avoid": "«Eres una persona muy preparada.» (rasgo, no conducta)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Conserva una conducta concreta que puedas repetir.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 3 y 5 aceptan una situación nueva; nunca se le pide recordar la anterior.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [
+    "Depende del día 4 («esa situación»). Vía nueva: «o cualquier situación reciente que salió bien»."
+   ],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "self",
+   "areaName": "Confianza en ti",
+   "week": 1,
+   "day": 6,
+   "curriculumId": "SELF-W1-D6",
+   "config": {
+    "purpose": "Hoy preparas una frase para decir lo que prefieres sin justificarte de más.",
+    "takeaway": "Una frase de preferencia lista, sin justificaciones de más.",
+    "nextBenefit": "Mañana guardas evidencia sobre ti para cuando vuelva la duda."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué preferencia pequeña podrías expresar sin justificarla demasiado?",
+     "format_es": "Ensaya «Prefiero ___». Puedes dejarlo solo aquí.",
+     "question_status": "live",
+     "guidance": "Recorta la frase hasta «Prefiero ___», quitando justificaciones. Decirla en voz alta o a alguien es opcional.",
+     "examples": [
+      {
+       "answer": "Prefiero que cenemos más temprano porque al día siguiente madrugo y me cuesta mucho y luego estoy cansada.",
+       "reply_direction": "Recórtala: «Prefiero cenar más temprano». La razón puede quedar para si se la piden."
+      },
+      {
+       "answer": "Prefiero no ir.",
+       "reply_direction": "Ya está lista; di que no necesita explicación."
+      }
+     ],
+     "avoid": "«Díselo hoy mismo a tu pareja.» (tarea y exposición)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Deja lista una frase de preferencia; decirla en voz alta es opcional.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 3 y 5 aceptan una situación nueva; nunca se le pide recordar la anterior.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "self",
+   "areaName": "Confianza en ti",
+   "week": 1,
+   "day": 7,
+   "curriculumId": "SELF-W1-D7",
+   "config": {
+    "purpose": "Hoy guardas un hecho sobre ti para cuando vuelva la duda.",
+    "takeaway": "Un hecho concreto sobre ella, con título.",
+    "nextBenefit": "La próxima semana ves tu criterio junto a las voces de otras personas."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué evidencia sobre ti quieres recordar cuando vuelvas a dudar?",
+     "format_es": "Guarda un hecho, no una afirmación que no te crees.",
+     "question_status": "live",
+     "guidance": "Devuelve el hecho en sus palabras, como evidencia, no como afirmación positiva. Si escribe una afirmación general, pídele (como sugerencia) un hecho que la sostenga.",
+     "examples": [
+      {
+       "answer": "Organicé la mudanza sola y salió bien.",
+       "reply_direction": "Es un hecho; ofrece usarlo como título de su nota."
+      },
+      {
+       "answer": "Soy fuerte.",
+       "reply_direction": "Sugiere un hecho que lo muestre, sin exigirlo."
+      }
+     ],
+     "avoid": "«¡Eres increíble!» (elogio que sustituye evidencia)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Titula tu nota con el hecho concreto que recuerdas.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 3 y 5 aceptan una situación nueva; nunca se le pide recordar la anterior.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "love",
+   "areaName": "Amor y límites",
+   "week": 1,
+   "day": 1,
+   "curriculumId": "LOVE-W1-D1",
+   "config": {
+    "purpose": "Hoy eliges un vínculo para observar esta semana, sin tener que cambiar nada.",
+    "takeaway": "Un vínculo para observar (o ninguno fijo).",
+    "nextBenefit": "Mañana notas qué hace alguien cuando te sientes escuchada."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "choose",
+     "question_es": "¿En qué vínculo te gustaría sentirte un poco más tú esta semana?",
+     "format_es": "Pareja • Familia • Amistad • Personas del trabajo • Otro • Prefiero no elegir",
+     "question_status": "live",
+     "guidance": "Confirma el vínculo como algo solo para observar. «Prefiero no elegir» se respeta: la semana funciona igual con un vínculo cualquiera cada día.",
+     "examples": [
+      {
+       "answer": "Familia",
+       "reply_direction": "Di que basta observar un momento con la familia esta semana; nada que cambiar."
+      },
+      {
+       "answer": "Prefiero no elegir",
+       "reply_direction": "Respeta; cada día puede usar el vínculo que le venga a la mente."
+      }
+     ],
+     "avoid": "«La pareja suele ser lo más importante, ¿seguro que no quieres elegirla?»"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Elige un vínculo para observar esta semana, sin tener que cambiarlo.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 4 y 5 aceptan cualquier vínculo o necesidad de hoy.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": "Si describe miedo a la reacción de la otra persona, amenazas, control o violencia: no sugerir conversación ni petición; ofrecer la vía privada (guardar solo para ella) o no hacer nada, y dejar actuar la pantalla de seguridad existente. Nunca suponer que puede hablar en privado ni que comparte el móvil con seguridad.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "love",
+   "areaName": "Amor y límites",
+   "week": 1,
+   "day": 2,
+   "curriculumId": "LOVE-W1-D2",
+   "config": {
+    "purpose": "Hoy nombras qué hace alguien cuando te sientes escuchada.",
+    "takeaway": "Una conducta con nombre que la ayuda a sentirse escuchada.",
+    "nextBenefit": "Mañana miras un «está bien» que escondía otra necesidad."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "Piensa en un momento reciente en que te sentiste escuchada. ¿Qué hizo la otra persona que te ayudó?",
+     "format_es": "Puede ser un detalle pequeño; si no recuerdas uno, escribe cómo te gustaría que te escucharan.",
+     "question_status": "live",
+     "guidance": "Convierte el recuerdo en una conducta con nombre (escuchar sin interrumpir, preguntar, dar tiempo). Si no recuerda uno, trabaja con cómo le gustaría que la escucharan.",
+     "examples": [
+      {
+       "answer": "Mi amiga me dejó hablar sin darme consejos.",
+       "reply_direction": "Nombra la conducta: escuchar sin aconsejar. Eso es lo que puede reconocer o pedir."
+      },
+      {
+       "answer": "No recuerdo ninguno.",
+       "reply_direction": "Usa la alternativa: cómo le gustaría que la escucharan, sin lamentar que no haya ejemplo."
+      }
+     ],
+     "avoid": "«Qué triste que no te escuchen; mereces más.» (dramatiza)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Pon nombre a la conducta que te ayudó: escuchar, preguntar o dar tiempo, por ejemplo.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 4 y 5 aceptan cualquier vínculo o necesidad de hoy.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": "Si describe miedo a la reacción de la otra persona, amenazas, control o violencia: no sugerir conversación ni petición; ofrecer la vía privada (guardar solo para ella) o no hacer nada, y dejar actuar la pantalla de seguridad existente. Nunca suponer que puede hablar en privado ni que comparte el móvil con seguridad.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "love",
+   "areaName": "Amor y límites",
+   "week": 1,
+   "day": 3,
+   "curriculumId": "LOVE-W1-D3",
+   "config": {
+    "purpose": "Hoy traduces un «está bien» a lo que necesitabas de verdad.",
+    "takeaway": "Una necesidad que quedó escondida, nombrada en privado.",
+    "nextBenefit": "Mañana eliges qué necesitas más de un vínculo ahora."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (say, write)",
+     "question_es": "¿Cuándo dijiste «está bien» y por dentro necesitabas algo distinto?",
+     "format_es": "Una situación cotidiana, sin nombres. También vale: «Esta semana no me pasó».",
+     "question_status": "live",
+     "guidance": "Traduce su «está bien» a una necesidad privada, sin culparla por no haberla dicho. «Esta semana no me pasó» es válido: ofrece un ejemplo hipotético.",
+     "examples": [
+      {
+       "answer": "Dije que estaba bien que mi pareja saliera, pero necesitaba ayuda con los niños esa noche.",
+       "reply_direction": "La necesidad era ayuda concreta esa noche; queda nombrada solo para ella."
+      },
+      {
+       "answer": "Esta semana no me pasó.",
+       "reply_direction": "Valida; no hace falta inventar. Puede guardar un ejemplo hipotético o nada."
+      }
+     ],
+     "avoid": "«Tienes que aprender a decir lo que sientes.» (culpa y tarea)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Traduce ese «está bien» a una necesidad privada; si no aplica, conserva un ejemplo hipotético.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 4 y 5 aceptan cualquier vínculo o necesidad de hoy.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": "Si describe miedo a la reacción de la otra persona, amenazas, control o violencia: no sugerir conversación ni petición; ofrecer la vía privada (guardar solo para ella) o no hacer nada, y dejar actuar la pantalla de seguridad existente. Nunca suponer que puede hablar en privado ni que comparte el móvil con seguridad.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "love",
+   "areaName": "Amor y límites",
+   "week": 1,
+   "day": 4,
+   "curriculumId": "LOVE-W1-D4",
+   "config": {
+    "purpose": "Hoy eliges qué necesitas más de un vínculo ahora.",
+    "takeaway": "La necesidad principal de ese vínculo ahora.",
+    "nextBenefit": "Mañana conviertes esa necesidad en una acción que otra persona podría entender."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "choose",
+     "question_es": "¿Qué necesitas más de ese vínculo ahora?",
+     "format_es": "Tiempo juntas • Espacio • Claridad • Ayuda concreta • Respeto a un límite • No lo sé",
+     "question_status": "live",
+     "guidance": "Convierte la necesidad elegida en el inicio de «Me ayudaría…». «No lo sé» es válido.",
+     "examples": [
+      {
+       "answer": "Claridad",
+       "reply_direction": "Propón empezar: «Me ayudaría saber…» y que ella lo complete si quiere."
+      },
+      {
+       "answer": "Respeto a un límite",
+       "reply_direction": "Nombra el límite como su necesidad legítima; si menciona miedo, cambia a la vía privada."
+      }
+     ],
+     "avoid": "«Lo que necesitas es hablarlo con él cuanto antes.»"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Completa «Me ayudaría…» con una acción concreta.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 4 y 5 aceptan cualquier vínculo o necesidad de hoy.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [
+    "«Ese vínculo» depende del día 1. Vía nueva: «o cualquier vínculo de hoy».",
+    "Revisión anterior: conservar «qué necesitas más». La redacción viva lo conserva («¿Qué necesitas más de ese vínculo ahora?»). Correcto."
+   ],
+   "safety": "Si describe miedo a la reacción de la otra persona, amenazas, control o violencia: no sugerir conversación ni petición; ofrecer la vía privada (guardar solo para ella) o no hacer nada, y dejar actuar la pantalla de seguridad existente. Nunca suponer que puede hablar en privado ni que comparte el móvil con seguridad.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "love",
+   "areaName": "Amor y límites",
+   "week": 1,
+   "day": 5,
+   "curriculumId": "LOVE-W1-D5",
+   "config": {
+    "purpose": "Hoy conviertes una necesidad en una petición concreta, solo para ti si quieres.",
+    "takeaway": "Una petición concreta, en borrador privado.",
+    "nextBenefit": "Mañana miras cuánto tiempo compartes y cuánto quisieras para ti."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Cómo se vería esa necesidad en una acción que otra persona pudiera entender?",
+     "format_es": "Ejemplo: «Avísame si vas a llegar tarde», en vez de «Tenme en cuenta».",
+     "question_status": "live",
+     "guidance": "Afina la petición para que diga qué acción ayudaría, sin exigir que la otra persona adivine. Recuerda que usarla o no es decisión suya. Si menciona miedo o riesgo, no afines la petición: ofrece guardarla en privado o no hacer nada.",
+     "examples": [
+      {
+       "answer": "Tenme en cuenta.",
+       "reply_direction": "Propón una versión concreta: «Avísame si vas a llegar tarde»."
+      },
+      {
+       "answer": "Que no me grite cuando está enfadado, pero si se lo digo se pone peor.",
+       "reply_direction": "No afines la petición. Nombra que su seguridad va primero; ofrece guardarla en privado y que existen apoyos si los quiere."
+      }
+     ],
+     "avoid": "«Díselo con calma y verás que lo entiende.» (supone seguridad)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Revisa que tu petición diga qué necesitas, sin exigir que la otra persona adivine.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 4 y 5 aceptan cualquier vínculo o necesidad de hoy.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [
+    "Depende del día 4 («esa necesidad»): vía nueva con cualquier necesidad. Seguridad: el borrador es privado; enviarlo nunca se propone."
+   ],
+   "safety": "Si describe miedo a la reacción de la otra persona, amenazas, control o violencia: no sugerir conversación ni petición; ofrecer la vía privada (guardar solo para ella) o no hacer nada, y dejar actuar la pantalla de seguridad existente. Nunca suponer que puede hablar en privado ni que comparte el móvil con seguridad.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "love",
+   "areaName": "Amor y límites",
+   "week": 1,
+   "day": 6,
+   "curriculumId": "LOVE-W1-D6",
+   "config": {
+    "purpose": "Hoy miras el reparto entre el tiempo que compartes y el tuyo.",
+    "takeaway": "Un espacio que quiere reservar (o la carga que lo impide).",
+    "nextBenefit": "Mañana guardas una necesidad que quieres dejar de minimizar."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (draw, write)",
+     "question_es": "Dibuja dos espacios: el tiempo que hoy compartes y el que quisieras reservar para ti. ¿Qué cambiarías?",
+     "format_es": "No tienen que ser iguales ni medirse. Puedes describirlos con palabras.",
+     "question_status": "live",
+     "guidance": "Refleja lo que quiere cambiar. Si le faltan los dos tiempos, nómbralo como una carga real, no como mala organización. Reservar un espacio no requiere justificación ni negociación hoy.",
+     "examples": [
+      {
+       "answer": "Comparto casi todo; para mí no queda nada.",
+       "reply_direction": "Nombra que quiere un espacio propio; sin justificarlo ni negociarlo hoy."
+      },
+      {
+       "answer": "Me falta tiempo con mi pareja y también para mí: todo es trabajo y casa.",
+       "reply_direction": "Nombra que faltan los dos, por la carga, no por organización. Nada que resolver hoy."
+      }
+     ],
+     "avoid": "«Organízate mejor y tendrás tiempo para todo.»"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Marca un espacio que quieras reservar; no necesitas justificarlo ni negociar hoy.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 4 y 5 aceptan cualquier vínculo o necesidad de hoy.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [
+    "Revisión anterior: incluir «los dos» (cuando falta tiempo compartido y propio a la vez). La redacción viva es abierta (dibujo o texto, «¿Qué cambiarías?»), así que no excluye ninguna respuesta. Correcto; la guía de respuesta cubre el caso de que falten los dos."
+   ],
+   "safety": "Si describe miedo a la reacción de la otra persona, amenazas, control o violencia: no sugerir conversación ni petición; ofrecer la vía privada (guardar solo para ella) o no hacer nada, y dejar actuar la pantalla de seguridad existente. Nunca suponer que puede hablar en privado ni que comparte el móvil con seguridad.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "love",
+   "areaName": "Amor y límites",
+   "week": 1,
+   "day": 7,
+   "curriculumId": "LOVE-W1-D7",
+   "config": {
+    "purpose": "Hoy guardas una necesidad que ya no quieres minimizar.",
+    "takeaway": "Una frase «Para mí también importa…».",
+    "nextBenefit": "La próxima semana conviertes una necesidad en un límite que puedes nombrar, con una opción segura."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué necesidad te gustaría dejar de minimizar, aunque todavía no sepas pedirla?",
+     "format_es": "Completa: «Para mí también importa…». No hace falta compartirlo.",
+     "question_status": "live",
+     "guidance": "Devuelve la frase «Para mí también importa…» en sus palabras como referencia privada. No la conviertas en una conversación pendiente.",
+     "examples": [
+      {
+       "answer": "Para mí también importa descansar los domingos.",
+       "reply_direction": "Devuélvela tal cual; queda guardada para cuando ella quiera usarla."
+      },
+      {
+       "answer": "No sé cuál.",
+       "reply_direction": "Ofrece usar la necesidad del día 3 o 4 si la nombró; si no, basta con dejarlo abierto."
+      }
+     ],
+     "avoid": "«Ahora que lo sabes, este fin de semana díselo.»"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Guarda la frase como referencia para una futura conversación.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, los días 4 y 5 aceptan cualquier vínculo o necesidad de hoy.",
+   "lowCapacity": "«Hoy no puedo» se acepta sin tarea.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": "Si describe miedo a la reacción de la otra persona, amenazas, control o violencia: no sugerir conversación ni petición; ofrecer la vía privada (guardar solo para ella) o no hacer nada, y dejar actuar la pantalla de seguridad existente. Nunca suponer que puede hablar en privado ni que comparte el móvil con seguridad.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "everyday",
+   "areaName": "Ritmo diario",
+   "week": 1,
+   "day": 1,
+   "curriculumId": "RHYTHM-W1-D1",
+   "config": {
+    "purpose": "Hoy eliges el momento del día en que todo se te junta, para mirarlo sin culparte.",
+    "takeaway": "El momento del día que más pesa.",
+    "nextBenefit": "Mañana reconstruyes ese momento para ver qué intentabas hacer a la vez."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "choose",
+     "question_es": "¿En qué momento del día sientes que todo se te junta?",
+     "format_es": "Al despertar • Al salir • A media jornada • Al volver • Antes de dormir • Mi horario cambia",
+     "question_status": "live",
+     "guidance": "Confirma el momento y nombra una fricción típica de ese momento como pregunta abierta (no como diagnóstico). «Mi horario cambia» es válido: se observa el próximo momento difícil.",
+     "examples": [
+      {
+       "answer": "Al volver",
+       "reply_direction": "Sugiere que al volver suelen coincidir varias tareas; mañana puede ver cuáles."
+      },
+      {
+       "answer": "Mi horario cambia",
+       "reply_direction": "Respeta; propone observar el próximo momento en que todo se junte, sea cuando sea."
+      }
+     ],
+     "avoid": "«Levántate una hora antes para adelantar.» (más exigencia)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Elige un momento, no todo el día, para observar esta semana.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 2 usa «un momento reciente», no «ayer».",
+   "lowCapacity": "«Hoy no puedo» se acepta; en Ritmo diario es coherente: menos exigencia.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "everyday",
+   "areaName": "Ritmo diario",
+   "week": 1,
+   "day": 2,
+   "curriculumId": "RHYTHM-W1-D2",
+   "config": {
+    "purpose": "Hoy ves qué intentabas hacer a la vez en ese momento.",
+    "takeaway": "Hasta tres tareas que coincidieron, en orden.",
+    "nextBenefit": "Mañana nombras el trabajo invisible de ese momento."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "blanks",
+     "question_es": "Reconstruye ese momento de ayer: ¿qué estabas intentando hacer a la vez?",
+     "format_es": "Hasta tres tareas, sin juzgar cómo salieron.",
+     "question_status": "live",
+     "guidance": "Ordena las tareas que nombró en el orden en que aparecieron y señala dónde se solapan. Sin juzgar cómo salieron.",
+     "examples": [
+      {
+       "answer": "Hacer la cena, revisar deberes, contestar al jefe",
+       "reply_direction": "Ordénalas y señala el solape: cena y deberes a la vez."
+      },
+      {
+       "answer": "No me acuerdo de ayer",
+       "reply_direction": "Usa cualquier momento reciente."
+      }
+     ],
+     "avoid": "«Haz una lista de prioridades cada mañana.» (añade tarea)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Pon las tareas en el orden en que aparecieron.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 2 usa «un momento reciente», no «ayer».",
+   "lowCapacity": "«Hoy no puedo» se acepta; en Ritmo diario es coherente: menos exigencia.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [
+    "Depende de «ese momento de ayer». Tras una pausa: «un momento reciente»."
+   ],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "everyday",
+   "areaName": "Ritmo diario",
+   "week": 1,
+   "day": 3,
+   "curriculumId": "RHYTHM-W1-D3",
+   "config": {
+    "purpose": "Hoy nombras el trabajo que haces y nadie cuenta como trabajo.",
+    "takeaway": "Una carga invisible con nombre.",
+    "nextBenefit": "Mañana separas lo que depende de ti de lo que depende de otros."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué trabajo haces ahí que nadie suele contar como trabajo?",
+     "format_es": "Puede ser recordar, coordinar, cuidar o anticipar. Si no aplica, escribe otra carga.",
+     "question_status": "live",
+     "guidance": "Nombra la carga invisible (recordar, coordinar, anticipar) como trabajo real. No sugieras delegar si no mencionó a nadie.",
+     "examples": [
+      {
+       "answer": "Recordar todas las citas médicas de la familia.",
+       "reply_direction": "Nombra que coordinar es trabajo; queda en su descripción del momento."
+      },
+      {
+       "answer": "Nada especial.",
+       "reply_direction": "Ofrece ejemplos (recordar, anticipar) sin insistir; también vale otra carga."
+      }
+     ],
+     "avoid": "«Pídele a tu pareja que se encargue.» (supone ayuda disponible)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Añade esa carga invisible a tu descripción del momento.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 2 usa «un momento reciente», no «ayer».",
+   "lowCapacity": "«Hoy no puedo» se acepta; en Ritmo diario es coherente: menos exigencia.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [
+    "Repite el mismo momento por tercera vez (días 1–3). Valorar fusionar con el día 2."
+   ],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "everyday",
+   "areaName": "Ritmo diario",
+   "week": 1,
+   "day": 4,
+   "curriculumId": "RHYTHM-W1-D4",
+   "config": {
+    "purpose": "Hoy separas lo que depende de ti de lo que depende de horarios ajenos.",
+    "takeaway": "Una parte ajustable y otra que necesita apoyo.",
+    "nextBenefit": "Mañana eliges un cambio pequeño que quite un paso."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (draw, write)",
+     "question_es": "¿Qué parte depende de ti y qué parte depende de horarios o necesidades ajenas?",
+     "format_es": "Dos zonas, con palabras o trazos. Puedes usar dos listas.",
+     "question_status": "live",
+     "guidance": "Marca una parte que puede ajustar y otra que necesita apoyo o coordinación. Si nada depende de ella, eso es información, no un fallo.",
+     "examples": [
+      {
+       "answer": "Depende de mí: la cena. De otros: el horario del colegio y del autobús.",
+       "reply_direction": "Señala que la cena es la parte ajustable."
+      },
+      {
+       "answer": "Nada depende de mí.",
+       "reply_direction": "Nombra que la carga es estructural; no hay que cambiar nada hoy."
+      }
+     ],
+     "avoid": "«Siempre hay algo que puedes controlar si te organizas.»"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Marca una parte que puedas ajustar y otra que requiera apoyo o coordinación.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 2 usa «un momento reciente», no «ayer».",
+   "lowCapacity": "«Hoy no puedo» se acepta; en Ritmo diario es coherente: menos exigencia.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "everyday",
+   "areaName": "Ritmo diario",
+   "week": 1,
+   "day": 5,
+   "curriculumId": "RHYTHM-W1-D5",
+   "config": {
+    "purpose": "Hoy eliges un cambio pequeño que quite un paso de ese momento.",
+    "takeaway": "Un paso que deja de ser necesario.",
+    "nextBenefit": "Mañana ves con qué cuentas para probar ese cambio."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué cambio pequeño quitaría un paso de ese momento?",
+     "format_es": "No añadas una rutina completa: elige algo que simplifique.",
+     "question_status": "live",
+     "guidance": "Afina el cambio hasta que quite exactamente un paso; nunca añadas una rutina.",
+     "examples": [
+      {
+       "answer": "Dejar la mochila preparada la noche antes.",
+       "reply_direction": "Nombra el paso que desaparece: buscar las cosas por la mañana."
+      },
+      {
+       "answer": "Hacer todo más rápido.",
+       "reply_direction": "Reconduce: «más rápido» añade presión; propone quitar un paso concreto."
+      }
+     ],
+     "avoid": "«Crea una rutina matutina de 30 minutos.»"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Escribe exactamente qué paso dejaría de ser necesario.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 2 usa «un momento reciente», no «ayer».",
+   "lowCapacity": "«Hoy no puedo» se acepta; en Ritmo diario es coherente: menos exigencia.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "everyday",
+   "areaName": "Ritmo diario",
+   "week": 1,
+   "day": 6,
+   "curriculumId": "RHYTHM-W1-D6",
+   "config": {
+    "purpose": "Hoy ves con qué cuentas para probar el cambio, o qué te lo impide.",
+    "takeaway": "El cambio ajustado a un recurso disponible, o la barrera.",
+    "nextBenefit": "Mañana eliges una expectativa que puedes bajar."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "choose",
+     "question_es": "¿Qué tienes disponible para probar ese cambio?",
+     "format_es": "Unos minutos • Un objeto a mano • Ayuda de alguien • Puedo cambiar el orden • Nada por ahora • No lo sé",
+     "question_status": "live",
+     "guidance": "Adapta el cambio al recurso que tiene. «Nada por ahora» es una barrera real; queda registrada sin culpa.",
+     "examples": [
+      {
+       "answer": "Puedo cambiar el orden",
+       "reply_direction": "Propón probar el mismo cambio solo cambiando el orden, sin recursos nuevos."
+      },
+      {
+       "answer": "Nada por ahora",
+       "reply_direction": "Registra la barrera; no hay prueba que hacer."
+      }
+     ],
+     "avoid": "«Compra un organizador.» (gasto)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Adapta el cambio a un recurso disponible, o deja registrada la barrera.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 2 usa «un momento reciente», no «ayer».",
+   "lowCapacity": "«Hoy no puedo» se acepta; en Ritmo diario es coherente: menos exigencia.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "everyday",
+   "areaName": "Ritmo diario",
+   "week": 1,
+   "day": 7,
+   "curriculumId": "RHYTHM-W1-D7",
+   "config": {
+    "purpose": "Hoy eliges una expectativa que puedes bajar en un momento del día.",
+    "takeaway": "Una expectativa más realista para ese momento.",
+    "nextBenefit": "La próxima semana quitas fricción a una tarea concreta y defines su versión mínima."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué parte del día merece menos exigencia, no más disciplina?",
+     "format_es": "Nombra el momento y una expectativa que podrías bajar.",
+     "question_status": "live",
+     "guidance": "Devuelve la expectativa más realista en sus palabras. Sin metas nuevas.",
+     "examples": [
+      {
+       "answer": "Al volver: no hace falta que la cocina quede perfecta.",
+       "reply_direction": "Devuélvela como su nueva expectativa para ese momento."
+      },
+      {
+       "answer": "No puedo bajar nada.",
+       "reply_direction": "Nombra que a veces la exigencia no es suya; anotarlo también cuenta."
+      }
+     ],
+     "avoid": "«Si te organizas mejor, podrás con todo.»"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Deja una expectativa más realista para ese momento del día.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 2 usa «un momento reciente», no «ayer».",
+   "lowCapacity": "«Hoy no puedo» se acepta; en Ritmo diario es coherente: menos exigencia.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": null,
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "energy",
+   "areaName": "Reinicio de energía",
+   "week": 1,
+   "day": 1,
+   "curriculumId": "ENERGY-W1-D1",
+   "config": {
+    "purpose": "Hoy describes un momento sin margen, sin explicar quién eres.",
+    "takeaway": "Un momento sin margen, descrito como situación.",
+    "nextBenefit": "Mañana nombras qué tipo de carga notas más."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿En qué momento reciente sentiste que ya no te quedaba margen?",
+     "format_es": "Puede ser físico, mental o social; no tienes que explicar una causa.",
+     "question_status": "live",
+     "guidance": "Describe el momento como una situación con demandas concretas, no como un rasgo («soy floja»). Sin causas ni diagnósticos.",
+     "examples": [
+      {
+       "answer": "Ayer, a las 9 de la noche, no pude contestar ni un mensaje.",
+       "reply_direction": "Nombra la observación: a las 9 ya no quedaba margen para lo social."
+      },
+      {
+       "answer": "Siempre estoy agotada, soy así.",
+       "reply_direction": "Separa: el agotamiento es una observación, «soy así» es una explicación; hoy basta un momento concreto."
+      }
+     ],
+     "avoid": "«Puede que tengas estrés crónico o anemia.» (diagnóstico)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Describe el momento sin convertirlo en una explicación de quién eres.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 3 acepta cualquier cansancio reciente.",
+   "lowCapacity": "Si escribe que no puede más, aceptar y ofrecer parar; si aparece riesgo, la pantalla de seguridad actúa.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": "Si describe agotamiento extremo, ideas de hacerse daño o falta de lo básico: no dar pautas de descanso; dejar actuar la pantalla de seguridad y ofrecer apoyos. Nunca nombrar trastornos.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "energy",
+   "areaName": "Reinicio de energía",
+   "week": 1,
+   "day": 2,
+   "curriculumId": "ENERGY-W1-D2",
+   "config": {
+    "purpose": "Hoy nombras qué tipo de carga pesa más.",
+    "takeaway": "Un tipo de carga y una demanda ligada a ella.",
+    "nextBenefit": "Mañana ves qué pasaba justo antes del cansancio."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "choose",
+     "question_es": "¿Qué tipo de carga notas más hoy?",
+     "format_es": "Física • Mental • Emocional • Social • Varias • No lo sé",
+     "question_status": "live",
+     "guidance": "Une el tipo de carga con una demanda concreta, sin diagnosticar la causa.",
+     "examples": [
+      {
+       "answer": "Mental",
+       "reply_direction": "Propón nombrar una demanda: «llevar la cuenta de todo»."
+      },
+      {
+       "answer": "Varias",
+       "reply_direction": "Valida; basta elegir una para observar."
+      }
+     ],
+     "avoid": "«La carga mental se cura meditando.» (receta)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Nombra una demanda relacionada con esa carga, sin diagnosticar su causa.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 3 acepta cualquier cansancio reciente.",
+   "lowCapacity": "Si escribe que no puede más, aceptar y ofrecer parar; si aparece riesgo, la pantalla de seguridad actúa.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": "Si describe agotamiento extremo, ideas de hacerse daño o falta de lo básico: no dar pautas de descanso; dejar actuar la pantalla de seguridad y ofrecer apoyos. Nunca nombrar trastornos.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "energy",
+   "areaName": "Reinicio de energía",
+   "week": 1,
+   "day": 3,
+   "curriculumId": "ENERGY-W1-D3",
+   "config": {
+    "purpose": "Hoy separas lo que pasó de lo que todavía no sabes si es la causa.",
+    "takeaway": "Hasta tres hechos, separados de las explicaciones.",
+    "nextBenefit": "Mañana miras cómo se repartió tu energía ayer."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "blanks",
+     "question_es": "¿Qué estaba pasando justo antes de notar ese cansancio?",
+     "format_es": "Hasta tres hechos, sin buscar un diagnóstico.",
+     "question_status": "live",
+     "guidance": "Separa hechos de explicaciones no comprobadas. Un día no demuestra un patrón.",
+     "examples": [
+      {
+       "answer": "Comí tarde, discutí con mi hijo, tuve reunión.",
+       "reply_direction": "Ordena los hechos; ninguno es «la causa» todavía."
+      },
+      {
+       "answer": "Siempre que veo a mi madre me agoto.",
+       "reply_direction": "Distingue el hecho de hoy de la regla «siempre»; la regla queda como hipótesis."
+      }
+     ],
+     "avoid": "«Tu madre es tóxica para tu energía.» (interpretación)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Separa hechos de explicaciones que todavía no sabes si son ciertas.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 3 acepta cualquier cansancio reciente.",
+   "lowCapacity": "Si escribe que no puede más, aceptar y ofrecer parar; si aparece riesgo, la pantalla de seguridad actúa.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [
+    "Depende de «ese cansancio». Tras una pausa: cualquier cansancio reciente."
+   ],
+   "safety": "Si describe agotamiento extremo, ideas de hacerse daño o falta de lo básico: no dar pautas de descanso; dejar actuar la pantalla de seguridad y ofrecer apoyos. Nunca nombrar trastornos.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "energy",
+   "areaName": "Reinicio de energía",
+   "week": 1,
+   "day": 4,
+   "curriculumId": "ENERGY-W1-D4",
+   "config": {
+    "purpose": "Hoy miras cómo se repartió tu energía en un día, sin puntuarla.",
+    "takeaway": "Un cambio para observar otro día.",
+    "nextBenefit": "Mañana buscas un momento que te dejó un poco más de espacio."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (draw, write)",
+     "question_es": "Dibuja cómo se repartió tu energía ayer. ¿Qué cambio notaste, si hubo alguno?",
+     "format_es": "Una línea o palabras; no hace falta puntuarla.",
+     "question_status": "live",
+     "guidance": "Devuelve el cambio que notó como algo para observar otro día, no como patrón.",
+     "examples": [
+      {
+       "answer": "Bien por la mañana, caída a las 4.",
+       "reply_direction": "Nombra el cambio a las 4 como algo que puede observar otro día."
+      },
+      {
+       "answer": "Igual todo el día, baja.",
+       "reply_direction": "Válido; un día sin cambios también es información."
+      }
+     ],
+     "avoid": "«Toma café a las 3 para evitar la caída.» (receta)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Marca un cambio para observar otro día; un solo día no demuestra un patrón.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 3 acepta cualquier cansancio reciente.",
+   "lowCapacity": "Si escribe que no puede más, aceptar y ofrecer parar; si aparece riesgo, la pantalla de seguridad actúa.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": "Si describe agotamiento extremo, ideas de hacerse daño o falta de lo básico: no dar pautas de descanso; dejar actuar la pantalla de seguridad y ofrecer apoyos. Nunca nombrar trastornos.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "energy",
+   "areaName": "Reinicio de energía",
+   "week": 1,
+   "day": 5,
+   "curriculumId": "ENERGY-W1-D5",
+   "config": {
+    "purpose": "Hoy encuentras qué te dio un poco de espacio, aunque no te hiciera feliz.",
+    "takeaway": "Un detalle que dio espacio, o la demanda a reducir.",
+    "nextBenefit": "Mañana eliges qué necesitas primero cuando estás así."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué momento te dejó un poco más de espacio, aunque no te hiciera sentir feliz?",
+     "format_es": "Si ninguno lo hizo, escribe qué habría reducido una demanda.",
+     "question_status": "live",
+     "guidance": "Nombra el detalle que dio espacio, o la demanda que habría sido útil reducir. No lo conviertas en tarea diaria.",
+     "examples": [
+      {
+       "answer": "Diez minutos en el autobús sin mirar el móvil.",
+       "reply_direction": "Nombra el detalle: diez minutos sin pantalla."
+      },
+      {
+       "answer": "Ninguno.",
+       "reply_direction": "Usa la alternativa: qué demanda habría convenido reducir."
+      }
+     ],
+     "avoid": "«Medita diez minutos al día a partir de hoy.»"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Conserva el detalle o la demanda que habría sido útil reducir.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 3 acepta cualquier cansancio reciente.",
+   "lowCapacity": "Si escribe que no puede más, aceptar y ofrecer parar; si aparece riesgo, la pantalla de seguridad actúa.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": "Si describe agotamiento extremo, ideas de hacerse daño o falta de lo básico: no dar pautas de descanso; dejar actuar la pantalla de seguridad y ofrecer apoyos. Nunca nombrar trastornos.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "energy",
+   "areaName": "Reinicio de energía",
+   "week": 1,
+   "day": 6,
+   "curriculumId": "ENERGY-W1-D6",
+   "config": {
+    "purpose": "Hoy eliges qué necesitas primero cuando te quedas sin margen.",
+    "takeaway": "Una forma pequeña de atender esa necesidad, o la ayuda que falta.",
+    "nextBenefit": "Mañana guardas una observación sobre tu energía, sin convertirla en regla."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "choose",
+     "question_es": "¿Qué necesitas primero cuando estás así?",
+     "format_es": "Menos estímulos • Una necesidad básica • Estar acompañada • Estar sola • Ayuda con una carga • No lo sé",
+     "question_status": "live",
+     "guidance": "Define una forma pequeña de atender esa necesidad con lo que tiene, o nombra la ayuda que falta. Nunca recetes descanso.",
+     "examples": [
+      {
+       "answer": "Menos estímulos",
+       "reply_direction": "Propón una versión posible: bajar el volumen o salir a la puerta un minuto, si puede."
+      },
+      {
+       "answer": "Una necesidad básica: no estoy durmiendo por el turno de noche.",
+       "reply_direction": "No recetes dormir; nombra que es una necesidad no cubierta por la carga, y que existen apoyos si quiere buscarlos."
+      }
+     ],
+     "avoid": "«Tienes que dormir ocho horas.»"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Define una forma pequeña de atender esa necesidad, o la ayuda que te falta.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 3 acepta cualquier cansancio reciente.",
+   "lowCapacity": "Si escribe que no puede más, aceptar y ofrecer parar; si aparece riesgo, la pantalla de seguridad actúa.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [
+    "«Una necesidad básica»: si lo básico no está cubierto (comida, sueño, techo), derivar a apoyo, no a autocuidado."
+   ],
+   "safety": "Si describe agotamiento extremo, ideas de hacerse daño o falta de lo básico: no dar pautas de descanso; dejar actuar la pantalla de seguridad y ofrecer apoyos. Nunca nombrar trastornos.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  },
+  {
+   "area": "energy",
+   "areaName": "Reinicio de energía",
+   "week": 1,
+   "day": 7,
+   "curriculumId": "ENERGY-W1-D7",
+   "config": {
+    "purpose": "Hoy guardas una observación provisional sobre tu energía.",
+    "takeaway": "Una observación provisional.",
+    "nextBenefit": "La próxima semana pruebas una pausa que sí quepa en tu día, o nombras la barrera."
+   },
+   "steps": [
+    {
+     "id": "ask",
+     "kind": "reflect (write)",
+     "question_es": "¿Qué observación sobre tu energía vale la pena recordar sin convertirla en una regla?",
+     "format_es": "Completa: «Esta semana noté…». Una semana no define todo tu cuerpo.",
+     "question_status": "live",
+     "guidance": "Devuelve «Esta semana noté…» como provisional. Sin etiquetas fijas.",
+     "examples": [
+      {
+       "answer": "Esta semana noté que las tardes con los niños me vacían.",
+       "reply_direction": "Devuélvela como observación provisional para la semana 2."
+      },
+      {
+       "answer": "No noté nada.",
+       "reply_direction": "Válido; quizá una semana no basta, y eso también es información."
+      }
+     ],
+     "avoid": "«Eres una persona de mañanas.» (etiqueta)"
+    },
+    {
+     "id": "take",
+     "optional": true,
+     "prompt_es": "Guarda la observación como provisional, no como una etiqueta fija.",
+     "prompt_status": "live",
+     "guidance": "Devuelve su frase en sus palabras; si saltó el paso, propón una desde la respuesta anterior."
+    }
+   ],
+   "gapReturn": "Tras una pausa, el día 3 acepta cualquier cansancio reciente.",
+   "lowCapacity": "Si escribe que no puede más, aceptar y ofrecer parar; si aparece riesgo, la pantalla de seguridad actúa.",
+   "skip": "Saltar termina el paso sin respuesta ni insistencia; el día se puede cerrar igual.",
+   "flags": [],
+   "safety": "Si describe agotamiento extremo, ideas de hacerse daño o falta de lo básico: no dar pautas de descanso; dejar actuar la pantalla de seguridad y ofrecer apoyos. Nunca nombrar trastornos.",
+   "status": "PROPOSED (all Spanish in config, guidance and examples awaits María and Alejandra)"
+  }
+ ]
+}

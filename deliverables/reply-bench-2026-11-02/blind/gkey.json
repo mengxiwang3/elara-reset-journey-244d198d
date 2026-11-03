@@ -1,0 +1,130 @@
+{
+ "G01": {
+  "pair": "s2",
+  "variant": "V0"
+ },
+ "G02": {
+  "pair": "s1-take",
+  "variant": "V3"
+ },
+ "G03": {
+  "pair": "s5",
+  "variant": "V0"
+ },
+ "G04": {
+  "pair": "s1-choice",
+  "variant": "V2"
+ },
+ "G05": {
+  "pair": "s1-choice",
+  "variant": "V0"
+ },
+ "G06": {
+  "pair": "s1-choice",
+  "variant": "V3"
+ },
+ "G07": {
+  "pair": "s7",
+  "variant": "V1"
+ },
+ "G08": {
+  "pair": "s1-choice",
+  "variant": "V1"
+ },
+ "G09": {
+  "pair": "s4",
+  "variant": "V2"
+ },
+ "G10": {
+  "pair": "s3",
+  "variant": "V1"
+ },
+ "G11": {
+  "pair": "s6",
+  "variant": "V0"
+ },
+ "G12": {
+  "pair": "s3",
+  "variant": "V0"
+ },
+ "G13": {
+  "pair": "s6",
+  "variant": "V1"
+ },
+ "G14": {
+  "pair": "s7",
+  "variant": "V2"
+ },
+ "G15": {
+  "pair": "s7",
+  "variant": "V0"
+ },
+ "G16": {
+  "pair": "s1-take",
+  "variant": "V2"
+ },
+ "G17": {
+  "pair": "s5",
+  "variant": "V1"
+ },
+ "G18": {
+  "pair": "s3",
+  "variant": "V3"
+ },
+ "G19": {
+  "pair": "s2",
+  "variant": "V1"
+ },
+ "G20": {
+  "pair": "s5",
+  "variant": "V3"
+ },
+ "G21": {
+  "pair": "s6",
+  "variant": "V3"
+ },
+ "G22": {
+  "pair": "s3",
+  "variant": "V2"
+ },
+ "G23": {
+  "pair": "s5",
+  "variant": "V2"
+ },
+ "G24": {
+  "pair": "s2",
+  "variant": "V3"
+ },
+ "G25": {
+  "pair": "s7",
+  "variant": "V3"
+ },
+ "G26": {
+  "pair": "s4",
+  "variant": "V3"
+ },
+ "G27": {
+  "pair": "s4",
+  "variant": "V1"
+ },
+ "G28": {
+  "pair": "s1-take",
+  "variant": "V0"
+ },
+ "G29": {
+  "pair": "s6",
+  "variant": "V2"
+ },
+ "G30": {
+  "pair": "s1-take",
+  "variant": "V1"
+ },
+ "G31": {
+  "pair": "s4",
+  "variant": "V0"
+ },
+ "G32": {
+  "pair": "s2",
+  "variant": "V2"
+ }
+}

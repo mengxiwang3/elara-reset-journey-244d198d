@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Siete sesiones v2</title>
+<style>
+:root{--ink:#17241C;--mute:#55635b;--line:#CFD9CA;--soft:#E7EDE4;--acc:#2C4A3A;--bg:#F6F3EC}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#e8ece9;--mute:#aab5ae;--line:#3b4741;--soft:#1f2723;--acc:#9cc3ad;--bg:#141917}}
+:root[data-theme="dark"]{--ink:#e8ece9;--mute:#aab5ae;--line:#3b4741;--soft:#1f2723;--acc:#9cc3ad;--bg:#141917}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px 48px}h1{font:600 26px/1.2 Georgia,serif;margin:0 0 6px}h2{font:600 18px/1.3 Georgia,serif;margin:26px 0 8px}
+a{color:var(--acc);font-weight:600}.card{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:8px 0}
+.row{display:flex;flex-wrap:wrap;gap:8px}.row a{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:8px 14px;min-height:44px;text-decoration:none}
+.mute{color:var(--mute);font-size:13.5px}code{font-size:13px}
+</style></head><body><main>
+<h1>Siete sesiones v2 · índice de pruebas</h1>
+<p class="mute">Prototipo para pruebas cualitativas. Datos ficticios; el español nuevo es propuesta. Todo funciona sin red.</p>
+<h2>Prototipo</h2>
+<div class="card"><a href="sesiones-v2.html">sesiones-v2.html</a> — revisor: caminos, vista previa por sesión, variantes A/B, teléfonos, texto 100–160 %, teclado.</div>
+<h2>Página de participantes</h2>
+<div class="card"><p style="margin:0 0 8px"><a href="tester.html">tester.html</a> sin código: elegir o «al azar». Con código fijo:</p>
+<div class="row"><a href="tester.html#t1">T1</a><a href="tester.html#t2">T2</a><a href="tester.html#t3">T3</a><a href="tester.html#t4">T4</a><a href="tester.html#t5">T5</a><a href="tester.html#t6">T6</a><a href="tester.html#t7">T7</a><a href="tester.html#t8">T8</a></div></div>
+<h2>Kit</h2>
+<div class="card"><a href="kit/guion-facilitadora.html">Guion de la facilitadora</a> · <a href="kit/hoja-observacion.html">Hoja de observación</a> (<a href="kit/hoja-observacion.csv">CSV</a>) · <a href="kit/tarjeta-oportunidades.html">Tarjeta Oportunidades</a> · <a href="kit/tarjeta-conexiones.html">Tarjeta Conexiones</a> · <a href="kit/day_feedback-sql.md">SQL day_feedback</a></div>
+<h2>Comprobaciones</h2>
+<div class="card">Desde esta carpeta, con Playwright disponible: <code>node source/test-v2.cjs .</code> y, para las capturas, <code>node source/shots.cjs .</code>. Resultado del último pase en <a href="check-results.json">check-results.json</a> y <a href="CHECKS.md">CHECKS.md</a>.</div>
+</main></body></html>

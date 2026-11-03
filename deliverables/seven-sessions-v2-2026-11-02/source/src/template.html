@@ -1,0 +1,32 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elara · siete sesiones v2</title>
+<style>/*@@CSS@@*/</style></head><body>
+<div class="sv-top"><h1>Elara · siete sesiones de prueba de Claridad financiera · v2</h1>
+<p>Prototipo para revisar con el equipo, no para usuarias. v2 (2 nov): sesión 5 y 7 por camino, el camino de apoyo avanza (qué aclarar → dónde preguntar → el mensaje), y tres pares A/B. Contenido del currículo de 210 días. Las respuestas de Elara son <b>ejemplos escritos para el prototipo</b>; en la app las generaría el modelo con el propósito, la conclusión y la guía de cada sesión. Todo el español nuevo es propuesta pendiente de María y Alejandra. Nada se guarda fuera de esta página.</p></div>
+<div class="sv-grid">
+ <div class="sv-ctl" role="group" aria-label="Controles de revisión (no son parte de la app)">
+  <div class="sv-g"><b>Recorrido real desde Hoy</b><div class="sv-seg" id="c-run"></div><p class="sv-hint" style="margin:8px 0 4px">Avanzar a la sesión, con respuestas de ejemplo en las anteriores, por el camino:</p><div class="sv-seg" id="c-advp"></div><div class="sv-seg" id="c-adv" style="margin-top:6px"></div><p class="sv-hint">Terminar una sesión dentro del teléfono es lo único que la marca como hecha y avanza «Sesión N de 7».</p></div>
+  <div class="sv-g"><b>Variantes A/B</b><p class="sv-hint" id="vline" style="margin:0 0 6px"></p><p class="sv-hint" style="margin:0">1 · Pregunta de la sesión 2 (si la sesión 1 eligió «Cubrir algo básico»)</p><div class="sv-seg" id="c-v-s2"></div><p class="sv-hint" style="margin:8px 0 0">2 · Recuerdo al empezar las sesiones 2–7</p><div class="sv-seg" id="c-v-recap"></div><p class="sv-hint" style="margin:8px 0 0">3 · Respuestas de Elara</p><div class="sv-seg" id="c-v-reply"></div><p class="sv-hint">Cambiar una variante reinicia la sesión abierta, para que sea lo único distinto.</p></div><div class="sv-g"><b>Ver sesión (vista previa)</b><div class="sv-seg" id="c-pv"></div><p class="sv-hint">Vista previa: no marca nada como hecho ni cambia el recorrido real.</p></div>
+  <div class="sv-g"><b>Ejemplos de respuesta · sesión <span id="c-scn-n">1</span></b><div class="sv-seg" id="c-scn"></div><p class="sv-hint">Abre la vista previa con respuestas de ejemplo ya puestas. Toca «Seguir» en el teléfono para ver la respuesta de Elara.</p></div>
+  <div class="sv-g"><b>Casos</b><div class="sv-seg" id="c-case"></div><p class="sv-hint" id="c-case-h">Saltar, «Hoy no puedo», «No quise decir eso» y «Parar por hoy» (la ✕) están en cada pantalla del teléfono.</p></div>
+  <div class="sv-g"><b>Plataforma</b><div class="sv-seg" id="c-plat"></div></div>
+  <div class="sv-g"><b>Pantalla</b><div class="sv-seg" id="c-dev"></div></div>
+  <div class="sv-g"><b>Tamaño de texto</b><div class="sv-seg" id="c-k"></div></div>
+  <div class="sv-g"><b>Teclado (simulado)</b><div class="sv-seg" id="c-kb"></div></div>
+  <div class="sv-g"><b>Navegación Android</b><div class="sv-seg" id="c-nav"></div></div>
+  <div class="sv-g"><b>Movimiento</b><div class="sv-seg" id="c-mo"></div></div>
+  <div class="sv-g"><button class="sv-btn" id="c-reset" type="button">Reiniciar todo</button></div>
+ </div>
+ <div class="sv-phone"><div class="sv-badge" id="pvbadge" role="status">Vista previa de la sesión <span id="pvn"></span>: no cuenta como hecha</div><h2 id="ttl"></h2><div id="phone"></div><button class="sv-btn" id="c-back" type="button">Atrás del sistema (Esc)</button></div>
+ <div class="sv-side" aria-live="polite">
+  <h2>Ejemplo de prototipo</h2>
+  <div class="sv-box" id="last"><p style="margin:0">Responde una pregunta en el teléfono para ver aquí qué regla produjo la respuesta de Elara.</p></div>
+  <details class="sv-box"><summary>Texto nuevo para aprobar</summary><ul class="sv-copy" id="copy"></ul></details>
+  <details class="sv-box"><summary>Límites del prototipo</summary><ul style="margin:6px 0 0;padding-left:18px">
+   <li>Las respuestas de Elara son ejemplos fijos: una por opción elegida; con texto libre solo hay respuesta escrita si coincide con un ejemplo preparado. Cualquier otro texto recibe «Guardé tu frase.» y no se simula lo que generaría el modelo.</li>
+   <li>Lo que respondes vive solo en la memoria de esta página: al recargar se pierde.</li>
+   <li>Teclado, Atrás del sistema y barras son simulados. Sin probar en dispositivos reales ni con lectores de pantalla.</li>
+   <li>Elara no puede confirmar servicios locales: el camino de apoyo ofrece tipos de lugar, nunca nombres, direcciones ni teléfonos.</li><li>La foto de Wuzhen y la semana son ilustrativas: la prueba usa los primeros siete días de Claridad financiera.</li></ul></details>
+ </div>
+</div>
+<script>/*@@S0@@*/</script><script>/*@@S1@@*/</script><script>/*@@S2@@*/</script></body></html>

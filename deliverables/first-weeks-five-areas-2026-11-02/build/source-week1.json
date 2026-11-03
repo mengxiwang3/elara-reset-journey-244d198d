@@ -1,0 +1,527 @@
+[
+ {
+  "id": "PURPOSE-W1-D1",
+  "day": 1,
+  "format": "Voz o texto / Voice or text",
+  "es": {
+   "title": "¿Qué tema vuelve a tu cabeza cuando por fin tienes un rato para ti?",
+   "rest": "Cuenta una situación, no toda tu historia. Alternativa: texto.",
+   "opt": "Paso opcional / Para llevarte: Pon un título de pocas palabras al tema que vuelve."
+  },
+  "en": {
+   "title": "What keeps returning to your mind when you finally have a moment to yourself?",
+   "rest": "Describe one situation, not your whole story. Text alternative.",
+   "opt": "Optional step / Takeaway: Give the recurring topic a short title."
+  }
+ },
+ {
+  "id": "PURPOSE-W1-D2",
+  "day": 2,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué ocupa tu semana y deja poco espacio para algo que te importa?",
+   "rest": "Nombra una tensión concreta, sin asumir que puedes quitar esa obligación.",
+   "opt": "Paso opcional / Para llevarte: Identifica si falta tiempo, apoyo o permiso propio; no tienes que resolverlo hoy."
+  },
+  "en": {
+   "title": "What fills your week and leaves little room for something that matters to you?",
+   "rest": "Name a specific tension without assuming you can remove the obligation.",
+   "opt": "Optional step / Takeaway: Identify whether time, support, or your own permission is missing; no solution required today."
+  }
+ },
+ {
+  "id": "PURPOSE-W1-D3",
+  "day": 3,
+  "format": "Una opción / One choice",
+  "es": {
+   "title": "¿Qué podrías mirar cinco minutos para entender algo que te da curiosidad?",
+   "rest": "Un curso • Las tareas de un trabajo • Un proyecto de alguien • Una actividad local • Otra cosa • Nada hoy",
+   "opt": "Paso opcional / Para llevarte: Si puedes, mira una sola fuente durante cinco minutos y anota algo que desconocías."
+  },
+  "en": {
+   "title": "What could you look at for five minutes to understand a curiosity?",
+   "rest": "A course • Job duties • Someone's project • A local activity • Something else • Nothing today",
+   "opt": "Optional step / Takeaway: If possible, look at one source for five minutes and note something you did not know."
+  }
+ },
+ {
+  "id": "PURPOSE-W1-D4",
+  "day": 4,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué parte de lo que sientes que deberías querer sí elegirías tú?",
+   "rest": "Si no reconoces esa presión, describe algo que te interese sin explicarlo a nadie.",
+   "opt": "Paso opcional / Para llevarte: Subraya una preferencia que sí reconoces como tuya."
+  },
+  "en": {
+   "title": "Which part of what you feel you should want would you choose yourself?",
+   "rest": "If no pressure fits, describe an interest you need not justify.",
+   "opt": "Optional step / Takeaway: Underline one preference you recognize as your own."
+  }
+ },
+ {
+  "id": "PURPOSE-W1-D5",
+  "day": 5,
+  "format": "Varias opciones / Multiple choices",
+  "es": {
+   "title": "¿Qué tuvo un momento reciente que te gustaría repetir?",
+   "rest": "Calma • Conexión • Aprender • Crear o resolver • Disfrutar • Otra cosa",
+   "opt": "Paso opcional / Para llevarte: Anota una condición concreta que hizo posible ese momento."
+  },
+  "en": {
+   "title": "What made a recent moment worth repeating?",
+   "rest": "Calm • Connection • Learning • Making or solving • Enjoyment • Something else",
+   "opt": "Optional step / Takeaway: Note one concrete condition that made that moment possible."
+  }
+ },
+ {
+  "id": "PURPOSE-W1-D6",
+  "day": 6,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué cosa quieres entender mejor, sin decidir todavía tu futuro?",
+   "rest": "Hazla concreta: «Si este curso cabe en mi vida», no «Qué hacer con mi vida».",
+   "opt": "Paso opcional / Para llevarte: Escribe tu foco como una pregunta que podrías investigar."
+  },
+  "en": {
+   "title": "What one thing do you want to understand without deciding your future yet?",
+   "rest": "Make it concrete: “Whether this course fits,” not “What to do with my life.”",
+   "opt": "Optional step / Takeaway: Write your focus as a question you could investigate."
+  }
+ },
+ {
+  "id": "PURPOSE-W1-D7",
+  "day": 7,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué descubrimiento de estos días quieres conservar?",
+   "rest": "Puede ser una curiosidad, una preferencia o una duda más clara.",
+   "opt": "Paso opcional / Para llevarte: Guarda un hallazgo y una duda, sin obligarte a resolverla."
+  },
+  "en": {
+   "title": "What discovery from these days do you want to keep?",
+   "rest": "A curiosity, preference or clearer question.",
+   "opt": "Optional step / Takeaway: Keep one finding and one question without having to resolve it."
+  }
+ },
+ {
+  "id": "SELF-W1-D1",
+  "day": 1,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué decisión pequeña te ha hecho buscar aprobación últimamente?",
+   "rest": "Elige algo cotidiano; no necesitas exponer una decisión íntima.",
+   "opt": "Paso opcional / Para llevarte: Nombra qué esperabas recibir al pedir aprobación: un dato, compañía o permiso."
+  },
+  "en": {
+   "title": "Which small decision has made you seek approval lately?",
+   "rest": "Choose something everyday; no need to disclose an intimate decision.",
+   "opt": "Optional step / Takeaway: Name what you hoped for from approval: a fact, company, or permission."
+  }
+ },
+ {
+  "id": "SELF-W1-D2",
+  "day": 2,
+  "format": "Voz o texto / Voice or text",
+  "es": {
+   "title": "¿Qué te dices cuando no tienes certeza sobre una elección?",
+   "rest": "Una frase tal como aparece, sin tener que creerla. Alternativa: texto.",
+   "opt": "Paso opcional / Para llevarte: Escribe la frase como un pensamiento que aparece, no como un hecho demostrado."
+  },
+  "en": {
+   "title": "What do you tell yourself when you are unsure about a choice?",
+   "rest": "One phrase as it appears, without having to believe it. Text alternative.",
+   "opt": "Optional step / Takeaway: Write the sentence as a thought that arises, not a proven fact."
+  }
+ },
+ {
+  "id": "SELF-W1-D3",
+  "day": 3,
+  "format": "Lista breve / Short list",
+  "es": {
+   "title": "¿Qué parte de esa preocupación sabes y qué parte estás imaginando?",
+   "rest": "Dos columnas: «Hechos» y «Lo que imagino». También puedes usar una situación nueva.",
+   "opt": "Paso opcional / Para llevarte: Marca un dato que puedas comprobar y una incertidumbre que deba seguir abierta."
+  },
+  "en": {
+   "title": "Which part of that concern do you know, and which part are you imagining?",
+   "rest": "Two columns: “Facts” and “What I imagine.” A new situation is fine.",
+   "opt": "Optional step / Takeaway: Mark one checkable fact and one uncertainty that must remain open."
+  }
+ },
+ {
+  "id": "SELF-W1-D4",
+  "day": 4,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué has decidido antes que salió suficientemente bien, aunque no fuera perfecto?",
+   "rest": "Una elección pequeña cuenta. Si no recuerdas una, describe una tarea que resolviste.",
+   "opt": "Paso opcional / Para llevarte: Anota qué información tenías cuando elegiste, sin usar lo que supiste después."
+  },
+  "en": {
+   "title": "What past decision worked well enough, even if it was not perfect?",
+   "rest": "A small choice counts. If none comes to mind, describe a task you handled.",
+   "opt": "Optional step / Takeaway: Note what information you had when choosing, without using later knowledge."
+  }
+ },
+ {
+  "id": "SELF-W1-D5",
+  "day": 5,
+  "format": "Varias opciones / Multiple choices",
+  "es": {
+   "title": "¿Qué hiciste tú que ayudó en esa situación?",
+   "rest": "Pregunté • Me preparé • Me adapté • Pedí ayuda • Elegí con lo que sabía • Otra cosa",
+   "opt": "Paso opcional / Para llevarte: Conserva una conducta concreta que puedas repetir."
+  },
+  "en": {
+   "title": "What did you do that helped in that situation?",
+   "rest": "Asked • Prepared • Adapted • Asked for help • Used what I knew • Something else",
+   "opt": "Optional step / Takeaway: Keep one concrete behavior you can repeat."
+  }
+ },
+ {
+  "id": "SELF-W1-D6",
+  "day": 6,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué preferencia pequeña podrías expresar sin justificarla demasiado?",
+   "rest": "Ensaya «Prefiero ___». Puedes dejarlo solo aquí.",
+   "opt": "Paso opcional / Para llevarte: Deja lista una frase de preferencia; decirla en voz alta es opcional."
+  },
+  "en": {
+   "title": "What small preference could you express without overexplaining it?",
+   "rest": "Rehearse “I prefer ___.” You can keep it private.",
+   "opt": "Optional step / Takeaway: Prepare a preference sentence; saying it aloud is optional."
+  }
+ },
+ {
+  "id": "SELF-W1-D7",
+  "day": 7,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué evidencia sobre ti quieres recordar cuando vuelvas a dudar?",
+   "rest": "Guarda un hecho, no una afirmación que no te crees.",
+   "opt": "Paso opcional / Para llevarte: Titula tu nota con el hecho concreto que recuerdas."
+  },
+  "en": {
+   "title": "What evidence about yourself would you like to remember when doubt returns?",
+   "rest": "Keep a fact, not an affirmation you do not believe.",
+   "opt": "Optional step / Takeaway: Title your note with the concrete fact you remember."
+  }
+ },
+ {
+  "id": "LOVE-W1-D1",
+  "day": 1,
+  "format": "Una opción / One choice",
+  "es": {
+   "title": "¿En qué vínculo te gustaría sentirte un poco más tú esta semana?",
+   "rest": "Pareja • Familia • Amistad • Personas del trabajo • Otro • Prefiero no elegir",
+   "opt": "Paso opcional / Para llevarte: Elige un vínculo para observar esta semana, sin tener que cambiarlo."
+  },
+  "en": {
+   "title": "In which relationship would you like to feel a little more like yourself this week?",
+   "rest": "Partner • Family • Friendship • People at work • Other • Prefer not to choose",
+   "opt": "Optional step / Takeaway: Choose one relationship to observe this week without needing to change it."
+  }
+ },
+ {
+  "id": "LOVE-W1-D2",
+  "day": 2,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "Piensa en un momento reciente en que te sentiste escuchada. ¿Qué hizo la otra persona que te ayudó?",
+   "rest": "Puede ser un detalle pequeño; si no recuerdas uno, escribe cómo te gustaría que te escucharan.",
+   "opt": "Paso opcional / Para llevarte: Pon nombre a la conducta que te ayudó: escuchar, preguntar o dar tiempo, por ejemplo."
+  },
+  "en": {
+   "title": "Think of a recent moment when you felt heard. What did the other person do that helped?",
+   "rest": "A small detail counts; if none comes to mind, describe how you would like to be heard.",
+   "opt": "Optional step / Takeaway: Name the behavior that helped: listening, asking, or giving time, for example."
+  }
+ },
+ {
+  "id": "LOVE-W1-D3",
+  "day": 3,
+  "format": "Voz o texto / Voice or text",
+  "es": {
+   "title": "¿Cuándo dijiste «está bien» y por dentro necesitabas algo distinto?",
+   "rest": "Una situación cotidiana, sin nombres. También vale: «Esta semana no me pasó».",
+   "opt": "Paso opcional / Para llevarte: Traduce ese «está bien» a una necesidad privada; si no aplica, conserva un ejemplo hipotético."
+  },
+  "en": {
+   "title": "When did you say “it's okay” while needing something different inside?",
+   "rest": "One everyday situation, without names. “That did not happen this week” is valid.",
+   "opt": "Optional step / Takeaway: Translate that “it's okay” into a private need; if irrelevant, keep a hypothetical example."
+  }
+ },
+ {
+  "id": "LOVE-W1-D4",
+  "day": 4,
+  "format": "Una opción / One choice",
+  "es": {
+   "title": "¿Qué necesitas más de ese vínculo ahora?",
+   "rest": "Tiempo juntas • Espacio • Claridad • Ayuda concreta • Respeto a un límite • No lo sé",
+   "opt": "Paso opcional / Para llevarte: Completa «Me ayudaría…» con una acción concreta."
+  },
+  "en": {
+   "title": "What do you most need from that relationship now?",
+   "rest": "Time together • Space • Clarity • Practical help • Respect for a boundary • Not sure",
+   "opt": "Optional step / Takeaway: Complete “It would help me…” with a concrete action."
+  }
+ },
+ {
+  "id": "LOVE-W1-D5",
+  "day": 5,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Cómo se vería esa necesidad en una acción que otra persona pudiera entender?",
+   "rest": "Ejemplo: «Avísame si vas a llegar tarde», en vez de «Tenme en cuenta».",
+   "opt": "Paso opcional / Para llevarte: Revisa que tu petición diga qué necesitas, sin exigir que la otra persona adivine."
+  },
+  "en": {
+   "title": "What would that need look like as an action another person could understand?",
+   "rest": "Example: “Tell me if you will be late,” rather than “Consider me.”",
+   "opt": "Optional step / Takeaway: Check that your request says what you need without requiring mind-reading."
+  }
+ },
+ {
+  "id": "LOVE-W1-D6",
+  "day": 6,
+  "format": "Dibujo o texto / Drawing or text",
+  "es": {
+   "title": "Dibuja dos espacios: el tiempo que hoy compartes y el que quisieras reservar para ti. ¿Qué cambiarías?",
+   "rest": "No tienen que ser iguales ni medirse. Puedes describirlos con palabras.",
+   "opt": "Paso opcional / Para llevarte: Marca un espacio que quieras reservar; no necesitas justificarlo ni negociar hoy."
+  },
+  "en": {
+   "title": "Draw two spaces: the time you share now and the time you would like for yourself. What would you change?",
+   "rest": "They need not be equal or measured. You can describe them in words.",
+   "opt": "Optional step / Takeaway: Mark one space you want to reserve; no justification or negotiation needed today."
+  }
+ },
+ {
+  "id": "LOVE-W1-D7",
+  "day": 7,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué necesidad te gustaría dejar de minimizar, aunque todavía no sepas pedirla?",
+   "rest": "Completa: «Para mí también importa…». No hace falta compartirlo.",
+   "opt": "Paso opcional / Para llevarte: Guarda la frase como referencia para una futura conversación."
+  },
+  "en": {
+   "title": "What need would you like to stop minimizing, even if you do not yet know how to ask for it?",
+   "rest": "Complete: “It also matters to me that…” You do not have to share it.",
+   "opt": "Optional step / Takeaway: Keep the sentence as a reference for a future conversation."
+  }
+ },
+ {
+  "id": "RHYTHM-W1-D1",
+  "day": 1,
+  "format": "Una opción / One choice",
+  "es": {
+   "title": "¿En qué momento del día sientes que todo se te junta?",
+   "rest": "Al despertar • Al salir • A media jornada • Al volver • Antes de dormir • Mi horario cambia",
+   "opt": "Paso opcional / Para llevarte: Elige un momento, no todo el día, para observar esta semana."
+  },
+  "en": {
+   "title": "At what point in the day does everything seem to pile up?",
+   "rest": "On waking • When leaving • Midday • On returning • Before bed • My schedule changes",
+   "opt": "Optional step / Takeaway: Choose one moment, not the whole day, to observe this week."
+  }
+ },
+ {
+  "id": "RHYTHM-W1-D2",
+  "day": 2,
+  "format": "Lista breve / Short list",
+  "es": {
+   "title": "Reconstruye ese momento de ayer: ¿qué estabas intentando hacer a la vez?",
+   "rest": "Hasta tres tareas, sin juzgar cómo salieron.",
+   "opt": "Paso opcional / Para llevarte: Pon las tareas en el orden en que aparecieron."
+  },
+  "en": {
+   "title": "Reconstruct that moment yesterday: what were you trying to do at once?",
+   "rest": "Up to three tasks, without judging how they went.",
+   "opt": "Optional step / Takeaway: Put the tasks in the order they appeared."
+  }
+ },
+ {
+  "id": "RHYTHM-W1-D3",
+  "day": 3,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué trabajo haces ahí que nadie suele contar como trabajo?",
+   "rest": "Puede ser recordar, coordinar, cuidar o anticipar. Si no aplica, escribe otra carga.",
+   "opt": "Paso opcional / Para llevarte: Añade esa carga invisible a tu descripción del momento."
+  },
+  "en": {
+   "title": "What work do you do then that rarely gets counted as work?",
+   "rest": "It may be remembering, coordinating, caring, or anticipating. If not applicable, name another load.",
+   "opt": "Optional step / Takeaway: Add that invisible load to your description of the moment."
+  }
+ },
+ {
+  "id": "RHYTHM-W1-D4",
+  "day": 4,
+  "format": "Dibujo o texto / Drawing or text",
+  "es": {
+   "title": "¿Qué parte depende de ti y qué parte depende de horarios o necesidades ajenas?",
+   "rest": "Dos zonas, con palabras o trazos. Puedes usar dos listas.",
+   "opt": "Paso opcional / Para llevarte: Marca una parte que puedas ajustar y otra que requiera apoyo o coordinación."
+  },
+  "en": {
+   "title": "Which part depends on you, and which depends on other people's schedules or needs?",
+   "rest": "Two areas with words or marks. Two lists also work.",
+   "opt": "Optional step / Takeaway: Mark one part you can adjust and another requiring support or coordination."
+  }
+ },
+ {
+  "id": "RHYTHM-W1-D5",
+  "day": 5,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué cambio pequeño quitaría un paso de ese momento?",
+   "rest": "No añadas una rutina completa: elige algo que simplifique.",
+   "opt": "Paso opcional / Para llevarte: Escribe exactamente qué paso dejaría de ser necesario."
+  },
+  "en": {
+   "title": "What small change would remove one step from that moment?",
+   "rest": "Do not add a whole routine: choose something that simplifies.",
+   "opt": "Optional step / Takeaway: Write exactly which step would no longer be necessary."
+  }
+ },
+ {
+  "id": "RHYTHM-W1-D6",
+  "day": 6,
+  "format": "Una opción / One choice",
+  "es": {
+   "title": "¿Qué tienes disponible para probar ese cambio?",
+   "rest": "Unos minutos • Un objeto a mano • Ayuda de alguien • Puedo cambiar el orden • Nada por ahora • No lo sé",
+   "opt": "Paso opcional / Para llevarte: Adapta el cambio a un recurso disponible, o deja registrada la barrera."
+  },
+  "en": {
+   "title": "What do you have available to try that change?",
+   "rest": "A few minutes • An item at hand • Someone's help • I can change the order • Nothing for now • Not sure",
+   "opt": "Optional step / Takeaway: Adapt the change to an available resource, or record the barrier."
+  }
+ },
+ {
+  "id": "RHYTHM-W1-D7",
+  "day": 7,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué parte del día merece menos exigencia, no más disciplina?",
+   "rest": "Nombra el momento y una expectativa que podrías bajar.",
+   "opt": "Paso opcional / Para llevarte: Deja una expectativa más realista para ese momento del día."
+  },
+  "en": {
+   "title": "Which part of your day needs fewer demands, rather than more discipline?",
+   "rest": "Name the moment and one expectation you could lower.",
+   "opt": "Optional step / Takeaway: Leave a more realistic expectation for that time of day."
+  }
+ },
+ {
+  "id": "ENERGY-W1-D1",
+  "day": 1,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿En qué momento reciente sentiste que ya no te quedaba margen?",
+   "rest": "Puede ser físico, mental o social; no tienes que explicar una causa.",
+   "opt": "Paso opcional / Para llevarte: Describe el momento sin convertirlo en una explicación de quién eres."
+  },
+  "en": {
+   "title": "When recently did you feel you had no capacity left?",
+   "rest": "It may be physical, mental, or social; you do not have to explain a cause.",
+   "opt": "Optional step / Takeaway: Describe the moment without turning it into an explanation of who you are."
+  }
+ },
+ {
+  "id": "ENERGY-W1-D2",
+  "day": 2,
+  "format": "Una opción / One choice",
+  "es": {
+   "title": "¿Qué tipo de carga notas más hoy?",
+   "rest": "Física • Mental • Emocional • Social • Varias • No lo sé",
+   "opt": "Paso opcional / Para llevarte: Nombra una demanda relacionada con esa carga, sin diagnosticar su causa."
+  },
+  "en": {
+   "title": "What kind of load do you notice most today?",
+   "rest": "Physical • Mental • Emotional • Social • Several • Not sure",
+   "opt": "Optional step / Takeaway: Name one demand related to that load without diagnosing its cause."
+  }
+ },
+ {
+  "id": "ENERGY-W1-D3",
+  "day": 3,
+  "format": "Lista breve / Short list",
+  "es": {
+   "title": "¿Qué estaba pasando justo antes de notar ese cansancio?",
+   "rest": "Hasta tres hechos, sin buscar un diagnóstico.",
+   "opt": "Paso opcional / Para llevarte: Separa hechos de explicaciones que todavía no sabes si son ciertas."
+  },
+  "en": {
+   "title": "What was happening just before you noticed that tiredness?",
+   "rest": "Up to three facts, without seeking a diagnosis.",
+   "opt": "Optional step / Takeaway: Separate facts from explanations you do not yet know are true."
+  }
+ },
+ {
+  "id": "ENERGY-W1-D4",
+  "day": 4,
+  "format": "Dibujo o texto / Drawing or text",
+  "es": {
+   "title": "Dibuja cómo se repartió tu energía ayer. ¿Qué cambio notaste, si hubo alguno?",
+   "rest": "Una línea o palabras; no hace falta puntuarla.",
+   "opt": "Paso opcional / Para llevarte: Marca un cambio para observar otro día; un solo día no demuestra un patrón."
+  },
+  "en": {
+   "title": "Draw how your energy varied yesterday. What change did you notice, if any?",
+   "rest": "A line or words; no score needed.",
+   "opt": "Optional step / Takeaway: Mark one change to observe another day; a single day does not prove a pattern."
+  }
+ },
+ {
+  "id": "ENERGY-W1-D5",
+  "day": 5,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué momento te dejó un poco más de espacio, aunque no te hiciera sentir feliz?",
+   "rest": "Si ninguno lo hizo, escribe qué habría reducido una demanda.",
+   "opt": "Paso opcional / Para llevarte: Conserva el detalle o la demanda que habría sido útil reducir."
+  },
+  "en": {
+   "title": "What moment gave you a little more space, even if it did not make you feel happy?",
+   "rest": "If none did, write what might have reduced one demand.",
+   "opt": "Optional step / Takeaway: Keep the detail or demand that would have been useful to reduce."
+  }
+ },
+ {
+  "id": "ENERGY-W1-D6",
+  "day": 6,
+  "format": "Una opción / One choice",
+  "es": {
+   "title": "¿Qué necesitas primero cuando estás así?",
+   "rest": "Menos estímulos • Una necesidad básica • Estar acompañada • Estar sola • Ayuda con una carga • No lo sé",
+   "opt": "Paso opcional / Para llevarte: Define una forma pequeña de atender esa necesidad, o la ayuda que te falta."
+  },
+  "en": {
+   "title": "What do you need first when you feel like this?",
+   "rest": "Less stimulation • A basic need • Company • Time alone • Help with a load • Not sure",
+   "opt": "Optional step / Takeaway: Define a small way to address that need, or the help missing."
+  }
+ },
+ {
+  "id": "ENERGY-W1-D7",
+  "day": 7,
+  "format": "Texto abierto / Open text",
+  "es": {
+   "title": "¿Qué observación sobre tu energía vale la pena recordar sin convertirla en una regla?",
+   "rest": "Completa: «Esta semana noté…». Una semana no define todo tu cuerpo.",
+   "opt": "Paso opcional / Para llevarte: Guarda la observación como provisional, no como una etiqueta fija."
+  },
+  "en": {
+   "title": "What observation about your energy is worth remembering without turning it into a rule?",
+   "rest": "Complete: “This week I noticed…”. One week does not define your body.",
+   "opt": "Optional step / Takeaway: Keep the observation as provisional, not a fixed label."
+  }
+ }
+]

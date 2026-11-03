@@ -1,0 +1,310 @@
+[
+ {
+  "rid": "R113",
+  "context": {
+   "day_purpose": "Hoy eliges por dónde empezar y qué tiene que respetar cualquier opción.",
+   "intended_takeaway": "Un camino y una condición no negociable, con sus palabras.",
+   "path": "empleo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) mi prima me dijo que en su trabajo buscan gente, pero yo no tengo papeles"
+  },
+  "reply": "Te llevas dos cosas separadas: una oportunidad concreta por tu prima y una condición, qué documentos pide ese trabajo. Lo segundo se pregunta antes de ilusionarse."
+ },
+ {
+  "rid": "R114",
+  "context": {
+   "day_purpose": "Hoy escribes la primera frase que podrías usar de verdad.",
+   "intended_takeaway": "Una frase lista para reutilizar. No se envía a ningún sitio.",
+   "path": "negocio",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿A quién ayudaría tu idea y con qué problema concreto?\nWhat they answered: (they wrote) Ayudaría a familias del barrio a resolver los pasteles de cumpleaños sin salir de casa"
+  },
+  "reply": "Ayudarías a familias del barrio con los pasteles de cumpleaños sin salir de casa. Una idea muy concreta para cerrar el día."
+ },
+ {
+  "rid": "R115",
+  "context": {
+   "day_purpose": "Hoy escribes una frase verdadera sobre lo que sabes hacer o lo que ya sabes de tu trámite.",
+   "intended_takeaway": "Una línea de evidencia reutilizable, o un dato conocido y una pregunta abierta.",
+   "path": "empleo",
+   "step": "1 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they wrote) Nunca tuve empleo formal"
+  },
+  "reply": "Las tareas sin pago cuentan: organizar turnos de cuidado, por ejemplo. Si hoy no sale ninguna, vale un ejemplo inventado para ver el formato."
+ },
+ {
+  "rid": "R116",
+  "context": {
+   "day_purpose": "Hoy ves si lo urgente es cubrir lo básico, ordenar fechas o buscar ingresos.",
+   "intended_takeaway": "Su situación en una palabra y el camino que encaja.",
+   "path": "-",
+   "step": "1 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: Alcanza y queda algo"
+  },
+  "reply": "Con margen, la pregunta útil ya no es cubrir lo básico sino qué hacer con lo que queda. Puedes explorar un ingreso o una decisión sin prisa."
+ },
+ {
+  "rid": "R117",
+  "context": {
+   "day_purpose": "Hoy escribes la primera frase que podrías usar de verdad.",
+   "intended_takeaway": "Una frase lista para reutilizar. No se envía a ningún sitio.",
+   "path": "empleo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?\nWhat they answered: (they wrote) Puedo ayudar con el inventario; lo demostré cuando detectaba faltantes en la tienda"
+  },
+  "reply": "Tu frase ya sirve: dice qué haces y cuándo lo mostraste, en menos de 25 palabras. Puedes usarla tal cual."
+ },
+ {
+  "rid": "R118",
+  "context": {
+   "day_purpose": "Hoy armas un filtro para descartar rápido lo que no encaja en tu vida.",
+   "intended_takeaway": "Un criterio para descartar y una pregunta para verificarlo en cualquier oferta.",
+   "path": "empleo",
+   "step": "1 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?\nUnder it: Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición\nWhat they answered: (they skipped this one)"
+  },
+  "reply": "Dejaste esta pregunta para después. Está bien."
+ },
+ {
+  "rid": "R119",
+  "context": {
+   "day_purpose": "Hoy conviertes una preocupación de dinero en una pregunta que puedas averiguar.",
+   "intended_takeaway": "Una pregunta que puede averiguar y quién podría responderla.",
+   "path": "-",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: Escribe una pregunta concreta sobre el tema elegido.\nWhat they answered: (they skipped this one)"
+  },
+  "reply": "Hoy dejaste este paso para otro momento, y está bien. Lo que elegiste antes sigue aquí."
+ },
+ {
+  "rid": "R120",
+  "context": {
+   "day_purpose": "Hoy decides con calma: probar algo pequeño, esperar o parar.",
+   "intended_takeaway": "Una decisión y, con sus palabras, lo que ahora puede hacer o lo único que le falta.",
+   "path": "empleo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) ahora puedo apply con mi frase"
+  },
+  "reply": "Ahora puedes postularte con tu frase. Buen cierre de semana."
+ },
+ {
+  "rid": "R121",
+  "context": {
+   "day_purpose": "Hoy escribes la primera frase que podrías usar de verdad.",
+   "intended_takeaway": "Una frase lista para reutilizar. No se envía a ningún sitio.",
+   "path": "empleo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?\nWhat they answered: (they wrote) Puedo ayudar con atención a clientes, ventas, inventario, caja, limpieza, organizar eventos, cuidar niños y hacer pedidos, lo demostré en varios trabajos durante muchos años"
+  },
+  "reply": "Puedes ayudar con muchas cosas y lo demostraste durante muchos años. Tienes mucha experiencia; buen cierre."
+ },
+ {
+  "rid": "R122",
+  "context": {
+   "day_purpose": "Hoy eliges por dónde empezar y qué tiene que respetar cualquier opción.",
+   "intended_takeaway": "Un camino y una condición no negociable, con sus palabras.",
+   "path": "apoyo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: Para aclarar esta necesidad, cobro o apoyo, ¿qué información o acceso tienes y qué te falta?\nWhat they answered: (they wrote) Sé que existe una ayuda, pero no sé si me corresponde"
+  },
+  "reply": "Lo que falta es un requisito, no tu mérito. La pregunta concreta es qué condiciones pide esa ayuda."
+ },
+ {
+  "rid": "R123",
+  "context": {
+   "day_purpose": "Hoy conviertes una preocupación de dinero en una pregunta que puedas averiguar.",
+   "intended_takeaway": "Una pregunta que puede averiguar y quién podría responderla.",
+   "path": "-",
+   "step": "1 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué te gustaría entender mejor sobre tu dinero ahora?\nUnder it: Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa\nWhat they answered: (none of the options; in their own words) no me alcanza para la comida de esta semana"
+  },
+  "reply": "Lo urgente es la comida de esta semana, no un presupuesto. En el siguiente paso puedes escribir qué te gustaría preguntar a un apoyo de tu zona; basta el país o la región."
+ },
+ {
+  "rid": "R124",
+  "context": {
+   "day_purpose": "Hoy decides con calma: probar algo pequeño, esperar o parar.",
+   "intended_takeaway": "Una decisión y, con sus palabras, lo que ahora puede hacer o lo único que le falta.",
+   "path": "apoyo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) hoy no puedo con esto"
+  },
+  "reply": "Está bien. Lo que preparaste queda guardado y puedes volver cuando quieras."
+ },
+ {
+  "rid": "R125",
+  "context": {
+   "day_purpose": "Hoy armas un filtro para descartar rápido lo que no encaja en tu vida.",
+   "intended_takeaway": "Un criterio para descartar y una pregunta para verificarlo en cualquier oferta.",
+   "path": "empleo",
+   "step": "1 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?\nUnder it: Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición\nWhat they answered: Horario, Transporte"
+  },
+  "reply": "Regla: si el horario o el trayecto no te funcionan, se descarta. Pregunta: ¿qué horario y en qué zona?"
+ },
+ {
+  "rid": "R126",
+  "context": {
+   "day_purpose": "Hoy escribes una frase verdadera sobre lo que sabes hacer o lo que ya sabes de tu trámite.",
+   "intended_takeaway": "Una línea de evidencia reutilizable, o un dato conocido y una pregunta abierta.",
+   "path": "empleo",
+   "step": "1 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they wrote) Llevaba el inventario de la tienda y detectaba cuando faltaba algo"
+  },
+  "reply": "Tu frase ya está casi lista: «Llevé el inventario de una tienda y detecté faltantes». Es evidencia de control y orden, justo lo que piden muchos puestos."
+ },
+ {
+  "rid": "R127",
+  "context": {
+   "day_purpose": "Hoy conviertes una preocupación de dinero en una pregunta que puedas averiguar.",
+   "intended_takeaway": "Una pregunta que puede averiguar y quién podría responderla.",
+   "path": "-",
+   "step": "1 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué te gustaría entender mejor sobre tu dinero ahora?\nUnder it: Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa\nWhat they answered: Mis deudas"
+  },
+  "reply": "Elegiste tus deudas. Mirarlas puede pesar, y está bien ir poco a poco."
+ },
+ {
+  "rid": "R128",
+  "context": {
+   "day_purpose": "Hoy armas un filtro para descartar rápido lo que no encaja en tu vida.",
+   "intended_takeaway": "Un criterio para descartar y una pregunta para verificarlo en cualquier oferta.",
+   "path": "empleo",
+   "step": "1 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?\nUnder it: Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición\nWhat they answered: Horario, Cuidados"
+  },
+  "reply": "Tu filtro: descarta ofertas cuyo horario no deje espacio para tus cuidados. La pregunta para cualquier oferta: ¿qué horario pide y es fijo?"
+ },
+ {
+  "rid": "R129",
+  "context": {
+   "day_purpose": "Hoy decides con calma: probar algo pequeño, esperar o parar.",
+   "intended_takeaway": "Una decisión y, con sus palabras, lo que ahora puede hacer o lo único que le falta.",
+   "path": "empleo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) Ahora puedo explicar lo que sé hacer con un ejemplo"
+  },
+  "reply": "Te llevas eso: puedes explicar lo que sabes hacer con un ejemplo."
+ },
+ {
+  "rid": "R130",
+  "context": {
+   "day_purpose": "Hoy escribes una frase verdadera sobre lo que sabes hacer o lo que ya sabes de tu trámite.",
+   "intended_takeaway": "Una línea de evidencia reutilizable, o un dato conocido y una pregunta abierta.",
+   "path": "empleo",
+   "step": "1 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they wrote) hoy no tengo nada que decir"
+  },
+  "reply": "Está bien. La línea puede esperar; nada se pierde."
+ },
+ {
+  "rid": "R131",
+  "context": {
+   "day_purpose": "Hoy escribes una frase verdadera sobre lo que sabes hacer o lo que ya sabes de tu trámite.",
+   "intended_takeaway": "Una línea de evidencia reutilizable, o un dato conocido y una pregunta abierta.",
+   "path": "empleo",
+   "step": "1 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they said this aloud; it was transcribed, so expect speech and transcription slips) cuido a mi abuela, le doy sus medicinas a tiempo y llevo sus citas"
+  },
+  "reply": "Eso es experiencia en organizar horarios y llevar control de citas y medicinas. Como línea: «Llevo el control de medicinas y citas de una persona mayor»."
+ },
+ {
+  "rid": "R132",
+  "context": {
+   "day_purpose": "Hoy eliges por dónde empezar y qué tiene que respetar cualquier opción.",
+   "intended_takeaway": "Un camino y una condición no negociable, con sus palabras.",
+   "path": "empleo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) Tengo experiencia en atención al cliente, pero solo puedo de 9 a 2 por los niños"
+  },
+  "reply": "Tu condición es el horario de 9 a 2, y ya será tu primer filtro. La atención al cliente es lo que tienes a favor para buscar puestos con ese horario."
+ },
+ {
+  "rid": "R133",
+  "context": {
+   "day_purpose": "Hoy ves si lo urgente es cubrir lo básico, ordenar fechas o buscar ingresos.",
+   "intended_takeaway": "Su situación en una palabra y el camino que encaja.",
+   "path": "-",
+   "step": "1 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: Cambia cada vez"
+  },
+  "reply": "Si cambia cada vez, compara un periodo a la vez: lo confirmado que entra y los pagos de ese periodo. Lo que no sepas queda «por confirmar»."
+ },
+ {
+  "rid": "R134",
+  "context": {
+   "day_purpose": "Hoy escribes la primera frase que podrías usar de verdad.",
+   "intended_takeaway": "Una frase lista para reutilizar. No se envía a ningún sitio.",
+   "path": "empleo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?\nWhat they answered: (they wrote) Puedo ayudar con atención a clientes, ventas, inventario, caja, limpieza, organizar eventos, cuidar niños y hacer pedidos, lo demostré en varios trabajos durante muchos años"
+  },
+  "reply": "Son muchas cosas a la vez. Elige la que más pide el puesto que te interesa y quédate con una frase: «Puedo ayudar con ___; lo demostré cuando ___»."
+ },
+ {
+  "rid": "R135",
+  "context": {
+   "day_purpose": "Hoy decides con calma: probar algo pequeño, esperar o parar.",
+   "intended_takeaway": "Una decisión y, con sus palabras, lo que ahora puede hacer o lo único que le falta.",
+   "path": "empleo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) no sé"
+  },
+  "reply": "Está bien no saberlo hoy. Lo que preparaste sigue aquí."
+ },
+ {
+  "rid": "R136",
+  "context": {
+   "day_purpose": "Hoy conviertes una preocupación de dinero en una pregunta que puedas averiguar.",
+   "intended_takeaway": "Una pregunta que puede averiguar y quién podría responderla.",
+   "path": "empleo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: Escribe una pregunta concreta sobre el tema elegido.\nWhat they answered: (they wrote) ¿Qué día me paga la señora de la limpieza el mes de octubre?"
+  },
+  "reply": "Tu pregunta ya se responde con una fecha: qué día de octubre te paga. Quien mejor la confirma es ella misma. ¿Se la puedes preguntar esta semana?"
+ },
+ {
+  "rid": "R137",
+  "context": {
+   "day_purpose": "Hoy eliges por dónde empezar y qué tiene que respetar cualquier opción.",
+   "intended_takeaway": "Un camino y una condición no negociable, con sus palabras.",
+   "path": "apoyo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: Para aclarar esta necesidad, cobro o apoyo, ¿qué información o acceso tienes y qué te falta?\nWhat they answered: (they wrote) Sé que existe una ayuda, pero no sé si me corresponde"
+  },
+  "reply": "Sabes que existe una ayuda pero no si te corresponde. Hoy diste un paso al ponerlo en palabras."
+ },
+ {
+  "rid": "R138",
+  "context": {
+   "day_purpose": "Hoy eliges por dónde empezar y qué tiene que respetar cualquier opción.",
+   "intended_takeaway": "Un camino y una condición no negociable, con sus palabras.",
+   "path": "empleo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) Tengo tiempo de sobra y computadora, me falta saber qué buscar"
+  },
+  "reply": "Tienes tiempo y computadora, y te falta saber qué buscar. Hoy cerraste con algo claro sobre dónde estás."
+ },
+ {
+  "rid": "R139",
+  "context": {
+   "day_purpose": "Hoy escribes la primera frase que podrías usar de verdad.",
+   "intended_takeaway": "Una frase lista para reutilizar. No se envía a ningún sitio.",
+   "path": "apoyo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Cómo explicarías qué necesitas saber para aclarar tu necesidad, cobro o apoyo?\nWhat they answered: (they wrote) necesito ayuda"
+  },
+  "reply": "«Necesito ayuda» es el punto de partida. Te llevas el formato para la oficina: «Necesito saber ___; la situación es ___», sin justificar más."
+ },
+ {
+  "rid": "R140",
+  "context": {
+   "day_purpose": "Hoy eliges por dónde empezar y qué tiene que respetar cualquier opción.",
+   "intended_takeaway": "Un camino y una condición no negociable, con sus palabras.",
+   "path": "empleo",
+   "step": "2 of 2",
+   "shown_to_her_and_her_answer": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) Tengo experiencia en atención al cliente, pero solo puedo de 9 a 2 por los niños"
+  },
+  "reply": "Tu condición es el horario de 9 a 2, y ya será tu primer filtro. La atención al cliente es lo que tienes a favor. ¿Te la quedas como tu frase de hoy?"
+ }
+]

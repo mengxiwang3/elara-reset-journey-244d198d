@@ -1,0 +1,31 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elara · prueba de siete sesiones</title>
+<style>/*@@CSS@@*/
+.tv-wrap{max-width:980px;margin:0 auto;padding:14px 16px 32px;display:grid;grid-template-columns:auto minmax(260px,1fr);gap:18px;align-items:start}
+@media (max-width:860px){.tv-wrap{grid-template-columns:1fr;justify-items:center}.tv-side{width:100%;max-width:560px}}
+.tv-side{background:#E7EDE4;border:1px solid #CFD9CA;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:12px;font:15px/1.45 'Instrument Sans',system-ui,sans-serif;color:#17241C}
+.tv-side h2{margin:0;font:600 18px/1.2 Fraunces,Georgia,serif;color:#2C4A3A}
+.tv-side textarea{width:100%;min-height:160px;box-sizing:border-box;border:1.5px solid #9DB098;border-radius:12px;padding:10px;font:15px/1.45 'Instrument Sans',system-ui,sans-serif;background:#FFFCF6;color:#17241C}
+.tv-row{display:flex;flex-wrap:wrap;gap:8px}
+@media (max-width:440px){.tv-wrap{padding:8px 8px 28px;gap:12px}.tv-wrap .ph{--w:calc(100vw - 28px)!important;max-width:100%}.tv-wrap>*{max-width:100%;min-width:0}}
+.tv-pick{max-width:560px;margin:40px auto;padding:20px;background:#E7EDE4;border:1px solid #CFD9CA;border-radius:16px;font:16px/1.5 'Instrument Sans',system-ui,sans-serif;color:#17241C}
+.tv-pick h1{font:600 24px/1.2 Fraunces,Georgia,serif;color:#2C4A3A;margin:0 0 8px}
+.tv-tag{display:inline-block;padding:3px 10px;border-radius:12px;background:#FBE7DF;color:#7A2F17;font-weight:700;font-size:13px}
+</style></head><body>
+<div class="tv-pick" id="t-pick" hidden><h1>Prueba de Elara</h1><p><span class="tv-tag">Prototipo</span> Esta página es una prueba para conversar con el equipo de Elara. No es la app real y lo que escribas no sale de este navegador.</p><p>La facilitadora te dará un código:</p><div class="tv-row" id="t-codes"></div><p style="margin-top:14px"><button class="sv-btn" id="t-rand" type="button">Asignarme uno al azar</button></p></div>
+<div class="tv-wrap" id="t-main" hidden>
+ <div class="sv-phone"><div class="sv-badge" id="pvbadge" role="status">Vista previa <span id="pvn"></span></div><h2 id="ttl"></h2><div id="phone"></div><button class="sv-btn" id="c-back" type="button" hidden>Atrás</button></div>
+ <aside class="tv-side" aria-label="Notas de la prueba (no son parte de la app)">
+  <h2>Prueba de Elara <span class="tv-tag">Prototipo</span></h2>
+  <p style="margin:0">Código <b id="t-code"></b>. Las respuestas de Elara son ejemplos escritos, no la app real. Nada sale de este navegador.</p>
+  <p style="margin:0" id="t-state"></p>
+  <label for="t-notes"><b>Notas</b> (se quedan solo en este navegador)</label>
+  <textarea id="t-notes" placeholder="Lo que quieras recordar o contarnos"></textarea>
+  <div class="tv-row"><button class="sv-btn" id="t-copy" type="button">Copiar notas</button></div><p style="margin:0" id="t-msg" role="status" aria-live="polite"></p>
+  <details><summary style="cursor:pointer;font-weight:700;color:#2C4A3A;min-height:44px">Para la facilitadora</summary>
+   <p id="vline" style="margin:6px 0"></p>
+   <div class="tv-row"><button class="sv-btn" id="t-next" type="button">Pasar al día siguiente</button><button class="sv-btn" id="t-gap" type="button">Simular regreso tras 9 días</button><button class="sv-btn" id="t-plat" type="button">Cambiar iOS / Android</button></div>
+   <p style="margin:6px 0 0;font-size:14px">Cada sesión se abre al día siguiente. Usa «Pasar al día siguiente» solo cuando la participante vuelva. No le digas qué variante tiene.</p></details>
+ </aside>
+</div>
+<script>window.SES_TESTER=true</script><script>/*@@S0@@*/</script><script>/*@@S1@@*/</script><script>/*@@S2@@*/</script></body></html>

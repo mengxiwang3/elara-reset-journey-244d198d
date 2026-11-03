@@ -1,0 +1,434 @@
+[
+ {
+  "gid": "G01",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: No alcanza",
+    "reply": "Elegiste que no alcanza. Gracias por decirlo con claridad; no es fácil."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: Cambia cada vez",
+    "reply": "Dices que cambia cada vez. Esa incertidumbre puede ser cansada de llevar."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: Alcanza y queda algo",
+    "reply": "Alcanza y queda algo. Qué bueno tener ese margen."
+   }
+  ]
+ },
+ {
+  "gid": "G02",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: Escribe una pregunta concreta sobre el tema elegido.\nWhat they answered: (they wrote) ¿Qué día me paga la señora de la limpieza el mes de octubre?",
+    "reply": "Tu pregunta ya se responde con una fecha: qué día de octubre te paga. Quien mejor la confirma es ella misma. ¿Se la puedes preguntar esta semana?"
+   },
+   {
+    "answer_context": "The question they were asked: Escribe una pregunta concreta sobre el tema elegido.\nWhat they answered: (they wrote) no sé si me corresponde el apoyo para madres solteras en mi municipio",
+    "reply": "Tu pregunta es si cumples los requisitos de ese apoyo. La puede responder la oficina del municipio que lo otorga, o su página oficial."
+   }
+  ]
+ },
+ {
+  "gid": "G03",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?\nUnder it: Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición\nWhat they answered: Horario, Cuidados",
+    "reply": "Elegiste horario y cuidados. Son condiciones importantes en tu vida."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?\nUnder it: Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición\nWhat they answered: Acceso a internet, No pagar por adelantado",
+    "reply": "Elegiste acceso a internet y no pagar por adelantado. Es bueno cuidarte así."
+   }
+  ]
+ },
+ {
+  "gid": "G04",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué te gustaría entender mejor sobre tu dinero ahora?\nUnder it: Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa\nWhat they answered: Lo que gano",
+    "reply": "Con lo que ganas, la pregunta útil suele ser de frecuencia o de monto: cuánto entra y cada cuánto. En el siguiente paso escribe la que te falta."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué te gustaría entender mejor sobre tu dinero ahora?\nUnder it: Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa\nWhat they answered: Mis deudas",
+    "reply": "Con una deuda basta una pregunta por ahora: cuánto queda, qué fecha importa o qué pasa si te atrasas. Escoge una en el siguiente paso."
+   }
+  ]
+ },
+ {
+  "gid": "G05",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué te gustaría entender mejor sobre tu dinero ahora?\nUnder it: Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa\nWhat they answered: Lo que gano",
+    "reply": "Elegiste entender mejor lo que ganas. Es un buen punto de partida para mirar tu dinero con calma."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué te gustaría entender mejor sobre tu dinero ahora?\nUnder it: Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa\nWhat they answered: Mis deudas",
+    "reply": "Elegiste tus deudas. Mirarlas puede pesar, y está bien ir poco a poco."
+   }
+  ]
+ },
+ {
+  "gid": "G06",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué te gustaría entender mejor sobre tu dinero ahora?\nUnder it: Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa\nWhat they answered: Lo que gano",
+    "reply": "Entender lo que ganas suele empezar por un dato: cuánto entra y con qué frecuencia. En el siguiente paso puedes escribir la pregunta que más te falta sobre eso."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué te gustaría entender mejor sobre tu dinero ahora?\nUnder it: Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa\nWhat they answered: Mis deudas",
+    "reply": "Con una deuda, lo útil hoy es una sola pregunta: cuánto queda, qué fecha importa o qué pasa si te atrasas. No hace falta revisarla entera."
+   }
+  ]
+ },
+ {
+  "gid": "G07",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) Ahora puedo explicar lo que sé hacer con un ejemplo",
+    "reply": "Te llevas eso: puedes explicar lo que sabes hacer con un ejemplo."
+   },
+   {
+    "answer_context": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) Aún necesito saber si la beca aplica en mi ciudad",
+    "reply": "Te llevas lo único que falta: saber si la beca aplica en tu ciudad."
+   }
+  ]
+ },
+ {
+  "gid": "G08",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué te gustaría entender mejor sobre tu dinero ahora?\nUnder it: Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa\nWhat they answered: Lo que gano",
+    "reply": "Entender lo que ganas suele empezar por un dato: cuánto entra y con qué frecuencia. En el siguiente paso puedes escribir la pregunta que más te falta sobre eso."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué te gustaría entender mejor sobre tu dinero ahora?\nUnder it: Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa\nWhat they answered: Mis deudas",
+    "reply": "Con una deuda, lo útil hoy es una sola pregunta: cuánto queda, qué fecha importa o qué pasa si te atrasas. No hace falta revisarla entera."
+   }
+  ]
+ },
+ {
+  "gid": "G09",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they wrote) Llevaba el inventario de la tienda y detectaba cuando faltaba algo",
+    "reply": "Tu frase ya está casi lista: «Llevé el inventario de una tienda y detecté faltantes». Es evidencia de control y orden, justo lo que piden muchos puestos."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they wrote) Nunca tuve empleo formal",
+    "reply": "No tener empleo formal no dice qué sabes hacer. Una tarea real sin pago sirve igual, por ejemplo organizar algo en casa o en la escuela de tus hijos."
+   }
+  ]
+ },
+ {
+  "gid": "G10",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) Tengo experiencia en atención al cliente, pero solo puedo de 9 a 2 por los niños",
+    "reply": "Tu condición es el horario de 9 a 2, y ya será tu primer filtro. La atención al cliente es lo que tienes a favor para buscar puestos con ese horario."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) Tengo tiempo de sobra y computadora, me falta saber qué buscar",
+    "reply": "Tienes lo que muchas opciones piden, tiempo y computadora. Lo que falta no es una condición sino un rumbo: qué tipo de tarea buscar."
+   }
+  ]
+ },
+ {
+  "gid": "G11",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?\nWhat they answered: (they wrote) Soy responsable y trabajadora",
+    "reply": "Te describes como responsable y trabajadora. Hoy cerraste el día con una frase sobre ti; bien hecho."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?\nWhat they answered: (they wrote) Puedo ayudar con el inventario; lo demostré cuando detectaba faltantes en la tienda",
+    "reply": "Puedes ayudar con el inventario y lo demostraste detectando faltantes. Hoy cerraste con una frase clara sobre lo que sabes hacer."
+   }
+  ]
+ },
+ {
+  "gid": "G12",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) Tengo experiencia en atención al cliente, pero solo puedo de 9 a 2 por los niños",
+    "reply": "Tienes experiencia en atención al cliente y solo puedes de 9 a 2 por los niños. Hoy pusiste en palabras algo importante para ti; buen cierre."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) Tengo tiempo de sobra y computadora, me falta saber qué buscar",
+    "reply": "Tienes tiempo y computadora, y te falta saber qué buscar. Hoy cerraste con algo claro sobre dónde estás."
+   }
+  ]
+ },
+ {
+  "gid": "G13",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?\nWhat they answered: (they wrote) Soy responsable y trabajadora",
+    "reply": "Tu frase de hoy: «Soy responsable y trabajadora». Se sostiene mejor con una tarea que lo muestre, como una vez que resolviste algo sin que te lo pidieran."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?\nWhat they answered: (they wrote) Puedo ayudar con el inventario; lo demostré cuando detectaba faltantes en la tienda",
+    "reply": "Tu frase ya sirve: dice qué haces y cuándo lo mostraste, en menos de 25 palabras. Puedes usarla tal cual."
+   }
+  ]
+ },
+ {
+  "gid": "G14",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) Ahora puedo explicar lo que sé hacer con un ejemplo",
+    "reply": "Te llevas una frase con ejemplo, lista para usar. Lo que venga después puede esperar a la próxima semana."
+   },
+   {
+    "answer_context": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) Aún necesito saber si la beca aplica en mi ciudad",
+    "reply": "La pieza que falta es una sola respuesta: si aplica en tu ciudad. Tu frase de la sesión anterior ya sirve para pedirla."
+   }
+  ]
+ },
+ {
+  "gid": "G15",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) Ahora puedo explicar lo que sé hacer con un ejemplo",
+    "reply": "Ahora puedes explicar lo que sabes hacer con un ejemplo. Qué bonito cierre para esta semana; has avanzado mucho."
+   },
+   {
+    "answer_context": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) Aún necesito saber si la beca aplica en mi ciudad",
+    "reply": "Aún necesitas saber si la beca aplica en tu ciudad. Cerraste la semana con algo claro; gracias por tu constancia."
+   }
+  ]
+ },
+ {
+  "gid": "G16",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: Escribe una pregunta concreta sobre el tema elegido.\nWhat they answered: (they wrote) ¿Qué día me paga la señora de la limpieza el mes de octubre?",
+    "reply": "Ya es una pregunta verificable: la fecha de pago de octubre. Se la puedes confirmar directamente a quien te paga."
+   },
+   {
+    "answer_context": "The question they were asked: Escribe una pregunta concreta sobre el tema elegido.\nWhat they answered: (they wrote) no sé si me corresponde el apoyo para madres solteras en mi municipio",
+    "reply": "La pregunta concreta es: ¿qué requisitos pide el apoyo para madres solteras de mi municipio? La responde la oficina que lo otorga o su sitio oficial."
+   }
+  ]
+ },
+ {
+  "gid": "G17",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?\nUnder it: Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición\nWhat they answered: Horario, Cuidados",
+    "reply": "Tu filtro: descarta ofertas cuyo horario no deje espacio para tus cuidados. La pregunta para cualquier oferta: ¿qué horario pide y es fijo?"
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?\nUnder it: Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición\nWhat they answered: Acceso a internet, No pagar por adelantado",
+    "reply": "Dos reglas: que no pida internet que no tienes, y que no te pida pagar nada para empezar. Si piden pagar, descártala."
+   }
+  ]
+ },
+ {
+  "gid": "G18",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) Tengo experiencia en atención al cliente, pero solo puedo de 9 a 2 por los niños",
+    "reply": "Tu condición es el horario de 9 a 2, y ya será tu primer filtro. La atención al cliente es lo que tienes a favor. ¿Te la quedas como tu frase de hoy?"
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) Tengo tiempo de sobra y computadora, me falta saber qué buscar",
+    "reply": "Tienes lo que muchas opciones piden, tiempo y computadora. Lo que falta es un rumbo: qué tipo de tarea buscar. ¿Qué tarea te gustaría mirar primero?"
+   }
+  ]
+ },
+ {
+  "gid": "G19",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: No alcanza",
+    "reply": "Si no alcanza, lo urgente es cubrir lo básico, no hacer un presupuesto. Después puedes preparar una pregunta para un apoyo de tu zona."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: Cambia cada vez",
+    "reply": "Si cambia cada vez, compara un periodo a la vez: lo confirmado que entra y los pagos de ese periodo. Lo que no sepas queda «por confirmar»."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: Alcanza y queda algo",
+    "reply": "Con lo básico cubierto, puedes usar estas sesiones para explorar un ingreso o preparar una decisión, sin prisa."
+   }
+  ]
+ },
+ {
+  "gid": "G20",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?\nUnder it: Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición\nWhat they answered: Horario, Cuidados",
+    "reply": "Tu filtro: descarta ofertas cuyo horario no deje espacio para tus cuidados. La pregunta para cualquier oferta: ¿qué horario pide y es fijo?"
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?\nUnder it: Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición\nWhat they answered: Acceso a internet, No pagar por adelantado",
+    "reply": "Dos reglas: que no pida internet que no tienes, y que no te pida pagar nada para empezar. Si piden pagar, descártala."
+   }
+  ]
+ },
+ {
+  "gid": "G21",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?\nWhat they answered: (they wrote) Soy responsable y trabajadora",
+    "reply": "Tu frase: «Soy responsable y trabajadora». Se sostiene mejor con una tarea que lo muestre. ¿Cuál te viene a la mente?"
+   },
+   {
+    "answer_context": "The question they were asked: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?\nWhat they answered: (they wrote) Puedo ayudar con el inventario; lo demostré cuando detectaba faltantes en la tienda",
+    "reply": "Tu frase ya sirve: dice qué haces y cuándo lo mostraste, en menos de 25 palabras. Puedes usarla tal cual."
+   }
+  ]
+ },
+ {
+  "gid": "G22",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) Tengo experiencia en atención al cliente, pero solo puedo de 9 a 2 por los niños",
+    "reply": "Te llevas un filtro claro: solo de 9 a 2. Y una ventaja concreta, la atención al cliente, para buscar puestos que respeten ese horario."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?\nWhat they answered: (they wrote) Tengo tiempo de sobra y computadora, me falta saber qué buscar",
+    "reply": "Tu caso es distinto al de quien tiene poco tiempo: aquí lo que falta es el rumbo. Te llevas eso: tiempo y computadora a favor, falta elegir qué tipo de tarea."
+   }
+  ]
+ },
+ {
+  "gid": "G23",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?\nUnder it: Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición\nWhat they answered: Horario, Cuidados",
+    "reply": "Regla para descartar: si el horario no deja espacio a tus cuidados, no sigue. Pregunta para cualquier oferta: ¿qué horario pide exactamente?"
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?\nUnder it: Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición\nWhat they answered: Acceso a internet, No pagar por adelantado",
+    "reply": "Regla firme: cualquier oferta que pida pagar para empezar queda fuera. La pregunta para las demás: ¿qué conexión necesita?"
+   }
+  ]
+ },
+ {
+  "gid": "G24",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: No alcanza",
+    "reply": "Si no alcanza, lo urgente es cubrir lo básico, no hacer un presupuesto. Después puedes preparar una pregunta para un apoyo de tu zona."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: Cambia cada vez",
+    "reply": "Si cambia cada vez, compara un periodo a la vez: lo confirmado que entra y los pagos de ese periodo. Lo que no sepas queda «por confirmar»."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: Alcanza y queda algo",
+    "reply": "Con lo básico cubierto, puedes usar estas sesiones para explorar un ingreso o preparar una decisión, sin prisa."
+   }
+  ]
+ },
+ {
+  "gid": "G25",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) Ahora puedo explicar lo que sé hacer con un ejemplo",
+    "reply": "Te llevas eso: puedes explicar lo que sabes hacer con un ejemplo. ¿Dónde la usarías primero?"
+   },
+   {
+    "answer_context": "The question they were asked: Ahora puedo… / Aún necesito…\nWhat they answered: (they wrote) Aún necesito saber si la beca aplica en mi ciudad",
+    "reply": "Te llevas lo único que falta: saber si la beca aplica en tu ciudad. ¿Sabes a qué oficina preguntar?"
+   }
+  ]
+ },
+ {
+  "gid": "G26",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they wrote) Llevaba el inventario de la tienda y detectaba cuando faltaba algo",
+    "reply": "Eso ya es evidencia: llevar inventario y detectar faltantes. Como línea: «Llevé el inventario de una tienda y detectaba faltantes». Sirve cuando una oferta pide control u organización."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they wrote) Nunca tuve empleo formal",
+    "reply": "Las tareas sin pago cuentan: organizar turnos de cuidado, por ejemplo. Si hoy no sale ninguna, vale un ejemplo inventado para ver el formato."
+   }
+  ]
+ },
+ {
+  "gid": "G27",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they wrote) Llevaba el inventario de la tienda y detectaba cuando faltaba algo",
+    "reply": "Eso ya es evidencia: llevar inventario y detectar faltantes. Como línea: «Llevé el inventario de una tienda y detectaba faltantes». Sirve cuando una oferta pide control u organización."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they wrote) Nunca tuve empleo formal",
+    "reply": "Las tareas sin pago cuentan: organizar turnos de cuidado, por ejemplo. Si hoy no sale ninguna, vale un ejemplo inventado para ver el formato."
+   }
+  ]
+ },
+ {
+  "gid": "G28",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: Escribe una pregunta concreta sobre el tema elegido.\nWhat they answered: (they wrote) ¿Qué día me paga la señora de la limpieza el mes de octubre?",
+    "reply": "Quieres saber qué día te paga la señora de la limpieza en octubre. Es una pregunta concreta y clara, un buen cierre para hoy."
+   },
+   {
+    "answer_context": "The question they were asked: Escribe una pregunta concreta sobre el tema elegido.\nWhat they answered: (they wrote) no sé si me corresponde el apoyo para madres solteras en mi municipio",
+    "reply": "No sabes si te corresponde el apoyo para madres solteras en tu municipio. Gracias por compartirlo; aclarar eso puede darte más tranquilidad."
+   }
+  ]
+ },
+ {
+  "gid": "G29",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?\nWhat they answered: (they wrote) Soy responsable y trabajadora",
+    "reply": "«Responsable» necesita un ejemplo para sostenerse. Te llevas el formato: «Puedo ayudar con ___; lo demostré cuando ___»."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?\nWhat they answered: (they wrote) Puedo ayudar con el inventario; lo demostré cuando detectaba faltantes en la tienda",
+    "reply": "Te llevas una frase lista: «Puedo ayudar con el inventario; lo demostré detectando faltantes en la tienda». Puedes reutilizarla tal cual."
+   }
+  ]
+ },
+ {
+  "gid": "G30",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: Escribe una pregunta concreta sobre el tema elegido.\nWhat they answered: (they wrote) ¿Qué día me paga la señora de la limpieza el mes de octubre?",
+    "reply": "Tu pregunta ya se responde con una fecha: qué día de octubre te paga. Quien mejor la confirma es ella misma."
+   },
+   {
+    "answer_context": "The question they were asked: Escribe una pregunta concreta sobre el tema elegido.\nWhat they answered: (they wrote) no sé si me corresponde el apoyo para madres solteras en mi municipio",
+    "reply": "Tu pregunta es si cumples los requisitos de ese apoyo. La puede responder la oficina del municipio que lo otorga, o su página oficial."
+   }
+  ]
+ },
+ {
+  "gid": "G31",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they wrote) Llevaba el inventario de la tienda y detectaba cuando faltaba algo",
+    "reply": "Llevabas el inventario de la tienda y detectabas cuando faltaba algo. Es una experiencia valiosa."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué sabes hacer que podría servir en una oportunidad que te interesa?\nUnder it: Menciona un ejemplo concreto, también de experiencia informal.\nWhat they answered: (they wrote) Nunca tuve empleo formal",
+    "reply": "Nunca tuviste empleo formal. Gracias por compartirlo; no define todo lo que sabes hacer."
+   }
+  ]
+ },
+ {
+  "gid": "G32",
+  "replies": [
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: No alcanza",
+    "reply": "Cuando no alcanza, lo primero es lo básico. La siguiente pregunta puede ser a qué apoyo de tu zona acudir; basta el país o la región."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: Cambia cada vez",
+    "reply": "Cuando cambia, el dinero confirmado para después no es dinero de hoy. Compara solo un periodo: lo confirmado y los pagos de ese periodo."
+   },
+   {
+    "answer_context": "The question they were asked: ¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?\nUnder it: Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé\nWhat they answered: Alcanza y queda algo",
+    "reply": "Con margen, la pregunta útil ya no es cubrir lo básico sino qué hacer con lo que queda. Puedes explorar un ingreso o una decisión sin prisa."
+   }
+  ]
+ }
+]

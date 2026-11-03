@@ -1,0 +1,751 @@
+diff --git a/apps/mobile/app/(tabs)/index.tsx b/apps/mobile/app/(tabs)/index.tsx
+index 4ac1ac7..1303175 100644
+--- a/apps/mobile/app/(tabs)/index.tsx
++++ b/apps/mobile/app/(tabs)/index.tsx
+@@ -164,7 +164,9 @@ export default function TodayScreen() {
+   // week's card shows the week's place instead, the one its line names.
+   const placeDef = place?.placeId ? placeById(place.placeId) : null;
+   const dayPlace = entry && placeDef && entry.kind !== "week" ? dayPlaceWords(t.dayPlaces, placeDef.area, entry.dayInWeek) : null;
+-  const card = entry ? postcardWords(entry, t, question, content?.config?.minutes, now.getTime(), locale, dayPlace?.where) : null;
++  // The card names the day in short; the full question waits inside the session.
++  const dayTitle = shortDayTitle(content?.title, question, place?.worldId && entry ? landmark(t, place.worldId, entry.dayInWeek).toward : null);
++  const card = entry ? postcardWords(entry, t, dayTitle, content?.config?.minutes, now.getTime(), locale, dayPlace?.name ?? place?.name) : null;
+   const photo =
+     entry && placeDef
+       ? entry.kind === "week"
+@@ -199,7 +201,7 @@ export default function TodayScreen() {
+       scroll
+       scrollToTopOnTabPress
+       edges={["top"]}
+-      contentContainerStyle={{ paddingBottom: tabClearance, gap: spacing[6] + 2 }}
++      contentContainerStyle={{ paddingBottom: tabClearance, gap: spacing[6] }}
+       scrollProps={{
+         refreshControl: (
+           <RefreshControl refreshing={refreshing} onRefresh={() => void onRefresh()} tintColor={colors.brand} />
+@@ -245,15 +247,15 @@ export default function TodayScreen() {
+             stampName={place.name}
+             compact={windowHeight < 700}
+           >
+-            <AppText variant="bodySmall" color={colors.secondary} style={styles.placeLine}>
++            <AppText variant="bodySmall" color={colors.secondary} style={styles.placeLine} numberOfLines={1}>
+               {card.placeLine}
+             </AppText>
+             {card.done ? <DoneLine label={card.done} /> : null}
+-            <AppText variant="editorialTitle" accessibilityRole="header">
++            <AppText variant="editorialTitle" accessibilityRole="header" numberOfLines={3}>
+               {card.title}
+             </AppText>
+             {card.meta ? (
+-              <AppText variant="body" color={colors.textSecondary}>
++              <AppText variant="bodySmall" color={colors.textSecondary}>
+                 {card.meta}
+               </AppText>
+             ) : null}
+@@ -360,6 +362,22 @@ function daypartFor(hour: number): Daypart {
+   return "night";
+ }
+ 
++/** Longest day title the postcard shows as is; past it, the day's place line stands in. */
++const SHORT_TITLE_MAX = 48;
++
++/**
++ * The postcard's title: the day in a few words, never the full question (that
++ * opens the session). The shortest of the day's own title and its first
++ * question when either is short, else the day's "Toward …" line from the
++ * session header, else the question as before.
++ */
++function shortDayTitle(dayTitle: string | undefined, question: string, toward: string | null): string {
++  const short = [dayTitle, question]
++    .filter((x): x is string => !!x && x.length <= SHORT_TITLE_MAX)
++    .sort((a, b) => a.length - b.length)[0];
++  return short ?? toward ?? question;
++}
++
+ /** The postcard's words for the entry's state. */
+ function postcardWords(
+   entry: TodayEntry,
+diff --git a/apps/mobile/app/path/day.tsx b/apps/mobile/app/path/day.tsx
+index 4d6297d..d0ed5cc 100644
+--- a/apps/mobile/app/path/day.tsx
++++ b/apps/mobile/app/path/day.tsx
+@@ -1367,7 +1367,15 @@ function DayScreenInner() {
+             if (opening?.kind === "poster" || opening?.kind === "name") useWorldLedger.getState().markEntered(w);
+             if (opening?.kind === "return") useWorldLedger.getState().markReturnShown(dayKey(new Date()));
+           }}
+-          header={{ toward: wd.here.toward, placeDay, steps: progressNow.total, on: progressNow.on }}
++          header={{
++            toward: wd.here.toward,
++            placeDay,
++            steps: progressNow.total,
++            on: progressNow.on,
++            // The question in short, for the line kept above the field while she types.
++            title: resolveTemplate(step.title, step.config?.titleFallback, ctx)?.text ?? fillTemplate(step.title, ctx).text,
++            reply: !!carried && (carried.pending || !!carried.reply),
++          }}
+           backLabel={index > 0 ? t.practice.header.backA11y : t.practice.header.leaveA11y}
+           onBack={back}
+           trailing={
+diff --git a/apps/mobile/src/components/atlas/globe/GlobeScreen.tsx b/apps/mobile/src/components/atlas/globe/GlobeScreen.tsx
+index 8326fa9..aedebf6 100644
+--- a/apps/mobile/src/components/atlas/globe/GlobeScreen.tsx
++++ b/apps/mobile/src/components/atlas/globe/GlobeScreen.tsx
+@@ -22,7 +22,7 @@ import { claimRedoWeek, useMyRedoWeek, useRedoWeek } from "@/store/useRedoWeek";
+ import { fontFamily } from "@/theme";
+ import { AtlasGlobe, GLOBE_START, type GlobeHandle } from "./AtlasGlobe";
+ import { placeCopy } from "./copy";
+-import { setGlobeLabels } from "./paintGlobe";
++import { setGlobeLabels, setGlobePlaceNames } from "./paintGlobe";
+ import { buildGlobe, currentPlace, pathFor, totals, traySlots, type GlobeArea, type GlobePlace } from "./model";
+ import { Postcard, SoonCard, CARD_W } from "./Postcard";
+ import { Arrival, arrivalDay, PlaceList, PlaceSheet } from "./Sheets";
+@@ -70,6 +70,11 @@ export function GlobeScreen({ atlas, prompt }: { atlas: AtlasDTO; /** The kept-w
+   const tray = useRef(new Animated.Value(0)).current;
+ 
+   useEffect(() => {
++    setGlobePlaceNames(
++      Object.fromEntries(
++        Object.entries(t.globe.places as Record<string, { name: string } | undefined>).map(([id, p]) => [id, p?.name ?? ""]),
++      ) as Partial<Record<PlaceId, string>>,
++    );
+     setGlobeLabels(
+       Object.fromEntries(GLOBE_AREAS.map((a) => [a, { theme: t.globe.areas[a].theme, name: t.globe.areas[a].continent }])) as Record<AreaKey, { theme: string; name: string }>,
+     );
+diff --git a/apps/mobile/src/components/atlas/globe/paintGlobe.ts b/apps/mobile/src/components/atlas/globe/paintGlobe.ts
+index 138a14e..4624986 100644
+--- a/apps/mobile/src/components/atlas/globe/paintGlobe.ts
++++ b/apps/mobile/src/components/atlas/globe/paintGlobe.ts
+@@ -1,7 +1,7 @@
+ import { Image } from "react-native";
+ import type { SkCanvas, SkFont, SkImage, SkPaint, SkPath, SkPicture, SkShader, SkTypeface } from "@shopify/react-native-skia";
+ import type { AreaKey } from "@elara/shared";
+-import { CONTINENTS, type PlaceId } from "@/content/places";
++import { CONTINENTS, placeById, type PlaceId } from "@/content/places";
+ import { PLACE_THUMB } from "@/content/placeImages";
+ import { color } from "@/components/world25d/paint";
+ import { loadSkia } from "@/components/world25d/skia";
+@@ -93,6 +93,7 @@ export async function loadGlobeAssets(): Promise<GlobeAssets> {
+ 
+ export class GlobePainter {
+   private fonts = new Map<number, SkFont>();
++  private lastWidth = 0;
+ 
+   constructor(private readonly assets: GlobeAssets) {}
+ 
+@@ -108,12 +109,15 @@ export class GlobePainter {
+ 
+   record(view: GlobeView, areas: readonly GlobeArea[], width: number, height: number): { picture: SkPicture; pins: Pin[] } {
+     const { Skia } = loadSkia();
++    this.lastWidth = width;
+     const rec = Skia.PictureRecorder();
+     const c = rec.beginRecording(Skia.XYWHRect(0, 0, width, height));
+     const started = new Map<AreaKey, boolean>(areas.map((a) => [a.area, a.started]));
+     this.globe(c, view, started);
+-    if (!view.zone) this.labels(c, view, started);
+     const pins = this.places(c, view, areas, started);
++    // Labels go on last, placed around the medallions rather than under them.
++    // In a zone only the selected place is named (the tray lists the rest).
++    this.labels(c, view, started, pins);
+     return { picture: rec.finishRecordingAsPicture(), pins };
+   }
+ 
+@@ -292,27 +296,105 @@ export class GlobePainter {
+ 
+   /* ───── continent labels ───── */
+ 
+-  private labels(c: SkCanvas, v: GlobeView, started: Map<AreaKey, boolean>) {
++  /**
++   * The continents' names, placed so they never sit on a medallion or on each
++   * other. The selected place's continent goes first and always shows; a
++   * label that cannot find a clear spot near its continent, or that would
++   * crowd the selected place, is left out (the list view names every place).
++   */
++  private labels(c: SkCanvas, v: GlobeView, started: Map<AreaKey, boolean>, pins: readonly Pin[]) {
+     const big = this.font(11);
+     const small = this.font(10);
+     if (!big || !small) return;
+-    for (const area of Object.keys(CONTINENTS) as AreaKey[]) {
++    const selPin = v.sel ? pins.find((p) => p.id === v.sel) ?? null : null;
++    const selArea = v.sel ? placeById(v.sel)?.area ?? null : null;
++    type Cand = { area: AreaKey; x: number; y: number; z: number; t1: string; name: string; w: number };
++    const cands: Cand[] = [];
++    for (const area of v.zone ? [] : (Object.keys(CONTINENTS) as AreaKey[])) {
+       const def = CONTINENTS[area];
+       const q = project(def.lon, def.lat, v.l0, v.p0);
+       if (q[2] <= 0.4) continue;
+-      const x = v.cx + q[0] * v.R;
+-      const y = v.cy - q[1] * v.R + (area === "self" ? -40 : 0) + (area === "money" ? -34 : 0) + (area === "everyday" ? -46 : 0);
+       const label = LABELS.get(area);
+       if (!label) continue;
+-      const col = started.get(area) ? def.col : UNSTARTED.col;
+-      const halo = this.stroke("rgb(255,255,255)", 4, 0.92);
++      const x = v.cx + q[0] * v.R;
++      const y = v.cy - q[1] * v.R + (area === "self" ? -40 : 0) + (area === "money" ? -34 : 0) + (area === "everyday" ? -46 : 0);
+       const t1 = label.theme.toUpperCase();
+-      const w1 = big.getTextWidth(t1);
+-      c.drawText(t1, x - w1 / 2, y, halo, big);
+-      c.drawText(t1, x - w1 / 2, y, this.fill(col), big);
+-      const w2 = small.getTextWidth(label.name);
+-      c.drawText(label.name, x - w2 / 2, y + 12, halo, small);
+-      c.drawText(label.name, x - w2 / 2, y + 12, this.fill("#5e5650"), small);
++      const w = Math.max(big.getTextWidth(t1), small.getTextWidth(label.name));
++      cands.push({ area, x, y, z: q[2], t1, name: label.name, w });
++    }
++    const rank = (k: Cand) => (k.area === selArea ? 0 : started.get(k.area) ? 1 : 2);
++    cands.sort((a, b) => rank(a) - rank(b) || b.z - a.z);
++    const placed: { l: number; t: number; r: number; b: number }[] = [];
++    const PADB = 3;
++    const boxAt = (k: Cand, y: number) => ({ l: k.x - k.w / 2 - PADB, t: y - 11 - PADB, r: k.x + k.w / 2 + PADB, b: y + 14 + PADB });
++    const hitsPin = (bx: { l: number; t: number; r: number; b: number }) =>
++      pins.some((p) => {
++        const nx = Math.max(bx.l, Math.min(p.x, bx.r));
++        const ny = Math.max(bx.t, Math.min(p.y, bx.b));
++        return Math.hypot(p.x - nx, p.y - ny) < p.r + 6;
++      });
++    const hitsLabel = (bx: { l: number; t: number; r: number; b: number }) =>
++      placed.some((o) => bx.l < o.r && bx.r > o.l && bx.t < o.b && bx.b > o.t);
++    const halo = this.stroke("rgb(255,255,255)", 4, 0.92);
++    // The selected place names itself first, beside its medallion on a paper tag,
++    // on the first side clear of the other medallions: it wins every overlap.
++    const selName = v.sel ? PLACE_NAMES.get(v.sel) : undefined;
++    if (selPin && selName) {
++      const w = big.getTextWidth(selName);
++      const off = selPin.r + 10;
++      const others = pins.filter((p) => p.id !== selPin.id);
++      const spots: [number, number][] = [
++        [selPin.x, selPin.y + off + 8],
++        [selPin.x, selPin.y - off],
++        [selPin.x + off + w / 2, selPin.y + 4],
++        [selPin.x - off - w / 2, selPin.y + 4],
++      ];
++      const tag = (x: number, y: number) => ({ l: x - w / 2 - 6, t: y - 13, r: x + w / 2 + 6, b: y + 5 });
++      const clear = (bx: { l: number; t: number; r: number; b: number }) =>
++        !others.some((p) => {
++          const nx = Math.max(bx.l, Math.min(p.x, bx.r));
++          const ny = Math.max(bx.t, Math.min(p.y, bx.b));
++          return Math.hypot(p.x - nx, p.y - ny) < p.r + 4;
++        });
++      const clamp = (x: number) => Math.max(w / 2 + 8, Math.min(this.lastWidth - w / 2 - 8, x));
++      const [sx, sy] = spots.map(([x, y]) => [clamp(x), y] as [number, number]).find(([x, y]) => clear(tag(x, y))) ?? [clamp(spots[0]![0]), spots[0]![1]];
++      const bx = tag(sx, sy);
++      const { Skia } = loadSkia();
++      c.drawRRect(Skia.RRectXY(Skia.XYWHRect(bx.l, bx.t, bx.r - bx.l, bx.b - bx.t), 9, 9), this.fill("#fffdf8", 0.95));
++      c.drawText(selName, sx - w / 2, sy, this.fill("#2b2622"), big);
++      placed.push({ l: bx.l - PADB, t: bx.t - PADB, r: bx.r + PADB, b: bx.b + PADB });
++    }
++    for (const k of cands) {
++      const selected = k.area === selArea;
++      // Above the cluster first (the eye reads down to the places), then below, then further out.
++      const tries = [k.y, k.y - 30, k.y + 30, k.y - 56, k.y + 56];
++      let y: number | null = null;
++      for (const ty of tries) {
++        const bx = boxAt(k, ty);
++        if (!hitsPin(bx) && !hitsLabel(bx)) {
++          y = ty;
++          break;
++        }
++      }
++      if (y === null) {
++        if (!selected) continue;
++        y = tries.find((ty) => !hitsLabel(boxAt(k, ty))) ?? k.y;
++      }
++      // Another continent's name right beside the selected place competes with it: leave it out.
++      if (!selected && selPin) {
++        const bx = boxAt(k, y);
++        const nx = Math.max(bx.l, Math.min(selPin.x, bx.r));
++        const ny = Math.max(bx.t, Math.min(selPin.y, bx.b));
++        if (Math.hypot(selPin.x - nx, selPin.y - ny) < selPin.r * 4) continue;
++      }
++      placed.push(boxAt(k, y));
++      const col = started.get(k.area) ? CONTINENTS[k.area].col : UNSTARTED.col;
++      const w1 = big.getTextWidth(k.t1);
++      c.drawText(k.t1, k.x - w1 / 2, y, halo, big);
++      c.drawText(k.t1, k.x - w1 / 2, y, this.fill(col), big);
++      const w2 = small.getTextWidth(k.name);
++      c.drawText(k.name, k.x - w2 / 2, y + 12, halo, small);
++      c.drawText(k.name, k.x - w2 / 2, y + 12, this.fill("#5e5650"), small);
+     }
+   }
+ 
+@@ -444,6 +526,15 @@ export function setGlobeLabels(labels: Record<AreaKey, { theme: string; name: st
+   for (const k of Object.keys(labels) as AreaKey[]) LABELS.set(k, labels[k]);
+ }
+ 
++/** The places' names (the catalogue's), set by the screen: the selected one is printed on the globe. */
++const PLACE_NAMES = new Map<PlaceId, string>();
++export function setGlobePlaceNames(names: Partial<Record<PlaceId, string>>) {
++  for (const k of Object.keys(names) as PlaceId[]) {
++    const n = names[k];
++    if (n) PLACE_NAMES.set(k, n);
++  }
++}
++
+ /** `rgb(r,g,b)` back to `#rrggbb`: the land tints are hex, the mixes are rgb. */
+ function rgbHex(c: string): string {
+   if (c.startsWith("#")) return c;
+diff --git a/apps/mobile/src/components/circles/circulos/parts.tsx b/apps/mobile/src/components/circles/circulos/parts.tsx
+index a2155c8..769cec5 100644
+--- a/apps/mobile/src/components/circles/circulos/parts.tsx
++++ b/apps/mobile/src/components/circles/circulos/parts.tsx
+@@ -19,7 +19,7 @@ import { authorName } from "@/components/circles/topics/ui";
+ import { useT } from "@/i18n";
+ import { timeAgo } from "@/lib/dates";
+ import { ease, haptics, interaction, PressableScale, useReducedMotion } from "@/motion";
+-import { colors, radius, shadow, spacing } from "@/theme";
++import { colors, layout, radius, shadow, spacing } from "@/theme";
+ import { canContact, undoLeft } from "./model";
+ import { useBlockUndo, useCirculosBlocks } from "./seams/blocks";
+ import { showToast } from "@/components/Toast";
+@@ -48,8 +48,8 @@ export const ink = {
+ 
+ export const DOT = " · ";
+ 
+-/** A screen's side margin: the prototype's 16, on every width. */
+-export const GUT = 16;
++/** A screen's side margin: the app's screen margin token (24), the same gutter as Hoy and the day screens. */
++export const GUT = layout.screenMargin;
+ 
+ /**
+  * Her name and how long ago. The name is a button to the profile only for
+diff --git a/apps/mobile/src/components/circles/topics/CirclesTopicsScreen.tsx b/apps/mobile/src/components/circles/topics/CirclesTopicsScreen.tsx
+index d51295c..d89f27d 100644
+--- a/apps/mobile/src/components/circles/topics/CirclesTopicsScreen.tsx
++++ b/apps/mobile/src/components/circles/topics/CirclesTopicsScreen.tsx
+@@ -359,22 +359,26 @@ export function Explore({
+           )
+         ) : (
+           <>
+-            <AppText variant="body">{c.membersOnly}</AppText>
+-            <View style={styles.between}>
+-              <View style={{ flexShrink: 1 }}>
+-                <AppText variant="body">{fromInterests ? c.explore.yourInterests(interestNames.join(", ")) : c.explore.noInterests}</AppText>
+-              </View>
+-              <TertiaryAction
+-                wrap
+-                label={fromInterests ? c.explore.editInterests : c.explore.pickInterests}
+-                color={colors.buttonForest}
+-                accessibilityHint={fromInterests ? c.explore.editInterestsA11y : undefined}
+-                onPress={onEditInterests}
+-              />
+-            </View>
++            {/* One heading, then her interests in one quiet line with Edit as a
++                small link beside it: the list leads, not the settings. */}
+             <View>
+               <SectionHeading label={fromInterests ? c.explore.suggestedTitle : c.explore.startTitle} />
++              <View style={styles.interestsRow}>
++                <AppText variant="bodySmall" color={colors.textSecondary} numberOfLines={1} style={styles.interestsText}>
++                  {fromInterests ? c.explore.yourInterests(interestNames.join(", ")) : c.explore.noInterests}
++                </AppText>
++                <TertiaryAction
++                  wrap={false}
++                  label={fromInterests ? c.explore.editInterests : c.explore.pickInterests}
++                  color={fromInterests ? colors.textSecondary : colors.buttonForest}
++                  accessibilityHint={fromInterests ? c.explore.editInterestsA11y : undefined}
++                  onPress={onEditInterests}
++                />
++              </View>
+               {suggested.map(row)}
++              <AppText variant="bodySmall" color={colors.textSecondary} style={styles.membersOnly}>
++                {c.membersOnly}
++              </AppText>
+             </View>
+             {/* The one way to the full list. */}
+             <PrimaryPill slim case="gentle" variant="outline" label={showAll ? c.explore.hideAll : c.explore.showAll(topics.length)} onPress={() => setShowAll((s) => !s)} />
+@@ -435,6 +439,9 @@ const styles = StyleSheet.create({
+   row: { minHeight: 48, paddingVertical: spacing[2], borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: colors.border, gap: 2 },
+   linkRow: { minHeight: 44, flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: spacing[2] },
+   between: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", columnGap: spacing[2] },
++  interestsRow: { flexDirection: "row", alignItems: "center", gap: spacing[2], marginBottom: spacing[1] },
++  interestsText: { flex: 1, minWidth: 0 },
++  membersOnly: { marginTop: spacing[3] },
+   card: { ...paperSheet, paddingHorizontal: spacing[4], paddingVertical: spacing[1] },
+ });
+ 
+diff --git a/apps/mobile/src/components/hoy/HoyPostcard.tsx b/apps/mobile/src/components/hoy/HoyPostcard.tsx
+index dc09c83..669b2e1 100644
+--- a/apps/mobile/src/components/hoy/HoyPostcard.tsx
++++ b/apps/mobile/src/components/hoy/HoyPostcard.tsx
+@@ -68,7 +68,8 @@ export function HoyPostcard({
+     [size],
+   );
+   const printW = size ? size.w - PAD * 2 : 0;
+-  const printH = Math.round(Math.min(262, Math.max(150, printW * (compact ? 0.56 : 0.78))));
++  // A landscape strip, not a square: the day's title and its action stay in the first screen.
++  const printH = Math.round(Math.min(200, Math.max(132, printW * (compact ? 0.42 : 0.52))));
+ 
+   return (
+     <View style={styles.lean}>
+@@ -217,7 +218,7 @@ export function SavedNote({ label }: { label: string }) {
+ 
+ const styles = StyleSheet.create({
+   lean: { transform: [{ rotate: "-0.4deg" }] },
+-  card: { paddingTop: PAD, paddingHorizontal: PAD, paddingBottom: spacing[6], gap: spacing[5] + 2 },
++  card: { paddingTop: PAD, paddingHorizontal: PAD, paddingBottom: spacing[5], gap: spacing[5] },
+   print: { overflow: "visible", backgroundColor: colors.sagePale },
+   clip: { overflow: "hidden" },
+   tear: { position: "absolute", left: 0, bottom: -1 },
+diff --git a/apps/mobile/src/components/practice/PhotoInput.tsx b/apps/mobile/src/components/practice/PhotoInput.tsx
+index 878a98c..5786b38 100644
+--- a/apps/mobile/src/components/practice/PhotoInput.tsx
++++ b/apps/mobile/src/components/practice/PhotoInput.tsx
+@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
+ import { ActivityIndicator, Image, Keyboard, Linking, StyleSheet, TextInput, View } from "react-native";
+ import { AppText } from "../AppText";
+ import { Icon } from "../Icon";
+-import { useKeyboard } from "@/hooks/useKeyboard";
+ import { useT } from "@/i18n";
+ import { api, photoSource } from "@/lib/api";
+ import { pickPracticePhoto } from "@/lib/imagePicker";
+@@ -91,7 +90,6 @@ export function PhotoInput({
+   captionPlaceholder?: string;
+ }) {
+   const t = useT();
+-  const keyboard = useKeyboard();
+   const theme = usePracticeTheme();
+   const has = !!(draft.uri || draft.photo);
+   const set = (patch: Partial<PhotoDraft>) => onChange({ ...draft, ...patch });
+@@ -162,36 +160,54 @@ export function PhotoInput({
+   }
+ 
+   const source = draft.uri ? { uri: draft.uri } : draft.photo ? photoSource(draft.photo.id) : null;
++  const captionMissing = !draft.caption.trim();
++  // The photo and the words it needs sit together: a compact thumbnail with
++  // Retake / Library beside it, and the required caption straight under them,
++  // so the caption is never pushed below the fold and the disabled Next always
++  // has its reason on screen.
+   return (
+     <FadeIn style={styles.stack}>
+-      <View style={[styles.preview, keyboard.visible && { height: 120, aspectRatio: undefined }, { borderColor: theme.cardBorder, backgroundColor: theme.card }]}>
+-        {source ? (
+-          <Image
+-            source={source}
+-            style={StyleSheet.absoluteFill}
+-            resizeMode="cover"
+-            accessibilityIgnoresInvertColors
+-            accessibilityLabel={draft.caption || t.practice.photo.yourPhoto}
+-          />
+-        ) : null}
+-        {status === "uploading" ? (
+-          <View style={styles.overlay}>
+-            <ActivityIndicator color={theme.ctaInk} />
+-            <AppText variant="caption" color={theme.ctaInk}>
++      <View style={styles.photoRow}>
++        <View style={[styles.preview, { backgroundColor: theme.card }]}>
++          {source ? (
++            <Image
++              source={source}
++              style={StyleSheet.absoluteFill}
++              resizeMode="cover"
++              accessibilityIgnoresInvertColors
++              accessibilityLabel={draft.caption || t.practice.photo.yourPhoto}
++            />
++          ) : null}
++          {status === "uploading" ? (
++            <View style={styles.overlay}>
++              <ActivityIndicator color={theme.ctaInk} />
++            </View>
++          ) : null}
++        </View>
++        <View style={styles.photoSide}>
++          {status === "uploading" ? (
++            <AppText variant="caption" color={theme.muted} accessibilityLiveRegion="polite">
+               {t.practice.photo.uploading}
+             </AppText>
+-          </View>
+-        ) : null}
+-      </View>
+-      {status === "failed" ? (
+-        <View style={styles.failed}>
+-          <AppText variant="caption" color={theme.accent}>
+-            {t.practice.photo.failed}
+-          </AppText>
+-          <Link label={t.practice.photo.retry} onPress={onRetry} />
++          ) : null}
++          {status === "failed" ? (
++            <>
++              <AppText variant="caption" color={theme.accent}>
++                {t.practice.photo.failed}
++              </AppText>
++              <Link label={t.practice.photo.retry} onPress={onRetry} start />
++            </>
++          ) : null}
++          {/* "Photo saved. Tap Next" only once Next can actually be tapped. */}
++          {draft.photo && status === "idle" && !captionMissing ? (
++            <AppText variant="caption" color={theme.muted} accessibilityLiveRegion="polite">
++              {t.ux.photoSaved}
++            </AppText>
++          ) : null}
++          <Link label={t.practice.photo.retake} onPress={onRetake} start />
++          <Link label={t.practice.photo.library} onPress={() => onPick("library")} start />
+         </View>
+-      ) : null}
+-      {draft.photo && status === "idle" ? <AppText variant="body" color={theme.ink} accessibilityLiveRegion="polite">{t.ux.photoSaved}</AppText> : null}
++      </View>
+       <View style={styles.captionBlock}>
+         <AppText variant="label" color={theme.accent}>
+           {t.practice.photo.captionLabel}
+@@ -206,22 +222,18 @@ export function PhotoInput({
+           accessibilityLabel={t.practice.photo.captionLabel}
+         />
+       </View>
+-      <View style={styles.row}>
+-        <Link label={t.practice.photo.retake} onPress={onRetake} />
+-        <Link label={t.practice.photo.library} onPress={() => onPick("library")} />
+-      </View>
+     </FadeIn>
+   );
+ }
+ 
+-function Link({ label, onPress }: { label: string; onPress: () => void }) {
++function Link({ label, onPress, start }: { label: string; onPress: () => void; start?: boolean }) {
+   const theme = usePracticeTheme();
+   return (
+     <PressableScale
+       size="chip"
+       dim={0.6}
+       onPress={onPress}
+-      style={styles.link}
++      style={[styles.link, start && styles.linkStart]}
+       accessibilityRole="button"
+       accessibilityLabel={label}
+     >
+@@ -232,6 +244,9 @@ function Link({ label, onPress }: { label: string; onPress: () => void }) {
+   );
+ }
+ 
++/** The chosen photo's thumbnail (spacing[24] + spacing[4]). */
++const PREVIEW = spacing[24] + spacing[4];
++
+ const styles = StyleSheet.create({
+   stack: { gap: spacing[3], width: "100%" },
+   empty: {
+@@ -265,15 +280,15 @@ const styles = StyleSheet.create({
+   },
+   libraryWrap: { width: "100%", maxWidth: 320, alignSelf: "center" },
+   denied: { gap: spacing[1], alignItems: "center" },
++  photoRow: { flexDirection: "row", alignItems: "center", gap: spacing[4] },
++  /** A thumbnail, not a hero: the caption it needs stays in the first screen. */
+   preview: {
+-    width: "100%",
+-    aspectRatio: 1,
+-    maxHeight: 340,
+-    alignSelf: "center",
+-    borderWidth: 1,
+-    borderRadius: radius.feature,
++    width: PREVIEW,
++    height: PREVIEW,
++    borderRadius: radius.content,
+     overflow: "hidden",
+   },
++  photoSide: { flex: 1, minWidth: 0, gap: spacing[1] },
+   overlay: {
+     position: "absolute",
+     top: 0,
+@@ -285,7 +300,6 @@ const styles = StyleSheet.create({
+     justifyContent: "center",
+     gap: spacing[2],
+   },
+-  failed: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
+   captionBlock: { gap: spacing[2] },
+   caption: {
+     ...type.body,
+@@ -304,7 +318,7 @@ const styles = StyleSheet.create({
+     minHeight: 120,
+     textAlignVertical: "top",
+   },
+-  row: { flexDirection: "row", justifyContent: "center", gap: spacing[6] },
+   link: { minHeight: 44, justifyContent: "center", paddingHorizontal: spacing[2], alignSelf: "center" },
++  linkStart: { alignSelf: "flex-start", paddingHorizontal: 0 },
+   underline: { textDecorationLine: "underline" },
+ });
+diff --git a/apps/mobile/src/components/practice/StepScreen.tsx b/apps/mobile/src/components/practice/StepScreen.tsx
+index 339f968..0c6d6e8 100644
+--- a/apps/mobile/src/components/practice/StepScreen.tsx
++++ b/apps/mobile/src/components/practice/StepScreen.tsx
+@@ -37,7 +37,7 @@ import { openLink } from "@/lib/legal";
+ import { duration, FadeIn, PressableScale, Reveal, stagger, interaction, useReducedMotion } from "@/motion";
+ import { useScreenReader } from "@/hooks/useScreenReader";
+ import { photoSource } from "@/lib/api";
+-import { colors, radius, spacing, type, withAlpha } from "@/theme";
++import { colors, layout, radius, spacing, type, withAlpha } from "@/theme";
+ import { BlanksInput } from "./BlanksInput";
+ import { PracticeCta } from "./DayChrome";
+ import { CtaTone } from "./CenteredDayHeader";
+@@ -245,6 +245,14 @@ export function StepScreen({
+   useEffect(() => {
+     reportScroll?.(0);
+   }, [reportScroll]);
++  // Her reply lands under the field: bring the whole card up above the fixed
++  // footer instead of leaving it to start below the fold.
++  const replyLanded = beat && locked && !pending && !!reply;
++  useEffect(() => {
++    if (!replyLanded) return;
++    const id = setTimeout(() => keyboardScroll.props.ref.current?.scrollToEnd({ animated: !reducedLead }), REPLY_SCROLL_MS);
++    return () => clearTimeout(id);
++  }, [replyLanded]); // eslint-disable-line react-hooks/exhaustive-deps
+   const [noticeReady, setNoticeReady] = useState(false);
+   useEffect(() => {
+     setNoticeReady(false);
+@@ -892,6 +900,9 @@ function dayTwoSource(stepId: string): number {
+   );
+ }
+ 
++/** After the reply card's fade starts, so the scroll measures its full height. */
++const REPLY_SCROLL_MS = 450;
++
+ const KNOWN = new Set([
+   "reflect",
+   "choose",
+@@ -1417,9 +1428,9 @@ const styles = StyleSheet.create({
+   scroll: {
+     paddingHorizontal: spacing[6],
+     paddingTop: spacing[6],
+-    // Clears the fixed action area so the final option remains fully readable
+-    // and tappable on shorter phones.
+-    paddingBottom: 112,
++    // Clears the fixed action area so the final option, and the last line of
++    // Elara's reply, remain fully readable and tappable on shorter phones.
++    paddingBottom: layout.scrollPadBottom,
+     gap: spacing[5],
+   },
+   recapScroll: { flexGrow: 1, justifyContent: "center", paddingBottom: spacing[6] },
+diff --git a/apps/mobile/src/components/practice/landscape/BandDay.tsx b/apps/mobile/src/components/practice/landscape/BandDay.tsx
+index 178e20b..ac180fb 100644
+--- a/apps/mobile/src/components/practice/landscape/BandDay.tsx
++++ b/apps/mobile/src/components/practice/landscape/BandDay.tsx
+@@ -26,7 +26,7 @@ import { useKeyboard } from "@/hooks/useKeyboard";
+ import { useScreenReader } from "@/hooks/useScreenReader";
+ import { useT } from "@/i18n";
+ import { duration as dur, ease, FadeIn, PressableScale, useLoopProgress, useReducedMotion } from "@/motion";
+-import { colors, shellHitTarget, spacing, withAlpha } from "@/theme";
++import { colors, layout, shellHitTarget, spacing, withAlpha } from "@/theme";
+ import { LandscapeScene, type SceneHandle } from "./LandscapeScene";
+ import {
+   BAND_MS,
+@@ -185,7 +185,7 @@ export const BandDay = forwardRef<WorldDayHandle, BandDayProps>(function BandDay
+ 
+   const state: BandState = phase === "arrive" ? "arrive" : phase === "walk" ? "step" : phase === "done" ? "done" : "atlas";
+   const dims = { height: win.height, fontScale: win.fontScale, topInset: insets.top };
+-  const target = bandHeight(state, { ...dims, keyboard: keyboard.visible && phase === "walk" });
++  const target = bandHeight(state, { ...dims, keyboard: keyboard.visible && phase === "walk", reply: !!header.reply && phase === "walk" });
+   const hMax = bandMax(dims);
+   const compact = bandSize(dims) === "compact";
+   const [band] = useState(() => new Animated.Value(target));
+@@ -365,6 +365,10 @@ export const BandDay = forwardRef<WorldDayHandle, BandDayProps>(function BandDay
+     setScrolled((was) => (was ? y > 4 : y > 12));
+   }, []);
+   const folded = phase === "walk" && (keyboard.visible || scrolled);
++  // Typing with the question scrolled away: a short version of it stays above
++  // the field (two lines at most), so she never writes without seeing what
++  // she is answering. Under the folded strip, never over the picture.
++  const questionLine = phase === "walk" && keyboard.visible && scrolled && header.title ? header.title : null;
+   const showControls = phase !== "horizon";
+   const backPress = phase === "done" || phase === "revealed" ? onLeave : onBack;
+ 
+@@ -417,6 +421,13 @@ export const BandDay = forwardRef<WorldDayHandle, BandDayProps>(function BandDay
+           ) : phase === "walk" ? (
+             <KeyboardAvoider toScreenBottom>
+               <View style={[styles.steps, { paddingTop: pad.top - STEP_TOP }]}>
++                {questionLine ? (
++                  <View style={styles.questionLine} pointerEvents="none">
++                    <AppText variant="label" color={colors.foreground} numberOfLines={2} accessibilityRole="header">
++                      {questionLine}
++                    </AppText>
++                  </View>
++                ) : null}
+                 {/* "Saving your place": its own slot in the page, under the
+                     pill's overhang, never drawn over the pill or a heading. */}
+                 <View style={[styles.savingSlot, saving && { paddingTop: folded ? spacing[2] : PILL_OVERHANG }]} pointerEvents="none">
+@@ -906,7 +917,7 @@ function FaceGlyph() {
+ 
+ type Pad = { top: number; side: number };
+ /** The page's padding under the band (prototype: 42 / 22, and 38 / 16 in its 320 mode). */
+-const PAD: Pad = { top: 42, side: 22 };
++const PAD: Pad = { top: 42, side: layout.screenMargin };
+ const COMPACT_PAD: Pad = { top: 38, side: 16 };
+ /** The step screen's own top padding, taken off the page's so the question sits where the prototype's does. */
+ const STEP_TOP = spacing[6];
+@@ -956,6 +967,15 @@ const styles = StyleSheet.create({
+     backgroundColor: withAlpha(WHITE, 0.9),
+   },
+   savingSlot: { alignItems: "center" },
++  // The step page's own gutter (StepScreen), so the line sits over the question it shortens.
++  questionLine: {
++    paddingHorizontal: spacing[6],
++    paddingTop: spacing[2],
++    paddingBottom: spacing[2],
++    borderBottomWidth: StyleSheet.hairlineWidth,
++    borderBottomColor: LINE,
++    backgroundColor: colors.cream,
++  },
+   savedRow: { flexDirection: "row", alignItems: "flex-start", gap: spacing[2], marginTop: spacing[2] },
+   asks: { marginTop: spacing[5] },
+   orb: { position: "absolute", left: 22, top: 24 - ORB, width: ORB, height: ORB },
+diff --git a/apps/mobile/src/components/practice/landscape/WorldDay.tsx b/apps/mobile/src/components/practice/landscape/WorldDay.tsx
+index d92f038..fa6e5f2 100644
+--- a/apps/mobile/src/components/practice/landscape/WorldDay.tsx
++++ b/apps/mobile/src/components/practice/landscape/WorldDay.tsx
+@@ -167,7 +167,16 @@ export interface WorldDayProps {
+   onOpened?: () => void;
+   /** The arrival's words are up (the day's asks may follow). Not called when opening already arrived. */
+   onArrived?: () => void;
+-  header: { toward: string; placeDay: string; steps: number; on: number };
++  header: {
++    toward: string;
++    placeDay: string;
++    steps: number;
++    on: number;
++    /** The step's own question, for the short line kept above the field while she types (photo band). */
++    title?: string;
++    /** The step opens on Elara's reply to the step before (photo band: the compact band). */
++    reply?: boolean;
++  };
+   backLabel: string;
+   onBack: () => void;
+   trailing?: ReactNode;
+diff --git a/apps/mobile/src/components/practice/landscape/photoDay.test.ts b/apps/mobile/src/components/practice/landscape/photoDay.test.ts
+index 7d1718d..e7ec2f5 100644
+--- a/apps/mobile/src/components/practice/landscape/photoDay.test.ts
++++ b/apps/mobile/src/components/practice/landscape/photoDay.test.ts
+@@ -51,6 +51,15 @@ describe("the band's height (prototype index.html)", () => {
+     expect(bandHeight("arrive", { ...phone, keyboard: true })).toBe(430);
+   });
+ 
++  it("gives a step that opens on Elara's reply the compact band, so the reply clears the footer", () => {
++    expect(bandHeight("step", { ...phone, reply: true })).toBe(BAND_HEIGHTS.compact.step);
++    expect(bandHeight("step", { ...small, reply: true })).toBe(BAND_HEIGHTS.compact.step);
++    // Typing still wins: the strip for the controls.
++    expect(bandHeight("step", { ...phone, reply: true, keyboard: true })).toBe(KEYBOARD_BAND);
++    // Only a step: the arrival and the done screen keep theirs.
++    expect(bandHeight("done", { ...phone, reply: true })).toBe(290);
++  });
++
+   it("keeps the phone's proportions on a taller window", () => {
+     expect(bandHeight("step", { height: 1180 })).toBe(Math.round(290 * (1180 / 844)));
+   });
+diff --git a/apps/mobile/src/components/practice/landscape/photoDay.ts b/apps/mobile/src/components/practice/landscape/photoDay.ts
+index f1c8035..6f100f9 100644
+--- a/apps/mobile/src/components/practice/landscape/photoDay.ts
++++ b/apps/mobile/src/components/practice/landscape/photoDay.ts
+@@ -31,12 +31,21 @@ export function bandSize({ height, fontScale = 1 }: { height: number; fontScale?
+  */
+ export function bandHeight(
+   state: BandState,
+-  { height, fontScale = 1, keyboard = false, topInset = 0 }: { height: number; fontScale?: number; keyboard?: boolean; topInset?: number },
++  {
++    height,
++    fontScale = 1,
++    keyboard = false,
++    reply = false,
++    topInset = 0,
++  }: { height: number; fontScale?: number; keyboard?: boolean; reply?: boolean; topInset?: number },
+ ): number {
+   const table = BAND_HEIGHTS[bandSize({ height, fontScale })];
+   // The back circle (44) and the pill above the band's foot (about 41) must both fit under the status bar.
+   const floor = Math.round(topInset + CIRCLE + PILL_RISE + 8);
+   if (keyboard && state === "step") return Math.max(KEYBOARD_BAND, Math.round(topInset + CIRCLE + KEYBOARD_GAP));
++  // A step that opens on Elara's reply gives the page the compact band, so her
++  // whole reply has room above the fixed footer (it can run to several lines).
++  if (reply && state === "step") return Math.max(BAND_HEIGHTS.compact.step, floor);
+   // A very tall window (an iPad) keeps the phone's proportions rather than a fixed height.
+   const scaled = height > PHONE_H ? Math.round(table[state] * (height / PHONE_H)) : table[state];
+   return Math.max(scaled, floor);

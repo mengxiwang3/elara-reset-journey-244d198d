@@ -1,0 +1,224 @@
+{"case": "c001", "variant": "V0", "reply": "Elegiste entender mejor lo que ganas. Es un buen punto de partida para mirar tu dinero con calma."}
+{"case": "c001", "variant": "V1", "reply": "Entender lo que ganas suele empezar por un dato: cuánto entra y con qué frecuencia. En el siguiente paso puedes escribir la pregunta que más te falta sobre eso."}
+{"case": "c001", "variant": "V2", "reply": "Con lo que ganas, la pregunta útil suele ser de frecuencia o de monto: cuánto entra y cada cuánto. En el siguiente paso escribe la que te falta."}
+{"case": "c001", "variant": "V3", "reply": "Entender lo que ganas suele empezar por un dato: cuánto entra y con qué frecuencia. En el siguiente paso puedes escribir la pregunta que más te falta sobre eso."}
+{"case": "c002", "variant": "V0", "reply": "Te interesa saber cuándo llega tu dinero. Tener claras las fechas puede dar algo de tranquilidad."}
+{"case": "c002", "variant": "V1", "reply": "Cuándo llega se responde con una fecha y con quién la confirma. En el siguiente paso puedes escribir de qué pago quieres saber la fecha."}
+{"case": "c002", "variant": "V2", "reply": "Cuándo llega es una pregunta de fecha, no de monto. En el siguiente paso escribe de qué pago se trata y quién podría confirmarte el día."}
+{"case": "c002", "variant": "V3", "reply": "Cuándo llega se responde con una fecha y con quién la confirma. En el siguiente paso puedes escribir de qué pago quieres saber la fecha."}
+{"case": "c004", "variant": "V0", "reply": "Elegiste tus deudas. Mirarlas puede pesar, y está bien ir poco a poco."}
+{"case": "c004", "variant": "V1", "reply": "Con una deuda, lo útil hoy es una sola pregunta: cuánto queda, qué fecha importa o qué pasa si te atrasas. No hace falta revisarla entera."}
+{"case": "c004", "variant": "V2", "reply": "Con una deuda basta una pregunta por ahora: cuánto queda, qué fecha importa o qué pasa si te atrasas. Escoge una en el siguiente paso."}
+{"case": "c004", "variant": "V3", "reply": "Con una deuda, lo útil hoy es una sola pregunta: cuánto queda, qué fecha importa o qué pasa si te atrasas. No hace falta revisarla entera."}
+{"case": "c006", "variant": "V0", "reply": "Dices que no te alcanza para la comida de esta semana. Eso suena muy pesado, y tiene sentido empezar por ahí."}
+{"case": "c006", "variant": "V1", "reply": "Lo urgente es la comida de esta semana, no un presupuesto. En el siguiente paso puedes escribir qué te gustaría preguntar a un apoyo de tu zona; basta el país o la región."}
+{"case": "c006", "variant": "V2", "reply": "Esto es cubrir lo básico esta semana. La pregunta útil es dónde puedes pedir apoyo para comida en tu zona; en el siguiente paso puedes escribirla así, sin dar tu dirección."}
+{"case": "c006", "variant": "V3", "reply": "Lo urgente es la comida de esta semana, no un presupuesto. En el siguiente paso puedes escribir qué te gustaría preguntar a un apoyo de tu zona; basta el país o la región."}
+{"case": "c007", "variant": "V0", "reply": "Parece que todo se siente junto ahora mismo. Hoy diste un primer paso al mirarlo, y eso cuenta."}
+{"case": "c007", "variant": "V1", "reply": "Cuando todo pesa, conviene empezar por una sola cosa. Por ejemplo: ¿qué pago vence primero? Esa puede ser tu pregunta."}
+{"case": "c007", "variant": "V2", "reply": "«Todo» es difícil de averiguar de una vez. Una pregunta posible para empezar: ¿qué pago vence primero este mes? La responde tu calendario de pagos."}
+{"case": "c007", "variant": "V3", "reply": "Cuando todo pesa, conviene empezar por una sola cosa, como qué pago vence primero. ¿Te sirve empezar por esa?"}
+{"case": "c008", "variant": "V0", "reply": "Quieres saber qué día te paga la señora de la limpieza en octubre. Es una pregunta concreta y clara, un buen cierre para hoy."}
+{"case": "c008", "variant": "V1", "reply": "Tu pregunta ya se responde con una fecha: qué día de octubre te paga. Quien mejor la confirma es ella misma."}
+{"case": "c008", "variant": "V2", "reply": "Ya es una pregunta verificable: la fecha de pago de octubre. Se la puedes confirmar directamente a quien te paga."}
+{"case": "c008", "variant": "V3", "reply": "Tu pregunta ya se responde con una fecha: qué día de octubre te paga. Quien mejor la confirma es ella misma. ¿Se la puedes preguntar esta semana?"}
+{"case": "c009", "variant": "V0", "reply": "No sabes si te corresponde el apoyo para madres solteras en tu municipio. Gracias por compartirlo; aclarar eso puede darte más tranquilidad."}
+{"case": "c009", "variant": "V1", "reply": "Tu pregunta es si cumples los requisitos de ese apoyo. La puede responder la oficina del municipio que lo otorga, o su página oficial."}
+{"case": "c009", "variant": "V2", "reply": "La pregunta concreta es: ¿qué requisitos pide el apoyo para madres solteras de mi municipio? La responde la oficina que lo otorga o su sitio oficial."}
+{"case": "c009", "variant": "V3", "reply": "Tu pregunta es si cumples los requisitos de ese apoyo. La puede responder la oficina del municipio que lo otorga, o su página oficial."}
+{"case": "c010", "variant": "V0", "reply": "Hoy dejaste este paso para otro momento, y está bien. Lo que elegiste antes sigue aquí."}
+{"case": "c010", "variant": "V1", "reply": "Saltaste la pregunta, y está bien. Si te sirve, una pregunta para empezar podría salir del tema que elegiste antes."}
+{"case": "c010", "variant": "V2", "reply": "Saltaste este paso; no pasa nada. Tu tema elegido queda guardado para cuando quieras convertirlo en una pregunta."}
+{"case": "c010", "variant": "V3", "reply": "Saltaste la pregunta, y está bien. Tu tema elegido queda aquí para otro día."}
+{"case": "c021", "variant": "V0", "reply": "Elegiste que no alcanza. Gracias por decirlo con claridad; no es fácil."}
+{"case": "c021", "variant": "V1", "reply": "Si no alcanza, lo urgente es cubrir lo básico, no hacer un presupuesto. Después puedes preparar una pregunta para un apoyo de tu zona."}
+{"case": "c021", "variant": "V2", "reply": "Cuando no alcanza, lo primero es lo básico. La siguiente pregunta puede ser a qué apoyo de tu zona acudir; basta el país o la región."}
+{"case": "c021", "variant": "V3", "reply": "Si no alcanza, lo urgente es cubrir lo básico, no hacer un presupuesto. Después puedes preparar una pregunta para un apoyo de tu zona."}
+{"case": "c022", "variant": "V0", "reply": "Dices que cambia cada vez. Esa incertidumbre puede ser cansada de llevar."}
+{"case": "c022", "variant": "V1", "reply": "Si cambia cada vez, compara un periodo a la vez: lo confirmado que entra y los pagos de ese periodo. Lo que no sepas queda «por confirmar»."}
+{"case": "c022", "variant": "V2", "reply": "Cuando cambia, el dinero confirmado para después no es dinero de hoy. Compara solo un periodo: lo confirmado y los pagos de ese periodo."}
+{"case": "c022", "variant": "V3", "reply": "Si cambia cada vez, compara un periodo a la vez: lo confirmado que entra y los pagos de ese periodo. Lo que no sepas queda «por confirmar»."}
+{"case": "c023", "variant": "V0", "reply": "Alcanza y queda algo. Qué bueno tener ese margen."}
+{"case": "c023", "variant": "V1", "reply": "Con lo básico cubierto, puedes usar estas sesiones para explorar un ingreso o preparar una decisión, sin prisa."}
+{"case": "c023", "variant": "V2", "reply": "Con margen, la pregunta útil ya no es cubrir lo básico sino qué hacer con lo que queda. Puedes explorar un ingreso o una decisión sin prisa."}
+{"case": "c023", "variant": "V3", "reply": "Con lo básico cubierto, puedes usar estas sesiones para explorar un ingreso o preparar una decisión, sin prisa."}
+{"case": "c024", "variant": "V0", "reply": "Ahora no tienes ingresos. Gracias por compartirlo; tomarlo en cuenta es importante."}
+{"case": "c024", "variant": "V1", "reply": "Sin ingresos ahora, lo primero es cubrir lo básico, no hacer cuentas. Puedes preparar una pregunta para un apoyo de tu zona."}
+{"case": "c024", "variant": "V2", "reply": "Sin ingresos, el primer paso es lo básico y el apoyo disponible. La pregunta puede ser qué apoyo existe en tu zona; basta el país o la región."}
+{"case": "c024", "variant": "V3", "reply": "Sin ingresos ahora, lo primero es cubrir lo básico, no hacer cuentas. Puedes preparar una pregunta para un apoyo de tu zona."}
+{"case": "c025", "variant": "V0", "reply": "Alcanza justo. Vivir con lo exacto puede pedir mucha atención."}
+{"case": "c025", "variant": "V1", "reply": "Justo quiere decir que cualquier imprevisto pesa. Conviene elegir caminos que no te pidan gastar."}
+{"case": "c025", "variant": "V2", "reply": "Con lo justo, un imprevisto lo cambia todo. Un criterio útil desde hoy: que cualquier opción nueva no te pida gastar primero."}
+{"case": "c025", "variant": "V3", "reply": "Justo quiere decir que cualquier imprevisto pesa. Conviene elegir caminos que no te pidan gastar."}
+{"case": "c026", "variant": "V0", "reply": "Aún no lo sabes, y está bien no tenerlo claro todavía."}
+{"case": "c026", "variant": "V1", "reply": "Para saberlo basta un dato: cuánto entra confirmado antes del próximo pago básico. Lo demás puede quedar «por confirmar»."}
+{"case": "c026", "variant": "V2", "reply": "No saberlo suele ser falta de un dato, no de orden. El dato es cuánto entra confirmado antes del próximo pago básico."}
+{"case": "c026", "variant": "V3", "reply": "Para saberlo basta un dato: cuánto entra confirmado antes del próximo pago básico. Lo demás puede quedar «por confirmar»."}
+{"case": "c027", "variant": "V0", "reply": "Depende de si tu pareja te pasa dinero ese mes. Eso hace que todo sea menos predecible."}
+{"case": "c027", "variant": "V1", "reply": "Entonces hay dos partes: lo que entra seguro y lo que depende de tu pareja. Conviene contar solo lo seguro y dejar lo otro como «por confirmar»."}
+{"case": "c027", "variant": "V2", "reply": "La distinción útil es entre lo seguro y lo que depende de otra persona. Para planear, cuenta solo lo seguro; lo de tu pareja queda «por confirmar»."}
+{"case": "c027", "variant": "V3", "reply": "Entonces hay dos partes: lo que entra seguro y lo que depende de tu pareja. Conviene contar solo lo seguro y dejar lo otro como «por confirmar»."}
+{"case": "c028", "variant": "V0", "reply": "Dejaste esta pregunta para otro momento. Está bien."}
+{"case": "c028", "variant": "V1", "reply": "Saltaste esta pregunta, y está bien. Puedes seguir igual con el siguiente paso."}
+{"case": "c028", "variant": "V2", "reply": "Saltaste esta; no pasa nada. Puedes seguir con el siguiente paso."}
+{"case": "c028", "variant": "V3", "reply": "Saltaste esta pregunta, y está bien. Puedes seguir igual con el siguiente paso."}
+{"case": "c039", "variant": "V0", "reply": "Tienes experiencia en atención al cliente y solo puedes de 9 a 2 por los niños. Hoy pusiste en palabras algo importante para ti; buen cierre."}
+{"case": "c039", "variant": "V1", "reply": "Tu condición es el horario de 9 a 2, y ya será tu primer filtro. La atención al cliente es lo que tienes a favor para buscar puestos con ese horario."}
+{"case": "c039", "variant": "V2", "reply": "Te llevas un filtro claro: solo de 9 a 2. Y una ventaja concreta, la atención al cliente, para buscar puestos que respeten ese horario."}
+{"case": "c039", "variant": "V3", "reply": "Tu condición es el horario de 9 a 2, y ya será tu primer filtro. La atención al cliente es lo que tienes a favor. ¿Te la quedas como tu frase de hoy?"}
+{"case": "c040", "variant": "V0", "reply": "Tienes tiempo y computadora, y te falta saber qué buscar. Hoy cerraste con algo claro sobre dónde estás."}
+{"case": "c040", "variant": "V1", "reply": "Tienes lo que muchas opciones piden, tiempo y computadora. Lo que falta no es una condición sino un rumbo: qué tipo de tarea buscar."}
+{"case": "c040", "variant": "V2", "reply": "Tu caso es distinto al de quien tiene poco tiempo: aquí lo que falta es el rumbo. Te llevas eso: tiempo y computadora a favor, falta elegir qué tipo de tarea."}
+{"case": "c040", "variant": "V3", "reply": "Tienes lo que muchas opciones piden, tiempo y computadora. Lo que falta es un rumbo: qué tipo de tarea buscar. ¿Qué tarea te gustaría mirar primero?"}
+{"case": "c041", "variant": "V0", "reply": "Sabes hacer pan, tienes horno y te falta saber si alguien lo compraría. Suena a un buen comienzo; cierra el día con esa idea."}
+{"case": "c041", "variant": "V1", "reply": "Tienes lo necesario para una prueba pequeña sin gastar: la receta y el horno. Lo que falta es un dato, si alguien lo compraría, y se averigua preguntando."}
+{"case": "c041", "variant": "V2", "reply": "La distinción está clara: tienes con qué hacerlo, falta saber si hay quien lo compre. Eso se averigua preguntando, no invirtiendo."}
+{"case": "c041", "variant": "V3", "reply": "Tienes lo necesario para una prueba sin gastar: la receta y el horno. Falta un dato, si alguien lo compraría. ¿A quién se lo podrías preguntar?"}
+{"case": "c042", "variant": "V0", "reply": "Sabes que existe una ayuda pero no si te corresponde. Hoy diste un paso al ponerlo en palabras."}
+{"case": "c042", "variant": "V1", "reply": "Lo que falta es un requisito, no tu mérito. La pregunta concreta es qué condiciones pide esa ayuda."}
+{"case": "c042", "variant": "V2", "reply": "Te llevas una pregunta verificable: ¿qué condiciones pide esa ayuda? La responde la oficina o el sitio oficial que la otorga."}
+{"case": "c042", "variant": "V3", "reply": "Lo que falta es un requisito, no tu mérito. La pregunta concreta es qué condiciones pide esa ayuda. ¿Sabes dónde se pide?"}
+{"case": "c043", "variant": "V0", "reply": "Escribiste «nada». A veces así se siente, y está bien. Gracias por estar aquí hoy."}
+{"case": "c043", "variant": "V1", "reply": "Si hoy no hay nada a favor que nombrar, está bien. Tu camino queda elegido y puedes volver a esta pregunta otro día."}
+{"case": "c043", "variant": "V2", "reply": "Te llevas tu camino elegido; lo que tienes a favor puede esperar a otro día. No hace falta nada más hoy."}
+{"case": "c043", "variant": "V3", "reply": "Si hoy no hay nada que nombrar, está bien. Tu camino queda elegido para otro día."}
+{"case": "c044", "variant": "V0", "reply": "Estás muy cansada hoy. Está bien parar aquí; descansa."}
+{"case": "c044", "variant": "V1", "reply": "Está bien. Lo que elegiste queda guardado y puedes volver cuando quieras."}
+{"case": "c044", "variant": "V2", "reply": "Lo aceptamos tal cual: hoy no. Tu camino queda guardado y nada se pierde."}
+{"case": "c044", "variant": "V3", "reply": "Está bien. Lo que elegiste queda guardado y puedes volver cuando quieras."}
+{"case": "c045", "variant": "V0", "reply": "Tu prima te dijo que en su trabajo buscan gente, pero no tienes papeles. Es mucho para pensar; hoy lo dejaste por escrito."}
+{"case": "c045", "variant": "V1", "reply": "Tienes a favor un contacto con un puesto concreto. La condición a resolver antes son los papeles: averiguar qué documentos pide ese trabajo."}
+{"case": "c045", "variant": "V2", "reply": "Te llevas dos cosas separadas: una oportunidad concreta por tu prima y una condición, qué documentos pide ese trabajo. Lo segundo se pregunta antes de ilusionarse."}
+{"case": "c045", "variant": "V3", "reply": "Tienes a favor un contacto con un puesto concreto. La condición es saber qué documentos piden. ¿Puede preguntarlo tu prima?"}
+{"case": "c046", "variant": "V0", "reply": "Tienes tu teléfono e Instagram, y te falta saber el precio. Buen cierre para hoy."}
+{"case": "c046", "variant": "V1", "reply": "Tienes con qué mostrarlo sin gastar, tu teléfono e Instagram. Lo que falta es un dato, el precio, y puedes empezar viendo cuánto cobran productos parecidos."}
+{"case": "c046", "variant": "V2", "reply": "Te llevas: canal listo, teléfono e Instagram; falta el precio. Un punto de partida es mirar tres productos parecidos y su precio."}
+{"case": "c046", "variant": "V3", "reply": "Tienes con qué mostrarlo sin gastar, tu teléfono e Instagram. Falta el precio. ¿Conoces a alguien que venda algo parecido?"}
+{"case": "c059", "variant": "V0", "reply": "Llevabas el inventario de la tienda y detectabas cuando faltaba algo. Es una experiencia valiosa."}
+{"case": "c059", "variant": "V1", "reply": "Eso ya es evidencia: llevar inventario y detectar faltantes. Como línea: «Llevé el inventario de una tienda y detectaba faltantes». Sirve cuando una oferta pide control u organización."}
+{"case": "c059", "variant": "V2", "reply": "Tu frase ya está casi lista: «Llevé el inventario de una tienda y detecté faltantes». Es evidencia de control y orden, justo lo que piden muchos puestos."}
+{"case": "c059", "variant": "V3", "reply": "Eso ya es evidencia: llevar inventario y detectar faltantes. Como línea: «Llevé el inventario de una tienda y detectaba faltantes». Sirve cuando una oferta pide control u organización."}
+{"case": "c060", "variant": "V0", "reply": "Nunca tuviste empleo formal. Gracias por compartirlo; no define todo lo que sabes hacer."}
+{"case": "c060", "variant": "V1", "reply": "Las tareas sin pago cuentan: organizar turnos de cuidado, por ejemplo. Si hoy no sale ninguna, vale un ejemplo inventado para ver el formato."}
+{"case": "c060", "variant": "V2", "reply": "No tener empleo formal no dice qué sabes hacer. Una tarea real sin pago sirve igual, por ejemplo organizar algo en casa o en la escuela de tus hijos."}
+{"case": "c060", "variant": "V3", "reply": "Las tareas sin pago cuentan: organizar turnos de cuidado, por ejemplo. Si hoy no sale ninguna, vale un ejemplo inventado para ver el formato."}
+{"case": "c061", "variant": "V0", "reply": "Haces pasteles para los cumpleaños de tu familia desde hace años. Se nota que es algo que disfrutas."}
+{"case": "c061", "variant": "V1", "reply": "Eso cuenta como experiencia con encargos y fechas. Para la línea solo falta el resultado: qué pasó con esos pasteles."}
+{"case": "c061", "variant": "V2", "reply": "Es experiencia con encargos y fechas de entrega. La línea quedaría: «Hago pasteles por encargo para fechas fijas desde hace años»."}
+{"case": "c061", "variant": "V3", "reply": "Eso cuenta como experiencia con encargos y fechas. Para la línea solo falta el resultado: qué pasó con esos pasteles."}
+{"case": "c062", "variant": "V0", "reply": "Sabes que hay una beca para madres y necesitas aclarar si aplica en tu ciudad. Es bueno tenerlo claro."}
+{"case": "c062", "variant": "V1", "reply": "Ya tienes separado lo que sabes de lo que falta. La pregunta para la oficina de esa beca sería: «¿Esta beca aplica en mi ciudad?»."}
+{"case": "c062", "variant": "V2", "reply": "Ya está separado: sabes que existe, falta saber si aplica en tu ciudad. Esa pregunta la responde la oficina de la beca o su sitio oficial."}
+{"case": "c062", "variant": "V3", "reply": "Ya tienes separado lo que sabes de lo que falta. La pregunta para la oficina de esa beca sería: «¿Esta beca aplica en mi ciudad?»."}
+{"case": "c063", "variant": "V0", "reply": "Te describes como responsable y trabajadora. Son cualidades importantes."}
+{"case": "c063", "variant": "V1", "reply": "«Responsable» se entiende mejor con una tarea que lo muestre, como una vez que organizaste algo sin que te lo pidieran. Con eso la línea se sostiene sola."}
+{"case": "c063", "variant": "V2", "reply": "Una cualidad necesita un ejemplo. Prueba con la forma «Hice ___ y el resultado fue ___», con algo que muestre que eres responsable."}
+{"case": "c063", "variant": "V3", "reply": "«Responsable» se entiende mejor con una tarea que lo muestre, como una vez que organizaste algo sin que te lo pidieran. Con eso la línea se sostiene sola."}
+{"case": "c064", "variant": "V0", "reply": "Cuidas a tu abuela, le das sus medicinas a tiempo y llevas sus citas. Es mucho cuidado y mucha responsabilidad."}
+{"case": "c064", "variant": "V1", "reply": "Eso es experiencia en organizar horarios y llevar control de citas y medicinas. Como línea: «Llevo el control de medicinas y citas de una persona mayor»."}
+{"case": "c064", "variant": "V2", "reply": "Ahí hay dos habilidades concretas: control de horarios y seguimiento de citas. La línea: «Organizo medicinas y citas médicas de una persona mayor, a tiempo»."}
+{"case": "c064", "variant": "V3", "reply": "Eso es experiencia en organizar horarios y llevar control de citas y medicinas. Como línea: «Llevo el control de medicinas y citas de una persona mayor»."}
+{"case": "c065", "variant": "V0", "reply": "Ana dice que eres buena organizando. Qué bueno que alguien lo note."}
+{"case": "c065", "variant": "V1", "reply": "Lo que dice Ana es una pista; la línea se sostiene mejor con algo que organizaste tú. Por ejemplo: «Organicé ___ y el resultado fue ___»."}
+{"case": "c065", "variant": "V2", "reply": "La opinión de Ana sirve de pista, pero la evidencia es un hecho. ¿Qué organizaste que ella vio? Esa tarea es tu línea."}
+{"case": "c065", "variant": "V3", "reply": "Lo que dice Ana es una pista; la línea se sostiene mejor con algo que organizaste tú. Por ejemplo: «Organicé ___ y el resultado fue ___»."}
+{"case": "c066", "variant": "V0", "reply": "Hoy no tienes nada que decir, y está bien."}
+{"case": "c066", "variant": "V1", "reply": "Está bien. La línea puede esperar; nada se pierde."}
+{"case": "c066", "variant": "V2", "reply": "Lo aceptamos: hoy no. La línea puede esperar a otro día."}
+{"case": "c066", "variant": "V3", "reply": "Está bien. La línea puede esperar; nada se pierde."}
+{"case": "c079", "variant": "V0", "reply": "Elegiste horario y cuidados. Son condiciones importantes en tu vida."}
+{"case": "c079", "variant": "V1", "reply": "Tu filtro: descarta ofertas cuyo horario no deje espacio para tus cuidados. La pregunta para cualquier oferta: ¿qué horario pide y es fijo?"}
+{"case": "c079", "variant": "V2", "reply": "Regla para descartar: si el horario no deja espacio a tus cuidados, no sigue. Pregunta para cualquier oferta: ¿qué horario pide exactamente?"}
+{"case": "c079", "variant": "V3", "reply": "Tu filtro: descarta ofertas cuyo horario no deje espacio para tus cuidados. La pregunta para cualquier oferta: ¿qué horario pide y es fijo?"}
+{"case": "c080", "variant": "V0", "reply": "Elegiste acceso a internet y no pagar por adelantado. Es bueno cuidarte así."}
+{"case": "c080", "variant": "V1", "reply": "Dos reglas: que no pida internet que no tienes, y que no te pida pagar nada para empezar. Si piden pagar, descártala."}
+{"case": "c080", "variant": "V2", "reply": "Regla firme: cualquier oferta que pida pagar para empezar queda fuera. La pregunta para las demás: ¿qué conexión necesita?"}
+{"case": "c080", "variant": "V3", "reply": "Dos reglas: que no pida internet que no tienes, y que no te pida pagar nada para empezar. Si piden pagar, descártala."}
+{"case": "c081", "variant": "V0", "reply": "Te ofrecieron un trabajo por WhatsApp que pide pagar el registro. Es bueno que lo hayas notado."}
+{"case": "c081", "variant": "V1", "reply": "Pagar para poder trabajar es una señal de alerta. Compruébala en la web oficial de la empresa, no en el enlace que te mandaron, y no pagues mientras tanto."}
+{"case": "c081", "variant": "V2", "reply": "Esa oferta ya choca con un filtro clave: pagar para empezar. Antes de nada, búscala en la web oficial de la empresa, no en el enlace, y no envíes dinero ni datos."}
+{"case": "c081", "variant": "V3", "reply": "Pagar para poder trabajar es una señal de alerta. Compruébala en la web oficial de la empresa, no en el enlace que te mandaron, y no pagues mientras tanto."}
+{"case": "c082", "variant": "V0", "reply": "Elegiste transporte como condición."}
+{"case": "c082", "variant": "V1", "reply": "Tu filtro: que el lugar quede a una distancia que puedas cubrir. Pregunta para cualquier opción: ¿dónde es y cuánto me cuesta llegar?"}
+{"case": "c082", "variant": "V2", "reply": "Regla: si llegar cuesta más tiempo o dinero del que tienes, se descarta. Pregunta: ¿dónde es exactamente y cómo llego?"}
+{"case": "c082", "variant": "V3", "reply": "Tu filtro: que el lugar quede a una distancia que puedas cubrir. Pregunta para cualquier opción: ¿dónde es y cuánto me cuesta llegar?"}
+{"case": "c083", "variant": "V0", "reply": "Elegiste cuidados. Cuidar de otros es una gran parte de tu vida."}
+{"case": "c083", "variant": "V1", "reply": "Tu condición es que cualquier opción deje espacio para tus cuidados. La pregunta para una oferta sería: ¿el horario es compatible con quien cuidas?"}
+{"case": "c083", "variant": "V2", "reply": "Si tu camino es aclarar un apoyo, la condición de cuidados se traduce en una pregunta para el trámite: ¿puedo hacerlo sin dejar sola a la persona que cuido?"}
+{"case": "c083", "variant": "V3", "reply": "Tu condición es que cualquier opción deje espacio para tus cuidados. La pregunta para una oferta sería: ¿el horario es compatible con quien cuidas?"}
+{"case": "c084", "variant": "V0", "reply": "Dejaste esta pregunta para después. Está bien."}
+{"case": "c084", "variant": "V1", "reply": "Saltaste el filtro, y está bien. Puedes armarlo otro día."}
+{"case": "c084", "variant": "V2", "reply": "Saltaste esta; no pasa nada. Puedes seguir con el siguiente paso."}
+{"case": "c084", "variant": "V3", "reply": "Saltaste el filtro, y está bien. Puedes armarlo otro día."}
+{"case": "c085", "variant": "V0", "reply": "Horario y transporte son tus condiciones."}
+{"case": "c085", "variant": "V1", "reply": "Tu filtro: horario y transporte. Pregunta para cualquier oferta: ¿qué horario pide y dónde es?"}
+{"case": "c085", "variant": "V2", "reply": "Regla: si el horario o el trayecto no te funcionan, se descarta. Pregunta: ¿qué horario y en qué zona?"}
+{"case": "c085", "variant": "V3", "reply": "Tu filtro: horario y transporte. Pregunta para cualquier oferta: ¿qué horario pide y dónde es?"}
+{"case": "c086", "variant": "V0", "reply": "Tu condición es que no sea de noche."}
+{"case": "c086", "variant": "V1", "reply": "Regla clara: descarta turnos nocturnos. Pregunta para cualquier oferta: ¿en qué horario es?"}
+{"case": "c086", "variant": "V2", "reply": "Filtro: nada de noche. La pregunta antes de seguir con una oferta: ¿a qué hora empieza y termina?"}
+{"case": "c086", "variant": "V3", "reply": "Regla clara: descarta turnos nocturnos. Pregunta para cualquier oferta: ¿en qué horario es?"}
+{"case": "c099", "variant": "V0", "reply": "Te describes como responsable y trabajadora. Hoy cerraste el día con una frase sobre ti; bien hecho."}
+{"case": "c099", "variant": "V1", "reply": "Tu frase de hoy: «Soy responsable y trabajadora». Se sostiene mejor con una tarea que lo muestre, como una vez que resolviste algo sin que te lo pidieran."}
+{"case": "c099", "variant": "V2", "reply": "«Responsable» necesita un ejemplo para sostenerse. Te llevas el formato: «Puedo ayudar con ___; lo demostré cuando ___»."}
+{"case": "c099", "variant": "V3", "reply": "Tu frase: «Soy responsable y trabajadora». Se sostiene mejor con una tarea que lo muestre. ¿Cuál te viene a la mente?"}
+{"case": "c100", "variant": "V0", "reply": "Puedes ayudar con el inventario y lo demostraste detectando faltantes. Hoy cerraste con una frase clara sobre lo que sabes hacer."}
+{"case": "c100", "variant": "V1", "reply": "Tu frase ya sirve: dice qué haces y cuándo lo mostraste, en menos de 25 palabras. Puedes usarla tal cual."}
+{"case": "c100", "variant": "V2", "reply": "Te llevas una frase lista: «Puedo ayudar con el inventario; lo demostré detectando faltantes en la tienda». Puedes reutilizarla tal cual."}
+{"case": "c100", "variant": "V3", "reply": "Tu frase ya sirve: dice qué haces y cuándo lo mostraste, en menos de 25 palabras. Puedes usarla tal cual."}
+{"case": "c101", "variant": "V0", "reply": "Ayudarías a familias del barrio con los pasteles de cumpleaños sin salir de casa. Una idea muy concreta para cerrar el día."}
+{"case": "c101", "variant": "V1", "reply": "Tu frase ya dice a quién ayudas y qué resuelves. Para probarla basta preguntar a dos familias si la pagarían, sin cobrar nada todavía."}
+{"case": "c101", "variant": "V2", "reply": "Te llevas una frase clara de quién y qué: familias del barrio, pasteles sin salir de casa. Puedes usarla tal cual para preguntar si alguien la pagaría."}
+{"case": "c101", "variant": "V3", "reply": "Tu frase ya dice a quién ayudas y qué resuelves. ¿A qué dos familias se la podrías contar primero?"}
+{"case": "c102", "variant": "V0", "reply": "Necesitas saber si la beca aplica en tu ciudad, criando sola a dos hijos. Gracias por compartirlo; cierras el día con algo importante."}
+{"case": "c102", "variant": "V1", "reply": "Tu frase dice lo que necesitas saber y tu situación, sin justificar nada más. Puedes llevarla tal cual."}
+{"case": "c102", "variant": "V2", "reply": "Te llevas una frase lista para la oficina: qué necesitas saber y tu situación, sin justificar nada. Llévala tal cual."}
+{"case": "c102", "variant": "V3", "reply": "Tu frase dice lo que necesitas saber y tu situación, sin justificar nada más. Puedes llevarla tal cual."}
+{"case": "c103", "variant": "V0", "reply": "Puedes ayudar con muchas cosas y lo demostraste durante muchos años. Tienes mucha experiencia; buen cierre."}
+{"case": "c103", "variant": "V1", "reply": "Son muchas cosas a la vez. Elige la que más pide el puesto que te interesa y quédate con una frase: «Puedo ayudar con ___; lo demostré cuando ___»."}
+{"case": "c103", "variant": "V2", "reply": "Tu frase tiene ocho tareas; una frase útil tiene una. Te llevas la que más se repita en las ofertas que miras, con un ejemplo concreto."}
+{"case": "c103", "variant": "V3", "reply": "Son muchas cosas a la vez. Elige la que más pide el puesto que te interesa. ¿Cuál dejarías en tu frase?"}
+{"case": "c104", "variant": "V0", "reply": "Necesitas ayuda, y está bien decirlo. Hoy diste un paso al escribirlo."}
+{"case": "c104", "variant": "V1", "reply": "Tu frase de hoy: «Necesito ayuda». Para usarla en una oficina conviene añadir qué necesitas saber, por ejemplo qué apoyo existe para tu situación."}
+{"case": "c104", "variant": "V2", "reply": "«Necesito ayuda» es el punto de partida. Te llevas el formato para la oficina: «Necesito saber ___; la situación es ___», sin justificar más."}
+{"case": "c104", "variant": "V3", "reply": "Tu frase de hoy: «Necesito ayuda». Para usarla en una oficina conviene añadir qué necesitas saber. ¿Qué sería?"}
+{"case": "c105", "variant": "V0", "reply": "Tu idea es vender ropa. Buen cierre para el día."}
+{"case": "c105", "variant": "V1", "reply": "Tu frase de hoy: «Vender ropa». Se vuelve útil cuando dice a quién ayuda y con qué, por ejemplo «Ayudaría a ___ a resolver ___»."}
+{"case": "c105", "variant": "V2", "reply": "Te llevas la idea y el formato que le falta: «Ayudaría a ___ a resolver ___». Con eso «vender ropa» se convierte en una propuesta."}
+{"case": "c105", "variant": "V3", "reply": "Tu frase de hoy: «Vender ropa». Se vuelve útil cuando dice a quién ayuda y con qué. ¿A quién le venderías primero?"}
+{"case": "c106", "variant": "V0", "reply": "Puedes atender clientes por teléfono, no en persona. Gracias por aclararlo; buen cierre."}
+{"case": "c106", "variant": "V1", "reply": "Entendido: atención a clientes por teléfono, no en persona. Esa es tu frase de hoy, y sirve para buscar puestos remotos o de centro de llamadas."}
+{"case": "c106", "variant": "V2", "reply": "Entendido, por teléfono y no en persona. Te llevas la frase corregida: «Puedo atender clientes por teléfono»."}
+{"case": "c106", "variant": "V3", "reply": "Entendido: atención a clientes por teléfono, no en persona. Esa es tu frase de hoy."}
+{"case": "c119", "variant": "V0", "reply": "Ahora puedes explicar lo que sabes hacer con un ejemplo. Qué bonito cierre para esta semana; has avanzado mucho."}
+{"case": "c119", "variant": "V1", "reply": "Te llevas eso: puedes explicar lo que sabes hacer con un ejemplo."}
+{"case": "c119", "variant": "V2", "reply": "Te llevas una frase con ejemplo, lista para usar. Lo que venga después puede esperar a la próxima semana."}
+{"case": "c119", "variant": "V3", "reply": "Te llevas eso: puedes explicar lo que sabes hacer con un ejemplo. ¿Dónde la usarías primero?"}
+{"case": "c120", "variant": "V0", "reply": "Aún necesitas saber si la beca aplica en tu ciudad. Cerraste la semana con algo claro; gracias por tu constancia."}
+{"case": "c120", "variant": "V1", "reply": "Te llevas lo único que falta: saber si la beca aplica en tu ciudad."}
+{"case": "c120", "variant": "V2", "reply": "La pieza que falta es una sola respuesta: si aplica en tu ciudad. Tu frase de la sesión anterior ya sirve para pedirla."}
+{"case": "c120", "variant": "V3", "reply": "Te llevas lo único que falta: saber si la beca aplica en tu ciudad. ¿Sabes a qué oficina preguntar?"}
+{"case": "c121", "variant": "V0", "reply": "Ahora puedes preguntarles a dos vecinas si comprarían el pan. Un cierre muy concreto para esta semana."}
+{"case": "c121", "variant": "V1", "reply": "Te llevas un paso concreto: preguntar a dos vecinas si comprarían el pan."}
+{"case": "c121", "variant": "V2", "reply": "Te llevas una prueba sin costo: preguntar a dos vecinas si comprarían el pan. Con eso sabrás si vale seguir."}
+{"case": "c121", "variant": "V3", "reply": "Te llevas un paso concreto: preguntar a dos vecinas si comprarían el pan."}
+{"case": "c122", "variant": "V0", "reply": "Decides no seguir por ahora porque no tienes tiempo. Está bien cuidar tus tiempos; cierras con calma."}
+{"case": "c122", "variant": "V1", "reply": "Te llevas una decisión: no seguir por ahora, por falta de tiempo."}
+{"case": "c122", "variant": "V2", "reply": "Es una decisión con información. Te llevas lo que preparaste, por si lo necesitas más adelante."}
+{"case": "c122", "variant": "V3", "reply": "Te llevas una decisión: no seguir por ahora, por falta de tiempo."}
+{"case": "c123", "variant": "V0", "reply": "No lo sabes todavía, y está bien. Cierras la semana igual."}
+{"case": "c123", "variant": "V1", "reply": "Está bien no saberlo hoy. Lo que preparaste sigue aquí."}
+{"case": "c123", "variant": "V2", "reply": "Lo aceptamos: hoy no sabes. Lo que preparaste queda guardado."}
+{"case": "c123", "variant": "V3", "reply": "Está bien no saberlo hoy. Lo que preparaste sigue aquí."}
+{"case": "c124", "variant": "V0", "reply": "Hoy no puedes con esto. Está bien parar; cuídate."}
+{"case": "c124", "variant": "V1", "reply": "Está bien. Lo que preparaste queda guardado y puedes volver cuando quieras."}
+{"case": "c124", "variant": "V2", "reply": "Lo aceptamos tal cual: hoy no. Nada se pierde."}
+{"case": "c124", "variant": "V3", "reply": "Está bien. Lo que preparaste queda guardado y puedes volver cuando quieras."}
+{"case": "c125", "variant": "V0", "reply": "Ahora puedes postularte con tu frase. Buen cierre de semana."}
+{"case": "c125", "variant": "V1", "reply": "Te llevas eso: puedes postularte usando tu frase."}
+{"case": "c125", "variant": "V2", "reply": "Te llevas tu frase lista para postularte. Antes de enviarla, compárala con lo que pide la oferta."}
+{"case": "c125", "variant": "V3", "reply": "Te llevas eso: puedes postularte usando tu frase. ¿Ya tienes una oferta en mente?"}
+{"case": "c126", "variant": "V0", "reply": "Aún no estás lista; te falta el horario. Gracias por aclararlo."}
+{"case": "c126", "variant": "V1", "reply": "Entendido, aún te falta el horario. Te llevas eso: la pieza pendiente es saber qué horario puedes ofrecer."}
+{"case": "c126", "variant": "V2", "reply": "Entendido: no estás lista, falta el horario. Esa es la única pieza pendiente."}
+{"case": "c126", "variant": "V3", "reply": "Entendido, aún te falta el horario. Te llevas eso como pieza pendiente."}

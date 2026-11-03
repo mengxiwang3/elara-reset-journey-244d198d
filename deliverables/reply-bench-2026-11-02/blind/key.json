@@ -1,0 +1,898 @@
+{
+ "R001": {
+  "case": "c105",
+  "variant": "V3"
+ },
+ "R002": {
+  "case": "c060",
+  "variant": "V2"
+ },
+ "R003": {
+  "case": "c082",
+  "variant": "V2"
+ },
+ "R004": {
+  "case": "c121",
+  "variant": "V0"
+ },
+ "R005": {
+  "case": "c045",
+  "variant": "V0"
+ },
+ "R006": {
+  "case": "c086",
+  "variant": "V3"
+ },
+ "R007": {
+  "case": "c061",
+  "variant": "V1"
+ },
+ "R008": {
+  "case": "c042",
+  "variant": "V3"
+ },
+ "R009": {
+  "case": "c027",
+  "variant": "V3"
+ },
+ "R010": {
+  "case": "c083",
+  "variant": "V2"
+ },
+ "R011": {
+  "case": "c022",
+  "variant": "V2"
+ },
+ "R012": {
+  "case": "c028",
+  "variant": "V3"
+ },
+ "R013": {
+  "case": "c021",
+  "variant": "V2"
+ },
+ "R014": {
+  "case": "c085",
+  "variant": "V3"
+ },
+ "R015": {
+  "case": "c065",
+  "variant": "V3"
+ },
+ "R016": {
+  "case": "c105",
+  "variant": "V2"
+ },
+ "R017": {
+  "case": "c001",
+  "variant": "V1"
+ },
+ "R018": {
+  "case": "c122",
+  "variant": "V3"
+ },
+ "R019": {
+  "case": "c106",
+  "variant": "V3"
+ },
+ "R020": {
+  "case": "c010",
+  "variant": "V1"
+ },
+ "R021": {
+  "case": "c065",
+  "variant": "V1"
+ },
+ "R022": {
+  "case": "c124",
+  "variant": "V1"
+ },
+ "R023": {
+  "case": "c063",
+  "variant": "V0"
+ },
+ "R024": {
+  "case": "c002",
+  "variant": "V3"
+ },
+ "R025": {
+  "case": "c079",
+  "variant": "V3"
+ },
+ "R026": {
+  "case": "c028",
+  "variant": "V1"
+ },
+ "R027": {
+  "case": "c059",
+  "variant": "V3"
+ },
+ "R028": {
+  "case": "c106",
+  "variant": "V0"
+ },
+ "R029": {
+  "case": "c046",
+  "variant": "V2"
+ },
+ "R030": {
+  "case": "c039",
+  "variant": "V2"
+ },
+ "R031": {
+  "case": "c025",
+  "variant": "V2"
+ },
+ "R032": {
+  "case": "c024",
+  "variant": "V2"
+ },
+ "R033": {
+  "case": "c086",
+  "variant": "V2"
+ },
+ "R034": {
+  "case": "c083",
+  "variant": "V3"
+ },
+ "R035": {
+  "case": "c044",
+  "variant": "V1"
+ },
+ "R036": {
+  "case": "c043",
+  "variant": "V1"
+ },
+ "R037": {
+  "case": "c041",
+  "variant": "V2"
+ },
+ "R038": {
+  "case": "c044",
+  "variant": "V2"
+ },
+ "R039": {
+  "case": "c006",
+  "variant": "V0"
+ },
+ "R040": {
+  "case": "c081",
+  "variant": "V1"
+ },
+ "R041": {
+  "case": "c007",
+  "variant": "V3"
+ },
+ "R042": {
+  "case": "c122",
+  "variant": "V2"
+ },
+ "R043": {
+  "case": "c009",
+  "variant": "V3"
+ },
+ "R044": {
+  "case": "c086",
+  "variant": "V0"
+ },
+ "R045": {
+  "case": "c102",
+  "variant": "V2"
+ },
+ "R046": {
+  "case": "c008",
+  "variant": "V1"
+ },
+ "R047": {
+  "case": "c026",
+  "variant": "V2"
+ },
+ "R048": {
+  "case": "c103",
+  "variant": "V3"
+ },
+ "R049": {
+  "case": "c066",
+  "variant": "V0"
+ },
+ "R050": {
+  "case": "c021",
+  "variant": "V0"
+ },
+ "R051": {
+  "case": "c009",
+  "variant": "V0"
+ },
+ "R052": {
+  "case": "c065",
+  "variant": "V0"
+ },
+ "R053": {
+  "case": "c101",
+  "variant": "V2"
+ },
+ "R054": {
+  "case": "c059",
+  "variant": "V1"
+ },
+ "R055": {
+  "case": "c105",
+  "variant": "V1"
+ },
+ "R056": {
+  "case": "c024",
+  "variant": "V1"
+ },
+ "R057": {
+  "case": "c063",
+  "variant": "V2"
+ },
+ "R058": {
+  "case": "c043",
+  "variant": "V3"
+ },
+ "R059": {
+  "case": "c043",
+  "variant": "V0"
+ },
+ "R060": {
+  "case": "c099",
+  "variant": "V0"
+ },
+ "R061": {
+  "case": "c026",
+  "variant": "V0"
+ },
+ "R062": {
+  "case": "c105",
+  "variant": "V0"
+ },
+ "R063": {
+  "case": "c126",
+  "variant": "V1"
+ },
+ "R064": {
+  "case": "c104",
+  "variant": "V3"
+ },
+ "R065": {
+  "case": "c121",
+  "variant": "V2"
+ },
+ "R066": {
+  "case": "c004",
+  "variant": "V2"
+ },
+ "R067": {
+  "case": "c001",
+  "variant": "V3"
+ },
+ "R068": {
+  "case": "c064",
+  "variant": "V2"
+ },
+ "R069": {
+  "case": "c060",
+  "variant": "V0"
+ },
+ "R070": {
+  "case": "c040",
+  "variant": "V3"
+ },
+ "R071": {
+  "case": "c006",
+  "variant": "V3"
+ },
+ "R072": {
+  "case": "c082",
+  "variant": "V1"
+ },
+ "R073": {
+  "case": "c023",
+  "variant": "V3"
+ },
+ "R074": {
+  "case": "c022",
+  "variant": "V3"
+ },
+ "R075": {
+  "case": "c100",
+  "variant": "V3"
+ },
+ "R076": {
+  "case": "c046",
+  "variant": "V3"
+ },
+ "R077": {
+  "case": "c001",
+  "variant": "V2"
+ },
+ "R078": {
+  "case": "c041",
+  "variant": "V0"
+ },
+ "R079": {
+  "case": "c004",
+  "variant": "V1"
+ },
+ "R080": {
+  "case": "c066",
+  "variant": "V2"
+ },
+ "R081": {
+  "case": "c124",
+  "variant": "V2"
+ },
+ "R082": {
+  "case": "c021",
+  "variant": "V1"
+ },
+ "R083": {
+  "case": "c002",
+  "variant": "V2"
+ },
+ "R084": {
+  "case": "c039",
+  "variant": "V0"
+ },
+ "R085": {
+  "case": "c002",
+  "variant": "V0"
+ },
+ "R086": {
+  "case": "c121",
+  "variant": "V1"
+ },
+ "R087": {
+  "case": "c062",
+  "variant": "V0"
+ },
+ "R088": {
+  "case": "c028",
+  "variant": "V2"
+ },
+ "R089": {
+  "case": "c040",
+  "variant": "V2"
+ },
+ "R090": {
+  "case": "c062",
+  "variant": "V1"
+ },
+ "R091": {
+  "case": "c084",
+  "variant": "V2"
+ },
+ "R092": {
+  "case": "c024",
+  "variant": "V0"
+ },
+ "R093": {
+  "case": "c026",
+  "variant": "V3"
+ },
+ "R094": {
+  "case": "c044",
+  "variant": "V0"
+ },
+ "R095": {
+  "case": "c042",
+  "variant": "V2"
+ },
+ "R096": {
+  "case": "c028",
+  "variant": "V0"
+ },
+ "R097": {
+  "case": "c022",
+  "variant": "V0"
+ },
+ "R098": {
+  "case": "c125",
+  "variant": "V3"
+ },
+ "R099": {
+  "case": "c026",
+  "variant": "V1"
+ },
+ "R100": {
+  "case": "c046",
+  "variant": "V1"
+ },
+ "R101": {
+  "case": "c082",
+  "variant": "V0"
+ },
+ "R102": {
+  "case": "c123",
+  "variant": "V1"
+ },
+ "R103": {
+  "case": "c126",
+  "variant": "V2"
+ },
+ "R104": {
+  "case": "c084",
+  "variant": "V1"
+ },
+ "R105": {
+  "case": "c063",
+  "variant": "V3"
+ },
+ "R106": {
+  "case": "c122",
+  "variant": "V1"
+ },
+ "R107": {
+  "case": "c102",
+  "variant": "V1"
+ },
+ "R108": {
+  "case": "c025",
+  "variant": "V0"
+ },
+ "R109": {
+  "case": "c027",
+  "variant": "V0"
+ },
+ "R110": {
+  "case": "c046",
+  "variant": "V0"
+ },
+ "R111": {
+  "case": "c008",
+  "variant": "V0"
+ },
+ "R112": {
+  "case": "c079",
+  "variant": "V2"
+ },
+ "R113": {
+  "case": "c045",
+  "variant": "V2"
+ },
+ "R114": {
+  "case": "c101",
+  "variant": "V0"
+ },
+ "R115": {
+  "case": "c060",
+  "variant": "V1"
+ },
+ "R116": {
+  "case": "c023",
+  "variant": "V2"
+ },
+ "R117": {
+  "case": "c100",
+  "variant": "V1"
+ },
+ "R118": {
+  "case": "c084",
+  "variant": "V0"
+ },
+ "R119": {
+  "case": "c010",
+  "variant": "V0"
+ },
+ "R120": {
+  "case": "c125",
+  "variant": "V0"
+ },
+ "R121": {
+  "case": "c103",
+  "variant": "V0"
+ },
+ "R122": {
+  "case": "c042",
+  "variant": "V1"
+ },
+ "R123": {
+  "case": "c006",
+  "variant": "V1"
+ },
+ "R124": {
+  "case": "c124",
+  "variant": "V3"
+ },
+ "R125": {
+  "case": "c085",
+  "variant": "V2"
+ },
+ "R126": {
+  "case": "c059",
+  "variant": "V2"
+ },
+ "R127": {
+  "case": "c004",
+  "variant": "V0"
+ },
+ "R128": {
+  "case": "c079",
+  "variant": "V1"
+ },
+ "R129": {
+  "case": "c119",
+  "variant": "V1"
+ },
+ "R130": {
+  "case": "c066",
+  "variant": "V3"
+ },
+ "R131": {
+  "case": "c064",
+  "variant": "V1"
+ },
+ "R132": {
+  "case": "c039",
+  "variant": "V1"
+ },
+ "R133": {
+  "case": "c022",
+  "variant": "V1"
+ },
+ "R134": {
+  "case": "c103",
+  "variant": "V1"
+ },
+ "R135": {
+  "case": "c123",
+  "variant": "V3"
+ },
+ "R136": {
+  "case": "c008",
+  "variant": "V3"
+ },
+ "R137": {
+  "case": "c042",
+  "variant": "V0"
+ },
+ "R138": {
+  "case": "c040",
+  "variant": "V0"
+ },
+ "R139": {
+  "case": "c104",
+  "variant": "V2"
+ },
+ "R140": {
+  "case": "c039",
+  "variant": "V3"
+ },
+ "R141": {
+  "case": "c123",
+  "variant": "V0"
+ },
+ "R142": {
+  "case": "c061",
+  "variant": "V3"
+ },
+ "R143": {
+  "case": "c120",
+  "variant": "V2"
+ },
+ "R144": {
+  "case": "c027",
+  "variant": "V2"
+ },
+ "R145": {
+  "case": "c106",
+  "variant": "V1"
+ },
+ "R146": {
+  "case": "c123",
+  "variant": "V2"
+ },
+ "R147": {
+  "case": "c021",
+  "variant": "V3"
+ },
+ "R148": {
+  "case": "c106",
+  "variant": "V2"
+ },
+ "R149": {
+  "case": "c080",
+  "variant": "V3"
+ },
+ "R150": {
+  "case": "c044",
+  "variant": "V3"
+ },
+ "R151": {
+  "case": "c045",
+  "variant": "V1"
+ },
+ "R152": {
+  "case": "c023",
+  "variant": "V1"
+ },
+ "R153": {
+  "case": "c066",
+  "variant": "V1"
+ },
+ "R154": {
+  "case": "c104",
+  "variant": "V1"
+ },
+ "R155": {
+  "case": "c065",
+  "variant": "V2"
+ },
+ "R156": {
+  "case": "c102",
+  "variant": "V0"
+ },
+ "R157": {
+  "case": "c120",
+  "variant": "V0"
+ },
+ "R158": {
+  "case": "c040",
+  "variant": "V1"
+ },
+ "R159": {
+  "case": "c125",
+  "variant": "V2"
+ },
+ "R160": {
+  "case": "c103",
+  "variant": "V2"
+ },
+ "R161": {
+  "case": "c041",
+  "variant": "V1"
+ },
+ "R162": {
+  "case": "c125",
+  "variant": "V1"
+ },
+ "R163": {
+  "case": "c062",
+  "variant": "V3"
+ },
+ "R164": {
+  "case": "c081",
+  "variant": "V0"
+ },
+ "R165": {
+  "case": "c080",
+  "variant": "V1"
+ },
+ "R166": {
+  "case": "c120",
+  "variant": "V3"
+ },
+ "R167": {
+  "case": "c041",
+  "variant": "V3"
+ },
+ "R168": {
+  "case": "c009",
+  "variant": "V1"
+ },
+ "R169": {
+  "case": "c085",
+  "variant": "V0"
+ },
+ "R170": {
+  "case": "c119",
+  "variant": "V0"
+ },
+ "R171": {
+  "case": "c027",
+  "variant": "V1"
+ },
+ "R172": {
+  "case": "c101",
+  "variant": "V1"
+ },
+ "R173": {
+  "case": "c010",
+  "variant": "V2"
+ },
+ "R174": {
+  "case": "c122",
+  "variant": "V0"
+ },
+ "R175": {
+  "case": "c126",
+  "variant": "V0"
+ },
+ "R176": {
+  "case": "c062",
+  "variant": "V2"
+ },
+ "R177": {
+  "case": "c007",
+  "variant": "V1"
+ },
+ "R178": {
+  "case": "c119",
+  "variant": "V2"
+ },
+ "R179": {
+  "case": "c126",
+  "variant": "V3"
+ },
+ "R180": {
+  "case": "c045",
+  "variant": "V3"
+ },
+ "R181": {
+  "case": "c064",
+  "variant": "V0"
+ },
+ "R182": {
+  "case": "c002",
+  "variant": "V1"
+ },
+ "R183": {
+  "case": "c001",
+  "variant": "V0"
+ },
+ "R184": {
+  "case": "c081",
+  "variant": "V2"
+ },
+ "R185": {
+  "case": "c102",
+  "variant": "V3"
+ },
+ "R186": {
+  "case": "c080",
+  "variant": "V2"
+ },
+ "R187": {
+  "case": "c007",
+  "variant": "V2"
+ },
+ "R188": {
+  "case": "c099",
+  "variant": "V3"
+ },
+ "R189": {
+  "case": "c009",
+  "variant": "V2"
+ },
+ "R190": {
+  "case": "c008",
+  "variant": "V2"
+ },
+ "R191": {
+  "case": "c099",
+  "variant": "V2"
+ },
+ "R192": {
+  "case": "c006",
+  "variant": "V2"
+ },
+ "R193": {
+  "case": "c079",
+  "variant": "V0"
+ },
+ "R194": {
+  "case": "c101",
+  "variant": "V3"
+ },
+ "R195": {
+  "case": "c081",
+  "variant": "V3"
+ },
+ "R196": {
+  "case": "c124",
+  "variant": "V0"
+ },
+ "R197": {
+  "case": "c043",
+  "variant": "V2"
+ },
+ "R198": {
+  "case": "c084",
+  "variant": "V3"
+ },
+ "R199": {
+  "case": "c063",
+  "variant": "V1"
+ },
+ "R200": {
+  "case": "c083",
+  "variant": "V0"
+ },
+ "R201": {
+  "case": "c061",
+  "variant": "V0"
+ },
+ "R202": {
+  "case": "c082",
+  "variant": "V3"
+ },
+ "R203": {
+  "case": "c104",
+  "variant": "V0"
+ },
+ "R204": {
+  "case": "c024",
+  "variant": "V3"
+ },
+ "R205": {
+  "case": "c085",
+  "variant": "V1"
+ },
+ "R206": {
+  "case": "c121",
+  "variant": "V3"
+ },
+ "R207": {
+  "case": "c025",
+  "variant": "V1"
+ },
+ "R208": {
+  "case": "c064",
+  "variant": "V3"
+ },
+ "R209": {
+  "case": "c086",
+  "variant": "V1"
+ },
+ "R210": {
+  "case": "c080",
+  "variant": "V0"
+ },
+ "R211": {
+  "case": "c060",
+  "variant": "V3"
+ },
+ "R212": {
+  "case": "c120",
+  "variant": "V1"
+ },
+ "R213": {
+  "case": "c025",
+  "variant": "V3"
+ },
+ "R214": {
+  "case": "c100",
+  "variant": "V2"
+ },
+ "R215": {
+  "case": "c119",
+  "variant": "V3"
+ },
+ "R216": {
+  "case": "c004",
+  "variant": "V3"
+ },
+ "R217": {
+  "case": "c061",
+  "variant": "V2"
+ },
+ "R218": {
+  "case": "c010",
+  "variant": "V3"
+ },
+ "R219": {
+  "case": "c023",
+  "variant": "V0"
+ },
+ "R220": {
+  "case": "c100",
+  "variant": "V0"
+ },
+ "R221": {
+  "case": "c099",
+  "variant": "V1"
+ },
+ "R222": {
+  "case": "c059",
+  "variant": "V0"
+ },
+ "R223": {
+  "case": "c007",
+  "variant": "V0"
+ },
+ "R224": {
+  "case": "c083",
+  "variant": "V1"
+ }
+}

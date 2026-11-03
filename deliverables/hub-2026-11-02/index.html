@@ -1,0 +1,168 @@
+<title>Elara test week</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Instrument+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: a single column read top to bottom; each workstream is a section with its verdict first, then links; images in a two-up grid. */
+:root{
+  --bg:#F2F5EE; --surface:#FFFCF6; --fg:#17241C; --mute:#46564C; --line:#D3DCCF;
+  --forest:#2C4A3A; --terra:#B3542F; --ok:#2E6B47; --wait:#8A6414;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif; --sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121A15; --surface:#1A241E; --fg:#E7EEE6; --mute:#A7B6AC; --line:#2E3C34;
+  --forest:#9CC7AE; --terra:#E39272; --ok:#8FD0A6; --wait:#E3C273; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121A15; --surface:#1A241E; --fg:#E7EEE6; --mute:#A7B6AC; --line:#2E3C34;
+  --forest:#9CC7AE; --terra:#E39272; --ok:#8FD0A6; --wait:#E3C273; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--sans);padding-block:28px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:900px;margin:0 auto;display:grid;gap:40px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--forest);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:2.1rem}h2{font-size:1.45rem;padding-top:10px;border-top:1px solid var(--line)}h3{font-size:1.05rem}
+p,li{max-width:72ch}p{margin:0}ul,ol{margin:0;padding-left:22px;display:grid;gap:6px}
+section{display:grid;gap:14px}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.lede{color:var(--mute)}
+a{color:var(--forest);font-weight:600}
+a:focus-visible{outline:3px solid var(--terra);outline-offset:2px}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);text-decoration:none}
+.chip{display:inline-block;font-size:.76rem;font-weight:600;letter-spacing:.04em;border-radius:999px;padding:2px 9px;border:1px solid currentColor;white-space:nowrap;vertical-align:1px}
+.ok{color:var(--ok)}.wait{color:var(--wait)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:560px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:8px 12px;border-bottom:1px solid var(--line)}
+th{font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.win{font-weight:600;color:var(--forest)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:16px}
+figure{margin:0;display:grid;gap:6px;min-width:0}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+figcaption{font-size:.86rem;color:var(--mute)}
+.note{font-size:.9rem;color:var(--mute)}
+.dl{display:grid;gap:6px;justify-items:start}
+.dl button{min-height:48px;padding:10px 18px;border-radius:8px;border:2px solid var(--forest);background:var(--forest);color:var(--bg);font:600 1rem var(--sans);cursor:pointer}
+.dl button:focus-visible{outline:3px solid var(--terra);outline-offset:2px}
+.dl button[disabled]{opacity:.7;cursor:progress}
+.dl small{color:var(--mute)}
+.dl .st{min-height:1.4em;font-weight:600;font-size:.92rem}
+</style>
+<main>
+<header style="display:grid;gap:10px">
+  <p class="eyebrow">Elara · 2 Nov 2026</p>
+  <h1>Elara test week</h1>
+  <p class="lede">Everything prepared for the next round of testing: how Elara should reply each day, the seven Money sessions with three A/B tests, a kit for María and Alejandra, a first week for the other five areas, and the A/B comparison images. All new Spanish is proposed until María and Alejandra approve it. These are prototypes; nothing is in the app yet.</p>
+  <div class="dl">
+    <button type="button" id="dl-btn">Download PDF</button>
+    <small>Everything on this page, in one file · 56 pages · 6.0 MB: contents, prototype captures, blind results, the five area weeks, script, observation summary and both cards</small>
+    <div class="st" id="dl-st" role="status" aria-live="polite"></div>
+  </div>
+</header>
+
+<section aria-labelledby="s1">
+  <h2 id="s1">How Elara should reply each day</h2>
+  <p>Today Elara is told to «reflect back» what she wrote, so her daily reply mostly praises and mirrors. We compared the current prompt (V0) with three new versions (V1–V3) on 56 answers written to resemble what testers might say; there are no real user answers yet. Eight separate Claude reviewer agents scored every reply twice without knowing which version wrote it. They are the same kind of model that wrote the replies, so their agreement (96–100%) overstates how certain this is.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Out of 112 scores</th><th>V0 · current</th><th>V1 · handoff</th><th>V2 · handoff + chosen move</th><th>V3 · handoff + closing question</th></tr></thead>
+    <tbody>
+      <tr><td>Adds something useful</td><td>18</td><td>104</td><td class="win">106</td><td>101</td></tr>
+      <tr><td>Generic praise</td><td>64</td><td>0</td><td>1</td><td>0</td></tr>
+      <tr><td>Reads feelings into her answer</td><td>22</td><td>2</td><td class="win">0</td><td>2</td></tr>
+      <tr><td>Different answers, different replies</td><td>0 of 8</td><td>7 of 8</td><td class="win">8 of 8</td><td>8 of 8</td></tr>
+      <tr><td>Average quality (1–5)</td><td>1.95</td><td>4.00</td><td class="win">4.09</td><td>3.98</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Recommendation: use V2 (handoff + chosen move) as the candidate.</b> Before shipping, the developers run the saved inputs on the production model and score them blind the same way. Elara receives the day's purpose, the takeaway and the step's guidance, then makes one move: a distinction, a tighter draft, the missing fact and who can confirm it, or a next step. <span class="chip wait">Directional</span></p>
+  <p class="note">The replies were written by Claude imitating each prompt, not by the app's model (<code>openai/gpt-5.6-luna</code>). Claude also wrote the 56 answers. Blind scoring removes bias in the scoring, not in how the replies were written.</p>
+  <div class="links"><a href="respuestas.html">Full results</a></div>
+</section>
+
+<section aria-labelledby="s2">
+  <h2 id="s2">The seven Money sessions, fixed</h2>
+  <ul>
+    <li><b>Support path moves forward:</b> she names what to clarify, then where she could ask (Elara never invents a local service), then gets a two-sentence message she can copy.</li>
+    <li><b>Session 5 fits every path:</b> a job filter, the conditions of a procedure or support, or a first test for a business idea.</li>
+    <li><b>Session 7</b> no longer assumes a job offer.</li>
+  </ul>
+  <h3>Three A/B pairs</h3>
+  <ol>
+    <li>Keep session 2, or fold it into session 1 when she already chose «Cubrir algo básico».</li>
+    <li>No recap, or open sessions 2–7 with «Ayer te llevaste: …».</li>
+    <li>Elara replies after every step, or once at the end.</li>
+  </ol>
+  <p>480 automated layout and logic checks pass (every path and variant, four screen sizes, larger text). This shows the screens work. It doesn't show they're useful, and they haven't been tried on real phones or with screen readers. <span class="chip ok">Checked in a browser</span></p>
+  <p class="note">The prototype shows sample replies written by the team, not live Elara replies. This round tests how the sessions are built, not the quality of the reply prompt.</p>
+  <div class="links"><a href="sesiones-v2.html">Open the prototype</a><a href="tester.html#t1">Tester page (example: tester 1)</a></div>
+</section>
+
+<section aria-labelledby="s3">
+  <h2 id="s3">Kit for the test round</h2>
+  <ul>
+    <li><b>Schedule:</b> 4 or 8 women over 7 days, so every A/B pair splits evenly (6 leaves session 2 at 2 vs 4). Live sessions on days 1, 4 and 7; about 1.5 hours of facilitator time per tester.</li>
+    <li><b>Each tester gets a code</b> (#t1, #t2…) that fixes her variants. Notes stay in her browser; nothing is tracked.</li>
+    <li><b>Script</b> in Spanish with three questions that matter: what is this asking and what would it help you with; what in the reply came from what you wrote; what did you remember, use or try.</li>
+    <li><b>Concept check, 6–8 minutes:</b> would she use job opportunities and matching with other women? It starts from what she actually did last time and ends with a forced choice, because «sí, lo usaría» alone is weak evidence.</li>
+  </ul>
+  <div class="links"><a href="guion.html">Facilitator script</a><a href="hoja.html">Observation sheet</a><a href="tarjeta-oportunidades.html">Card: Oportunidades</a><a href="tarjeta-conexiones.html">Card: Conexiones</a></div>
+</section>
+
+<section aria-labelledby="s4">
+  <h2 id="s4">First week for the other five areas</h2>
+  <p>Each day has a purpose line, the app's live question, reply guidance with two contrasting answers, a takeaway and the next day's benefit.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Area</th><th>First useful result (editorial)</th><th>Editorial review (Claude, not yet tested with users)</th></tr></thead>
+    <tbody>
+      <tr><td>Encontrar propósito</td><td>Day 1</td><td>Usable with small changes; day 3's five-minute experiment is the strongest.</td></tr>
+      <tr><td>Confianza en ti</td><td>Day 1</td><td>Good week. Elara must not approve her choices.</td></tr>
+      <tr><td>Amor y límites</td><td>Day 2</td><td>Builds to a private draft request on day 5. Week 2 day 6 needs «y tu seguridad» back.</td></tr>
+      <tr><td>Ritmo diario</td><td>Day 1</td><td>Well aimed but slow; days 2–4 could become two.</td></tr>
+      <tr><td>Reinicio de energía</td><td>Day 1</td><td>Safe, no diagnosing, but heavy on observation.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="links"><a href="primeras-semanas.html">Open the five weeks</a></div>
+</section>
+
+<section aria-labelledby="s5">
+  <h2 id="s5">A/B comparison images</h2>
+  <p>Screens are real captures from the prototypes. Each image shows version A on the left and B on the right.</p>
+  <div class="gallery">
+    <figure><img src="img/00-resumen.png" alt="Summary of five A/B tests: three open, two decided" loading="lazy"><figcaption>All tests at a glance: five A/B tests, three still open and two decided.</figcaption></figure>
+    <figure><img src="img/01-mirada.png" alt="Mirada offered during sign-up versus as a card on Hoy after the first practice" loading="lazy"><figcaption>Where to offer the Mirada. A: during sign-up. B: as a card on Hoy after the first practice. Open.</figcaption></figure>
+    <figure><img src="img/02-oportunidades.png" alt="Short opportunity card versus card with context and what happens next" loading="lazy"><figcaption>Oportunidades card. A: short card. B: card with context and what happens next. Open.</figcaption></figure>
+    <figure><img src="img/03-conexiones.png" alt="Clean profile card versus paper-layer profile card" loading="lazy"><figcaption>Conexiones card style. A: clean profile card. B: paper-layer profile card. Open.</figcaption></figure>
+    <figure><img src="img/04-hoy-decidido.png" alt="Hoy order and palette, version A chosen in both" loading="lazy"><figcaption>Hoy order (A: postcard, then Atlas, then week) and background (A: sage and ivory). Decided: A in both.</figcaption></figure>
+  </div>
+</section>
+
+<section aria-labelledby="s6">
+  <h2 id="s6">Decisions for you</h2>
+  <ol>
+    <li>Approve the new daily-reply prompt for the developers, and ask them to run the saved test inputs on the real model.</li>
+    <li>How many testers: 4 or 8, so every A/B pair stays even.</li>
+    <li>How testers open their page: a private link per person, or a file.</li>
+    <li>Which wording the test uses for sessions 3, 6 and 7, where the live app asks different questions.</li>
+    <li>Spanish approvals from María and Alejandra across all of the above.</li>
+  </ol>
+</section>
+</main>
+<script>
+(function(){
+  var btn=document.getElementById('dl-btn'),st=document.getElementById('dl-st');
+  btn.addEventListener('click',async function(){
+    btn.disabled=true;st.textContent='Preparing the PDF…';
+    try{
+      var d=null;try{d=await claude.use('downloads')}catch(e){d=null}
+      if(!d){st.textContent='Downloading is not available in this view. Open the page on claude.ai to download.';return}
+      var r=await fetch('elara-test-week.pdf');if(!r.ok)throw new Error('fetch');
+      var blob=await r.blob();
+      await d.save({filename:'elara-test-week.pdf',data:new Blob([blob],{type:'application/pdf'})});
+      st.textContent='Done.';
+    }catch(e){
+      var c=e&&e.code;
+      if(c==='declined')st.textContent='Download cancelled.';
+      else if(c==='rate_limited')st.textContent='Wait a moment and try again.';
+      else st.textContent='The PDF could not be saved from here. Try again in a moment.';
+    }finally{btn.disabled=false}
+  });
+})();
+</script>

@@ -1,0 +1,500 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Handoff para desarrolladores · siete sesiones</title>
+<style>:root{--bg:#F4F6F1;--fg:#1B2A22;--mute:#4A5A50;--line:#CBD4C7;--card:#fff;--accent:#2C4A3A}
+@media(prefers-color-scheme:dark){:root{--bg:#141C17;--fg:#E8EEE6;--mute:#A9B8AE;--line:#2F3D35;--card:#1B261F;--accent:#9CC7AE}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,sans-serif;padding:24px max(16px,env(safe-area-inset-right)) 48px max(16px,env(safe-area-inset-left))}
+main{max-width:980px;margin:0 auto}h1,h2,h3{color:var(--accent);line-height:1.25}h1{font-size:1.8rem}h2{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem}
+code{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:.88em;word-break:break-word}pre{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto}pre code{border:0;padding:0}
+table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;font-size:.9rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+a{color:var(--accent);font-weight:600}.back{display:inline-flex;min-height:44px;align-items:center}</style></head><body><main>
+<a class="back" href="./">← Finales integrados</a><h1>Seven-session Money test: developer handoff</h1>
+<p>30 October 2026. <strong>Draft for developers. Nothing is implemented, committed, pushed or published.</strong></p>
+<p><strong>Sources</strong>
+- <strong>Content:</strong> the 210-day curriculum (A = rewritten version, B = question alternatives), from <code>Elara_210_day_editorial_audit.xlsx</code> and <code>Elara_A_B_question_comparison.xlsx</code>. The editorial reasoning is in <code>docs/curriculum-review-2026-10-30/REVIEW.md</code>.
+- <strong>Code:</strong> a read-only checkout of the app at <code>/home/user/elara</code>, commit <code>cb7f602</code> (2026-10-21). Line numbers refer to that commit, and <strong>the main branch may have moved since.</strong> Re-check line numbers before editing.</p>
+<p><strong>Labels</strong></p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[CURRENT]</td>
+<td>In the code today. Read from the source; not run against production.</td>
+</tr>
+<tr>
+<td>[PROPOSED]</td>
+<td>A change for developers to make.</td>
+</tr>
+<tr>
+<td>[NUEVO]</td>
+<td>Spanish copy not present in A or B. Proposed until María and Alejandra approve it.</td>
+</tr>
+<tr>
+<td>[HYPOTHESIS]</td>
+<td>Untested.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>1. Daily-reply inputs</h2>
+<h3>Current behaviour</h3>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Where</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reply entry point</td>
+<td><code>apps/api/src/routes/me.ts:507</code></td>
+<td>Calls <code>replyToStep(...)</code> with <code>step</code>, <code>value</code>, <code>position</code>, <code>total</code>, <code>dayTitle</code>, <code>dayNumber</code>, <code>mode</code> and <code>locale</code>.</td>
+</tr>
+<tr>
+<td>Authored per-option reply short-circuit</td>
+<td><code>apps/api/src/services/stepReply.ts:142</code></td>
+<td><code>authoredReply(step, value)</code>. If the author wrote a reply for the chosen option, <strong>no model call happens</strong>.</td>
+</tr>
+<tr>
+<td>Background context</td>
+<td><code>stepReply.ts:163</code></td>
+<td><code>buildGuideContext(db, userId, …)</code>: her stored background notes.</td>
+</tr>
+<tr>
+<td>Prompt assembly</td>
+<td><code>stepReply.ts:171–190</code></td>
+<td>Base prompt, persona, context, a position-based job (<code>jobFor</code>, <code>:90–98</code>), then the rules.</td>
+</tr>
+<tr>
+<td>The core instruction</td>
+<td><code>stepReply.ts:180</code></td>
+<td>«Reflect back something specific they actually said rather than praising them».</td>
+</tr>
+<tr>
+<td>Middle-step job</td>
+<td><code>stepReply.ts:97</code></td>
+<td>«Acknowledge what they said in one or two sentences… Do NOT ask a question».</td>
+</tr>
+<tr>
+<td>Last-step job</td>
+<td><code>stepReply.ts:95</code></td>
+<td>«Close the day… close warmly».</td>
+</tr>
+<tr>
+<td>User message</td>
+<td><code>stepReply.ts:200</code></td>
+<td><code>questionFor(step)</code> (title, body and prompt, <code>:230–236</code>) plus «What they answered: …» from <code>describeAnswer</code>.</td>
+</tr>
+<tr>
+<td>Fallback</td>
+<td><code>stepReply.ts:239</code></td>
+<td>On any failure, <code>step.elara</code> is shown.</td>
+</tr>
+<tr>
+<td>Question rewriting</td>
+<td><code>me.ts</code>, after the reply</td>
+<td><code>ensurePersonalized(...)</code> <strong>rewrites upcoming days' questions with a model</strong> (<code>services/personalizedQuestions.ts:484</code>). It is live when the path setting is enabled and approved and <code>PERSONALIZATION_DISABLED</code> is unset (<code>:179–188</code>).</td>
+</tr>
+<tr>
+<td>Step model</td>
+<td><code>packages/shared/src/steps.ts:50</code></td>
+<td><code>DayStep { id, kind, title, body, config, elara }</code>. Content lives in D1 <code>path_day.steps</code> (JSON) and <code>path_day.config</code> (JSON) (migrations <code>0017_day_steps.sql</code>, <code>0001_flexible_day.sql</code>).</td>
+</tr>
+<tr>
+<td>Conditional steps</td>
+<td><code>packages/shared/src/offered.ts:28</code></td>
+<td><code>config.when</code> can show a step <strong>only based on an earlier answer in the same day</strong>. There is no cross-day condition.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What the reply never receives:</strong> the day's purpose, the intended takeaway, any guidance on what a useful reply looks like, or her chosen branch. The model can only mirror what she said, and the day-closing instruction («close warmly») actively pushes it toward a pleasant summary. [HYPOTHESIS] This fits the tester complaint that daily questions don't connect and give no payoff. It is not proven.</p>
+<h3>Proposed change</h3>
+<ol>
+<li><strong>Content fields.</strong> Use the existing JSON columns, so no migration is needed. Do update the zod schemas so the keys aren't stripped.</li>
+<li>Day level, in <code>path_day.config</code>:<ul>
+<li><code>purpose</code>: one Spanish sentence, also shown to her.</li>
+<li><code>takeaway</code>: what she should leave with.</li>
+<li><code>nextBenefit</code>: one line shown at the end.</li>
+</ul>
+</li>
+<li>Step level, in <code>DayConfig</code>:<ul>
+<li><code>guidance</code>: a reply instruction for this step. Never shown to her.</li>
+<li><code>branch</code>: <code>empleo | negocio | apoyo</code> when the step belongs to a branch.</li>
+</ul>
+</li>
+<li><strong>Pass them in.</strong> At <code>me.ts:507</code>, read <code>authored.config.purpose/takeaway</code> and <code>saved.step.config.guidance</code> and pass them to <code>replyToStep</code>.</li>
+<li><strong>Prompt.</strong> In <code>stepReply.ts:171–190</code>, add a block <strong>before</strong> the rules:
+   <code>Purpose of today (shown to her): {purpose}
+   What she should leave with: {takeaway}
+   How to reply to this step: {guidance}
+   Make exactly ONE useful move toward that result: name one distinction, improve her draft,
+   clarify one fact, or offer one feasible next step. Use only what she wrote.
+   No praise. No interpretation of her feelings or motives. No new task.</code></li>
+<li>Replace <code>:180</code> with: «Use something specific she said, then make the one useful move above».</li>
+<li>Replace the last-step job at <code>:95</code> with: «Name her takeaway in her own words (≤1 sentence). Do not ask a question».</li>
+<li><strong>Keep every safety rule at <code>:182–188</code>.</strong></li>
+<li><strong>Keep the question approved.</strong> For the test cohort, set <code>PERSONALIZATION_DISABLED=1</code> in the beta environment (<code>wrangler.toml</code>, beta vars). Alternatively, mark the seven days not personalizable. Otherwise the approved question can be rewritten before she sees it.</li>
+<li><strong>Show only her branch.</strong> Within-day <code>when</code> already works. Start sessions 4 and 6 with a one-tap step, «Sigues por: Empleo · Negocio · Aclarar o apoyo», with her session 3 choice listed first. The three branch steps then carry <code>when: { step: "camino", valueIn: [...] }</code>. This doubles as the «cambiar» option and needs no new code.</li>
+<li>The alternative, a cross-day <code>when</code> that reads session 3's answer directly, is [PROPOSED], new code, and not needed for the test.</li>
+<li><strong>Authored per-option replies.</strong> Leave <code>config.replies</code> empty on the steps below. Otherwise <code>stepReply.ts:142</code> returns the authored line, and the purpose/guidance block is never used.</li>
+</ol>
+<hr />
+<h2>2. The seven-session sequence</h2>
+<p>The source IDs are curriculum days. In the app, these are the Money path's first seven days for the test cohort.</p>
+<p><strong>Shown to her each session:</strong>
+- <code>purpose</code> above the question
+- the question
+- the reply
+- «Te llevas: …», which is her own words, taken from her answer
+- <code>nextBenefit</code></p>
+<p><strong>Always available:</strong> «Saltar» and «Parar por hoy».</p>
+<p><strong>Fresh start after a gap:</strong> the question always works from today's situation, and no earlier answer is required.</p>
+<h3>S1 · MONEY-W1-D1 (question B) + W1-D5 line</h3>
+<ul>
+<li><strong>purpose</strong> [NUEVO]: «Hoy conviertes una preocupación de dinero en una pregunta que puedas averiguar.»</li>
+<li><strong>step 1 · choose:</strong> «Si hoy aclararas un solo tema de dinero, ¿cuál te sería más útil?»</li>
+<li>Options: Cubrir algo básico ahora · Conseguir ingresos · Aclarar un cobro o un pago · Entender una deuda · Preparar una decisión · Otro · No sé hoy</li>
+<li><strong>step 2 · reflect</strong> (optional; <code>minWords: 1</code>): «La primera pregunta que necesito resolver es…» Placeholder: «Ej.: ¿qué día me pagan?»</li>
+<li><strong>guidance:</strong></li>
+<li>Step 1: say what her choice means to work on now. If she chose «Cubrir algo básico», switch to support. Offer to shape a question for a support source in her area (country or region only). No income homework.</li>
+<li>Step 2: turn her line into one verifiable question: who, what or when. Add who could answer it. If she skipped step 2, propose one question from her step 1 choice.</li>
+<li><strong>takeaway:</strong> one question she can ask, plus who could answer it.</li>
+<li><strong>nextBenefit</strong> [NUEVO]: «Mañana, en dos minutos, sabrás si te toca cubrir lo básico, ordenar fechas o buscar ingresos.»</li>
+<li><strong>The useful result arrives in session 1:</strong> a concrete question. Session 1 also pre-selects the session 3 path from the step 1 choice.</li>
+</ul>
+<h3>S2 · MONEY-W1-D4 (A)</h3>
+<ul>
+<li><strong>purpose</strong> [NUEVO]: «Hoy ves si lo urgente es cubrir lo básico, ordenar fechas o buscar ingresos.»</li>
+<li><strong>choose:</strong> «Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?»</li>
+<li>Options: Alcanza y sobra algo · Justo · No alcanza · Varía mucho · Sin ingresos ahora · No sé todavía</li>
+<li><strong>guidance:</strong></li>
+<li>No alcanza or Sin ingresos: name essentials first and offer support routes. Never imply poor management.</li>
+<li>Varía mucho: explain that confirmed-but-future money is not available today (the W1-D2 card), and suggest comparing one period at a time.</li>
+<li>Alcanza or Justo: suggest exploring income or a decision without pressure.</li>
+<li><strong>takeaway:</strong> her situation in one word, plus the route that fits.</li>
+<li><strong>nextBenefit</strong> [NUEVO]: «Mañana eliges por dónde empezar y la condición que no vas a negociar.»</li>
+</ul>
+<h3>S3 · MONEY-W1-D7 (A) + W1-D6 branch</h3>
+<ul>
+<li><strong>purpose</strong> [NUEVO]: «Hoy eliges por dónde empezar y qué tiene que respetar cualquier opción.»</li>
+<li><strong>step 1 · choose (<code>id: "camino"</code>):</strong> «Con lo que sabes hoy, ¿qué camino te serviría explorar primero?»</li>
+<li>Options: Empleo · Probar una idea de servicio o venta · Aclarar un cobro, pago o apoyo · Ninguno por ahora</li>
+<li><strong>step 2 · reflect, one variant shown per branch (<code>when</code> on <code>camino</code>):</strong></li>
+<li>Empleo: «¿Qué tienes a favor para explorar empleo y qué condición necesitas resolver antes?»</li>
+<li>Negocio: «¿Con qué cuentas para explorar una idea sin gastar y qué te falta?»</li>
+<li>Apoyo: «Para aclarar esta necesidad, cobro o apoyo, ¿qué información o acceso tienes y qué te falta?»</li>
+<li>Ninguno: step 2 is not offered, and the reply honours the pause.</li>
+<li><strong>guidance:</strong> separate what she has from what's missing. Turn the missing part into a filter, not a defect. Never assume money, time or helpers she didn't mention.</li>
+<li><strong>takeaway:</strong> a path, plus one non-negotiable condition in her words.</li>
+<li><strong>nextBenefit</strong> [NUEVO]: «Mañana conviertes algo que ya hiciste en una frase que puedes usar.»</li>
+</ul>
+<h3>S4 · MONEY-W2-D2, by branch</h3>
+<ul>
+<li><strong>purpose</strong> [NUEVO]: «Hoy escribes una frase verdadera sobre lo que sabes hacer o lo que ya sabes de tu trámite.»</li>
+<li><strong>step 1 · choose (<code>id: "camino"</code>):</strong> «Sigues por:» Empleo · Negocio · Aclarar o apoyo. This is the change-path step from §1.5.</li>
+<li><strong>step 2 · reflect, by branch:</strong></li>
+<li>Empleo: «¿Qué experiencia verdadera muestra una habilidad útil para ese puesto?» Format: «Hice ___ y el resultado fue ___».</li>
+<li>Negocio: «¿Qué has hecho que pueda servir para atender esa necesidad?» Same format.</li>
+<li>Apoyo: «¿Qué sabes ya sobre esta necesidad, cobro o apoyo y qué necesitas aclarar?» Format: «Ya sé ___; necesito aclarar ___».</li>
+<li><strong>guidance:</strong></li>
+<li>Empleo or negocio: turn the task she named into one evidence line. Never invent a skill.</li>
+<li>She has no formal job: unpaid real tasks count (care, organizing). If nothing comes to mind, offer a fictional example of the format.</li>
+<li>Apoyo: separate what she knows from the open question. Never ask her to prove she deserves help.</li>
+<li><strong>takeaway:</strong> one evidence line, or a known fact plus an open question.</li>
+<li><strong>nextBenefit</strong> [NUEVO]: «Mañana armas un filtro para descartar rápido lo que no cabe en tu vida.»</li>
+</ul>
+<h3>S5 · MONEY-W2-D3 (A)</h3>
+<ul>
+<li><strong>purpose</strong> [NUEVO]: «Hoy armas un filtro para descartar rápido lo que no encaja en tu vida.»</li>
+<li><strong>multi</strong> (max 2) + <strong>reflect</strong> (which one is non-negotiable): «¿Qué tendría que respetar una oportunidad para que cupiera de verdad en tu vida?»</li>
+<li>Options: Horario · Cuidados · Lugar · Equipo · Conexión · Idioma · Accesibilidad · Otra</li>
+<li><strong>info card</strong> (existing A learning support): «Remoto dice dónde se trabaja, no cuándo. Revisa horario, lugar permitido, equipo e idioma.»</li>
+<li><strong>guidance:</strong></li>
+<li>Turn her conditions into one discard rule and one question to ask about any real offer.</li>
+<li>If she mentions a specific offer, add the W2-D6 check: «Si piden pagar para empezar o datos muy pronto, compruébala en la web oficial, no en el enlace».</li>
+<li><strong>takeaway:</strong> one discard criterion, plus one verification question.</li>
+<li><strong>nextBenefit</strong> [NUEVO]: «Mañana juntas tu frase y tu filtro en una primera versión.»</li>
+</ul>
+<h3>S6 · MONEY-W3-D1, by branch</h3>
+<ul>
+<li><strong>purpose</strong> [NUEVO]: «Hoy escribes la primera frase que podrías usar de verdad.»</li>
+<li><strong>step 1:</strong> «Sigues por:», as in S4.</li>
+<li><strong>step 2 · reflect, by branch.</strong> The body quotes her S4 line with the existing day template, e.g. <code>{d4.&lt;stepId&gt;}</code>. If she skipped S4, the template falls back whole.</li>
+<li>Empleo: «¿Cómo explicarías lo que puedes aportar al puesto sin exagerar?» Format: «Puedo ayudar con ___; lo demostré cuando ___».</li>
+<li>Negocio: «¿A quién ayudaría tu idea y con qué problema concreto?» Format: «Ayudaría a ___ a resolver ___».</li>
+<li>Apoyo: «¿Cómo explicarías qué necesitas saber para aclarar tu necesidad, cobro o apoyo?» Format: «Necesito saber ___; la situación es ___».</li>
+<li><strong>guidance:</strong></li>
+<li>A vague phrase, like «soy responsable»: ask for one task that shows it, as a suggestion, not a required question.</li>
+<li>A concrete phrase: tighten it to 25 words or fewer and say it can be reused.</li>
+<li>Apoyo: never require justification.</li>
+<li><strong>takeaway:</strong> one sentence, ready to reuse. It is not sent anywhere.</li>
+<li><strong>nextBenefit</strong> [NUEVO]: «Mañana decides si probar algo pequeño, esperar o parar, y guardas tu kit.»</li>
+</ul>
+<h3>S7 · MONEY-W3-D7 (B) + W5-D1 line</h3>
+<ul>
+<li><strong>purpose</strong> [NUEVO]: «Hoy decides con calma: probar algo pequeño, esperar o parar.»</li>
+<li><strong>step 1 · choose:</strong> «¿Qué parte de tu borrador podrías probar ya y qué falta preparar, si decides seguir?»</li>
+<li>Options: Probar algo pequeño · Preparar lo que falta · Decido no seguir por ahora</li>
+<li><strong>step 2 · reflect:</strong> «Ahora puedo… / Aún necesito…»</li>
+<li><strong>guidance:</strong></li>
+<li>Probar: one no-cost, no-exposure test, e.g. «compárala con una oferta real sin enviarla».</li>
+<li>Preparar: name the one missing piece.</li>
+<li>No seguir: confirm it is an informed decision, and list what she keeps. No persuasion.</li>
+<li><strong>takeaway:</strong> a decision, plus «Mi kit» [NUEVO]: her S1 question, S3 condition, S4 line and S6 sentence. It is shown only on her request. Saving it is [PROPOSED]; a profile/collection entry would need new work.</li>
+<li><strong>nextBenefit</strong> [NUEVO]: «Si sigues, la próxima semana comparas tu kit con una oportunidad real.»</li>
+</ul>
+<hr />
+<h2>3. Feedback quality</h2>
+<p><strong>Rules:</strong>
+- <strong>Allowed:</strong> exactly one useful move, in at most 3 sentences.
+- <strong>Avoid:</strong> generic praise, unsupported interpretation of feelings or motives, a new task, and a question on middle steps.</p>
+<p><strong>Contrasting cases.</strong> Different answers must produce different replies.</p>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Answer</th>
+<th>Good reply (direction)</th>
+<th>Bad reply</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S2 A</td>
+<td>«No alcanza, esta semana no tengo para comida»</td>
+<td>«Lo urgente es cubrir esta semana, no un presupuesto. Si quieres, preparamos una pregunta para un apoyo de tu zona; basta el país o la región.»</td>
+<td>«Gracias por compartir, es valiente reconocerlo.»</td>
+</tr>
+<tr>
+<td>S2 B</td>
+<td>«Alcanza, pero cobro en fechas distintas»</td>
+<td>«La duda está en las fechas. Compara solo un periodo: lo confirmado que entra y los pagos de ese periodo; lo que no sepas queda "por confirmar".»</td>
+<td>Same support offer as S2 A</td>
+</tr>
+<tr>
+<td>S4 A</td>
+<td>«Llevaba el inventario y detectaba faltantes»</td>
+<td>«Eso ya es evidencia: llevar inventario y detectar faltantes. Úsala cuando una oferta pida control u organización.»</td>
+<td>«¡Qué gran habilidad!»</td>
+</tr>
+<tr>
+<td>S4 B</td>
+<td>«Nunca tuve empleo formal»</td>
+<td>«Las tareas sin pago cuentan: organizar turnos de cuidado, por ejemplo. Si hoy no sale ninguna, vale un ejemplo inventado para ver el formato.»</td>
+<td>«Parece que te cuesta valorarte.»</td>
+</tr>
+<tr>
+<td>S5 A</td>
+<td>«Solo móvil y 20 min de noche, necesito dinero pronto»</td>
+<td>«Tres filtros: solo móvil, 20 minutos y pago pronto. Revisa en cada oferta qué equipo pide y cuándo paga; nunca pagues por empezar.»</td>
+<td>A suggestion to take a course</td>
+</tr>
+<tr>
+<td>Skip</td>
+<td>step skipped</td>
+<td>Nothing generated (the skip ends the step). The day continues or closes neutrally.</td>
+<td>«¿Seguro que no quieres intentarlo?»</td>
+</tr>
+<tr>
+<td>Correction</td>
+<td>«No, no quise decir eso; es por mi hermana»</td>
+<td>Update the reading without argument: «Entendido, es sobre tu hermana.» Then make the one move.</td>
+<td>Defending the earlier reading</td>
+</tr>
+<tr>
+<td>Low capacity</td>
+<td>«hoy no puedo» / «cansada»</td>
+<td>Accept it. Offer «Parar por hoy» and say nothing is lost. No task.</td>
+<td>A smaller task «para no perder el ritmo»</td>
+</tr>
+<tr>
+<td>Gap return</td>
+<td>First visit after 9 days</td>
+<td>The question works on today's situation, with no recap required.</td>
+<td>«Retomemos lo que dijiste el lunes…»</td>
+</tr>
+<tr>
+<td>Non-answer</td>
+<td>«hola», «test»</td>
+<td>[CURRENT] Already handled. The re-invite appears and no model call is made (<code>stepReply.ts:151–158</code>).</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Safety</td>
+<td>Mentions violence or crisis</td>
+<td>[CURRENT] The safety screen runs before the reply (<code>me.ts:422–487</code>, before any model call). The card replaces the reply.</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Persona caveat.</strong> The persona prompt (<code>GUIDE_PERSONALITIES</code>) can add warmth. Check that it doesn't reintroduce praise.</p>
+<hr />
+<h2>4. Existing beta evidence: «¿Te sirvió la sesión de hoy?»</h2>
+<p><strong>Storage</strong> [CURRENT]:
+- <strong>Table:</strong> D1 table <code>day_feedback</code> (<code>apps/api/drizzle/migrations/0056_day_feedback.sql</code>). Columns: <code>area</code>, <code>day</code>, <code>answer</code> (<code>yes | little | no</code>), <code>reasons</code>, <code>note</code>, <code>locale</code>, <code>build</code>, <code>update_id</code>, <code>platform</code> and <code>created_at</code>.
+- <strong>Event:</strong> a content-free event, <code>day_feedback</code>, is also written to <code>analytics_event</code> (<code>apps/api/src/services/dayFeedback.ts:46–61</code>).
+- <strong>Reasons</strong> (<code>packages/shared/src/dayFeedback.ts:18</code>):
+  - <code>point</code>: didn't get the point
+  - <code>generic</code>
+  - <code>long</code>
+  - <code>wording</code>
+  - <code>language</code>
+  - <code>other</code>
+- <strong>App screens:</strong> <code>apps/mobile/src/components/practice/DayFeedback.tsx</code> and <code>apps/mobile/app/path/day.tsx</code>.
+- <strong>Admin export:</strong> <code>GET /api/admin/day-feedback?area=money&amp;format=csv</code> (<code>apps/api/src/routes/admin/dayFeedback.ts</code>, mounted at <code>routes/admin/index.ts:53</code>). Filters: <code>area</code>, <code>day</code>, <code>build</code>, <code>days</code>.
+- <strong>Databases:</strong> <code>elara-db</code> (prod) and <code>elara-db-beta</code> (<code>apps/api/wrangler.toml:22, :184</code>).</p>
+<p><strong>Analysis status: BLOCKED.</strong>
+- <strong>Why:</strong> this session has no access to the database or admin API. Cloudflare is blocked from here, and I won't ask for credentials. <strong>There are no findings yet.</strong> Everything about dropout causes stays a [HYPOTHESIS].</p>
+<p><strong>Exact retrieval request for a developer with access.</strong> Run on the beta database with <code>wrangler d1 execute elara-db-beta --remote --command "&lt;SQL&gt;"</code>, or use the admin CSV.</p>
+<pre><code class="language-sql">-- A. Usefulness by Money day (counts, not just rates)
+SELECT day, answer, COUNT(*) AS n, COUNT(DISTINCT user_id) AS women
+FROM day_feedback WHERE area = 'money'
+GROUP BY day, answer ORDER BY day, answer;
+
+-- B. Reasons for &quot;little&quot;/&quot;no&quot;
+SELECT day, reasons, COUNT(*) AS n
+FROM day_feedback WHERE area = 'money' AND answer IN ('little','no')
+GROUP BY day, reasons ORDER BY day, n DESC;
+
+-- C. Free-text notes: read by an authorised person, de-identified before sharing
+SELECT day, answer, reasons, note, locale, build FROM day_feedback
+WHERE area = 'money' AND note IS NOT NULL ORDER BY day;
+
+-- D. Reach per day (who completed each Money day), to see where women stop
+SELECT json_extract(props,'$.day') AS day, COUNT(DISTINCT user_id) AS women
+FROM analytics_event
+WHERE name = 'gamification_day_completed' AND json_extract(props,'$.area') = 'money'
+GROUP BY day ORDER BY day;
+
+-- E. Feedback response rate per day (did the prompt get answered at all)
+SELECT d.day, COUNT(DISTINCT d.user_id) AS answered,
+  (SELECT COUNT(DISTINCT e.user_id) FROM analytics_event e
+   WHERE e.name='gamification_day_completed' AND json_extract(e.props,'$.area')='money'
+     AND json_extract(e.props,'$.day')=d.day) AS completed
+FROM day_feedback d WHERE d.area='money' GROUP BY d.day;
+</code></pre>
+<p><strong>How to report:</strong>
+- Share the counts with their denominators.
+- Exclude team and test accounts, and say how they were identified.
+- Do not export emails or notes outside the authorised group.</p>
+<p><strong>How to read it:</strong>
+- <strong>Findings</strong> are what the counts show, e.g. "Day 3: 4 of 9 answered «no»; 3 of the 4 chose <code>point</code>".
+- <strong>Hypotheses</strong> are anything about why women stop.
+- A drop in query D shows where they stop, not why.</p>
+<hr />
+<h2>5. Acceptance checks before testers see it</h2>
+<p>Status key:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proposed</td>
+<td>Not run.</td>
+</tr>
+<tr>
+<td>Run · passed</td>
+<td>Run and passed, with the date.</td>
+</tr>
+<tr>
+<td>Blocked</td>
+<td>Cannot run from here.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Check</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Baseline: the existing tests <code>apps/api/test/day-feedback.test.ts</code> and <code>step-reply-locale.test.ts</code></td>
+<td><strong>Run · passed</strong> (6/6, 30 Oct, local checkout <code>cb7f602</code>)</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>purpose</code>, <code>takeaway</code>, <code>nextBenefit</code> and <code>guidance</code> survive zod parsing and round-trip through <code>path_day</code></td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>replyToStep</code> prompt contains purpose, takeaway and guidance for each of the 7 days. Unit test on the assembled <code>instructions</code> string.</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Safety rules at <code>stepReply.ts:182–188</code> and the safety screen in <code>me.ts</code> are unchanged</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>4</td>
+<td>With <code>PERSONALIZATION_DISABLED=1</code> on beta, the question shown equals the approved text for all 7 days</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>5</td>
+<td>No <code>config.replies</code> on the test steps, so the model path is used (<code>stepReply.ts:142</code>)</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Branch display: only one branch step is offered in S3, S4 and S6; changing «Sigues por» swaps the step; «Ninguno» offers none</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Template <code>{d4.…}</code> in S6 falls back cleanly when S4 was skipped or <code>hidden</code></td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Skip, «Parar por hoy» and resume mid-day work on all 7 days, and a gap of 7 days or more needs no recap</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Reply quality: run the 11 cases in §3 against the beta model, about 3 runs each. A reviewer marks pass or fail on "one useful move, no praise, no interpretation, no new task, different reply for contrasting answers". Report counts.</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Model failure: if the model is down or slow, the authored <code>elara</code> line still shows, and no screen breaks</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Spanish copy: María reviews and Alejandra approves every [NUEVO] line</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Day unlock: confirm the beta <code>DAY_UNLOCK</code> (<code>wrangler.toml:271</code>, currently <code>next-day@00:00</code>) fits a 7-session test, or agree a different value for the cohort</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Feedback prompt still appears on all 7 days, and <code>day_feedback</code> rows are written with <code>area='money'</code></td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>14</td>
+<td>§4 retrieval request run by an authorised developer, with results shared as counts</td>
+<td><strong>Blocked</strong> (no access from this session)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before inviting testers:</strong> checks 1–13 pass, and 14 is done. Any reply-quality failure in check 9 is fixed in <code>guidance</code> or the prompt and re-run.</p></main></body></html>

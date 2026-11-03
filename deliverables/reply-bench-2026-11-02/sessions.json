@@ -1,0 +1,142 @@
+[
+ {
+  "n": 1,
+  "day": 1,
+  "title": "Una pregunta que puedas averiguar",
+  "src_app": "MONEY-W1-D1 (app text, 210-day draft)",
+  "purpose": "Hoy conviertes una preocupación de dinero en una pregunta que puedas averiguar.",
+  "takeaway": "Una pregunta que puede averiguar y quién podría responderla.",
+  "steps": [
+   {
+    "id": "ask",
+    "pos": 1,
+    "total": 2,
+    "kind": "choose",
+    "q": "¿Qué te gustaría entender mejor sobre tu dinero ahora?",
+    "under": "Lo que gano • Cuándo llega • Lo que necesito pagar • Mis deudas • Mi independencia • Otra cosa",
+    "guidance": "Di qué significa trabajar hoy en lo que eligió y qué tipo de pregunta conviene escribir en el siguiente paso. Si su elección apunta a cubrir algo básico, el apoyo va primero; nada de tareas de ingresos."
+   },
+   {
+    "id": "take",
+    "pos": 2,
+    "total": 2,
+    "kind": "reflect",
+    "q": "Escribe una pregunta concreta sobre el tema elegido.",
+    "guidance": "Convierte su frase en una pregunta verificable (quién, qué o cuándo) y di quién podría responderla. Si saltó el paso, propone una pregunta desde su elección."
+   }
+  ]
+ },
+ {
+  "n": 2,
+  "day": 2,
+  "title": "Dónde estás hoy",
+  "src_app": "MONEY-W1-D4 (app text, 210-day draft)",
+  "purpose": "Hoy ves si lo urgente es cubrir lo básico, ordenar fechas o buscar ingresos.",
+  "takeaway": "Su situación en una palabra y el camino que encaja.",
+  "steps": [
+   {
+    "id": "ask",
+    "pos": 1,
+    "total": 2,
+    "kind": "choose",
+    "q": "¿Qué describe mejor lo que pasa entre tus ingresos y lo necesario?",
+    "under": "Alcanza y queda algo • Alcanza justo • No alcanza • Cambia cada vez • No tengo ingresos ahora • Aún no lo sé",
+    "guidance": "«No alcanza» o «No tengo ingresos»: primero lo básico y rutas de apoyo; nunca insinuar mala gestión. «Cambia cada vez»: lo confirmado para después no es dinero de hoy; comparar un periodo a la vez. «Alcanza»: explorar un ingreso o una decisión sin presión."
+   }
+  ]
+ },
+ {
+  "n": 3,
+  "day": 3,
+  "title": "Por dónde empezar",
+  "src_app": "handoff wording (app W1-D7 asks a different question)",
+  "purpose": "Hoy eliges por dónde empezar y qué tiene que respetar cualquier opción.",
+  "takeaway": "Un camino y una condición no negociable, con sus palabras.",
+  "steps": [
+   {
+    "id": "condicion",
+    "pos": 2,
+    "total": 2,
+    "kind": "reflect",
+    "branch": true,
+    "q": "(su camino) ¿Qué tienes a favor y qué condición necesitas resolver antes?",
+    "guidance": "Separa lo que tiene de lo que falta. Convierte lo que falta en un filtro, no en un defecto. Nunca supongas dinero, tiempo o ayudas que no mencionó."
+   }
+  ]
+ },
+ {
+  "n": 4,
+  "day": 4,
+  "title": "Una frase verdadera",
+  "src_app": "MONEY-W2-D2 (app text) for empleo/negocio; handoff wording for apoyo",
+  "purpose": "Hoy escribes una frase verdadera sobre lo que sabes hacer o lo que ya sabes de tu trámite.",
+  "takeaway": "Una línea de evidencia reutilizable, o un dato conocido y una pregunta abierta.",
+  "steps": [
+   {
+    "id": "ask",
+    "pos": 1,
+    "total": 2,
+    "kind": "reflect",
+    "q": "¿Qué sabes hacer que podría servir en una oportunidad que te interesa?",
+    "under": "Menciona un ejemplo concreto, también de experiencia informal.",
+    "guidance": "Convierte la tarea que nombró en una línea de evidencia; nunca inventes una habilidad. Si no tiene empleo formal: las tareas sin pago cuentan; si no sale ninguna, ofrece un ejemplo ficticio del formato. Si su camino es apoyo: separa lo que sabe de la pregunta abierta; nunca pidas demostrar que merece ayuda."
+   }
+  ]
+ },
+ {
+  "n": 5,
+  "day": 5,
+  "title": "Tu filtro",
+  "src_app": "MONEY-W2-D3 (app text, 210-day draft)",
+  "purpose": "Hoy armas un filtro para descartar rápido lo que no encaja en tu vida.",
+  "takeaway": "Un criterio para descartar y una pregunta para verificarlo en cualquier oferta.",
+  "steps": [
+   {
+    "id": "ask",
+    "pos": 1,
+    "total": 2,
+    "kind": "multi",
+    "q": "¿Qué condiciones tendría que respetar una oportunidad para que fuera viable?",
+    "under": "Horario • Cuidados • Transporte • Acceso a internet • No pagar por adelantado • Otra condición",
+    "guidance": "Convierte sus condiciones en una regla para descartar y una pregunta para cualquier oferta real. Si menciona una oferta concreta: si piden pagar para empezar o datos muy pronto, que la compruebe en la web oficial, no en el enlace."
+   }
+  ]
+ },
+ {
+  "n": 6,
+  "day": 6,
+  "title": "Tu primera frase",
+  "src_app": "handoff wording (app W3-D1 asks about a recent expense)",
+  "purpose": "Hoy escribes la primera frase que podrías usar de verdad.",
+  "takeaway": "Una frase lista para reutilizar. No se envía a ningún sitio.",
+  "steps": [
+   {
+    "id": "frase",
+    "pos": 2,
+    "total": 2,
+    "kind": "reflect",
+    "branch": true,
+    "q": "(su camino) Empleo: ¿Cómo explicarías lo que puedes aportar al puesto sin exagerar? · Negocio: ¿A quién ayudaría tu idea y con qué problema concreto? · Apoyo: ¿Cómo explicarías qué necesitas saber para aclarar tu necesidad, cobro o apoyo?",
+    "guidance": "Frase vaga: sugiere una tarea que lo muestre, como sugerencia, no como pregunta obligatoria. Frase concreta: déjala en 25 palabras o menos y di que se puede reutilizar. Apoyo: nunca pedir justificación."
+   }
+  ]
+ },
+ {
+  "n": 7,
+  "day": 7,
+  "title": "Probar, esperar o parar",
+  "src_app": "handoff wording, question B (app W3-D7 asks for a decision criterion)",
+  "purpose": "Hoy decides con calma: probar algo pequeño, esperar o parar.",
+  "takeaway": "Una decisión y, con sus palabras, lo que ahora puede hacer o lo único que le falta.",
+  "steps": [
+   {
+    "id": "ahora",
+    "pos": 2,
+    "total": 2,
+    "kind": "reflect",
+    "q": "Ahora puedo… / Aún necesito…",
+    "guidance": "Nombra lo que puede hacer ahora o lo único que le falta, con sus palabras. Sin tareas nuevas. Si decidió no seguir, confírmalo como decisión informada, sin persuadir."
+   }
+  ]
+ }
+]

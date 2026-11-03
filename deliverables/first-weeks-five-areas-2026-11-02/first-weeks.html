@@ -1,0 +1,288 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Primeras semanas Elara</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Instrument+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column, sticky area tabs (hash routed), one card per day. */
+:root{--bg:#F2F5EE;--surface:#FFFCF6;--fg:#17241C;--mute:#46564C;--line:#D3DCCF;--forest:#2C4A3A;--terra:#B3542F;--warn:#8A6414;
+--serif:'Fraunces',Georgia,serif;--sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121A15;--surface:#1A241E;--fg:#E7EEE6;--mute:#A7B6AC;--line:#2E3C34;--forest:#9CC7AE;--terra:#E39272;--warn:#E3C273;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121A15;--surface:#1A241E;--fg:#E7EEE6;--mute:#A7B6AC;--line:#2E3C34;--forest:#9CC7AE;--terra:#E39272;--warn:#E3C273;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 var(--sans);padding-block:24px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:820px;margin:0 auto;display:grid;gap:24px}
+h1,h2{font-family:var(--serif);font-weight:600;color:var(--forest);margin:0;text-wrap:balance;line-height:1.2}
+h1{font-size:2rem}h2{font-size:1.5rem}.wk{display:block;font:600 .85rem var(--sans);color:var(--mute);letter-spacing:.04em;margin-top:4px}
+p{margin:0;max-width:70ch}.lede{color:var(--mute)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:8px;border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto}
+nav a{flex:none;min-height:44px;display:inline-flex;align-items:center;padding:0 14px;border-radius:999px;border:1px solid var(--line);color:var(--forest);font-weight:600;text-decoration:none;background:var(--surface)}
+nav a[aria-current="true"]{background:var(--forest);color:var(--bg);border-color:var(--forest)}
+a:focus-visible{outline:3px solid var(--terra);outline-offset:2px}
+.area{display:grid;gap:16px}.area[hidden]{display:none}
+.job{color:var(--mute)}
+.verdict{display:grid;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px}
+.safe{color:var(--terra)}
+.days{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:8px;min-width:0}
+.dhead{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}.dn{font:600 1.1rem var(--serif);color:var(--forest)}
+.dhead code,.fmt{font-size:.8rem;color:var(--mute)}
+.purpose{font-weight:600}.q{font:600 1.08rem var(--serif)}.rest{color:var(--mute);font-size:.92rem}
+dl{margin:0;display:grid;gap:4px}dt{font-size:.76rem;text-transform:uppercase;letter-spacing:.07em;color:var(--mute);font-weight:600;margin-top:6px}dd{margin:0}
+.ex{margin:6px 0 0;padding-left:18px;display:grid;gap:6px;font-size:.94rem}.ex q{font-style:italic}.ex span{display:block;color:var(--mute)}
+.bad{color:var(--terra)}.flag{color:var(--warn);font-size:.94rem}
+.prop{font-size:.72rem;font-weight:600;border:1px solid currentColor;border-radius:999px;padding:1px 7px;color:var(--terra)}.was{display:block;color:var(--mute);font-size:.88rem}
+</style></head><body><main>
+<header style="display:grid;gap:8px"><h1>Primeras semanas Elara</h1>
+<p class="lede">Primera semana de cinco caminos con el modelo de las sesiones de Dinero. Las preguntas son las de la app (borrador del 21 oct). Todo el texto nuevo es propuesta para María y Alejandra. 2 nov 2026.</p></header>
+<nav aria-label="Caminos"><a href="#purpose" data-k="purpose">Encontrar propósito</a><a href="#self" data-k="self">Confianza en ti</a><a href="#love" data-k="love">Amor y límites</a><a href="#rhythm" data-k="rhythm">Ritmo diario</a><a href="#energy" data-k="energy">Reinicio de energía</a></nav>
+<section class="area" id="a-purpose" aria-labelledby="h-purpose">
+<h2 id="h-purpose">Encontrar propósito <span class="wk">Semana 1 · Una pregunta propia</span></h2>
+<p class="job">Probar si una dirección encaja, sin definir un propósito de vida con una respuesta.</p>
+<div class="verdict"><p><b>Veredicto.</b> Usable con cambios menores. El primer resultado útil llega el día 1 si el paso opcional pide una pregunta, no solo un título (propuesta). Los días 1 y 6 se solapan (los dos piden «qué te interesa»); el día 3 es el mejor: un experimento de cinco minutos. El día 4 es el más abstracto.</p><p><b>Primer resultado útil:</b> día 1. Si vuelve tras días sin entrar, la pregunta funciona con lo que le interesa hoy; nunca se le pide recordar lo que escribió antes.</p>
+</div><ol class="days">
+<li class="day"><div class="dhead"><span class="dn">Día 1</span><code>PURPOSE-W1-D1</code><span class="fmt">Voz o texto</span></div>
+<p class="purpose">Hoy nombras el tema que vuelve a tu cabeza y lo conviertes en una pregunta pequeña.</p>
+<p class="q">¿Qué tema vuelve a tu cabeza cuando por fin tienes un rato para ti?</p><p class="rest">Cuenta una situación, no toda tu historia. Alternativa: texto.</p>
+<dl><dt>Paso opcional</dt><dd><span class="prop">Propuesto</span> Escribe una pregunta pequeña que ese tema te despierta. <span class="was">App: Pon un título de pocas palabras al tema que vuelve.</span></dd>
+<dt>Guía para Elara</dt><dd>Nombra el tema en sus palabras y propón una sola pregunta concreta que lo vuelva investigable (qué, cómo o dónde). No interpretes qué dice el tema de su vida.<ul class="ex"><li><q>Pienso mucho en plantas, en tener un huerto en el balcón.</q><span>Devuelve el tema («un huerto en el balcón») y una pregunta concreta: «¿Qué se puede cultivar con la luz que tiene mi balcón?».</span></li><li><q>No sé, en nada. Llego muy cansada.</q><span>Acepta que hoy no aparece un tema; no insistas. Ofrece que en otro momento basta notar qué mira cuando tiene un minuto libre.</span></li><li class="bad"><b>Evitar:</b> «¡Qué bonito! Eso dice mucho de tu conexión con la naturaleza y tu propósito.» (interpreta y elogia)</li></ul></dd>
+<dt>Te llevas</dt><dd>Un tema con nombre y una pregunta pequeña sobre él.</dd><dt>Próxima vez</dt><dd>Mañana ves qué ocupa tu semana y deja poco espacio para eso, sin tener que resolverlo.</dd></dl><p class="flag"><b>Nota.</b> El paso opcional del PDF pide solo un título. Un título no deja nada que investigar; una pregunta sí. Cambio propuesto solo en el paso opcional; la pregunta del día no cambia.</p></li>
+<li class="day"><div class="dhead"><span class="dn">Día 2</span><code>PURPOSE-W1-D2</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy distingues qué te quita espacio: tiempo, apoyo o permiso propio.</p>
+<p class="q">¿Qué ocupa tu semana y deja poco espacio para algo que te importa?</p><p class="rest">Nombra una tensión concreta, sin asumir que puedes quitar esa obligación.</p>
+<dl><dt>Paso opcional</dt><dd>Identifica si falta tiempo, apoyo o permiso propio; no tienes que resolverlo hoy.</dd>
+<dt>Guía para Elara</dt><dd>Separa el tipo de tensión (tiempo, apoyo o permiso propio) sin sugerir quitar obligaciones. Si es falta de apoyo, no culpes su organización.<ul class="ex"><li><q>Cuido a mi madre por las tardes y ya no dibujo.</q><span>Nombra la tensión como falta de tiempo y de relevo, no de ganas. No propongas dejar de cuidar.</span></li><li><q>Tengo tiempo los domingos pero siento que dibujar es perder el tiempo.</q><span>Nombra que aquí falta permiso propio, no horas. Una distinción, sin convencerla.</span></li><li class="bad"><b>Evitar:</b> «Tienes que priorizarte más y poner límites a tu familia.» (asume que puede y da tarea)</li></ul></dd>
+<dt>Te llevas</dt><dd>La tensión concreta y si lo que falta es tiempo, apoyo o permiso.</dd><dt>Próxima vez</dt><dd>Mañana miras algo cinco minutos para entender mejor una curiosidad.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 3</span><code>PURPOSE-W1-D3</code><span class="fmt">Una opción</span></div>
+<p class="purpose">Hoy pruebas, en cinco minutos, si una curiosidad merece más tiempo.</p>
+<p class="q">¿Qué podrías mirar cinco minutos para entender algo que te da curiosidad?</p><p class="rest">Un curso • Las tareas de un trabajo • Un proyecto de alguien • Una actividad local • Otra cosa • Nada hoy</p>
+<dl><dt>Paso opcional</dt><dd>Si puedes, mira una sola fuente durante cinco minutos y anota algo que desconocías.</dd>
+<dt>Guía para Elara</dt><dd>Convierte la opción elegida en una fuente concreta de cinco minutos y una cosa que anotar. «Nada hoy» se respeta sin insistir.<ul class="ex"><li><q>Las tareas de un trabajo</q><span>Propón mirar una oferta o un día típico de ese trabajo y anotar una tarea que no imaginaba.</span></li><li><q>Nada hoy</q><span>Respeta la pausa; recuerda que la prueba de cinco minutos sigue disponible cuando quiera.</span></li><li class="bad"><b>Evitar:</b> «Inscríbete en un curso para empezar ya.» (gasto y compromiso)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una fuente concreta y algo que no sabía.</dd><dt>Próxima vez</dt><dd>Mañana separas lo que sientes que deberías querer de lo que sí elegirías.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 4</span><code>PURPOSE-W1-D4</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy separas lo que crees que deberías querer de lo que sí elegirías tú.</p>
+<p class="q">¿Qué parte de lo que sientes que deberías querer sí elegirías tú?</p><p class="rest">Si no reconoces esa presión, describe algo que te interese sin explicarlo a nadie.</p>
+<dl><dt>Paso opcional</dt><dd>Subraya una preferencia que sí reconoces como tuya.</dd>
+<dt>Guía para Elara</dt><dd>Refleja la parte que ella reconoce como suya, sin inventar un deseo oculto ni un conflicto. Si no siente presión, trabaja con el interés que describe.<ul class="ex"><li><q>Debería querer un trabajo estable, pero lo que sí elegiría es tener tardes libres.</q><span>Devuelve la preferencia «tardes libres» como un criterio que puede usar para comparar opciones.</span></li><li><q>No siento esa presión, simplemente me gusta cocinar.</q><span>No busques presión. Toma «cocinar» como interés sin preguntar más; basta reflejarlo como algo suyo.</span></li><li class="bad"><b>Evitar:</b> «En el fondo quizá temes decepcionar a tu familia.» (interpretación no pedida)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una preferencia que reconoce como suya.</dd><dt>Próxima vez</dt><dd>Mañana ves qué tuvo un buen momento reciente que te gustaría repetir.</dd></dl><p class="flag"><b>Atención.</b> Puede fabricar un conflicto que ella no tiene. La alternativa del PDF («si no reconoces esa presión…») debe mostrarse siempre.</p></li>
+<li class="day"><div class="dhead"><span class="dn">Día 5</span><code>PURPOSE-W1-D5</code><span class="fmt">Varias opciones</span></div>
+<p class="purpose">Hoy encuentras qué hizo posible un buen momento, para poder repetirlo.</p>
+<p class="q">¿Qué tuvo un momento reciente que te gustaría repetir?</p><p class="rest">Calma • Conexión • Aprender • Crear o resolver • Disfrutar • Otra cosa</p>
+<dl><dt>Paso opcional</dt><dd>Anota una condición concreta que hizo posible ese momento.</dd>
+<dt>Guía para Elara</dt><dd>Une lo que eligió (calma, aprender…) con una condición concreta que lo hizo posible (hora, lugar, compañía). Sin promesas de felicidad.<ul class="ex"><li><q>Aprender, Crear o resolver</q><span>Propón la condición: «tenía una tarde sin interrupciones». Esa condición es lo que se puede buscar de nuevo.</span></li><li><q>Calma</q><span>Pregunta por el detalle de lugar u hora solo como sugerencia; si no lo sabe, basta nombrar la calma.</span></li><li class="bad"><b>Evitar:</b> «Ese es tu propósito: crear.» (define un propósito con una respuesta)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una condición que hizo posible algo que vale la pena repetir.</dd><dt>Próxima vez</dt><dd>Mañana conviertes lo que te interesa en una pregunta que podrías investigar.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 6</span><code>PURPOSE-W1-D6</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy escribes una pregunta concreta que podrías investigar sin decidir tu futuro.</p>
+<p class="q">¿Qué cosa quieres entender mejor, sin decidir todavía tu futuro?</p><p class="rest">Hazla concreta: «Si este curso cabe en mi vida», no «Qué hacer con mi vida».</p>
+<dl><dt>Paso opcional</dt><dd>Escribe tu foco como una pregunta que podrías investigar.</dd>
+<dt>Guía para Elara</dt><dd>Reduce su pregunta hasta que sea comprobable en una semana. Si es enorme («qué hago con mi vida»), ofrece una versión pequeña.<ul class="ex"><li><q>¿Debería estudiar enfermería?</q><span>Ofrece una versión comprobable: «¿Qué horarios y requisitos tiene enfermería donde vivo?».</span></li><li><q>Si un curso de diseño cabe en mi semana.</q><span>Ya es concreta; di que se puede comprobar comparando el horario del curso con una semana real.</span></li><li class="bad"><b>Evitar:</b> «Enfermería sería perfecta para ti.» (decide por ella)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una pregunta que se puede investigar.</dd><dt>Próxima vez</dt><dd>Mañana guardas un hallazgo y una duda de esta semana.</dd></dl><p class="flag"><b>Atención.</b> Se solapa con el día 1 si el día 1 ya pidió una pregunta. Si se adopta la propuesta del día 1, aquí se refina esa pregunta («hazla más pequeña o comprobable») en vez de empezar de cero.</p></li>
+<li class="day"><div class="dhead"><span class="dn">Día 7</span><code>PURPOSE-W1-D7</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy guardas lo que descubriste esta semana y una duda que sigue abierta.</p>
+<p class="q">¿Qué descubrimiento de estos días quieres conservar?</p><p class="rest">Puede ser una curiosidad, una preferencia o una duda más clara.</p>
+<dl><dt>Paso opcional</dt><dd>Guarda un hallazgo y una duda, sin obligarte a resolverla.</dd>
+<dt>Guía para Elara</dt><dd>Devuelve su hallazgo y su duda en sus palabras. No resumas su semana con una conclusión sobre su propósito.<ul class="ex"><li><q>Descubrí que me gusta aprender cosas prácticas; dudo si tengo tiempo.</q><span>Devuelve ambas cosas; la duda del tiempo es buen material para la semana 2 (condiciones).</span></li><li><q>Nada claro todavía.</q><span>Valida que una duda más clara también cuenta; ofrece guardar la pregunta del día 6 si la hizo.</span></li><li class="bad"><b>Evitar:</b> «¡Felicidades, ya encontraste tu propósito!»</li></ul></dd>
+<dt>Te llevas</dt><dd>Un hallazgo y una duda, con sus palabras.</dd><dt>Próxima vez</dt><dd>La próxima semana conviertes eso en hasta tres condiciones para comparar opciones.</dd></dl></li>
+</ol>
+</section><section class="area" id="a-self" aria-labelledby="h-self">
+<h2 id="h-self">Confianza en ti <span class="wk">Semana 1 · Escuchar tu criterio</span></h2>
+<p class="job">Mejorar cómo decide: hechos, criterio propio e incertidumbre, sin que la aprobación de Elara sea la fuente.</p>
+<div class="verdict"><p><b>Veredicto.</b> Buena semana. Resultado útil desde el día 1 (qué buscaba al pedir aprobación: dato, compañía o permiso). Riesgo principal: que las respuestas de Elara validen («buena decisión»), lo que convierte a la IA en la nueva fuente de aprobación. Los días 3 y 5 dependen de una situación anterior («esa preocupación», «esa situación»): necesitan una vía con ejemplo nuevo.</p><p><b>Primer resultado útil:</b> día 1. Tras una pausa, los días 3 y 5 aceptan una situación nueva; nunca se le pide recordar la anterior.</p>
+</div><ol class="days">
+<li class="day"><div class="dhead"><span class="dn">Día 1</span><code>SELF-W1-D1</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy distingues qué buscabas al pedir aprobación: un dato, compañía o permiso.</p>
+<p class="q">¿Qué decisión pequeña te ha hecho buscar aprobación últimamente?</p><p class="rest">Elige algo cotidiano; no necesitas exponer una decisión íntima.</p>
+<dl><dt>Paso opcional</dt><dd>Nombra qué esperabas recibir al pedir aprobación: un dato, compañía o permiso.</dd>
+<dt>Guía para Elara</dt><dd>Nombra cuál de las tres cosas parece buscar (dato, compañía o permiso), como hipótesis que ella puede corregir. Si buscaba un dato, eso es razonable, no un fallo.<ul class="ex"><li><q>Pregunté a mi hermana si cambiar de colegio a mi hijo.</q><span>Sugiere que quizá buscaba un dato o compañía, no permiso; ella decide cuál.</span></li><li><q>Pedí opinión en el grupo sobre qué ropa ponerme.</q><span>Distingue: aquí quizá era compañía o permiso, no un dato. Sin juicio.</span></li><li class="bad"><b>Evitar:</b> «No necesitas la aprobación de nadie, confía en ti.» (consigna vacía)</li></ul></dd>
+<dt>Te llevas</dt><dd>Qué esperaba recibir al pedir aprobación: dato, compañía o permiso.</dd><dt>Próxima vez</dt><dd>Mañana notas qué te dices cuando no estás segura.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 2</span><code>SELF-W1-D2</code><span class="fmt">Voz o texto</span></div>
+<p class="purpose">Hoy separas lo que te dices de lo que es un hecho.</p>
+<p class="q">¿Qué te dices cuando no tienes certeza sobre una elección?</p><p class="rest">Una frase tal como aparece, sin tener que creerla. Alternativa: texto.</p>
+<dl><dt>Paso opcional</dt><dd>Escribe la frase como un pensamiento que aparece, no como un hecho demostrado.</dd>
+<dt>Guía para Elara</dt><dd>Devuelve la frase como un pensamiento que aparece («aparece la idea de que…»), no como un hecho ni como un defecto. No discutas si es verdad.<ul class="ex"><li><q>«Siempre elijo mal.»</q><span>Reformula: «aparece el pensamiento de que siempre eliges mal». Sin rebatirlo ni consolar.</span></li><li><q>«Mejor espero a que alguien me diga.»</q><span>Nombra que es una forma de buscar seguridad; nada que corregir hoy.</span></li><li class="bad"><b>Evitar:</b> «¡Eso no es verdad! Eres muy capaz.» (aprobación de la IA)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una frase que aparece cuando duda, escrita como pensamiento.</dd><dt>Próxima vez</dt><dd>Mañana separas lo que sabes de lo que imaginas en una preocupación.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 3</span><code>SELF-W1-D3</code><span class="fmt">Lista breve</span></div>
+<p class="purpose">Hoy separas lo que sabes de lo que estás imaginando.</p>
+<p class="q">¿Qué parte de esa preocupación sabes y qué parte estás imaginando?</p><p class="rest">Dos columnas: «Hechos» y «Lo que imagino». También puedes usar una situación nueva.</p>
+<dl><dt>Paso opcional</dt><dd>Marca un dato que puedas comprobar y una incertidumbre que deba seguir abierta.</dd>
+<dt>Guía para Elara</dt><dd>Señala un dato que puede comprobar y una incertidumbre que puede quedar abierta. Acepta una situación nueva si no quiere volver a la anterior.<ul class="ex"><li><q>Hechos: me citaron a una reunión. Imagino: me van a despedir.</q><span>Separa: la cita es un hecho; el despido es una posibilidad sin datos. Lo comprobable: el tema de la reunión.</span></li><li><q>No sé qué es hecho y qué no.</q><span>Ofrece un ejemplo ficticio corto del formato, sin exigir el suyo.</span></li><li class="bad"><b>Evitar:</b> «Seguro que no pasa nada malo.» (tranquiliza sin datos)</li></ul></dd>
+<dt>Te llevas</dt><dd>Un dato comprobable y una incertidumbre que puede seguir abierta.</dd><dt>Próxima vez</dt><dd>Mañana recuerdas una decisión que salió suficientemente bien.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 4</span><code>SELF-W1-D4</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy encuentras evidencia de una decisión tuya que salió suficientemente bien.</p>
+<p class="q">¿Qué has decidido antes que salió suficientemente bien, aunque no fuera perfecto?</p><p class="rest">Una elección pequeña cuenta. Si no recuerdas una, describe una tarea que resolviste.</p>
+<dl><dt>Paso opcional</dt><dd>Anota qué información tenías cuando elegiste, sin usar lo que supiste después.</dd>
+<dt>Guía para Elara</dt><dd>Devuelve la información que tenía al decidir, sin juzgar con lo que supo después. Una tarea resuelta cuenta.<ul class="ex"><li><q>Elegí este piso aunque era más caro porque estaba cerca del colegio.</q><span>Destaca su criterio («cerca del colegio») como evidencia de que decidió con lo que sabía.</span></li><li><q>No recuerdo ninguna.</q><span>Ofrece la alternativa del PDF: una tarea que resolvió esta semana también cuenta.</span></li><li class="bad"><b>Evitar:</b> «¡Fue una gran decisión!» (la IA aprueba)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una decisión suficientemente buena y la información que tenía entonces.</dd><dt>Próxima vez</dt><dd>Mañana nombras qué hiciste tú que ayudó.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 5</span><code>SELF-W1-D5</code><span class="fmt">Varias opciones</span></div>
+<p class="purpose">Hoy nombras una conducta tuya que ayudó y que puedes repetir.</p>
+<p class="q">¿Qué hiciste tú que ayudó en esa situación?</p><p class="rest">Pregunté • Me preparé • Me adapté • Pedí ayuda • Elegí con lo que sabía • Otra cosa</p>
+<dl><dt>Paso opcional</dt><dd>Conserva una conducta concreta que puedas repetir.</dd>
+<dt>Guía para Elara</dt><dd>Convierte lo que eligió en una conducta concreta y repetible («pregunté antes de decidir»). No conviertas una buena decisión en un rasgo de personalidad.<ul class="ex"><li><q>Pregunté, Me preparé</q><span>Devuelve una conducta repetible: «preguntar antes y prepararte».</span></li><li><q>Elegí con lo que sabía</q><span>Nombra que decidir con información incompleta también es una habilidad.</span></li><li class="bad"><b>Evitar:</b> «Eres una persona muy preparada.» (rasgo, no conducta)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una conducta concreta que puede repetir.</dd><dt>Próxima vez</dt><dd>Mañana preparas una frase para expresar una preferencia pequeña.</dd></dl><p class="flag"><b>Atención.</b> Depende del día 4 («esa situación»). Vía nueva: «o cualquier situación reciente que salió bien».</p></li>
+<li class="day"><div class="dhead"><span class="dn">Día 6</span><code>SELF-W1-D6</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy preparas una frase para decir lo que prefieres sin justificarte de más.</p>
+<p class="q">¿Qué preferencia pequeña podrías expresar sin justificarla demasiado?</p><p class="rest">Ensaya «Prefiero ___». Puedes dejarlo solo aquí.</p>
+<dl><dt>Paso opcional</dt><dd>Deja lista una frase de preferencia; decirla en voz alta es opcional.</dd>
+<dt>Guía para Elara</dt><dd>Recorta la frase hasta «Prefiero ___», quitando justificaciones. Decirla en voz alta o a alguien es opcional.<ul class="ex"><li><q>Prefiero que cenemos más temprano porque al día siguiente madrugo y me cuesta mucho y luego estoy cansada.</q><span>Recórtala: «Prefiero cenar más temprano». La razón puede quedar para si se la piden.</span></li><li><q>Prefiero no ir.</q><span>Ya está lista; di que no necesita explicación.</span></li><li class="bad"><b>Evitar:</b> «Díselo hoy mismo a tu pareja.» (tarea y exposición)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una frase de preferencia lista, sin justificaciones de más.</dd><dt>Próxima vez</dt><dd>Mañana guardas evidencia sobre ti para cuando vuelva la duda.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 7</span><code>SELF-W1-D7</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy guardas un hecho sobre ti para cuando vuelva la duda.</p>
+<p class="q">¿Qué evidencia sobre ti quieres recordar cuando vuelvas a dudar?</p><p class="rest">Guarda un hecho, no una afirmación que no te crees.</p>
+<dl><dt>Paso opcional</dt><dd>Titula tu nota con el hecho concreto que recuerdas.</dd>
+<dt>Guía para Elara</dt><dd>Devuelve el hecho en sus palabras, como evidencia, no como afirmación positiva. Si escribe una afirmación general, pídele (como sugerencia) un hecho que la sostenga.<ul class="ex"><li><q>Organicé la mudanza sola y salió bien.</q><span>Es un hecho; ofrece usarlo como título de su nota.</span></li><li><q>Soy fuerte.</q><span>Sugiere un hecho que lo muestre, sin exigirlo.</span></li><li class="bad"><b>Evitar:</b> «¡Eres increíble!» (elogio que sustituye evidencia)</li></ul></dd>
+<dt>Te llevas</dt><dd>Un hecho concreto sobre ella, con título.</dd><dt>Próxima vez</dt><dd>La próxima semana ves tu criterio junto a las voces de otras personas.</dd></dl></li>
+</ol>
+</section><section class="area" id="a-love" aria-labelledby="h-love">
+<h2 id="h-love">Amor y límites <span class="wk">Semana 1 · Reconocer lo que necesitas</span></h2>
+<p class="job">Aclarar necesidades y expectativas con seguridad, con opción privada o de no actuar siempre disponible.</p>
+<div class="verdict"><p><b>Veredicto.</b> Buena progresión hacia una petición concreta (día 5), pero el primer resultado útil llega el día 2. Los días 4 y 5 dependen del vínculo y la necesidad anteriores: hace falta vía con ejemplo nuevo. Seguridad: toda petición es un borrador privado; enviarla nunca se pide; si menciona miedo, amenazas o daño, la respuesta cambia a la vía privada o sin acción y la pantalla de seguridad actúa.</p><p><b>Primer resultado útil:</b> día 2. Tras una pausa, los días 4 y 5 aceptan cualquier vínculo o necesidad de hoy.</p>
+<p class="safe"><b>Seguridad.</b> Si describe miedo a la reacción de la otra persona, amenazas, control o violencia: no sugerir conversación ni petición; ofrecer la vía privada (guardar solo para ella) o no hacer nada, y dejar actuar la pantalla de seguridad existente. Nunca suponer que puede hablar en privado ni que comparte el móvil con seguridad.</p>
+</div><ol class="days">
+<li class="day"><div class="dhead"><span class="dn">Día 1</span><code>LOVE-W1-D1</code><span class="fmt">Una opción</span></div>
+<p class="purpose">Hoy eliges un vínculo para observar esta semana, sin tener que cambiar nada.</p>
+<p class="q">¿En qué vínculo te gustaría sentirte un poco más tú esta semana?</p><p class="rest">Pareja • Familia • Amistad • Personas del trabajo • Otro • Prefiero no elegir</p>
+<dl><dt>Paso opcional</dt><dd>Elige un vínculo para observar esta semana, sin tener que cambiarlo.</dd>
+<dt>Guía para Elara</dt><dd>Confirma el vínculo como algo solo para observar. «Prefiero no elegir» se respeta: la semana funciona igual con un vínculo cualquiera cada día.<ul class="ex"><li><q>Familia</q><span>Di que basta observar un momento con la familia esta semana; nada que cambiar.</span></li><li><q>Prefiero no elegir</q><span>Respeta; cada día puede usar el vínculo que le venga a la mente.</span></li><li class="bad"><b>Evitar:</b> «La pareja suele ser lo más importante, ¿seguro que no quieres elegirla?»</li></ul></dd>
+<dt>Te llevas</dt><dd>Un vínculo para observar (o ninguno fijo).</dd><dt>Próxima vez</dt><dd>Mañana notas qué hace alguien cuando te sientes escuchada.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 2</span><code>LOVE-W1-D2</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy nombras qué hace alguien cuando te sientes escuchada.</p>
+<p class="q">Piensa en un momento reciente en que te sentiste escuchada. ¿Qué hizo la otra persona que te ayudó?</p><p class="rest">Puede ser un detalle pequeño; si no recuerdas uno, escribe cómo te gustaría que te escucharan.</p>
+<dl><dt>Paso opcional</dt><dd>Pon nombre a la conducta que te ayudó: escuchar, preguntar o dar tiempo, por ejemplo.</dd>
+<dt>Guía para Elara</dt><dd>Convierte el recuerdo en una conducta con nombre (escuchar sin interrumpir, preguntar, dar tiempo). Si no recuerda uno, trabaja con cómo le gustaría que la escucharan.<ul class="ex"><li><q>Mi amiga me dejó hablar sin darme consejos.</q><span>Nombra la conducta: escuchar sin aconsejar. Eso es lo que puede reconocer o pedir.</span></li><li><q>No recuerdo ninguno.</q><span>Usa la alternativa: cómo le gustaría que la escucharan, sin lamentar que no haya ejemplo.</span></li><li class="bad"><b>Evitar:</b> «Qué triste que no te escuchen; mereces más.» (dramatiza)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una conducta con nombre que la ayuda a sentirse escuchada.</dd><dt>Próxima vez</dt><dd>Mañana miras un «está bien» que escondía otra necesidad.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 3</span><code>LOVE-W1-D3</code><span class="fmt">Voz o texto</span></div>
+<p class="purpose">Hoy traduces un «está bien» a lo que necesitabas de verdad.</p>
+<p class="q">¿Cuándo dijiste «está bien» y por dentro necesitabas algo distinto?</p><p class="rest">Una situación cotidiana, sin nombres. También vale: «Esta semana no me pasó».</p>
+<dl><dt>Paso opcional</dt><dd>Traduce ese «está bien» a una necesidad privada; si no aplica, conserva un ejemplo hipotético.</dd>
+<dt>Guía para Elara</dt><dd>Traduce su «está bien» a una necesidad privada, sin culparla por no haberla dicho. «Esta semana no me pasó» es válido: ofrece un ejemplo hipotético.<ul class="ex"><li><q>Dije que estaba bien que mi pareja saliera, pero necesitaba ayuda con los niños esa noche.</q><span>La necesidad era ayuda concreta esa noche; queda nombrada solo para ella.</span></li><li><q>Esta semana no me pasó.</q><span>Valida; no hace falta inventar. Puede guardar un ejemplo hipotético o nada.</span></li><li class="bad"><b>Evitar:</b> «Tienes que aprender a decir lo que sientes.» (culpa y tarea)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una necesidad que quedó escondida, nombrada en privado.</dd><dt>Próxima vez</dt><dd>Mañana eliges qué necesitas más de un vínculo ahora.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 4</span><code>LOVE-W1-D4</code><span class="fmt">Una opción</span></div>
+<p class="purpose">Hoy eliges qué necesitas más de un vínculo ahora.</p>
+<p class="q">¿Qué necesitas más de ese vínculo ahora?</p><p class="rest">Tiempo juntas • Espacio • Claridad • Ayuda concreta • Respeto a un límite • No lo sé</p>
+<dl><dt>Paso opcional</dt><dd>Completa «Me ayudaría…» con una acción concreta.</dd>
+<dt>Guía para Elara</dt><dd>Convierte la necesidad elegida en el inicio de «Me ayudaría…». «No lo sé» es válido.<ul class="ex"><li><q>Claridad</q><span>Propón empezar: «Me ayudaría saber…» y que ella lo complete si quiere.</span></li><li><q>Respeto a un límite</q><span>Nombra el límite como su necesidad legítima; si menciona miedo, cambia a la vía privada.</span></li><li class="bad"><b>Evitar:</b> «Lo que necesitas es hablarlo con él cuanto antes.»</li></ul></dd>
+<dt>Te llevas</dt><dd>La necesidad principal de ese vínculo ahora.</dd><dt>Próxima vez</dt><dd>Mañana conviertes esa necesidad en una acción que otra persona podría entender.</dd></dl><p class="flag"><b>Atención.</b> «Ese vínculo» depende del día 1. Vía nueva: «o cualquier vínculo de hoy».</p><p class="flag"><b>Revisión.</b> Revisión anterior: conservar «qué necesitas más». La redacción viva lo conserva («¿Qué necesitas más de ese vínculo ahora?»). Correcto.</p></li>
+<li class="day"><div class="dhead"><span class="dn">Día 5</span><code>LOVE-W1-D5</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy conviertes una necesidad en una petición concreta, solo para ti si quieres.</p>
+<p class="q">¿Cómo se vería esa necesidad en una acción que otra persona pudiera entender?</p><p class="rest">Ejemplo: «Avísame si vas a llegar tarde», en vez de «Tenme en cuenta».</p>
+<dl><dt>Paso opcional</dt><dd>Revisa que tu petición diga qué necesitas, sin exigir que la otra persona adivine.</dd>
+<dt>Guía para Elara</dt><dd>Afina la petición para que diga qué acción ayudaría, sin exigir que la otra persona adivine. Recuerda que usarla o no es decisión suya. Si menciona miedo o riesgo, no afines la petición: ofrece guardarla en privado o no hacer nada.<ul class="ex"><li><q>Tenme en cuenta.</q><span>Propón una versión concreta: «Avísame si vas a llegar tarde».</span></li><li><q>Que no me grite cuando está enfadado, pero si se lo digo se pone peor.</q><span>No afines la petición. Nombra que su seguridad va primero; ofrece guardarla en privado y que existen apoyos si los quiere.</span></li><li class="bad"><b>Evitar:</b> «Díselo con calma y verás que lo entiende.» (supone seguridad)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una petición concreta, en borrador privado.</dd><dt>Próxima vez</dt><dd>Mañana miras cuánto tiempo compartes y cuánto quisieras para ti.</dd></dl><p class="flag"><b>Atención.</b> Depende del día 4 («esa necesidad»): vía nueva con cualquier necesidad. Seguridad: el borrador es privado; enviarlo nunca se propone.</p></li>
+<li class="day"><div class="dhead"><span class="dn">Día 6</span><code>LOVE-W1-D6</code><span class="fmt">Dibujo o texto</span></div>
+<p class="purpose">Hoy miras el reparto entre el tiempo que compartes y el tuyo.</p>
+<p class="q">Dibuja dos espacios: el tiempo que hoy compartes y el que quisieras reservar para ti. ¿Qué cambiarías?</p><p class="rest">No tienen que ser iguales ni medirse. Puedes describirlos con palabras.</p>
+<dl><dt>Paso opcional</dt><dd>Marca un espacio que quieras reservar; no necesitas justificarlo ni negociar hoy.</dd>
+<dt>Guía para Elara</dt><dd>Refleja lo que quiere cambiar. Si le faltan los dos tiempos, nómbralo como una carga real, no como mala organización. Reservar un espacio no requiere justificación ni negociación hoy.<ul class="ex"><li><q>Comparto casi todo; para mí no queda nada.</q><span>Nombra que quiere un espacio propio; sin justificarlo ni negociarlo hoy.</span></li><li><q>Me falta tiempo con mi pareja y también para mí: todo es trabajo y casa.</q><span>Nombra que faltan los dos, por la carga, no por organización. Nada que resolver hoy.</span></li><li class="bad"><b>Evitar:</b> «Organízate mejor y tendrás tiempo para todo.»</li></ul></dd>
+<dt>Te llevas</dt><dd>Un espacio que quiere reservar (o la carga que lo impide).</dd><dt>Próxima vez</dt><dd>Mañana guardas una necesidad que quieres dejar de minimizar.</dd></dl><p class="flag"><b>Revisión.</b> Revisión anterior: incluir «los dos» (cuando falta tiempo compartido y propio a la vez). La redacción viva es abierta (dibujo o texto, «¿Qué cambiarías?»), así que no excluye ninguna respuesta. Correcto; la guía de respuesta cubre el caso de que falten los dos.</p></li>
+<li class="day"><div class="dhead"><span class="dn">Día 7</span><code>LOVE-W1-D7</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy guardas una necesidad que ya no quieres minimizar.</p>
+<p class="q">¿Qué necesidad te gustaría dejar de minimizar, aunque todavía no sepas pedirla?</p><p class="rest">Completa: «Para mí también importa…». No hace falta compartirlo.</p>
+<dl><dt>Paso opcional</dt><dd>Guarda la frase como referencia para una futura conversación.</dd>
+<dt>Guía para Elara</dt><dd>Devuelve la frase «Para mí también importa…» en sus palabras como referencia privada. No la conviertas en una conversación pendiente.<ul class="ex"><li><q>Para mí también importa descansar los domingos.</q><span>Devuélvela tal cual; queda guardada para cuando ella quiera usarla.</span></li><li><q>No sé cuál.</q><span>Ofrece usar la necesidad del día 3 o 4 si la nombró; si no, basta con dejarlo abierto.</span></li><li class="bad"><b>Evitar:</b> «Ahora que lo sabes, este fin de semana díselo.»</li></ul></dd>
+<dt>Te llevas</dt><dd>Una frase «Para mí también importa…».</dd><dt>Próxima vez</dt><dd>La próxima semana conviertes una necesidad en un límite que puedes nombrar, con una opción segura.</dd></dl></li>
+</ol>
+<p class="flag"><b>LOVE-W2-D6 (semana 2).</b> App: «¿Qué opción te cuida más en esta situación concreta?». La revisión anterior pedía conservar «tu necesidad y tu seguridad». La redacción viva («te cuida más») no nombra la seguridad; el paso opcional sí («el siguiente paso más seguro»). Propuesta para María: «¿Qué opción cuida mejor lo que necesitas y tu seguridad en esta situación?»</p>
+</section><section class="area" id="a-rhythm" aria-labelledby="h-rhythm">
+<h2 id="h-rhythm">Ritmo diario <span class="wk">Semana 1 · Ver la carga real</span></h2>
+<p class="job">Quitar trabajo o fricción, sin objetivos de productividad.</p>
+<div class="verdict"><p><b>Veredicto.</b> Bien orientada (menos exigencia, no más disciplina), pero lenta: los días 2, 3 y 4 describen el mismo momento y el primer cambio concreto llega el día 5. Propuesta: que la respuesta del día 1 ya nombre una fricción posible, y revisar con María si los días 2–4 pueden fusionarse en dos. El día 2 depende de «ese momento de ayer»: vía con un momento reciente cualquiera.</p><p><b>Primer resultado útil:</b> día 1. Tras una pausa, el día 2 usa «un momento reciente», no «ayer».</p>
+</div><ol class="days">
+<li class="day"><div class="dhead"><span class="dn">Día 1</span><code>RHYTHM-W1-D1</code><span class="fmt">Una opción</span></div>
+<p class="purpose">Hoy eliges el momento del día en que todo se te junta, para mirarlo sin culparte.</p>
+<p class="q">¿En qué momento del día sientes que todo se te junta?</p><p class="rest">Al despertar • Al salir • A media jornada • Al volver • Antes de dormir • Mi horario cambia</p>
+<dl><dt>Paso opcional</dt><dd>Elige un momento, no todo el día, para observar esta semana.</dd>
+<dt>Guía para Elara</dt><dd>Confirma el momento y nombra una fricción típica de ese momento como pregunta abierta (no como diagnóstico). «Mi horario cambia» es válido: se observa el próximo momento difícil.<ul class="ex"><li><q>Al volver</q><span>Sugiere que al volver suelen coincidir varias tareas; mañana puede ver cuáles.</span></li><li><q>Mi horario cambia</q><span>Respeta; propone observar el próximo momento en que todo se junte, sea cuando sea.</span></li><li class="bad"><b>Evitar:</b> «Levántate una hora antes para adelantar.» (más exigencia)</li></ul></dd>
+<dt>Te llevas</dt><dd>El momento del día que más pesa.</dd><dt>Próxima vez</dt><dd>Mañana reconstruyes ese momento para ver qué intentabas hacer a la vez.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 2</span><code>RHYTHM-W1-D2</code><span class="fmt">Lista breve</span></div>
+<p class="purpose">Hoy ves qué intentabas hacer a la vez en ese momento.</p>
+<p class="q">Reconstruye ese momento de ayer: ¿qué estabas intentando hacer a la vez?</p><p class="rest">Hasta tres tareas, sin juzgar cómo salieron.</p>
+<dl><dt>Paso opcional</dt><dd>Pon las tareas en el orden en que aparecieron.</dd>
+<dt>Guía para Elara</dt><dd>Ordena las tareas que nombró en el orden en que aparecieron y señala dónde se solapan. Sin juzgar cómo salieron.<ul class="ex"><li><q>Hacer la cena, revisar deberes, contestar al jefe</q><span>Ordénalas y señala el solape: cena y deberes a la vez.</span></li><li><q>No me acuerdo de ayer</q><span>Usa cualquier momento reciente.</span></li><li class="bad"><b>Evitar:</b> «Haz una lista de prioridades cada mañana.» (añade tarea)</li></ul></dd>
+<dt>Te llevas</dt><dd>Hasta tres tareas que coincidieron, en orden.</dd><dt>Próxima vez</dt><dd>Mañana nombras el trabajo invisible de ese momento.</dd></dl><p class="flag"><b>Atención.</b> Depende de «ese momento de ayer». Tras una pausa: «un momento reciente».</p></li>
+<li class="day"><div class="dhead"><span class="dn">Día 3</span><code>RHYTHM-W1-D3</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy nombras el trabajo que haces y nadie cuenta como trabajo.</p>
+<p class="q">¿Qué trabajo haces ahí que nadie suele contar como trabajo?</p><p class="rest">Puede ser recordar, coordinar, cuidar o anticipar. Si no aplica, escribe otra carga.</p>
+<dl><dt>Paso opcional</dt><dd>Añade esa carga invisible a tu descripción del momento.</dd>
+<dt>Guía para Elara</dt><dd>Nombra la carga invisible (recordar, coordinar, anticipar) como trabajo real. No sugieras delegar si no mencionó a nadie.<ul class="ex"><li><q>Recordar todas las citas médicas de la familia.</q><span>Nombra que coordinar es trabajo; queda en su descripción del momento.</span></li><li><q>Nada especial.</q><span>Ofrece ejemplos (recordar, anticipar) sin insistir; también vale otra carga.</span></li><li class="bad"><b>Evitar:</b> «Pídele a tu pareja que se encargue.» (supone ayuda disponible)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una carga invisible con nombre.</dd><dt>Próxima vez</dt><dd>Mañana separas lo que depende de ti de lo que depende de otros.</dd></dl><p class="flag"><b>Atención.</b> Repite el mismo momento por tercera vez (días 1–3). Valorar fusionar con el día 2.</p></li>
+<li class="day"><div class="dhead"><span class="dn">Día 4</span><code>RHYTHM-W1-D4</code><span class="fmt">Dibujo o texto</span></div>
+<p class="purpose">Hoy separas lo que depende de ti de lo que depende de horarios ajenos.</p>
+<p class="q">¿Qué parte depende de ti y qué parte depende de horarios o necesidades ajenas?</p><p class="rest">Dos zonas, con palabras o trazos. Puedes usar dos listas.</p>
+<dl><dt>Paso opcional</dt><dd>Marca una parte que puedas ajustar y otra que requiera apoyo o coordinación.</dd>
+<dt>Guía para Elara</dt><dd>Marca una parte que puede ajustar y otra que necesita apoyo o coordinación. Si nada depende de ella, eso es información, no un fallo.<ul class="ex"><li><q>Depende de mí: la cena. De otros: el horario del colegio y del autobús.</q><span>Señala que la cena es la parte ajustable.</span></li><li><q>Nada depende de mí.</q><span>Nombra que la carga es estructural; no hay que cambiar nada hoy.</span></li><li class="bad"><b>Evitar:</b> «Siempre hay algo que puedes controlar si te organizas.»</li></ul></dd>
+<dt>Te llevas</dt><dd>Una parte ajustable y otra que necesita apoyo.</dd><dt>Próxima vez</dt><dd>Mañana eliges un cambio pequeño que quite un paso.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 5</span><code>RHYTHM-W1-D5</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy eliges un cambio pequeño que quite un paso de ese momento.</p>
+<p class="q">¿Qué cambio pequeño quitaría un paso de ese momento?</p><p class="rest">No añadas una rutina completa: elige algo que simplifique.</p>
+<dl><dt>Paso opcional</dt><dd>Escribe exactamente qué paso dejaría de ser necesario.</dd>
+<dt>Guía para Elara</dt><dd>Afina el cambio hasta que quite exactamente un paso; nunca añadas una rutina.<ul class="ex"><li><q>Dejar la mochila preparada la noche antes.</q><span>Nombra el paso que desaparece: buscar las cosas por la mañana.</span></li><li><q>Hacer todo más rápido.</q><span>Reconduce: «más rápido» añade presión; propone quitar un paso concreto.</span></li><li class="bad"><b>Evitar:</b> «Crea una rutina matutina de 30 minutos.»</li></ul></dd>
+<dt>Te llevas</dt><dd>Un paso que deja de ser necesario.</dd><dt>Próxima vez</dt><dd>Mañana ves con qué cuentas para probar ese cambio.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 6</span><code>RHYTHM-W1-D6</code><span class="fmt">Una opción</span></div>
+<p class="purpose">Hoy ves con qué cuentas para probar el cambio, o qué te lo impide.</p>
+<p class="q">¿Qué tienes disponible para probar ese cambio?</p><p class="rest">Unos minutos • Un objeto a mano • Ayuda de alguien • Puedo cambiar el orden • Nada por ahora • No lo sé</p>
+<dl><dt>Paso opcional</dt><dd>Adapta el cambio a un recurso disponible, o deja registrada la barrera.</dd>
+<dt>Guía para Elara</dt><dd>Adapta el cambio al recurso que tiene. «Nada por ahora» es una barrera real; queda registrada sin culpa.<ul class="ex"><li><q>Puedo cambiar el orden</q><span>Propón probar el mismo cambio solo cambiando el orden, sin recursos nuevos.</span></li><li><q>Nada por ahora</q><span>Registra la barrera; no hay prueba que hacer.</span></li><li class="bad"><b>Evitar:</b> «Compra un organizador.» (gasto)</li></ul></dd>
+<dt>Te llevas</dt><dd>El cambio ajustado a un recurso disponible, o la barrera.</dd><dt>Próxima vez</dt><dd>Mañana eliges una expectativa que puedes bajar.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 7</span><code>RHYTHM-W1-D7</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy eliges una expectativa que puedes bajar en un momento del día.</p>
+<p class="q">¿Qué parte del día merece menos exigencia, no más disciplina?</p><p class="rest">Nombra el momento y una expectativa que podrías bajar.</p>
+<dl><dt>Paso opcional</dt><dd>Deja una expectativa más realista para ese momento del día.</dd>
+<dt>Guía para Elara</dt><dd>Devuelve la expectativa más realista en sus palabras. Sin metas nuevas.<ul class="ex"><li><q>Al volver: no hace falta que la cocina quede perfecta.</q><span>Devuélvela como su nueva expectativa para ese momento.</span></li><li><q>No puedo bajar nada.</q><span>Nombra que a veces la exigencia no es suya; anotarlo también cuenta.</span></li><li class="bad"><b>Evitar:</b> «Si te organizas mejor, podrás con todo.»</li></ul></dd>
+<dt>Te llevas</dt><dd>Una expectativa más realista para ese momento.</dd><dt>Próxima vez</dt><dd>La próxima semana quitas fricción a una tarea concreta y defines su versión mínima.</dd></dl></li>
+</ol>
+</section><section class="area" id="a-energy" aria-labelledby="h-energy">
+<h2 id="h-energy">Reinicio de energía <span class="wk">Semana 1 · Notar sin diagnosticar</span></h2>
+<p class="job">Ajustar las demandas a la capacidad observada, sin diagnosticar ni recetar descanso.</p>
+<div class="verdict"><p><b>Veredicto.</b> Segura y respetuosa (evita diagnosticar), pero muy de observación: el primer resultado práctico llega el día 6. Propuesta: que cada respuesta deje una observación con nombre desde el día 1. El día 3 depende de «ese cansancio». El día 6 («una necesidad básica») debe derivar a apoyo si lo básico (comida, sueño, techo) no está cubierto, sin recetar descanso.</p><p><b>Primer resultado útil:</b> día 1. Tras una pausa, el día 3 acepta cualquier cansancio reciente.</p>
+<p class="safe"><b>Seguridad.</b> Si describe agotamiento extremo, ideas de hacerse daño o falta de lo básico: no dar pautas de descanso; dejar actuar la pantalla de seguridad y ofrecer apoyos. Nunca nombrar trastornos.</p>
+</div><ol class="days">
+<li class="day"><div class="dhead"><span class="dn">Día 1</span><code>ENERGY-W1-D1</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy describes un momento sin margen, sin explicar quién eres.</p>
+<p class="q">¿En qué momento reciente sentiste que ya no te quedaba margen?</p><p class="rest">Puede ser físico, mental o social; no tienes que explicar una causa.</p>
+<dl><dt>Paso opcional</dt><dd>Describe el momento sin convertirlo en una explicación de quién eres.</dd>
+<dt>Guía para Elara</dt><dd>Describe el momento como una situación con demandas concretas, no como un rasgo («soy floja»). Sin causas ni diagnósticos.<ul class="ex"><li><q>Ayer, a las 9 de la noche, no pude contestar ni un mensaje.</q><span>Nombra la observación: a las 9 ya no quedaba margen para lo social.</span></li><li><q>Siempre estoy agotada, soy así.</q><span>Separa: el agotamiento es una observación, «soy así» es una explicación; hoy basta un momento concreto.</span></li><li class="bad"><b>Evitar:</b> «Puede que tengas estrés crónico o anemia.» (diagnóstico)</li></ul></dd>
+<dt>Te llevas</dt><dd>Un momento sin margen, descrito como situación.</dd><dt>Próxima vez</dt><dd>Mañana nombras qué tipo de carga notas más.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 2</span><code>ENERGY-W1-D2</code><span class="fmt">Una opción</span></div>
+<p class="purpose">Hoy nombras qué tipo de carga pesa más.</p>
+<p class="q">¿Qué tipo de carga notas más hoy?</p><p class="rest">Física • Mental • Emocional • Social • Varias • No lo sé</p>
+<dl><dt>Paso opcional</dt><dd>Nombra una demanda relacionada con esa carga, sin diagnosticar su causa.</dd>
+<dt>Guía para Elara</dt><dd>Une el tipo de carga con una demanda concreta, sin diagnosticar la causa.<ul class="ex"><li><q>Mental</q><span>Propón nombrar una demanda: «llevar la cuenta de todo».</span></li><li><q>Varias</q><span>Valida; basta elegir una para observar.</span></li><li class="bad"><b>Evitar:</b> «La carga mental se cura meditando.» (receta)</li></ul></dd>
+<dt>Te llevas</dt><dd>Un tipo de carga y una demanda ligada a ella.</dd><dt>Próxima vez</dt><dd>Mañana ves qué pasaba justo antes del cansancio.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 3</span><code>ENERGY-W1-D3</code><span class="fmt">Lista breve</span></div>
+<p class="purpose">Hoy separas lo que pasó de lo que todavía no sabes si es la causa.</p>
+<p class="q">¿Qué estaba pasando justo antes de notar ese cansancio?</p><p class="rest">Hasta tres hechos, sin buscar un diagnóstico.</p>
+<dl><dt>Paso opcional</dt><dd>Separa hechos de explicaciones que todavía no sabes si son ciertas.</dd>
+<dt>Guía para Elara</dt><dd>Separa hechos de explicaciones no comprobadas. Un día no demuestra un patrón.<ul class="ex"><li><q>Comí tarde, discutí con mi hijo, tuve reunión.</q><span>Ordena los hechos; ninguno es «la causa» todavía.</span></li><li><q>Siempre que veo a mi madre me agoto.</q><span>Distingue el hecho de hoy de la regla «siempre»; la regla queda como hipótesis.</span></li><li class="bad"><b>Evitar:</b> «Tu madre es tóxica para tu energía.» (interpretación)</li></ul></dd>
+<dt>Te llevas</dt><dd>Hasta tres hechos, separados de las explicaciones.</dd><dt>Próxima vez</dt><dd>Mañana miras cómo se repartió tu energía ayer.</dd></dl><p class="flag"><b>Atención.</b> Depende de «ese cansancio». Tras una pausa: cualquier cansancio reciente.</p></li>
+<li class="day"><div class="dhead"><span class="dn">Día 4</span><code>ENERGY-W1-D4</code><span class="fmt">Dibujo o texto</span></div>
+<p class="purpose">Hoy miras cómo se repartió tu energía en un día, sin puntuarla.</p>
+<p class="q">Dibuja cómo se repartió tu energía ayer. ¿Qué cambio notaste, si hubo alguno?</p><p class="rest">Una línea o palabras; no hace falta puntuarla.</p>
+<dl><dt>Paso opcional</dt><dd>Marca un cambio para observar otro día; un solo día no demuestra un patrón.</dd>
+<dt>Guía para Elara</dt><dd>Devuelve el cambio que notó como algo para observar otro día, no como patrón.<ul class="ex"><li><q>Bien por la mañana, caída a las 4.</q><span>Nombra el cambio a las 4 como algo que puede observar otro día.</span></li><li><q>Igual todo el día, baja.</q><span>Válido; un día sin cambios también es información.</span></li><li class="bad"><b>Evitar:</b> «Toma café a las 3 para evitar la caída.» (receta)</li></ul></dd>
+<dt>Te llevas</dt><dd>Un cambio para observar otro día.</dd><dt>Próxima vez</dt><dd>Mañana buscas un momento que te dejó un poco más de espacio.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 5</span><code>ENERGY-W1-D5</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy encuentras qué te dio un poco de espacio, aunque no te hiciera feliz.</p>
+<p class="q">¿Qué momento te dejó un poco más de espacio, aunque no te hiciera sentir feliz?</p><p class="rest">Si ninguno lo hizo, escribe qué habría reducido una demanda.</p>
+<dl><dt>Paso opcional</dt><dd>Conserva el detalle o la demanda que habría sido útil reducir.</dd>
+<dt>Guía para Elara</dt><dd>Nombra el detalle que dio espacio, o la demanda que habría sido útil reducir. No lo conviertas en tarea diaria.<ul class="ex"><li><q>Diez minutos en el autobús sin mirar el móvil.</q><span>Nombra el detalle: diez minutos sin pantalla.</span></li><li><q>Ninguno.</q><span>Usa la alternativa: qué demanda habría convenido reducir.</span></li><li class="bad"><b>Evitar:</b> «Medita diez minutos al día a partir de hoy.»</li></ul></dd>
+<dt>Te llevas</dt><dd>Un detalle que dio espacio, o la demanda a reducir.</dd><dt>Próxima vez</dt><dd>Mañana eliges qué necesitas primero cuando estás así.</dd></dl></li>
+<li class="day"><div class="dhead"><span class="dn">Día 6</span><code>ENERGY-W1-D6</code><span class="fmt">Una opción</span></div>
+<p class="purpose">Hoy eliges qué necesitas primero cuando te quedas sin margen.</p>
+<p class="q">¿Qué necesitas primero cuando estás así?</p><p class="rest">Menos estímulos • Una necesidad básica • Estar acompañada • Estar sola • Ayuda con una carga • No lo sé</p>
+<dl><dt>Paso opcional</dt><dd>Define una forma pequeña de atender esa necesidad, o la ayuda que te falta.</dd>
+<dt>Guía para Elara</dt><dd>Define una forma pequeña de atender esa necesidad con lo que tiene, o nombra la ayuda que falta. Nunca recetes descanso.<ul class="ex"><li><q>Menos estímulos</q><span>Propón una versión posible: bajar el volumen o salir a la puerta un minuto, si puede.</span></li><li><q>Una necesidad básica: no estoy durmiendo por el turno de noche.</q><span>No recetes dormir; nombra que es una necesidad no cubierta por la carga, y que existen apoyos si quiere buscarlos.</span></li><li class="bad"><b>Evitar:</b> «Tienes que dormir ocho horas.»</li></ul></dd>
+<dt>Te llevas</dt><dd>Una forma pequeña de atender esa necesidad, o la ayuda que falta.</dd><dt>Próxima vez</dt><dd>Mañana guardas una observación sobre tu energía, sin convertirla en regla.</dd></dl><p class="flag"><b>Atención.</b> «Una necesidad básica»: si lo básico no está cubierto (comida, sueño, techo), derivar a apoyo, no a autocuidado.</p></li>
+<li class="day"><div class="dhead"><span class="dn">Día 7</span><code>ENERGY-W1-D7</code><span class="fmt">Texto abierto</span></div>
+<p class="purpose">Hoy guardas una observación provisional sobre tu energía.</p>
+<p class="q">¿Qué observación sobre tu energía vale la pena recordar sin convertirla en una regla?</p><p class="rest">Completa: «Esta semana noté…». Una semana no define todo tu cuerpo.</p>
+<dl><dt>Paso opcional</dt><dd>Guarda la observación como provisional, no como una etiqueta fija.</dd>
+<dt>Guía para Elara</dt><dd>Devuelve «Esta semana noté…» como provisional. Sin etiquetas fijas.<ul class="ex"><li><q>Esta semana noté que las tardes con los niños me vacían.</q><span>Devuélvela como observación provisional para la semana 2.</span></li><li><q>No noté nada.</q><span>Válido; quizá una semana no basta, y eso también es información.</span></li><li class="bad"><b>Evitar:</b> «Eres una persona de mañanas.» (etiqueta)</li></ul></dd>
+<dt>Te llevas</dt><dd>Una observación provisional.</dd><dt>Próxima vez</dt><dd>La próxima semana pruebas una pausa que sí quepa en tu día, o nombras la barrera.</dd></dl></li>
+</ol>
+</section>
+</main>
+<script>
+(function(){var keys=["purpose", "self", "love", "rhythm", "energy"];
+function show(){var k=(location.hash||'').slice(1);if(keys.indexOf(k)<0)k=keys[0];
+keys.forEach(function(x){document.getElementById('a-'+x).hidden=(x!==k)});
+document.querySelectorAll('nav a').forEach(function(a){var on=a.dataset.k===k;a.setAttribute('aria-current',on?'true':'false');if(on)a.scrollIntoView({block:'nearest',inline:'center'})});setTimeout(function(){window.scrollTo(0,0)},0);}
+window.addEventListener('hashchange',show);show();})();
+</script></body></html>

@@ -1,0 +1,2407 @@
+{
+ "run": "2026-11-02T18:41:53.093Z",
+ "passed": 480,
+ "failed": 0,
+ "results": [
+  {
+   "name": "empleo AAA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "empleo AAA · path kept",
+   "pass": true,
+   "info": "empleo"
+  },
+  {
+   "name": "empleo AAA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo AAA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo AAA · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "empleo AAA · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "empleo AAA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo AAA · replies after steps (A)",
+   "pass": true,
+   "info": "11"
+  },
+  {
+   "name": "empleo AAA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo AAA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo AAA · session 4 empleo writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo AAA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario y CuidadosPregunta para cualquier oferta¿Qué horario pide y si "
+  },
+  {
+   "name": "empleo AAB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "empleo AAB · path kept",
+   "pass": true,
+   "info": "empleo"
+  },
+  {
+   "name": "empleo AAB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo AAB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo AAB · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "empleo AAB · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "empleo AAB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo AAB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo AAB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo AAB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo AAB · session 4 empleo writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo AAB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario y CuidadosPregunta para cualquier oferta¿Qué horario pide y si "
+  },
+  {
+   "name": "empleo ABA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "empleo ABA · path kept",
+   "pass": true,
+   "info": "empleo"
+  },
+  {
+   "name": "empleo ABA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo ABA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo ABA · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "empleo ABA · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: No alcanza\",\"4\":\"Ayer te llevaste · Tu camino: Empleo\",\"5\":\"Ayer te llevaste · Tu frase: «Llevaba el inventario y detectaba faltantes»\",\"6\":\"Ayer te llevaste · Tu filtro: Horario y Cuidados\",\"7\":\"Ayer te llevaste · Tu frase: «Puedo ayudar con el inventario; lo demostré cuando detectaba faltantes en la tienda»\"}"
+  },
+  {
+   "name": "empleo ABA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo ABA · replies after steps (A)",
+   "pass": true,
+   "info": "11"
+  },
+  {
+   "name": "empleo ABA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo ABA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo ABA · session 4 empleo writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo ABA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario y CuidadosPregunta para cualquier oferta¿Qué horario pide y si "
+  },
+  {
+   "name": "empleo ABB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "empleo ABB · path kept",
+   "pass": true,
+   "info": "empleo"
+  },
+  {
+   "name": "empleo ABB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo ABB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo ABB · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "empleo ABB · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: No alcanza\",\"4\":\"Ayer te llevaste · Tu camino: Empleo\",\"5\":\"Ayer te llevaste · Tu frase: «Llevaba el inventario y detectaba faltantes»\",\"6\":\"Ayer te llevaste · Tu filtro: Horario y Cuidados\",\"7\":\"Ayer te llevaste · Tu frase: «Puedo ayudar con el inventario; lo demostré cuando detectaba faltantes en la tienda»\"}"
+  },
+  {
+   "name": "empleo ABB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo ABB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo ABB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo ABB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo ABB · session 4 empleo writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo ABB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario y CuidadosPregunta para cualquier oferta¿Qué horario pide y si "
+  },
+  {
+   "name": "empleo BAA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "empleo BAA · path kept",
+   "pass": true,
+   "info": "empleo"
+  },
+  {
+   "name": "empleo BAA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BAA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo BAA · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "empleo BAA · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "empleo BAA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BAA · replies after steps (A)",
+   "pass": true,
+   "info": "11"
+  },
+  {
+   "name": "empleo BAA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BAA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BAA · session 4 empleo writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BAA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario y CuidadosPregunta para cualquier oferta¿Qué horario pide y si "
+  },
+  {
+   "name": "empleo BAB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "empleo BAB · path kept",
+   "pass": true,
+   "info": "empleo"
+  },
+  {
+   "name": "empleo BAB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BAB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo BAB · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "empleo BAB · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "empleo BAB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BAB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BAB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo BAB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BAB · session 4 empleo writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BAB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario y CuidadosPregunta para cualquier oferta¿Qué horario pide y si "
+  },
+  {
+   "name": "empleo BBA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "empleo BBA · path kept",
+   "pass": true,
+   "info": "empleo"
+  },
+  {
+   "name": "empleo BBA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BBA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo BBA · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "empleo BBA · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: No alcanza\",\"4\":\"Ayer te llevaste · Tu camino: Empleo\",\"5\":\"Ayer te llevaste · Tu frase: «Llevaba el inventario y detectaba faltantes»\",\"6\":\"Ayer te llevaste · Tu filtro: Horario y Cuidados\",\"7\":\"Ayer te llevaste · Tu frase: «Puedo ayudar con el inventario; lo demostré cuando detectaba faltantes en la tienda»\"}"
+  },
+  {
+   "name": "empleo BBA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BBA · replies after steps (A)",
+   "pass": true,
+   "info": "11"
+  },
+  {
+   "name": "empleo BBA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BBA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BBA · session 4 empleo writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BBA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario y CuidadosPregunta para cualquier oferta¿Qué horario pide y si "
+  },
+  {
+   "name": "empleo BBB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "empleo BBB · path kept",
+   "pass": true,
+   "info": "empleo"
+  },
+  {
+   "name": "empleo BBB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BBB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo BBB · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "empleo BBB · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: No alcanza\",\"4\":\"Ayer te llevaste · Tu camino: Empleo\",\"5\":\"Ayer te llevaste · Tu frase: «Llevaba el inventario y detectaba faltantes»\",\"6\":\"Ayer te llevaste · Tu filtro: Horario y Cuidados\",\"7\":\"Ayer te llevaste · Tu frase: «Puedo ayudar con el inventario; lo demostré cuando detectaba faltantes en la tienda»\"}"
+  },
+  {
+   "name": "empleo BBB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BBB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BBB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "empleo BBB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BBB · session 4 empleo writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "empleo BBB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario y CuidadosPregunta para cualquier oferta¿Qué horario pide y si "
+  },
+  {
+   "name": "negocio AAA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "negocio AAA · path kept",
+   "pass": true,
+   "info": "negocio"
+  },
+  {
+   "name": "negocio AAA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio AAA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio AAA · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "negocio AAA · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "negocio AAA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio AAA · replies after steps (A)",
+   "pass": true,
+   "info": "11"
+  },
+  {
+   "name": "negocio AAA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio AAA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio AAA · session 4 negocio writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio AAA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu pruebaQue no cueste dinero y Que quepa en mi tiempoPregunta para tu primera p"
+  },
+  {
+   "name": "negocio AAB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "negocio AAB · path kept",
+   "pass": true,
+   "info": "negocio"
+  },
+  {
+   "name": "negocio AAB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio AAB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio AAB · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "negocio AAB · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "negocio AAB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio AAB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio AAB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio AAB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio AAB · session 4 negocio writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio AAB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu pruebaQue no cueste dinero y Que quepa en mi tiempoPregunta para tu primera p"
+  },
+  {
+   "name": "negocio ABA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "negocio ABA · path kept",
+   "pass": true,
+   "info": "negocio"
+  },
+  {
+   "name": "negocio ABA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio ABA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio ABA · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "negocio ABA · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: No alcanza\",\"4\":\"Ayer te llevaste · Tu camino: Probar una idea de servicio o venta\",\"5\":\"Ayer te llevaste · Tu frase: «Hago pasteles para los cumpleaños de mi familia desde hace años»\",\"6\":\"Ayer te llevaste · Tu prueba: Que no cueste dinero y Que quepa en mi tiempo\",\"7\":\"Ayer te llevaste · Tu frase: «Ayudaría a familias del barrio a resolver los pasteles de cumpleaños sin salir de casa»\"}"
+  },
+  {
+   "name": "negocio ABA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio ABA · replies after steps (A)",
+   "pass": true,
+   "info": "11"
+  },
+  {
+   "name": "negocio ABA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio ABA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio ABA · session 4 negocio writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio ABA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu pruebaQue no cueste dinero y Que quepa en mi tiempoPregunta para tu primera p"
+  },
+  {
+   "name": "negocio ABB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "negocio ABB · path kept",
+   "pass": true,
+   "info": "negocio"
+  },
+  {
+   "name": "negocio ABB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio ABB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio ABB · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "negocio ABB · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: No alcanza\",\"4\":\"Ayer te llevaste · Tu camino: Probar una idea de servicio o venta\",\"5\":\"Ayer te llevaste · Tu frase: «Hago pasteles para los cumpleaños de mi familia desde hace años»\",\"6\":\"Ayer te llevaste · Tu prueba: Que no cueste dinero y Que quepa en mi tiempo\",\"7\":\"Ayer te llevaste · Tu frase: «Ayudaría a familias del barrio a resolver los pasteles de cumpleaños sin salir de casa»\"}"
+  },
+  {
+   "name": "negocio ABB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio ABB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio ABB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio ABB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio ABB · session 4 negocio writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio ABB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu pruebaQue no cueste dinero y Que quepa en mi tiempoPregunta para tu primera p"
+  },
+  {
+   "name": "negocio BAA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "negocio BAA · path kept",
+   "pass": true,
+   "info": "negocio"
+  },
+  {
+   "name": "negocio BAA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BAA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio BAA · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "negocio BAA · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "negocio BAA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BAA · replies after steps (A)",
+   "pass": true,
+   "info": "11"
+  },
+  {
+   "name": "negocio BAA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BAA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BAA · session 4 negocio writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BAA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu pruebaQue no cueste dinero y Que quepa en mi tiempoPregunta para tu primera p"
+  },
+  {
+   "name": "negocio BAB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "negocio BAB · path kept",
+   "pass": true,
+   "info": "negocio"
+  },
+  {
+   "name": "negocio BAB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BAB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio BAB · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "negocio BAB · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "negocio BAB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BAB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BAB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio BAB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BAB · session 4 negocio writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BAB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu pruebaQue no cueste dinero y Que quepa en mi tiempoPregunta para tu primera p"
+  },
+  {
+   "name": "negocio BBA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "negocio BBA · path kept",
+   "pass": true,
+   "info": "negocio"
+  },
+  {
+   "name": "negocio BBA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BBA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio BBA · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "negocio BBA · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: No alcanza\",\"4\":\"Ayer te llevaste · Tu camino: Probar una idea de servicio o venta\",\"5\":\"Ayer te llevaste · Tu frase: «Hago pasteles para los cumpleaños de mi familia desde hace años»\",\"6\":\"Ayer te llevaste · Tu prueba: Que no cueste dinero y Que quepa en mi tiempo\",\"7\":\"Ayer te llevaste · Tu frase: «Ayudaría a familias del barrio a resolver los pasteles de cumpleaños sin salir de casa»\"}"
+  },
+  {
+   "name": "negocio BBA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BBA · replies after steps (A)",
+   "pass": true,
+   "info": "11"
+  },
+  {
+   "name": "negocio BBA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BBA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BBA · session 4 negocio writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BBA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu pruebaQue no cueste dinero y Que quepa en mi tiempoPregunta para tu primera p"
+  },
+  {
+   "name": "negocio BBB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "negocio BBB · path kept",
+   "pass": true,
+   "info": "negocio"
+  },
+  {
+   "name": "negocio BBB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BBB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio BBB · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "negocio BBB · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: No alcanza\",\"4\":\"Ayer te llevaste · Tu camino: Probar una idea de servicio o venta\",\"5\":\"Ayer te llevaste · Tu frase: «Hago pasteles para los cumpleaños de mi familia desde hace años»\",\"6\":\"Ayer te llevaste · Tu prueba: Que no cueste dinero y Que quepa en mi tiempo\",\"7\":\"Ayer te llevaste · Tu frase: «Ayudaría a familias del barrio a resolver los pasteles de cumpleaños sin salir de casa»\"}"
+  },
+  {
+   "name": "negocio BBB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BBB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BBB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "negocio BBB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BBB · session 4 negocio writes a line",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "negocio BBB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu pruebaQue no cueste dinero y Que quepa en mi tiempoPregunta para tu primera p"
+  },
+  {
+   "name": "apoyo AAA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "apoyo AAA · path kept",
+   "pass": true,
+   "info": "apoyo"
+  },
+  {
+   "name": "apoyo AAA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo AAA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo AAA · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "apoyo AAA · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "apoyo AAA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo AAA · replies after steps (A)",
+   "pass": true,
+   "info": "11"
+  },
+  {
+   "name": "apoyo AAA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo AAA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo AAA · session 4 apoyo chooses where to ask (no evidence line)",
+   "pass": true,
+   "info": "{\"camino\":\"apoyo\",\"donde\":0}"
+  },
+  {
+   "name": "apoyo AAA · session 6 apoyo takeaway is the message",
+   "pass": true,
+   "info": "Tu mensaje«Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»Listo para copiar. No se envía a ningún sitio."
+  },
+  {
+   "name": "apoyo AAA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario de atención y DocumentosPregunta antes de ir o llamar¿Qué horar"
+  },
+  {
+   "name": "apoyo AAB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "apoyo AAB · path kept",
+   "pass": true,
+   "info": "apoyo"
+  },
+  {
+   "name": "apoyo AAB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo AAB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo AAB · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "apoyo AAB · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "apoyo AAB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo AAB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo AAB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo AAB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo AAB · session 4 apoyo chooses where to ask (no evidence line)",
+   "pass": true,
+   "info": "{\"camino\":\"apoyo\",\"donde\":0}"
+  },
+  {
+   "name": "apoyo AAB · session 6 apoyo takeaway is the message",
+   "pass": true,
+   "info": "Tu mensaje«Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»Listo para copiar. No se envía a ningún sitio."
+  },
+  {
+   "name": "apoyo AAB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario de atención y DocumentosPregunta antes de ir o llamar¿Qué horar"
+  },
+  {
+   "name": "apoyo ABA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "apoyo ABA · path kept",
+   "pass": true,
+   "info": "apoyo"
+  },
+  {
+   "name": "apoyo ABA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo ABA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo ABA · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "apoyo ABA · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: No alcanza\",\"4\":\"Ayer te llevaste · Tu camino: Aclarar un cobro, pago o apoyo\",\"5\":\"Ayer te llevaste · Dónde preguntar: Una oficina pública\",\"6\":\"Ayer te llevaste · Tu filtro: Horario de atención y Documentos\",\"7\":\"Ayer te llevaste · Tu mensaje: «Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»\"}"
+  },
+  {
+   "name": "apoyo ABA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo ABA · replies after steps (A)",
+   "pass": true,
+   "info": "11"
+  },
+  {
+   "name": "apoyo ABA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo ABA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo ABA · session 4 apoyo chooses where to ask (no evidence line)",
+   "pass": true,
+   "info": "{\"camino\":\"apoyo\",\"donde\":0}"
+  },
+  {
+   "name": "apoyo ABA · session 6 apoyo takeaway is the message",
+   "pass": true,
+   "info": "Tu mensaje«Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»Listo para copiar. No se envía a ningún sitio."
+  },
+  {
+   "name": "apoyo ABA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario de atención y DocumentosPregunta antes de ir o llamar¿Qué horar"
+  },
+  {
+   "name": "apoyo ABB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "apoyo ABB · path kept",
+   "pass": true,
+   "info": "apoyo"
+  },
+  {
+   "name": "apoyo ABB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo ABB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo ABB · session 2 asks",
+   "pass": true,
+   "info": "Pensando en lo básico que necesitas cubrir, ¿cómo está tu situación hoy?"
+  },
+  {
+   "name": "apoyo ABB · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: No alcanza\",\"4\":\"Ayer te llevaste · Tu camino: Aclarar un cobro, pago o apoyo\",\"5\":\"Ayer te llevaste · Dónde preguntar: Una oficina pública\",\"6\":\"Ayer te llevaste · Tu filtro: Horario de atención y Documentos\",\"7\":\"Ayer te llevaste · Tu mensaje: «Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»\"}"
+  },
+  {
+   "name": "apoyo ABB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo ABB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo ABB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo ABB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo ABB · session 4 apoyo chooses where to ask (no evidence line)",
+   "pass": true,
+   "info": "{\"camino\":\"apoyo\",\"donde\":0}"
+  },
+  {
+   "name": "apoyo ABB · session 6 apoyo takeaway is the message",
+   "pass": true,
+   "info": "Tu mensaje«Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»Listo para copiar. No se envía a ningún sitio."
+  },
+  {
+   "name": "apoyo ABB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario de atención y DocumentosPregunta antes de ir o llamar¿Qué horar"
+  },
+  {
+   "name": "apoyo BAA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "apoyo BAA · path kept",
+   "pass": true,
+   "info": "apoyo"
+  },
+  {
+   "name": "apoyo BAA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BAA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo BAA · session 2 folded",
+   "pass": true,
+   "info": "Ya sabemos por dónde empezar"
+  },
+  {
+   "name": "apoyo BAA · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "apoyo BAA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BAA · replies after steps (A)",
+   "pass": true,
+   "info": "10"
+  },
+  {
+   "name": "apoyo BAA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BAA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BAA · session 4 apoyo chooses where to ask (no evidence line)",
+   "pass": true,
+   "info": "{\"camino\":\"apoyo\",\"donde\":0}"
+  },
+  {
+   "name": "apoyo BAA · session 6 apoyo takeaway is the message",
+   "pass": true,
+   "info": "Tu mensaje«Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»Listo para copiar. No se envía a ningún sitio."
+  },
+  {
+   "name": "apoyo BAA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario de atención y DocumentosPregunta antes de ir o llamar¿Qué horar"
+  },
+  {
+   "name": "apoyo BAB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "apoyo BAB · path kept",
+   "pass": true,
+   "info": "apoyo"
+  },
+  {
+   "name": "apoyo BAB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BAB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo BAB · session 2 folded",
+   "pass": true,
+   "info": "Ya sabemos por dónde empezar"
+  },
+  {
+   "name": "apoyo BAB · recap absent on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\"}"
+  },
+  {
+   "name": "apoyo BAB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BAB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BAB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,0,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo BAB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BAB · session 4 apoyo chooses where to ask (no evidence line)",
+   "pass": true,
+   "info": "{\"camino\":\"apoyo\",\"donde\":0}"
+  },
+  {
+   "name": "apoyo BAB · session 6 apoyo takeaway is the message",
+   "pass": true,
+   "info": "Tu mensaje«Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»Listo para copiar. No se envía a ningún sitio."
+  },
+  {
+   "name": "apoyo BAB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario de atención y DocumentosPregunta antes de ir o llamar¿Qué horar"
+  },
+  {
+   "name": "apoyo BBA · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "apoyo BBA · path kept",
+   "pass": true,
+   "info": "apoyo"
+  },
+  {
+   "name": "apoyo BBA · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BBA · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo BBA · session 2 folded",
+   "pass": true,
+   "info": "Ya sabemos por dónde empezar"
+  },
+  {
+   "name": "apoyo BBA · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: Lo básico primero: lo elegiste en la sesión 1\",\"4\":\"Ayer te llevaste · Tu camino: Aclarar un cobro, pago o apoyo\",\"5\":\"Ayer te llevaste · Dónde preguntar: Una oficina pública\",\"6\":\"Ayer te llevaste · Tu filtro: Horario de atención y Documentos\",\"7\":\"Ayer te llevaste · Tu mensaje: «Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»\"}"
+  },
+  {
+   "name": "apoyo BBA · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BBA · replies after steps (A)",
+   "pass": true,
+   "info": "10"
+  },
+  {
+   "name": "apoyo BBA · no end bubble (A)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BBA · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BBA · session 4 apoyo chooses where to ask (no evidence line)",
+   "pass": true,
+   "info": "{\"camino\":\"apoyo\",\"donde\":0}"
+  },
+  {
+   "name": "apoyo BBA · session 6 apoyo takeaway is the message",
+   "pass": true,
+   "info": "Tu mensaje«Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»Listo para copiar. No se envía a ningún sitio."
+  },
+  {
+   "name": "apoyo BBA · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario de atención y DocumentosPregunta antes de ir o llamar¿Qué horar"
+  },
+  {
+   "name": "apoyo BBB · all seven sessions completed",
+   "pass": true,
+   "info": "done=7"
+  },
+  {
+   "name": "apoyo BBB · path kept",
+   "pass": true,
+   "info": "apoyo"
+  },
+  {
+   "name": "apoyo BBB · nav hidden in every session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BBB · at most one primary action per screen",
+   "pass": true,
+   "info": "[1,1,1,1,1,1,1,1,1,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo BBB · session 2 folded",
+   "pass": true,
+   "info": "Ya sabemos por dónde empezar"
+  },
+  {
+   "name": "apoyo BBB · recap shown on 2–7",
+   "pass": true,
+   "info": "{\"1\":\"\",\"2\":\"Ayer te llevaste · Tu pregunta: «¿Qué día me pagan?»\",\"3\":\"Ayer te llevaste · Tu situación hoy: Lo básico primero: lo elegiste en la sesión 1\",\"4\":\"Ayer te llevaste · Tu camino: Aclarar un cobro, pago o apoyo\",\"5\":\"Ayer te llevaste · Dónde preguntar: Una oficina pública\",\"6\":\"Ayer te llevaste · Tu filtro: Horario de atención y Documentos\",\"7\":\"Ayer te llevaste · Tu mensaje: «Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»\"}"
+  },
+  {
+   "name": "apoyo BBB · no recap on session 1",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BBB · no mid-session replies (B)",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BBB · one reply at the end (B)",
+   "pass": true,
+   "info": "[1,0,1,1,1,1,1]"
+  },
+  {
+   "name": "apoyo BBB · nav restored after each session",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "apoyo BBB · session 4 apoyo chooses where to ask (no evidence line)",
+   "pass": true,
+   "info": "{\"camino\":\"apoyo\",\"donde\":0}"
+  },
+  {
+   "name": "apoyo BBB · session 6 apoyo takeaway is the message",
+   "pass": true,
+   "info": "Tu mensaje«Hola, quería saber si la ayuda para la renta aplica en mi ciudad. Mi situación es que crío sola a dos hijos.»Listo para copiar. No se envía a ningún sitio."
+  },
+  {
+   "name": "apoyo BBB · session 5 takeaway label fits path",
+   "pass": true,
+   "info": "Tu filtroHorario de atención y DocumentosPregunta antes de ir o llamar¿Qué horar"
+  },
+  {
+   "name": "S5 empleo asks about an opportunity",
+   "pass": true,
+   "info": "¿Qué tendría que respetar una oportunidad para que cupiera de verdad en tu vida?"
+  },
+  {
+   "name": "S5 apoyo asks about a trámite",
+   "pass": true,
+   "info": "¿Qué tendría que respetar este trámite o apoyo para que puedas hacerlo de verdad?"
+  },
+  {
+   "name": "S5 negocio asks about a first test",
+   "pass": true,
+   "info": "Para una primera prueba de tu idea, ¿qué tendría que cumplir?"
+  },
+  {
+   "name": "S7 empleo reply mentions an offer",
+   "pass": true,
+   "info": "Una prueba sin costo ni exposición: compara tu frase con una oferta real sin enviarla y anota qué coincide."
+  },
+  {
+   "name": "S7 apoyo reply does not assume a job offer",
+   "pass": true,
+   "info": "Una prueba pequeña: lleva tu mensaje al lugar que elegiste, o pregunta solo el primer dato. Si hoy no puedes ir, guardarlo para cuando puedas también cuenta."
+  },
+  {
+   "name": "S7 negocio reply is a no-cost ask",
+   "pass": true,
+   "info": "Una prueba sin gastar: pregunta a dos personas si les serviría tu idea y anota qué dicen. No hace falta vender todavía."
+  },
+  {
+   "name": "Support path names no specific service, address or phone number",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "Change path S4: empleo → apoyo swaps the question",
+   "pass": true,
+   "info": "{\"before\":\"¿Qué experiencia verdadera muestra una habilidad útil para ese puesto?\",\"after\":\"¿Dónde podrías preguntar por lo que quieres aclarar?\",\"none\":\"end\"}"
+  },
+  {
+   "name": "Change path to «Ninguno» skips the path question",
+   "pass": true,
+   "info": "end"
+  },
+  {
+   "name": "Skip all of session 1: no reply, calm takeaway",
+   "pass": true,
+   "info": "{\"skipEnd\":\"end\",\"skipTake\":\"HoyNo elegiste un tema, y está bien. Puedes volver cuando quieras.\",\"skipBubbles\":0,\"low\":\"Está bien. No se pierde nada: lo que respondiste queda guardado y puedes volver cuando quieras.\",\"lowNav\":true,\"resume\":\"Buscar ayuda ahora\",\"entry\":1,\"resumeAt\":\"r:tema\",\"gapRecap\":\"La última vez te llevaste · Tu situación hoy: No alcanza\",\"corrQ\":\"q:pregunta\",\"corrRep\":\"Entendido, es sobre tu hermana. La pregunta útil es qué día le pagan a ella, y quien mejor la responde es ella misma o quien le paga.\"}"
+  },
+  {
+   "name": "«Hoy no puedo» accepted with no task",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "Stop and resume returns to the same step",
+   "pass": true,
+   "info": "r:tema"
+  },
+  {
+   "name": "Gap return uses «La última vez te llevaste»",
+   "pass": true,
+   "info": "La última vez te llevaste · Tu situación hoy: No alcanza"
+  },
+  {
+   "name": "Correction updates the reply without argument",
+   "pass": true,
+   "info": "Entendido, es sobre tu hermana. La pregunta útil es qué día le pagan a ella, y quien mejor la responde es ella misma o quien le paga."
+  },
+  {
+   "name": "Reply B: one bubble at the end, correction returns to that question",
+   "pass": true,
+   "info": "{\"atEnd\":\"end\",\"n\":1,\"back\":\"q:condicion\"}"
+  },
+  {
+   "name": "S6 apoyo offers «Copiar mi mensaje»",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S1 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S1 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S1 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S2 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S2 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S2 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S4 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S4 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S4 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S5 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S5 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S5 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S6 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S6 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S6 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S7 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S7 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 100% · S7 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S1 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S1 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S1 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S2 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S2 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S2 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S4 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S4 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S4 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S5 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S5 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S5 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S6 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S6 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S6 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S7 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S7 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 160% · S7 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S1 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S1 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S1 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S2 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S2 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S2 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S4 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S4 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S4 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S5 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S5 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S5 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S6 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S6 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S6 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S7 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S7 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 100% · S7 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S1 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S1 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S1 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S2 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S2 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S2 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S4 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S4 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S4 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S5 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S5 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S5 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S6 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S6 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S6 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S7 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S7 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphonese 160% · S7 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S1 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S1 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S1 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S2 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S2 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S2 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S4 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S4 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S4 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S5 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S5 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S5 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S6 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S6 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S6 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S7 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S7 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 100% · S7 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S1 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S1 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S1 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S2 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S2 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S2 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S4 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S4 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S4 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S5 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S5 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S5 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S6 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S6 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S6 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S7 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S7 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "pixel8 160% · S7 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S1 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S1 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S1 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S2 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S2 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S2 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S4 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S4 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S4 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S5 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S5 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S5 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S6 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S6 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S6 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S7 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S7 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 100% · S7 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S1 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S1 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S1 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S2 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S2 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S2 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S4 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S4 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S4 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S5 q · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S5 q · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S5 q · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S6 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S6 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S6 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S7 end · no horizontal overflow",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S7 end · targets ≥ 44",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "android360 160% · S7 end · text ≥ 14 px",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "iphone15 · keyboard: input and action above the keyboard",
+   "pass": true,
+   "info": "{\"taAbove\":true,\"btnAbove\":true,\"kbAfterBack\":false}"
+  },
+  {
+   "name": "iphone15 · keyboard: Back closes the keyboard first",
+   "pass": true,
+   "info": "{\"taAbove\":true,\"btnAbove\":true,\"kbAfterBack\":false}"
+  },
+  {
+   "name": "iphonese · keyboard: input and action above the keyboard",
+   "pass": true,
+   "info": "{\"taAbove\":true,\"btnAbove\":true,\"kbAfterBack\":false}"
+  },
+  {
+   "name": "iphonese · keyboard: Back closes the keyboard first",
+   "pass": true,
+   "info": "{\"taAbove\":true,\"btnAbove\":true,\"kbAfterBack\":false}"
+  },
+  {
+   "name": "pixel8 · keyboard: input and action above the keyboard",
+   "pass": true,
+   "info": "{\"taAbove\":true,\"btnAbove\":true,\"kbAfterBack\":false}"
+  },
+  {
+   "name": "pixel8 · keyboard: Back closes the keyboard first",
+   "pass": true,
+   "info": "{\"taAbove\":true,\"btnAbove\":true,\"kbAfterBack\":false}"
+  },
+  {
+   "name": "android360 · keyboard: input and action above the keyboard",
+   "pass": true,
+   "info": "{\"taAbove\":true,\"btnAbove\":true,\"kbAfterBack\":false}"
+  },
+  {
+   "name": "android360 · keyboard: Back closes the keyboard first",
+   "pass": true,
+   "info": "{\"taAbove\":true,\"btnAbove\":true,\"kbAfterBack\":false}"
+  },
+  {
+   "name": "tester t1 gets its assigned variants",
+   "pass": true,
+   "info": "{\"vr\":{\"s2\":\"A\",\"recap\":\"A\",\"reply\":\"A\"},\"exp\":{\"s2\":\"A\",\"recap\":\"A\",\"reply\":\"A\"},\"code\":\"T1\",\"ctl\":false}"
+  },
+  {
+   "name": "tester t2 gets its assigned variants",
+   "pass": true,
+   "info": "{\"vr\":{\"s2\":\"A\",\"recap\":\"B\",\"reply\":\"B\"},\"exp\":{\"s2\":\"A\",\"recap\":\"B\",\"reply\":\"B\"},\"code\":\"T2\",\"ctl\":false}"
+  },
+  {
+   "name": "tester t3 gets its assigned variants",
+   "pass": true,
+   "info": "{\"vr\":{\"s2\":\"B\",\"recap\":\"A\",\"reply\":\"B\"},\"exp\":{\"s2\":\"B\",\"recap\":\"A\",\"reply\":\"B\"},\"code\":\"T3\",\"ctl\":false}"
+  },
+  {
+   "name": "tester t4 gets its assigned variants",
+   "pass": true,
+   "info": "{\"vr\":{\"s2\":\"B\",\"recap\":\"B\",\"reply\":\"A\"},\"exp\":{\"s2\":\"B\",\"recap\":\"B\",\"reply\":\"A\"},\"code\":\"T4\",\"ctl\":false}"
+  },
+  {
+   "name": "tester t5 gets its assigned variants",
+   "pass": true,
+   "info": "{\"vr\":{\"s2\":\"B\",\"recap\":\"B\",\"reply\":\"B\"},\"exp\":{\"s2\":\"B\",\"recap\":\"B\",\"reply\":\"B\"},\"code\":\"T5\",\"ctl\":false}"
+  },
+  {
+   "name": "tester t6 gets its assigned variants",
+   "pass": true,
+   "info": "{\"vr\":{\"s2\":\"B\",\"recap\":\"A\",\"reply\":\"A\"},\"exp\":{\"s2\":\"B\",\"recap\":\"A\",\"reply\":\"A\"},\"code\":\"T6\",\"ctl\":false}"
+  },
+  {
+   "name": "tester t7 gets its assigned variants",
+   "pass": true,
+   "info": "{\"vr\":{\"s2\":\"A\",\"recap\":\"B\",\"reply\":\"A\"},\"exp\":{\"s2\":\"A\",\"recap\":\"B\",\"reply\":\"A\"},\"code\":\"T7\",\"ctl\":false}"
+  },
+  {
+   "name": "tester t8 gets its assigned variants",
+   "pass": true,
+   "info": "{\"vr\":{\"s2\":\"A\",\"recap\":\"A\",\"reply\":\"B\"},\"exp\":{\"s2\":\"A\",\"recap\":\"A\",\"reply\":\"B\"},\"code\":\"T8\",\"ctl\":false}"
+  },
+  {
+   "name": "tester page makes no network requests",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "tester notes stay in this browser for the same code",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "tester page has «Copiar notas» and the Prototipo label",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "no code: picker shown, «al azar» assigns a code in the URL",
+   "pass": true,
+   "info": "{\"pick\":true,\"hash\":\"#t5\"}#t5"
+  },
+  {
+   "name": "tester page at 390 px wide: no horizontal scroll",
+   "pass": true,
+   "info": "extra 0"
+  },
+  {
+   "name": "tester page at 360 px wide: no horizontal scroll",
+   "pass": true,
+   "info": "extra 0"
+  },
+  {
+   "name": "t1–t4 balance every variant 2/2",
+   "pass": true,
+   "info": "{\"s2A\":2,\"recapA\":2,\"replyA\":2,\"recapB\":2,\"replyB\":2,\"s2B\":2}"
+  },
+  {
+   "name": "no page errors",
+   "pass": true,
+   "info": ""
+  }
+ ]
+}
