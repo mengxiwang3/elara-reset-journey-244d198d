@@ -24,7 +24,17 @@ const concepts = {
         css: ["c2.css"], js: ["content.js", "shared.js", "c2.content.js", "c2.js"],
         fine: FINE + " Ojo: C v2 ya no usa exactamente los mismos textos ni respuestas que A, B y C v1. Los textos nuevos son una propuesta, pendiente de María y Alejandra.",
         back: "← Todas las propuestas" },
+  d1: { title: "Elara · Dirección 1: Tarjeta de colección", h: "D1 · Tarjeta de colección",
+        p: "Sus palabras se convierten en un objeto: su elección se vuelve un sello dentado, el cierre lo matasella «Wuzhen · Día 1» y el farol queda sujeto con cinta. En Hoy vive en un álbum de la semana.",
+        css: ["c2.css", "d.css", "d1.css"], js: ["content.js", "shared.js", "c2.content.js", "d1.js", "c2.js"], fine: "", back: "← Comparar direcciones", backHref: "compare-directions.html" },
+  d2: { title: "Elara · Dirección 2: Paseo por el canal", h: "D2 · Paseo por el canal",
+        p: "La sesión es un paseo corto por Wuzhen: la barca avanza por una línea de canal con paradas, el paisaje cambia en cada una y al llegar al farol se lo lleva. En Hoy, su nota queda clavada en la postal.",
+        css: ["c2.css", "d.css", "d2.css"], js: ["content.js", "shared.js", "c2.content.js", "d2.js", "c2.js"], fine: "", back: "← Comparar direcciones", backHref: "compare-directions.html" },
+  d3: { title: "Elara · Dirección 3: Con Elara", h: "D3 · Con Elara",
+        p: "El orbe de Elara acompaña: presenta el día con una frase, se aparta a una esquina mientras ella escribe (sin moverse) y vuelve para recibir sus palabras y devolverle la tarjeta sellada.",
+        css: ["c2.css", "d.css", "d3.css"], js: ["content.js", "shared.js", "c2.content.js", "d3.js", "c2.js"], fine: "", back: "← Comparar direcciones", backHref: "compare-directions.html" },
 };
+const DFINE = "Dirección visual sobre C v2: mismas preguntas, mismas respuestas de ejemplo y mismas respuestas simuladas («Respuesta simulada»); solo cambia la experiencia. Sin datos reales ni IA. Textos nuevos: propuesta, pendiente de María y Alejandra.";
 
 const only = process.argv.slice(2);
 for (const [k, c] of Object.entries(concepts)) {
@@ -56,8 +66,8 @@ ${css.map(read).join("\n")}
     <p>${c.p}</p>
     <p><span class="rtag">Contenido actual de la app (aprobación por confirmar)</span></p>
     <div id="rev-controls"></div>
-    <p class="fine">${c.fine || FINE}</p>
-    <p><a href="index.html">${c.back || "← Las tres propuestas"}</a></p>
+    <p class="fine">${c.fine === "" ? DFINE : c.fine || FINE}</p>
+    <p><a href="${c.backHref || "index.html"}">${c.back || "← Las tres propuestas"}</a></p>
   </aside>
 </div>
 <script>

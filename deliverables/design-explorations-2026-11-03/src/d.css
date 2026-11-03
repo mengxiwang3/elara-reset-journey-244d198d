@@ -1,0 +1,30 @@
+/* =====================================================================
+ * Shared by the three design directions (d1–d3), on top of c2.css.
+ * Removes the generic defaults: no pill buttons, no dashed tags, no soft
+ * rounded "card" treatment on every element. Character comes from each
+ * direction's own file.
+ * ===================================================================== */
+:root{--desk:#EFE6D7;--ink-soft:#3B332E;--rule:#CBBFAE}
+.btn{border-radius:4px;letter-spacing:.01em}
+.btn.ghost{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.btn.line{border-width:1.5px}
+.btn.sm{border-radius:4px}
+.icon-btn{border-radius:4px}
+/* reviewer tags: a solid hairline, set small and uppercase, so they still read as annotations */
+.rtag{border:1px solid #8C827A;border-radius:0;background:#FFFFFF;text-transform:uppercase;letter-spacing:.06em;font-size:13px;padding:2px 6px}
+.rtag.sim{border-color:#B8441A;background:#FFFFFF;color:#7E3514}
+.sample-btn{border:1px solid var(--line);border-radius:4px}
+/* Elara's notes: a ruled aside in her voice, not another rounded card */
+.enote2{background:transparent;border-left:3px solid #E39B76;border-radius:0;margin-top:18px}
+.enote2 .en-hd{border-radius:0;padding-left:12px}
+.enote2 .txt{padding:0 12px 4px 14px}
+.enote2.err{background:#FFFFFF;border:1px solid var(--rule);border-left:3px solid var(--muted)}
+.enote2.load{padding-left:12px}
+.banner{border-radius:0;background:transparent;border-left:3px solid var(--forest);padding:6px 12px}
+.notice{border-radius:0}
+.choice-row{border-radius:0}
+.today-card,.post,.tcard,.minicard{border-radius:2px}
+textarea.write{border-radius:2px}
+.opt{border-radius:2px}
+/* entry fade is the safe default; each direction adds motion only when motion is allowed */
+@keyframes dFade{from{opacity:0}to{opacity:1}}

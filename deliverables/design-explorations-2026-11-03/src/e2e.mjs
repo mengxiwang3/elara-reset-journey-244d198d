@@ -9,7 +9,8 @@ import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 const { chromium } = createRequire(import.meta.url)("playwright");
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const which = process.argv.slice(2).length ? process.argv.slice(2) : ["a", "b", "c", "c2"];
+const which = process.argv.slice(2).length ? process.argv.slice(2) : ["a", "b", "c", "c2", "d1", "d2", "d3"];
+const S_LEAVE = '[data-act="leave"]';
 const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 393, height: 852 } });
 const errs = []; p.on("pageerror", (e) => errs.push(e.message));
@@ -20,7 +21,7 @@ const txt = async () => (await p.locator("#app").innerText()).replace(/\s+/g, " 
 const expect = async (s, label) => ok((await txt()).includes(s), label + " ⇒ " + s);
 const url = (k) => pathToFileURL(join(root, k + ".html")).href;
 
-for (const k of which.filter((x) => x !== "c2")) {
+for (const k of which.filter((x) => ["a", "b", "c"].includes(x))) {
   console.log("--", k);
   await p.goto(url(k)); await p.evaluate(() => localStorage.clear()); await p.reload();
   await tap('[data-act="start"]');
@@ -131,7 +132,7 @@ if (which.includes("c2")) {
   ok((await txt()).includes(T.sum1), "fixed summary: 1 de 2");
   ok(!(await txt()).includes("Mañana partimos de lo que elegiste hoy"), "no bridge line that would assume a choice");
   await tap('[data-act="toHoy"]');
-  ok((await p.locator("#app .today-card").innerText()).includes(T.empty), "Hoy card: «Sin nota hoy»");
+  { const hc = await p.locator("#app .today-card").innerText(); ok(hc.includes("Listo por hoy") && !hc.includes(T.empty) && !hc.includes(NONE), "Hoy card: «Listo por hoy», nothing quoted (no «Ninguna», no «Sin nota hoy»)"); }
 
   // 4b · «Ninguna por ahora», then writing: template quotes her words verbatim
   await fresh(); await toStep1(); await choose(NONE); await think();
@@ -170,7 +171,7 @@ if (which.includes("c2")) {
   ok(!(await has(".chip")) && (await count(".tcard .skipped")) === 2, "Tu colección: no «Frase», both slots skipped");
   await tap('[data-act="back"]'); await tap('[data-act="toHoy"]');
   ok((await has(".disc.done")) && (await txt()).includes("1 de 7"), "both skipped: keepsake and progress still count");
-  ok((await count(".today-card .skipped")) === 2, "Hoy card: both skipped, nothing invented");
+  { const hc = await p.locator("#app .today-card").innerText(); ok(hc.includes("Listo por hoy") && hc.includes("farol de papel") && !hc.includes("«"), "Hoy card: both skipped, «Listo por hoy» + keepsake, nothing invented"); }
 
   // 8 · leave mid-draft, reload, resume
   await fresh(); await toStep1(); await choose(MEJ); await think();
@@ -258,6 +259,126 @@ if (which.includes("c2")) {
   const allNotes = await p.evaluate(() => [...Object.values(C2.askNotes), C2.takeTailored, C2.takeTemplate("x"), C2.summary(0), C2.summary(1), C2.summary(2), C2.purposeLine]);
   allNotes.forEach((x) => { if (GRADE.test(x) || PROMISE.test(x)) hits.push("copy: " + x.slice(0, 50)); });
   ok(hits.length === 0, `no grading words or day-9 promises on ${views.s} screens + ${views.p} states (after replies land) or in the reply copy` + (hits.length ? " ⇒ " + hits.join(" | ") : ""));
+}
+
+
+// ---- shared behaviour suite: the baseline and the three directions must behave the same ----
+const CORE = which.filter((k) => k === "c2" || /^d[123]$/.test(k));
+for (const k of CORE) {
+  console.log(`-- ${k} (shared behaviour)`);
+  const SAMPLE = "Preguntar a mi encargada si hay formación gratuita para subir de puesto.";
+  const EDITED = "Preguntar a mi encargada si hay formación gratuita y en qué horario.";
+  const MEJ = "Mejorar mi trabajo actual", NONE = "Ninguna por ahora";
+  const fresh = async () => { await p.setViewportSize({ width: 393, height: 852 }); await p.goto(url(k)); await p.evaluate(() => localStorage.clear()); await p.reload(); await p.waitForTimeout(150); };
+  const has = async (sel) => (await p.locator("#app " + sel).count()) > 0;
+  const value = async () => p.locator("#app textarea").inputValue();
+  const think = () => p.waitForTimeout(1800);
+  const T = await (async () => { await fresh(); return p.evaluate(() => ({ notes: C2.askNotes, tailored: C2.takeTailored, tpl: C2.takeTemplate("§"), rest: C2.restTitle, updated: C2.updated, keep: C.meta.keepsake })); })();
+  const toStep1 = async () => { await tap('[data-act="start"]'); await tap('[data-act="toAsk"]'); };
+  const choose = async (o) => { await tap(`[data-act="pick"][data-arg="${o}"]`); await tap('[data-act="askNext"]'); };
+  const hoyTop = async (needle) => p.evaluate((n) => {
+    const tabs = document.querySelector("#app .tabs").getBoundingClientRect();
+    const w = document.createTreeWalker(document.querySelector("#app .scroll"), NodeFilter.SHOW_TEXT); let x;
+    while ((x = w.nextNode())) if (x.textContent.includes(n)) { const r = x.parentElement.getBoundingClientRect(); return r.top > 0 && r.bottom < tabs.top; }
+    return false; }, needle);
+
+  // happy path + calm writing + non-blocking close
+  await toStep1(); await choose(MEJ); await think();
+  await expect(T.notes[MEJ], "step 1 note for her option");
+  ok((await p.locator("#app .rtag.sim").count()) >= 1, "note labelled «Respuesta simulada»");
+  await p.locator("#app textarea").click(); await p.locator("#app textarea").pressSequentially("Preguntar", { delay: 30 });
+  const running = await p.evaluate(() => document.getAnimations().filter((a) => a.playState === "running" && !(a.effect && a.effect.target && a.effect.target.closest && a.effect.target.closest(".dots"))).length);
+  ok(running === 0, "writing is calm: nothing animates while she types");
+  await p.locator("#app textarea").fill(SAMPLE);
+  await p.locator('#app [data-act="finish"]').click(); await p.waitForTimeout(40);
+  ok(await p.locator('#app .foot [data-act="toHoy"]').isEnabled(), "close: «Volver a Hoy» usable at once (no animation to wait through)");
+  await think();
+  await expect(T.tailored, "closing note quotes her sample answer");
+  await expect("Preguntar a mi encargada si hay formación gratuita para subir de puesto", "her words are on the card");
+  await tap('[data-act="toHoy"]');
+  ok(await hoyTop("Preguntar a mi encargada"), "Hoy: her takeaway is visible without scrolling");
+  ok(!(await txt()).includes("Respuesta simulada"), "Hoy: no simulated reply shown as her content");
+
+  // edit from Hoy: back to step 2 with her words, the card updates everywhere
+  await tap('[data-act="edit"]');
+  ok((await value()) === SAMPLE, "«Editar» from Hoy opens step 2 with her words");
+  await expect("Estás editando tu tarjeta de hoy.", "editing banner");
+  await p.locator("#app textarea").fill(EDITED);
+  await tap('[data-act="finish"]'); await think();
+  await expect(T.updated, "«Tarjeta actualizada.» after saving");
+  ok((await txt()).includes("en qué horario") && !(await txt()).includes("para subir de puesto"), "the close shows the edited words only");
+  await tap('[data-act="toHoy"]');
+  ok((await txt()).includes("en qué horario"), "Hoy shows the edited card");
+
+  // edit from the close, then discard
+  await tap('[data-act="review"]'); await tap('[data-act="edit"]');
+  ok((await value()) === EDITED, "«Editar» from the close opens step 2 with her words");
+  await p.locator("#app textarea").fill("algo que no guardo");
+  await tap('[data-act="cancelEdit"]');
+  ok((await txt()).includes("en qué horario") && !(await txt()).includes("algo que no guardo"), "discarding an edit restores the card");
+
+  // no-disclosure closes: «Ninguna por ahora» without a note, and both skipped
+  await fresh(); await toStep1(); await choose(NONE); await think(); await tap('[data-act="finishEmpty"]');
+  let t = await txt();
+  const low = (x) => x.toLowerCase();
+  ok(low(t).includes(low(T.rest)) && t.includes(T.keep), "«Ninguna», no note: «Listo por hoy» with the keepsake");
+  ok(!/«[^»]+»/.test(t.replace(/«Ninguna por ahora»/g, "")), "«Ninguna», no note: nothing quoted on the close");
+  await tap('[data-act="toHoy"]'); t = await txt();
+  ok(low(t).includes(low(T.rest)) && !t.includes(NONE) && !/«[^»]+»/.test(t) && !t.includes("Respuesta simulada"), "«Ninguna», no note: Hoy quotes nothing and does not show «Ninguna»");
+  await fresh(); await toStep1(); await tap('[data-act="askSkip"]'); await tap('[data-act="takeSkip"]');
+  t = await txt();
+  ok(low(t).includes(low(T.rest)) && t.includes(T.keep) && !t.includes("Respuesta simulada") && !/«[^»]+»/.test(t), "both skipped: «Listo por hoy», keepsake, no reply, nothing quoted");
+  await tap('[data-act="toHoy"]'); t = await txt();
+  ok(low(t).includes(low(T.rest)) && t.includes("1 de 7") && !/«[^»]+»/.test(t), "both skipped: Hoy counts the day, quotes nothing");
+
+  // «Cambiar» keeps the draft; leave mid-draft and resume
+  await fresh(); await toStep1(); await choose(MEJ); await think();
+  await p.locator("#app textarea").fill("Mi borrador");
+  await tap('[data-act="change"]'); await choose("Cobrar un pago pendiente");
+  ok((await value()) === "Mi borrador" && (await has("#changed")), "«Cambiar» to another option keeps the draft, shows the notice");
+  await tap(S_LEAVE);
+  await p.locator('#sheet [data-act="leaveConfirm"]').click(); await p.waitForTimeout(150);
+  await p.reload(); await p.waitForTimeout(200);
+  ok((await txt()).includes("Mi borrador"), "Hoy: resume entry shows the draft after a reload");
+  await tap('[data-act="start"]');
+  ok((await value()) === "Mi borrador", "resume restores the draft");
+
+  // offline: one retry, one continue
+  await fresh(); await p.locator('[data-mode="error"]').click(); await toStep1(); await choose(MEJ); await think();
+  ok((await p.locator('#app [data-act="retry"]').count()) === 1 && (await p.locator('#app [data-act="skipWait"]').count()) === 1, "offline: one «Reintentar», one «Seguir sin la nota de Elara»");
+  await tap('[data-act="retry"]'); await think();
+  await expect(T.notes[MEJ], "retry: the note arrives");
+  await p.locator('[data-mode="ok"]').click();
+
+  // keyboard open at 393 / 100 % and 360 / 160 %
+  for (const [w, h, sc] of [[393, 852, 1], [360, 780, 1.6]]) {
+    await p.setViewportSize({ width: w, height: h });
+    const KB = await p.evaluate(() => [...document.querySelectorAll("[data-preset]")].findIndex((x) => x.textContent === "Teclado abierto"));
+    await p.evaluate(([i, s]) => { window.proto.text(s); window.proto.preset(i); }, [KB, sc]); await p.waitForTimeout(300);
+    await p.evaluate(() => window.scrollTo(0, 0)); // the reviewer panel sits below the phone at this width
+    const kb = await p.evaluate(() => { const r = (s) => document.querySelector(s).getBoundingClientRect(); const k = r("#app .kbd"), f = r("#app textarea.write"), b = r("#finish"), c = r("#app .scroll");
+      return { open: !!document.querySelector("#app .scr.kb"), field: f.top >= c.top - 1 && f.bottom <= c.bottom + 1, btn: b.bottom <= k.top + .5 && b.top >= 0 }; });
+    ok(kb.open && kb.field && kb.btn, `keyboard at ${w}/${sc * 100} %: field and primary button above it`);
+    await p.evaluate(() => window.proto.text(1));
+  }
+
+  // reduced motion: the close only fades
+  await fresh(); await p.click('[data-motion="rm"]');
+  const FIN = await p.evaluate(() => [...document.querySelectorAll("[data-screen]")].findIndex((x) => x.textContent === "Tarjeta lista"));
+  await p.evaluate(() => { P.fx.finish = true; }); await p.evaluate((i) => window.proto.go(i), FIN); await p.waitForTimeout(30);
+  const props = await p.evaluate(() => document.getAnimations().flatMap((a) => a.effect.getKeyframes().flatMap((f) => Object.keys(f))).filter((x) => !["offset", "easing", "composite", "computedOffset", "opacity"].includes(x)));
+  ok(props.length === 0, "reduced motion: only opacity animates" + (props.length ? " ⇒ " + [...new Set(props)].join(", ") : ""));
+  await p.click('[data-motion="full"]');
+
+  // no grading words anywhere
+  const GRADE = /(^|[^a-záéíóúñü])(bien|válid[ao]s?|perfect[ao]s?|genial|excelente|estupend[ao]s?|fantástic[ao]s?|correct[ao]s?|buen[ao]?s?(?! días)|muy útil)(?=$|[^a-záéíóúñü])/i;
+  const n = await p.evaluate(() => ({ s: document.querySelectorAll("[data-screen]").length, p: document.querySelectorAll("[data-preset]").length }));
+  const hits = [];
+  for (const [kind, c] of [["go", n.s], ["preset", n.p]]) for (let i = 0; i < c; i++) {
+    await p.evaluate(([kind, i]) => window.proto[kind](i), [kind, i]); await p.waitForTimeout(kind === "preset" ? 1750 : 1750);
+    const g = (await txt()).match(GRADE); if (g) hits.push(`${kind} ${i}: ${g[2]}`);
+  }
+  ok(hits.length === 0, `no grading words on ${n.s} screens + ${n.p} states` + (hits.length ? " ⇒ " + hits.join(" | ") : ""));
 }
 
 console.log(errs.length ? "JS errors: " + errs.join(" | ") : "no JS errors");

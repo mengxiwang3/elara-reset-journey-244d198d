@@ -12,9 +12,12 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const which = process.argv.slice(2).length ? process.argv.slice(2) : ["a", "b", "c", "c2"];
+const which = process.argv.slice(2).length ? process.argv.slice(2) : ["a", "b", "c", "c2", "d1", "d2", "d3"];
+const AUD = (k) => k === "c2" || /^d[123]$/.test(k);
 const slug = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-const LARGE = ["Por qué hoy", "Paso 1 elegido", "Paso 2 escrito", "Teclado abierto", "Sin conexión", "Opción cambiada", "Tarjeta lista", "Pasó las dos", "Borrador sin terminar (Hoy)", "Hoy después"];
+const LARGE = ["Por qué hoy", "Paso 1 elegido", "Paso 2 escrito", "Teclado abierto", "Sin conexión", "Opción cambiada", "Tarjeta lista", "Pasó las dos", "Ninguna, sin nota (cierre)", "Editando la tarjeta", "Borrador sin terminar (Hoy)", "Hoy después"];
+// key screens captured again with reduced motion (and checked: only opacity may animate)
+const RM = ["Por qué hoy", "Paso 2 escrito", "Teclado abierto", "Tarjeta lista", "Hoy después", "Pasó las dos", "Ninguna, sin nota (cierre)"];
 
 /* ---- runs inside the page ---- */
 function audit() {
@@ -34,7 +37,7 @@ function audit() {
     }
     return { col, img, op };
   };
-  const shown = (el) => { const cs = getComputedStyle(el), r = el.getBoundingClientRect(); return cs.visibility !== "hidden" && cs.display !== "none" && r.width > 0 && r.height > 0; };
+  const shown = (el) => { const cs = getComputedStyle(el), r = el.getBoundingClientRect(); return !el.closest("[aria-hidden=true]") && cs.visibility !== "hidden" && cs.display !== "none" && r.width > 0 && r.height > 0; };
   const label = (el) => (el.getAttribute("aria-label") || el.textContent || el.placeholder || "").replace(/\s+/g, " ").trim().slice(0, 48);
   const out = { texts: [], minFont: null, minProduct: null, small: [], overflow: [], clipped: [], overlaps: [] };
   const scope = [...phone.querySelectorAll("#app *, #sheet *, #toast")];
@@ -121,11 +124,11 @@ for (const k of which) {
     const list = await page.evaluate(() => [...document.querySelectorAll("[data-screen]")].map((b) => b.textContent));
     const presets = await page.evaluate(() => [...document.querySelectorAll("[data-preset]")].map((b) => b.textContent));
     const jobs = [...list.map((n, i) => ["s", i, n]), ...presets.map((n, i) => ["p", i, n])];
-    const v2 = k === "c2";
+    const v2 = AUD(k);
     const shoot = async (t, i, n, file) => {
       await page.evaluate(([t, i]) => (t === "s" ? window.proto.go(i) : window.proto.preset(i)), [t, i]);
-      await page.waitForTimeout(260);
-      if (v2) record(await page.evaluate(audit), `${w} ${file.replace(/^c2-\d+-/, "").replace(".png", "")}`);
+      await page.waitForTimeout(/-rm-/.test(file) ? 60 : 650);
+      if (v2) record(await page.evaluate(audit), file.replace(".png", ""));
       else {
         const issues = await page.evaluate(() => {
           const out = []; const app = document.querySelector("#app"); const W = app.getBoundingClientRect().right + 0.5;
@@ -135,6 +138,12 @@ for (const k of which) {
         });
         issues.forEach((x) => problems.push(`${k} ${w} ${n}: ${x}`));
       }
+      if (v2 && /-rm-/.test(file)) {
+        const bad = await page.evaluate(() => document.getAnimations().flatMap((a) => (a.effect && a.effect.getKeyframes ? a.effect.getKeyframes() : []).flatMap((kf) => Object.keys(kf).filter((p) => !["offset", "easing", "composite", "computedOffset", "opacity"].includes(p)))));
+        if (bad.length) problems.push(`${file}: reduced motion still animates ${[...new Set(bad)].join(", ")}`);
+        report.rmChecked = (report.rmChecked || 0) + 1;
+      }
+      await page.evaluate(() => window.scrollTo(0, 0)); // reviewer clicks can scroll the page at phone width
       await page.screenshot({ path: join(root, "shots", file) });
       const tall = await page.evaluate(() => { const s = document.querySelector("#app .scroll"); return s && s.scrollHeight > s.clientHeight + 40 ? (s.scrollTop = s.scrollHeight, true) : false; });
       if (tall && (w === 393 || /-t1[36]0-/.test(file))) { await page.waitForTimeout(80); await page.screenshot({ path: join(root, "shots", file.replace(".png", "-scrolled.png")) }); }
@@ -154,15 +163,27 @@ for (const k of which) {
         }
       }
       await page.evaluate(() => window.proto.text(1));
+      await page.click('[data-motion="rm"]');
+      for (const n of RM) {
+        const si = list.indexOf(n), pi = presets.indexOf(n);
+        await shoot(si >= 0 ? "s" : "p", si >= 0 ? si : pi, n, `${k}-${w}-rm-${slug(n)}.png`);
+      }
+      await page.evaluate(() => window.proto.text(1.6));
+      for (const n of ["Tarjeta lista", "Hoy después"]) {
+        const si = list.indexOf(n);
+        await shoot("s", si, n, `${k}-${w}-rm-t160-${slug(n)}.png`);
+      }
+      await page.evaluate(() => window.proto.text(1));
+      await page.click('[data-motion="full"]');
     }
     await page.close();
   }
 }
 
 // the reviewer panel (outside the phone) is checked once, at desktop width
-if (which.includes("c2")) {
+for (const k of which.filter(AUD)) {
   const page = await browser.newPage({ viewport: { width: 1280, height: 1000 } });
-  await page.goto(pathToFileURL(join(root, "c2.html")).href);
+  await page.goto(pathToFileURL(join(root, k + ".html")).href);
   await page.waitForTimeout(300);
   const panel = await page.evaluate(() => {
     const out = { minFont: 99, small: [] };
@@ -173,23 +194,26 @@ if (which.includes("c2")) {
     });
     return out;
   });
-  report.panel = panel;
-  await page.screenshot({ path: join(root, "shots", "c2-desktop-1280.png") });
+  report.panel = report.panel ? { minFont: Math.min(report.panel.minFont, panel.minFont), small: report.panel.small.concat(panel.small) } : panel;
+  await page.screenshot({ path: join(root, "shots", `${k}-desktop-1280.png`) });
   await page.close();
 }
 await browser.close();
 
-if (which.includes("c2")) {
+if (which.some(AUD)) {
+  console.log(`reduced-motion captures checked (only opacity may animate): ${report.rmChecked || 0}`);
   const uniq = new Map();
   for (const x of report.lowest.sort((a, b) => a.r - b.r)) if (!uniq.has(x.t)) uniq.set(x.t, x);
-  console.log(`c2 audit: ${report.shots} captures, ${report.texts} text checks, ${report.images} over an image`);
+  console.log(`audit (${which.filter(AUD).join(", ")}): ${report.shots} captures, ${report.texts} text checks, ${report.images} over an image`);
   console.log(`contrast failures: ${report.fails.length}`); report.fails.slice(0, 20).forEach((f) => console.log("  " + f));
   console.log("lowest contrast (unique texts):"); [...uniq.values()].slice(0, 8).forEach((x) => console.log(`  ${x.r}:1 (needs ${x.need}, ${x.size}px) "${x.t}" [${x.where}]`));
   console.log(`smallest text: ${report.minFont.size}px "${report.minFont.t}" [${report.minFont.where}]`);
   console.log(`smallest product-UI text (reviewer tags excluded): ${report.minProduct.size}px "${report.minProduct.t}" [${report.minProduct.where}]`);
   console.log(`targets under 44px: ${report.small.size}`); [...report.small].slice(0, 20).forEach((s) => console.log("  " + s));
   console.log(`horizontal overflow: ${report.overflow.size}`); [...report.overflow].slice(0, 20).forEach((s) => console.log("  " + s));
-  console.log(`text wider/taller than its box: ${report.clipped.size}`); [...report.clipped].slice(0, 30).forEach((s) => console.log("  " + s));
+  console.log(`text wider/taller than its box: ${report.clipped.size}`);
+  { const g = {}; [...report.clipped].forEach((x) => { const [f, ...r] = x.split(": "); const key = f.split("-")[0] + " · " + r.join(": "); (g[key] = g[key] || []).push(f.split("-").slice(1).join("-")); });
+    Object.entries(g).forEach(([k, v]) => console.log(`  ${k}  ×${v.length}  e.g. ${v[0]}`)); }
   console.log(`overlapping text: ${report.overlaps.size}`); [...report.overlaps].slice(0, 30).forEach((s) => console.log("  " + s));
   console.log(`reviewer panel: smallest text ${report.panel.minFont}px, buttons under 44px: ${report.panel.small.length}`);
 }

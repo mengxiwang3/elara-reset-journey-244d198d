@@ -276,7 +276,8 @@ button.en-hd{cursor:pointer}
 #sheet p{color:var(--body);font-size:1.0625rem;line-height:1.45}
 #sheet .tagline{margin:10px 0 16px}
 #toast{position:absolute;left:16px;right:16px;bottom:96px;z-index:70;background:var(--forest-ink);color:#fff;border-radius:14px;padding:12px 16px;
-  font-size:1rem;line-height:1.35;opacity:0;transform:translateY(8px);transition:.25s;pointer-events:none}
+  font-size:1rem;line-height:1.35;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none}
+html.rm #toast{transform:none;transition:opacity .25s}
 #toast.on{opacity:1;transform:none}
 
 /* ---------- simulated iOS keyboard (px / container units, not scaled) ---------- */
@@ -304,3 +305,20 @@ button.en-hd{cursor:pointer}
 .scr.kb .foot .btn.ghost{order:-1;width:auto;flex:0 1 auto;padding:.375rem .625rem}
 /* side by side at 100 %; at larger text the primary button takes its own row instead of squeezing */
 .scr.kb .foot .btn:not(.ghost){flex:1 1 12rem;width:auto}
+
+/* ---------- brief 3: editing after completion, the «Listo por hoy» close, motion ---------- */
+.today-card .two{display:flex;gap:8px;flex-wrap:wrap}
+.today-card .two .btn{flex:1 1 8rem;width:auto}
+.edit-btn{width:auto;margin-top:12px;padding:.375rem 1.125rem}
+.banner.updated{margin:12px 0 0;color:var(--forest);font-weight:600}
+.banner.updated svg{width:18px;height:18px}
+.rest{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.rest .rk{width:76px;height:84px;flex:none;background:url(assets/keepsake-d1.webp) center/contain no-repeat}
+.rest p{font-size:1rem;line-height:1.35}
+.rest span{display:block;font-size:.875rem;color:var(--muted);font-weight:600}
+.rest strong{font-family:var(--serif);font-weight:600;font-size:1.375rem}
+/* one-shot effects are opacity-only in the baseline; a tap ends any of them */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fx-finish .tcard,.fx-finish .rest{animation:fadeIn .25s ease-out both}
+.skipfx *,.skipfx *::before,.skipfx *::after{animation-duration:1ms!important;animation-delay:0s!important;transition-duration:1ms!important}
+@media (prefers-reduced-motion:reduce){html:not(.motion) *{animation-duration:1ms!important;transition-duration:1ms!important}}

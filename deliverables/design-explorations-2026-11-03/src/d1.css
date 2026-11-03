@@ -1,0 +1,148 @@
+/* ===== D1 · Tarjeta de colección: a desk, a deckle-edged card, a real perforated stamp ===== */
+.scr.d1{background:var(--desk)}
+.d1 .topbar,.d1 .foot{background:var(--desk)}
+.d1 .sbar{background:var(--desk)}
+/* progress = four little perforated stamps */
+.d1 .prog .segs{justify-content:center;gap:10px}
+.d1 .prog .segs i{flex:0 0 18px;height:22px;border-radius:0;background:#D8CDBD;
+  -webkit-mask:radial-gradient(2px,#0000 96%,#000) round -2px -2px/5.5px 5.5px,linear-gradient(#000 0 0) 50%/calc(100% - 5px) calc(100% - 5px) no-repeat;
+          mask:radial-gradient(2px,#0000 96%,#000) round -2px -2px/5.5px 5.5px,linear-gradient(#000 0 0) 50%/calc(100% - 5px) calc(100% - 5px) no-repeat}
+.d1 .prog .segs i.done{background:var(--forest)}
+.d1 .prog .segs i.now{background:var(--ember)}
+
+.kicker{font-size:.875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--forest);line-height:1.4}
+.kicker.ember{color:var(--ember-ink)}
+.d1-title{font-family:var(--serif);font-weight:600;font-size:2.5rem;line-height:1.02;letter-spacing:-.02em;margin:6px 0 0;max-width:12ch}
+/* «Por qué hoy» as a hand-set label strip, then her day in big italic */
+.why1{margin-top:18px;padding-left:2px}
+.label{display:inline-block;background:var(--forest);color:#fff;font-size:.875rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px 4px;transform:rotate(-1.5deg)}
+.why-line{font-family:var(--serif);font-style:italic;font-size:1.375rem;line-height:1.22;margin-top:10px;color:var(--ink)}
+.why-pay{font-size:1rem;color:var(--body);margin-top:10px;padding-top:10px;border-top:1px solid var(--rule)}
+.sec1{font-size:.875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ember-ink);margin:26px 0 12px}
+
+/* the card: the app's deckle-edged paper, slightly turned on the desk */
+.cc{position:relative;padding:22px 20px 22px;
+  filter:drop-shadow(0 10px 14px rgba(70,45,20,.18));transform:rotate(-1deg);margin:4px 2px 0}
+/* the paper is flipped so its printed wave sits behind the bottom margin, never through text */
+.cc::before{content:"";position:absolute;inset:0;z-index:-1;background:#FBF6EC url(assets/paper-sheet.webp) center bottom/100% 140% no-repeat;transform:scaleY(-1)}
+.cc.write{transform:none;filter:drop-shadow(0 4px 8px rgba(70,45,20,.12))}
+.cc-meta{font-size:.875rem;font-weight:600;color:var(--muted);padding-right:150px;line-height:1.35;min-height:2.7em}
+.slot-l{display:flex;gap:8px;align-items:baseline;font-size:1rem;color:var(--body);margin-top:14px;padding-right:118px}
+.slot-l .nn{font-family:var(--serif);font-weight:600;color:var(--ember-ink)}
+.cc .lines{height:56px;margin-top:8px;background:repeating-linear-gradient(transparent 0 26px,#D9CDBB 26px 27px)}
+.cc.strip{transform:rotate(-.6deg);padding-bottom:18px}
+
+/* the stamp: a real perforated edge (mask), Wuzhen photograph, her option as the caption */
+.stp-wrap{filter:drop-shadow(0 2px 2px rgba(60,40,20,.25))}
+.stp-wrap.corner{position:absolute;top:-12px;right:12px;transform:rotate(5deg);z-index:2}
+.stp{--r:3.5px;width:112px;padding:9px 9px 8px;background:#FFFDF8;
+  -webkit-mask:radial-gradient(var(--r),#0000 96%,#000) round calc(-1*var(--r)) calc(-1*var(--r))/calc(2.6*var(--r)) calc(2.6*var(--r)),linear-gradient(#000 0 0) 50%/calc(100% - 2.6*var(--r)) calc(100% - 2.6*var(--r)) no-repeat;
+          mask:radial-gradient(var(--r),#0000 96%,#000) round calc(-1*var(--r)) calc(-1*var(--r))/calc(2.6*var(--r)) calc(2.6*var(--r)),linear-gradient(#000 0 0) 50%/calc(100% - 2.6*var(--r)) calc(100% - 2.6*var(--r)) no-repeat}
+.stp .pic{height:64px;background:url(assets/wuzhen-d4.webp) 62% 45%/cover}
+.stp .cap{font-family:var(--serif);font-style:italic;font-size:.875rem;line-height:1.15;margin-top:6px;color:var(--ink)}
+.stp.ghost{background:#E6DCCB;min-height:96px;display:flex;align-items:center;justify-content:center}
+.stp.ghost .g{font-family:var(--serif);font-style:italic;font-size:.9375rem;color:var(--muted)}
+
+/* «Para llevarte» set as a ticket stub (notched ends) */
+.stub{display:inline-block;margin-top:18px;background:var(--forest);color:#fff;font-family:var(--sans);font-size:.875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:6px 18px 5px;line-height:1.3;
+  -webkit-mask:radial-gradient(circle 6px at 0 50%,#0000 96%,#000) left/51% 100% no-repeat,radial-gradient(circle 6px at 100% 50%,#0000 96%,#000) right/51% 100% no-repeat;
+          mask:radial-gradient(circle 6px at 0 50%,#0000 96%,#000) left/51% 100% no-repeat,radial-gradient(circle 6px at 100% 50%,#0000 96%,#000) right/51% 100% no-repeat}
+.d1 .take-h.stub{font-size:.9375rem;margin-top:20px}
+/* her own words: big Fraunces italic, tight leading, hanging opening quote */
+.words{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.75rem;line-height:1.1;letter-spacing:-.01em;margin:12px 0 0 .42em;color:var(--ink);padding-right:8px}
+.words .hang{margin-left:-.42em}
+.cc.big{padding-bottom:92px;margin-top:20px}
+.cc.big .stub,.cc.mini .stub{margin-top:30px}
+.cc.big .words{font-size:1.875rem}
+/* the lantern, taped on at the close */
+.lnt{position:absolute;left:14px;bottom:-8px;width:74px;height:84px;background:url(assets/keepsake-d1.webp) center/contain no-repeat;transform:rotate(-6deg)}
+.lnt::before{content:"";position:absolute;left:12px;top:-4px;width:52px;height:18px;background:rgba(236,224,200,.85);transform:rotate(-12deg);box-shadow:0 1px 1px rgba(0,0,0,.06)}
+/* the postmark cancels the stamp */
+.pm{position:absolute;top:-10px;right:18px;width:118px;height:72px;color:#9C3A16;opacity:.8;transform:rotate(-14deg);z-index:3;pointer-events:none}
+.cc.mini .pm{top:-8px;right:14px;width:92px;height:56px}
+/* the close with nothing written: the lantern is the payoff, nothing is filled in */
+.cc.restcard{text-align:left;padding-bottom:24px}
+.rest-k{width:140px;height:150px;margin:18px 0 0 6px;background:url(assets/keepsake-d1.webp) center/contain no-repeat}
+.rest-cap{font-family:var(--serif);font-weight:600;font-size:1.5rem;line-height:1.15;margin-top:4px}
+.rest-cap span{display:block;font-family:var(--sans);font-weight:600;font-size:.875rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+
+/* writing: a choice line hand-set at the top, lined field, nothing moves */
+.cc-choice{display:flex;align-items:flex-end;gap:6px;flex-wrap:wrap;padding-right:118px;min-height:96px}
+.cc-choice p{flex:1;min-width:8em}
+.cc-choice .l{display:block;font-size:.875rem;font-weight:600;color:var(--muted)}
+.cc-choice .v{display:block;font-family:var(--serif);font-weight:600;font-size:1.25rem;line-height:1.2}
+.cc-choice .v.skipped{font-family:var(--sans);font-weight:400;font-size:1rem;color:var(--muted)}
+.chg{border:0;background:transparent;color:var(--forest);font-weight:600;font-size:1rem;min-height:44px;min-width:44px;padding:0 8px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.d1 textarea.write{background:#FFFDF8 repeating-linear-gradient(transparent 0 calc(1.45em - 1px),#E6DCCB calc(1.45em - 1px) 1.45em) 0 14px/100% 1.45em;line-height:1.45}
+
+/* step 1 options: a ledger, the mark is a tiny stamp */
+.d1 .opts{gap:0;border-top:1px solid var(--rule)}
+.d1 .opt{background:transparent;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:.75rem 4px}
+.d1 .opt[aria-checked=true]{background:transparent;border:0;border-bottom:2px solid var(--forest)}
+.d1 .opt .rad{border:0;border-radius:0;width:22px;height:26px;background:#D8CDBD;
+  -webkit-mask:radial-gradient(2px,#0000 96%,#000) round -2px -2px/5.5px 5.5px,linear-gradient(#000 0 0) 50%/calc(100% - 5px) calc(100% - 5px) no-repeat;
+          mask:radial-gradient(2px,#0000 96%,#000) round -2px -2px/5.5px 5.5px,linear-gradient(#000 0 0) 50%/calc(100% - 5px) calc(100% - 5px) no-repeat}
+.d1 .opt[aria-checked=true] .rad{background:var(--ember-ink)}
+
+.d1 .edit-btn{margin-top:18px}
+.next1{display:flex;gap:14px;align-items:center;margin-top:22px;padding-top:16px;border-top:1px solid var(--rule)}
+.next1 .stp{width:64px}
+.next1 .stp.ghost{min-height:72px}
+.nk{display:block;width:44px;height:44px;background:url(assets/keepsake-d2.webp) center/contain no-repeat;opacity:.55}
+.next1 .t1{font-size:.875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--forest)}
+.next1 .t2{font-family:var(--serif);font-size:1.125rem;line-height:1.3;margin-top:2px}
+
+/* Hoy: an album page, the week as seven stamp slots */
+.album{margin:0 16px;padding:16px 14px 14px;background:#E7DCC9;border-top:3px solid var(--forest)}
+.al-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.al-hd h2{font-family:var(--serif);font-weight:600;font-size:1.375rem}
+.al-hd .cnt{font-size:.875rem;font-weight:600;color:var(--forest)}
+.al-page{position:relative;margin:16px 6px 6px;padding:2px}
+.al-page::before,.al-page::after{content:"";position:absolute;width:22px;height:22px;z-index:4;border:0 solid #3B332E}
+.al-page::before{top:-4px;left:-4px;border-width:3px 0 0 3px}
+.al-page::after{bottom:-4px;right:-4px;border-width:0 3px 3px 0}
+.cc.mini{transform:rotate(-1.4deg);padding:18px 16px 70px}
+.cc.mini .stp{width:92px}
+.cc.mini .stp .pic{height:50px}
+.cc.mini .cc-meta{padding-right:112px}
+.cc.mini .words{font-size:1.375rem;margin-top:10px}
+.cc.mini .lnt{width:52px;height:60px;bottom:-12px}
+.cc.mini.restcard .rest-k{width:96px;height:100px;margin-top:10px}
+.cc.mini .rest-cap{font-size:1.25rem}
+.al-strip{display:flex;justify-content:space-between;list-style:none;margin:22px 0 14px;padding:0}
+.al-strip li{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.875rem;color:var(--muted)}
+.al-strip .stp{width:38px;padding:4px;--r:2.5px}
+.al-strip .stp.ghost{min-height:44px;background:#D8CDBD}
+.al-strip .got .stp .nk{width:30px;height:36px;opacity:1;background-image:url(assets/keepsake-d1.webp)}
+.al-strip .got span{color:var(--forest);font-weight:600}
+.d1 .two{display:flex;gap:8px;flex-wrap:wrap}
+.d1 .two .btn{flex:1 1 8rem;width:auto}
+.hoy.d1 .scroll{background:var(--desk)}
+.hoy-next{margin:18px 16px 0;border-top:0}
+
+/* ---- motion: only where it means something, never blocking, a tap ends it ---- */
+.d1 .fx-stamp .stp,.d1.fx-finish .pm,.d1.fx-finish .lnt,.d1.fx-finish .rest-k,.d1.fx-updated .words{animation:dFade .2s ease-out both}
+@media (prefers-reduced-motion:no-preference){
+  html:not(.rm) .d1 .fx-stamp{animation:d1Stamp .32s cubic-bezier(.2,.9,.3,1.3) both}
+  html:not(.rm) .d1 .fx-stamp .stp{animation:none}
+  html:not(.rm) .d1.fx-finish .pm{animation:d1Strike .34s .12s cubic-bezier(.2,.8,.3,1) both}
+  html:not(.rm) .d1.fx-finish .lnt{animation:d1Tape .42s .3s cubic-bezier(.2,.9,.3,1.2) both}
+  html:not(.rm) .d1.fx-finish .rest-k{animation:d1Tape .42s .2s cubic-bezier(.2,.9,.3,1.2) both}
+}
+@keyframes d1Stamp{from{transform:rotate(5deg) translateY(-18px) scale(1.25);opacity:0}to{transform:rotate(5deg)}}
+@keyframes d1Strike{from{transform:rotate(-14deg) scale(1.5);opacity:0}to{transform:rotate(-14deg) scale(1);opacity:.82}}
+@keyframes d1Tape{from{transform:rotate(-16deg) translateY(-22px);opacity:0}to{transform:rotate(-6deg)}}
+
+/* tight leading on purpose; padding keeps the descenders inside their own box */
+.d1-title,.words,.rest-cap,.cc-choice .v,.stp .cap{padding-bottom:.12em}
+.stp .cap{overflow-wrap:anywhere;hyphens:auto}
+
+/* on the darker desk the ember ink goes one step deeper (5.5:1 on #EFE6D7, 5.1:1 on the album) */
+.scr.d1{--ember-ink:#9C3A16}
+.rest-cap span{line-height:1.3;margin-bottom:4px}
+/* large text: the stamp leaves the corner and sits in the flow, so its caption can grow */
+html[data-ts] .d1 .stp-wrap.corner{position:relative;top:auto;right:auto;margin:0 0 10px auto;width:fit-content}
+html[data-ts] .d1 .cc-meta,html[data-ts] .d1 .slot-l,html[data-ts] .d1 .cc-choice{padding-right:0}
+html[data-ts] .d1 .cc-choice{min-height:0}
+html[data-ts] .d1 .pm{top:-34px;right:-10px}
+.rest-t{font-family:var(--serif);font-weight:600;font-size:1.375rem;margin-top:12px}

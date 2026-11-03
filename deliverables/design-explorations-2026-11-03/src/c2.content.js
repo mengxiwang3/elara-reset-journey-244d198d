@@ -85,6 +85,17 @@ const C2 = {
   summary: (answered) =>
     answered === 0 ? "Recorriste las preguntas de hoy." : `Respondiste ${answered} de 2 preguntas.`,
 
+  // brief 3 (3 Nov) · editing after completion, and the close when she wrote nothing
+  edit: "Editar",                                   // new
+  editA11y: "Editar tu tarjeta de hoy",             // new
+  editingBanner: "Estás editando tu tarjeta de hoy.", // new
+  saveChanges: "Guardar cambios",                   // new
+  cancelEditA11y: "Descartar los cambios y volver a tu tarjeta", // new
+  updated: "Tarjeta actualizada.",                  // new
+  restTitle: "Listo por hoy",                       // app (day.arrival.done), the app's close with no takeaway
+  restKeepsake: "Tu recuerdo de hoy",               // new
+  dayDone: "Día 1 hecho",                           // app pattern («Día 1 hecho» on Hoy)
+
   // reviewer-only tags (not product copy)
   tags: { saved: "Guardado simulado", offline: "Sin conexión simulada · guardado simulado" },
   sampleBtn: "Usar respuesta de ejemplo (sintética)",

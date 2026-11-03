@@ -164,3 +164,12 @@ The content of record is unchanged except for the instruction in item 2. That co
 2. Después de «Ninguna por ahora», ¿«Terminar sin escribir» se entiende mejor que «Prefiero pasar»?
 3. Las notas de Elara para cada opción, ¿suenan a ella? ¿Alguna te parece que empuja demasiado?
 4. ¿La tarjeta arriba en Hoy te ayuda a encontrar lo que te llevas, o te parece demasiado protagonista?
+
+## Update for the visual directions (3 Nov, later)
+
+C v2 now also has:
+- **Editing after completion:** «Editar» on the close and on Hoy leads to step 2 with her words, then «Guardar cambios» and «Tarjeta actualizada.». The × discards the edit.
+- **The app's «Listo por hoy» close** when no takeaway was written. The keepsake is the payoff, and Hoy quotes nothing for «Ninguna por ahora» or a skipped answer. This replaces the earlier Hoy card lines «Sin nota hoy» / «Pasaste esta pregunta»; the full card still shows them.
+- **A reduced-motion toggle** and a tap-to-skip for any animation.
+
+C v2 is the baseline for D1–D3; see `DIRECTIONS.md`. The new strings are listed there.

@@ -1,0 +1,116 @@
+/* ===== D3 · Con Elara: deep forest for her moments, paper for yours, the orb between ===== */
+.scr.d3{background:var(--bg)}
+.scr.d3.night{background:var(--forest-ink)}
+.d3.night .sbar,.d3.night .topbar{background:var(--forest-ink);color:#fff}
+.d3.night .icon-btn{background:#1F4234;color:#fff}
+.d3.night .prog .lbl{color:#CFE4D9}
+.d3.night .prog .segs i{background:#2D5444}
+.d3.night .prog .segs i.done{background:var(--mint)}
+.d3.night .prog .segs i.now{background:var(--ember)}
+.d3.night .foot{background:var(--bg)}
+/* the orb: one mark, four places */
+.orb3{display:block;border-radius:50%;background:url(assets/orb.png) center/cover;flex:none}
+.orb3.at-speak{width:132px;height:132px;margin:8px 0 0 -6px;box-shadow:0 0 0 14px rgba(242,147,92,.10),0 0 0 32px rgba(242,147,92,.05)}
+.orb3.at-receive{width:104px;height:104px;margin:4px auto 0;box-shadow:0 0 0 12px rgba(242,147,92,.10),0 0 0 26px rgba(242,147,92,.05)}
+.orb3.at-ask{width:44px;height:44px;margin-top:2px}
+.orb3.at-corner{position:absolute;top:-11px;right:-11px;width:26px;height:26px;box-shadow:0 0 0 3px var(--bg)}
+.orb3.at-hoy{width:56px;height:56px;margin:6px 24px 0 0}
+/* Elara speaks: her line, big and italic, against the night; a sliver of canal on the right */
+.stage3{position:relative;padding:6px 20px 28px;color:var(--mint-pale)}
+.strip3{position:absolute;top:0;right:0;width:34%;height:180px;background:url(assets/wuzhen-d6.webp) 40% 50%/cover;
+  clip-path:polygon(18% 0,100% 0,100% 100%,0 88%)}
+.who3{font-size:.875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);margin-top:18px}
+.say3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.75rem;line-height:1.16;letter-spacing:-.01em;margin-top:8px;color:#F4FAF6;max-width:17ch}
+.say3.reply{font-size:1.375rem;max-width:none}
+.pay3{font-size:1rem;color:#CFE4D9;margin-top:14px;padding-top:12px;border-top:1px solid #2D5444}
+.stage3.close{text-align:left}
+.stage3.close .orb3{margin:6px 0 0}
+.h3{font-family:var(--serif);font-weight:600;font-size:2.25rem;line-height:1.05;color:#fff;margin-top:6px}
+.d3 .say-wrap .simrow{margin-top:10px}
+.d3 .say-wrap .rtag.sim{background:var(--forest-ink);color:#F2B79A;border-color:#F2B79A}
+.d3 .say-wrap .enote2{border-left-color:var(--mint)}
+.d3 .say-wrap .enote2,.d3 .say-wrap .enote2 *{color:#F4FAF6}
+.d3 .say-wrap .enote2.err{background:#1F4234}
+.d3 .say-wrap .enote2.err .btn.line{border-color:#F4FAF6}
+.d3 .banner.updated{color:var(--mint);border-left-color:var(--mint)}
+/* paper rises under the night */
+.paper3{background:var(--bg);padding:20px 20px 0;border-radius:0;position:relative}
+.paper3::before{content:"";position:absolute;left:0;right:0;top:-12px;height:13px;background:var(--bg);
+  clip-path:polygon(0 60%,7% 20%,15% 70%,24% 10%,33% 60%,42% 25%,52% 75%,61% 15%,70% 65%,80% 20%,89% 70%,100% 30%,100% 100%,0 100%)}
+.t3{font-family:var(--serif);font-weight:600;font-size:1.375rem;line-height:1.2}
+.mini3{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;margin-top:14px;padding:12px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.mini3 p{font-size:1rem;color:var(--body)}
+.mini3 span{display:block;font-size:.875rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ember-ink)}
+.lk3{display:inline-block;width:64px;height:72px;background:url(assets/keepsake-d1.webp) center/contain no-repeat}
+.mini3 .lk3{filter:grayscale(1);opacity:.55}
+.lk3.big{position:absolute;right:10px;top:-34px;width:84px;height:96px;transform:rotate(6deg)}
+/* step 1: Elara asks */
+.asks{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+.d3 .opts{gap:0;border-top:1px solid var(--rule)}
+.d3 .opt{background:transparent;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:.75rem 4px}
+.d3 .opt[aria-checked=true]{background:#FFF1EC;border:0;border-bottom:2px solid var(--ember-ink)}
+.d3 .opt[aria-checked=true] .rad{background:var(--ember-ink);border-color:var(--ember-ink)}
+/* step 2: a plain sheet; Elara is the still dot at its corner */
+.sheet3{position:relative;border:1.5px solid var(--ink);padding:14px 14px 16px;margin-top:6px;background:#FFFDF8}
+.chosen3{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.chosen3 p{flex:1;min-width:8em}
+.chosen3 .l,.ch3 span{display:block;font-size:.875rem;font-weight:600;color:var(--muted)}
+.chosen3 .v{font-family:var(--serif);font-weight:600;font-size:1.1875rem;line-height:1.25}
+.chosen3 .v.skipped{font-family:var(--sans);font-weight:400;font-size:1rem;color:var(--muted)}
+.d3 .chg{border:0;background:transparent;color:var(--forest);font-weight:600;font-size:1rem;min-height:44px;min-width:44px;padding:0 8px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.d3 .take-h{margin-top:14px}
+/* the card handed back */
+.card3{position:relative;background:#FFFDF8;border-top:4px solid var(--ember);padding:16px 104px 20px 16px;box-shadow:0 10px 22px rgba(20,30,25,.14);margin-top:8px}
+.card3 .meta3{font-size:.875rem;font-weight:600;color:var(--muted);letter-spacing:.04em}
+.ch3{font-family:var(--serif);font-weight:600;font-size:1.25rem;line-height:1.25;margin-top:10px}
+.ch3.dark{color:#F4FAF6}
+.ch3.dark span{color:#CFE4D9}
+.stub3{display:inline-block;margin-top:14px;background:var(--forest);color:#fff;font-size:.875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 16px 4px;
+  -webkit-mask:radial-gradient(circle 6px at 0 50%,#0000 96%,#000) left/51% 100% no-repeat,radial-gradient(circle 6px at 100% 50%,#0000 96%,#000) right/51% 100% no-repeat;
+          mask:radial-gradient(circle 6px at 0 50%,#0000 96%,#000) left/51% 100% no-repeat,radial-gradient(circle 6px at 100% 50%,#0000 96%,#000) right/51% 100% no-repeat}
+.words3{font-family:var(--serif);font-style:italic;font-size:1.625rem;line-height:1.12;margin:10px 0 0 .42em}
+.words3 .hang{margin-left:-.42em}
+.card3 .words3{margin-right:-88px}
+.d3 .edit-btn{margin-top:18px}
+.next3{margin-top:22px;padding-top:14px;border-top:2px solid var(--ink)}
+.next3 .t1{font-size:.875rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--forest)}
+.next3 .t2{font-family:var(--serif);font-size:1.125rem;line-height:1.3;margin-top:4px}
+/* Hoy: the orb beside the greeting; today's words on the night, under a sliver of canal */
+.hello3{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.eve3{margin:0 16px 18px;background:var(--forest-ink);color:#F4FAF6}
+.eve-ph{height:64px;background:url(assets/wuzhen-d6.webp) 50% 60%/cover}
+.eve-in{padding:14px 16px 16px}
+.eve3 h2{font-size:.875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mint)}
+.eve3 .words3{color:#F4FAF6;font-size:1.5rem}
+.restline3{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:1.25rem;margin-top:8px}
+.restline3 .lk3{width:52px;height:58px}
+.d3 .two{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.d3 .two .btn{flex:1 1 8rem;width:auto}
+.btn.inv{background:#F4FAF6;color:var(--forest-ink)}
+.btn.inv.line{background:transparent;color:#F4FAF6;border:1.5px solid #F4FAF6}
+.eve3 .rtag{background:var(--forest-ink);color:#CFE4D9;border-color:#CFE4D9}
+html[data-ts=xl] .strip3{display:none}
+html[data-ts=xl] .orb3.at-speak{width:96px;height:96px}
+
+/* ---- motion: the orb travels between moments; never during writing; a tap ends it ---- */
+.d3 .fx-orb{animation:dFade .2s ease-out both}
+.d3.fx-finish .card3{animation:dFade .25s .1s ease-out both}
+@media (prefers-reduced-motion:no-preference){
+  html:not(.rm) .d3 .fx-orb.at-speak{animation:d3Arrive .5s cubic-bezier(.2,.8,.3,1) both}
+  html:not(.rm) .d3 .fx-orb.at-ask{animation:d3Shrink .38s cubic-bezier(.2,.8,.3,1) both}
+  html:not(.rm) .d3 .fx-orb.at-receive.from-take{animation:d3Return .5s cubic-bezier(.2,.8,.3,1.1) both}
+  html:not(.rm) .d3.fx-finish .card3{animation:d3Hand .45s .35s cubic-bezier(.2,.8,.3,1.1) both}
+}
+@keyframes d3Arrive{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes d3Shrink{from{transform:scale(2.4) translate(20px,30px);opacity:.4}to{transform:none;opacity:1}}
+@keyframes d3Return{from{transform:translate(220px,240px) scale(.25);opacity:.5}to{transform:none;opacity:1}}
+@keyframes d3Hand{from{transform:translateY(-40px) scale(.94);opacity:0}to{transform:none;opacity:1}}
+
+.say3,.h3,.words3,.ch3,.t3,.chosen3 .v{padding-bottom:.12em}
+.wk3{margin:0 16px 18px}
+.wk3 p{font-size:1rem;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.wk3 b{font-weight:600;color:var(--forest)}
+.wk3 ol{display:flex;justify-content:space-between;list-style:none;margin:10px 0 0;padding:0}
+.wk3 li{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.875rem;color:var(--muted)}
+.wk3 li.got{border:0;background:url(assets/keepsake-d1.webp) center/80% no-repeat,#fff;box-shadow:0 1px 4px rgba(0,0,0,.14)}
+.wk3 li.got span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}

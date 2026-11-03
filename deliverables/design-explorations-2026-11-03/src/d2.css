@@ -1,0 +1,116 @@
+/* ===== D2 · Paseo por el canal: full-bleed Wuzhen, an inked canal as progress ===== */
+.scr.d2{background:var(--bg)}
+/* the status bar stays on paper: the photograph starts right under it */
+.d2 .scroll{position:relative}
+/* the photograph: full bleed, cropped per stop */
+.band2{background-size:cover;background-repeat:no-repeat;background-position:var(--pos);position:relative}
+.band2.tall{height:270px}
+.band2.mid{height:200px}
+.band2.thin{height:64px}
+.band2.end{height:280px}
+.scr.kb .band2.thin{display:none}
+.nav2{position:absolute;top:8px;left:12px;right:12px;display:flex;justify-content:space-between;z-index:5}
+.nav2 .icon-btn{background:rgba(249,245,239,.94)}
+/* the paper slab rises over the photo with a torn top edge */
+.slab{position:relative;background:var(--bg);margin-top:-26px;padding:20px 20px 0;
+  clip-path:polygon(0 14px,6% 6px,13% 12px,21% 3px,29% 10px,38% 2px,47% 11px,56% 4px,64% 12px,73% 3px,82% 10px,90% 2px,100% 9px,100% 100%,0 100%)}
+.d2.take .slab{margin-top:-14px}
+.scr.kb .slab{margin-top:0;clip-path:none}
+.kicker2{font-size:.875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--forest);line-height:1.4;margin-top:8px}
+.kicker2.ember{color:var(--ember-ink)}
+.d2-title{font-family:var(--serif);font-weight:600;font-size:2.5rem;line-height:1.02;letter-spacing:-.02em;margin-top:4px}
+
+/* the canal line */
+.canal{position:relative;margin:14px -4px 4px;padding-bottom:2px}
+.canal svg{display:block;width:100%;height:28px;overflow:visible}
+.canal .water{fill:none;stroke:#5E8C86;stroke-width:2.2;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.canal circle{fill:var(--bg);stroke:#5E8C86;stroke-width:1.6;vector-effect:non-scaling-stroke}
+.canal circle.past{fill:var(--forest);stroke:var(--forest)}
+.canal circle.now{fill:var(--ember);stroke:var(--ember)}
+.canal .boat{position:absolute;top:-6px;left:var(--to);width:22px;height:14px;margin-left:-11px;background:var(--forest);
+  clip-path:polygon(0 30%,100% 30%,80% 100%,20% 100%)}
+.canal .boat::after{content:"";position:absolute;left:9px;top:-8px;width:2px;height:10px;background:var(--forest)}
+.canal.compact{margin-top:6px}
+.canal.compact svg{height:20px}
+.stopname{font-family:var(--serif);font-style:italic;font-size:1.125rem;line-height:1.3;margin-top:6px}
+.stopname span{font-family:var(--sans);font-style:normal;font-size:.875rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--forest);margin-right:6px}
+
+.why2{margin-top:18px;border-top:2px solid var(--ink);padding-top:12px}
+.why2 h2{font-size:.875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--forest)}
+.why-line{font-family:var(--serif);font-style:italic;font-size:1.375rem;line-height:1.22;margin-top:8px}
+.why-pay{font-size:1rem;color:var(--body);margin-top:10px}
+.end2{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:center;margin-top:20px;padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.end2 h2{font-family:var(--serif);font-weight:600;font-size:1.25rem}
+.end2 p{font-size:1rem;color:var(--body);margin-top:2px}
+.lk{width:72px;height:80px;background:url(assets/keepsake-d1.webp) center/contain no-repeat;filter:grayscale(1);opacity:.55}
+.lk.big{width:120px;height:130px;filter:none;opacity:1}
+
+/* step 1 + 2 */
+.d2 .opts{gap:0;border-top:1px solid var(--rule)}
+.d2 .opt{background:transparent;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:.75rem 4px}
+.d2 .opt[aria-checked=true]{background:#E4EDEA;border:0;border-bottom:2px solid var(--forest)}
+.chosen{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px;padding:8px 0;border-bottom:1px solid var(--rule)}
+.chosen p{flex:1;min-width:8em}
+.chosen .l,.chosen-line .l{display:block;font-size:.875rem;font-weight:600;color:var(--muted)}
+.chosen .v{font-family:var(--serif);font-weight:600;font-size:1.1875rem;line-height:1.25}
+.chosen .v.skipped{font-family:var(--sans);font-weight:400;font-size:1rem;color:var(--muted)}
+.d2 .chg{border:0;background:transparent;color:var(--forest);font-weight:600;font-size:1rem;min-height:44px;min-width:44px;padding:0 8px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.d2 .take-h{margin-top:14px}
+
+/* arrival */
+.arrive{display:flex;align-items:flex-end;gap:16px;margin-top:12px}
+.kname{font-family:var(--serif);font-weight:600;font-size:1.5rem;line-height:1.15;padding-bottom:12px}
+.kname span{display:block;font-family:var(--sans);font-size:.875rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chosen-line{font-size:1rem;margin-top:12px}
+.pinnote{position:relative;margin-top:16px;padding:16px 16px 18px;background:#FFFDF8;border-top:1px solid var(--rule);box-shadow:0 1px 0 var(--rule)}
+.pinnote::before{content:"";position:absolute;top:-7px;left:22px;width:14px;height:14px;border-radius:50%;background:var(--ember);box-shadow:0 2px 2px rgba(0,0,0,.25)}
+.stub2{display:inline-block;background:var(--forest);color:#fff;font-size:.875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 16px 4px;
+  -webkit-mask:radial-gradient(circle 6px at 0 50%,#0000 96%,#000) left/51% 100% no-repeat,radial-gradient(circle 6px at 100% 50%,#0000 96%,#000) right/51% 100% no-repeat;
+          mask:radial-gradient(circle 6px at 0 50%,#0000 96%,#000) left/51% 100% no-repeat,radial-gradient(circle 6px at 100% 50%,#0000 96%,#000) right/51% 100% no-repeat}
+.words2{font-family:var(--serif);font-style:italic;font-size:1.625rem;line-height:1.12;margin:10px 0 0 .42em}
+.words2 .hang{margin-left:-.42em}
+.d2 .edit-btn{margin-top:16px}
+.next2{margin-top:22px;padding:14px 0 0;border-top:2px solid var(--ink)}
+.next2 .t1{font-size:.875rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--forest)}
+.next2 .t2{font-family:var(--serif);font-size:1.125rem;line-height:1.3;margin-top:4px}
+
+/* Hoy: a postcard with the week's canal and her note pinned at today's stop */
+.pc{margin:0 0 0;background:var(--bg)}
+.pc-ph{height:170px;background:url(assets/wuzhen-d1.webp) 25% 60%/cover}
+.pc-map{position:relative;margin:-22px 16px 0;background:#FFFDF8;padding:16px 16px 14px;box-shadow:0 8px 18px rgba(60,40,20,.12)}
+.pc-map h2{font-size:.875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--forest)}
+.wk-canal{position:relative;margin:8px -2px 0}
+.wk-canal svg{display:block;width:100%;height:26px;overflow:visible}
+.wk-canal .water{fill:none;stroke:#5E8C86;stroke-width:2;vector-effect:non-scaling-stroke}
+.wk-canal circle{fill:#FFFDF8;stroke:#5E8C86;stroke-width:1.4;vector-effect:non-scaling-stroke}
+.wk-canal circle.past{fill:var(--ember);stroke:var(--ember)}
+.wk-canal .pin{position:absolute;left:6%;top:-12px;width:2px;height:24px;background:var(--ink)}
+.pinned2{position:relative;margin-top:16px;padding-top:16px;border-top:1px dashed var(--rule)}
+.where2{font-size:.875rem;font-weight:600;color:var(--muted);margin-bottom:8px}
+.restline{font-size:1rem;line-height:1.4}
+.restline strong{font-family:var(--serif);font-size:1.25rem}
+.d2 .two{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.d2 .two .btn{flex:1 1 8rem;width:auto}
+.hoy-next2{margin:22px 16px 0}
+
+/* ---- motion: the walk. Pans and sailing only when motion is allowed; never on typing ---- */
+.d2 .fx-pan,.d2.fx-finish .arrive{animation:dFade .25s ease-out both}
+@media (prefers-reduced-motion:no-preference){
+  html:not(.rm) .d2 .fx-pan{animation:d2Pan .55s cubic-bezier(.3,.7,.3,1) both}
+  html:not(.rm) .d2 .fx-sail{animation:d2Sail .55s cubic-bezier(.3,.7,.3,1) both}
+  html:not(.rm) .d2.fx-finish .lk.big{animation:d2Give .45s .35s cubic-bezier(.2,.9,.3,1.25) both}
+}
+@keyframes d2Pan{from{background-position:calc(var(--px,0%) + 0%) 50%;opacity:.6;transform:scale(1.06)}to{background-position:var(--pos);opacity:1;transform:none}}
+@keyframes d2Sail{from{left:var(--from)}to{left:var(--to)}}
+@keyframes d2Give{from{transform:translateY(-28px) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+
+/* large text: the photograph gives way so the words keep the screen */
+html[data-ts=l] .band2.tall,html[data-ts=l] .band2.end{height:190px}
+html[data-ts=l] .band2.mid{height:130px}
+html[data-ts=xl] .band2.tall,html[data-ts=xl] .band2.end{height:120px}
+html[data-ts=xl] .band2.mid{height:84px}
+html[data-ts=xl] .pc-ph{height:110px}
+
+.d2-title,.words2,.kname,.stopname,.chosen .v{padding-bottom:.12em}
+.pc-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pc-hd span{font-size:.875rem;font-weight:600;color:var(--forest)}
