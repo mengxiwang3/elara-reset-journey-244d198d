@@ -1,0 +1,148 @@
+/* ===== C3 · on top of c2.css. Hoy = the app's Hoy; the postcard appears only at the ending ===== */
+:root{--sky1:#C9DDE6;--sky2:#EFE3C8;--paper3:#FFFDF8}
+.scr.hoy.c3{padding-top:0}
+.hoy.c3 .scroll{padding-top:0}
+.hoy.c3 .sbar{background:var(--sky1)}
+/* ---- Hoy: sky, greeting, avatar ---- */
+.hoytop{background:linear-gradient(var(--sky1) 0,var(--sky2) 60%,var(--bg) 100%),var(--sky1);padding:calc(var(--sb) + 14px) 20px 22px}
+.hoytop .hoy-date{padding:0;font-size:1rem;color:var(--muted)}
+.greet{display:flex;align-items:flex-start;gap:12px;margin-top:6px}
+.greet h1{flex:1;min-width:0;font-family:var(--serif);font-weight:600;font-size:2rem;line-height:1.12;letter-spacing:-.01em;overflow-wrap:anywhere;hyphens:auto;margin:0}
+.greet.sm h1{font-size:1.625rem}
+.avatar{flex:none;width:44px;height:44px;border-radius:50%;background:#FFE9DF;color:var(--ember-ink);font-weight:600;font-size:.9375rem;display:flex;align-items:center;justify-content:center}
+/* ---- torn paper (hero and postcard): the edge is cut, the shadow follows the cut ---- */
+.torn{filter:drop-shadow(0 5px 9px rgba(60,40,20,.14))}
+.torn>.paper{background:var(--paper3);clip-path:polygon(0 4px,6% 1px,13% 4px,21% 0,30% 3px,41% 1px,52% 4px,63% 0,74% 3px,85% 1px,93% 4px,100% 1px,calc(100% - 2px) 20%,100% 38%,calc(100% - 3px) 58%,100% 78%,calc(100% - 2px) 100%,92% calc(100% - 4px),83% 100%,72% calc(100% - 3px),60% calc(100% - 1px),48% calc(100% - 4px),37% 100%,26% calc(100% - 3px),15% calc(100% - 1px),6% calc(100% - 4px),0 calc(100% - 2px),2px 78%,0 58%,3px 38%,0 20%)}
+.hero3{margin:-2px 16px 0}
+.hero-in{position:relative;padding:14px 14px 20px}
+.hero3 .photo{height:200px;background:url(assets/wuzhen-d1.webp) 30% 58%/cover;clip-path:polygon(0 0,100% 0,100% calc(100% - 7px),94% 100%,86% calc(100% - 5px),77% calc(100% - 8px),66% 100%,55% calc(100% - 6px),44% calc(100% - 9px),33% 100%,22% calc(100% - 6px),11% calc(100% - 9px),0 calc(100% - 4px))}
+.hero3 .stp3.hero{position:absolute;top:158px;right:20px}
+.rings3{position:absolute;top:196px;right:106px;width:58px;height:29px;color:#5E8C86;opacity:.5}
+.where3{font-size:.875rem;font-weight:600;color:var(--forest);line-height:1.4;margin:22px 96px 0 6px}
+.title-q{font-family:var(--serif);font-weight:600;font-size:1.625rem;line-height:1.2;margin:10px 6px 0;letter-spacing:-.005em}
+.min3{font-size:1rem;color:var(--muted);margin:10px 6px 0}
+.resume3t{font-size:.9375rem;font-weight:600;color:var(--ember-ink);margin:10px 6px 0}
+.draft3{font-size:1rem;color:var(--body);margin:6px 6px 0;line-height:1.4}
+.draft3 span{font-weight:600;color:var(--ink)}
+.hero3 .tagline{margin:8px 6px 0}
+.next3{margin:14px 6px 0;padding-top:10px;border-top:1px solid var(--border)}
+.next3 b{display:block;font-size:.875rem;color:var(--forest)}
+.next3 span{display:block;font-family:var(--serif);font-size:1.0625rem;line-height:1.3;margin-top:2px}
+/* the perforated stamp */
+.stp3{--r:3px;width:max-content;min-width:82px;max-width:150px;padding:7px 7px 6px;background:var(--paper3);transform:rotate(3deg);filter:drop-shadow(0 2px 2px rgba(60,40,20,.22));
+  -webkit-mask:radial-gradient(var(--r),#0000 96%,#000) round calc(-1*var(--r)) calc(-1*var(--r))/calc(2.6*var(--r)) calc(2.6*var(--r)),linear-gradient(#000 0 0) 50%/calc(100% - 2.6*var(--r)) calc(100% - 2.6*var(--r)) no-repeat;
+          mask:radial-gradient(var(--r),#0000 96%,#000) round calc(-1*var(--r)) calc(-1*var(--r))/calc(2.6*var(--r)) calc(2.6*var(--r)),linear-gradient(#000 0 0) 50%/calc(100% - 2.6*var(--r)) calc(100% - 2.6*var(--r)) no-repeat}
+.stp3 .pic{width:100%;min-width:68px;height:48px;background:url(assets/wuzhen-d4.webp) 62% 45%/cover}
+.stp3 .cap{white-space:nowrap;font-family:var(--serif);font-style:italic;font-size:.875rem;line-height:1.15;margin-top:4px;color:var(--ink);padding-bottom:.1em}
+.stp3.mini{display:block;min-width:0;width:34px;height:40px;padding:0;background:#DDD3C4;transform:none;filter:none}
+/* ---- «Tu camino por Asia»: existing component, illustrative values ---- */
+.asia{position:relative;overflow:hidden;margin:18px 16px 0;padding:14px 130px 8px 16px;background:#E5EEEE;border:1px solid #CCDADA;border-radius:16px;min-height:150px}
+.asia h2{font-family:var(--serif);font-weight:600;font-size:1.375rem;line-height:1.15;color:var(--forest)}
+.asia p{font-weight:600;font-size:1rem;line-height:1.4;margin-top:2px}
+.asia .tagline{margin:4px 0 0}
+.asia .lnk{padding-left:0}
+.globe{position:absolute;right:-34px;top:10px;width:150px;height:150px}
+/* ---- weekly tracker ---- */
+.week3{padding:22px 20px 0}
+.wk-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.wk-hd h2{font-size:1.1875rem;font-weight:600;line-height:1.3}
+.wk-hd .cnt{font-size:1rem;color:var(--muted)}
+.days{display:flex;justify-content:space-between;list-style:none;margin:12px 0 0;padding:0}
+.days li{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:40px}
+.dc{position:relative;width:40px;height:40px;border-radius:50%;border:1.5px dashed #8C827A;background:transparent}
+.dc.dn{border:0;box-shadow:0 1px 4px rgba(0,0,0,.18),0 0 0 2px #fff}
+.dc.dn .th{position:absolute;inset:0;border-radius:50%;background:url(assets/wuzhen-d4.webp) 62% 45%/cover}
+.dc .ck{position:absolute;right:-5px;bottom:-4px;width:18px;height:18px;border-radius:50%;background:var(--forest);border:2px solid var(--bg);display:flex;align-items:center;justify-content:center}
+.dc.td{border:3px solid var(--ember);background:#fff}
+.dl{font-size:.875rem;color:var(--muted)}
+.dl.today{color:var(--ember-ink);font-weight:600}
+.wkline{font-size:1rem;color:var(--body);margin-top:12px}
+/* ---- «Para retomar»: the one card ---- */
+.resume3{padding:22px 20px 0}
+.sec{font-size:1.1875rem;font-weight:600;line-height:1.3}
+.sec.quiet{font-size:1.0625rem;color:var(--body)}
+.rcard{margin-top:12px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px 6px}
+.rc-t{font-size:.9375rem;font-weight:600;color:var(--forest)}
+.rc-ctx{font-size:.875rem;color:var(--muted);margin-top:6px;line-height:1.35}
+.rc-words{font-family:var(--serif);font-size:1.1875rem;line-height:1.3;margin-top:8px;overflow-wrap:anywhere}
+.rc-plain{font-size:1.0625rem;font-weight:600;margin-top:8px}
+.clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rc-act{display:flex;gap:6px 18px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.lnk{border:0;background:none;color:var(--forest);font-weight:600;font-size:1rem;min-height:44px;padding:0 4px;cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-align:left}
+/* ---- «Para hoy»: optional, quieter ---- */
+.forday{padding:22px 20px 0}
+.fh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.opt-tag{font-size:.875rem;color:var(--muted);border:1px solid #8C827A;border-radius:999px;padding:1px 10px}
+.rows{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid var(--border)}
+.rows li{border-bottom:1px solid var(--border)}
+.row3{display:flex;align-items:center;gap:14px;width:100%;min-height:64px;padding:10px 2px;border:0;background:none;text-align:left;cursor:pointer;color:var(--ink)}
+.rtx{flex:1;min-width:0}
+.rt{display:block;font-weight:600;font-size:1.0625rem;line-height:1.3}
+.rs{display:block;color:var(--muted);font-size:.9375rem;line-height:1.35;margin-top:2px}
+.row3 svg{flex:none;color:var(--muted)}
+.dots6{flex:none;width:58px;height:34px;position:relative}
+.dots6 i{position:absolute;width:13px;height:13px;border-radius:50%}
+.dots6 i:nth-child(1){left:0;top:4px}.dots6 i:nth-child(2){left:8px;top:18px}.dots6 i:nth-child(3){left:20px;top:0}
+.dots6 i:nth-child(4){left:26px;top:19px}.dots6 i:nth-child(5){left:40px;top:6px}.dots6 i:nth-child(6){left:44px;top:21px}
+.helpb{display:flex;align-items:center;gap:10px;min-height:48px;margin-top:6px;border:0;background:none;color:var(--muted);font-size:1.0625rem;cursor:pointer;padding:0 2px}
+/* ---- the start button: persistent, above the tab bar, never covering content ---- */
+.cta3{flex:none;padding:10px 16px 12px;background:var(--bg);border-top:1px solid var(--border)}
+.c3 .tabs{position:relative;border-top:0;padding-bottom:30px}
+.navtag{position:absolute;left:50%;bottom:4px;transform:translateX(-50%);white-space:nowrap}
+
+/* ---- session: opening ---- */
+.meta3{font-size:.875rem;font-weight:600;color:var(--forest);margin-top:6px}
+.title3{font-family:var(--serif);font-weight:600;font-size:1.875rem;line-height:1.1;margin-top:6px;letter-spacing:-.01em}
+.purpose3{font-size:1.1875rem;line-height:1.4;margin-top:16px}
+.opt3{font-size:1rem;color:var(--body);margin-top:12px}
+.hint3{display:flex;gap:14px;align-items:center;margin-top:20px;padding-top:14px;border-top:1px solid var(--border)}
+.hint3 p{font-size:1rem;color:var(--body);line-height:1.4}
+/* ---- session: writing (C v2's compact screen) ---- */
+.c3 .choice-row{margin-top:2px}
+.lab3{font-size:.875rem;font-weight:600;color:var(--ember-ink);margin-top:16px}
+.q3{font-weight:600;font-size:1.3125rem;line-height:1.3;margin-top:4px}
+.ex3{font-size:1rem;color:var(--muted);margin:6px 0 12px;font-style:italic}
+.kbtag{position:absolute;left:50%;bottom:2.4cqw;transform:translateX(-50%);font:600 13px/1.25 var(--sans);color:#3A3D42;white-space:nowrap}
+.scr.kb .kbd{position:relative}
+/* ---- completion ---- */
+.pcard{margin-top:16px}
+.pc3{padding:16px 18px 14px}
+.pc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.pc-id{min-width:0;flex:1}
+.pc-meta{font-size:.875rem;font-weight:600;color:var(--muted);line-height:1.35}
+.pc-lab{font-size:.875rem;font-weight:600;color:var(--ember-ink);margin-top:10px}
+.stwrap{position:relative;flex:none}
+.pm3{position:absolute;left:-6px;top:36px;width:96px;height:58px;color:#9C3A16;opacity:.3;transform:rotate(-12deg);pointer-events:none}
+.words3{font-family:var(--serif);font-style:italic;font-size:1.875rem;line-height:1.14;margin:12px 0 0 .42em;padding-bottom:.1em;color:var(--ink);overflow-wrap:anywhere}
+.words3 .hang{margin-left:-.42em}
+.words3.long{font-size:1.25rem;line-height:1.3}
+.about{font-size:.9375rem;color:var(--muted);margin-top:12px}
+.pc3 .enote2{margin-top:14px}
+.pc3 .enote2.main .txt{font-size:1rem}
+.pc-foot{display:flex;justify-content:flex-end;margin-top:6px}
+.lnt3{width:46px;height:54px;background:url(assets/keepsake-d1.webp) center/contain no-repeat;transform:rotate(-5deg)}
+.choice3{margin-top:16px;font-family:var(--serif);font-weight:600;font-size:1.375rem;line-height:1.25}
+.choice3 span{display:block;font-family:var(--sans);font-size:.875rem;color:var(--muted)}
+.keep3{display:flex;align-items:center;gap:14px;margin-top:16px}
+.keep3 .lk{width:76px;height:84px;flex:none;background:url(assets/keepsake-d1.webp) center/contain no-repeat}
+.keep3 p{font-family:var(--serif);font-weight:600;font-size:1.375rem;line-height:1.2}
+.keep3 span{display:block;font-family:var(--sans);font-size:.875rem;color:var(--muted);margin-bottom:2px}
+.calm3{font-size:1rem;color:var(--body);margin-top:14px}
+.tom3{display:flex;gap:12px;align-items:center;margin-top:22px;padding-top:14px;border-top:1px solid var(--border)}
+.tom3 .k{width:48px;height:52px;flex:none;background:url(assets/keepsake-d2.webp) center/contain no-repeat;opacity:.7}
+.tom3 .t1{font-size:.875rem;font-weight:600;color:var(--forest)}
+.tom3 .t2{font-family:var(--serif);font-size:1.0625rem;line-height:1.3;margin-top:2px}
+/* ---- follow-up day (illustration) ---- */
+.fu-t{flex:1;text-align:center;font-size:.875rem;color:var(--muted);font-weight:600;line-height:1.3}
+.ctx3{font-size:1rem;line-height:1.45;background:var(--sage);border-radius:8px;padding:10px 12px;margin-top:8px}
+.ctx3 span{font-weight:600}
+.ctx3.none{background:transparent;border-left:3px solid var(--forest);border-radius:0;color:var(--body)}
+.ph3{margin-top:16px;padding:22px 16px;border:1px solid #8C827A;background:var(--surface);color:var(--muted);font-size:1rem;line-height:1.4;text-align:center}
+/* ---- motion: one short stamp-down at the finish; opacity only when motion is reduced ---- */
+.fx-finish .pcard,.fx-finish .keep3{animation:fadeIn .25s ease-out both}
+@media (prefers-reduced-motion:no-preference){
+  html:not(.rm) .fx-finish .pcard .stp3{animation:c3Stamp .3s .1s cubic-bezier(.2,.9,.3,1.2) both}
+  html:not(.rm) .fx-finish .keep3 .lk{animation:c3Stamp .3s .1s cubic-bezier(.2,.9,.3,1.2) both}
+}
+@keyframes c3Stamp{from{transform:scale(1.25) rotate(3deg);opacity:0}to{transform:scale(1) rotate(3deg)}}
+.title3,.words3,.title-q,.greet h1,.choice3,.keep3 p{padding-bottom:.08em}

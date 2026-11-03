@@ -12,10 +12,13 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const which = process.argv.slice(2).length ? process.argv.slice(2) : ["a", "b", "c", "c2", "d1", "d2", "d3"];
-const AUD = (k) => k === "c2" || /^d[123]$/.test(k);
+const which = process.argv.slice(2).length ? process.argv.slice(2) : ["a", "b", "c", "c2", "d1", "d2", "d3", "c3"];
+const AUD = (k) => k === "c2" || /^(d[123]|c3)$/.test(k);
 const slug = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const LARGE = ["Por qué hoy", "Paso 1 elegido", "Paso 2 escrito", "Teclado abierto", "Sin conexión", "Opción cambiada", "Tarjeta lista", "Pasó las dos", "Ninguna, sin nota (cierre)", "Editando la tarjeta", "Borrador sin terminar (Hoy)", "Hoy después"];
+// C3 has its own lists (its states are named differently)
+const L3 = ["Apertura", "Pregunta 1 elegida", "Pregunta 2 escrita", "Teclado abierto (simulado)", "Sin conexión", "Opción cambiada con borrador", "Cierre", "Cierre: pasó las dos", "Cierre: Ninguna sin nota", "Cierre: respuesta larga", "Escribiendo: respuesta larga", "Editando la respuesta", "Hoy antes", "Hoy después", "Hoy: «Hi»", "Hoy: pasó las dos", "Hoy: solo «Ninguna»", "Hoy: respuesta larga", "Borrador sin terminar (Hoy)", "Seguimiento con tarea (ilustrativo)", "Seguimiento sin tarea (ilustrativo)"];
+const RM3 = ["Apertura", "Pregunta 2 escrita", "Teclado abierto (simulado)", "Cierre", "Cierre: pasó las dos", "Hoy antes", "Hoy después", "Hoy: «Hi»"];
 // key screens captured again with reduced motion (and checked: only opacity may animate)
 const RM = ["Por qué hoy", "Paso 2 escrito", "Teclado abierto", "Tarjeta lista", "Hoy después", "Pasó las dos", "Ninguna, sin nota (cierre)"];
 
@@ -55,7 +58,7 @@ function audit() {
         if (!out.minFont || size < out.minFont.size) out.minFont = { size, t: label(el) };
         if (!el.closest(".rtag") && (!out.minProduct || size < out.minProduct.size)) out.minProduct = { size, t: label(el) };
         if (el.clientWidth > 0 && el.scrollWidth > el.clientWidth + 1 && !/(auto|scroll)/.test(cs.overflowX)) out.clipped.push(`wider than its box: ${label(el)}`);
-        if (el.clientHeight > 0 && el.scrollHeight > el.clientHeight + 2 && !/(auto|scroll)/.test(cs.overflowY)) out.clipped.push(`taller than its box: ${label(el)}`);
+        if (el.clientHeight > 0 && el.scrollHeight > el.clientHeight + 2 && !/(auto|scroll)/.test(cs.overflowY) && !(cs.webkitLineClamp && cs.webkitLineClamp !== "none")) out.clipped.push(`taller than its box: ${label(el)}`);
       }
     }
     if (el.matches("textarea") && !el.value) {
@@ -82,7 +85,12 @@ function audit() {
     const range = document.createRange(); range.selectNodeContents(node);
     const sc = scroller(node), clip = sc ? sc.getBoundingClientRect() : PR;
     id++;
-    for (const r of range.getClientRects()) if (r.width > 1 && r.height > 1) runs.push({ id, sc, r, clip, t: node.textContent.trim().slice(0, 30) });
+    // an intentionally clamped paragraph (line-clamp) only shows its box: hidden lines are not overlap
+    let clampBox = null; for (let e = node.parentElement; e && !clampBox; e = e.parentElement) { const c = getComputedStyle(e).webkitLineClamp; if (c && c !== "none") clampBox = e.getBoundingClientRect(); }
+    for (const r of range.getClientRects()) if (r.width > 1 && r.height > 1) {
+      if (clampBox && (r.bottom > clampBox.bottom + 1 || r.top < clampBox.top - 1)) continue;
+      runs.push({ id, sc, r, clip, t: node.textContent.trim().slice(0, 30) });
+    }
   }
   const inter = (a, b) => ({ l: Math.max(a.left, b.left), t: Math.max(a.top, b.top), r: Math.min(a.right, b.right), b: Math.min(a.bottom, b.bottom) });
   for (let i = 0; i < runs.length; i++) for (let j = i + 1; j < runs.length; j++) {
@@ -156,7 +164,7 @@ for (const k of which) {
     if (v2) {
       for (const scale of [1.3, 1.6]) {
         await page.evaluate((s) => window.proto.text(s), scale);
-        for (const n of LARGE) {
+        for (const n of (k === "c3" ? L3 : LARGE)) {
           const si = list.indexOf(n), pi = presets.indexOf(n);
           if (si < 0 && pi < 0) { problems.push(`missing large-text target ${n}`); continue; }
           await shoot(si >= 0 ? "s" : "p", si >= 0 ? si : pi, n, `${k}-${w}-t${Math.round(scale * 100)}-${slug(n)}.png`);
@@ -164,17 +172,28 @@ for (const k of which) {
       }
       await page.evaluate(() => window.proto.text(1));
       await page.click('[data-motion="rm"]');
-      for (const n of RM) {
+      for (const n of (k === "c3" ? RM3 : RM)) {
         const si = list.indexOf(n), pi = presets.indexOf(n);
         await shoot(si >= 0 ? "s" : "p", si >= 0 ? si : pi, n, `${k}-${w}-rm-${slug(n)}.png`);
       }
       await page.evaluate(() => window.proto.text(1.6));
-      for (const n of ["Tarjeta lista", "Hoy después"]) {
+      for (const n of (k === "c3" ? ["Cierre", "Hoy después"] : ["Tarjeta lista", "Hoy después"])) {
         const si = list.indexOf(n);
         await shoot("s", si, n, `${k}-${w}-rm-t160-${slug(n)}.png`);
       }
       await page.evaluate(() => window.proto.text(1));
       await page.click('[data-motion="full"]');
+      if (k === "c3") { // the greeting rule and long names: Hoy with each name, at 100 % and 160 %
+        for (const nm of ["first", "long"]) {
+          await page.click(`[data-nm="${nm}"]`);
+          for (const sc of [1, 1.6]) {
+            await page.evaluate((x) => window.proto.text(x), sc);
+            for (const n of ["Hoy antes", "Hoy después"]) await shoot("s", list.indexOf(n), n, `${k}-${w}-nm-${nm}-t${Math.round(sc * 100)}-${slug(n)}.png`);
+          }
+          await page.evaluate(() => window.proto.text(1));
+        }
+        await page.click('[data-nm="short"]');
+      }
     }
     await page.close();
   }

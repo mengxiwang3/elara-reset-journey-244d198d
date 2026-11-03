@@ -24,6 +24,10 @@ const concepts = {
         css: ["c2.css"], js: ["content.js", "shared.js", "c2.content.js", "c2.js"],
         fine: FINE + " Ojo: C v2 ya no usa exactamente los mismos textos ni respuestas que A, B y C v1. Los textos nuevos son una propuesta, pendiente de María y Alejandra.",
         back: "← Todas las propuestas" },
+  c3: { title: "Elara · Sesión C3: Hoy de la app y tarjeta final", h: "C3 · Hoy de la app, sesión corta, tarjeta al final",
+        p: "El Hoy real de la app con contenido de Wuzhen, la sesión funcional de C v2 con una pregunta 2 adaptada a la opción, y una tarjeta postal solo al final, con sus palabras.",
+        css: ["c2.css", "c3.css"], js: ["content.js", "shared.js", "c2.content.js", "c3.content.js", "c3.js", "c2.js"], fine: "",
+        back: "← Comparar direcciones", backHref: "compare-directions.html" },
   d1: { title: "Elara · Dirección 1: Tarjeta de colección", h: "D1 · Tarjeta de colección",
         p: "Sus palabras se convierten en un objeto: su elección se vuelve un sello dentado, el cierre lo matasella «Wuzhen · Día 1» y el farol queda sujeto con cinta. En Hoy vive en un álbum de la semana.",
         css: ["c2.css", "d.css", "d1.css"], js: ["content.js", "shared.js", "c2.content.js", "d1.js", "c2.js"], fine: "", back: "← Comparar direcciones", backHref: "compare-directions.html" },
@@ -34,7 +38,7 @@ const concepts = {
         p: "El orbe de Elara acompaña: presenta el día con una frase, se aparta a una esquina mientras ella escribe (sin moverse) y vuelve para recibir sus palabras y devolverle la tarjeta sellada.",
         css: ["c2.css", "d.css", "d3.css"], js: ["content.js", "shared.js", "c2.content.js", "d3.js", "c2.js"], fine: "", back: "← Comparar direcciones", backHref: "compare-directions.html" },
 };
-const DFINE = "Dirección visual sobre C v2: mismas preguntas, mismas respuestas de ejemplo y mismas respuestas simuladas («Respuesta simulada»); solo cambia la experiencia. Sin datos reales ni IA. Textos nuevos: propuesta, pendiente de María y Alejandra.";
+const DFINE = "Prototipo visual sobre C v2: mismas preguntas, mismas respuestas de ejemplo y mismas respuestas simuladas («Respuesta simulada»); solo cambia la experiencia. Sin datos reales ni IA. Textos nuevos: propuesta, pendiente de María y Alejandra.";
 
 const only = process.argv.slice(2);
 for (const [k, c] of Object.entries(concepts)) {

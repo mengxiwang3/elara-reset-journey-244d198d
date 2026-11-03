@@ -46,6 +46,15 @@ tr:last-child td{border-bottom:0}
   <div class="tags"><span class="tag">Contenido actual de la app (aprobación por confirmar)</span><span class="tag sim">Respuestas de Elara simuladas</span><span class="tag">Not tested with users</span></div>
 </header>
 
+<section aria-labelledby="c3">
+  <h2 id="c3">New: C3, the app's Hoy and a postcard only at the end</h2>
+  <p class="lede">One focused revision. Hoy follows the real Hoy of the app (shown in two captures of another day) with Wuzhen content; the session keeps C v2's short flow, with a question 2 adapted to the chosen option; a postcard appears only at the end, around her own words, and never when she wrote nothing. New Spanish is pending María and Alejandra. Scope of the checks: a browser CSS imitation of 130% and 160% text, a contrast, text-size and 44px-target audit, and reduced-motion captures. There was no device testing and no screen-reader testing.</p>
+  <div class="cards">
+    <article class="card"><img src="shots/c3-393-10-hoy-despues.png" alt="C3 Hoy: sky, torn-paper hero with a stamp, globe card, week tracker and «Para retomar»"><div class="body"><span class="letter">C3</span><h3>Hoy of the app, postcard at the end</h3><p>Hoy: sky, torn-paper hero with a perforated stamp, a persistent start button, the seven-day tracker and one «Para retomar» card with her words clamped to two lines. Optional rows are quieter. The globe card, the three optional rows and the tab bar are illustrative or existing, and tagged so.</p><a class="open" href="c3.html">Open C3</a></div></article>
+    <article class="card"><img src="shots/c3-393-09-cierre.png" alt="C3 completion: her words on a torn-paper postcard with a stamp, a faint postmark and the lantern"><div class="body"><span class="letter">C3</span><h3>Completion</h3><p>Her exact words, large, on a postcard with a «Wuzhen» stamp, a faint postmark and the lantern. Elara's simulated note sits small below. If she wrote nothing there is no card: «Listo por hoy», a calm line and the keepsake.</p><a class="open" href="compare-directions.html#c3">See it in the comparison</a></div></article>
+  </div>
+</section>
+
 <section aria-labelledby="dirs">
   <h2 id="dirs">New: three visual directions, compared with C v2</h2>
   <p class="lede">The same day, questions, sample answers and simulated replies throughout. Only the composition, interaction and character change. These are prototypes; nothing has been applied to the app.</p>
@@ -57,7 +66,7 @@ tr:last-child td{border-bottom:0}
   <p><a class="open" href="compare-directions.html">Compare side by side</a></p>
   <div class="rec">
     <p><b>Recommendation to test:</b> lead with D1's stamp, postmark and album. Use D3's orb only at the close, to receive her words. Show the week on Hoy as D2's canal with stamps at each stop, without D2's panning between steps. The "boring" risk is mostly in the payoff, and D1 makes that an object worth returning to while keeping motion risk low. D3 is the warmest, but depends most on reply quality. D2 delights most on entry, but has the most motion and the highest build cost.</p>
-    <p class="note">Test: 6–8 people, each trying C v2 and one direction in rotated order. It is disproved if purpose clarity drops below C v2, if nobody would reopen the card or album, or if D2 or D3 wins on "would you come back tomorrow". All four directions pass the same checks (213 end-to-end; contrast at least 4.95:1; text at least 14px; targets at least 44px; reduced motion is fade-only; 160% text). New Spanish is pending María and Alejandra.</p>
+    <p class="note">Test: 6–8 people, each trying C v2 and one direction in rotated order. It is disproved if purpose clarity drops below C v2, if nobody would reopen the card or album, or if D2 or D3 wins on "would you come back tomorrow". All four directions pass the same checks (213 end-to-end checks in the browser; contrast at least 4.95:1; text at least 14px; targets at least 44px; reduced-motion captures animate opacity only; a CSS imitation of 160% text). No device or screen-reader testing.. New Spanish is pending María and Alejandra.</p>
   </div>
 </section>
 
@@ -77,7 +86,7 @@ tr:last-child td{border-bottom:0}
         <li>On Hoy, a compact takeaway card sits right under the greeting.</li>
         <li>«Ninguna por ahora» is a real answer: step 2 becomes optional and she can «Terminar sin escribir». «Prefiero pasar» records nothing. Nothing is invented for a skipped question.</li>
         <li>States shown: keyboard, unfinished draft, resume, changed answer, loading, offline (one «Reintentar», one «Seguir sin la nota de Elara»), each skip, completion. Saving and offline are tagged as simulated.</li>
-        <li>Text is 14px or larger, contrast is at least 4.5:1 (lowest 4.98:1), and every control is at least 44px. Layouts hold at 130% and 160% text.</li>
+        <li>Text is 14px or larger, contrast is at least 4.5:1 (lowest 4.98:1), and every control is at least 44px. A browser CSS imitation of 130% and 160% text produced no overflow or overlap; there was no device testing.</li>
       </ul>
       <p class="note">C v2 no longer uses exactly the same copy and replies as A and B, so test it against C v1 or the current app, not in a three-way comparison. All of this is a hypothesis to test, and the new Spanish is pending María and Alejandra.</p>
     </div>
@@ -154,7 +163,7 @@ tr:last-child td{border-bottom:0}
     <li>These are HTML approximations of the app; spacing and bars are close, not exact.</li>
     <li>Elara's replies are written by hand to the app's rules, not by the model. Judge the structure, not the wording.</li>
     <li>In the app this is path week 2, day 1 (Wuzhen is the week-2 place), so the prototypes say «Semana 2 · Día 1».</li>
-    <li>Offline only simulates the reply failing. No screen-reader or large-text check yet.</li>
+    <li>Offline only simulates the reply failing. No screen-reader or device check yet; large text was only imitated in the browser with CSS.</li>
   </ul>
 </section>
 </main>
