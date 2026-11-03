@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Elara bug handoff: code check</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">body{font:10pt/1.45 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#1a1615;margin:0}
+h1{font:600 20pt Georgia,serif;color:#16382a;margin:0 0 6px}h2{font:600 13.5pt Georgia,serif;color:#16382a;margin:18px 0 6px;break-after:avoid;border-top:1px solid #d9d2c7;padding-top:8px}h3{font-size:11pt;margin:10px 0 4px;break-after:avoid}
+table{border-collapse:collapse;width:100%;margin:6px 0 10px;font-size:8.6pt}th,td{border:1px solid #d9d2c7;padding:4px 5px;text-align:left;vertical-align:top}th{background:#f2ede4}tr{break-inside:avoid}
+code{font:8.3pt Menlo,Consolas,monospace;background:#f2ede4;padding:0 2px;border-radius:3px;word-break:break-word}pre{background:#f2ede4;padding:6px;font-size:8pt;white-space:pre-wrap;break-inside:avoid}
+ul,ol{padding-left:20px}li{margin:2px 0}blockquote{border-left:3px solid #b5461b;margin:6px 0;padding:2px 10px;color:#3d3631}
+</style>
+</head>
+<body>
+<p style="font-size:8.5pt;letter-spacing:.08em;text-transform:uppercase;color:#5a514b">Elara · 3 Nov 2026 · for the developers · code-checked revision of the UI/UX bug handoff</p><h1 id="bug-handoff-code-check-3-nov-2026">Bug handoff: code check (3
+Nov 2026)</h1>
+<p>What was checked: the eight issues from the 6-minute TestFlight
+recording, traced through the code. All reads were read-only.</p>
+<ul>
+<li><strong>Main:</strong> <code>origin/main</code> 1363407, read with
+<code>git show</code>.</li>
+<li><strong>Combined branch:</strong> <code>daily-session</code> 5387605
+in <code>/home/user/elara-session</code>.</li>
+<li><strong>What was run:</strong> nothing was edited, committed or
+pushed. The only code run was:
+<ul>
+<li>two <code>tsx</code> scratch scripts that call the real
+<code>stopLandmarks</code>/<code>hereIndexFor</code> (issue 01) and the
+real <code>score()</code> from <code>wellbeing.ts</code> (issue
+04);</li>
+<li>a small node check of the <code>sanitize</code> quote regex (issue
+02);</li>
+<li><code>vitest</code> on <code>placeDay.test.ts</code> and
+<code>atlas/week.test.ts</code> on the branch (23/23 pass).</li>
+</ul></li>
+<li><strong>Nothing was tested on a device.</strong></li>
+</ul>
+<p><strong>About the build.</strong> Several strings quoted in the
+handoff do not exist verbatim in <code>origin/main</code>, in
+<code>daily-session</code>, or in any local or remote ref: - «El lugar
+del descanso» - «Tu reflexión · Día 4» - «Te llevas» - «Una frase que
+guardaste» - «Tu camino por Asia» - «Empleos»</p>
+<p>The nearest real strings are named under each issue. Either the
+TestFlight build is not one of these commits, or the handoff paraphrased
+the screens. Verdicts below are about the code, not about one specific
+build.</p>
+<p>Legend: - <strong>CONFIRMED-IN-CODE:</strong> the code produces the
+behaviour. - <strong>PLAUSIBLE:</strong> the code allows it, but runtime
+or data is needed to confirm. - <strong>NOT REPRODUCIBLE FROM
+CODE:</strong> the code as described does not exist. - <strong>NEEDS
+DECISION:</strong> the fix depends on a product choice.</p>
+<h2 id="summary">Summary</h2>
+<table>
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 7%" />
+<col style="width: 11%" />
+<col style="width: 14%" />
+<col style="width: 34%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Pri</th>
+<th>Issue</th>
+<th>Verdict</th>
+<th>Smallest fix (where)</th>
+<th>Combined branch</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01</td>
+<td>P1</td>
+<td>Day/stop names shifted between Atlas and session</td>
+<td><strong>CONFIRMED-IN-CODE</strong> (two index rules on one list) +
+<strong>NEEDS DECISION</strong> (which stop names a day)</td>
+<td><code>apps/mobile/src/content/placeDay.ts:57-61</code>:
+<code>at</code> from <code>hereIndexFor</code>, <code>toward</code> from
+<code>stopIndexFor</code>; update
+<code>placeDay.test.ts:31-39</code></td>
+<td>Not touched</td>
+</tr>
+<tr class="even">
+<td>02</td>
+<td>P1</td>
+<td>Closing reply to «Todo bien» asks for another answer on a closed
+day; broken quote</td>
+<td><strong>CONFIRMED-IN-CODE</strong> (prompt contradiction +
+quote-stripping regex); exact wording PLAUSIBLE (model output)</td>
+<td><code>apps/api/src/services/stepReply.ts</code>: last-step variant
+of the “invite to try again” rule; balanced-only quote strip in
+<code>sanitize</code></td>
+<td>Partly: V2 prompt only on 2 Money days; W4D4 keeps the legacy
+prompt; the contradiction and <code>sanitize</code> are unchanged</td>
+</tr>
+<tr class="odd">
+<td>03</td>
+<td>P2</td>
+<td>Composer briefly under keyboard, settles ~1 s later</td>
+<td><strong>PLAUSIBLE</strong> (timing pattern in code)</td>
+<td>Classify only: BandDay band collapse 500 ms vs keyboard; two-pass
+reveal (<code>keyboardWillShow</code> then
+<code>keyboardDidShow</code>)</td>
+<td>Not touched (BandDay changed nearby, same timing)</td>
+</tr>
+<tr class="even">
+<td>04</td>
+<td>P1</td>
+<td>Weekly metrics: Presencia 29, Acción 80, 24%, deltas without
+period</td>
+<td><strong>CONFIRMED-IN-CODE</strong> (reproduced exactly by running
+<code>score()</code>)</td>
+<td><code>apps/mobile/app/progress.tsx</code> (labels/units, delta
+baseline); <code>apps/api/src/services/wellbeing.ts:192-199</code>
+(agency counts steps, connection 0)</td>
+<td>Not touched</td>
+</tr>
+<tr class="odd">
+<td>05</td>
+<td>P2</td>
+<td>Her «Todo bien» shown on Hoy and in «Frases que guardaste» without
+the question</td>
+<td><strong>CONFIRMED-IN-CODE</strong>: every
+<code>keep:&quot;sentence&quot;</code> answer is shelved automatically; Hoy quotes
+it with no question</td>
+<td><code>collection.ts:90</code>, <code>todayEntry.ts:295</code> (main)
+/ <code>lib/session.ts:hoyTakeaway</code> (branch): skip non-answers,
+carry the question</td>
+<td>Changes it: Hoy becomes «Hoy te llevas · Día N»; still no question;
+«Todo bien» still promoted; shelf unchanged</td>
+</tr>
+<tr class="even">
+<td>06</td>
+<td>P2</td>
+<td>Hoy repeats progress</td>
+<td><strong>PARTLY CONFIRMED</strong>: day/week shown on the postcard
+and again in «Tu semana en …» (+ Atlas tab). The «Tu camino por Asia»
+banner is <strong>NOT REPRODUCIBLE FROM CODE</strong></td>
+<td><code>app/(tabs)/index.tsx</code>: drop the disc-section count or
+the postcard’s week/day</td>
+<td>Order changed (takeaway added), repetition kept</td>
+</tr>
+<tr class="odd">
+<td>07</td>
+<td>P2</td>
+<td>Circle composer: «Anónima» scrolls away while typing</td>
+<td><strong>CONFIRMED-IN-CODE</strong> (layout); the identity is sent
+and displayed correctly</td>
+<td><code>CompartirSheet.tsx:149-152</code>: move
+<code>NameChoice</code>/<code>who</code> above the text field or into
+the pinned footer</td>
+<td>Not touched</td>
+</tr>
+<tr class="even">
+<td>08a</td>
+<td>P2</td>
+<td>Buttons spinner-only while loading</td>
+<td><strong>CONFIRMED-IN-CODE</strong>: label replaced by spinner;
+repeat taps blocked</td>
+<td><code>components/system/PrimaryPill.tsx:108-111</code>: keep the
+label next to a small spinner</td>
+<td>Not touched</td>
+</tr>
+<tr class="odd">
+<td>08b</td>
+<td>P3</td>
+<td>Explore «Empleos» tab empty</td>
+<td><strong>Mechanism CONFIRMED</strong> (static tabs show «Todavía no
+hay nada aquí. Vuelve pronto.»). There is <strong>no «Empleos»
+category</strong> in code</td>
+<td><code>CategoryTabs</code>
+(<code>components/explore/Catalogue.tsx:149</code>): filter
+<code>CATEGORIES</code> with existing <code>hasAny()</code></td>
+<td>Not touched</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="p1-day-identity-mismatch-money-week-4-arashiyama">01 · P1 · Day
+identity mismatch (Money week 4, Arashiyama)</h2>
+<p><strong>Verdict:</strong> CONFIRMED-IN-CODE (inconsistent index
+rules) + NEEDS DECISION.</p>
+<p><strong>World.</strong> Money week 4 is Arashiyama: -
+<code>places.ts:68-73</code> (<code>ky</code> is Money’s 4th row). -
+<code>stopsKeyFor</code> (<code>placeDay.ts:46-48</code>) gives every
+place except Lan Hạ the <code>generic</code> list. - That list is
+<code>es/globe.ts:53</code>:
+<code>[&quot;La primera vista&quot;, &quot;El camino adelante&quot;, &quot;La vuelta&quot;, &quot;El lugar de descanso&quot;, &quot;La subida&quot;, &quot;El mirador&quot;, &quot;El horizonte&quot;]</code>.</p>
+<p><strong>Evidence.</strong> - <code>placeDay.ts:36-38</code>:
+<code>stopIndexFor(day) = min(day, 6)</code>. The doc comment says this
+is the stop the day <strong>heads toward</strong>. -
+<code>placeDay.ts:41-43</code>:
+<code>hereIndexFor(day) = day - 1</code>. This is the stop the day’s
+<strong>picture shows</strong>, where she stands. -
+<code>placeDay.ts:57-61</code>: <code>stopLandmarks</code> builds
+<strong>both</strong> <code>at</code> («En …») and <code>toward</code>
+(«Hacia …») from <code>stopIndexFor(i+1)</code>:
+<code>ts   const stop = lowerFirst(stops[Math.min(stopIndexFor(i + 1), stops.length - 1)] ?? &quot;&quot;);   return lang === &quot;es&quot; ? { at: `En ${stop}`, toward: `Hacia ${stop}` } : …</code>
+- Who reads what:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Surface</th>
+<th>Code</th>
+<th>Reads</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Atlas week list</td>
+<td><code>app/(tabs)/atlas/week/[worldId].tsx:106</code> →
+<code>components/atlas/week.ts:81</code></td>
+<td><code>landmarks.map(l =&gt; l.at)</code></td>
+</tr>
+<tr class="even">
+<td>Atlas world record strip</td>
+<td><code>atlas/world/[worldId].tsx:270,282,287</code></td>
+<td><code>copy.at(index)</code></td>
+</tr>
+<tr class="odd">
+<td>Session pill</td>
+<td><code>app/path/day.tsx:1370</code></td>
+<td><code>wd.here.toward</code></td>
+</tr>
+<tr class="even">
+<td>Done screen «Mañana, …»</td>
+<td><code>day.tsx:1388</code> + <code>es/photoDay.ts</code>
+<code>tomorrow</code></td>
+<td><code>wd.next.toward</code></td>
+</tr>
+<tr class="odd">
+<td>«¿Dónde es?» photo line</td>
+<td><code>day.tsx:1348</code></td>
+<td><code>globe.stops[…][hereIndexFor(day)]</code> (bare stop, no
+«En»)</td>
+</tr>
+<tr class="even">
+<td>Hoy week discs (a11y)</td>
+<td><code>(tabs)/index.tsx:436</code></td>
+<td><code>landmark(…).at</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Computed with the real functions</strong> (tsx, branch
+checkout; <code>placeDay.ts</code> is identical on main):</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Atlas «at»</th>
+<th>Pill «toward»</th>
+<th>Done «Mañana»</th>
+<th>Photo line (here)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3</td>
+<td>En el lugar de descanso</td>
+<td>Hacia el lugar de descanso</td>
+<td>Mañana, hacia la subida</td>
+<td>La vuelta</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><strong>En la subida</strong></td>
+<td><strong>Hacia la subida</strong></td>
+<td><strong>Mañana, hacia el mirador</strong></td>
+<td><strong>El lugar de descanso</strong></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>En el mirador</td>
+<td>Hacia el mirador</td>
+<td>Mañana, hacia el horizonte</td>
+<td>La subida</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>En el horizonte</td>
+<td>Hacia el horizonte</td>
+<td>Mañana, hacia el horizonte</td>
+<td>El mirador</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>En el horizonte</td>
+<td>Hacia el horizonte</td>
+<td>n/a</td>
+<td>El horizonte</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mechanism.</strong> One list is read with two index rules: -
+The session’s «Hacia la subida / Día 4» and «Mañana, hacia el mirador»
+match the code exactly. - The labels the tester reports for the Atlas
+(Day 4 «El lugar de(l) descanso», Day 5 «En la subida», Day 6 «En el
+mirador») follow the <code>hereIndexFor</code> rule, which on main is
+used only by the photo line. - On main, the Atlas week list would say
+«Día 4 · En la subida». It names as “where she is” (<code>at</code>, «En
+…») the stop she is still heading toward. So on one day, three surfaces
+name the same day three ways: - the photo says «El lugar de descanso»; -
+the pill says «Hacia la subida»; - the Atlas says «En la subida».</p>
+<p>There is no list off by one. <code>at</code> uses the toward index
+instead of the here index. Side effect: days 6 and 7 are both «En el
+horizonte» and «Hacia el horizonte».</p>
+<p><strong>Pinned by tests.</strong> <code>placeDay.test.ts:31-39</code>
+pins <code>at == toward</code> on purpose
+(<code>enL[0] = { at: &quot;At the mist pass&quot;, toward: &quot;Toward the mist pass&quot; }</code>).
+The same test documents the prototype model: Day 3 = “the rafts in the
+picture, ‘Toward the cave’ in the pill”. So this is a design-level
+inconsistency, not an accident nobody saw.</p>
+<p><strong>Smallest fix:</strong>
+<code>apps/mobile/src/content/placeDay.ts:57-61</code> builds
+<code>at</code> from <code>stops[hereIndexFor(i+1)]</code> and keeps
+<code>toward</code> on <code>stopIndexFor(i+1)</code>; update
+<code>placeDay.test.ts:31-39</code>. Result: - Day 4: Atlas «En el lugar
+de descanso», photo «El lugar de descanso», pill «Hacia la subida»,
+«Mañana, hacia el mirador». - The Atlas then matches what the tester
+describes, and «En» and «Hacia» never name the same stop on one day. -
+This also repairs the day 6/7 duplicate.</p>
+<p><strong>Open decision:</strong> which single name the day carries in
+the Atlas list and on the done screen’s eyebrow: where she stands («En
+el lugar de descanso») or where she heads («Hacia la subida»). - Even
+after the fix, the done screen says «Hacia la subida · Día 4» while the
+Atlas says «En el lugar de descanso · Día 4». That is correct under the
+prototype model, but it is exactly the “shifted by one” perception. - If
+the Atlas should name the day by its pill, then change the Atlas to read
+<code>toward</code> (<code>week/[worldId].tsx:106</code>,
+<code>world/[worldId].tsx:270-287</code>) instead of changing
+<code>at</code>.</p>
+<p><strong>Combined branch:</strong> not touched
+(<code>placeDay.ts</code>, <code>es/globe.ts</code> and the Atlas
+week/world screens are unchanged). The branch also feeds
+<code>wd.here.toward</code> to the new session opening title
+(<code>day.tsx:1576</code>), so the decision applies there too.</p>
+<hr />
+<h2 id="p1-closing-reply-after-todo-bien">02 · P1 · Closing reply after
+«Todo bien»</h2>
+<p><strong>Verdict:</strong> - The prompt contradiction and the broken
+quote are CONFIRMED-IN-CODE. - The exact wording of the reply is model
+output (PLAUSIBLE, but it fits the prompt and the step text
+precisely).</p>
+<p><strong>Data path.</strong> - Money W4D4 is path day 25
+(<code>content/pathDays/money.ts:389-401</code>). It has two steps:
+<code>ask</code> (choose) and <code>take</code> (reflect,
+<code>keep:&quot;sentence&quot;</code>). - The <code>take</code> copy
+(<code>es/pathCopy/money.ts:582-587</code>): «Dijiste «{ask|lower}».
+¿Qué es lo siguiente que necesitarías saber? También puedes escribir que
+lo dejas aquí por ahora.» The model’s “doesn’t say whether she’ll add
+the missing info or stop” is that question read back. - The route passes
+<code>position</code> and <code>total: steps.length</code>
+(<code>routes/me.ts:590-594</code>). So <code>take</code> is step 2 of
+2, the last step.</p>
+<p><strong>Evidence (main,
+<code>apps/api/src/services/stepReply.ts</code>).</strong> -
+<code>:95</code> last step: «Close the day … Do not ask a question.» -
+<code>:195</code> (a general rule in the same instructions): «If the
+answer is very short, off-topic, … or does not answer the question, …
+<strong>invite them to try the question again</strong> in their own
+words.» The two rules contradict each other on the last step, and the
+model follows <code>:195</code>. - <code>:165-171</code>: only
+<code>isNonAnswer</code> words skip the model and get
+<code>retry: true</code>. «Todo bien» is not in
+<code>NON_ANSWER_PHRASES</code>
+(<code>packages/shared/src/practice.ts:221-236</code>). So it reaches
+the model, and the reply comes back <code>generated: true</code> with
+<strong>no <code>retry</code> flag</strong>. - On the client,
+<code>app/path/day.tsx:1233</code> takes
+<code>live = dayAnswers[liveFrom].reply</code>, and <code>:1385</code>
+shows it as the done screen’s Elara line (<code>BandDay</code> renders
+it raw). So the invitation lands on a screen with no input. -
+<strong>Quote bug:</strong> <code>sanitize</code>,
+<code>stepReply.ts:264</code>:
+<code>text.replace(/^[&quot;“”&#39;]+|[&quot;“”&#39;]+$/g, &quot;&quot;)</code> strips any leading
+or trailing quote even when it opens or closes a quoted phrase
+<strong>inside</strong> the reply. Checked with node: -
+<code>&quot;Todo bien&quot; no deja claro…</code> →
+<code>Todo bien&quot; no deja claro…</code> -
+<code>Dijiste &quot;todo bien&quot;</code> → <code>Dijiste &quot;todo bien</code> -
+<code>«»</code> are not touched.</p>
+<p>This is the malformed quote. No client-side wrapper adds quotes on
+the band done screen; <code>day-complete.tsx:401</code> wraps in “ ”
+only on the legacy screen.</p>
+<p><strong>Smallest fix.</strong> 1. <code>stepReply.ts</code>: make the
+“invite them to try again” bullet depend on position. - When
+<code>position &gt;= total</code>, replace it with: «If the answer is
+very short or does not answer the question, acknowledge it plainly in
+one sentence without interpreting it and close. Never ask for another
+answer.» - On the branch, apply this in both
+<code>legacyStepInstructions</code> (<code>:134</code>) and
+<code>stepInstructions</code> (<code>:186</code>). 2.
+<code>stepReply.ts</code> <code>sanitize</code>: strip only a
+<strong>balanced</strong> wrapping pair. Example:
+<code>const m = /^([&quot;“])([^&quot;“”]*)([&quot;”])$/.exec(text); if (m) text = m[2];</code>.
+Never strip one side alone. 3. Optional belt-and-braces: add «todo
+bien», «bien», «nada más» to <code>NON_ANSWER_PHRASES</code>. This is a
+product call, since «Todo bien» may be an honest answer, so not
+recommended blind.</p>
+<p><strong>Combined branch.</strong> - The V2 prompt
+(<code>stepInstructions</code>) is used only when the day has a
+<code>purpose</code>. In Spanish Money that is only W2D1 and W2D2
+(<code>es/pathCopy/money.ts:183,215</code>). W4D4 goes through
+<code>legacyStepInstructions</code>, which is byte-for-byte main’s text.
+<strong>Not fixed for this day.</strong> - V2 itself still carries the
+same “invite them to try again” bullet (<code>:186</code>) next to «Do
+not ask her a question», so the contradiction survives there too. -
+<code>sanitize</code> is unchanged (<code>:368</code>). - On the client,
+the branch keeps <code>retry</code> replies off the session close
+(<code>day.tsx:1385,1442</code>). That only covers
+<code>retry: true</code> (server-detected non-answers). A model-written
+invitation like this one has no flag, so “the retry invitation never
+carried to a later screen” does <strong>not</strong> cover this case. -
+<strong>Status: partly</strong> (structure improved, this bug not
+fixed).</p>
+<p><strong>Open decision:</strong> whether a short-but-real last answer
+(«Todo bien») should be accepted as-is (recommended) or treated as a
+non-answer.</p>
+<hr />
+<h2 id="p2-transient-keyboard-overlap">03 · P2 · Transient keyboard
+overlap</h2>
+<p><strong>Verdict:</strong> PLAUSIBLE (classify only). The code has two
+timing paths that produce “covered, then settles”.</p>
+<p><strong>Evidence.</strong> - <code>hooks/useKeyboard.ts:38-46</code>:
+iOS state updates on <code>keyboardWillShow</code>, which is fine. -
+<code>useKeyboardAwareScroll</code>
+(<code>useKeyboard.ts:157-172</code>) reveals the focused field twice.
+The first pass runs on <code>keyboardWillShow</code>, before the avoider
+has shrunk the scroller, and its scroll is clamped to 0 (the file says
+so at <code>:161-164</code>). The second pass runs on
+<code>keyboardDidShow</code> and does an animated <code>scrollTo</code>.
+Until that second pass the field can sit under the keys. This is used by
+the step screen (<code>StepScreen.tsx:242</code>, 88 pt gap) and the
+circle composer. - The daily step in the photo band: -
+<code>BandDay.tsx:188-200</code> shrinks the band when
+<code>keyboard.visible</code>, with an <code>Animated.timing</code> of
+<code>BAND_MS = 500</code> ms (<code>photoDay.ts:70</code>). That is not
+tied to the keyboard’s own ~250 ms curve. - The composer padding
+(<code>KeyboardAvoider toScreenBottom</code>,
+<code>KeyboardAvoider.tsx:73-75</code>) jumps to the full keyboard
+height instantly, with no animation. - So content above it moves in
+three different rhythms (instant, 250 ms, 500 ms) and then the didShow
+scroll. That adds up to roughly 0.5-1 s of settling. - Pregunta
+(<code>(tabs)/ask.tsx:178-184,361</code>):
+<code>KeyboardAvoidingView</code> padding, plus <code>scrollToEnd</code>
+50 ms after <code>visible</code>. Less likely to overlap.</p>
+<p><strong>Fix direction (not requested):</strong> - In
+<code>BandDay</code>, drive the band collapse with
+<code>keyboard.duration</code> and start it on
+<code>keyboardWillShow</code>. - Or move to
+<code>react-native-keyboard-controller</code>, which is a bigger
+change.</p>
+<p><strong>Needs:</strong> a screen recording at 60 fps on device, to
+tell which composer it was.</p>
+<p><strong>Combined branch:</strong> not touched. <code>BandDay</code>
+gained a folded question line on
+<code>keyboard.visible &amp;&amp; scrolled</code>, with the same
+timing.</p>
+<hr />
+<h2 id="p1-weekly-metrics-cómo-has-estado">04 · P1 · Weekly metrics
+(«Cómo has estado»)</h2>
+<p><strong>Verdict:</strong> CONFIRMED-IN-CODE. Reproduced exactly by
+running the real <code>score()</code> with 2 active days, 4
+answered-step signals, 0 check-ins:
+<code>engagement 29, agency 80, connection 0, mood/stability/outlook null, confidence 0.24, checkIns 0, daysActive 2</code>.</p>
+<p><strong>Screen:</strong> <code>apps/mobile/app/progress.tsx</code>.
+Labels are in <code>es/account.ts:563-566</code>; the footer is
+<code>:519-522</code>.</p>
+<p><strong>Computation:</strong>
+<code>apps/api/src/services/wellbeing.ts</code>. - <strong>Presencia
+29</strong> = <code>round(days/7*100)</code> = 2/7 → 28.6 →
+<strong>29</strong> (<code>:189</code>). It is a percentage shown as a
+bare number under the hint «Días en los que estuviste aquí». Yes, 29 =
+2/7 as a %. - <strong>Acción 80</strong> =
+<code>round(min(completions/5,1)*100)</code> where
+<code>completions</code> counts <strong>every</strong>
+<code>path_day</code> signal of kind <code>completed</code> <strong>or
+<code>answered</code></strong> (<code>:192-195</code>).
+<code>saveStep</code> writes one <code>answered</code> signal per step
+(<code>services/progress.ts:~815</code>). So 2 days × 2 steps = 4 → 4/5
+= <strong>80</strong>. It counts steps, not “días y acciones que
+terminaste”. - <strong>24 %</strong> =
+<code>confidence = days/5*0.6 + checkIns/5*0.4</code> = 0.4×0.6 + 0 =
+<strong>0.24</strong> (<code>:223-224</code>). The footer calls it
+«basado en el 24% de una semana completa» (<code>account.ts:521</code>),
+but it is a confidence blend, not a share of the week. - <strong>0
+registros</strong> = mood check-ins
+(<code>checkIns: moods.length</code>). - <strong>Missing data:</strong>
+- mood, stability and outlook become <code>null</code> and show «—»
+(correct). - <strong>connection becomes 0</strong> whenever any signal
+exists and there were no social actions (<code>:198-200</code>).
+Engagement and agency likewise show 0 rather than «—» on a week with
+signals but no path answers. So “no data” partly becomes zero. -
+<strong>Deltas without a period:</strong>
+<code>progress.tsx:37-41</code> picks <code>previous</code> = the latest
+earlier week with <code>confidence &gt; 0</code>, which may be many
+weeks back. <code>:189-197</code> prints <code>-12</code> with no
+«vs. semana del …». A delta of 0 is hidden (<code>delta ?</code>).</p>
+<p><strong>Smallest fix.</strong> - <code>progress.tsx</code>: - For
+<code>engagement</code>, show «2 de 7 días» (from
+<code>latest.daysActive</code>) instead of the % number. - Under deltas,
+add «vs. semana del {formatWeek(previous.periodStart)}». - Reword
+<code>weekBasis</code> to «2 días activos · 0 registros · lectura con
+pocos datos» (no %), or drop the %. - <code>wellbeing.ts:192-195</code>:
+count distinct <code>localDate</code>s with a <code>path_day</code>
+signal (days, not steps), or only <code>completed</code>. -
+<code>:198-200</code>: leave <code>connection</code> <code>null</code>
+when <code>socialActions === 0</code>. - Snapshots are frozen rows
+(<code>snapshotWrite</code>), so already-written weeks keep their old
+numbers. Only new weeks change, or a one-off recompute is needed.</p>
+<p><strong>Combined branch:</strong> not touched.</p>
+<p><strong>Open decision:</strong> whether Acción measures days, steps
+or completed actions; whether to show % values at all on a 2-day
+week.</p>
+<hr />
+<h2 id="p2-todo-bien-promoted-to-hoy-and-to-frases-que-guardaste">05 ·
+P2 · «Todo bien» promoted to Hoy and to «Frases que guardaste»</h2>
+<p><strong>Verdict:</strong> CONFIRMED-IN-CODE: automatic promotion of
+<code>keep:&quot;sentence&quot;</code> answers.</p>
+<p><strong>Evidence (main).</strong> - Every Money <code>take</code>
+step is <code>keep: &quot;sentence&quot;</code>
+(<code>content/pathDays/money.ts</code>, e.g. W4D4 at
+<code>:397</code>). -
+<code>components/practice/collection.ts:90-101</code>: any answered step
+with <code>keep</code> becomes a <code>kind:&quot;sentence&quot;</code> item.
+There is no save action by her, and no filter for non-answers. - That
+list is the profile drawer’s «Frases que guardaste»
+(<code>profile.tsx:192</code>, <code>es/account.ts:31</code>). That is
+the handoff’s «Una frase que guardaste». - Hoy «Para retomar»
+(<code>app/(tabs)/index.tsx:289-304</code>) uses <code>recallFor</code>
+(<code>hooks/todayEntry.ts:295-330</code>). - <code>recallFor</code> →
+<code>headlineValue</code> picks the day’s prose (reflect wins). For
+W4D4 that is the <code>take</code> answer «Todo bien». - The label is
+«Hoy dijiste · Día 4» / «Ayer dijiste · Día 4»
+(<code>es/home.ts:349-357</code>); the handoff wrote «Tu reflexión · Día
+4». - Shown as «Todo bien», with <strong>no question</strong>. - Hoy’s
+<code>recall.quoted</code> uses «…» while the rest of the app’s
+<code>common.format.quote</code> uses “…”
+(<code>es/common.ts:12</code>), so quote styles differ.</p>
+<p><strong>Smallest fix.</strong> - Filter <code>isNonAnswer</code> in
+<code>collection.ts:91</code> (as the branch’s <code>takeawayText</code>
+already does), and skip very short answers if desired. - Show the
+question as context: on Hoy, a <code>detail</code> line with the step
+title; on the shelf, the day’s question (it is already in
+<code>days</code>).</p>
+<p><strong>Combined branch: changes it, partly.</strong> -
+<code>recallFor</code> is removed. Hoy now shows
+<code>TakeawayRow</code> from
+<code>hoyTakeaway</code>/<code>takeawayText</code>
+(<code>lib/session.ts</code>,
+<code>packages/shared/src/session.ts:185-206</code>), labelled «Hoy te
+llevas · Día 4» / «La última vez anotaste · Día 4» (branch
+<code>es/home.ts:355-361</code>). This is the handoff’s «Te llevas». -
+On non-session days <code>takeawayStepOf</code> falls back to the last
+<code>keep</code> step, so W4D4’s «Todo bien» is <strong>still
+promoted</strong>. <code>isNonAnswer</code> does not catch it. - The
+card has <strong>no question</strong> (label + quote + hint). - The
+shelf in <code>collection.ts</code> is unchanged.</p>
+<p><strong>Open decision:</strong> should <code>keep:&quot;sentence&quot;</code>
+be explicit (she taps «Guardar») or stay automatic, and should Hoy show
+the question?</p>
+<hr />
+<h2 id="p2-hoy-repeats-progress">06 · P2 · Hoy repeats progress</h2>
+<p><strong>Verdict:</strong> - Repetition: CONFIRMED-IN-CODE. - The «Tu
+camino por Asia» Atlas banner: NOT REPRODUCIBLE FROM CODE. No such
+string or component exists on main or the branch. <code>globe.ts</code>
+has <code>sheet.path</code> «El camino de {continent}: …» only inside
+the Atlas globe sheet. - The design choice: NEEDS DECISION.</p>
+<p><strong>Order on main</strong>
+(<code>app/(tabs)/index.tsx</code>):</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lines</th>
+<th>Section</th>
+<th>Shows</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>:214</code></td>
+<td>Masthead</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>:236-268</code></td>
+<td><code>HoyPostcard</code></td>
+<td><code>placeLine</code> «Arashiyama, Kioto, Japón · Semana 4 · Día 4»
+(<code>:383</code>) + «Día 4 hecho» + title + button</td>
+</tr>
+<tr class="odd">
+<td><code>:270-287</code></td>
+<td>«Tu semana en Arashiyama»</td>
+<td>aside «4 de 7» + <code>WeekDiscs</code> + «Esta semana: …»</td>
+</tr>
+<tr class="even">
+<td><code>:289-304</code></td>
+<td>«Para retomar»</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>:306-342</code></td>
+<td>«Para hoy»</td>
+<td>guide, «Ver dónde estás» (six areas, not the Atlas), Elara</td>
+</tr>
+</tbody>
+</table>
+<p>Week and day appear on the postcard, again as the disc count, and
+again in the Atlas tab.</p>
+<p><strong>Minimal reduction (pick one).</strong> - (a) Drop the aside
+count «4 de 7» (<code>:275-276</code>): the discs already show it. - (b)
+Drop «· Semana 4 · Día 4» from <code>placeLine</code>
+(<code>es/home.ts</code> <code>hoy.placeLine</code>) and let the discs
+carry the position. - (c) Fold the discs into the postcard and remove
+the section.</p>
+<ol type="a">
+<li>is a two-line change.</li>
+</ol>
+<p><strong>Combined branch:</strong> order changed (Masthead → takeaway
+at the top when today is done → postcard → takeaway under it → week
+discs → «Para hoy»; «Para retomar» is removed). The repetition is
+unchanged.</p>
+<hr />
+<h2 id="p2-circle-post-composer-identity-scrolls-away">07 · P2 · Circle
+post composer: identity scrolls away</h2>
+<p><strong>Verdict:</strong> - The layout problem: CONFIRMED-IN-CODE. -
+The identity itself: correct in code.</p>
+<p><strong>Evidence.</strong> -
+<code>components/circles/circulos/CompartirSheet.tsx:131-152</code>:
+order is circle chips → multiline <code>TextField</code> (min 120 pt,
+grows, <code>maxLength 4000</code>) → <code>NameChoice</code> → «who
+sees it» line. - All of that is the sheet’s scrolling body. «Publicar»
+is in <code>footer</code> (<code>:99-112</code>), which
+<code>Sheet.tsx:308-324</code> pins outside the <code>ScrollView</code>.
+As she types, the field grows and the keyboard shrinks the sheet, so
+<code>NameChoice</code> falls below the fold while «Publicar» stays
+visible.</p>
+<p><strong>Identity sent and shown correctly.</strong> - Client:
+<code>anonymous</code> state goes to
+<code>api.createTopicPost(..., { anonymous })</code>
+(<code>:53,70</code>). - Schema: <code>anonymous: z.boolean()</code>
+(<code>packages/shared/src/circleTopics.ts:87,100</code>). - Insert:
+<code>services/circleTopics.ts:534</code> stores it. -
+<code>authorOf</code> (<code>:170-173</code>) returns
+<code>{ anonymous:true, id:null, name:null }</code> to everyone. Names
+are not even fetched for anonymous rows (<code>:294,452-454</code>). -
+Byline: «Anónima» to others, «Tú (Anónima)» to her
+(<code>components/circles/topics/ui.tsx:55-58</code>). - Not audited:
+push and digest copy.</p>
+<p><strong>Smallest fix:</strong> in <code>CompartirSheet.tsx</code>,
+move <code>&lt;NameChoice …/&gt;</code> and the <code>who</code> line
+above the <code>TextField</code>. Or render
+<code>&lt;NameChoice compact …/&gt;</code> inside the pinned
+<code>footer</code> above «Publicar». <code>NameChoice</code> already
+supports <code>compact</code>.</p>
+<p><strong>Combined branch:</strong> not touched (it changes only
+<code>circulos/parts.tsx</code> and
+<code>CirclesTopicsScreen.tsx</code>).</p>
+<hr />
+<h2 id="p2-p3-spinner-only-buttons-empty-explore-tab">08 · P2-P3 ·
+Spinner-only buttons; empty Explore tab</h2>
+<p><strong>08a verdict:</strong> CONFIRMED-IN-CODE.</p>
+<p><strong>Evidence.</strong> -
+<code>components/system/PrimaryPill.tsx:108-111</code>:
+<code>loading</code> cross-fades the whole label to a bare
+<code>ActivityIndicator</code>. - <code>:127</code>
+<code>disabled={off || loading}</code> blocks repeat taps, and
+<code>:131-133</code> keeps the label for VoiceOver plus
+<code>busy</code>. - Callers: - Join: <code>CircleScreen.tsx:151</code>,
+<code>circle-preview.tsx:138</code>. - Publish:
+<code>CompartirSheet.tsx:107</code>, <code>topic-compose.tsx:166</code>.
+- Save: <code>resource/[id].tsx:436</code>,
+<code>event-detail/[id].tsx:350</code>. - <code>CompartirSheet</code>
+also guards in <code>onPress</code> (<code>ready</code> includes
+<code>busy</code>), so it is double-protected. -
+<code>circle-compose.tsx:95</code> already does it the other way, with
+the label «Publicando…».</p>
+<p><strong>Smallest fix:</strong> in <code>PrimaryPill</code>, render
+the spinner (size small) next to the label instead of replacing it, or
+accept an optional <code>loadingLabel</code>. One component, no caller
+changes.</p>
+<p><strong>08b verdict:</strong> - The behaviour: CONFIRMED-IN-CODE. -
+The «Empleos» name: NOT REPRODUCIBLE FROM CODE.</p>
+<p><strong>Evidence.</strong> - Explore tabs are a static list:
+<code>lib/exploreCatalogue.ts:23</code>
+<code>CATEGORIES = [&quot;all&quot;,&quot;workshop&quot;,&quot;listen&quot;,&quot;watch&quot;,&quot;guide&quot;]</code>,
+labelled «Todo, Talleres, Audios, Videos, Guías»
+(<code>es/explore.ts:40</code>). - There is no jobs or «Empleos»
+category anywhere in code or CMS kinds. The tab in the recording was
+most likely «Talleres» or another kind with no items. -
+<code>CategoryTabs</code>
+(<code>components/explore/Catalogue.tsx:149-185</code>) always renders
+every tab. An empty one shows <code>catalogue.empty</code> «Todavía no
+hay nada aquí. Vuelve pronto.»
+(<code>(tabs)/explore/index.tsx:94-102,242-244</code>;
+<code>es/explore.ts:91</code>). - A <code>hasAny(c, category)</code>
+helper already exists (<code>exploreCatalogue.ts:83-97</code>) and is
+not used by the tabs. - <code>hasAny(&quot;workshop&quot;)</code> checks
+<code>featured || recordings</code>, while the empty check uses
+<code>upcoming || recordings</code>. Align them when wiring.</p>
+<p><strong>Smallest fix:</strong> pass the catalogue to
+<code>CategoryTabs</code> and render
+<code>CATEGORIES.filter(c =&gt; c === &quot;all&quot; || hasAny(catalogue, c))</code>.
+If the current tab disappears, reset it to <code>&quot;all&quot;</code>.</p>
+<p><strong>Combined branch:</strong> not touched.</p>
+<p><strong>Open decision:</strong> whether to hide empty kinds, or keep
+them with a better empty state.</p>
+<hr />
+<h2 id="recommended-fix-order">Recommended fix order</h2>
+<ol type="1">
+<li><strong>02</strong>: P1, copy users see on the done screen, and a
+broken quote. Two small edits in <code>stepReply.ts</code> (prompt
+bullet on the last step in both prompt builders; balanced quote strip).
+Ship with the combined branch, since it already edits this file.</li>
+<li><strong>04</strong>: P1, numbers that mislead.
+<ul>
+<li>Client-only first: <code>progress.tsx</code> units («2 de 7 días»),
+the delta baseline label, the footer wording.</li>
+<li>Then <code>wellbeing.ts</code> agency/connection, which affects only
+new weeks.</li>
+</ul></li>
+<li><strong>01</strong>: P1, needs the naming decision first. Then a
+2-line change in <code>placeDay.ts</code> + its test (or the Atlas
+screens read <code>toward</code>).</li>
+<li><strong>05</strong>: filter non-answers from the shelf and the Hoy
+takeaway (<code>collection.ts</code>, <code>session.ts</code>); add the
+question as context.</li>
+<li><strong>07</strong>: move <code>NameChoice</code> above the field in
+<code>CompartirSheet.tsx</code>.</li>
+<li><strong>08a</strong>: <code>PrimaryPill</code> keeps the label while
+loading.</li>
+<li><strong>06</strong>: drop the «4 de 7» count (after design
+sign-off).</li>
+<li><strong>08b</strong>: hide empty Explore tabs with
+<code>hasAny</code>.</li>
+<li><strong>03</strong>: device capture first; then tie BandDay’s band
+collapse to the keyboard’s duration.</li>
+</ol>
+</body>
+</html>
