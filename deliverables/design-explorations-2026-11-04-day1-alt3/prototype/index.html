@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elara · Dinero · Día 1 · Alternativa 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Tokens from packages/tokens (colors.ts, scale.ts). */
+:root{
+  --bg:#F9F5EF; --paper:#FFFFFF; --ink:#1A1615; --body:#524944; --muted:#635A54; --faint:#7A726C;
+  --ember:#C94A1C; --ember-press:#B8441A; --forest:#16382A; --forest-light:#1B4232;
+  --mint-pale:#E8F5EE; --peach:#FFF1EC; --accent:#FFEADB; --muted-bg:#F4EFEA; --border:#E8E0D5;
+  --ring:#E65A28; --gap:#9C3412;
+  --serif:'Fraunces', ui-serif, Georgia, serif; --sans:'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  --r-card:8px; --r-row:4px; --r-feature:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;-webkit-text-size-adjust:100%}
+body{min-height:100vh;overflow-x:hidden}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-radius:6px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.shell{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+
+/* Top bar */
+.top{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:8px;padding:10px 16px 8px;border-bottom:1px solid transparent}
+.top.scrolled{border-bottom-color:var(--border)}
+.back{min-width:44px;min-height:44px;border:0;background:none;display:flex;align-items:center;gap:4px;color:var(--forest);font-weight:600;font-size:15px;padding:0 6px;cursor:pointer;border-radius:22px}
+.back[hidden]{display:flex;visibility:hidden}
+.progress{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.progress .bars{display:flex;gap:5px}
+.progress .bars span{width:28px;height:4px;border-radius:2px;background:var(--border)}
+.progress .bars span.on{background:var(--forest)}
+.progress .txt{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.review-pill{min-height:44px;border:1px dashed #B9AFA3;background:var(--paper);border-radius:22px;padding:0 12px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap}
+
+/* Content */
+main{flex:1;padding:8px 20px 24px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 6px}
+h1{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.2;margin:0 0 16px;color:var(--ink)}
+h2{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.28;margin:22px 0 12px}
+p{margin:0 0 14px;color:var(--body)}
+.elara{display:flex;gap:12px;align-items:flex-start;background:var(--peach);border-radius:16px;padding:14px 16px;margin:4px 0 16px}
+.orb{flex:none;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F2935C,#C94A1C 55%,#8E2F0E);box-shadow:0 0 0 3px #FFE1D3}
+.elara .who{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.elara .say{font-family:var(--serif);font-style:italic;font-weight:400;font-size:18px;line-height:1.45;color:var(--ink)}
+.rule{border-left:4px solid var(--ember);background:var(--paper);border-radius:0 var(--r-card) var(--r-card) 0;padding:14px 16px;margin:6px 0 18px;box-shadow:0 1px 0 var(--border)}
+.rule .lab{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ember-press);margin-bottom:4px}
+.rule .txt{font-family:var(--serif);font-weight:500;font-size:20px;line-height:1.35;color:var(--forest)}
+.note{font-size:15px;color:var(--muted)}
+
+/* Timeline */
+.tl{position:relative;margin:8px 0 6px;padding-left:4px}
+.tl-row{position:relative;display:grid;grid-template-columns:30px 1fr;gap:10px;padding-bottom:10px}
+.tl-row:last-child{padding-bottom:4px}
+.tl-row::before{content:"";position:absolute;left:14px;top:30px;bottom:-2px;width:2px;background:var(--border)}
+.tl-row:last-child::before{display:none}
+.mark{width:30px;height:30px;display:flex;align-items:center;justify-content:center}
+.mark i{display:block;width:16px;height:16px;border-radius:50%}
+.mark.done i{background:var(--forest)}
+.mark.now i{background:var(--paper);border:3px solid var(--ember);box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--ember)}
+.mark.pending i{background:var(--paper);border:2px dashed var(--muted)}
+.card{background:var(--paper);border:1px solid var(--border);border-radius:var(--r-card);padding:9px 12px 10px;transition:box-shadow .25s,border-color .25s;scroll-margin-top:76px}
+.card.pending{background:transparent;border:2px dashed #B9AFA3}
+.card.focus{border-color:var(--forest);box-shadow:0 0 0 2px var(--forest)}
+.card .when{display:inline-block;margin-right:8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card .line{display:flex;justify-content:space-between;align-items:baseline;gap:4px 10px;flex-wrap:wrap}
+.card .what{font-weight:600;font-size:16px}
+.card .amt{font-family:var(--serif);font-weight:600;font-size:18px;white-space:nowrap}
+.amt.in{color:var(--forest)} .amt.out{color:var(--ink)}
+.amt.struck{text-decoration:line-through;color:var(--faint)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;border-radius:999px;padding:3px 10px;line-height:1.35}
+.tag.bal{background:var(--muted-bg);color:var(--ink)}
+.tag.ok{background:var(--mint-pale);color:var(--forest)}
+.tag.wait{background:transparent;border:1px dashed var(--muted);color:var(--muted)}
+.tag.gap{background:#FBE3D6;color:var(--gap);border:1px solid #E9B49B}
+.tag.q{background:var(--accent);color:var(--ink)}
+.calc{font-size:15px;color:var(--forest);font-weight:600;margin-top:6px}
+.ghost{margin-top:8px;font-size:14px;color:var(--muted);border:1px dashed #C9BFB3;border-radius:var(--r-row);padding:6px 10px}
+.ghost s{color:var(--faint)}
+.was{font-size:13px;color:var(--faint);margin-top:4px}
+.was s{color:var(--faint)}
+@keyframes arrive{from{opacity:0;transform:translateY(-48px)}to{opacity:1;transform:none}}
+@keyframes appear{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes nudge{0%{transform:none}35%{transform:translateY(-34px)}70%{transform:translateY(4px)}100%{transform:none}}
+.arrive{animation:arrive .7s cubic-bezier(.2,.8,.2,1) both}
+.appear{animation:appear .35s ease-out both}
+.nudge{animation:nudge .9s ease-in-out both}
+@media (prefers-reduced-motion: reduce){.arrive,.appear,.nudge{animation:none}.card{transition:none}}
+
+/* Question + options */
+.question{font-family:var(--serif);font-weight:500;font-size:20px;line-height:1.35;color:var(--ink);margin:18px 0 12px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:56px;text-align:left;background:var(--paper);border:1.5px solid var(--border);border-radius:var(--r-card);padding:12px 14px;font-size:17px;font-weight:500;cursor:pointer}
+.opt[aria-pressed="true"]{border-color:var(--forest);box-shadow:inset 0 0 0 1px var(--forest);background:#FBFDFB}
+.opt .pick{flex:none;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--forest);display:none}
+.opt[aria-pressed="true"] .pick{display:inline}
+.feedback{margin:0 0 4px;border-radius:var(--r-card);padding:12px 14px;background:var(--paper);border:1px solid var(--border)}
+.feedback .verdict{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.feedback.right .verdict{color:var(--forest)}
+.feedback.look .verdict{color:var(--ember-press)}
+.feedback p{margin:0;color:var(--ink)}
+.btn-ghost{width:100%;min-height:52px;margin-top:12px;background:transparent;border:1.5px solid var(--forest);border-radius:999px;color:var(--forest);font-weight:600;font-size:16px;cursor:pointer}
+.btn-ghost[aria-pressed="true"]{background:var(--mint-pale)}
+.steps{margin:12px 0 0;padding:12px 14px;background:var(--mint-pale);border-radius:var(--r-card)}
+.steps ol{margin:0;padding-left:22px}
+.steps li{margin:4px 0;color:var(--ink)}
+.steps li.later{opacity:.35}
+
+/* Chips */
+.chips{display:flex;flex-direction:column;gap:10px}
+.chip{width:100%;min-height:52px;text-align:left;background:var(--paper);border:1.5px solid var(--border);border-radius:var(--r-card);padding:12px 14px;font-size:17px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.chip[aria-pressed="true"]{border-color:var(--forest);box-shadow:inset 0 0 0 1px var(--forest)}
+.chip .pick{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--forest);display:none;flex:none}
+.chip[aria-pressed="true"] .pick{display:inline}
+.field{margin-top:12px}
+.field label{display:block;font-weight:600;font-size:15px;margin-bottom:6px;color:var(--ink)}
+textarea{width:100%;min-height:96px;font:inherit;font-size:17px;line-height:1.45;color:var(--ink);background:var(--paper);border:1.5px solid #CFC5B8;border-radius:var(--r-row);padding:10px 12px;resize:vertical}
+textarea::placeholder{color:#8A8079}
+.status{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:15px;font-weight:600}
+.status.ok{color:var(--forest)}
+.status.err{color:var(--gap)}
+.disclosure{background:var(--paper);border:1px solid var(--border);border-radius:var(--r-card);padding:12px 14px;margin:8px 0 6px}
+.mini{list-style:none;margin:10px 0 0;padding:0}
+.mini li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--border);font-size:16px}
+.mini li:first-child{border-top:0}
+
+/* Buttons */
+.bar{position:sticky;bottom:0;z-index:4;background:linear-gradient(to top,var(--bg) 82%,rgba(249,245,239,0));padding:12px 20px calc(12px + env(safe-area-inset-bottom))}
+.bar .inner{max-width:440px;margin:0 auto;display:flex;flex-direction:row-reverse;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.btn{flex:1 1 190px;min-height:54px;border:0;border-radius:999px;font-weight:600;font-size:17px;cursor:pointer}
+.btn.block{display:block;width:100%}
+.btn.fwd{background:var(--ember);color:#fff}
+.btn.fwd:active{background:var(--ember-press)}
+.btn.commit{background:var(--forest);color:#fff}
+.btn[disabled],.btn[aria-disabled="true"]{background:#E6DFD6;color:#8A8079;cursor:not-allowed}
+.link{flex:0 0 auto;min-height:44px;border:0;background:none;color:var(--forest);font-weight:600;font-size:16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0 8px}
+.try{background:#F6EFDC;border-radius:var(--r-card);padding:12px 14px;margin:0 0 14px}
+.try .lab{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#7A5212;margin-bottom:2px}
+.try p{margin:0;color:var(--ink)}
+.next{font-size:15px;color:var(--muted);margin-top:8px}
+
+/* Review panel */
+body.capture .top,body.capture .bar{position:static}
+.review{position:fixed;inset:auto 12px 12px 12px;z-index:20;max-width:420px;margin:0 auto;background:var(--paper);border:2px dashed #B9AFA3;border-radius:12px;padding:14px 16px;box-shadow:0 10px 30px rgba(26,22,21,.18)}
+.review h3{margin:0 0 4px;font-size:15px}
+.review .warn{font-size:13px;color:var(--muted);margin:0 0 10px}
+.review .row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--border)}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:999px;overflow:hidden}
+.seg button{min-height:40px;min-width:52px;border:0;background:var(--paper);font-weight:600;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--forest);color:#fff}
+.review label{display:flex;align-items:center;gap:8px;min-height:40px;font-size:15px}
+.review input[type=checkbox]{width:22px;height:22px;accent-color:var(--forest)}
+.review .small{min-height:40px;border:1px solid var(--border);background:var(--paper);border-radius:999px;padding:0 14px;font-weight:600;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="top" id="top">
+    <button class="back" id="back" type="button" hidden><span aria-hidden="true">‹</span><span id="backTxt">Atrás</span></button>
+    <div class="progress" aria-hidden="false"><div class="bars" id="bars"><span></span><span></span><span></span><span></span></div><div class="txt" id="stepTxt"></div></div>
+    <button class="review-pill" id="reviewBtn" type="button" aria-expanded="false" aria-controls="review">Revisión</button>
+  </header>
+  <main id="app" tabindex="-1"></main>
+  <div class="bar" id="bar"><div class="inner" id="barInner"></div></div>
+</div>
+<div class="sr-only" aria-live="polite" id="live"></div>
+<section class="review" id="review" hidden aria-label="Panel de revisión">
+  <h3 id="rvTitle"></h3>
+  <p class="warn" id="rvWarn"></p>
+  <div class="row"><span id="rvLang"></span><span class="seg" role="group"><button type="button" id="langEs" aria-pressed="true">ES</button><button type="button" id="langEn" aria-pressed="false">EN</button></span></div>
+  <div class="row"><label><input type="checkbox" id="simErr"><span id="rvErr"></span></label></div>
+  <div class="row"><button type="button" class="small" id="restart"></button><button type="button" class="small" id="rvClose"></button></div>
+</section>
+
+<script>
+/* Copy: Spanish is the source; English is the V3.2 English edition. Authored lines only. */
+const T = {
+  es: {
+    lang: "es", back: "Atrás", step: (n) => `Paso ${n} de 4`, review: "Revisión",
+    rvTitle: "Revisión · no es parte de la app", rvWarn: "Solo para revisar este prototipo. Ella nunca ve este panel.",
+    rvLang: "Idioma de revisión", rvErr: "Simular error al guardar", restart: "Reiniciar", close: "Cerrar",
+    dayLabel: "Dinero · Día 1 de 7",
+    title: "Un pago, una fecha, una respuesta más clara",
+    elara: "Elara",
+    opening: "Hoy empezamos por algo concreto: un solo pago y el dinero que llega antes. Puedes quedarte con el ejemplo.",
+    ruleLab: "La regla de hoy", rule: "Antes de contar un dinero futuro, confirma cuándo llega.",
+    explain: "Un dinero prometido todavía no es dinero disponible. Mirar las fechas te deja ver un hueco antes de que llegue. Hoy lo vemos en el mes de Ana, fecha por fecha.",
+    start: "Ver el mes de Ana",
+    actEyebrow: "El mes de Ana", actTitle: "Fecha por fecha",
+    actIntro: "Toca para avanzar por el mes. Debajo de cada fecha ves cuánto le queda.",
+    today: "Hoy", inAccount: "En la cuenta", balance: (v) => `Le quedan ${v}`, balanceQ: "Le quedan ¿?",
+    day: (n) => `Día ${n}`, rent: "Alquiler", power: "Luz", client: "Cobro del cliente",
+    promised: "Prometido para el día 10", unconfirmed: "Sin confirmar", pending: "Pendiente",
+    arrives14: "Llega el día 14", wasPromised: "Antes: prometido para el día 10",
+    lateForPower: "Llega el día 14: tarde para la luz",
+    gap: "Falta US$50", notYet: "Todavía no ha llegado", notSubtracted: "Sin restar todavía", beforePaying: "US$120 es antes de pagar la luz",
+    ghost150: "+US$200 el día 12", ghost150b: "no está: llega el 14",
+    seeDay5: "Ver el día 5", seeDay12: "Ver el día 12",
+    moved: "El cliente avisa: paga el día 14, no el 10.",
+    q: "El cliente paga el día 14. ¿Qué pasa el día 12, después del alquiler y antes del cobro?",
+    yourPick: "Tu elección",
+    opts: [
+      { id: "a", t: "Faltan US$50 para la luz.", r: "Sí. US$300 − US$180 = US$120. La luz cuesta US$170: faltan US$50 hasta que llegue el cobro.", ok: true },
+      { id: "b", t: "Quedan US$150 después de pagar la luz.", r: "Eso cuenta los US$200 antes de que lleguen. El día 12 todavía no están." },
+      { id: "c", t: "Quedan US$120 después de pagar la luz.", r: "US$120 es lo que queda antes de pagarla. Para los US$170 de la luz faltan US$50." },
+    ],
+    right: "Así es", look: "Mira la línea",
+    showMe: "No estoy segura, muéstrame",
+    showMeLab: "Paso a paso",
+    showSteps: ["Después del alquiler quedan US$120 (300 − 180).", "La luz cuesta US$170, así que el día 12 faltan US$50 (120 − 170).", "El cobro del día 14 llega tarde para ese pago."],
+    cont: "Continuar", skip: "Prefiero pasar",
+    usefulEyebrow: "Hazlo útil", usefulQ: "¿Qué se parece más a tu situación hoy?",
+    skippedNote: "Pasaste la actividad. Puedes ver la explicación cuando quieras.",
+    seeExplain: "Ver la explicación", hideExplain: "Ocultar la explicación",
+    miniRows: [["Hoy", "US$300"], ["Día 5 · alquiler", "−US$180 → US$120"], ["Día 12 · luz", "−US$170 → falta US$50"], ["Día 14 · cobro", "+US$200, tarde para la luz"]],
+    chips: [
+      { id: "date", t: "No sé bien cuándo me pagan", r: "Entonces esa fecha está sin confirmar. Antes de contar ese dinero para un pago, averigua cuándo estará en tu cuenta. Una pregunta para guardar: “¿Qué día tendré el dinero en mi cuenta?”" },
+      { id: "noopen", t: "No quiero abrir mis cuentas hoy", r: "Quédate con Ana. Sus US$200 llegan después del pago de la luz, así que ese día faltan US$50. Puedes aprender la idea sin abrir tus cuentas." },
+      { id: "short", t: "Lo que pasa es que no me alcanza", r: "Mirar fechas no crea dinero. Sí ayuda a separar dos preguntas: ¿el dinero llega después del pago, o falta aunque cuentes todo lo que entra? Son problemas distintos, y ninguno se resuelve con que te digan que te organices mejor." },
+      { id: "other", t: "Tengo otra pregunta", r: "La explicación de hoy cubre el hueco entre fechas. Si quieres, escribe tu pregunta y guárdala como pendiente." },
+    ],
+    otherLabel: "Tu pregunta (opcional)", otherPh: "Escribe tu pregunta",
+    saveQ: "Guardar mi pregunta", saving: "Guardando…",
+    qSaved: "Pregunta guardada como pendiente, sin darla por respondida.",
+    saveErr: "No se pudo guardar. Revisa tu conexión y vuelve a intentarlo.", retry: "Reintentar",
+    editQ: "Editar mi pregunta", emptyQ: "Escribe algo antes de guardar.",
+    takeEyebrow: "Te llevas", takeTitle: "Una regla para hoy",
+    tryLab: "Si quieres probarlo", tryTxt: "Mira tu próximo cobro y fíjate qué pagos salen antes de esa fecha.",
+    noData: "Puedes guardar la regla sin añadir datos personales.",
+    saveRule: "Guardar mi regla", ruleSaved: "Guardada en Tu colección.", finish: "Terminar", finishNoSave: "Terminar sin guardar",
+    next: "Mañana: para qué ahorrar, para qué invertir y cuándo necesitas el dinero.",
+    endTitle: "Listo por hoy",
+    endSaved: "Tu regla está en Tu colección.",
+    endNotSaved: "No guardaste nada. La explicación sigue aquí si quieres volver.",
+    endQ: "Tu pregunta quedó guardada como pendiente.",
+    restartReviewer: "Volver al inicio (revisión)",
+  },
+  en: {
+    lang: "en", back: "Back", step: (n) => `Step ${n} of 4`, review: "Review",
+    rvTitle: "Review · not part of the app", rvWarn: "Only for reviewing this prototype. She never sees this panel.",
+    rvLang: "Review language", rvErr: "Simulate a save error", restart: "Restart", close: "Close",
+    dayLabel: "Money · Day 1 of 7",
+    title: "One bill, one date, one clearer answer",
+    elara: "Elara",
+    opening: "Today we start with something concrete: one payment and the money that arrives before it. You can stay with the example.",
+    ruleLab: "Today’s rule", rule: "Before counting future income, confirm when it arrives.",
+    explain: "Promised money isn’t available money yet. Looking at the dates lets you see a gap before it arrives. Today we look at Ana’s month, date by date.",
+    start: "See Ana’s month",
+    actEyebrow: "Ana’s month", actTitle: "Date by date",
+    actIntro: "Tap to move through the month. Under each date you see what she has left.",
+    today: "Today", inAccount: "In the account", balance: (v) => `She has ${v} left`, balanceQ: "She has ? left",
+    day: (n) => `Day ${n}`, rent: "Rent", power: "Electricity", client: "Client’s payment",
+    promised: "Promised for day 10", unconfirmed: "Not confirmed", pending: "Pending",
+    arrives14: "Arrives on day 14", wasPromised: "Before: promised for day 10",
+    lateForPower: "Arrives on day 14: too late for electricity",
+    gap: "US$50 short", notYet: "Hasn’t arrived yet", notSubtracted: "Not subtracted yet", beforePaying: "US$120 is before paying electricity",
+    ghost150: "+US$200 on day 12", ghost150b: "isn’t there: it arrives on the 14th",
+    seeDay5: "See day 5", seeDay12: "See day 12",
+    moved: "The client says: they’ll pay on day 14, not day 10.",
+    q: "The client pays on day 14. What happens on day 12, after rent and before the payment arrives?",
+    yourPick: "Your choice",
+    opts: [
+      { id: "a", t: "She’s US$50 short for electricity.", r: "Yes. US$300 − US$180 = US$120. Electricity costs US$170: she’s US$50 short until the client pays.", ok: true },
+      { id: "b", t: "US$150 is left after electricity.", r: "That counts the US$200 before it arrives. On day 12 it isn’t there yet." },
+      { id: "c", t: "US$120 is left after electricity.", r: "US$120 is what’s left before paying it. For the US$170 electricity bill, she’s US$50 short." },
+    ],
+    right: "That’s right", look: "Look at the line",
+    showMe: "Not sure, show me",
+    showMeLab: "Step by step",
+    showSteps: ["After rent, US$120 is left (300 − 180).", "Electricity is US$170, so on day 12 she’s US$50 short (120 − 170).", "The day-14 payment arrives too late for that bill."],
+    cont: "Continue", skip: "Prefer to skip",
+    usefulEyebrow: "Make it useful", usefulQ: "Which is closest to your situation today?",
+    skippedNote: "You skipped the activity. You can see the explanation whenever you like.",
+    seeExplain: "See the explanation", hideExplain: "Hide the explanation",
+    miniRows: [["Today", "US$300"], ["Day 5 · rent", "−US$180 → US$120"], ["Day 12 · electricity", "−US$170 → US$50 short"], ["Day 14 · payment", "+US$200, too late for electricity"]],
+    chips: [
+      { id: "date", t: "I don’t really know when I get paid", r: "Then that date is unconfirmed. Before counting that money toward a payment, find out when it will be in your account. A question to keep: “What day will the money be in my account?”" },
+      { id: "noopen", t: "I don’t want to open my accounts today", r: "Stay with Ana. Her US$200 arrives after the electricity payment, so that day she’s US$50 short. You can learn the idea without opening your accounts." },
+      { id: "short", t: "The problem is I don’t have enough", r: "Looking at dates doesn’t create money. It does help separate two questions: does money arrive after the payment, or is there a shortfall even counting everything coming in? They’re different problems, and neither is solved by being told to get more organised." },
+      { id: "other", t: "I have a different question", r: "Today’s explanation covers the gap between dates. If you like, write your question and save it as open." },
+    ],
+    otherLabel: "Your question (optional)", otherPh: "Write your question",
+    saveQ: "Save my question", saving: "Saving…",
+    qSaved: "Question saved as open; we won’t treat it as answered.",
+    saveErr: "It couldn’t be saved. Check your connection and try again.", retry: "Try again",
+    editQ: "Edit my question", emptyQ: "Write something before saving.",
+    takeEyebrow: "You take away", takeTitle: "One rule for today",
+    tryLab: "If you want to try it", tryTxt: "Look at your next payday and notice which payments leave before that date.",
+    noData: "You can save the rule without adding personal details.",
+    saveRule: "Save my rule", ruleSaved: "Saved in Your collection.", finish: "Finish", finishNoSave: "Finish without saving",
+    next: "Tomorrow: what saving is for, what investing is for, and when you need the money.",
+    endTitle: "Done for today",
+    endSaved: "Your rule is in Your collection.",
+    endNotSaved: "You didn’t save anything. The explanation is here if you want to come back.",
+    endQ: "Your question was saved as open.",
+    restartReviewer: "Back to the start (review)",
+  },
+};
+
+const fresh = () => ({
+  screen: 0, reveal: 0, pick: null, showMe: false, showStep: 0, skippedActivity: false,
+  explainOpen: false, branch: null, otherText: "", otherState: "idle", ruleState: "idle", ended: false,
+});
+let S = fresh();
+let lang = "es";
+let simError = false;
+const t = () => T[lang];
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let animateNext = null; // one-shot animation hint for the next render
+let scrollAfter = null; // one-shot: element id to bring to the top after the next render
+function showPick() {
+  const fb = document.getElementById("fb"), d12 = document.getElementById("row-d12");
+  if (!fb || !d12) return;
+  const head = $("top").offsetHeight + 8, barH = $("bar").offsetHeight;
+  const need = fb.getBoundingClientRect().bottom + window.scrollY + 12 - (window.innerHeight - barH); // lowest scroll that shows all feedback
+  const most = d12.getBoundingClientRect().top + window.scrollY - head; // highest scroll that still shows day 12
+  const top = Math.max(0, need <= most ? need : need);
+  window.scrollTo({ top, behavior: reduced() ? "auto" : "smooth" });
+}
+function bringToTop(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - ($("top").offsetHeight + 8);
+  window.scrollTo({ top: Math.max(0, top), behavior: reduced() ? "auto" : "smooth" });
+}
+let showTimers = [];
+
+function announce(msg) { const l = $("live"); l.textContent = ""; setTimeout(() => (l.textContent = msg), 30); }
+
+/* ── Timeline ─────────────────────────────────────────────────────────── */
+function timeline() {
+  const c = t();
+  const rows = [];
+  const step = S.showMe ? S.showStep : 0;
+  const pick = S.pick;
+  const gapShown = pick === "a" || step >= 2;
+  const head = (when, what, amt, amtCls) =>
+    `<div class="line"><span class="what"><span class="when">${when}</span>${what}</span><span class="${amtCls}">${amt}</span></div>`;
+  // Hoy
+  rows.push(`<li class="tl-row" id="row-hoy"><div class="mark done" aria-hidden="true"><i></i></div>
+    <div class="card">${head(c.today, c.inAccount, "+US$300", "amt in")}
+    <div class="tags"><span class="tag bal">${c.balance("US$300")}</span></div></div></li>`);
+  // Día 5
+  if (S.reveal >= 1) {
+    rows.push(`<li class="tl-row ${animateNext === "d5" ? "appear" : ""}" id="row-d5"><div class="mark done" aria-hidden="true"><i></i></div>
+      <div class="card ${step === 1 ? "focus" : ""}">${head(c.day(5), c.rent, "−US$180", "amt out")}
+      <div class="tags"><span class="tag bal">${c.balance("US$120")}</span></div>
+      ${step >= 1 ? `<div class="calc">300 − 180 = 120</div>` : ""}</div></li>`);
+  }
+  // The promised payment still sits at day 10 until day 12 is revealed
+  if (S.reveal < 2) {
+    rows.push(`<li class="tl-row" id="row-d10"><div class="mark pending" aria-hidden="true"><i></i></div>
+      <div class="card pending">${head(c.day(10), c.client, "+US$200", "amt in")}
+      <div class="tags"><span class="tag wait">${c.promised}</span><span class="tag wait">${c.unconfirmed}</span></div></div></li>`);
+  }
+  if (S.reveal >= 2) {
+    // Día 12
+    let tags;
+    let amtCls = "amt out";
+    let extra = "";
+    let sub = "";
+    if (gapShown) tags = `<span class="tag gap"><span aria-hidden="true">!</span> ${c.gap}</span>`;
+    else if (pick === "b") { tags = `<span class="tag q">${c.balanceQ}</span>`; extra = `<div class="ghost"><s>${c.ghost150}</s> · ${c.ghost150b}</div>`; }
+    else if (pick === "c") { tags = `<span class="tag q">${c.beforePaying}</span>`; amtCls = "amt struck"; sub = `<div class="was">${c.notSubtracted}</div>`; }
+    else tags = `<span class="tag q">${c.balanceQ}</span>`;
+    rows.push(`<li class="tl-row ${animateNext === "d12" ? "appear" : ""}" id="row-d12"><div class="mark now" aria-hidden="true"><i></i></div>
+      <div class="card ${step === 2 || (pick && !S.showMe) ? "focus" : ""}">${head(c.day(12), c.power, "−US$170", amtCls)}
+      ${sub}<div class="tags">${tags}</div>${extra}
+      ${step >= 2 ? `<div class="calc">120 − 170 = −50</div>` : ""}</div></li>`);
+    // Día 14
+    const late = pick === "a" || step >= 3;
+    const anim = animateNext === "d12" ? "arrive" : animateNext === "nudge" ? "nudge" : "";
+    rows.push(`<li class="tl-row" id="row-d14"><div class="mark pending" aria-hidden="true"><i></i></div>
+      <div class="card pending ${anim} ${step === 3 || pick === "b" ? "focus" : ""}">${head(c.day(14), c.client, "+US$200", "amt in")}
+      <div class="was"><s>${c.wasPromised}</s></div>
+      <div class="tags">${late ? `<span class="tag gap">${c.lateForPower}</span>` : `<span class="tag wait">${c.arrives14}</span><span class="tag wait">${c.pending}</span>`}</div></div></li>`);
+  }
+  return `<ol class="tl" aria-label="${esc(c.actEyebrow)}" style="list-style:none;margin:8px 0 6px;padding-left:4px">${rows.join("")}</ol>`;
+}
+
+/* ── Screens ──────────────────────────────────────────────────────────── */
+function elaraBlock(text) {
+  return `<div class="elara"><span class="orb" aria-hidden="true"></span><div><span class="who">${t().elara}</span><span class="say">${esc(text)}</span></div></div>`;
+}
+function ruleBlock(label) {
+  return `<div class="rule">${label ? `<div class="lab">${esc(label)}</div>` : ""}<div class="txt">${esc(t().rule)}</div></div>`;
+}
+
+function screenOpening() {
+  const c = t();
+  return {
+    html: `<div class="eyebrow">${c.dayLabel}</div><h1>${c.title}</h1>${elaraBlock(c.opening)}${ruleBlock(c.ruleLab)}<p>${c.explain}</p>`,
+    bar: [{ id: "start", cls: "btn fwd", label: c.start, on: () => go(1) }],
+  };
+}
+
+function screenActivity() {
+  const c = t();
+  let html = `<div class="eyebrow">${c.actEyebrow}</div><h1>${c.actTitle}</h1>`;
+  if (S.reveal < 2) html += `<p class="note">${c.actIntro}</p>`;
+  if (S.reveal >= 2) html += `<p class="note">${c.moved}</p>`;
+  html += timeline();
+  const bar = [];
+  if (S.reveal < 2) {
+    const label = S.reveal === 0 ? c.seeDay5 : c.seeDay12;
+    bar.push({ id: "reveal", cls: "btn fwd", label, on: () => {
+      S.reveal += 1; animateNext = S.reveal === 1 ? "d5" : "d12";
+      if (S.reveal === 2) { announce(c.moved); scrollAfter = "row-d12"; } else scrollAfter = "row-d5";
+      render();
+    } });
+  } else {
+    // The worked explanation sits right under the timeline it annotates.
+    if (S.showMe) {
+      html += `<div class="steps" id="steps"><div class="eyebrow" style="margin-top:0">${c.showMeLab}</div><ol>${c.showSteps
+        .map((s, i) => `<li class="${i < S.showStep ? "" : "later"}">${esc(s)}</li>`)
+        .join("")}</ol></div>`;
+    }
+    html += `<div class="question" id="q">${c.q}</div><div class="opts" role="group" aria-labelledby="q">`;
+    for (const o of c.opts) {
+      html += `<button type="button" class="opt" data-opt="${o.id}" aria-pressed="${S.pick === o.id}"><span>${esc(o.t)}</span><span class="pick">${c.yourPick}</span></button>`;
+      if (S.pick === o.id) html += `<div class="feedback ${o.ok ? "right" : "look"}" id="fb"><div class="verdict">${o.ok ? c.right : c.look}</div><p>${esc(o.r)}</p></div>`;
+    }
+    html += `</div>`;
+    html += `<button type="button" class="btn-ghost" id="showMe" aria-pressed="${S.showMe}">${c.showMe}</button>`;
+    const ready = !!S.pick || S.showMe;
+    bar.push({ id: "cont", cls: "btn fwd", label: c.cont, disabled: !ready, on: () => ready && go(2) });
+  }
+  bar.push({ id: "skip", cls: "link", label: c.skip, on: () => { S.skippedActivity = !S.pick && !S.showMe; go(2); } });
+  return { html, bar };
+}
+
+function screenUseful() {
+  const c = t();
+  let html = `<div class="eyebrow">${c.usefulEyebrow}</div>`;
+  if (S.skippedActivity) {
+    html += `<div class="disclosure"><p class="note" style="margin:0 0 8px">${c.skippedNote}</p>
+      <button type="button" class="link" id="explainBtn" aria-expanded="${S.explainOpen}" style="padding:0">${S.explainOpen ? c.hideExplain : c.seeExplain}</button>
+      ${S.explainOpen ? `<div id="explainBox"><ol style="margin:10px 0 0;padding-left:22px">${c.showSteps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
+        <ul class="mini">${c.miniRows.map(([a, b]) => `<li><span>${esc(a)}</span><strong>${esc(b)}</strong></li>`).join("")}</ul></div>` : ""}</div>`;
+  }
+  html += `<h1 id="uq" style="font-size:24px">${c.usefulQ}</h1><div class="chips" role="group" aria-labelledby="uq">`;
+  for (const ch of c.chips) html += `<button type="button" class="chip" data-chip="${ch.id}" aria-pressed="${S.branch === ch.id}"><span>${esc(ch.t)}</span><span class="pick">${c.yourPick}</span></button>`;
+  html += `</div>`;
+  if (S.branch) {
+    const ch = c.chips.find((x) => x.id === S.branch);
+    html += `<div id="reply" style="margin-top:14px">${elaraBlock(ch.r)}</div>`;
+    if (S.branch === "other") {
+      const saved = S.otherState === "saved";
+      html += `<div class="field"><label for="otherText">${c.otherLabel}</label>
+        <textarea id="otherText" placeholder="${esc(c.otherPh)}" ${saved ? "readonly" : ""}>${esc(S.otherText)}</textarea></div>`;
+      if (saved) {
+        html += `<div class="status ok" role="status"><span aria-hidden="true">✓</span> ${c.qSaved}</div>
+          <button type="button" class="link" id="editQ" style="padding:0;margin-top:4px">${c.editQ}</button>`;
+      } else {
+        const busy = S.otherState === "saving";
+        if (S.otherState === "error") html += `<div class="status err" role="alert">${c.saveErr}</div>`;
+        if (S.otherState === "empty") html += `<div class="status err" role="alert">${c.emptyQ}</div>`;
+        html += `<button type="button" class="btn commit block" id="saveQ" style="margin-top:10px" ${busy ? 'aria-disabled="true"' : ""}>${busy ? c.saving : S.otherState === "error" ? c.retry : c.saveQ}</button>`;
+      }
+    }
+  }
+  const bar = [
+    { id: "cont", cls: "btn fwd", label: c.cont, disabled: !S.branch, on: () => S.branch && go(3) },
+    { id: "skip", cls: "link", label: c.skip, on: () => go(3) },
+  ];
+  return { html, bar };
+}
+
+function screenTakeaway() {
+  const c = t();
+  let html = `<div class="eyebrow">${c.takeEyebrow}</div><h1>${c.takeTitle}</h1>${ruleBlock("")}
+    <div class="try"><div class="lab">${c.tryLab}</div><p>${c.tryTxt}</p></div><p class="note">${c.noData}</p>`;
+  if (S.ruleState === "saved") html += `<div class="status ok" role="status" id="ruleStatus"><span aria-hidden="true">✓</span> ${c.ruleSaved}</div>`;
+  if (S.ruleState === "error") html += `<div class="status err" role="alert" id="ruleStatus">${c.saveErr}</div>`;
+  html += `<p class="next">${c.next}</p>`;
+  const bar = [];
+  if (S.ruleState === "saved") {
+    bar.push({ id: "finish", cls: "btn fwd", label: c.finish, on: () => end() });
+  } else {
+    const busy = S.ruleState === "saving";
+    bar.push({ id: "saveRule", cls: "btn commit", label: busy ? c.saving : S.ruleState === "error" ? c.retry : c.saveRule, busy, on: () => !busy && saveRule() });
+    bar.push({ id: "finishNoSave", cls: "link", label: c.finishNoSave, on: () => !busy && end() });
+  }
+  return { html, bar };
+}
+
+function screenEnd() {
+  const c = t();
+  let html = `<div class="eyebrow">${c.dayLabel}</div><h1>${c.endTitle}</h1>`;
+  if (S.ruleState === "saved") html += `${ruleBlock("")}<p>${c.endSaved}</p>`;
+  else html += `<p>${c.endNotSaved}</p>`;
+  if (S.otherState === "saved") html += `<p>${c.endQ}</p>`;
+  html += `<p class="next">${c.next}</p>`;
+  return { html, bar: [{ id: "again", cls: "link", label: c.restartReviewer, on: () => restart() }] };
+}
+
+/* ── Actions ──────────────────────────────────────────────────────────── */
+function fakeSave() {
+  return new Promise((res, rej) => setTimeout(() => (simError ? rej(new Error("sim")) : res()), 600));
+}
+function saveQuestion() {
+  const text = ($("otherText")?.value || "").trim();
+  S.otherText = $("otherText")?.value || "";
+  if (!text) { S.otherState = "empty"; render(); return; }
+  S.otherState = "saving"; render();
+  fakeSave().then(() => { S.otherState = "saved"; announce(t().qSaved); render(); }, () => { S.otherState = "error"; announce(t().saveErr); render(); });
+}
+function saveRule() {
+  S.ruleState = "saving"; render();
+  fakeSave().then(() => { S.ruleState = "saved"; announce(t().ruleSaved); render(); }, () => { S.ruleState = "error"; announce(t().saveErr); render(); });
+}
+function end() { S.ended = true; go(4); }
+function go(n) { S.screen = n; animateNext = null; render(); window.scrollTo(0, 0); $("app").focus({ preventScroll: true }); }
+function restart() { showTimers.forEach(clearTimeout); S = fresh(); render(); window.scrollTo(0, 0); }
+function startShowMe() {
+  showTimers.forEach(clearTimeout); showTimers = [];
+  S.showMe = true; S.showStep = 1; scrollAfter = "row-d5"; render();
+  announce(t().showSteps.join(" "));
+  const delay = reduced() ? 0 : 900;
+  showTimers.push(setTimeout(() => { S.showStep = 2; render(); }, delay));
+  showTimers.push(setTimeout(() => { S.showStep = 3; render(); }, delay * 2));
+}
+
+/* ── Render ───────────────────────────────────────────────────────────── */
+function render() {
+  const c = t();
+  document.documentElement.lang = c.lang;
+  const screens = [screenOpening, screenActivity, screenUseful, screenTakeaway, screenEnd];
+  const { html, bar } = screens[S.screen]();
+  $("app").innerHTML = html;
+  const stepNo = Math.min(S.screen + 1, 4);
+  $("stepTxt").textContent = S.screen === 4 ? c.endTitle : c.step(stepNo);
+  [...$("bars").children].forEach((b, i) => b.classList.toggle("on", i < stepNo));
+  const back = $("back");
+  back.hidden = !(S.screen >= 1 && S.screen <= 3);
+  $("backTxt").textContent = c.back;
+  $("reviewBtn").textContent = c.review;
+  // Bar
+  const inner = $("barInner");
+  inner.innerHTML = "";
+  for (const b of bar) {
+    const el = document.createElement("button");
+    el.type = "button"; el.id = "bar-" + b.id; el.className = b.cls; el.textContent = b.label;
+    if (b.disabled) el.setAttribute("aria-disabled", "true");
+    if (b.busy) el.setAttribute("aria-disabled", "true");
+    el.addEventListener("click", b.on);
+    inner.appendChild(el);
+  }
+  // Wiring
+  document.querySelectorAll("[data-opt]").forEach((el) =>
+    el.addEventListener("click", () => {
+      const id = el.dataset.opt;
+      const changed = S.pick && S.pick !== id;
+      S.pick = id;
+      animateNext = id === "b" ? "nudge" : null;
+      scrollAfter = "pick";
+      render();
+      const o = c.opts.find((x) => x.id === id);
+      announce((o.ok ? c.right : c.look) + ". " + o.r);
+      document.querySelector(`[data-opt="${id}"]`)?.focus({ preventScroll: true });
+    }),
+  );
+  $("showMe")?.addEventListener("click", startShowMe);
+  document.querySelectorAll("[data-chip]").forEach((el) =>
+    el.addEventListener("click", () => {
+      S.branch = el.dataset.chip;
+      if (S.otherState === "empty" || S.otherState === "error") S.otherState = "idle";
+      render();
+      const ch = c.chips.find((x) => x.id === S.branch);
+      announce(ch.r);
+      document.querySelector(`[data-chip="${S.branch}"]`)?.focus({ preventScroll: true });
+    }),
+  );
+  $("otherText")?.addEventListener("input", (e) => { S.otherText = e.target.value; });
+  $("saveQ")?.addEventListener("click", () => S.otherState !== "saving" && saveQuestion());
+  $("editQ")?.addEventListener("click", () => { S.otherState = "idle"; render(); $("otherText")?.focus(); });
+  $("explainBtn")?.addEventListener("click", () => { S.explainOpen = !S.explainOpen; render(); $("explainBtn")?.focus(); });
+  animateNext = null;
+  if (scrollAfter) { const id = scrollAfter; scrollAfter = null; requestAnimationFrame(() => (id === "pick" ? showPick() : bringToTop(id))); }
+}
+
+/* Header + review panel */
+$("back").addEventListener("click", () => { if (S.screen > 0) go(S.screen - 1); });
+$("reviewBtn").addEventListener("click", () => {
+  const p = $("review"); p.hidden = !p.hidden; $("reviewBtn").setAttribute("aria-expanded", String(!p.hidden)); paintReview();
+});
+$("rvClose").addEventListener("click", () => { $("review").hidden = true; $("reviewBtn").setAttribute("aria-expanded", "false"); });
+$("langEs").addEventListener("click", () => { lang = "es"; paintReview(); render(); });
+$("langEn").addEventListener("click", () => { lang = "en"; paintReview(); render(); });
+$("simErr").addEventListener("change", (e) => { simError = e.target.checked; });
+$("restart").addEventListener("click", () => { restart(); });
+function paintReview() {
+  const c = t();
+  $("rvTitle").textContent = c.rvTitle; $("rvWarn").textContent = c.rvWarn; $("rvLang").textContent = c.rvLang;
+  $("rvErr").textContent = c.rvErr; $("restart").textContent = c.restart; $("rvClose").textContent = c.close;
+  $("langEs").setAttribute("aria-pressed", String(lang === "es")); $("langEn").setAttribute("aria-pressed", String(lang === "en"));
+}
+window.addEventListener("scroll", () => $("top").classList.toggle("scrolled", window.scrollY > 4), { passive: true });
+paintReview();
+render();
+</script>
+</body>
+</html>
