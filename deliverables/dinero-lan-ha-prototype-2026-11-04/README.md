@@ -45,16 +45,22 @@ node src/make-data.mjs ../money-sessions-v4.1-2026-11-04/src/content-es.mjs src/
 node test/e2e.cjs src /tmp/out
 ```
 
-## Design tokens used (from `@elara/tokens`)
+## Look (version 2, after review)
 
-- **Paper:**
-  - canvas `#F9F5EF`;
-  - notebook page `#FBF7EE`;
-  - slip `#FFFDF9`;
-  - sand `#EFE4D2`;
-  - hairline `#E6DFD6`.
-- **Ink:** `#1A1615`, with secondary `#635A54`.
-- **Forest:** primary button `#1F3A2E` with cream text `#F7F1E8`. Forest `#16382A` and `#122E23` are used for day complete.
-- **Terracotta:** `#C94A1C` for eyebrows; `#B8441A` for the button on forest.
-- **Atlas thread:** navy `#26314D` where she has walked; pencil `#9A9089` ahead.
-- **Type:** Fraunces for titles and Elara's italic voice; Instrument Sans for everything else.
+Version 1 used beige paper, taped notes and italic quotes, and read as vintage stationery. Version 2 changes that:
+
+- **Panels:** clean white, 90–94 % opaque, over the blurred landscape. There is no paper texture and no beige.
+- **Saved items:** shown as a light card (`#F1F5F2`) with a green bookmark. There is no tape and no rotation.
+- **Italics:** only on two short companion lines, «Hoy queda hecho, tal como lo dejaste.» and «Tu día N te espera…». Feedback and quotes are upright.
+- **Kept from version 1:**
+  - the forest-green buttons;
+  - the landscape and its slow motion (ripple, mist, zoom);
+  - Fraunces titles;
+  - terracotta for eyebrows and for the one button on the forest completion screen.
+- **Tokens from `@elara/tokens`:**
+  - ink `#1A1615` and `#635A54`;
+  - forest `#1F3A2E` with cream text `#F7F1E8`;
+  - forest `#16382A` and `#122E23` for day complete;
+  - terracotta `#C94A1C`, and `#B8441A` on forest.
+- **Thread:** forest where she has walked and light grey ahead.
+- **Type:** Fraunces for titles; Instrument Sans for everything else.
