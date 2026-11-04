@@ -89,3 +89,65 @@ Screenshots of every state are in `shots/`: 390×844 at 2×, plus two 360×780 v
 - a real phone (touch, VoiceOver/TalkBack, Dynamic Type);
 - the copy with María;
 - whether the women understand the moving card better than V3.2's static version. That needs the test with people.
+
+## The artifact version, v2: her own month, real photos
+
+`artifact/el-mes-de-ana.html` is the published page («Tu mes, fecha por fecha»). It keeps the same file name, so the link stays the same. v2 makes two changes, both from team feedback.
+
+**1. The day is about her month, not only Ana's.** The opening offers «Empezar con mi mes» as the main button, with «Ver primero el ejemplo de Ana» beside it. Ana's timeline is unchanged and still has the per-choice feedback. Step 3, «Tu turno: ahora, tu mes», asks for:
+- the day she gets paid, or «Todavía no sé la fecha seguro»;
+- up to three payments (a name chip plus a day);
+- optionally, the amounts and what she has today.
+
+«Ver mi mes» draws her own timeline. **The code does the arithmetic. There is no AI.** Each outcome has an authored message:
+
+| Her situation | What she sees |
+|---|---|
+| A payment leaves her short before payday | «El día 12 te faltarían $50.000 para la luz o los servicios. Tu dinero llega el día 15: tarde para ese pago.» |
+| She is short even counting her pay | the line above, plus «Aunque cuentes tu cobro, faltarían $30.000. Eso ya no es solo un tema de fechas.» |
+| Covered | «Con estas cifras te alcanza hasta el día 15.» |
+| Dates only, no amounts | «Arriendo o alquiler (día 5) sale antes de tu cobro (día 15)…» |
+| Payday not confirmed | «Tu cobro está por confirmar. Hasta saber la fecha, no lo cuentes para estos pagos.» |
+| Payments after payday | «ese dinero sí llega antes» |
+| Same day as payday | asks her to confirm which comes first |
+
+Amounts are optional and whole numbers only, formatted as she types (es-CO: `180.000`). The V3.2 branches are now chips under her month, each opened by a tap. «No sé bien cuándo me pagan» also ticks «por confirmar». «Hoy prefiero quedarme con Ana» puts her form away and shows Ana's month in four lines.
+
+**What is saved:** the postcard carries the rule and her dates («Tu cobro: día 15. Antes salen: arriendo o alquiler (5), luz o servicios (12).»), never amounts. The button says so: «Guardar mi regla y mis fechas». As before, «Guardado» appears only after the save succeeds.
+
+**2. Real photos, no cartoon faces.** The team said the women like realistic photos. The page now uses the app's own Lan Hạ photos, not generated images:
+- `apps/mobile/assets/places/h/lh.jpg` heads the opening and is the front of the postcard;
+- `days/lh/d1.webp` is the band on the end screen.
+
+The faces and legs are gone from the icons, which are now plain line icons. The warmth stays in the paper details: the taped rule, the stamp, the moving envelope in Ana's month.
+
+**New copy for María and Alejandra to approve:**
+- the opening line;
+- «Tu turno» and its field labels;
+- the privacy line;
+- every message in the table above;
+- «De Elara, desde Lan Hạ».
+
+The privacy line («no se comparte con nadie») needs the same check as the consent promise in the test kit.
+
+**Reuse vs new:**
+- *Reuse:* the photos (already in `placeImages.ts` / `dayImages.ts`); `choose` with written `replies` for the branch chips; `keep: "rule"`; the share card (`ShareCardSheet.tsx`) for the postcard.
+- *New:* a «my month» step: day pickers, optional amounts, a computed timeline and message templates. It is new because `blanks` collects text but doesn't calculate. Also new: saving her dates without amounts, and currency formatting by locale.
+
+**Tested:** `node e2e/run-artifact.cjs` gives **108 passed, 0 failed** at 360×780 (`artifact/e2e-log.txt`). It covers:
+- both starting paths;
+- every message above, with the arithmetic checked;
+- validation, editing, and adding and removing a payment;
+- each branch, the question save (empty, then failure, then retry) and the rule save (failure, then success);
+- finishing without saving, and skipping;
+- the EN toggle keeping her inputs;
+- dark mode;
+- the photos loading;
+- no horizontal scroll and every touch target at least 44 px.
+
+Shots are in `artifact/shots/`.
+
+**Not verified:**
+- whether women will type real dates on day 1;
+- whether «$» without a currency code reads right in every country;
+- a real phone.

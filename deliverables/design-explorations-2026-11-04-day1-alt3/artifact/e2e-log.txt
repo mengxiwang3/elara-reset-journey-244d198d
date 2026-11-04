@@ -1,103 +1,109 @@
+108 passed, 0 failed (360×780, 2026-11-04)
+PASS opening: Lan Hạ photo loads
 PASS opening: title
-PASS opening: Elara line
 PASS opening: rule
-PASS opening: explanation does not give the answer
+PASS opening: start with my month is the main button
+PASS opening: Ana's example is offered
 PASS opening: no audio controls
-PASS activity: promised payment shown at day 10
-PASS activity: marked unconfirmed
-PASS activity: question not shown yet
-PASS day 5: rent and balance US$120
-PASS day 12: payment moved to day 14
-PASS day 12: promise no longer at day 10
-PASS day 12: question shown
-PASS day 12: balance unknown before a choice
-PASS day 12: Continue disabled before a choice
-PASS pick B: own feedback
-PASS pick B: verdict label
-PASS pick B: ghost US$200 on day 12
-PASS pick B: Continue enabled
-PASS pick B (phone view): the whole feedback is on screen
-PASS pick C: own feedback
-PASS pick C: bill shown as not subtracted
-PASS pick C: B no longer pressed
-PASS pick C: B feedback gone
-PASS pick C (phone view): the whole feedback is on screen
-PASS pick A: own feedback
-PASS pick A: verdict label
-PASS pick A: gap marker on day 12
-PASS pick A: payment late for the bill
-PASS pick A: only A pressed
-PASS pick A (phone view): the whole feedback is on screen
-PASS pick A (phone view): the day-14 card is on screen too
-PASS show me: step-by-step text
-PASS show me: calc on timeline
-PASS show me: did not move on
-PASS show me (phone view): timeline and the steps on screen together
-PASS EN: same choice kept, English copy
-PASS EN: feedback in English
-PASS EN: rule label and timeline in English
-PASS ES again: Spanish copy back
-PASS useful: question
-PASS useful: no skip note when she did the activity
-PASS useful: Continue disabled before a chip
-PASS branch date: own reply
-PASS branch date: only it pressed
-PASS branch noopen: own reply
-PASS branch noopen: only it pressed
-PASS branch short: own reply
-PASS branch short: only it pressed
-PASS branch other: own reply
-PASS branch other: only it pressed
-PASS branch switch: reply swapped
-PASS other: empty is not saved
-PASS other: saving state, not yet saved
-PASS other: saved only after success
-PASS other error: honest message
-PASS other error: never shows saved
-PASS other error: text kept
-PASS other retry: saved
-PASS back: activity choice kept
-PASS forward again: branch kept
-PASS takeaway: rule
-PASS takeaway: try line
-PASS rule: saving state
-PASS rule error: honest message
-PASS rule error: never shows saved
-PASS rule error: can still finish without saving
-PASS rule: saved only after success
-PASS end (saved): says the rule is saved
-PASS end (saved): mentions saved question
-PASS skip: moves on without revealing
-PASS skip: offers the explanation
-PASS skip: explanation on request
-PASS takeaway reached after skipping branches
-PASS end (not saved): says nothing was saved
-PASS end (not saved): no saved-rule claim
-PASS end (not saved): no saved-question claim
-PASS show-me only: Continue enabled
-PASS show-me only: gap shown on timeline
-PASS show-me only: not treated as a skip
-PASS wrong answer can continue
-PASS wrong answer still shown on return
-PASS EN branch reply
-PASS EN takeaway
-PASS 360×780 opening: no horizontal scroll
-PASS 360×780 opening: primary button in view
-PASS 360×780 activity start: no horizontal scroll
-PASS 360×780 activity start: primary button in view
-PASS 360×780 day 5: no horizontal scroll
-PASS 360×780 day 5: primary button in view
-PASS 360×780 day 12 question: no horizontal scroll
-PASS 360×780 day 12 question: primary button in view
-PASS 360×780 after pick: no horizontal scroll
-PASS 360×780 after pick: primary button in view
-PASS 360×780 useful: no horizontal scroll
-PASS 360×780 useful: primary button in view
-PASS 360×780 other question: no horizontal scroll
-PASS 360×780 other question: primary button in view
-PASS 360×780 takeaway: no horizontal scroll
-PASS 360×780 takeaway: primary button in view
-PASS 360×780 takeaway: all visible buttons ≥ 44px tall
-PASS reduced motion: show-me completes without waiting
-
-101 passed, 0 failed
+PASS opening: no cartoon faces left (no eyes/legs in the SVG)
+PASS opening: no horizontal scroll at 360px
+PASS opening: every touch target is at least 44px
+PASS my month: «Tu turno» screen
+PASS my month: Ana's example still reachable
+PASS my month: privacy line
+PASS my month: continue waits for her
+PASS my month form: no horizontal scroll at 360px
+PASS my month form: every touch target is at least 44px
+PASS validation: asks for a payday and one payment date
+PASS amounts: formatted as she types them (es-CO)
+PASS gap: day 12 is $50.000 short for the electricity
+PASS gap: names when her money arrives
+PASS gap: no false shortfall (300 + 200 − 350 ≥ 0)
+PASS gap: running balance after rent shows $120.000
+PASS gap: the timeline marks the gap
+PASS gap: payday sits after the payments
+PASS gap: result is a warning
+PASS my month result: no horizontal scroll at 360px
+PASS my month result: every touch target is at least 44px
+PASS edit: her details are still there
+PASS EN: same result in English
+PASS takeaway: postcard photo loads
+PASS takeaway: postcard carries her dates
+PASS takeaway: no amounts on the postcard
+PASS takeaway: says amounts are not saved
+PASS takeaway: save names what is saved
+PASS takeaway: nothing claims «guardado» before the tap
+PASS takeaway: no horizontal scroll at 360px
+PASS takeaway: every touch target is at least 44px
+PASS rule save: shows «Guardando…» while saving
+PASS rule save error: honest message
+PASS rule save error: offers retry
+PASS rule save error: no success claim
+PASS rule save: confirmed only after it succeeds
+PASS end: saved message
+PASS end: bay photo band and postcard load
+PASS end: no horizontal scroll at 360px
+PASS end: every touch target is at least 44px
+PASS covered: «Con estas cifras te alcanza hasta el día 15.»
+PASS covered: tone good
+PASS shortfall: «El día 5 te faltarían $80.000 para el arriendo o alquiler.»
+PASS shortfall: «Aunque cuentes tu cobro, faltarían $30.000. Eso ya no es solo un tema de fechas.»
+PASS shortfall: tone warn
+PASS order only (no amounts): «Arriendo o alquiler (día 5) sale antes de tu cobro (día 15).»
+PASS order only (no amounts): «Colegio (día 10) sale antes de tu cobro (día 15).»
+PASS order only (no amounts): tone plain
+PASS amounts without today's balance: «Luz o servicios (día 12) sale antes de tu cobro (día 15).»
+PASS amounts without today's balance: «Si añades lo que tienes hoy»
+PASS pay to confirm: «Tu cobro está por confirmar. Hasta saber la fecha, no lo cuentes para estos pagos.»
+PASS pay to confirm: timeline says «Por confirmar»
+PASS pay to confirm, covered: «Con lo que tienes hoy cubres estos pagos sin contar el cobro.»
+PASS pay to confirm, covered: tone good
+PASS payments after payday: «Tus pagos salen después de tu cobro: ese dinero sí llega antes.»
+PASS payments after payday: tone good
+PASS same day: «Tarjeta sale el mismo día que tu cobro»
+PASS payments: a second payment can be added
+PASS payments: and removed
+PASS branches: no reply before a tap
+PASS branch «no sé cuándo me pagan»: authored reply
+PASS branch «no sé cuándo me pagan»: marks the payday as to confirm
+PASS branch «no me alcanza»: authored reply
+PASS branch: changing branch replaces the reply
+PASS branch «quedarme con Ana»: reply
+PASS branch «quedarme con Ana»: her form is put away
+PASS branch «quedarme con Ana»: Ana's month in brief (she hasn't seen it)
+PASS branch «quedarme con Ana»: can continue
+PASS branch ana: no horizontal scroll at 360px
+PASS branch ana: every touch target is at least 44px
+PASS takeaway (Ana branch): no personal line
+PASS takeaway (Ana branch): plain save label
+PASS branch «otra pregunta»: field is optional
+PASS question: empty save asks for text
+PASS question save error: honest message
+PASS question save error: text is kept
+PASS question save error: retry
+PASS question: saved as open only after success
+PASS finish without saving: honest end
+PASS finish without saving: question still noted
+PASS example: Ana's month
+PASS example: day 10 promised, not confirmed
+PASS example start: no horizontal scroll at 360px
+PASS example start: every touch target is at least 44px
+PASS example: day 5 rent leaves US$120
+PASS example: the payment moves to day 14
+PASS wrong answer B: specific feedback
+PASS changed answer C: its own feedback
+PASS changed answer: only one choice pressed
+PASS right answer A: feedback
+PASS right answer A: gap on day 12
+PASS show me: three steps, separate from skipping
+PASS example → my month: no «see Ana» link after seeing her
+PASS back: the example keeps her answer
+PASS skip: lands on her month with a way back to the explanation
+PASS skip: explanation opens on tap
+PASS skip her month: takeaway still offered
+PASS skip everything: honest end
+PASS see Ana from her month: example opens
+PASS back to her month: her payday is kept
+PASS EN: opening
+PASS EN: main button
+PASS no page errors
