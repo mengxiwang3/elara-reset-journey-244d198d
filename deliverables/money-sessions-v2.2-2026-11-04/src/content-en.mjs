@@ -1,0 +1,572 @@
+// Elara · Money · V2.2 · English review edition.
+// Translates content-es.mjs (the Spanish is the source copy). build.mjs checks
+// that both files have the same shape.
+
+export const labels = {
+  lang: "en",
+  brand: "ELARA / MONEY CLARITY",
+  footer: "4 NOV 2026 / EDITORIAL REVIEW DRAFT / V2.2 / ENGLISH",
+  entry: "1 / Opening",
+  listen: "2 / Listen or read (complete script)",
+  check: "3 / Check an idea",
+  explore: "3 / Explore what changes",
+  steps: "3 / Her note and a next step",
+  apply: "4 / Make it hers",
+  deeper: "“Think a little further”: one branch per her choice",
+  close: "5 / The close",
+  rule: "Today’s rule",
+  keep: "She keeps",
+  tomorrow: "Tomorrow",
+  ifBack: "On return or after a skipped session",
+  media: "Media and delivery",
+  changed: "What changed since V2.1",
+  review: "Reviewer: what to check here",
+  connEyebrow: "CONNECTION AND CLOSE",
+  connTitle: "What she makes her own",
+  other: "If she picks “Other” and writes, Elara replies:",
+  supported: "Supported idea",
+  checkNote:
+    "Review copy only: “Supported idea” guides the review. Do not show it before she answers. “Prefer to skip” lets her read the explanation or continue.",
+  exploreNote:
+    "No winning option: each choice shows its consequence. “Prefer to skip” lets her read the explanation or continue.",
+};
+
+export const cover = {
+  eyebrow: "PILOT / VERSION 2.2 / ENGLISH REVIEW",
+  title: ["Your money.", "Something you understand and can use."],
+  sub: "Seven sessions with scripts, written replies and one clear rule per session. A proposal for review: the Spanish needs María’s and Alejandra’s approval.",
+  hook: "From the first visit: learn something about money and leave with a rule you can use.",
+  length:
+    "Proposed length: 3-4 minutes and five screens per session, to be checked in beta. The audio scripts are written for review; nothing has been recorded.",
+  head: ["Session", "Experience", "Today’s rule"],
+  rows: [
+    ["1", "Audio + two scenes", "If you’ll need it soon, keep it available."],
+    ["2", "Calendar with two levels", "Before counting money as free, check which payments come first."],
+    ["3", "Audio + private rehearsal", "First see what you can manage; then decide what to offer."],
+    ["4", "Two-perspective clip", "Liking a brand doesn’t tell you whether its share is a good buy."],
+    ["5", "Change an assumption", "Over time, a gain or a debt that stays weighs a lot."],
+    ["6", "Fictional message · new", "If they guarantee returns, rush you or ask you to bring people, don’t send money until you’ve checked."],
+    ["7", "Note + one choice", "Her rule of the week, in her words."],
+  ],
+  sections: [
+    [
+      "What changed in V2.2",
+      [
+        "Every session closes with one clearly stated rule. At most one caveat per screen.",
+        "Five screens per session; 35-45 s audio with at most three ideas.",
+        "Examples in dollars ($) and payments with names: rent, card, pay (proposed; María decides).",
+        "Session 5: 20 and 30 years, plus rising prices and a debt.",
+        "New session 6: when an investment promises too much. “Two funds” moves to a later week.",
+        "Every Elara reply is written in advance, including the one for “Other”.",
+      ],
+    ],
+    [
+      "Where to review",
+      "Shared behaviour: page 2. Sessions: pages 3-16. Review: pages 17-18. Sources and numbers: page 19. What the app already supports: page 20.",
+    ],
+    [
+      "What remains open",
+      "Emotional relevance and daily use are hypotheses. María reviews language and situations; Alejandra reviews voice. Session 6 sources still need verifying. Nothing is published without their review.",
+    ],
+  ],
+};
+
+export const common = {
+  eyebrow: "SHARED BEHAVIOUR",
+  title: "One learning point, one rule, one connection",
+  sub: "An editorial proposal. Page 20 says which parts the app already supports.",
+  sections: [
+    [
+      "Five screens per visit",
+      "1. Opening: one question, up to five options, “Other” and “Prefer to skip”. 2. Listen or read: 35-45 s audio with at most three ideas, three cards and “Read instead”. 3. Check or explore: three or four options, each with its own written explanation, shown when she picks. 4. Make it hers: one sentence to keep, if she wants. 5. The close: today’s rule, what she keeps and what tomorrow is about. Show her only her own route.",
+    ],
+    [
+      "Today’s rule",
+      "Every session leaves one short rule, stated clearly. Caveats stay, but at most one per screen: several in a row make it feel as if nothing was learned.",
+    ],
+    [
+      "When to go deeper",
+      "Optional button: “Think a little further.” It opens at most one question from the branch matching her choice. Her answer changes the draft or the saved detail. If no branch fits, offer continuing or an example without assigning an emotion.",
+    ],
+    [
+      "What Elara says",
+      "Every reply is written in advance; none is generated by AI. If she picks “Other” and writes, Elara doesn’t interpret her words: it uses the line written for “Other” in that session and continues. That keeps the generic note from coming back.",
+    ],
+    [
+      "Learning at her own pace",
+      "“Prefer to skip” and “Use an example” are always available. After skipping an activity, offer the explanation or continue. An omission never becomes an answer or an error.",
+    ],
+    [
+      "Memory she can correct",
+      "Saving is optional. Recover only what she saved, with “Edit” and “Remove”. In session 7, omit missing fields. Never invent a transformation.",
+    ],
+    [
+      "Privacy and honest states",
+      "Do not share answers with María or Circles by default. Do not record personal audio: the audio is teaching content. The close recognises what she did; it does not certify mastery.",
+    ],
+    [
+      "Cases and numbers",
+      "Fictional examples in dollars ($), as a proposal. Calculations live in code, with dates, rates and assumptions visible. No product or allocation recommendations, account connections, sending drafts or moving money within the sessions.",
+    ],
+  ],
+  foot: "Closing without an activity: “The explanation is here if you want to come back.” Closing with a card: show only what she chose to keep. No option schedules a reminder on its own.",
+};
+
+export const sessions = [
+  {
+    n: "01",
+    tag: "EMOTION + FIRST DISCOVERY",
+    title: "Save or invest? Start with what you want",
+    goal: "Distinguish saving from investing and connect that to when the money is needed.",
+    meta: "3-4 min proposed / Short audio + two scenes / estimated narration: 35-45 s",
+    entry: {
+      q: "What decision would you like more freedom to make if you had a financial cushion?",
+      options: ["Change jobs", "Move or choose where to live", "Say no to something", "Make time for something of my own", "Start investing"],
+      extra: "“Other” with free text · “Just exploring”",
+      other: "“That’s your reason, in your words. Now let’s look at when you’d need that money, because that changes where it makes sense to keep it.”",
+    },
+    script:
+      "Imagine two pots of money: one for a move next month and one you won’t touch for years. Saving means keeping money aside so it’s available. Investing means putting it to work so it can grow, accepting that it can also fall, even right when you need it. So the first question isn’t how much it could earn, but what it’s for and when you’ll need it. You don’t need money today to learn this.",
+    cards: [
+      ["Needed soon", "A move next month: what matters is that the money is there."],
+      ["Years to wait", "There’s time for ups and downs."],
+      ["First question", "What is it for, and when do I need it?"],
+    ],
+    check: {
+      kind: "check",
+      prompt: "Paula has to pay for a move in four weeks. She’s offered an investment that can rise or fall. What would you check first?",
+      options: [
+        ["How much she might earn if all goes well.", "It’s usually the first thing shown, but it doesn’t tell her whether she’ll have what she needs in four weeks. If it falls just before, she’s short for the move."],
+        ["Whether she’ll have the money on time, even if it falls.", "Yes. Paula already knows when she needs it: in four weeks. With so little time, what matters most is that the money is there.", true],
+        ["Whether it went well for other people.", "What happened to others doesn’t say what will happen in the next four weeks, and doesn’t change Paula’s date."],
+      ],
+    },
+    apply:
+      "Complete one sentence: “I want a cushion for ___.” Add “I’d need it soon,” “I could wait years,” or “I don’t know when yet.” Elara doesn’t choose saving or investing for her: it doesn’t know her situation. Paula’s example is available.",
+    branches: [
+      ["Chooses changing jobs or where to live", "“What option would that cushion open up that feels limited today?” Then: “We’ll keep that reason alongside the timing you chose.”"],
+      ["Chooses starting to invest", "“Let’s start with a useful distinction: keeping money aside and taking risk so it grows do different jobs. The next thing is knowing when you’d need it.”"],
+      ["No income or just exploring", "“You can learn with Paula’s example. You don’t need savings or money to continue.”"],
+    ],
+    rule: "If you’ll need the money soon, it usually makes sense to keep it available and not where it can fall.",
+    keep: "If she saves it: her sentence, optional reason and timing, including “to confirm”. Actions: “Save”, “Edit” and “Finish without saving”.",
+    tomorrow: "Why the balance in your account isn’t always free money.",
+    ifBack: "Recover her sentence only if she saved it and chooses to see it. Otherwise use Paula. Don’t claim she chose a product or started saving.",
+    media: "Audio by Ale. Two understated scenes, no aspirational wealth imagery. Complete transcript with “Read instead”.",
+    changed: [
+      "The rule is stated clearly in the close.",
+      "The audio no longer uses “assets”, “bonds” or “return”.",
+      "Paula’s option C is now clearly different (in V2.1 it overlapped with B), and the three options are similar in length.",
+      "“Cushion” (colchón) instead of “buffer” (respaldo) (María decides).",
+    ],
+    review: "Does “colchón” feel natural for this audience? Does the rule read as useful or as an order?",
+    sources: "Conceptual sources: S1, S8.",
+  },
+  {
+    n: "02",
+    tag: "USEFULNESS + CHOOSING A LEVEL",
+    title: "What you have and what’s already spoken for",
+    goal: "Spot a timing gap and recognise that a positive balance isn’t always free money.",
+    meta: "3-4 min proposed / Calendar (v1: three cards) + two levels / estimated narration: 35-45 s",
+    entry: {
+      q: "When you see your account balance, do you know which part is already spoken for before more money comes in?",
+      options: ["Not always", "Yes, give me a harder case", "My income varies a lot", "No income right now", "I’d rather use an example"],
+      extra: "“Other” with free text",
+      other: "“Thanks. Let’s look at Ana’s calendar; then you decide whether to use your own dates.”",
+    },
+    script:
+      "Ana has $100 in her account. On day 5 she pays $150 rent. On day 10 she gets paid $200. That pay arrives too late for the rent: on day 5 she’s $50 short. Looking at your money means looking at what comes in, what goes out and on which date. And a positive balance isn’t always free money: part of it may already be spoken for. The calendar is an example; it doesn’t change any real payment.",
+    cards: [
+      ["Today", "$100 in the account."],
+      ["Day 5", "Rent: $150. $50 short."],
+      ["Day 10", "Pay: $200. Arrives later."],
+    ],
+    check: {
+      kind: "explore",
+      prompt: "Pick one change to Ana’s calendar and see the consequence.",
+      options: [
+        ["Pay arrives on day 4.", "$100 + $200 = $300 before rent. After paying $150, $150 is left. That date needs confirming, and that $150 isn’t automatically free money."],
+        ["Pay is delayed to day 12.", "On day 5 she’s still $50 short. Money arriving later doesn’t cover the earlier gap."],
+        ["Rent moves to day 11.", "If that change is agreed and nothing else goes out, pay would arrive first. Moving the card here changes no real date."],
+      ],
+    },
+    advanced: {
+      title: "Route “Yes, give me a harder case”",
+      text: "Skip the basic narration and activity. “You have $300. On day 5 you pay $180 rent. On day 10 you should get paid $200, but the date is to be confirmed. On day 12 you pay $170 on your card.” Question: “If your pay slips to day 14, where are you on day 12, after paying the card?”",
+      options: [
+        ["$150 left over", "“That’s what happens if you’re paid on day 10: 300 − 180 + 200 − 170 = 150. With the delay, on day 12 the pay hasn’t arrived yet.”"],
+        ["Exactly $0", "“Close. After rent you have $120 (300 − 180). On day 12 you pay $170 and the pay hasn’t arrived: $50 short.”"],
+        ["$50 short", "“Yes. 300 − 180 = 120, and on day 12, 170 goes out before the pay arrives: $50 short. On day 14 you’re back to $150. When income varies, the date matters as much as the amount.”"],
+      ],
+    },
+    apply: "Standard route: choose one payment and one income of her own, with dates or “to confirm”, or stay with Ana. Amounts are not requested.",
+    branches: [
+      ["Chooses “My income varies a lot”", "“Which date do you need to confirm first for this calendar to help?” One answer is enough. Keep the open item without counting uncertain income as received."],
+      ["Doesn’t want to use her own data", "“Ana’s calendar is enough to practise. You can keep the question: what has to go out before money comes in again?”"],
+    ],
+    rule: "Before counting money as free, check which payments come first.",
+    keep: "One date to confirm, or the rule. In the harder case, her open check.",
+    tomorrow: "When you want to help someone and also protect what’s yours.",
+    ifBack: "Let her reopen her date or the fictional case, as she chooses. Don’t ask for proof of income, screenshots or documents.",
+    media: "v1 in text: three cards revealed on choice. A draggable calendar only if testing shows it’s needed. Always labelled “example”.",
+    changed: [
+      "Payments have names (rent, card, pay) and amounts in $.",
+      "The harder case now has a real trap: if pay slips, she’s $50 short on day 12. In V2.1 the balance never went negative, so it was just more arithmetic.",
+      "“Ya tiene dueño” (“already has an owner”) instead of “tiene destino” (María decides).",
+    ],
+    review: "Does “ya tiene dueño” sound natural? Does the harder case feel like a real challenge rather than patronising?",
+    sources: "Conceptual sources: S2.",
+  },
+  {
+    n: "03",
+    tag: "EMOTION + WORDS TO USE",
+    title: "What if they think I’m selfish?",
+    goal: "Distinguish what she wants to offer, what she can manage and the response she chooses to rehearse.",
+    meta: "3-5 min proposed / Personal audio + private rehearsal / estimated narration: 35-45 s",
+    entry: {
+      q: "If someone you love asked you for money, what might make you say yes before you know whether you can?",
+      options: ["I don’t want them to think I’m selfish", "I genuinely want to help", "I already help every month", "I worry about their reaction", "I can decide calmly"],
+      extra: "“Other” with free text · “Not applicable”",
+      other: "“Thank you for putting it that way. What you feel matters. Let’s separate out the part we can look at with numbers.”",
+    },
+    script:
+      "Helping can be something you choose with love. It can also get mixed with guilt, agreements or fear of disappointing someone. Today we separate three things: what you want to offer, what you can manage now and what you want to say. Numbers help with the second; they don’t decide for you. The sentence you write stays here if you want; you don’t have to send it.",
+    cards: [
+      ["What I want", "What I’d choose to offer."],
+      ["What I can manage", "What would be left uncovered."],
+      ["What I say", "Words that represent me."],
+    ],
+    check: {
+      kind: "explore",
+      prompt: "Marta has $200 and needs $150 for rent before payday. Someone asks her for $100. Pick a response to explore.",
+      options: [
+        ["“I need to check my payments before naming an amount.”", "It buys time without promising money. The decision is still open, but she’s no longer deciding in a rush."],
+        ["“This time I can offer $50.”", "That leaves $150, exactly the rent. It works in numbers; whether it’s right depends on other payments and on what Marta wants."],
+        ["“This time I won’t give money.”", "She keeps the $200. The arithmetic can’t tell us how she’ll feel or how the other person will react; that matters too."],
+      ],
+    },
+    apply:
+      "Choose a sentence from the example, edit it or write her own. Then reread: “Does this express what I want to offer without promising what I can’t manage?” She may keep the example.",
+    branches: [
+      ["Worries about seeming selfish", "“If you knew they wouldn’t be disappointed, what would you want to offer?” Use her answer in the draft without calling it an affordable amount. Say “your mum” only if she named her."],
+      ["Already helps every month", "“What would you like to protect in that help, and what do you need to stay covered for you?” A draft reflecting both. Don’t assume the arrangement can change."],
+      ["Worries about their reaction", "Don’t probe the disappointment. “We can keep this private and think first about what support would make you feel safer.” If not relevant, use Marta without looking for hidden conflict."],
+    ],
+    rule: "What you want to offer and what you can manage are two different questions. You can answer the second before you reply.",
+    keep: "Her exact wording, if she keeps it. Elara may say: “You can come back to these words before replying.” Don’t claim she set a boundary, sent a message or resolved guilt.",
+    tomorrow: "The difference between liking a company and owning a part of it.",
+    ifBack: "Offer “Reread”, “Edit” or “Leave it here”. Never ask whether she sent it. Supporting family can be freely chosen and valuable.",
+    media: "Ale can record the audio as a conversation. The extra emotional question appears only if she chooses it; Elara uses it to adjust the draft, not to diagnose.",
+    changed: [
+      "“There’s a prior commitment” becomes “I already help every month”: more concrete, and it covers money sent home.",
+      "Amounts in $; Marta’s payment has a name (rent).",
+      "Rule stated in the close. The rest stays: this was the strongest session.",
+    ],
+    review: "Does the question create recognition without blaming family? Does the sentence sound like something she’d actually say? Does “I already help every month” describe sending money home well?",
+    sources: "Conceptual sources: S2; original reflection and rehearsal.",
+  },
+  {
+    n: "04",
+    tag: "CURIOSITY + CHANGE OF PERSPECTIVE",
+    title: "From buying from a company to owning a part",
+    goal: "Explain what a share represents and separate liking a brand from an investment decision.",
+    meta: "3-4 min proposed / Two-perspective clip / estimated narration: 35-45 s",
+    entry: {
+      q: "Is there a company you use a lot that has made you think, “I wish I’d invested in it”?",
+      options: ["Yes, one comes to mind", "When I see what others earned", "I’d never thought about it", "I already invest", "I’d rather use a fictional company"],
+      extra: "“Other” with free text",
+      other: "“Thanks. Let’s use a fictional company to look at both perspectives without pressure.”",
+    },
+    script:
+      "As a customer you ask whether a product is useful to you. As a shareholder you own a small part of the company, and the price of that part rises or falls with what other people are willing to pay. So liking a brand doesn’t tell you whether its share, at today’s price, is a good buy. Today we switch perspective: from the product you use to the company you’d own part of.",
+    cards: [
+      ["Customer", "Is the product useful to me?"],
+      ["Shareholder", "What do I own, and what can happen to its value?"],
+      ["Market price", "Rises or falls. Not every company sells shares on an exchange."],
+    ],
+    check: {
+      kind: "check",
+      prompt: "A fictional company has many customers. Which question adds a shareholder’s perspective?",
+      options: [
+        ["How does it make money, and what could make it worth less?", "Yes. You’re looking at the business and its risks, not just the product. You’d still need the price, but you’re already thinking like an owner.", true],
+        ["Do I like its product more than another brand’s?", "A good customer question. On its own it says nothing about what you’d own or its risk."],
+        ["How much would I have made if I’d bought years ago?", "It sparks curiosity, but the past doesn’t say what the price will do from today."],
+      ],
+    },
+    apply:
+      "Choose a fictional company or one she knows. Complete only: “As a customer I know ___; as a possible shareholder I still need to understand ___.” If she doesn’t know where to start, offer “how it makes money”, “what could affect its value” or “what price I’d be paying”. Elara doesn’t research or recommend companies.",
+    branches: [
+      ["Thinks about what others earned", "“Are you drawn to understanding how it works, what others earned, or both?” Use her answer to pick the explanation, without creating urgency to buy."],
+      ["Had never thought about it", "Give the explanation rather than promising it: “You don’t need to know everything. A share is a small part of the company, and its price changes with what others pay for it. That’s enough to ask your first question.”"],
+      ["Already invests", "Skip the definition if she chooses. “Which part of your decision rests on knowing the product, and which on understanding the investment?”"],
+    ],
+    rule: "Liking a brand doesn’t tell you whether its share, at today’s price, is a good buy.",
+    keep: "One question she wants answered before considering a share, only if she chooses to save it.",
+    tomorrow: "Change one number and see how money grows, or shrinks, over time.",
+    ifBack: "If she asks about a specific purchase, keep the session educational and name the missing information.",
+    media: "Two perspectives on the same fictional company. No logos, profit testimonials or purchase screen. Exact transcript as an alternative.",
+    changed: [
+      "Dividends cut: one more idea the session didn’t use.",
+      "The three answers are similar in length (in V2.1 the right one was the longest, which gave it away).",
+      "The “Feels underinformed” branch had no matching opening option and promised an explanation it never gave. It now answers “I’d never thought about it” and gives the explanation.",
+    ],
+    review: "Does shifting from customer to shareholder spark curiosity? Is owning a part understandable without feeling tested?",
+    sources: "Conceptual sources: S3, S9.",
+  },
+  {
+    n: "05",
+    tag: "DISCOVERY + FOR AND AGAINST YOU",
+    title: "No magic: change a number and look",
+    goal: "See how a gain, a debt or rising prices enter the next calculation, and why time changes everything.",
+    meta: "3-5 min proposed / Demonstration (v1: cards revealed on choice) + voiceover / estimated narration: 40-50 s",
+    entry: {
+      q: "When other people talk about investing, what comes up for you?",
+      options: ["Curiosity", "I feel late", "I distrust what they show", "Nothing in particular"],
+      extra: "“Other” with free text · “Prefer to skip”",
+      other: "“Thanks. Let’s look at a simple calculation; you choose what to change.”",
+    },
+    script:
+      "$100 at 5% a year becomes $105 after one year. If that gain stays, next year the 5% is calculated on $105, not $100. At first you barely notice; over time you do: after 20 years it would be about $265, against $200 if the gain didn’t stay. And it works the same way against you, with a debt or with rising prices. The 5% is an assumption, not a promise: a real investment can also fall.",
+    cards: [
+      ["Hypothetical base", "$100 at 5% a year, 20 years: $265. If the gain didn’t stay: $200."],
+      ["More time", "30 years: $432."],
+      ["Against you", "Prices rising 10% a year: what costs $100 today costs $121 in 2 years."],
+    ],
+    check: {
+      kind: "explore",
+      prompt: "Choose an assumption to change. The calculation and an explanation appear; no right guess is needed first.",
+      options: [
+        ["Ten more years (30 in total).", "100 × 1.05³⁰ ≈ $432. The last ten years add more than the first twenty together, because the gain grows on earlier gains. Still assumes 5% every year and no added money."],
+        ["Two years with a 10% fall.", "100 × 0.90² = $81. Value can also fall. The example doesn’t predict a particular loss."],
+        ["Prices rising 10% a year.", "100 × 1.10² = $121. What costs $100 today would cost $121 in two years. If your money doesn’t grow, it buys less. Same calculation, working against you."],
+        ["A $100 debt at 30% a year, unpaid.", "100 × 1.30² = $169. If interest is added to the debt, next year you’re charged interest on interest. Simplified example: real cards and loans calculate in other ways."],
+      ],
+    },
+    apply:
+      "Choose an idea to keep: “Over time, a gain that stays weighs a lot,” “It works the same with debts and prices,” “An assumption is not a promise,” or her own wording. Optional check: “In year two, is the 5% calculated on 100 or 105?” For 105: “Yes, it includes the first gain.” For 100: “Look at step one: there’s now 105; the second 5% applies to that.”",
+    branches: [
+      ["Feels late", "“What weighs more: not understanding it yet, comparing yourself with others, or both?” Then: “Time matters, and so does starting by understanding. There’s nothing to catch up on today.” Don’t promise catching up or create urgency."],
+      ["Distrusts what others show", "“A gains figure leaves questions: how much was put in, how long it took, what it cost and what risk was taken.” She can keep one question. Tomorrow continues the theme."],
+      ["Nothing in particular, or skips", "Open the changes directly: “You can learn by seeing what changes when one assumption changes.” Don’t interpret silence or missing savings."],
+    ],
+    rule: "When a gain or a debt stays, the next calculation is made on more. Over time that weighs a lot, for you or against you.",
+    keep: "Her chosen idea and the assumption she explored, labelled “Hypothetical example; no contributions, withdrawals, costs or taxes.” Don’t apply the rate to her finances.",
+    tomorrow: "How to recognise an investment that promises too much.",
+    ifBack: "Return to the assumption she explored if saved; otherwise show the base case. Moving a control doesn’t prove understanding.",
+    media: "Checked, fixed states, not AI-generated calculations. In the text beta, cards revealed on choice. Always show HYPOTHETICAL EXAMPLE.",
+    changed: [
+      "From 2 to 20 years. In V2.1 the difference was $0.25 (110.25 against 110): the lesson was invisible.",
+      "Two cases this audience lives with, working against her: rising prices and a debt. “Start with 200” is cut.",
+      "The “Feels late” branch makes sure the 30-year example doesn’t deepen that feeling.",
+    ],
+    review: "Do the against-you cases (prices, debt) feel close to home or heavy? Does the 30-year example deepen the “I’m late” feeling?",
+    sources: "Conceptual sources: S4, S5; original numerical examples.",
+  },
+  {
+    n: "06",
+    tag: "PROTECTION + JUDGEMENT · NEW SESSION",
+    title: "When an investment promises too much",
+    goal: "Recognise three warning signs before sending money, without distrusting everything or blaming anyone.",
+    meta: "3-4 min proposed / Audio + fictional message / estimated narration: 35-45 s",
+    entry: {
+      q: "Have you ever been offered something to “grow your money” fast?",
+      options: ["Yes, on WhatsApp or social media", "Yes, by someone I know", "I’ve seen it happen to others", "Never", "I’ve put money into something like that"],
+      extra: "“Other” with free text · “Prefer to skip”",
+      other: "“Thanks. Let’s look at three signs that work for any offer.”",
+    },
+    script:
+      "Every real investment can fall. So if someone guarantees you high returns, they’re promising something they can’t know. Pressure is a sign too: “today only”, “only a few places left”. And an offer coming from someone you trust or from your community doesn’t make it safe: many scams arrive that way, and the person passing it on may truly believe in it.",
+    cards: [
+      ["Guaranteed returns", "No real investment can guarantee them."],
+      ["Decide now", "Pressure takes away your time to check."],
+      ["Bring more people", "If you earn by recruiting, ask where the money comes from."],
+    ],
+    check: {
+      kind: "check",
+      prompt: "Lucía gets this message (fictional example): “Invest $100 today and in a month you’ll have $150. Guaranteed. 3 places left. Bring two friends and you earn more.” What should she do first?",
+      options: [
+        ["Put in just a little to try it.", "Trying it with a little doesn’t protect her: many of these schemes pay out the first time so you trust them and put in more."],
+        ["Ask whether the sender got paid.", "Someone being paid doesn’t prove it’s safe: in these schemes, early payouts often come from the money of people who join later."],
+        ["Send nothing until she checks who’s offering it.", "Yes. The message has all three signs: guaranteed returns, pressure and bringing more people. Before sending money, she can check whether whoever is offering it is authorised by her country’s financial regulator.", true],
+      ],
+    },
+    apply:
+      "Keep the three questions: “Before sending money, I ask: are they guaranteeing returns? are they rushing me? are they asking me to bring more people?” Or complete: “If I’m offered something like this, I’ll reply: ___.” Example: “Thanks, I’ll look at it calmly before deciding.”",
+    branches: [
+      ["Offered by someone she knows", "“You don’t have to think badly of that person: they may believe in it too. You can say: ‘Thanks, I’ll look at it calmly before deciding.’”"],
+      ["Has put money into something like that", "“Thank you for telling me. These offers are designed to look safe; it’s nothing to be ashamed of. We don’t know whether yours was legitimate: these signs help you review it. If you’re worried, you can contact your country’s financial regulator.” Don’t ask for details or amounts. Don’t promise to recover money."],
+      ["Never, or seen it in others", "“These signs also help you support others without accusing anyone.”"],
+    ],
+    rule: "If they guarantee returns, rush you or ask you to bring more people, don’t send money until you’ve checked.",
+    keep: "The three questions or her sentence, if she chooses to save them.",
+    tomorrow: "Bring together what you kept this week and choose your rule.",
+    ifBack: "Offer “Reread the signs”. Never ask whether she invested or how much.",
+    media: "A chat-style message labelled “Fictional example”. No logos, real companies, specific cryptocurrencies or real screenshots. No legal advice. Say “your country’s financial regulator” without choosing one: the audience lives in several countries (pending: a verified list by country).",
+    changed: [
+      "New session. Replaces “Two funds”, which moves unchanged to a later week (text in V2.1).",
+      "Why: for this audience, protecting herself from misleading offers is more urgent than comparing funds, and it is still learning about investing.",
+    ],
+    review: "Can scams be discussed without causing shame? Does “I’ve put money into something like that” feel safe to choose? Which channels do these offers really arrive through in her community?",
+    sources: "Conceptual sources: S10, S11, S12 (to verify).",
+  },
+  {
+    n: "07",
+    tag: "RECOGNITION + CONTINUITY",
+    title: "What you can take with you now",
+    goal: "Bring together what she kept and choose the rule of the week she wants to take with her.",
+    meta: "2-3 min proposed / Note + one choice / estimated narration: 25-35 s",
+    entry: {
+      q: "This week you saw six rules. Which one would you like to take with you?",
+      options: [
+        "If I’ll need it soon, I keep it available.",
+        "Before counting money as free, I check which payments come first.",
+        "First I see what I can manage; then I decide what to offer.",
+        "Liking a brand doesn’t tell me whether its share is a good buy.",
+        "Over time, a gain or a debt that stays weighs a lot.",
+        "If they guarantee, rush me or ask me to bring people, I don’t send money without checking.",
+      ],
+      extra: "“None yet” · Show the rules from sessions she opened; if none, all of them.",
+      other: null,
+    },
+    script:
+      "A week can leave you a rule, a sentence you want to use or a better question. Today we bring together only what you chose to keep. You can correct it or remove it. There’s nothing else to fill in to finish.",
+    cards: [
+      ["Your rule", "The one you chose today."],
+      ["Your words", "Your sentence or purpose, if you kept them."],
+      ["Your question", "The one you want answered, if you kept it."],
+    ],
+    check: {
+      kind: "steps",
+      prompt: "Show the note built from what she saved, with “Edit” and “Remove” on each line. Then an optional next step.",
+      options: [
+        ["The note", "At the top, the chosen rule. Below, only what was saved and confirmed: purpose (session 1), sentence (session 3), question (session 4), signs (session 6). Omit missing fields. It is never empty: the rule is content, not her data."],
+        ["“What would help you next?”", "Debts and interest / A cushion for emergencies / Costs of investing / More examples of shares and funds / I don’t want to choose yet. Save only if she confirms."],
+        ["An example, only if she asks", "Fictional, not a user’s: “Your rule: before counting money as free, I check which payments come first. You chose: a cushion to change jobs. You rehearsed: ‘I need to check my payments before naming an amount.’”"],
+      ],
+    },
+    apply:
+      "With saved cards: “This is what you chose to keep. Is there anything that no longer represents you?” Edit before closing. With nothing saved: “You’re taking the rule you chose. Learning doesn’t require keeping anything personal.” Don’t say “you’re confident now” or attribute actions outside the app.",
+    branches: [
+      ["Wants to explain an idea", "Support by choice: share = a small part of the company, with a value that changes; compound = a gain or debt that stays enters the next calculation; signs = guarantee, pressure, bringing people. If something is confused, correct only that part with its example."],
+      ["Chooses “None yet”", "“That’s fine. You can come back to any session whenever you like.” No insisting."],
+      ["Saved nothing", "Don’t reconstruct memories from an omission or show another user’s data."],
+    ],
+    rule: "The one she chose, in her words if she edited it: “Your rule of the week: …”.",
+    keep: "A note she reviewed and, only if she chose it, the next topic. Close: “You can come back to this note to continue from where you chose.”",
+    tomorrow: "The topic she chose, or nothing: no reminder is scheduled on its own.",
+    ifBack: "The note can change. No answer implies an opened account, an investment, savings or a scheduled reminder.",
+    media: "A note with her exact sentences, not a generated letter of praise. No transformation percentages or certificates of financial readiness.",
+    changed: [
+      "The note is never empty: it starts with the rule she chooses, which is content rather than her data.",
+      "Shorter: V2.1’s A/B/C choice is removed.",
+      "“Diversification” is replaced by the warning signs from the new session 6.",
+    ],
+    review: "Does choosing a rule feel like hers? Does she feel recognised without Elara inventing a story?",
+    sources: "Conceptual sources: S1-S12; original editorial synthesis.",
+  },
+];
+
+export const reviewPage = {
+  eyebrow: "REVIEW / MARÍA + ALEJANDRA",
+  title: "Test the complete experience",
+  sub: "For each session: “Ready to test” or “Needs revision.” Quote the exact sentence or moment and propose an alternative.",
+  head: ["Session", "Check", "Revision or decision"],
+  rows: [
+    ["1", "Does she learn something on the first visit and connect it to a decision of her own?"],
+    ["2", "Does the harder case feel like a real challenge, not patronising?"],
+    ["3", "Does the sentence sound like something she’d actually say?"],
+    ["4", "Does the customer-to-shareholder shift spark curiosity?"],
+    ["5", "Do the against-you cases feel close? Does the 30-year example deepen “I’m late”?"],
+    ["6", "Can scams be discussed without shame? Is “I’ve put money into something like that” safe to choose?"],
+    ["7", "Does choosing a rule feel like hers and reduce effort?"],
+  ],
+  wordsTitle: "Words María decides",
+  wordsHead: ["In V2.1", "Proposed in V2.2", "Where"],
+  words: [
+    ["“respaldo económico” (buffer)", "“colchón económico” (cushion)", "Sessions 1 and 7"],
+    ["“tiene destino” (is earmarked)", "“ya tiene dueño” (already has an owner)", "Session 2"],
+    ["“unidades” (units)", "dollars ($)", "All"],
+    ["“Hay un compromiso previo”", "“Ya ayudo cada mes” (I already help every month)", "Session 3"],
+    ["—", "the whole of session 6 (new)", "Session 6"],
+    ["—", "the six rules, in “you” and “I” forms", "All"],
+  ],
+  lang: [
+    "Language and emotion",
+    "Flag literal translations, patronising tone and assumptions about partners, family, income or shame. Check that “Other”, “Not applicable” and the example let her continue without defending herself. An intense question should leave more clarity or a tool.",
+  ],
+};
+
+export const testPage = {
+  eyebrow: "REVIEW / SMALL TEST",
+  title: "Before recording anything",
+  sections: [
+    [
+      "A text test with five women",
+      "Test sessions 1-3 in text first, before producing audio or video. After each visit: “What did you understand or discover?”, “What would you use beyond Elara?” and “Did anything make you want to leave?” Don’t ask participants to publish private answers.",
+    ],
+    [
+      "The question that tells you most",
+      "The next day, before opening the app: “Do you remember yesterday’s rule? Say it in your own words.” If most can’t, the rule isn’t working, even if every screen was completed.",
+    ],
+    [
+      "At the end of the week",
+      "Ask which session she would reopen and why, what felt repetitive and what she expected to learn that was missing. Watch whether she returns on her own. Record actual answers; completing screens doesn’t establish success.",
+    ],
+    [
+      "Before recording",
+      "Finalise the concept and wording. Then test whether the audio helps her understand the same thing better or with less effort. Always keep equivalent text; audio must not add a compulsory task.",
+    ],
+  ],
+};
+
+export const sourcesPage = {
+  eyebrow: "SOURCES / SCOPE",
+  title: "What supports the content",
+  sub: "V2.1’s sources (S1-S9), with how V2.2 uses them. Session 6’s sources (S10-S12) could not be opened from this working session and must be verified before publication.",
+  items: [
+    ["S1 / SEC Investor.gov / Introduction to Investing", "Saving, investing, time horizon and risk: session 1. U.S. accounts, guarantees and tax rules are not applied to other countries.", "https://www.investor.gov/introduction-investing"],
+    ["S2 / CFPB / Creating a cash flow budget", "Dates, inflows, outflows and balance: sessions 2-3. The relational element of session 3 is an editorial proposal.", "https://www.consumerfinance.gov/documents/10038/cfpb_creating-cash-flow-budget_tool_2021-08.pdf"],
+    ["S3 / SEC Investor.gov / Stocks", "Shares, ownership and risk: session 4.", "https://www.investor.gov/introduction-investing/investing-basics/investment-products/stocks"],
+    ["S4 / SEC Investor.gov / Introduction to Investing", "Compound growth and possible losses: session 5.", "https://www.investor.gov/introduction-investing"],
+    ["S5 / SEC Investor.gov / Compound Interest Calculator", "Explicit assumptions: principal, time, rate and frequency: session 5.", "https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator"],
+    ["S6, S7 / SEC Investor.gov / Asset Allocation; Mutual Funds and ETFs", "“Two funds”: moves to a later week.", "https://www.investor.gov/introduction-investing/getting-started/asset-allocation"],
+    ["S8 / SEC Investor.gov / Asset Allocation", "Time horizon, tolerance and possible loss: sessions 1 and 7.", "https://www.investor.gov/introduction-investing/getting-started/asset-allocation"],
+    ["S9 / SEC Investor.gov / Public Companies", "A familiar company may not have exchange-traded shares: session 4.", "https://www.investor.gov/introduction-investing/investing-basics/how-stock-markets-work/public-companies"],
+    ["S10-S12 / SEC Investor.gov / Red Flags of Fraud; Affinity Fraud; Ponzi Schemes · TO VERIFY", "Guaranteed returns, pressure to decide, offers inside trusted communities, and early investors paid with newer investors’ money: session 6. A verified list of regulators by country is also missing.", null],
+  ],
+  numbersTitle: "Scope of the numbers",
+  numbers:
+    "Session 2: 100 + 200 − 150 = 150; harder case: 300 − 180 = 120; 120 − 170 = −50 ($50 short on day 12); 300 − 180 + 200 − 170 = 150. Session 3: 200 − 50 = 150. Session 5, annual compounding: 100 × 1.05² = 110.25; 100 × 1.05²⁰ = 265.33 (without the gain staying: 100 + 20 × 5 = 200); 100 × 1.05³⁰ = 432.19 (years 21-30: +166.86; years 1-20: +165.33); 100 × 0.90² = 81; 100 × 1.10² = 121; 100 × 1.30² = 169. Hypothetical constant rates; no contributions, withdrawals, costs, taxes or inflation adjustment. The debt is a simplified example with annual compounding.",
+  missingTitle: "Before publication",
+  missing:
+    "This is not a complete course: debts, an emergency cushion, bonds and provider evaluation need further development. Verify S10-S12 and prepare the regulator list by country. María reviews voice and audience; the team checks formats, saving, routes and formulas.",
+};
+
+// English only: what the app already supports. Checked against the code on
+// 4 Nov 2026 (branch ux-fixes-2026-11-03, built on origin/main 1363407).
+export const buildPage = {
+  eyebrow: "FOR THE TEAM / BUILD",
+  title: "What the app already supports",
+  sub: "Checked against the app code on 4 Nov 2026 (main at 1363407 plus the pending fix branches). Which build TestFlight runs is still unknown, so confirm there too.",
+  head: ["What the session needs", "Day-engine piece", "Status"],
+  rows: [
+    ["Opening question, up to five options, “Other” with text", "choose step with otherLabel", "Exists"],
+    ["“Prefer to skip”, “Not applicable”, “None yet”", "stateOptions (skipped, none) and noneOption", "Exists"],
+    ["Ale’s audio with “Read instead”", "voiceNote (player already used on Money Day 5); script as the step body", "Exists; nothing recorded"],
+    ["The three cards", "info or read step", "Exists"],
+    ["A written reply per option, shown at once, no AI", "choose with replies on a quiet step (used in Money Clarity v4)", "Exists"],
+    ["“Think a little further” branch per her choice", "conditional step: when { step, valueIn }", "Exists"],
+    ["Fill-in sentence (“I want a cushion for ___”)", "blanks with fields, placeholders, examples; keep: \"sentence\"", "Exists"],
+    ["Today’s rule in the close", "keep: \"rule\" (the week synthesis leads with it) and the day takeaway card", "Exists"],
+    ["Session 7: choose one of the week’s rules", "choose with the six rules as fixed options. Showing only rules from sessions she opened is new (optionsFrom reads the same day only)", "Exists; filter is new"],
+    ["Session 7 note with Edit and Remove per line", "collection exists; one editable note is new", "New"],
+    ["Session 2 draggable calendar", "none", "New; ship v1 as choose + replies"],
+    ["Session 5 number controls", "none", "New; ship v1 as choose + replies"],
+  ],
+  notes: [
+    "Most of V2.2 is content work on the existing engine. Of the new pieces, only session 7’s editable note is needed to ship it as written; the calendar and the number controls can wait for the text test.",
+    "Write each day in both the bundled app copy and the server seed. The parity check already fails with 78 older drifts, so check these days explicitly.",
+    "Mark the check and explore steps quiet, so the written reply shows instead of a model reply.",
+    "Which week and days these replace in the Money path is an owner decision.",
+  ],
+};
