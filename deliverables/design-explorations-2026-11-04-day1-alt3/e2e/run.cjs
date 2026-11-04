@@ -6,8 +6,9 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
-const URL = "file://" + path.join(ROOT, "prototype", "index.html");
-const SHOTS = path.join(ROOT, "shots");
+const URL = process.env.E2E_URL || "file://" + path.join(ROOT, "prototype", "index.html");
+const SHOTS = process.env.E2E_SHOTS || path.join(ROOT, "shots");
+const LOG = process.env.E2E_LOG || path.join(ROOT, "e2e", "e2e-log.txt");
 fs.mkdirSync(SHOTS, { recursive: true });
 const log = [];
 let pass = 0, fail = 0;
@@ -305,7 +306,7 @@ async function review(page, fn) {
 
   await browser.close();
   log.push(`\n${pass} passed, ${fail} failed`);
-  fs.writeFileSync(path.join(__dirname, "e2e-log.txt"), log.join("\n") + "\n");
+  fs.writeFileSync(LOG, log.join("\n") + "\n");
   console.log(log.join("\n"));
   process.exit(fail ? 1 : 0);
 })();

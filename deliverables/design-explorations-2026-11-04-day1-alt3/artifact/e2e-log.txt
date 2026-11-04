@@ -1,0 +1,103 @@
+PASS opening: title
+PASS opening: Elara line
+PASS opening: rule
+PASS opening: explanation does not give the answer
+PASS opening: no audio controls
+PASS activity: promised payment shown at day 10
+PASS activity: marked unconfirmed
+PASS activity: question not shown yet
+PASS day 5: rent and balance US$120
+PASS day 12: payment moved to day 14
+PASS day 12: promise no longer at day 10
+PASS day 12: question shown
+PASS day 12: balance unknown before a choice
+PASS day 12: Continue disabled before a choice
+PASS pick B: own feedback
+PASS pick B: verdict label
+PASS pick B: ghost US$200 on day 12
+PASS pick B: Continue enabled
+PASS pick B (phone view): the whole feedback is on screen
+PASS pick C: own feedback
+PASS pick C: bill shown as not subtracted
+PASS pick C: B no longer pressed
+PASS pick C: B feedback gone
+PASS pick C (phone view): the whole feedback is on screen
+PASS pick A: own feedback
+PASS pick A: verdict label
+PASS pick A: gap marker on day 12
+PASS pick A: payment late for the bill
+PASS pick A: only A pressed
+PASS pick A (phone view): the whole feedback is on screen
+PASS pick A (phone view): the day-14 card is on screen too
+PASS show me: step-by-step text
+PASS show me: calc on timeline
+PASS show me: did not move on
+PASS show me (phone view): timeline and the steps on screen together
+PASS EN: same choice kept, English copy
+PASS EN: feedback in English
+PASS EN: rule label and timeline in English
+PASS ES again: Spanish copy back
+PASS useful: question
+PASS useful: no skip note when she did the activity
+PASS useful: Continue disabled before a chip
+PASS branch date: own reply
+PASS branch date: only it pressed
+PASS branch noopen: own reply
+PASS branch noopen: only it pressed
+PASS branch short: own reply
+PASS branch short: only it pressed
+PASS branch other: own reply
+PASS branch other: only it pressed
+PASS branch switch: reply swapped
+PASS other: empty is not saved
+PASS other: saving state, not yet saved
+PASS other: saved only after success
+PASS other error: honest message
+PASS other error: never shows saved
+PASS other error: text kept
+PASS other retry: saved
+PASS back: activity choice kept
+PASS forward again: branch kept
+PASS takeaway: rule
+PASS takeaway: try line
+PASS rule: saving state
+PASS rule error: honest message
+PASS rule error: never shows saved
+PASS rule error: can still finish without saving
+PASS rule: saved only after success
+PASS end (saved): says the rule is saved
+PASS end (saved): mentions saved question
+PASS skip: moves on without revealing
+PASS skip: offers the explanation
+PASS skip: explanation on request
+PASS takeaway reached after skipping branches
+PASS end (not saved): says nothing was saved
+PASS end (not saved): no saved-rule claim
+PASS end (not saved): no saved-question claim
+PASS show-me only: Continue enabled
+PASS show-me only: gap shown on timeline
+PASS show-me only: not treated as a skip
+PASS wrong answer can continue
+PASS wrong answer still shown on return
+PASS EN branch reply
+PASS EN takeaway
+PASS 360×780 opening: no horizontal scroll
+PASS 360×780 opening: primary button in view
+PASS 360×780 activity start: no horizontal scroll
+PASS 360×780 activity start: primary button in view
+PASS 360×780 day 5: no horizontal scroll
+PASS 360×780 day 5: primary button in view
+PASS 360×780 day 12 question: no horizontal scroll
+PASS 360×780 day 12 question: primary button in view
+PASS 360×780 after pick: no horizontal scroll
+PASS 360×780 after pick: primary button in view
+PASS 360×780 useful: no horizontal scroll
+PASS 360×780 useful: primary button in view
+PASS 360×780 other question: no horizontal scroll
+PASS 360×780 other question: primary button in view
+PASS 360×780 takeaway: no horizontal scroll
+PASS 360×780 takeaway: primary button in view
+PASS 360×780 takeaway: all visible buttons ≥ 44px tall
+PASS reduced motion: show-me completes without waiting
+
+101 passed, 0 failed
