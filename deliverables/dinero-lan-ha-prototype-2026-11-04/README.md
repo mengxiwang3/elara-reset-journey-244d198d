@@ -45,6 +45,23 @@ node src/make-data.mjs ../money-sessions-v4.1-2026-11-04/src/content-es.mjs src/
 node test/e2e.cjs src /tmp/out
 ```
 
+## Look (version 3: more Ventana)
+
+Version 3 brings back more of Ventana and keeps what worked in version 2:
+
+- **Landscape:** it fills about two-thirds of the screen. A white glass panel (88 % opaque, blur 24) floats over it.
+- **Header:** the place is a glass label at the top left; help and profile are at the top right.
+- **Type:** Plus Jakarta Sans throughout, with bold 800 titles and small capital labels.
+- **Grey:** Ventana's cool ink (`#1E2430` and `#4A5160`).
+- **Saved reminder:** what she kept is Recuerdo's quiet row inside the panel («AYER TE LLEVASTE … Tus días ›»), and it leads to Atlas.
+- **Day end:** it is shown over the place with a green «Día N hecho» and a forest-green «Volver a Hoy». It replaced the full forest screen.
+- **Kept from version 2:**
+  - forest-green buttons;
+  - white panels with no beige or tape;
+  - italics only on two companion lines;
+  - the Atlas tab;
+  - the water, mist and slow zoom on Hoy.
+
 ## Look (version 2, after review)
 
 Version 1 used beige paper, taped notes and italic quotes, and read as vintage stationery. Version 2 changes that:

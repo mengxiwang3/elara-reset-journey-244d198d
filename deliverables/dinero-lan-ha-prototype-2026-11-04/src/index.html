@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..650;1,9..144,400..560&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..600&display=swap" rel="stylesheet">
 <style>
 /* Layout: a working phone beside a review panel; two more views lay out a day's screens and the design review. */
 :root{
@@ -10,14 +10,15 @@
   --bg:#F2F4F1; --surface:#FFFFFF; --fg:#1A1615; --muted:#5A615C; --line:#DCE1DC; --chip:#E7EBE6; --accent:#1F3A2E; --accent-fg:#F7F1E8; --dot:#26314D;
   /* Elara (from @elara/tokens): the same in both themes, it is the product's own look */
   --paper:#F9F5EF; --mount:#FBF7EE; --slip:#FFFDF9; --sand:#EFE4D2; --hair:#E2E6E3; --rule:#C9D0CB;
-  --ink:#1A1615; --ink2:#635A54; --body:#524944; --placeholder:#7A726C;
+  --ink:#1E2430; --ink2:#4A5160; --body:#2C3240; --placeholder:#6B7280;
   --forest:#1F3A2E; --forest2:#16382A; --forestDeep:#122E23; --cream:#F7F1E8; --mint:#A3E5C7; --mintPale:#E8F5EE;
   --ember:#C94A1C; --emberDark:#B8441A; --peach:#FFF1EC; --peachLine:#E8CDBE;
   --navy:#26314D; --pencil:#9A9089; --return:#EEF1E8;
   /* clean white panels over the landscape; a faint green tint, never beige */
   --white:rgba(255,255,255,.9); --tint:#F1F5F2; --line2:rgba(26,22,21,.12); --mist:#DFE7E2;
-  --serif:'Fraunces', ui-serif, Georgia, 'Times New Roman', serif;
-  --sans:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* Ventana's warm sans for everything */
+  --serif:'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --sans:'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .36 0 0 0 0 .3 0 0 0 0 .24 0 0 0 .07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#0F1814; --surface:#15211C; --fg:#F1ECE4; --muted:#B4ACA2; --line:#293832; --chip:#1D2B25; --accent:#E9DFD0; --accent-fg:#14211B; --dot:#C9D2E6; color-scheme:dark } }
@@ -28,7 +29,7 @@ body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:1
 .ph{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px}
 .ph > div:first-child{min-width:0; max-width:660px}
 .kicker{margin:0; font-size:13px; font-weight:600; color:var(--muted)}
-.ptitle{margin:4px 0 0; font-family:var(--serif); font-size:clamp(30px, 4.4vw, 44px); line-height:1.08; font-weight:520; letter-spacing:-.015em; text-wrap:balance}
+.ptitle{margin:4px 0 0; font-family:var(--serif); font-size:clamp(30px, 4.4vw, 42px); line-height:1.08; font-weight:800; letter-spacing:-.025em; text-wrap:balance}
 .psub{margin:10px 0 0; color:var(--muted); max-width:64ch}
 .seg{display:flex; flex-wrap:wrap; background:var(--chip); border-radius:999px; padding:4px; gap:4px}
 .seg button{min-height:40px; border:0; border-radius:999px; padding:0 14px; background:transparent; color:var(--fg); font:600 14px var(--sans); cursor:pointer}
@@ -80,7 +81,7 @@ button:focus-visible, textarea:focus-visible, summary:focus-visible, input:focus
 .snapfig figcaption button{min-height:36px; border:1px solid var(--line); border-radius:10px; background:transparent; color:var(--fg); font:600 12px var(--sans); padding:0 10px; cursor:pointer; white-space:nowrap; flex:none}
 .revtext{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px}
 .revcard{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:18px 20px; display:flex; flex-direction:column; gap:10px; min-width:0}
-.revcard h3{margin:0; font-family:var(--serif); font-size:22px; font-weight:520; line-height:1.2}
+.revcard h3{margin:0; font-family:var(--serif); font-size:20px; font-weight:800; letter-spacing:-.015em; line-height:1.2}
 .revcard p, .revcard li{margin:0; font-size:14px; line-height:1.55; color:var(--fg)}
 .revcard ul, .revcard ol{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px}
 .revcard .muted{color:var(--muted)}
@@ -111,8 +112,8 @@ button:focus-visible, textarea:focus-visible, summary:focus-visible, input:focus
 .app img.broken{visibility:hidden}
 
 /* the place, with a little life in it: the water ripples, the mist drifts, the photo breathes */
-.heroBox{position:absolute; left:0; top:0; width:100%; height:58%; overflow:hidden; z-index:0; -webkit-mask-image:linear-gradient(#000 74%, transparent); mask-image:linear-gradient(#000 74%, transparent)}
-.app.small .heroBox{height:50%}
+.heroBox{position:absolute; left:0; top:0; width:100%; height:66%; overflow:hidden; z-index:0; -webkit-mask-image:linear-gradient(#000 72%, transparent); mask-image:linear-gradient(#000 72%, transparent)}
+.app.small .heroBox{height:56%}
 .heroInner{position:absolute; inset:0; transform-origin:50% 62%; animation:breathe 38s ease-in-out infinite alternate}
 .hero{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
 .water{filter:url(#ripple); -webkit-mask-image:linear-gradient(transparent calc(var(--water) * 100%), #000 calc(var(--water) * 100% + 6%)); mask-image:linear-gradient(transparent calc(var(--water) * 100%), #000 calc(var(--water) * 100% + 6%))}
@@ -129,15 +130,18 @@ button:focus-visible, textarea:focus-visible, summary:focus-visible, input:focus
 .nophoto .heroFallback{display:block}
 .home .scroll, .plain .scroll{position:absolute; left:0; right:0; top:0; bottom:var(--tabh); overflow-y:auto; z-index:1}
 .col{min-height:100%; display:flex; flex-direction:column}
-.spacer{flex:1 0 auto; min-height:190px; display:flex; flex-direction:column; justify-content:space-between; padding:var(--top) 16px 40px}
+.spacer{flex:1 0 auto; min-height:190px; display:flex; flex-direction:column; justify-content:flex-start; padding:var(--top) 16px 40px}
 .app.small .spacer{min-height:130px}
-.hdr{display:flex; align-items:center; justify-content:flex-end; gap:8px}
+.hdr{display:flex; align-items:center; justify-content:space-between; gap:8px}
+.hbtns{display:flex; gap:8px; flex:none}
 .disc{flex:none; width:44px; height:44px; border-radius:50%; border:1px solid rgba(26,22,21,.06); background:rgba(255,255,255,.92); display:grid; place-items:center; font-family:var(--serif); font-weight:600; font-size:20px; cursor:pointer; color:var(--ink); box-shadow:0 2px 6px rgba(26,22,21,.12)}
-.place{align-self:flex-start; display:inline-flex; align-items:center; gap:6px; min-height:30px; padding:4px 12px 4px 9px; border-radius:15px; background:rgba(255,253,249,.92); font-size:calc(13*var(--u)); line-height:1.3; font-weight:600; color:var(--ink); box-shadow:0 1px 4px rgba(26,22,21,.12)}
+.place{margin:0; min-width:0; display:inline-flex; align-items:center; gap:6px; min-height:36px; padding:4px 14px 4px 10px; border-radius:18px; background:rgba(255,255,255,.88); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); font-size:calc(14*var(--u)); line-height:1.3; font-weight:600; color:var(--ink)}
+.place svg{flex:none}
 .nophoto .place{background:var(--slip)}
 
 /* the notebook page laid over the place */
-.page2{position:relative; margin:-34px 10px 10px; border-radius:28px; background:var(--white); -webkit-backdrop-filter:blur(22px) saturate(1.2); backdrop-filter:blur(22px) saturate(1.2); box-shadow:0 12px 30px -20px rgba(16,28,22,.5); padding:18px 20px 12px; display:flex; flex-direction:column}
+.page2{position:relative; margin:-34px 12px 12px; border-radius:28px; background:rgba(255,255,255,.88); -webkit-backdrop-filter:blur(24px) saturate(1.3); backdrop-filter:blur(24px) saturate(1.3); padding:18px 20px 6px; display:flex; flex-direction:column}
+.stack{display:flex; flex-direction:column; gap:12px; margin-top:8px; padding-bottom:12px}
 .thread{align-self:flex-start; display:flex; align-items:center; min-height:44px; margin:-8px 0 0 -2px; padding:0 2px; border:0; background:none; cursor:pointer}
 .tn{flex:none; width:12px; height:12px; border-radius:50%; position:relative}
 .tn.w{background:var(--forest)}
@@ -148,14 +152,24 @@ button:focus-visible, textarea:focus-visible, summary:focus-visible, input:focus
 .tl.w{background:var(--forest)}
 .tl.a{background:#D3DAD5}
 .threadlab{margin-left:10px; font-size:calc(12*var(--u)); font-weight:600; color:var(--ink2)}
-.eyebrow{font-size:calc(13*var(--u)); line-height:1.4; font-weight:600; color:var(--ember)}
+.eyebrow{font-size:calc(13*var(--u)); line-height:1.4; font-weight:600; color:var(--ink2)}
 .eyebrow.done{display:flex; align-items:center; gap:8px; color:var(--forest)}
 .tick{flex:none; display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--forest); color:var(--cream)}
-.title{margin-top:6px !important; font-family:var(--serif); font-size:calc(28*var(--u)); line-height:1.14; font-weight:520; letter-spacing:-.012em; color:var(--ink); text-wrap:balance; font-variation-settings:"opsz" 60}
+.title{margin-top:6px !important; font-family:var(--serif); font-size:calc(26*var(--u)); line-height:1.2; font-weight:800; letter-spacing:-.02em; color:var(--ink); text-wrap:balance}
 .title:focus, .h2:focus{outline:none}
-.label{font-size:calc(12.5*var(--u)); line-height:1.35; font-weight:600; color:var(--ink2)}
-.purpose{margin-top:10px !important; font-size:calc(16*var(--u)); line-height:1.45; color:var(--body)}
-.purpose .label{display:block; margin-bottom:2px}
+.label{font-size:calc(12*var(--u)); line-height:1.35; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink2)}
+.purpose{margin-top:12px !important; font-size:calc(16*var(--u)); line-height:1.4; font-weight:500; color:var(--body)}
+.purpose .label{display:block; margin-bottom:3px}
+/* the quiet Ventana row: what she kept, and the way to Atlas */
+.rrow{margin-top:10px; width:100%; border:0; border-top:1px solid rgba(30,36,48,.12); background:none; padding:12px 0; display:flex; align-items:center; gap:12px; text-align:left; cursor:pointer; color:var(--ink)}
+.rico{flex:none; display:grid; place-items:center; width:36px; height:36px; border-radius:10px; background:rgba(31,58,46,.08); color:var(--forest)}
+.rcol{flex:1; min-width:0; display:flex; flex-direction:column; gap:2px}
+.rtop{display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap}
+.rlink{font-size:calc(13*var(--u)); line-height:1.3; font-weight:700}
+.rlink.lg{font-size:calc(15*var(--u))}
+.rq{font-size:calc(14.5*var(--u)); line-height:1.45; font-weight:500; color:var(--ink)}
+.kblock{margin-top:12px; display:flex; flex-direction:column; gap:3px}
+.quote{font-size:calc(17*var(--u)); line-height:1.4; font-weight:600; color:var(--ink)}
 .meta{display:flex; align-items:flex-start; gap:6px; margin-top:10px !important; font-size:calc(13*var(--u)); line-height:1.4; color:var(--ink2)}
 .meta svg{flex:none; margin-top:calc(2*var(--u))}
 .btn{width:100%; min-height:54px; border:0; border-radius:27px; background:var(--forest); color:var(--cream) !important; font-size:calc(17*var(--u)); line-height:1.25; font-weight:600; padding:12px 20px; display:flex; align-items:center; justify-content:center; gap:10px; cursor:pointer}
@@ -180,10 +194,10 @@ div.slip{cursor:default}
 .voice{font-size:calc(16*var(--u)); line-height:1.5; color:var(--body)}
 .voice.it{font-family:var(--serif); font-style:italic; font-size:calc(17*var(--u)); line-height:1.45; font-weight:420; color:var(--ink)}
 .returnnote{margin-bottom:12px; background:var(--return); border-radius:14px; padding:12px 14px}
-.welcome{margin-top:14px; display:flex; align-items:center; gap:12px; width:100%; min-height:56px; border:0; border-radius:14px; background:var(--tint); padding:10px 12px; text-align:left; cursor:pointer}
+.welcome{margin-top:12px; display:flex; align-items:center; gap:12px; width:100%; min-height:56px; border:0; border-top:1px solid rgba(30,36,48,.12); border-radius:0; background:none; padding:12px 0; text-align:left; cursor:pointer; color:var(--ink)}
 .welcome .playdisc{flex:none; width:40px; height:40px; border-radius:50%; background:var(--forest); color:var(--cream); display:grid; place-items:center}
 .welcome span.t{display:flex; flex-direction:column; gap:1px}
-.welcome b{font-family:var(--serif); font-weight:520; font-size:calc(16.5*var(--u)); line-height:1.25}
+.welcome b{font-weight:700; font-size:calc(16*var(--u)); line-height:1.25}
 .tabs{position:absolute; left:0; right:0; bottom:0; height:var(--tabh); background:rgba(255,255,255,.94); -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); border-top:1px solid rgba(26,22,21,.08); display:flex; justify-content:space-around; padding:6px 12px 0; z-index:3}
 .tabs button{width:100px; min-height:50px; border:0; background:none; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:calc(13*var(--u)); font-weight:500; color:var(--ink2); cursor:pointer}
 .tabs button[aria-current="page"]{color:var(--forest); font-weight:700}
@@ -199,7 +213,7 @@ div.slip{cursor:default}
 .moments .tn{width:10px; height:10px}
 .moments .tn.now::after{inset:2.5px}
 .sheet{position:relative; margin-top:-24px; border-radius:24px 24px 0 0; background:rgba(255,255,255,.94); -webkit-backdrop-filter:blur(22px); backdrop-filter:blur(22px); padding:22px 20px 28px; min-height:calc(100% - var(--band) + 24px); display:flex; flex-direction:column; gap:16px}
-.h2{font-family:var(--serif); font-size:calc(23*var(--u)); line-height:1.22; font-weight:520; letter-spacing:-.01em; color:var(--ink); text-wrap:balance}
+.h2{font-family:var(--serif); font-size:calc(22*var(--u)); line-height:1.25; font-weight:800; letter-spacing:-.015em; color:var(--ink); text-wrap:balance}
 .q{font-size:calc(18*var(--u)); line-height:1.4; font-weight:600; color:var(--ink); text-wrap:pretty}
 .read{font-size:calc(18*var(--u)); line-height:1.6; color:var(--body); text-wrap:pretty}
 .read.sm{font-size:calc(16*var(--u)); line-height:1.55}
@@ -219,7 +233,7 @@ div.slip{cursor:default}
 .passwrap{display:flex; flex-direction:column; gap:4px}
 .passwrap .voice{background:var(--tint); border:0; border-radius:14px; padding:12px 14px; font-size:calc(16.5*var(--u))}
 .rulebox{background:var(--tint); border:0; border-left:3px solid var(--forest); border-radius:6px 14px 14px 6px; padding:14px 16px; display:flex; flex-direction:column; gap:4px}
-.ruletext{font-family:var(--serif); font-size:calc(19*var(--u)); line-height:1.4; font-weight:500; color:var(--ink)}
+.ruletext{font-size:calc(18*var(--u)); line-height:1.4; font-weight:700; color:var(--ink)}
 .ale{display:flex; align-items:center; gap:12px; min-height:56px; border:0; border-radius:14px; background:var(--tint); padding:8px 12px; width:100%; text-align:left; cursor:pointer}
 .ale .playdisc{flex:none; width:40px; height:40px; border-radius:50%; background:var(--forest); color:var(--cream); display:grid; place-items:center}
 .ale .t{display:flex; flex-direction:column; gap:1px; font-size:calc(14*var(--u)); color:var(--ink2)}
@@ -239,23 +253,10 @@ div.slip{cursor:default}
 .alert{border:2px solid #9B2C2C; background:#FFF5F3; color:#7A1F1F; border-radius:14px; padding:12px 14px; font-size:calc(15*var(--u)); font-weight:600}
 .next{font-size:calc(14.5*var(--u)); line-height:1.45; color:var(--ink2)}
 
-/* day complete: forest, the brand's moment for it */
-.dayend{position:absolute; inset:0; display:flex; flex-direction:column; background:linear-gradient(160deg, var(--forest2), var(--forestDeep)); color:var(--cream)}
-.dayend .scroll{position:relative; flex:1; min-height:0; overflow-y:auto}
-.dayend .band{height:calc(var(--band) - 24px); opacity:.9}
-.dayend .band::after{content:""; position:absolute; inset:0; background:linear-gradient(transparent 40%, var(--forest2))}
-.dayend .inner{padding:4px 22px 28px; display:flex; flex-direction:column; gap:16px}
-.dayend .eyebrow{color:var(--mint); display:flex; align-items:center; gap:8px}
-.dayend .tick{background:var(--mint); color:var(--forestDeep)}
-.dayend .h2{color:var(--cream)}
-.dayend .read, .dayend .next, .dayend .hint{color:var(--mintPale)}
-.dayend .voice{color:var(--cream)}
-.dayend .slip{background:#fff}
-.dayend .slip .voice, .dayend .slip .kept{color:var(--ink)}
-.dayend .link{color:var(--cream)}
-.dayend .link.u span{text-decoration-color:rgba(232,245,238,.5)}
-.dayend .actions{background:transparent; border-top:1px solid rgba(232,245,238,.16)}
-.dayend .alert{background:#FFF5F3}
+/* day complete: back over the place, the same whether or not she saved */
+.dayend{position:absolute; inset:0; display:flex; flex-direction:column}
+.dayend .scroll{position:relative; flex:1; min-height:0; overflow-y:auto; z-index:1}
+.dayend .heroInner{animation:none}
 
 /* Tus días, Círculos */
 .plain{position:absolute; inset:0; background:linear-gradient(var(--mist), #EEF2EF)}
@@ -266,7 +267,7 @@ div.slip{cursor:default}
 .drow:first-child{border-top:0}
 .thumb{flex:none; width:56px; height:56px; border-radius:10px; object-fit:cover; background:var(--mist)}
 .dmain{flex:1; min-width:0; display:flex; flex-direction:column; gap:4px}
-.dt{font-family:var(--serif); font-size:calc(17*var(--u)); line-height:1.3; font-weight:520; color:var(--ink)}
+.dt{font-size:calc(16*var(--u)); line-height:1.3; font-weight:700; color:var(--ink)}
 .dmain .kept{font-size:calc(16*var(--u))}
 .tag{align-self:flex-start; font-size:calc(12.5*var(--u)); font-weight:600; border-radius:999px; padding:3px 10px; background:var(--tint); color:var(--ink2)}
 .tag.today{background:var(--forest); color:var(--cream)}
@@ -292,7 +293,6 @@ mark.mk{color:inherit; border-radius:3px; -webkit-box-decoration-break:clone; bo
 .mk-new{background:#CFEBDB; box-shadow:0 0 0 2px #CFEBDB}
 .mk-chg{background:#FBE3A6; box-shadow:0 0 0 2px #FBE3A6}
 ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB; border-radius:3px; color:inherit}
-.dayend ins.prop{background:#5B3A22; box-shadow:0 0 0 2px #5B3A22; color:var(--cream)}
 
 /* snapshots in the grids show their whole length */
 .snapapp{position:relative; inset:auto; width:390px; height:844px}
@@ -398,14 +398,14 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       <div class="revcard">
         <h3>Cómo vuelve la calidez</h3>
         <ul>
-          <li><b>Paneles blancos y limpios.</b> Blanco con un poco de transparencia sobre el paisaje, sin papel beige. Los botones negros pasan al verde bosque de Elara.</li>
+          <li><b>Más Ventana.</b> El paisaje llena la pantalla y un panel de vidrio blanco flota encima, con la tipografía sans cálida de Ventana. Sin papel beige. Los botones negros pasan al verde bosque de Elara.</li>
           <li><b>El lugar sigue respirando.</b> La foto de cada día ocupa la mitad de arriba y cambia con la semana: muelle, niebla, balsas, cueva, laguna, pueblo, bahía.</li>
           <li><b>El hilo del Atlas.</b> Siete puntos: azul donde ya caminó, a lápiz lo que viene. Muestra el progreso sin puntos, rachas ni premios.</li>
           <li><b>Atlas vuelve como pestaña.</b> Hoy es la práctica del día; Atlas es el cuaderno de la semana: el lugar, el hilo y cada día con lo que se llevó.</li>
           <li><b>Un lugar vivo, sin ruido.</b> En Hoy el agua se mueve apenas, la niebla pasa despacio y la foto respira. Se detiene si el teléfono pide menos movimiento.</li>
-          <li><b>Lo que se llevó, marcado.</b> Una tarjeta clara con un marcador verde, solo para lo que guardó. «Ayer» aparece solo si fue ayer; si no, dice el día.</li>
+          <li><b>Lo que se llevó, en la fila de Recuerdo.</b> Una fila discreta con un marcador verde, solo para lo que guardó, que lleva a Atlas. «Ayer» aparece solo si fue ayer; si no, dice el día.</li>
           <li><b>Una voz humana con un lugar fijo.</b> Cada opción responde con su propia frase, en texto claro; la cursiva queda para dos líneas de compañía. Ale da la bienvenida el día 1, y su nota de voz tiene sitio en «Una idea que ayuda» cuando esté grabada.</li>
-          <li><b>Terminar se siente bien, guarde o no.</b> El cierre del día es el momento verde bosque de la marca, el mismo con o sin guardar.</li>
+          <li><b>Terminar se siente bien, guarde o no.</b> El cierre del día vuelve sobre el lugar, con una marca verde de hecho, igual con o sin guardar.</li>
         </ul>
       </div>
       <div class="revcard">
@@ -479,6 +479,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     chevR: '<path d="m9 6 6 6-6 6"/>',
     check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
     bookmark: '<path d="M6.5 3.5h11v17l-5.5-4-5.5 4Z"/>',
+    cal: '<rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/>',
     play: '<path d="M8 5.5v13l11-6.5Z" fill="currentColor" stroke="none"/>'
   };
   function ico(name, size, sw) { return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (sw || 1.9) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + P[name] + "</svg>"; }
@@ -532,7 +533,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     return h;
   }
   function weekThread(st, n, label) {
-    return '<button type="button" class="thread" data-act="tusdias" aria-label="Tu semana en Lan Hạ: ' + esc(label) + '. Abrir Tus días">' + thread(st, n, 7) + '<span class="threadlab">' + esc(label) + "</span></button>";
+    return '<button type="button" class="thread" data-act="tusdias" aria-label="Tu semana en Lan Hạ: ' + esc(label) + '. Abrir Tus días">' + thread(st, n, 7) + "</button>";
   }
   function opts(st, k, list, sel, forceMark) {
     return '<div class="opts">' + list.map(function (o, i) {
@@ -548,15 +549,14 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   function field(st, k, ph, label) {
     return '<textarea class="field"' + (st.live ? ' id="f-' + k + '"' : "") + ' data-field="' + k + '" aria-label="' + esc(label) + '" placeholder="' + esc(ph) + '">' + esc(st.d[st.day][k]) + "</textarea>";
   }
+  /* What she chose to keep. On Hoy it is Ventana's quiet row, which also leads to Atlas; elsewhere, a label and the line. */
   function slip(label, text, opts2) {
     opts2 = opts2 || {};
-    var today = (opts2.cls || "").indexOf("today") >= 0;
-    var inner = '<span class="kic">' + ico(today ? "check" : "bookmark", 16, 2) + '</span><span class="kb"><span class="label">' + esc(label) + '</span><span class="kept">«' + esc(text) + "»</span>" + (opts2.go ? '<span class="go">Tus días' + ico("chevR", 16, 2) + "</span>" : "") + "</span>";
-    return opts2.go ? '<button type="button" class="slip' + (opts2.cls ? " " + opts2.cls : "") + '" data-act="tusdias" aria-label="' + esc(label) + ": " + esc(text) + '. Abrir Tus días">' + inner + "</button>"
-      : '<div class="slip' + (opts2.cls ? " " + opts2.cls : "") + '">' + inner + "</div>";
+    if (opts2.go) return '<button type="button" class="rrow" data-act="tusdias" aria-label="' + esc(label) + ": " + esc(text) + '. Abrir Tus días en Atlas"><span class="rico">' + ico("bookmark", 18) + '</span><span class="rcol"><span class="rtop"><span class="label">' + esc(label) + '</span><span class="rlink">Tus días ›</span></span><span class="rq">«' + esc(text) + "»</span></span></button>";
+    return '<div class="kblock">' + (label ? '<p class="label">' + esc(label) + "</p>" : "") + '<p class="quote">«' + esc(text) + "»</p></div>";
   }
   function bg(day) { return '<div class="bgblur" style="background-image:url(\'' + day.photo.src + '\')"></div><div class="veil"></div>'; }
-  function daysRow() { return '<button type="button" class="daysrow" data-act="tusdias"><span>Tus días</span>' + ico("chevR", 18, 2) + "</button>"; }
+  function daysRow() { return '<button type="button" class="rrow" data-act="tusdias" aria-label="Tus días, en Atlas"><span class="rico">' + ico("cal", 18) + '</span><span class="rcol"><span class="rlink lg">Tus días ›</span></span></button>'; }
 
   /* ---------- Atlas home ---------- */
   function homeHTML(st) {
@@ -569,7 +569,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       var nextStep = h.kind === "resume" ? '<p class="meta">Tu próximo paso: ' + esc(MNAME[MOMENT[ds.last || "s1"]]) + "</p>" : '<p class="meta">' + ico("lock", 14, 2) + "<span>Unos 3 a 5 minutos · respuestas privadas</span></p>";
       body = (gap ? '<p class="returnnote voice it">Tu día ' + n + " te espera. No se pierde nada.</p>" : "") +
         weekThread(st, n, "Día " + n + " de 7") +
-        '<p class="eyebrow">Dinero y estabilidad</p>' +
+        '<p class="eyebrow">Dinero y estabilidad · Día ' + n + " de 7</p>" +
         '<h1 class="title" tabindex="-1" data-focus>' + T(st, day.title, day.m.title) + "</h1>" +
         '<p class="purpose"><span class="label">Para qué es hoy</span>' + esc(day.purpose) + "</p>" + nextStep +
         '<button type="button" class="btn mt14" data-act="start">' + (h.kind === "resume" ? "Seguir con el día " : "Empezar el día ") + n + ico("arrow", 20, 2) + "</button>" +
@@ -600,8 +600,8 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     var heroAlt = '<img class="hero" src="' + day.photo.src + '" alt="" aria-hidden="true" style="object-position:' + day.photo.pos + '">';
     return '<div class="home">' + bg(day) + '<div class="heroFallback"></div>' +
       '<div class="heroBox" style="--water:' + day.photo.water + '"><div class="heroInner">' + img(day, "hero") + heroAlt.replace('class="hero"', 'class="hero water"') + '</div><div class="mist" aria-hidden="true"></div></div>' +
-      '<div class="scroll"><div class="col"><div class="spacer"><div class="hdr"><button type="button" class="disc" data-act="sheet" data-k="help" aria-label="Ayuda">?</button><button type="button" class="disc" data-act="sheet" data-k="profile" aria-label="Perfil y ajustes">' + ico("person", 22, 1.8) + "</button></div>" +
-      '<p class="place">' + ico("pin", 15, 2) + esc(PLACE + ", " + COUNTRY) + " · Semana " + WEEKNO + "</p></div>" +
+      '<div class="scroll"><div class="col"><div class="spacer"><div class="hdr"><p class="place">' + ico("pin", 16, 2) + esc(PLACE + ", " + COUNTRY) + "</p>" +
+      '<div class="hbtns"><button type="button" class="disc" data-act="sheet" data-k="help" aria-label="Ayuda">?</button><button type="button" class="disc" data-act="sheet" data-k="profile" aria-label="Perfil y ajustes">' + ico("person", 22, 1.8) + "</button></div></div></div>" +
       '<section class="page2" aria-label="Tu día">' + body + "</section></div></div>" + tabs("hoy") + "</div>";
   }
 
@@ -681,7 +681,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     var m = MOMENT[st.step];
     return '<div class="sess">' + bg(day) + '<div class="scroll">' + band(st, day, m) + '<section class="sheet">' + BODY[st.step](st, day, ds) + "</section></div>" + actionsHTML(st, day, ds) + "</div>";
   }
-  /* Completion: the same forest moment whether or not she saved. */
+  /* Completion: the same calm moment over the place, whether or not she saved. */
   function doneHTML(st, day, ds) {
     var sv = ds.saved, inner;
     var next = day.next ? '<p class="next">Mañana: ' + T(st, day.next, day.m.next) + "</p>" : "";
@@ -691,13 +691,15 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         (sv.note ? slip("Tu nota", sv.note, {}) : "") +
         '<p class="voice">' + T(st, day.tryLine, day.m.tryLine) + "</p>" + next;
     } else {
-      inner = '<h2 class="h2" tabindex="-1" data-focus>' + Pr(st, "unsaved") + "</h2>" +
+      inner = '<p class="read sm" tabindex="-1" data-focus>' + Pr(st, "unsaved") + "</p>" +
         '<div class="links"><button type="button" class="link u" data-act="goto" data-k="idea"><span>Volver a la explicación</span></button><button type="button" class="link u" data-act="choose"><span>Elegir qué guardar</span></button></div>' +
         '<p class="voice">' + T(st, day.tryLine, day.m.tryLine) + "</p>" + next;
     }
-    return '<div class="dayend"><div class="scroll"><div class="band">' + img(day) + '</div><div class="inner">' +
-      '<p class="eyebrow"><span class="tick">' + ico("check", 12, 3) + "</span><span>Día " + day.n + " hecho" + (day.n === 7 ? " · Semana " + WEEKNO + " completa" : "") + "</span></p>" + inner + "</div></div>" +
-      '<div class="actions"><button type="button" class="btn ember" data-act="home">Volver a Hoy</button></div></div>';
+    return '<div class="dayend">' + bg(day) + '<div class="heroBox"><div class="heroInner">' + img(day, "hero") + "</div></div>" +
+      '<div class="scroll"><div class="col"><div class="spacer"></div><section class="page2" aria-label="Día terminado">' +
+      '<p class="eyebrow done"><span class="tick">' + ico("check", 12, 3) + "</span><span>Día " + day.n + " hecho" + (day.n === 7 ? " · Semana " + WEEKNO + " completa" : "") + "</span></p>" +
+      '<div class="stack">' + inner + "</div></section></div></div>" +
+      '<div class="actions"><button type="button" class="btn" data-act="home">Volver a Hoy</button></div></div>';
   }
 
   /* ---------- Tus días, Círculos ---------- */
@@ -984,7 +986,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     { n: 1, kind: "home", o: { firstDay: true }, label: "1 · Día 1, antes de empezar", sub: "Sin historia: la bienvenida de Ale en lugar de un recuerdo." },
     { n: 4, kind: "home", o: {}, label: "2 · Un día del medio", sub: "Ayer se llevó una regla: aparece como algo que eligió conservar." },
     { n: 4, kind: "homeSaved", o: {}, label: "3 · Día hecho, con lo de hoy guardado", sub: "Lo de hoy manda; el recuerdo de ayer se retira. Tus días sigue a mano." },
-    { n: 4, kind: "saved", o: {}, label: "Cierre del día", sub: "El momento verde bosque de la marca, igual con o sin guardar." },
+    { n: 4, kind: "saved", o: {}, label: "Cierre del día", sub: "Vuelve sobre el lugar, con la marca de hecho, igual con o sin guardar." },
     { n: 7, kind: "saved", o: {}, label: "4 · Día 7 hecho", sub: "Cierre de la semana, sin prometer una semana 2." },
     { n: 7, kind: "weekDone", o: {}, label: "4 · Lo que sigue, a la mañana siguiente", sub: "Lo que se llevó esta semana y el camino a Tus días." },
     { n: 5, kind: "home", o: { gap: true }, label: "Vuelve después de unos días", sub: "No dice «ayer»: dice el día. Y una línea de regreso de la app." },
