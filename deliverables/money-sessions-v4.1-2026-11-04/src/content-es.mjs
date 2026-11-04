@@ -1,0 +1,372 @@
+// V4.1 · Spanish source copy. Built from the V4 review draft (sources/Elara_Dinero_V4_ES.pdf).
+// mark: "new" = text that did not exist in V4 · "changed" = V4 text that was edited.
+// Everything is a proposal until María and Alejandra approve it.
+
+export const ui = {
+  lang: "es",
+  brand: "ELARA / CLARIDAD CON DINERO",
+  footer: "ELARA  /  V4.1  /  04 NOV 2026  /  BORRADOR PARA REVISIÓN",
+  dayEye: (n, part) => `DÍA ${n} / 7 · ${part}`,
+  s1: "1 / EMPIEZA POR TI",
+  s2: "2 / UNA IDEA QUE AYUDA · LEER O ESCUCHAR",
+  check: "COMPRUEBA LA IDEA · OPCIONAL",
+  s3: "3 / HAZLO TUYO",
+  note: "NOTA OPCIONAL",
+  example: "VER UN EJEMPLO · OPCIONAL",
+  rulesList: "VER LAS REGLAS",
+  s4: "4 / TE LLEVAS",
+  ifTap: "Si toca:",
+  yesterday: "Ayer viste:",
+  tomorrow: "Mañana:",
+  pass: "También: “Prefiero pasar”. Respuesta: “Puedes seguir con la idea de hoy sin elegir una situación”.",
+  noteHint: "Puedes editar o dejar en blanco. También puedes tocar “Prefiero pasar”: “Puedes terminar con la idea de hoy sin escribir nada”.",
+  checkHint: "Opcional y sin puntuación. Solo se muestra la respuesta de la opción tocada y puede cambiar de opción. «No estoy segura, muéstrame» explica sin marcar un error. También puede seguir sin responder.",
+  actions: "Acciones: “Elegir qué guardar” / “Terminar sin guardar”. La selección ofrece la regla y, solo si existe, su nota o frase confirmada. “Guardar selección” se activa con al menos un elemento elegido. Si falla: “No se pudo guardar. Reintentar”. Al guardar con éxito: “Guardado en Tus días”. Sin guardar: “Terminaste por hoy sin guardar nada. Puedes volver a la explicación”.",
+  ok: "respuesta que se espera",
+  tags: { new: "NUEVO", changed: "CAMBIADO" },
+  noCheck: "Sin comprobación extra: el paso 3 ya le pide recordar sin mirar la lista.",
+};
+
+export const cover = {
+  eyebrow: "ELARA / CLARIDAD CON DINERO",
+  title: "Tu vida primero. Una idea útil cada día.",
+  sub: "V4.1 · Siete sesiones completas para revisar con María y Alejandra.",
+  intro: "Corrección de V4 tras una revisión del texto. Mantiene su enfoque: empezamos por lo que ella reconoce en su vida, y las historias ajenas y las cuentas son apoyos opcionales. Añade una comprobación opcional después de cada idea.",
+  rhythmLabel: "EL RITMO",
+  rhythm: "1. Reconoce tu situación. 2. Aprende una idea y, si quieres, compruébala. 3. Elige algo útil. 4. Llévatelo si quieres.",
+  routeLabel: "Ruta de siete días",
+  howLabel: "Cómo leerlo",
+  how: "Cada sesión ocupa dos páginas de revisión y cuatro momentos de contenido; no afirma que sean cuatro pasos nativos. Las opciones y sus respuestas están escritas completas. Solo se muestra la respuesta de la opción tocada. Texto principal legible; audio de Ale opcional con la misma enseñanza, todavía sin grabar. No hay examen, puntuación ni respuesta generada por IA. Las etiquetas NUEVO y CAMBIADO marcan lo que no es igual a V4.",
+  small: "Propuesta para probar; español pendiente de revisión por María y Alejandra. Duración orientativa: 3-5 minutos, por medir. Los ejemplos en US$ son ficticios.",
+};
+
+export const changes = {
+  title: "Qué cambió de V4 a V4.1",
+  intro: "Seis cambios, todos marcados en las páginas de cada día. Las reglas, el ritmo, los ejemplos, «Ayer viste» y el guardado no cambian.",
+  items: [
+    ["Comprobación opcional en los días 1 a 6", "Después de la idea, una pregunta corta con tres opciones y respuesta fija; una de ellas es «No estoy segura, muéstrame». Sin puntuación ni bloqueo. En V4 nada le mostraba si había entendido la idea."],
+    ["Día 1: un camino para «no me alcanza»", "La respuesta anuncia el paso 3; el paso 3 pregunta «¿Qué te ayudaría hoy?» y añade «Anotar cuánto falta, sin resolverlo hoy»; la nota acepta «Me faltan… para…»; «Te llevas» lo incluye. En V4, todas las opciones del paso 3 eran sobre fechas."],
+    ["Día 2: el título tiene referente", "«¿Qué te gustaría que tu dinero te permitiera?» en vez de «…ese dinero…», que en el inicio de Atlas aparece solo, sin una frase anterior."],
+    ["Día 7: sin suponer y sin lenguaje de prueba", "«Esta semana vimos seis ideas…» en vez de «Esta semana separaste…», que da por hecho que hizo todos los días. «Gracias por darte este tiempo esta semana» en vez de «Gracias por probar esta semana»."],
+    ["Texto más claro", "Día 1: «dos días después de la luz». Día 3: «poner un límite». Día 4: signo menos (−). Día 6: cinco opciones en vez de seis («reconocer señales» pasa a «Prefiero pasar») y una idea en frases más cortas. Día 7: idea más corta."],
+    ["Apoyo en momentos sensibles", "Día 3: una línea para quien siente presión o control sobre su dinero. Día 6: «ayuda oficial de tu país» sigue genérica hasta verificar organismos por país."],
+  ],
+  decideLabel: "Para decidir con María",
+  decide: [
+    "La línea de apoyo del día 3: ¿se queda, cambia o sale?",
+    "¿Qué organismos nombrar en el día 6 para Colombia, México y los demás países del grupo? Hay que verificarlos con fuentes oficiales antes de escribirlos.",
+    "Día 1: la comprobación usa «alquiler», como el ejemplo de V4. ¿«Alquiler» o «arriendo» para el grupo?",
+    "Las seis comprobaciones son texto nuevo: ¿ayudan o se sienten como examen?",
+  ],
+};
+
+const O = (t, r, extra = {}) => ({ t, r, ...extra });
+
+export const days = [
+  {
+    n: 1,
+    title: "¿Llega antes de que tengas que pagar?",
+    purpose: "Separar un problema de fechas de un dinero que no alcanza.",
+    yesterday: null,
+    s1: {
+      q: "¿Te ha pasado que sabes que te van a pagar, pero igual te preocupa una cuenta que vence antes?",
+      opts: [
+        O("Sí, no sé cuándo me pagan", "La fecha todavía está por confirmar. Hoy puedes preparar una pregunta sin abrir tus cuentas."),
+        O("Cobro después de que vence un pago", "Ese desfase merece atención. Vamos a mirar qué llega primero, sin asumir que puedes mover las fechas."),
+        O("Aunque cobre, no me alcanza", "Entonces no es solo un problema de fechas. Mirarlas puede aclarar el faltante, pero no crea dinero. En el paso 3 puedes anotar cuánto falta, sin resolverlo hoy.", { mark: "changed" }),
+        O("Hoy prefiero no mirar mi dinero", "Puedes quedarte con la idea general y el ejemplo opcional. No necesitas compartir cifras."),
+      ],
+      pass: null,
+    },
+    idea: { x: "Un ingreso esperado y un ingreso disponible son cosas distintas. Para un pago cercano importa qué dinero estará disponible antes del vencimiento. Si aun sumando todo lo que entra sigue faltando, hay un faltante total; si el dinero llega después, también hay un desfase de fechas. Pueden pasar las dos cosas a la vez." },
+    rule: "Antes de contar un dinero futuro, confirma cuándo llega.",
+    check: {
+      q: "Te pagan el día 20 y el alquiler vence el día 15. ¿Puedes contar con ese pago para el alquiler?",
+      opts: [
+        O("No: llega después del vencimiento.", "Exacto. El día 15 ese dinero todavía no está en tu cuenta, así que no cubre ese pago.", { ok: true }),
+        O("Sí, porque sé que me van a pagar.", "Saber que llegará no lo hace disponible el día 15. Lo que cuenta es el día en que está en tu cuenta."),
+        O("No estoy segura, muéstrame.", "Pon las fechas en orden: alquiler el 15, cobro el 20. El cobro llega después, así que no cubre ese pago."),
+      ],
+    },
+    s3: {
+      q: { x: "¿Qué te ayudaría hoy?", mark: "changed" },
+      opts: [
+        O("Preparar una pregunta sobre mi cobro", "Puedes usar: “¿Qué día estará el dinero disponible en mi cuenta?”. No tienes que enviarla ahora."),
+        O("Identificar el pago que vence primero", "Piensa solo en el próximo vencimiento. Después compáralo con la fecha confirmada del cobro; si falta una fecha, esa es la información pendiente."),
+        O("Anotar cuánto falta, sin resolverlo hoy", "Puedes escribir solo el pago y la diferencia. Saber cuánto falta es información, no un fracaso. No tienes que resolverlo hoy.", { mark: "new" }),
+        O("Entenderlo con un ejemplo", "Abre el ejemplo de abajo. No hace falta hacer una cuenta tú sola."),
+      ],
+    },
+    note: { x: "La fecha que quiero confirmar es… · Si eligió «Anotar cuánto falta»: Me faltan… para…", mark: "changed" },
+    example: { x: "Ejemplo opcional: hay US$300 disponibles. Sale un alquiler de US$180 y luego vence la luz por US$170. El cobro de US$200 llega dos días después de la luz. Quedan US$120 antes de la luz: ese día faltan US$50. El cobro posterior no cubre un vencimiento anterior.", mark: "changed" },
+    rules: null,
+    take: { x: "Una pregunta para confirmar una fecha, lo que falta anotado, o la regla de hoy.", mark: "changed" },
+    tryLine: "Si te sirve, confirma una fecha antes de comprometer ese dinero.",
+    next: { x: "¿Qué te gustaría que tu dinero te permitiera?", mark: "changed" },
+  },
+  {
+    n: 2,
+    title: { x: "¿Qué te gustaría que tu dinero te permitiera?", mark: "changed" },
+    purpose: "Darle al dinero un propósito y una fecha antes de elegir qué hacer con él.",
+    yesterday: "Antes de contar un dinero futuro, confirma cuándo llega.",
+    s1: {
+      q: "Cuando piensas en ahorrar o invertir, ¿qué te importa más hoy?",
+      opts: [
+        O("Sentirme menos expuesta ante un imprevisto", "Un respaldo puede darte margen. Empecemos por para qué lo querrías, sin pedirte una cantidad."),
+        O("Aprender a invertir, aunque todavía no empiece", "Puedes aprender desde ahora. Primero separaremos el dinero que necesitarías pronto del que podrías dejar más tiempo."),
+        O("Tengo un pago cercano que me preocupa", "La fecha de ese pago cambia la decisión. Necesitas pensar en disponibilidad y en qué pasaría si el valor bajara."),
+        O("Ahora no puedo apartar dinero", "No hace falta ahorrar hoy para aprender esta diferencia. No te vamos a pedir una meta de ahorro."),
+      ],
+      pass: null,
+    },
+    idea: { x: "Ahorrar es apartar dinero para usarlo después. Invertir es poner dinero en algo buscando una ganancia y aceptando riesgos, incluida una pérdida. Para un pago cercano, importa poder acceder al dinero y que no dependa de una subida. Tener más tiempo no elimina el riesgo. Antes de comparar opciones, pregunta: ¿para qué es y cuándo lo necesito?" },
+    rule: "El dinero para un pago cercano no debería depender de que una inversión suba.",
+    check: {
+      q: "Tienes un dinero para un pago dentro de un mes. Una opción promete más, pero su valor puede bajar. ¿Qué miras primero?",
+      opts: [
+        O("Si el dinero estará completo y disponible en esa fecha.", "Sí. Para un pago cercano, lo primero es tener el dinero ese día. La ganancia posible va después.", { ok: true }),
+        O("Cuánto ha subido últimamente.", "Una subida pasada no asegura cuánto valdrá dentro de un mes."),
+        O("No estoy segura, muéstrame.", "Primero: ¿para qué es y cuándo lo necesitas? Si es para un pago cercano, importa que esté ahí ese día, aunque algo baje."),
+      ],
+    },
+    s3: {
+      q: { x: "Elige una pregunta para llevarte." },
+      opts: [
+        O("¿Para qué y para cuándo quiero este dinero?", "Puedes pensar en un pago, un imprevisto o una meta de varios años. Si aún no sabes la fecha, déjala por confirmar."),
+        O("¿Puedo retirarlo cuando lo necesite?", "Antes de elegir una opción, revisa cuándo puedes sacar el dinero y qué restricciones o costos tiene."),
+        O("Hoy solo quiero aprender la diferencia", "Quédate con esto: apartar dinero y aceptar riesgo para buscar una ganancia son decisiones distintas."),
+      ],
+    },
+    note: { x: "Querría este dinero para… Lo necesitaría…" },
+    example: { x: "Ejemplo opcional: necesitas US$300 para mudarte en cuatro semanas. Si una inversión baja, podrías no tener los US$300 ese día. Una ganancia anterior no asegura el dinero de tu mudanza." },
+    rules: null,
+    take: { x: "Una pregunta sobre propósito, plazo o acceso al dinero." },
+    tryLine: "Si te sirve, ponle un para qué y un para cuándo a una cantidad, sin elegir todavía un producto.",
+    next: { x: "Antes de decir que sí" },
+  },
+  {
+    n: 3,
+    title: "Antes de decir que sí",
+    purpose: "Preparar una respuesta que te dé tiempo para decidir.",
+    yesterday: "El dinero para un pago cercano no debería depender de que una inversión suba.",
+    s1: {
+      q: "¿Qué podría hacerte decir que sí a dar dinero antes de saber si puedes?",
+      opts: [
+        O("Me preocupa parecer egoísta", "Puedes querer a alguien y revisar lo que puedes asumir. Hoy puedes practicar una respuesta sin enviarla."),
+        O("Ya ayudo cada mes y me cuesta cambiarlo", "Un compromiso habitual también se puede revisar. No vamos a decidir por ti cuánto dar."),
+        O("Me preocupa cómo reaccionaría la otra persona", "No necesitas ensayar ni poner un límite si eso te haría sentir insegura. Puedes pasar y pensar qué apoyo necesitas. Si alguien te presiona o controla tu dinero y te sientes en riesgo, busca apoyo en alguien de confianza o en una línea de ayuda de tu país.", { mark: "changed" }),
+        O("Esto no me pasa; quiero aprender una frase", "Puedes practicar una respuesta general y adaptarla solo si algún día te sirve."),
+      ],
+      pass: null,
+    },
+    idea: { x: "Querer ayudar, poder dar una cantidad y decidir darla son preguntas distintas. Mira qué pagos necesitas cubrir antes de volver a cobrar. Esa información muestra consecuencias; no mide cuánto quieres a alguien. Pedir tiempo puede mantener la decisión abierta sin prometer dinero." },
+    rule: "Puedes querer ayudar y tomarte tiempo para ver lo que puedes asumir.",
+    check: {
+      q: "Te piden US$100 para mañana y tienes pagos esta semana. ¿Qué respuesta te da tiempo sin prometer dinero?",
+      opts: [
+        O("«Necesito revisar mis pagos antes de decirte una cantidad.»", "Sí. Es una respuesta completa: no dice que no ni promete una cantidad todavía.", { ok: true }),
+        O("«Sí, mañana te lo paso.»", "Puede ser tu decisión. Si todavía no revisaste tus pagos, comprometes el dinero antes de saber si puedes."),
+        O("No estoy segura, muéstrame.", "Busca la respuesta que todavía no promete una cantidad: «Necesito revisar mis pagos antes de decirte una cantidad.»"),
+      ],
+    },
+    s3: {
+      q: { x: "¿Qué respuesta te gustaría ensayar?" },
+      opts: [
+        O("Necesito tiempo para revisar mis pagos", "Frase para editar: “Necesito revisar mis pagos antes de decirte una cantidad”."),
+        O("Quiero revisar la ayuda que doy cada mes", "Frase para editar: “Quiero revisar qué cantidad puedo sostener antes de comprometerme para el próximo mes”."),
+        O("No quiero preparar una respuesta hoy", "Puedes terminar con la regla. No tienes que tener una conversación ni explicar por qué pasas."),
+      ],
+    },
+    note: { x: "Mi frase para ensayar…" },
+    example: { x: "Ejemplo opcional: tienes US$200 y pagos de US$150 antes de cobrar. Dar US$100 dejaría US$100 para esos pagos: faltarían US$50. Esto muestra una consecuencia, no decide cuánto debes ofrecer." },
+    rules: null,
+    take: { x: "Una frase que hayas confirmado, o solo la regla." },
+    tryLine: "Si te sirve y te sientes segura, guarda tu frase a mano. No tienes que enviarla.",
+    next: { x: "Pago, pero ¿qué está bajando?" },
+  },
+  {
+    n: 4,
+    title: "Pago, pero ¿qué está bajando?",
+    purpose: "Entender qué parte de un pago reduce lo que debes.",
+    yesterday: "Puedes querer ayudar y tomarte tiempo para ver lo que puedes asumir.",
+    s1: {
+      q: "Si alguna vez pagaste una deuda y sentiste que casi no bajó, ¿qué te gustaría entender?",
+      opts: [
+        O("Por qué baja menos de lo que pago", "Un cargo de interés puede explicar parte de la diferencia. Vamos a separar los movimientos sin suponer qué ocurrió en tu cuenta."),
+        O("Qué significa que me cobren interés", "Es el costo de usar dinero prestado. Veremos cómo un cargo se suma al saldo."),
+        O("Qué mirar en mi estado de cuenta", "Puedes buscar saldo anterior, cargos, pagos y saldo nuevo. No necesitas subir el documento."),
+        O("No tengo deuda o prefiero no usar la mía", "Puedes aprender con una explicación breve. El ejemplo numérico es opcional."),
+      ],
+      pass: null,
+    },
+    idea: { x: "El saldo es lo que debes en una fecha. Los intereses y otros cargos pueden aumentarlo; los pagos lo reducen. Por eso, pagar una cantidad no siempre reduce la deuda en esa misma cantidad. Para entender el cambio, mira los movimientos por separado. Cada contrato tiene sus propias reglas de cálculo y aplicación de pagos." },
+    rule: "Mira por separado el saldo, los cargos y el pago.",
+    check: {
+      q: "Debías US$200. Este mes se sumaron US$15 de interés y pagaste US$40. ¿Cuánto bajó la deuda?",
+      opts: [
+        O("US$25.", "Sí. US$200 + US$15 − US$40 = US$175. Pagaste US$40, pero la deuda bajó US$25.", { ok: true }),
+        O("US$40.", "Eso es lo que pagaste. Antes se sumaron US$15 de interés, así que la deuda bajó US$25."),
+        O("No estoy segura, muéstrame.", "Primero suma el cargo: 200 + 15 = 215. Luego resta el pago: 215 − 40 = 175. Antes eran 200: bajó 25."),
+      ],
+    },
+    s3: {
+      q: { x: "¿Qué pregunta te serviría más?" },
+      opts: [
+        O("¿Qué cargos se añadieron?", "Busca los cargos del período y cómo están descritos. Si alguno no se entiende, esa es una pregunta para quien emite la cuenta."),
+        O("¿Cuánto bajó realmente el saldo?", "Compara saldo anterior y saldo nuevo, teniendo en cuenta compras, cargos y pagos del mismo período."),
+        O("Quiero ver una cuenta sencilla", "Abre el ejemplo opcional: muestra solo un interés y un pago, sin otros movimientos."),
+      ],
+    },
+    note: { x: "La línea o pregunta que quiero aclarar es…" },
+    example: { x: "Ejemplo opcional: saldo US$100 + interés US$10 − pago US$20 = US$90. Pagaste US$20, pero el saldo bajó US$10. Es una cuenta simplificada; no calcula la tasa ni las condiciones de tu deuda.", mark: "changed" },
+    rules: null,
+    take: { x: "Una pregunta concreta para entender un movimiento." },
+    tryLine: "Si te sirve, localiza una línea en tu próximo estado de cuenta. No necesitas resolver toda la deuda hoy.",
+    next: { x: "¿Cambió tu gasto o cambió el precio?" },
+  },
+  {
+    n: 5,
+    title: "¿Cambió tu gasto o cambió el precio?",
+    purpose: "Distinguir una subida de precio de un cambio en lo que compras.",
+    yesterday: "Mira por separado el saldo, los cargos y el pago.",
+    s1: {
+      q: "Cuando sientes que el dinero rinde menos, ¿qué te gustaría poder distinguir?",
+      opts: [
+        O("Compro lo mismo, pero pago más", "Comparar el mismo producto y cantidad ayuda a ver el cambio de precio, sin culparte de entrada."),
+        O("No sé si subió el precio o compré más", "Separar precio por unidad y cantidad puede aclararlo. No necesitas revisar todas tus compras."),
+        O("Los precios cambian muy rápido donde vivo", "Puedes usar una fecha de comparación que tenga sentido donde vives. No usaremos una tasa como si fuera la de tu país."),
+        O("Hoy solo quiero entender la idea", "La idea principal es poder de compra: cuánto puedes comprar con la misma cantidad de dinero."),
+      ],
+      pass: null,
+    },
+    idea: { x: "Si el mismo producto y cantidad cuestan más, el mismo dinero compra menos. La inflación es una subida general de precios; un solo producto no mide la inflación de tu país. Para comparar una compra, mira el precio por la misma cantidad y las fechas. Un envase más pequeño también puede cambiar lo que recibes por tu dinero." },
+    rule: "Para comparar precios, compara también la cantidad.",
+    check: {
+      q: "Antes, 1 kg de arroz costaba US$2. Ahora el paquete trae 800 g y sigue costando US$2. ¿Qué cambió?",
+      opts: [
+        O("Pagas lo mismo por menos: en la práctica, subió.", "Sí. Por kilo, ahora pagas US$2,50.", { ok: true }),
+        O("Nada, porque cuesta lo mismo.", "El paquete cuesta igual, pero trae 200 g menos. Por kilo, el precio pasó de US$2 a US$2,50."),
+        O("No estoy segura, muéstrame.", "Compara la misma cantidad: 1 kg costaba US$2. Ahora 800 g cuestan US$2, así que 1 kg costaría US$2,50."),
+      ],
+    },
+    s3: {
+      q: { x: "¿Qué comparación te serviría?" },
+      opts: [
+        O("Elegir algo que compro seguido", "Piensa en un producto. Para compararlo, usa la misma cantidad, presentación y moneda en dos fechas."),
+        O("Revisar si cambió el tamaño del envase", "Mira cuánto trae. Dos precios iguales pueden dar cantidades distintas; el precio por unidad ayuda a verlo."),
+        O("Entender cómo se acumulan las subidas", "Abre el ejemplo opcional. Cada nueva subida se calcula sobre el precio que ya cambió."),
+      ],
+    },
+    note: { x: "Quiero comparar… La cantidad y las fechas serían…" },
+    example: { x: "Ejemplo opcional: una canasta cuesta US$100. Sube 10 % y llega a US$110. Otra subida de 10 % suma US$11: llega a US$121. No es la inflación de ningún país; solo muestra cómo se acumulan porcentajes." },
+    rules: null,
+    take: { x: "Una comparación concreta, o la regla de hoy." },
+    tryLine: "Si te sirve, compara un producto y su cantidad. Ver una subida no significa que tengas que comprar menos ni invertir hoy.",
+    next: { x: "Cuando una promesa toca una necesidad" },
+  },
+  {
+    n: 6,
+    title: "Cuando una promesa toca una necesidad",
+    purpose: "Preparar una pausa y una comprobación antes de enviar dinero.",
+    yesterday: "Para comparar precios, compara también la cantidad.",
+    s1: {
+      q: "¿Qué podría hacerte confiar en una oferta de dinero antes de comprobarla?",
+      opts: [
+        O("Me la recomienda alguien cercano", "Puedes confiar en esa persona y comprobar la oferta por separado. La recomendación no verifica quién recibe el dinero."),
+        O("Necesito que el dinero me rinda rápido", "Esa necesidad puede hacer atractiva una promesa. No te obliga a decidir hoy ni a arriesgar dinero para probarla."),
+        O("Me dicen que la oportunidad se acaba hoy", "La presión reduce el tiempo para comprobar. Puedes preparar una respuesta que no comprometa dinero."),
+        O("Ya envié dinero y estoy preocupada", "Puedes dejar el ejercicio. Contacta pronto al banco o servicio de pago y busca ayuda oficial de tu país. No necesitas contar detalles aquí."),
+      ],
+      pass: { x: "También: “Prefiero pasar”. Respuesta: “Puedes seguir con la idea de hoy y ver qué señales mirar, sin tener una oferta”.", mark: "changed" },
+    },
+    idea: { x: "Hay tres señales para detenerte: te prometen ganancias altas con poco o ningún riesgo, te presionan para pagar ya o te premian por traer gente. No envíes dinero como prueba de seguridad. Busca tú misma la autoridad financiera de tu país. Comprueba quién es, si tiene permiso para esa actividad y cómo contactarla por otro medio. Una empresa registrada también puede ser suplantada, y el registro no garantiza ganancias.", mark: "changed" },
+    rule: "Ganancias altas, “sin riesgo” y prisa: para y comprueba antes de enviar dinero.",
+    check: {
+      q: "Te escriben: «Gana 15 % cada semana, garantizado. Quedan pocos cupos.» ¿Qué haces primero?",
+      opts: [
+        O("Paro y compruebo por mi cuenta antes de enviar dinero.", "Sí. Una ganancia alta, «garantizado» y prisa, juntas, son una señal para detenerse.", { ok: true }),
+        O("Envío poco para probar.", "Enviar poco no comprueba nada. Al principio pueden devolverte algo para que confíes y envíes más."),
+        O("No estoy segura, muéstrame.", "Busca las tres señales: ganancia alta, «garantizado» y «quedan pocos cupos». Con eso basta para parar y comprobar antes de enviar dinero."),
+      ],
+    },
+    s3: {
+      q: { x: "¿Qué te gustaría tener a mano?" },
+      opts: [
+        O("Una frase para ganar tiempo", "Puedes usar: “No voy a enviar dinero antes de revisar quién lo recibe y cómo funciona”."),
+        O("Una lista breve para comprobar", "Busca por tu cuenta la autoridad oficial; revisa identidad y autorización para la actividad; usa datos de contacto obtenidos fuera del mensaje."),
+        O("Orientación porque ya envié dinero", "Contacta al banco o servicio que usaste para pagar y pregunta qué opciones hay. Busca ayuda oficial local; no envíes más dinero para supuestamente liberar lo anterior."),
+      ],
+    },
+    note: { x: "La frase o comprobación que quiero recordar es…" },
+    example: { x: "Ejemplo opcional: “20 % al mes, sin riesgo; envía hoy y gana más si traes amigas”. No necesitas calcular una rentabilidad: identifica la promesa, la prisa y el reclutamiento. WhatsApp o cripto, por sí solos, no prueban una estafa." },
+    rules: null,
+    take: { x: "Una frase de pausa o una comprobación independiente." },
+    tryLine: "Si vuelve a aparecer una oferta, usa tu pausa antes de responder. No hace falta buscar una para practicar.",
+    next: { x: "¿Qué te serviría volver a encontrar?" },
+  },
+  {
+    n: 7,
+    title: "¿Qué te serviría volver a encontrar?",
+    purpose: "Recuperar una idea útil y dejarla a mano, sin demostrar que cambiaste.",
+    yesterday: "Ganancias altas, “sin riesgo” y prisa: para y comprueba antes de enviar dinero.",
+    s1: {
+      q: "Al pensar en esta semana, ¿qué se parece más a lo que te pasó?",
+      opts: [
+        O("Hay una idea que quiero conservar", "Puedes elegirla de la lista. No hace falta que la hayas puesto en práctica."),
+        O("Entendí algo, pero no lo usé", "Entender una idea y usarla son cosas distintas. Puedes quedarte con ella sin contar un resultado."),
+        O("Todavía tengo una duda", "Puedes anotar qué falta entender. Guardarla no significa que Elara ya la respondió."),
+        O("No encontré algo que me sirviera", "No tienes que elegir una regla para terminar. Si quieres, puedes decir qué esperabas encontrar."),
+      ],
+      pass: null,
+    },
+    idea: { x: "Esta semana vimos seis ideas: fechas, propósito, ayuda, deudas, precios y ofertas. No hace falta que hayas ahorrado o cambiado algo. Puedes quedarte con una idea, dejar una duda o terminar sin guardar nada.", mark: "changed" },
+    rule: "Elige una idea que te sirva, o termina sin guardar.",
+    check: null,
+    s3: {
+      q: { x: "Sin abrir la lista, ¿qué te viene a la mente?" },
+      opts: [
+        O("Una fecha o una pregunta que quiero confirmar", "Si el pago vence antes del cobro, ese ingreso todavía no está disponible para ese vencimiento. Puedes recuperar la pregunta del día 1."),
+        O("Una frase que podría darme tiempo", "Puedes querer ayudar y revisar tus pagos antes de comprometer una cantidad. Puedes recuperar o escribir una frase del día 3."),
+        O("Prefiero ver las reglas de la semana", "Abre la lista de abajo. Puedes elegir una, escribir la tuya o no elegir ninguna."),
+      ],
+    },
+    note: { x: "Mi idea, mi frase o lo que todavía quiero entender…" },
+    example: null,
+    rules: {
+      intro: "Después de intentar recordar, puedes elegir una regla de la lista, escribir la tuya o terminar sin elegir.",
+      list: [
+        "Antes de contar un dinero futuro, confirma cuándo llega.",
+        "El dinero para un pago cercano no debería depender de que una inversión suba.",
+        "Puedes querer ayudar y tomarte tiempo para ver lo que puedes asumir.",
+        "Mira por separado el saldo, los cargos y el pago.",
+        "Para comparar precios, compara también la cantidad.",
+        "Ganancias altas, “sin riesgo” y prisa: para y comprueba antes de enviar dinero.",
+      ],
+    },
+    take: { x: "Una sola regla, una frase confirmada o una duda pendiente. También puedes no guardar nada." },
+    tryLine: { x: "Si te sirve, deja lo que elegiste donde puedas volver a encontrarlo. Gracias por darte este tiempo esta semana. No hay otra tarea que completar.", mark: "changed" },
+    next: null,
+  },
+];
+
+export const notes = {
+  title: "Notas de revisión y construcción",
+  sections: [
+    ["ESTADO Y ALCANCE", "V4.1 corrige V4 tras una revisión del texto. Sigue siendo un borrador: no implica aprobación de María, eficacia demostrada ni contenido cargado en la app. Mantiene seis temas y un cierre; el día 5 prioriza una comparación de precios y deja los porcentajes como ejemplo opcional."],
+    ["INTERACCIÓN Y CONTINUIDAD", "Todas las opciones tienen respuestas fijas. Los títulos, la enseñanza y la salida deben conservarse en Ventana. “Ayer viste” es un repaso editorial del día anterior, no una afirmación de que ella lo completó o recuerda; ocultarlo si no corresponde. En el inicio de Atlas, “Ayer guardaste” solo aparece si guardó algo. El día 7 ofrece recuerdo sin nota ni calificación y luego el banco completo de reglas."],
+    ["COMPROBACIÓN OPCIONAL (NUEVO)", "Días 1 a 6: una pregunta después de la idea, con tres opciones y respuesta fija; una es “No estoy segura, muéstrame”. Sin puntuación, sin bloqueo y sin guardar el resultado. Puede cambiar de opción o seguir sin responder. Los números son pequeños y la cuenta está siempre en la respuesta."],
+    ["PREGUNTAS ABIERTAS Y OMISIONES", "En cualquier día: “Tengo otra pregunta” abre un campo opcional separado. Respuesta fija: “Puedes dejarla como pendiente. Esta sesión no la da por respondida”. Solo decir “guardada” tras confirmar una nota no vacía y completar el guardado. Si pasa una actividad, permitir seguir a la enseñanza o al cierre sin atribuirle una elección."],
+    ["GUARDADO Y PRIVACIDAD", "Elegir una frase sugerida exige confirmación. No generar una tarjeta con texto vacío ni afirmar ahorro, confianza o cambios de conducta. Las notas no se publican automáticamente; cualquier compartir debe mostrar selección, destino y confirmación aparte. No prometer que nadie del equipo puede leerlas sin verificar la política y el acceso reales. No pedir estados de cuenta, nombres, números de cuenta ni capturas."],
+    ["APOYO Y SEGURIDAD (NUEVO)", "Día 3: la línea sobre presión o control del dinero es nueva; María decide si se queda. Día 6: “ayuda oficial de tu país” sigue genérica. Antes de nombrar organismos, verificar una lista por país con fuentes oficiales; no escribir nombres sin verificar."],
+    ["LO QUE HAY QUE COMPROBAR EN LA APP", "No se verificó el código en esta reescritura. Mapear los cuatro momentos a pasos reales, los campos separados, las ramas, la comprobación opcional, los ejemplos desplegables, el regreso a Tus días y los estados de guardado/error. Si no hay audio, ocultar reproducir. Sin promesa de semana 2 ni acceso por confirmar."],
+    ["PREGUNTAS PARA MARÍA Y LAS PARTICIPANTES", "¿Qué parte sentiste que tenía que ver contigo? ¿Qué aprendiste que antes no sabías? ¿La comprobación te ayudó o se sintió como examen? ¿Con qué frase o pregunta saliste? ¿Qué ejemplo necesitaste y cuál sobró? Al día siguiente: ¿recuerdas una idea? Aceptar “ninguna”; no sugerir la respuesta. Comprobar “alquiler/arriendo”, “luz/servicios”, “respaldo/colchón” y duración real."],
+  ],
+  sourcesLabel: "Fuentes de los conceptos (revisadas el 04 nov 2026 en V4; no se volvieron a abrir para V4.1)",
+  sources: [
+    ["CFPB · Flujo de caja y ahorro de emergencia", "https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/"],
+    ["Investor.gov · Plazo y riesgo", "https://www.investor.gov/introduction-investing/investing-basics/save-and-invest/gauge-your-risk-tolerance"],
+    ["CFPB · Cálculo de intereses", "https://www.consumerfinance.gov/ask-cfpb/how-does-my-credit-card-company-calculate-the-amount-of-interest-i-owe-en-51/"],
+    ["BCE · Inflación y poder de compra", "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_inflation.en.html"],
+    ["Investor.gov · Señales de fraude", "https://www.investor.gov/protect-your-investments/fraud/how-avoid-fraud/red-flags-investment-fraud-checklist"],
+  ],
+};
