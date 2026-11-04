@@ -1,0 +1,1025 @@
+<title>Dinero en Lan Hạ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..650;1,9..144,400..560&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: a working phone beside a review panel; two more views lay out a day's screens and the design review. */
+:root{
+  /* page chrome: follows the viewer's theme */
+  --bg:#F2EDE5; --surface:#FBF8F3; --fg:#1A1615; --muted:#635A54; --line:#E0D7CB; --chip:#EAE3D8; --accent:#1F3A2E; --accent-fg:#F7F1E8; --dot:#26314D;
+  /* Elara (from @elara/tokens): the same in both themes, it is the product's own look */
+  --paper:#F9F5EF; --mount:#FBF7EE; --slip:#FFFDF9; --sand:#EFE4D2; --hair:#E6DFD6; --rule:#D6CBBC;
+  --ink:#1A1615; --ink2:#635A54; --body:#524944; --placeholder:#7A726C;
+  --forest:#1F3A2E; --forest2:#16382A; --forestDeep:#122E23; --cream:#F7F1E8; --mint:#A3E5C7; --mintPale:#E8F5EE;
+  --ember:#C94A1C; --emberDark:#B8441A; --peach:#FFF1EC; --peachLine:#E8CDBE;
+  --navy:#26314D; --pencil:#9A9089; --return:#EEF1E8;
+  --serif:'Fraunces', ui-serif, Georgia, 'Times New Roman', serif;
+  --sans:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .36 0 0 0 0 .3 0 0 0 0 .24 0 0 0 .07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#0F1814; --surface:#15211C; --fg:#F1ECE4; --muted:#B4ACA2; --line:#293832; --chip:#1D2B25; --accent:#E9DFD0; --accent-fg:#14211B; --dot:#C9D2E6; color-scheme:dark } }
+:root[data-theme="dark"]{ --bg:#0F1814; --surface:#15211C; --fg:#F1ECE4; --muted:#B4ACA2; --line:#293832; --chip:#1D2B25; --accent:#E9DFD0; --accent-fg:#14211B; --dot:#C9D2E6; color-scheme:dark }
+
+body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:15px; line-height:1.5}
+.page{max-width:1260px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:20px 48px; display:flex; flex-direction:column; gap:22px}
+.ph{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px}
+.ph > div:first-child{min-width:0; max-width:660px}
+.kicker{margin:0; font-size:13px; font-weight:600; color:var(--muted)}
+.ptitle{margin:4px 0 0; font-family:var(--serif); font-size:clamp(30px, 4.4vw, 44px); line-height:1.08; font-weight:520; letter-spacing:-.015em; text-wrap:balance}
+.psub{margin:10px 0 0; color:var(--muted); max-width:64ch}
+.seg{display:flex; flex-wrap:wrap; background:var(--chip); border-radius:999px; padding:4px; gap:4px}
+.seg button{min-height:40px; border:0; border-radius:999px; padding:0 14px; background:transparent; color:var(--fg); font:600 14px var(--sans); cursor:pointer}
+.seg button[aria-selected="true"]{background:var(--accent); color:var(--accent-fg)}
+button:focus-visible, textarea:focus-visible, summary:focus-visible, input:focus-visible{outline:3px solid #D9773F; outline-offset:2px}
+
+.try{display:grid; grid-template-columns:auto minmax(0, 360px); gap:28px; align-items:start; justify-content:center}
+.device{--sw:390px; --sh:844px; padding:10px; border-radius:50px; background:#1B1714; box-shadow:0 30px 60px -26px rgba(26,22,21,.5)}
+.device.small{--sw:375px; --sh:667px}
+.screen{width:var(--sw); height:var(--sh); border-radius:40px; overflow:hidden; position:relative; isolation:isolate; background:var(--paper)}
+.panel{position:sticky; top:16px; display:flex; flex-direction:column; gap:16px; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:18px}
+.panel h2{margin:0; font-size:14px; font-weight:700; color:var(--fg)}
+.cbox{display:flex; flex-direction:column; gap:10px}
+.nowlabel{margin:0; font-size:14px; background:var(--chip); border-radius:12px; padding:10px 12px}
+.ctext{width:100%; box-sizing:border-box; min-height:96px; border:1.5px solid var(--line); border-radius:12px; padding:10px 12px; background:var(--bg); color:var(--fg); font:500 15px/1.45 var(--sans); resize:vertical}
+.ctext::placeholder{color:var(--muted)}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{position:relative; min-width:44px; min-height:44px; border:1px solid var(--line); border-radius:12px; background:transparent; color:var(--fg); font:700 15px var(--sans); cursor:pointer; font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--accent); color:var(--accent-fg); border-color:var(--accent)}
+.prow{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.pbtn{min-height:44px; border:1px solid var(--line); border-radius:12px; padding:0 14px; background:transparent; color:var(--fg); font:600 14px var(--sans); cursor:pointer}
+.pbtn.primary{background:var(--accent); color:var(--accent-fg); border-color:var(--accent)}
+.pbtn:disabled{opacity:.45; cursor:default}
+.toggles{display:flex; flex-direction:column; gap:0; border:0; margin:0; padding:0}
+.toggles label, .hl{display:flex; align-items:center; gap:10px; min-height:40px; font-size:14px; cursor:pointer}
+.toggles input, .hl input{width:20px; height:20px; accent-color:var(--accent); margin:0; flex:none}
+.fine{margin:0; font-size:13px; color:var(--muted); line-height:1.5}
+.fine b{color:var(--fg); font-weight:600}
+.legend{display:flex; flex-wrap:wrap; gap:12px; font-size:12px; color:var(--muted)}
+.legend span{display:inline-flex; align-items:center; gap:6px}
+.legend i{display:inline-block; width:14px; height:12px; border-radius:3px}
+.more{border-top:1px solid var(--line); padding-top:10px}
+.more summary{min-height:36px; display:flex; align-items:center; font-size:14px; font-weight:700; cursor:pointer}
+.declist{margin:6px 0 0; padding-left:20px; display:flex; flex-direction:column; gap:12px; font-size:14px}
+.declist li{display:flex; flex-direction:column; gap:6px}
+.declist .ctext{min-height:64px}
+.chlist{margin:6px 0 0; padding-left:18px; display:flex; flex-direction:column; gap:8px; font-size:13px; color:var(--muted)}
+.chlist b{color:var(--fg)}
+
+.all, .rev{display:flex; flex-direction:column; gap:18px}
+.allhead{display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px}
+.allhead p{margin:0; color:var(--muted); font-size:14px; max-width:70ch}
+.strip{display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:30px 18px; align-items:start}
+.snapfig{margin:0; display:flex; flex-direction:column; gap:8px; min-width:0}
+.snap{border-radius:22px; overflow:hidden; box-shadow:0 14px 30px -20px rgba(26,22,21,.55); width:max-content; max-width:100%; background:var(--paper)}
+.snapin{zoom:.62}
+.snapfig figcaption{display:flex; align-items:flex-start; justify-content:space-between; gap:8px; font-size:13px; font-weight:600}
+.snapfig figcaption small{display:block; font-weight:400; color:var(--muted); margin-top:2px}
+.snapfig figcaption button{min-height:36px; border:1px solid var(--line); border-radius:10px; background:transparent; color:var(--fg); font:600 12px var(--sans); padding:0 10px; cursor:pointer; white-space:nowrap; flex:none}
+.revtext{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px}
+.revcard{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:18px 20px; display:flex; flex-direction:column; gap:10px; min-width:0}
+.revcard h3{margin:0; font-family:var(--serif); font-size:22px; font-weight:520; line-height:1.2}
+.revcard p, .revcard li{margin:0; font-size:14px; line-height:1.55; color:var(--fg)}
+.revcard ul, .revcard ol{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px}
+.revcard .muted{color:var(--muted)}
+.tbl{width:100%; border-collapse:collapse; font-size:13.5px}
+.tbl th, .tbl td{text-align:left; vertical-align:top; padding:8px 8px 8px 0; border-top:1px solid var(--line)}
+.tbl th{font-weight:700; color:var(--muted); font-size:12px}
+.tblwrap{overflow-x:auto}
+
+@media (max-width: 880px){ .try{grid-template-columns:minmax(0,1fr)} .panel{position:static} }
+@media (max-width: 560px){
+  .device{padding:0; background:none; box-shadow:none; border-radius:0}
+  .device .screen{width:100%; height:720px; height:clamp(560px, calc(100svh - 24px), 780px); border-radius:22px}
+  .device.small .screen{height:667px}
+  .strip{grid-template-columns:minmax(0,1fr); justify-items:center}
+  .snapin{zoom:.86}
+}
+
+/* ================= Elara ================= */
+.app{--u:1px; --tabh:78px; --top:50px; --band:168px; position:absolute; inset:0; overflow:hidden; color:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased; background:var(--paper) var(--grain); text-align:left}
+.app.big{--u:1.25px}
+.app.small{--tabh:66px; --top:24px; --band:128px}
+.app *{box-sizing:border-box}
+.app p, .app h1, .app h2, .app ol, .app ul{margin:0}
+.app button{font-family:inherit; color:inherit; -webkit-tap-highlight-color:transparent}
+.app img.broken{visibility:hidden}
+
+/* the place, with a little life in it: the water ripples, the mist drifts, the photo breathes */
+.heroBox{position:absolute; left:0; top:0; width:100%; height:52%; overflow:hidden; z-index:0}
+.app.small .heroBox{height:46%}
+.heroInner{position:absolute; inset:0; transform-origin:50% 62%; animation:breathe 38s ease-in-out infinite alternate}
+.hero{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.water{filter:url(#ripple); -webkit-mask-image:linear-gradient(transparent calc(var(--water) * 100%), #000 calc(var(--water) * 100% + 6%)); mask-image:linear-gradient(transparent calc(var(--water) * 100%), #000 calc(var(--water) * 100% + 6%))}
+.mist{position:absolute; left:-25%; right:-25%; top:0; height:calc(var(--water) * 100%); pointer-events:none; opacity:.5; mix-blend-mode:screen; filter:blur(10px);
+  background:radial-gradient(38% 55% at 28% 55%, rgba(255,255,255,.75), transparent 72%), radial-gradient(30% 45% at 70% 40%, rgba(255,255,255,.6), transparent 72%), radial-gradient(26% 40% at 50% 80%, rgba(255,255,255,.5), transparent 70%);
+  animation:drift 52s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:scale(1.02)} to{transform:scale(1.07) translateX(-1.2%)}}
+@keyframes drift{from{transform:translateX(-7%)} to{transform:translateX(7%)}}
+@media (prefers-reduced-motion: reduce){ .heroInner, .mist{animation:none} .water{display:none} }
+.snapapp .heroInner, .snapapp .mist{animation:none}
+.snapapp .water{display:none}
+.nophoto .heroBox, .nophoto .band img{display:none}
+.heroFallback{position:absolute; left:0; top:0; width:100%; height:52%; background:var(--sand) var(--grain); z-index:0; display:none}
+.nophoto .heroFallback{display:block}
+.home .scroll, .plain .scroll{position:absolute; left:0; right:0; top:0; bottom:var(--tabh); overflow-y:auto; z-index:1}
+.col{min-height:100%; display:flex; flex-direction:column}
+.spacer{flex:1 0 auto; min-height:190px; display:flex; flex-direction:column; justify-content:space-between; padding:var(--top) 16px 40px}
+.app.small .spacer{min-height:130px}
+.hdr{display:flex; align-items:center; justify-content:flex-end; gap:8px}
+.disc{flex:none; width:44px; height:44px; border-radius:50%; border:1px solid rgba(26,22,21,.08); background:var(--slip); display:grid; place-items:center; font-family:var(--serif); font-weight:600; font-size:20px; cursor:pointer; color:var(--ink); box-shadow:0 2px 6px rgba(26,22,21,.12)}
+.place{align-self:flex-start; display:inline-flex; align-items:center; gap:6px; min-height:30px; padding:4px 12px 4px 9px; border-radius:15px; background:rgba(255,253,249,.92); font-size:calc(13*var(--u)); line-height:1.3; font-weight:600; color:var(--ink); box-shadow:0 1px 4px rgba(26,22,21,.12)}
+.nophoto .place{background:var(--slip)}
+
+/* the notebook page laid over the place */
+.page2{position:relative; margin-top:-26px; border-radius:28px 28px 0 0; background:var(--mount) var(--grain); box-shadow:0 -6px 18px rgba(26,22,21,.10); padding:18px 20px 16px; display:flex; flex-direction:column}
+.thread{align-self:flex-start; display:flex; align-items:center; min-height:44px; margin:-8px 0 0 -2px; padding:0 2px; border:0; background:none; cursor:pointer}
+.tn{flex:none; width:12px; height:12px; border-radius:50%; position:relative}
+.tn.w{background:var(--navy)}
+.tn.now{background:var(--slip); box-shadow:inset 0 0 0 2px var(--navy)}
+.tn.now::after{content:""; position:absolute; inset:3px; border-radius:50%; background:var(--ember)}
+.tn.a{border:1.5px dashed var(--pencil)}
+.tl{flex:none; width:16px; height:2px}
+.tl.w{background:var(--navy)}
+.tl.a{background:repeating-linear-gradient(90deg, var(--pencil) 0 3px, transparent 3px 6px)}
+.threadlab{margin-left:10px; font-size:calc(12*var(--u)); font-weight:600; color:var(--ink2)}
+.eyebrow{font-size:calc(13*var(--u)); line-height:1.4; font-weight:600; color:var(--ember)}
+.eyebrow.done{display:flex; align-items:center; gap:8px; color:var(--forest)}
+.tick{flex:none; display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--forest); color:var(--cream)}
+.title{margin-top:6px !important; font-family:var(--serif); font-size:calc(28*var(--u)); line-height:1.14; font-weight:520; letter-spacing:-.012em; color:var(--ink); text-wrap:balance; font-variation-settings:"opsz" 60}
+.title:focus, .h2:focus{outline:none}
+.label{font-size:calc(12.5*var(--u)); line-height:1.35; font-weight:600; color:var(--ink2)}
+.purpose{margin-top:10px !important; font-size:calc(16*var(--u)); line-height:1.45; color:var(--body)}
+.purpose .label{display:block; margin-bottom:2px}
+.meta{display:flex; align-items:flex-start; gap:6px; margin-top:10px !important; font-size:calc(13*var(--u)); line-height:1.4; color:var(--ink2)}
+.meta svg{flex:none; margin-top:calc(2*var(--u))}
+.btn{width:100%; min-height:54px; border:0; border-radius:27px; background:var(--forest); color:var(--cream) !important; font-size:calc(17*var(--u)); line-height:1.25; font-weight:600; padding:12px 20px; display:flex; align-items:center; justify-content:center; gap:10px; cursor:pointer}
+.btn:disabled{background:#D6CEC4; color:#fff !important; cursor:default}
+.btn.ember{background:var(--emberDark)}
+.btn2{min-height:50px; border:1.5px solid var(--rule); border-radius:25px; background:transparent; font-size:calc(16*var(--u)); font-weight:600; padding:10px 18px; cursor:pointer; color:var(--ink)}
+.mt14{margin-top:14px !important} .mt10{margin-top:10px !important}
+.link{align-self:flex-start; min-height:44px; border:0; background:none; padding:0; display:inline-flex; align-items:center; gap:6px; font-size:calc(14.5*var(--u)); line-height:1.3; font-weight:600; text-align:left; cursor:pointer; color:var(--ink)}
+.link.u span{text-decoration:underline; text-decoration-color:var(--rule); text-decoration-thickness:1.5px; text-underline-offset:4px}
+.links{display:flex; flex-wrap:wrap; gap:0 20px; align-items:center}
+
+/* a slip she kept: the only taped thing on the page */
+.slip{position:relative; margin-top:16px; background:var(--slip); border:1px solid var(--hair); border-radius:6px 14px 14px 14px; padding:16px 16px 6px; box-shadow:0 1px 0 rgba(26,22,21,.04), 0 6px 14px -10px rgba(26,22,21,.35); transform:rotate(-.4deg); text-align:left; width:100%; display:flex; flex-direction:column; gap:4px; cursor:pointer}
+.slip::before{content:""; position:absolute; left:18px; top:-7px; width:46px; height:14px; background:rgba(239,228,210,.92); border:1px solid rgba(214,203,188,.7); transform:rotate(-4deg); border-radius:2px}
+.slip .label{color:var(--ink2)}
+.kept{font-family:var(--serif); font-style:italic; font-size:calc(18*var(--u)); line-height:1.4; font-weight:420; color:var(--ink)}
+.slip .go{align-self:flex-end; min-height:36px; display:inline-flex; align-items:center; font-size:calc(13.5*var(--u)); font-weight:600; color:var(--ink)}
+div.slip{cursor:default}
+.slip.today{border-color:var(--peachLine)}
+.daysrow{margin-top:8px; border:0; border-top:1px solid var(--hair); background:none; width:100%; min-height:48px; padding:6px 0 0; display:flex; align-items:center; justify-content:space-between; font-size:calc(15*var(--u)); font-weight:600; cursor:pointer; color:var(--ink)}
+.voice{font-family:var(--serif); font-style:italic; font-size:calc(17.5*var(--u)); line-height:1.45; font-weight:420; color:var(--ink)}
+.returnnote{margin-bottom:12px; background:var(--return); border-radius:14px; padding:12px 14px}
+.welcome{margin-top:14px; display:flex; align-items:center; gap:12px; width:100%; min-height:56px; border:1px solid var(--hair); border-radius:14px; background:var(--slip); padding:10px 12px; text-align:left; cursor:pointer}
+.welcome .playdisc{flex:none; width:40px; height:40px; border-radius:50%; background:var(--forest); color:var(--cream); display:grid; place-items:center}
+.welcome span.t{display:flex; flex-direction:column; gap:1px}
+.welcome b{font-family:var(--serif); font-weight:520; font-size:calc(16.5*var(--u)); line-height:1.25}
+.tabs{position:absolute; left:0; right:0; bottom:0; height:var(--tabh); background:var(--mount); border-top:1px solid var(--hair); display:flex; justify-content:space-around; padding:6px 12px 0; z-index:3}
+.tabs button{width:100px; min-height:50px; border:0; background:none; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:calc(13*var(--u)); font-weight:500; color:var(--ink2); cursor:pointer}
+.tabs button[aria-current="page"]{color:var(--forest); font-weight:700}
+
+/* the day's practice */
+.sess{position:absolute; inset:0; display:flex; flex-direction:column}
+.sess .scroll{position:relative; flex:1; min-height:0; overflow-y:auto; z-index:1}
+.band{position:relative; height:var(--band); background:var(--sand) var(--grain)}
+.band img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.bandbar{position:absolute; left:12px; right:12px; top:calc(var(--top) - 8px); display:flex; align-items:center; gap:10px}
+.moments{height:36px; padding:0 12px; border-radius:18px; background:rgba(255,253,249,.94); display:flex; align-items:center; gap:10px; font-size:calc(13*var(--u)); font-weight:600; color:var(--ink); white-space:nowrap; box-shadow:0 1px 4px rgba(26,22,21,.12)}
+.moments .tl{width:12px}
+.moments .tn{width:10px; height:10px}
+.moments .tn.now::after{inset:2.5px}
+.sheet{position:relative; margin-top:-24px; border-radius:24px 24px 0 0; background:var(--mount) var(--grain); padding:22px 20px 28px; min-height:calc(100% - var(--band) + 24px); display:flex; flex-direction:column; gap:16px}
+.h2{font-family:var(--serif); font-size:calc(23*var(--u)); line-height:1.22; font-weight:520; letter-spacing:-.01em; color:var(--ink); text-wrap:balance}
+.q{font-size:calc(18*var(--u)); line-height:1.4; font-weight:600; color:var(--ink); text-wrap:pretty}
+.read{font-size:calc(18*var(--u)); line-height:1.6; color:var(--body); text-wrap:pretty}
+.read.sm{font-size:calc(16*var(--u)); line-height:1.55}
+.hint{font-size:calc(14*var(--u)); line-height:1.5; color:var(--ink2)}
+.yday{background:var(--slip); border:1px solid var(--hair); border-radius:12px; padding:12px 14px; display:flex; flex-direction:column; gap:3px}
+.yday .voice{font-size:calc(16*var(--u))}
+.opts{display:flex; flex-direction:column; gap:10px}
+.optwrap{border:1px solid var(--hair); border-radius:16px; background:var(--slip); overflow:hidden}
+.optwrap.sel{border:2px solid var(--ember); background:var(--peach)}
+.opt{width:100%; min-height:52px; border:0; background:none; text-align:left; padding:13px 14px; display:flex; gap:12px; align-items:flex-start; font-size:calc(16*var(--u)); line-height:1.4; font-weight:500; cursor:pointer; color:var(--ink)}
+.radio{flex:none; width:20px; height:20px; margin-top:calc(1*var(--u)); border-radius:50%; border:2px solid var(--rule); background:var(--slip)}
+.sel .radio{border:6px solid var(--ember)}
+.box{flex:none; width:22px; height:22px; margin-top:calc(1*var(--u)); border-radius:6px; border:2px solid var(--rule); display:grid; place-items:center; color:var(--cream); background:var(--slip)}
+.sel .box{background:var(--forest); border-color:var(--forest)}
+.resp{padding:0 14px 14px 46px; display:flex; flex-direction:column; gap:6px}
+.resp .voice{font-size:calc(16.5*var(--u))}
+.passwrap{display:flex; flex-direction:column; gap:4px}
+.passwrap .voice{background:var(--slip); border:1px solid var(--hair); border-radius:14px; padding:12px 14px; font-size:calc(16.5*var(--u))}
+.rulebox{background:var(--slip); border:1px solid var(--hair); border-left:3px solid var(--forest); border-radius:6px 14px 14px 6px; padding:14px 16px; display:flex; flex-direction:column; gap:4px}
+.ruletext{font-family:var(--serif); font-size:calc(19*var(--u)); line-height:1.4; font-weight:500; color:var(--ink)}
+.ale{display:flex; align-items:center; gap:12px; min-height:56px; border:1px solid var(--hair); border-radius:14px; background:var(--slip); padding:8px 12px; width:100%; text-align:left; cursor:pointer}
+.ale .playdisc{flex:none; width:40px; height:40px; border-radius:50%; background:var(--forest); color:var(--cream); display:grid; place-items:center}
+.ale .t{display:flex; flex-direction:column; gap:1px; font-size:calc(14*var(--u)); color:var(--ink2)}
+.ale b{font-size:calc(15.5*var(--u)); color:var(--ink); font-weight:600}
+.discl{border-top:1px solid var(--hair)}
+.discbtn{width:100%; min-height:52px; border:0; background:none; display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:calc(16*var(--u)); font-weight:600; text-align:left; cursor:pointer; padding:0; color:var(--ink)}
+.discl.open .discbtn svg{transform:rotate(180deg)}
+.discbody{display:flex; flex-direction:column; gap:10px; padding-bottom:8px}
+.notebox{border-top:1px solid var(--hair); padding-top:14px; display:flex; flex-direction:column; gap:8px}
+.field{width:100%; min-height:92px; border:1.5px solid #918780; border-radius:14px; padding:12px 14px; font:500 calc(16*var(--u))/1.45 var(--sans); color:var(--ink); background:var(--slip); resize:vertical}
+.field::placeholder{color:var(--placeholder)}
+.actions{position:relative; z-index:2; flex:none; background:var(--mount); border-top:1px solid var(--hair); padding:12px 16px 16px; display:flex; flex-direction:column; gap:4px}
+.app:not(.small) .actions{padding-bottom:28px}
+.row2{display:flex; justify-content:space-between; gap:12px}
+.row2b{display:flex; gap:10px}
+.row2b .btn{flex:1}
+.alert{border:2px solid #9B2C2C; background:#FFF5F3; color:#7A1F1F; border-radius:14px; padding:12px 14px; font-size:calc(15*var(--u)); font-weight:600}
+.next{font-size:calc(14.5*var(--u)); line-height:1.45; color:var(--ink2)}
+
+/* day complete: forest, the brand's moment for it */
+.dayend{position:absolute; inset:0; display:flex; flex-direction:column; background:linear-gradient(160deg, var(--forest2), var(--forestDeep)); color:var(--cream)}
+.dayend .scroll{position:relative; flex:1; min-height:0; overflow-y:auto}
+.dayend .band{height:calc(var(--band) - 24px); opacity:.9}
+.dayend .band::after{content:""; position:absolute; inset:0; background:linear-gradient(transparent 40%, var(--forest2))}
+.dayend .inner{padding:4px 22px 28px; display:flex; flex-direction:column; gap:16px}
+.dayend .eyebrow{color:var(--mint); display:flex; align-items:center; gap:8px}
+.dayend .tick{background:var(--mint); color:var(--forestDeep)}
+.dayend .h2{color:var(--cream)}
+.dayend .read, .dayend .next, .dayend .hint{color:var(--mintPale)}
+.dayend .voice{color:var(--cream)}
+.dayend .slip{transform:rotate(-.6deg)}
+.dayend .slip .voice, .dayend .slip .kept{color:var(--ink)}
+.dayend .link{color:var(--cream)}
+.dayend .link.u span{text-decoration-color:rgba(232,245,238,.5)}
+.dayend .actions{background:transparent; border-top:1px solid rgba(232,245,238,.16)}
+.dayend .alert{background:#FFF5F3}
+
+/* Tus días, Círculos */
+.plain{position:absolute; inset:0; background:var(--paper) var(--grain)}
+.pcol{min-height:100%; padding:var(--top) 16px 16px; display:flex; flex-direction:column; gap:12px}
+.dlist{list-style:none; padding:0; display:flex; flex-direction:column}
+.drow{display:flex; gap:12px; padding:14px 0; border-top:1px solid var(--hair)}
+.drow:first-child{border-top:0}
+.thumb{flex:none; width:56px; height:56px; border-radius:10px; object-fit:cover; background:var(--sand)}
+.dmain{flex:1; min-width:0; display:flex; flex-direction:column; gap:4px}
+.dt{font-family:var(--serif); font-size:calc(17*var(--u)); line-height:1.3; font-weight:520; color:var(--ink)}
+.dmain .kept{font-size:calc(16*var(--u))}
+.tag{align-self:flex-start; font-size:calc(12.5*var(--u)); font-weight:600; border-radius:999px; padding:3px 10px; background:var(--sand); color:var(--ink2)}
+.tag.today{background:var(--forest); color:var(--cream)}
+.future .dt, .future .thumb{opacity:.55}
+.mounted{margin:4px 0 0; background:var(--slip); border:1px solid var(--hair); border-radius:6px; padding:8px 8px 10px; box-shadow:0 8px 18px -14px rgba(26,22,21,.5); transform:rotate(-.5deg); display:flex; flex-direction:column; gap:8px}
+.mounted img{width:100%; aspect-ratio:3/1; object-fit:cover; border-radius:3px; background:var(--sand); display:block}
+.mounted figcaption{font-size:calc(13*var(--u)); font-weight:600; color:var(--ink2); padding:0 4px}
+.nophoto .mounted img{visibility:hidden}
+.threadrow{display:flex; align-items:center; min-height:36px}
+
+/* sheets */
+.ovl{position:absolute; inset:0; background:rgba(26,22,21,.42); z-index:8; border:0; padding:0; width:100%; cursor:pointer}
+.bsheet{position:absolute; left:0; right:0; bottom:0; z-index:9; background:var(--mount) var(--grain); border-radius:26px 26px 0 0; padding:10px 20px 26px; display:flex; flex-direction:column; gap:12px; max-height:86%; overflow-y:auto; box-shadow:0 -10px 40px rgba(0,0,0,.18)}
+.grab{align-self:center; width:40px; height:5px; border-radius:3px; background:var(--rule); margin-bottom:4px}
+.switch{display:flex; align-items:center; justify-content:space-between; gap:14px; width:100%; min-height:56px; border:0; background:none; padding:0; text-align:left; cursor:pointer}
+.switch .tr{flex:none; width:52px; height:32px; border-radius:16px; background:var(--rule); position:relative; transition:background .15s}
+.switch .tr::after{content:""; position:absolute; top:3px; left:3px; width:26px; height:26px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.25); transition:left .15s}
+.switch[aria-checked="true"] .tr{background:var(--forest)}
+.switch[aria-checked="true"] .tr::after{left:23px}
+.video{aspect-ratio:16/9; border-radius:14px; background:var(--forest2); color:var(--mintPale); display:grid; place-items:center; text-align:center; padding:16px; font-size:calc(14*var(--u))}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+mark.mk{color:inherit; border-radius:3px; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+.mk-new{background:#CFEBDB; box-shadow:0 0 0 2px #CFEBDB}
+.mk-chg{background:#FBE3A6; box-shadow:0 0 0 2px #FBE3A6}
+ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB; border-radius:3px; color:inherit}
+.dayend ins.prop{background:#5B3A22; box-shadow:0 0 0 2px #5B3A22; color:var(--cream)}
+
+/* snapshots in the grids show their whole length */
+.snapapp{position:relative; inset:auto; width:390px; height:844px}
+.snapapp.small{width:375px; height:667px}
+.snapapp.tall{height:auto; min-height:844px}
+.snapapp.small.tall{min-height:667px}
+.snapapp.tall .sess, .snapapp.tall .dayend{position:relative; inset:auto; min-height:inherit}
+.snapapp.tall .sess .scroll, .snapapp.tall .dayend .scroll{overflow:visible; flex:none}
+.snapapp.tall .plain{position:relative; min-height:inherit}
+.snapapp.tall .plain .scroll{position:relative; bottom:auto; overflow:visible; padding-bottom:var(--tabh)}
+.snapapp .sheet{min-height:0}
+@media (prefers-reduced-motion: reduce){ .switch .tr, .switch .tr::after{transition:none} }
+</style>
+
+<div class="page">
+  <header class="ph">
+    <div>
+      <p class="kicker">Para María · Revisión de palabras y lecciones · Dinero V4.1</p>
+      <h1 class="ptitle">Dinero en Lan Hạ</h1>
+      <p class="psub">Los siete días de «Dinero y estabilidad», tal como los vería una participante. Recórrelos día por día y, en cada pantalla, anota lo que cambiarías: una palabra que no suena natural, una idea que no se entiende, un ejemplo que sobra. Al terminar, copia tus comentarios y envíalos al equipo.</p>
+    </div>
+    <div class="seg" role="tablist" aria-label="Vista">
+      <button role="tab" id="tabTry" aria-selected="true" aria-controls="tryView">Probar</button>
+      <button role="tab" id="tabAll" aria-selected="false" aria-controls="allView">Todas las pantallas</button>
+      <button role="tab" id="tabRev" aria-selected="false" aria-controls="revView">Revisión de diseño</button>
+    </div>
+  </header>
+
+  <section id="tryView" class="try" role="tabpanel" aria-labelledby="tabTry">
+    <div class="device" id="device"><div class="screen"><div class="app" id="app"></div></div></div>
+    <aside class="panel" aria-label="Revisión">
+      <section class="cbox" aria-labelledby="cHead">
+        <h2 id="cHead">Tu comentario sobre esta pantalla</h2>
+        <p class="nowlabel" id="nowLabel" aria-live="polite"></p>
+        <label class="sr" for="cmt">Comentario sobre esta pantalla</label>
+        <textarea id="cmt" class="ctext" rows="4" placeholder="Por ejemplo: «arriendo» suena más natural que «alquiler», o esta idea no se entiende."></textarea>
+        <p class="fine" id="cStatus">Se guarda en este navegador mientras escribes.</p>
+        <div class="prow">
+          <button class="pbtn primary" id="copyAll" type="button">Copiar todos mis comentarios</button>
+          <span class="fine" id="cCount"></span>
+        </div>
+        <div id="copyFallback" class="cbox" hidden>
+          <p class="fine">No se pudo copiar automáticamente. Mantén pulsado el texto, selecciónalo todo y cópialo:</p>
+          <label class="sr" for="copyText">Tus comentarios</label>
+          <textarea id="copyText" class="ctext" rows="7" readonly></textarea>
+        </div>
+      </section>
+      <div class="cbox">
+        <label class="hl"><input type="checkbox" id="optMarks"> Resaltar lo nuevo o cambiado desde V4</label>
+        <div class="legend" id="markLegend" hidden><span><i class="mk-new"></i>Nuevo en V4.1</span><span><i class="mk-chg"></i>Cambiado desde V4</span></div>
+        <label class="hl"><input type="checkbox" id="optProps"> Ver las propuestas de texto (no aprobadas)</label>
+        <div class="legend" id="propLegend" hidden><span><i style="background:#F8DCCB"></i>Propuesta, separada de V4.1</span></div>
+      </div>
+      <h2>La semana</h2>
+      <div class="chips" id="dayChips" role="group" aria-label="Empezar en un día"></div>
+      <div class="prow">
+        <button class="pbtn primary" id="nextDay" type="button">Pasar al día siguiente</button>
+        <button class="pbtn" id="gapDays" type="button">Volver 3 días después</button>
+      </div>
+      <div class="prow">
+        <button class="pbtn" id="reset" type="button">Reiniciar la semana</button>
+      </div>
+      <p class="fine">Cada día se abre al día siguiente de terminar el anterior. «Reiniciar la semana» borra las respuestas de prueba, no tus comentarios.</p>
+      <details class="more" open>
+        <summary>Decisiones pendientes (4)</summary>
+        <ol class="declist" id="decideList"></ol>
+      </details>
+      <details class="more">
+        <summary>Qué mirar en cada día</summary>
+        <p class="fine" id="lookText"></p>
+      </details>
+      <details class="more">
+        <summary>Qué cambió desde V4</summary>
+        <ul class="chlist" id="changesList"></ul>
+      </details>
+      <details class="more">
+        <summary>Probar también</summary>
+        <fieldset class="toggles">
+          <legend class="sr">Opciones de prueba</legend>
+          <label><input type="checkbox" id="optBig"> Texto grande (125 %)</label>
+          <label><input type="checkbox" id="optSmall"> Pantalla pequeña (375 × 667)</label>
+          <label><input type="checkbox" id="optNoPhoto"> Sin foto (respaldo sólido)</label>
+          <label><input type="checkbox" id="optVoice"> Lugar para la nota de voz de Ale (aún sin grabar)</label>
+          <label><input type="checkbox" id="optFail"> Simular un error al guardar</label>
+        </fieldset>
+      </details>
+      <p class="fine"><b>Contenido:</b> Dinero V4.1, sin cambios. Todo es propuesta hasta que María y Alejandra lo aprueben.</p>
+      <p class="fine"><b>Fotos:</b> las de la app para la bahía de Lan Hạ, una por día. El día 7 usa la foto general de la bahía.</p>
+      <p class="fine"><b>Privacidad:</b> lo que escribas se queda en este navegador. No se envía ni se comparte nada.</p>
+    </aside>
+  </section>
+
+  <section id="allView" class="all" role="tabpanel" aria-labelledby="tabAll" hidden>
+    <div class="allhead">
+      <div class="chips" id="allChips" role="group" aria-label="Elegir día"></div>
+      <p>Cada pantalla del día, en orden y completa. Usa «Abrir» para probar o comentar desde ahí.</p>
+    </div>
+    <div class="strip" id="strip"></div>
+  </section>
+
+  <section id="revView" class="rev" role="tabpanel" aria-labelledby="tabRev" hidden>
+    <div class="revtext">
+      <div class="revcard">
+        <h3>Cómo vuelve la calidez</h3>
+        <ul>
+          <li><b>Un cuaderno, no un cristal.</b> El día se escribe en papel cálido, apoyado sobre la foto del lugar. El vidrio esmerilado y los botones negros desaparecen; el botón principal es el verde bosque de Elara.</li>
+          <li><b>El lugar sigue respirando.</b> La foto de cada día ocupa la mitad de arriba y cambia con la semana: muelle, niebla, balsas, cueva, laguna, pueblo, bahía.</li>
+          <li><b>El hilo del Atlas.</b> Siete puntos: azul donde ya caminó, a lápiz lo que viene. Muestra el progreso sin puntos, rachas ni premios.</li>
+          <li><b>Atlas vuelve como pestaña.</b> Hoy es la práctica del día; Atlas es el cuaderno de la semana: el lugar, el hilo y cada día con lo que se llevó.</li>
+          <li><b>Un lugar vivo, sin ruido.</b> En Hoy el agua se mueve apenas, la niebla pasa despacio y la foto respira. Se detiene si el teléfono pide menos movimiento.</li>
+          <li><b>Lo que se llevó, pegado en el cuaderno.</b> Solo lo que guardó tiene cinta. «Ayer» aparece solo si fue ayer; si no, dice el día.</li>
+          <li><b>Una voz humana con un lugar fijo.</b> Las respuestas de cada opción se leen en la voz cursiva de Elara. Ale da la bienvenida el día 1, y su nota de voz tiene sitio en «Una idea que ayuda» cuando esté grabada.</li>
+          <li><b>Terminar se siente bien, guarde o no.</b> El cierre del día es el momento verde bosque de la marca, el mismo con o sin guardar.</li>
+        </ul>
+      </div>
+      <div class="revcard">
+        <h3>Lo que no cambia</h3>
+        <ul>
+          <li>Un foco por día, una acción principal y un recuerdo discreto.</li>
+          <li>El contenido de V4.1 y las reglas de apertura de cada día: «Ayer viste» solo cuando fue ayer.</li>
+          <li>Las notas son privadas: el inicio muestra reglas, nunca sus frases, salvo que ella lo active.</li>
+          <li>Compartir en Círculos es siempre aparte: elige qué y confirma.</li>
+          <li>Sin Explorar ni otros destinos de contenido. La guía y el audio viven dentro del día.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="strip" id="revStrip"></div>
+    <div class="revtext">
+      <div class="revcard">
+        <h3>Propuestas de texto, aparte</h3>
+        <p class="muted">No cambian V4.1. Se ven en el prototipo con «Ver las propuestas de texto».</p>
+        <div class="tblwrap"><table class="tbl" id="propTable"></table></div>
+      </div>
+      <div class="revcard">
+        <h3>Pendiente de aprobación</h3>
+        <ol id="pendingList"></ol>
+      </div>
+    </div>
+  </section>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="ripple" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.006 0.085" numOctaves="2" seed="7" result="n">
+      <animate attributeName="baseFrequency" dur="18s" values="0.006 0.085;0.008 0.105;0.006 0.085" repeatCount="indefinite"/>
+    </feTurbulence>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<script src="data.js"></script>
+<script>
+(function () {
+  "use strict";
+  var W = window.ELARA_WEEK;
+  var appEl = document.getElementById("app");
+  if (!W) { appEl.innerHTML = '<p style="padding:24px">No se pudo cargar el contenido de la semana.</p>'; return; }
+  var DAYS = W.week, U = W.ui;
+  var KEY = "elara-dinero-lanha-v41b", CKEY = "elara-dinero-lanha-v41-comentarios";
+  var PLACE = "Bahía de Lan Hạ", COUNTRY = "Vietnam", WEEKNO = 1;
+  var MOMENT = { s1: 1, idea: 2, check: 2, s3: 3, take: 4, done: 4 };
+  var MNAME = { 1: "Empieza por ti", 2: "Una idea que ayuda", 3: "Hazlo tuyo", 4: "Te llevas" };
+  /* Interface lines that are proposals (not V4.1). The two wording changes are only shown with «Ver las propuestas». */
+  var PROP = {
+    unsaved: { approved: U.unsaved, proposed: "Hoy queda hecho, tal como lo dejaste. La explicación sigue aquí si quieres volver a ella." },
+    endNoSave: { approved: "Terminar sin guardar", proposed: "Terminar por hoy" }
+  };
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function stepsOf(day) { return ["s1", "idea"].concat(day.check ? ["check"] : [], ["s3", "take"]); }
+  function T(st, text, mark) { return st.marks && mark ? '<mark class="mk mk-' + (mark === "new" ? "new" : "chg") + '">' + esc(text) + "</mark>" : esc(text); }
+  function Pr(st, key) { var p = PROP[key]; return st.props ? '<ins class="prop">' + esc(p.proposed) + "</ins>" : esc(p.approved); }
+
+  var P = {
+    pin: '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/>',
+    person: '<circle cx="12" cy="8.5" r="3.6"/><path d="M5 20c1.1-3.6 3.8-5.5 7-5.5s5.9 1.9 7 5.5"/>',
+    lock: '<rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>',
+    arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    people: '<circle cx="9" cy="9" r="3.5"/><circle cx="16.5" cy="10" r="2.8"/><path d="M3 19.5c.7-3.4 3.1-5.2 6-5.2s5.3 1.8 6 5.2"/><path d="M15.2 14.6c.5-.1 1-.2 1.5-.2 2.3 0 4 1.4 4.6 4.1"/>',
+    atlas: '<path d="M4 6.5 9 4.5l6 2 5-2v13l-5 2-6-2-5 2Z"/><path d="M9 4.5v13M15 6.5v13"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/>',
+    x: '<path d="M6 6l12 12M18 6 6 18"/>',
+    back: '<path d="m15 5-7 7 7 7"/>',
+    chevD: '<path d="m6 9 6 6 6-6"/>',
+    chevR: '<path d="m9 6 6 6-6 6"/>',
+    check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+    play: '<path d="M8 5.5v13l11-6.5Z" fill="currentColor" stroke="none"/>'
+  };
+  function ico(name, size, sw) { return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (sw || 1.9) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + P[name] + "</svg>"; }
+
+  /* ---------- state ---------- */
+  function blankDay() { return { started: false, last: "s1", s1: null, otherOpen: false, other: "", check: null, s3: null, note: "", notePass: false, exOpen: false, rulesOpen: false, pick: null, take: null, sel: { rule: true, note: true }, failed: false, done: false, doneCal: null, saved: null }; }
+  function fresh() { var d = {}; DAYS.forEach(function (x) { d[x.n] = blankDay(); }); return { cal: 1, view: "home", day: 1, step: "s1", sheet: null, share: { rule: true, note: false }, shared: false, showMine: false, big: false, small: false, failSave: false, marks: false, props: false, voice: false, nophoto: false, d: d }; }
+  function load() { try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.d && s.d[7] && s.cal) { s.sheet = null; return s; } } catch (e) {} return null; }
+  function persist() { try { localStorage.setItem(KEY, JSON.stringify(Object.assign({}, S, { sheet: null, live: false }))); } catch (e) {} }
+  var S = load() || fresh();
+
+  /* Which day the home is about, following the day-opening rule: the next day opens the day after the previous one is done. */
+  function firstOpen(st) { for (var n = 1; n <= 7; n++) if (!st.d[n].done) return n; return 8; }
+  function homeState(st) {
+    var n = firstOpen(st);
+    if (n > 1 && st.d[n - 1].doneCal === st.cal) return { n: n - 1, kind: "doneToday" };
+    if (n === 8) return { n: 7, kind: "weekDone" };
+    return { n: n, kind: st.d[n].started ? "resume" : "before" };
+  }
+  function cameBackAfterGap(st, n) { return n > 1 && st.d[n - 1].done && st.d[n - 1].doneCal < st.cal - 1; }
+  function yesterdayAccurate(st, n) { return n > 1 && st.d[n - 1].doneCal === st.cal - 1; }
+  function keptText(st, sv) { return sv ? (sv.rule || (st.showMine && sv.note) || null) : null; }
+  function lastKept(st, before) {
+    for (var k = before - 1; k >= 1; k--) { var t = keptText(st, st.d[k].saved); if (t) return { k: k, text: t }; }
+    return null;
+  }
+
+  /* ---------- shared pieces ---------- */
+  function ruleOf(day, ds) { return day.n === 7 ? (ds.pick != null ? day.rules.list[ds.pick] : null) : day.rule; }
+  function selectable(day, ds) {
+    var items = [], r = ruleOf(day, ds), note = ds.notePass ? "" : (ds.note || "").trim();
+    if (r) items.push({ k: "rule", label: day.n === 7 ? "La regla que elegiste" : "La regla de hoy", text: r });
+    if (note) items.push({ k: "note", label: "Tu nota", text: note });
+    return items;
+  }
+  function img(day, cls) { return '<img class="' + (cls || "") + '" src="' + day.photo.src + '" alt="' + esc(day.photo.alt) + '" style="object-position:' + day.photo.pos + '">'; }
+  function tabs(active) {
+    return '<nav class="tabs" aria-label="Secciones">' +
+      '<button type="button" data-act="hoy"' + (active === "hoy" ? ' aria-current="page"' : "") + ">" + ico("sun", 26, 1.7) + "<span>Hoy</span></button>" +
+      '<button type="button" data-act="atlas"' + (active === "atlas" ? ' aria-current="page"' : "") + ">" + ico("atlas", 26, 1.7) + "<span>Atlas</span></button>" +
+      '<button type="button" data-act="circulos"' + (active === "circulos" ? ' aria-current="page"' : "") + ">" + ico("people", 26, 1.7) + "<span>Círculos</span></button></nav>";
+  }
+  function thread(st, current, total, asButton) {
+    var h = "";
+    for (var i = 1; i <= total; i++) {
+      var walked = total === 7 ? st.d[i].done : i < current;
+      var cls = walked ? "w" : i === current ? "now" : "a";
+      if (i > 1) h += '<i class="tl ' + (walked || i === current ? "w" : "a") + '"></i>';
+      h += '<i class="tn ' + cls + '"></i>';
+    }
+    return h;
+  }
+  function weekThread(st, n, label) {
+    return '<button type="button" class="thread" data-act="tusdias" aria-label="Tu semana en Lan Hạ: ' + esc(label) + '. Abrir Tus días">' + thread(st, n, 7) + '<span class="threadlab">' + esc(label) + "</span></button>";
+  }
+  function opts(st, k, list, sel, forceMark) {
+    return '<div class="opts">' + list.map(function (o, i) {
+      var on = sel === i, m = forceMark || o.m;
+      var extra = (on && k === "s3" && o.phrase) ? '<button type="button" class="link u" data-act="use-phrase" data-i="' + i + '"><span>Usar esta frase en mi nota</span></button>' : "";
+      return '<div class="optwrap' + (on ? " sel" : "") + '"><button type="button" class="opt" data-act="pick" data-k="' + k + '" data-i="' + i + '" aria-pressed="' + on + '"><span class="radio" aria-hidden="true"></span><span>' + T(st, o.t, m) + "</span></button>" +
+        (on ? '<div class="resp" role="status"><p class="voice">' + T(st, o.r, m) + "</p>" + extra + "</div>" : "") + "</div>";
+    }).join("") + "</div>";
+  }
+  function discl(k, label, open, inner) {
+    return '<div class="discl' + (open ? " open" : "") + '"><button type="button" class="discbtn" data-act="toggle" data-k="' + k + '" aria-expanded="' + open + '"><span>' + label + "</span>" + ico("chevD", 20) + "</button>" + (open ? '<div class="discbody">' + inner + "</div>" : "") + "</div>";
+  }
+  function field(st, k, ph, label) {
+    return '<textarea class="field"' + (st.live ? ' id="f-' + k + '"' : "") + ' data-field="' + k + '" aria-label="' + esc(label) + '" placeholder="' + esc(ph) + '">' + esc(st.d[st.day][k]) + "</textarea>";
+  }
+  function slip(label, text, opts2) {
+    opts2 = opts2 || {};
+    var inner = '<span class="label">' + esc(label) + '</span><span class="kept">«' + esc(text) + "»</span>" + (opts2.go ? '<span class="go">Tus días' + ico("chevR", 16, 2) + "</span>" : "");
+    return opts2.go ? '<button type="button" class="slip' + (opts2.cls ? " " + opts2.cls : "") + '" data-act="tusdias" aria-label="' + esc(label) + ": " + esc(text) + '. Abrir Tus días">' + inner + "</button>"
+      : '<div class="slip' + (opts2.cls ? " " + opts2.cls : "") + '">' + inner + "</div>";
+  }
+  function daysRow() { return '<button type="button" class="daysrow" data-act="tusdias"><span>Tus días</span>' + ico("chevR", 18, 2) + "</button>"; }
+
+  /* ---------- Atlas home ---------- */
+  function homeHTML(st) {
+    var h = homeState(st), n = h.n, day = DAYS[n - 1], ds = st.d[n], body = "", eyebrowTxt = "Dinero y estabilidad · Día " + n + " de 7";
+    if (h.kind === "before" || h.kind === "resume") {
+      var gap = cameBackAfterGap(st, n);
+      var prev = lastKept(st, n);
+      var reminder = prev ? slip((prev.k === n - 1 && yesterdayAccurate(st, n)) ? "Ayer te llevaste" : "Te llevaste el día " + prev.k, prev.text, { go: true }) : (n > 1 ? daysRow() : "");
+      var welcome = (n === 1 && !ds.started) ? '<button type="button" class="welcome" data-act="sheet" data-k="welcome"><span class="playdisc">' + ico("play", 16) + '</span><span class="t"><span class="label">Antes de empezar</span><b>Una bienvenida de Ale</b></span></button>' : "";
+      var nextStep = h.kind === "resume" ? '<p class="meta">Tu próximo paso: ' + esc(MNAME[MOMENT[ds.last || "s1"]]) + "</p>" : '<p class="meta">' + ico("lock", 14, 2) + "<span>Unos 3 a 5 minutos · respuestas privadas</span></p>";
+      body = (gap ? '<p class="returnnote voice">Tu día ' + n + " te espera. No se pierde nada.</p>" : "") +
+        weekThread(st, n, "Día " + n + " de 7") +
+        '<p class="eyebrow">Dinero y estabilidad</p>' +
+        '<h1 class="title" tabindex="-1" data-focus>' + T(st, day.title, day.m.title) + "</h1>" +
+        '<p class="purpose"><span class="label">Para qué es hoy</span>' + esc(day.purpose) + "</p>" + nextStep +
+        '<button type="button" class="btn mt14" data-act="start">' + (h.kind === "resume" ? "Seguir con el día " : "Empezar el día ") + n + ico("arrow", 20, 2) + "</button>" +
+        welcome + reminder;
+    } else if (h.kind === "doneToday") {
+      var sv = ds.saved, today = keptText(st, sv);
+      var lead = today ? slip("Hoy te llevas", today, { cls: "today" }) :
+        (sv && sv.note ? '<p class="voice mt14">Tu nota quedó en Tus días.</p>' : '<p class="voice mt14">Hoy queda hecho, tal como lo dejaste.</p>');
+      var nextLine = day.next ? '<p class="next mt14">Mañana: ' + T(st, day.next, day.m.next) + "</p>" : '<p class="voice mt14">' + T(st, day.tryLine, day.m.tryLine) + "</p>";
+      body = weekThread(st, n + 1 > 7 ? 8 : n + 1, n === 7 ? "Semana completa" : "Día " + n + " de 7") +
+        '<p class="eyebrow done"><span class="tick">' + ico("check", 12, 3) + "</span><span>Día " + n + " hecho" + (n === 7 ? " · Semana " + WEEKNO + " completa" : "") + "</span></p>" +
+        '<h1 class="title" tabindex="-1" data-focus>' + T(st, day.title, day.m.title) + "</h1>" + lead + nextLine +
+        (n === 7 ? '<button type="button" class="btn mt14" data-act="tusdias">Ver tu semana</button>' : "") +
+        '<div class="links mt10">' +
+        '<button type="button" class="link u" data-act="reread"><span>Releer el día ' + n + "</span></button>" +
+        (sv ? '<button type="button" class="link u" data-act="sheet" data-k="share"><span>Compartir en Círculos</span></button>' : '<button type="button" class="link u" data-act="choose-day" data-n="' + n + '"><span>Elegir qué guardar</span></button>') +
+        "</div>" + (n === 7 ? "" : daysRow());
+    } else { /* weekDone: the morning after day 7 */
+      var keptList = DAYS.map(function (x) { return keptText(st, st.d[x.n].saved); }).filter(Boolean);
+      body = weekThread(st, 8, "Semana completa") +
+        '<p class="eyebrow">Semana ' + WEEKNO + " · Dinero y estabilidad</p>" +
+        '<h1 class="title" tabindex="-1" data-focus>Lo que te llevaste esta semana</h1>' +
+        (keptList.length ? keptList.slice(-3).map(function (t, i) { return slip(i === 0 ? "De tu semana" : "", t, {}); }).join("").replace(/<span class="label"><\/span>/g, "") :
+          '<p class="voice mt14">Hiciste los siete días. Tus días guarda cada uno, por si quieres volver.</p>') +
+        '<button type="button" class="btn mt14" data-act="tusdias">Ver tus días</button>';
+      eyebrowTxt = "";
+    }
+    var heroAlt = '<img class="hero" src="' + day.photo.src + '" alt="" aria-hidden="true" style="object-position:' + day.photo.pos + '">';
+    return '<div class="home">' + '<div class="heroFallback"></div>' +
+      '<div class="heroBox" style="--water:' + day.photo.water + '"><div class="heroInner">' + img(day, "hero") + heroAlt.replace('class="hero"', 'class="hero water"') + '</div><div class="mist" aria-hidden="true"></div></div>' +
+      '<div class="scroll"><div class="col"><div class="spacer"><div class="hdr"><button type="button" class="disc" data-act="sheet" data-k="help" aria-label="Ayuda">?</button><button type="button" class="disc" data-act="sheet" data-k="profile" aria-label="Perfil y ajustes">' + ico("person", 22, 1.8) + "</button></div>" +
+      '<p class="place">' + ico("pin", 15, 2) + esc(PLACE + ", " + COUNTRY) + " · Semana " + WEEKNO + "</p></div>" +
+      '<section class="page2" aria-label="Tu día">' + body + "</section></div></div>" + tabs("hoy") + "</div>";
+  }
+
+  /* ---------- the day's practice ---------- */
+  function eyebrow(n, txt) { return '<p class="eyebrow">Día ' + n + " · " + txt + "</p>"; }
+  var BODY = {
+    s1: function (st, day, ds) {
+      var showYesterday = day.yesterday && st.day === firstOpen(st) && yesterdayAccurate(st, day.n);
+      return eyebrow(day.n, "Empieza por ti") +
+        '<h1 class="title" style="margin-top:-8px !important" tabindex="-1" data-focus>' + T(st, day.title, day.m.title) + "</h1>" +
+        (showYesterday ? '<div class="yday"><p class="label">Ayer viste</p><p class="voice">«' + esc(day.yesterday) + "»</p></div>" : "") +
+        '<p class="q">' + esc(day.s1.q) + "</p>" + opts(st, "s1", day.s1.opts, ds.s1) +
+        '<div class="passwrap"><button type="button" class="link" data-act="pass" aria-pressed="' + (ds.s1 === "pass") + '">Prefiero pasar</button>' +
+        (ds.s1 === "pass" ? '<p class="voice" role="status">' + T(st, day.s1.pass + ".", day.m.pass) + "</p>" : "") + "</div>";
+    },
+    idea: function (st, day, ds) {
+      var ale = st.voice ? '<button type="button" class="ale" data-act="sheet" data-k="ale"><span class="playdisc">' + ico("play", 16) + '</span><span class="t"><b>Escuchar a Ale</b><span>La misma idea, en su voz</span></span></button>' : "";
+      return eyebrow(day.n, "Una idea que ayuda") +
+        '<h2 class="h2 sr" tabindex="-1" data-focus>Una idea que ayuda</h2>' + ale +
+        '<p class="read">' + T(st, day.idea, day.m.idea) + "</p>" +
+        '<div class="rulebox"><p class="label">La regla de hoy</p><p class="ruletext">' + esc(day.rule) + "</p></div>" +
+        discl("otherOpen", "Tengo otra pregunta", ds.otherOpen, field(st, "other", "Escribe tu pregunta…", "Tu pregunta") + '<p class="voice">' + esc(U.otherQ) + "</p>");
+    },
+    check: function (st, day, ds) {
+      return eyebrow(day.n, "Comprueba la idea · opcional") +
+        '<h2 class="h2" style="margin-top:-8px" tabindex="-1" data-focus>' + T(st, day.check.q, "new") + "</h2>" +
+        '<p class="hint" style="margin-top:-6px">' + esc(U.checkHint) + "</p>" + opts(st, "check", day.check.opts, ds.check, "new");
+    },
+    s3: function (st, day, ds) {
+      var ph = (day.noteAlt && ds.s3 === day.noteAlt.opt) ? day.noteAlt.text : day.note;
+      var rules = day.rules ? discl("rulesOpen", "Ver las reglas", ds.rulesOpen,
+        '<p class="hint">' + esc(day.rules.intro) + '</p><div class="opts">' + day.rules.list.map(function (r, i) {
+          var on = ds.pick === i;
+          return '<div class="optwrap' + (on ? " sel" : "") + '"><button type="button" class="opt" data-act="rule-pick" data-i="' + i + '" aria-pressed="' + on + '"><span class="radio" aria-hidden="true"></span><span>' + esc(r) + "</span></button></div>";
+        }).join("") + "</div>") : "";
+      var ex = day.example ? discl("exOpen", "Ver un ejemplo · opcional", ds.exOpen, '<p class="read sm">' + T(st, day.example, day.m.example) + "</p>") : "";
+      var note = '<div class="notebox"><p class="label">' + T(st, "Nota opcional", day.m.note) + "</p>" + (ds.notePass ?
+        '<p class="voice">' + esc(U.notePass) + '.</p><button type="button" class="link u" data-act="toggle" data-k="notePass"><span>Escribir una nota</span></button>' :
+        field(st, "note", ph, "Nota opcional") + '<button type="button" class="link" data-act="toggle" data-k="notePass">Prefiero pasar</button>') + "</div>";
+      return eyebrow(day.n, "Hazlo tuyo") + '<h2 class="h2" style="margin-top:-8px" tabindex="-1" data-focus>' + T(st, day.s3.q, day.m.s3q) + "</h2>" +
+        opts(st, "s3", day.s3.opts, ds.s3) + rules + ex + note;
+    },
+    take: function (st, day, ds) {
+      var head = eyebrow(day.n, "Te llevas");
+      if (ds.take === "choose" || ds.take === "error") {
+        var items = selectable(day, ds);
+        var list = items.length ? '<div class="opts">' + items.map(function (it) {
+          var on = !!ds.sel[it.k];
+          return '<div class="optwrap' + (on ? " sel" : "") + '"><button type="button" class="opt" data-act="sel" data-k="' + it.k + '" role="checkbox" aria-checked="' + on + '"><span class="box" aria-hidden="true">' + (on ? ico("check", 14, 3) : "") + '</span><span><span class="label" style="display:block">' + esc(it.label) + '</span><span class="kept" style="font-size:calc(17*var(--u))">«' + esc(it.text) + "»</span></span></button></div>";
+        }).join("") + "</div>" : '<p class="hint">Todavía no hay nada para elegir.</p><button type="button" class="link u" data-act="goto" data-k="s3"><span>Volver a Hazlo tuyo</span></button>';
+        return head + '<h2 class="h2" style="margin-top:-8px" tabindex="-1" data-focus>Elegir qué guardar</h2>' + list + (ds.take === "error" ? '<p class="alert" role="alert">No se pudo guardar.</p>' : "");
+      }
+      return head + '<h2 class="h2" style="margin-top:-8px" tabindex="-1" data-focus>' + T(st, day.take, day.m.take) + "</h2>";
+    }
+  };
+  function bar(inner, dark) { return '<div class="actions">' + inner + "</div>"; }
+  function actionsHTML(st, day, ds) {
+    var list = stepsOf(day), i = list.indexOf(st.step);
+    if (st.step === "take") {
+      var row = '<div class="row2"><button type="button" class="link" data-act="' + (ds.take ? "take-back" : "back") + '">' + ico("back", 18) + '<span>Atrás</span></button><button type="button" class="link" data-act="nosave">' + Pr(st, "endNoSave") + "</button></div>";
+      if (ds.take === "choose" || ds.take === "error") {
+        var count = selectable(day, ds).filter(function (it) { return ds.sel[it.k]; }).length;
+        return bar('<button type="button" class="btn" data-act="save"' + (count ? "" : " disabled") + ">" + (ds.take === "error" ? "Reintentar" : "Guardar selección") + "</button>" + row);
+      }
+      return bar('<button type="button" class="btn" data-act="choose">Elegir qué guardar</button>' + row);
+    }
+    var label = (st.step === "check" && ds.check == null) ? "Seguir sin responder" : "Seguir";
+    return bar('<div class="row2b">' + (i > 0 ? '<button type="button" class="btn2" data-act="back">Atrás</button>' : "") + '<button type="button" class="btn" data-act="next">' + label + ico("arrow", 20, 2) + "</button></div>");
+  }
+  function band(st, day, m) {
+    return '<div class="band">' + img(day) + '<div class="bandbar"><button type="button" class="disc" data-act="close" aria-label="Salir al inicio">' + ico("x", 20, 2.2) + "</button>" +
+      '<div class="moments" role="img" aria-label="Momento ' + m + " de 4: " + MNAME[m] + '">' + thread(st, m, 4) + "<span>" + m + " de 4</span></div></div></div>";
+  }
+  function sessionHTML(st) {
+    var day = DAYS[st.day - 1], ds = st.d[st.day];
+    if (st.step === "take" && (ds.take === "saved" || ds.take === "unsaved")) return doneHTML(st, day, ds);
+    var m = MOMENT[st.step];
+    return '<div class="sess"><div class="scroll">' + band(st, day, m) + '<section class="sheet">' + BODY[st.step](st, day, ds) + "</section></div>" + actionsHTML(st, day, ds) + "</div>";
+  }
+  /* Completion: the same forest moment whether or not she saved. */
+  function doneHTML(st, day, ds) {
+    var sv = ds.saved, inner;
+    var next = day.next ? '<p class="next">Mañana: ' + T(st, day.next, day.m.next) + "</p>" : "";
+    if (ds.take === "saved" && sv) {
+      inner = '<h2 class="h2" tabindex="-1" data-focus>' + esc(U.savedOk) + "</h2>" +
+        (sv.rule ? slip(day.n === 7 ? "La regla que elegiste" : "La regla de hoy", sv.rule, {}) : "") +
+        (sv.note ? slip("Tu nota", sv.note, {}) : "") +
+        '<p class="voice">' + T(st, day.tryLine, day.m.tryLine) + "</p>" + next;
+    } else {
+      inner = '<h2 class="h2" tabindex="-1" data-focus>' + Pr(st, "unsaved") + "</h2>" +
+        '<div class="links"><button type="button" class="link u" data-act="goto" data-k="idea"><span>Volver a la explicación</span></button><button type="button" class="link u" data-act="choose"><span>Elegir qué guardar</span></button></div>' +
+        '<p class="voice">' + T(st, day.tryLine, day.m.tryLine) + "</p>" + next;
+    }
+    return '<div class="dayend"><div class="scroll"><div class="band">' + img(day) + '</div><div class="inner">' +
+      '<p class="eyebrow"><span class="tick">' + ico("check", 12, 3) + "</span><span>Día " + day.n + " hecho" + (day.n === 7 ? " · Semana " + WEEKNO + " completa" : "") + "</span></p>" + inner + "</div></div>" +
+      '<div class="actions"><button type="button" class="btn ember" data-act="home">Volver a Hoy</button></div></div>';
+  }
+
+  /* ---------- Tus días, Círculos ---------- */
+  function tusDiasHTML(st) {
+    var open = firstOpen(st), opened = homeState(st).kind === "doneToday" ? open - 1 : open;
+    var rows = DAYS.map(function (day) {
+      var n = day.n, ds = st.d[n], body, cls = "drow";
+      if (!ds.done && n > opened) { cls += " future"; body = '<p class="label">Día ' + n + '</p><p class="dt">Más adelante</p>'; }
+      else {
+        body = '<p class="label">Día ' + n + '</p><p class="dt">' + esc(day.title) + "</p>";
+        if (ds.done && ds.saved) {
+          if (ds.saved.rule) body += '<p class="kept">«' + esc(ds.saved.rule) + "»</p>";
+          if (ds.saved.note) body += '<p class="label" style="margin-top:4px">Tu nota</p><p class="kept">«' + esc(ds.saved.note) + "»</p>";
+          body += '<div class="links"><button type="button" class="link u" data-act="open-day" data-n="' + n + '"><span>Releer</span></button></div>';
+        } else if (ds.done) {
+          body += '<span class="tag">Hecho</span><div class="links"><button type="button" class="link u" data-act="open-day" data-n="' + n + '"><span>Releer</span></button><button type="button" class="link u" data-act="choose-day" data-n="' + n + '"><span>Elegir qué guardar</span></button></div>';
+        } else {
+          body += '<span class="tag today">Hoy</span><div class="links"><button type="button" class="link u" data-act="open-day" data-n="' + n + '"><span>' + (ds.started ? "Seguir" : "Empezar") + "</span></button></div>";
+        }
+      }
+      return '<li class="' + cls + '"><img class="thumb" src="' + day.photo.src + '" alt="" style="object-position:' + day.photo.pos + '"><div class="dmain">' + body + "</div></li>";
+    }).join("");
+    var here = DAYS[Math.min(opened, 7) - 1], walkedLabel = open === 8 ? "Semana completa" : "Día " + Math.min(opened, 7) + " de 7";
+    return '<div class="plain"><div class="scroll"><div class="pcol">' +
+      '<p class="eyebrow">Semana ' + WEEKNO + ' · Dinero y estabilidad</p><h1 class="title" style="margin-top:0 !important" tabindex="-1" data-focus>Atlas</h1>' +
+      '<figure class="mounted"><img src="' + here.photo.src + '" alt="' + esc(here.photo.alt) + '" style="object-position:' + here.photo.pos + '"><figcaption>' + esc(PLACE + ", " + COUNTRY) + "</figcaption></figure>" +
+      '<div class="threadrow" role="img" aria-label="Tu semana: ' + esc(walkedLabel) + '">' + thread(st, open, 7) + '<span class="threadlab">' + esc(walkedLabel) + "</span></div>" +
+      '<h2 class="h2" style="margin-top:6px">Tus días</h2>' +
+      '<ol class="dlist">' + rows + "</ol></div></div>" + tabs("atlas") + "</div>";
+  }
+  function circulosHTML(st) {
+    return '<div class="plain"><div class="scroll"><div class="pcol">' +
+      '<h1 class="title" style="margin-top:0 !important" tabindex="-1" data-focus>Círculos</h1>' +
+      '<p class="purpose">Círculos no forma parte de este prototipo.</p><p class="hint">Desde el inicio, «Compartir en Círculos» te muestra qué se compartiría antes de enviar nada.</p></div></div>' + tabs("circulos") + "</div>";
+  }
+
+  /* ---------- sheets ---------- */
+  function sheetHTML(st) {
+    if (!st.sheet) return "";
+    var inner = "";
+    if (st.sheet === "help") {
+      inner = '<h2 class="h2" id="sh-t" tabindex="-1" data-focus>Ayuda</h2>' +
+        '<p class="purpose" style="margin:0">Cada día tiene cuatro momentos: Empieza por ti, Una idea que ayuda, Hazlo tuyo y Te llevas.</p>' +
+        '<p class="purpose" style="margin:0">Puedes pasar cualquier pregunta y terminar sin guardar nada. Lo que guardas queda en Tus días.</p>';
+    } else if (st.sheet === "profile") {
+      inner = '<h2 class="h2" id="sh-t" tabindex="-1" data-focus>Perfil y ajustes</h2>' +
+        '<button type="button" class="switch" role="switch" aria-checked="' + !!st.showMine + '" data-act="mine"><span><span class="q" style="display:block;font-size:calc(16*var(--u))">Mostrar mis frases en el inicio</span><span class="hint">Si está apagado, el inicio solo muestra reglas, nunca tus notas.</span></span><span class="tr" aria-hidden="true"></span></button>';
+    } else if (st.sheet === "welcome") {
+      inner = '<p class="label">Antes de empezar</p><h2 class="h2" id="sh-t" tabindex="-1" data-focus>Una bienvenida de Ale</h2><div class="video">El video de bienvenida de Ale ya está en la app. En este prototipo no se reproduce.</div>';
+    } else if (st.sheet === "ale") {
+      inner = '<h2 class="h2" id="sh-t" tabindex="-1" data-focus>Escuchar a Ale</h2><p class="purpose" style="margin:0">Aquí iría la nota de voz de Ale con la misma enseñanza. Todavía no está grabada: en la app, este botón no aparece hasta que exista el audio.</p>';
+    } else if (st.sheet === "share") {
+      var hs = homeState(st), sv = st.d[hs.n].saved || {}, items = [];
+      if (sv.rule) items.push({ k: "rule", label: "La regla", text: sv.rule });
+      if (sv.note) items.push({ k: "note", label: "Tu nota", text: sv.note });
+      inner = '<h2 class="h2" id="sh-t" tabindex="-1" data-focus>Compartir en Círculos</h2>' +
+        (st.shared ? '<p class="voice" role="status">En este prototipo no se comparte nada.</p>' :
+          '<p class="hint">Elige qué compartir. Solo se comparte lo que marques.</p><div class="opts">' + items.map(function (it) {
+            var on = !!st.share[it.k];
+            return '<div class="optwrap' + (on ? " sel" : "") + '"><button type="button" class="opt" data-act="share-sel" data-k="' + it.k + '" role="checkbox" aria-checked="' + on + '"><span class="box" aria-hidden="true">' + (on ? ico("check", 14, 3) : "") + '</span><span><span class="label" style="display:block">' + it.label + '</span><span class="kept" style="font-size:calc(17*var(--u))">«' + esc(it.text) + "»</span></span></button></div>";
+          }).join("") + '</div><p class="hint">Se compartiría en: Círculos.</p><button type="button" class="btn" data-act="share-go"' + ((st.share.rule && sv.rule) || (st.share.note && sv.note) ? "" : " disabled") + ">Compartir</button>");
+    }
+    return '<button type="button" class="ovl" data-act="close-sheet" aria-label="Cerrar"></button><div class="bsheet" role="dialog" aria-modal="true" aria-labelledby="sh-t"><span class="grab" aria-hidden="true"></span>' + inner +
+      '<button type="button" class="btn2" style="width:100%" data-act="close-sheet">Cerrar</button></div>';
+  }
+
+  function screenHTML(st) {
+    var v = st.view === "session" ? sessionHTML(st) : st.view === "tusdias" ? tusDiasHTML(st) : st.view === "circulos" ? circulosHTML(st) : homeHTML(st);
+    return v + sheetHTML(st);
+  }
+  function appClass(st, extra) { return "app" + (st.big ? " big" : "") + (st.small ? " small" : "") + (st.nophoto ? " nophoto" : "") + (extra || ""); }
+  function screenKey(st) { return [st.view, st.day, st.step, st.view === "session" ? st.d[st.day].take : homeState(st).kind, st.sheet || "", st.cal].join("|"); }
+  function describe(st) {
+    if (st.sheet) return { help: "Ayuda", profile: "Perfil y ajustes", share: "Compartir en Círculos", welcome: "Una bienvenida de Ale", ale: "Escuchar a Ale" }[st.sheet];
+    if (st.view === "tusdias") return "Atlas · Tus días";
+    if (st.view === "circulos") return "Círculos";
+    if (st.view === "session") {
+      var m = MOMENT[st.step], t = st.d[st.day].take;
+      if (st.step === "take" && (t === "saved" || t === "unsaved")) return "Día " + st.day + " · cierre del día" + (t === "saved" ? ", con algo guardado" : ", sin guardar");
+      var extra = st.step === "check" ? " (comprobación opcional)" : st.step === "take" && t ? " · " + { choose: "elegir qué guardar", error: "error al guardar" }[t] : "";
+      return "Día " + st.day + " · " + m + " de 4 · " + MNAME[m] + extra;
+    }
+    var h = homeState(st);
+    return h.kind === "weekDone" ? "Hoy · semana completa" : "Hoy · día " + h.n + " · " + { before: cameBackAfterGap(st, h.n) ? "vuelve después de unos días" : "antes de empezar", resume: "a medias", doneToday: st.d[h.n].saved ? "hecho, con algo guardado" : "hecho, sin guardar" }[h.kind];
+  }
+  function rankOf(st) {
+    if (st.view === "session") { var r = { s1: 1, idea: 2, check: 3, s3: 4, take: 5 }[st.step]; return st.day * 100 + r * 10 + ({ choose: 1, error: 2, saved: 3, unsaved: 4 }[st.d[st.day].take] || 0); }
+    var h = homeState(st); return h.n * 100 + (h.kind === "doneToday" || h.kind === "weekDone" ? 90 : 0) + (st.sheet ? 5 : 0) + (st.view === "tusdias" ? 900 : st.view === "circulos" ? 950 : 0);
+  }
+
+  /* ---------- live prototype ---------- */
+  var lastKey = null, wantFocus = false;
+  function render() {
+    S.live = true;
+    var key = screenKey(S), sc = appEl.querySelector(".scroll"), top = sc ? sc.scrollTop : 0;
+    appEl.className = appClass(S);
+    document.getElementById("device").classList.toggle("small", !!S.small);
+    appEl.innerHTML = screenHTML(S);
+    var nsc = appEl.querySelector(".scroll");
+    if (nsc) nsc.scrollTop = key === lastKey ? top : 0;
+    if (wantFocus && key !== lastKey) { var f = appEl.querySelector(S.sheet ? ".bsheet [data-focus]" : "[data-focus]"); if (f) f.focus({ preventScroll: true }); }
+    wantFocus = false; lastKey = key;
+    syncPanel(); persist();
+  }
+  function go(view) { S.view = view; S.sheet = null; }
+  function openSession(n, step) { S.day = n; S.step = step; S.view = "session"; S.sheet = null; S.d[n].started = true; }
+  function act(a, el) {
+    var i = el.dataset.i != null ? +el.dataset.i : null, k = el.dataset.k, n = el.dataset.n ? +el.dataset.n : null;
+    var day = DAYS[S.day - 1], ds = S.d[S.day], list = stepsOf(day);
+    switch (a) {
+      case "start": { var h = homeState(S), t = S.d[h.n]; openSession(h.n, t.done ? "s1" : (t.last || "s1")); break; }
+      case "reread": openSession(homeState(S).n, "s1"); break;
+      case "open-day": { var d2 = S.d[n]; openSession(n, d2.done ? "s1" : (d2.last || "s1")); break; }
+      case "choose-day": { openSession(n, "take"); var dd = S.d[n]; dd.take = "choose"; dd.sel = { rule: true, note: true }; dd.failed = false; break; }
+      case "close": ds.last = S.step; go("home"); break;
+      case "home": case "hoy": go("home"); break;
+      case "tusdias": case "atlas": go("tusdias"); break;
+      case "circulos": go("circulos"); break;
+      case "pick": ds[k] = i; break;
+      case "pass": ds.s1 = ds.s1 === "pass" ? null : "pass"; break;
+      case "toggle": ds[k] = !ds[k]; break;
+      case "rule-pick": ds.pick = ds.pick === i ? null : i; break;
+      case "use-phrase": ds.note = day.s3.opts[i].phrase; ds.notePass = false; break;
+      case "next": S.step = list[Math.min(list.indexOf(S.step) + 1, list.length - 1)]; ds.last = S.step; break;
+      case "back": S.step = list[Math.max(list.indexOf(S.step) - 1, 0)]; ds.last = S.step; break;
+      case "goto": S.step = k; ds.take = ds.done ? (ds.saved ? "saved" : "unsaved") : null; if (k === "idea" || k === "s3") ds.take = ds.done ? ds.take : null; ds.last = S.step; break;
+      case "choose": S.step = "take"; ds.take = "choose"; ds.sel = { rule: true, note: true }; ds.failed = false; break;
+      case "take-back": ds.take = ds.done ? (ds.saved ? "saved" : "unsaved") : null; break;
+      case "sel": ds.sel[k] = !ds.sel[k]; break;
+      case "save": {
+        var chosen = selectable(day, ds).filter(function (it) { return ds.sel[it.k]; });
+        if (!chosen.length) break;
+        if (S.failSave && !ds.failed) { ds.failed = true; ds.take = "error"; break; }
+        var sv = { rule: null, note: null };
+        chosen.forEach(function (it) { sv[it.k] = it.text; });
+        ds.saved = sv; ds.take = "saved"; ds.done = true; if (ds.doneCal == null) ds.doneCal = S.cal; ds.failed = false; ds.last = "take"; break;
+      }
+      case "nosave": ds.take = ds.saved ? "saved" : "unsaved"; ds.done = true; if (ds.doneCal == null) ds.doneCal = S.cal; ds.last = "take"; break;
+      case "sheet": S.sheet = k; if (k === "share") { S.share = { rule: true, note: false }; S.shared = false; } break;
+      case "close-sheet": S.sheet = null; break;
+      case "mine": S.showMine = !S.showMine; break;
+      case "share-sel": S.share[k] = !S.share[k]; break;
+      case "share-go": S.shared = true; break;
+    }
+    wantFocus = true; render();
+  }
+  appEl.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-act]");
+    if (!b || b.disabled || !appEl.contains(b)) return;
+    if (b.dataset.act === "goto" && b.dataset.k === "idea") { S.step = "idea"; wantFocus = true; render(); return; }
+    act(b.dataset.act, b);
+  });
+  appEl.addEventListener("input", function (e) { var t = e.target; if (t.dataset && t.dataset.field) { S.d[S.day][t.dataset.field] = t.value; persist(); } });
+  appEl.addEventListener("keydown", function (e) { if (e.key === "Escape" && S.sheet) { S.sheet = null; wantFocus = true; render(); } });
+  appEl.addEventListener("error", function (e) { if (e.target && e.target.tagName === "IMG") e.target.classList.add("broken"); }, true);
+
+  /* ---------- comments for María ---------- */
+  var C = (function () { try { var c = JSON.parse(localStorage.getItem(CKEY)); if (c && c.screens) return c; } catch (e) {} return { screens: {}, decide: [] }; })();
+  function persistC() { try { localStorage.setItem(CKEY, JSON.stringify(C)); } catch (e) {} }
+  var cmt = document.getElementById("cmt"), curId = null;
+  function screenId(st) { return describe(st); }
+  function updateCount() {
+    var n = Object.keys(C.screens).filter(function (k) { return (C.screens[k].text || "").trim(); }).length;
+    var d = (C.decide || []).filter(function (x) { return (x || "").trim(); }).length;
+    document.getElementById("cCount").textContent = n || d ? n + (n === 1 ? " pantalla comentada" : " pantallas comentadas") + (d ? " · " + d + (d === 1 ? " decisión" : " decisiones") : "") : "Todavía sin comentarios";
+  }
+  cmt.addEventListener("input", function () {
+    if (!curId) return;
+    var t = cmt.value;
+    if (t.trim()) C.screens[curId] = { label: curId, rank: rankOf(S), text: t }; else delete C.screens[curId];
+    persistC(); updateCount();
+  });
+  function compile() {
+    var lines = ["Comentarios sobre «Dinero en Lan Hạ» (Dinero V4.1)", ""];
+    var items = Object.keys(C.screens).map(function (k) { return C.screens[k]; }).filter(function (x) { return (x.text || "").trim(); }).sort(function (a, b) { return a.rank - b.rank; });
+    items.forEach(function (x) { lines.push("■ " + x.label); lines.push(x.text.trim()); lines.push(""); });
+    var dec = W.decide.map(function (q, i) { return { q: q, a: ((C.decide || [])[i] || "").trim() }; }).filter(function (x) { return x.a; });
+    if (dec.length) { lines.push("Decisiones pendientes"); dec.forEach(function (x) { lines.push("■ " + x.q); lines.push(x.a); lines.push(""); }); }
+    if (!items.length && !dec.length) lines.push("(Todavía sin comentarios.)");
+    return lines.join("\n");
+  }
+  var copyBtn = document.getElementById("copyAll");
+  copyBtn.addEventListener("click", function () {
+    var text = compile(), fb = document.getElementById("copyFallback"), ta = document.getElementById("copyText");
+    function fallback() { ta.value = text; fb.hidden = false; ta.focus(); ta.select(); }
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) { fallback(); return; }
+      navigator.clipboard.writeText(text).then(function () {
+        fb.hidden = true; copyBtn.textContent = "Copiado. Pégalo en un mensaje para el equipo.";
+        setTimeout(function () { copyBtn.textContent = "Copiar todos mis comentarios"; }, 3500);
+      }, fallback);
+    } catch (e) { fallback(); }
+  });
+  (function buildPanelLists() {
+    document.getElementById("decideList").innerHTML = W.decide.map(function (q, i) {
+      return '<li><span>' + esc(q) + '</span><label class="sr" for="dec-' + i + '">Tu respuesta</label><textarea class="ctext" id="dec-' + i + '" data-dec="' + i + '" rows="2" placeholder="Tu respuesta">' + esc((C.decide || [])[i] || "") + "</textarea></li>";
+    }).join("");
+    document.getElementById("decideList").addEventListener("input", function (e) {
+      var i = e.target.dataset.dec; if (i == null) return; C.decide = C.decide || []; C.decide[+i] = e.target.value; persistC(); updateCount();
+    });
+    document.getElementById("lookText").textContent = W.look;
+    document.getElementById("changesList").innerHTML = W.changes.map(function (c) { return "<li><b>" + esc(c.t) + ".</b> " + esc(c.d) + "</li>"; }).join("");
+  })();
+
+  /* ---------- review panel ---------- */
+  function syncPanel() {
+    document.getElementById("dayChips").innerHTML = DAYS.map(function (day) {
+      return '<button type="button" class="chip" data-start="' + day.n + '" aria-pressed="' + (homeState(S).n === day.n && S.view === "home") + '" aria-label="Empezar en el día ' + day.n + ', con los días anteriores hechos">' + day.n + "</button>";
+    }).join("");
+    var id = screenId(S);
+    document.getElementById("nowLabel").innerHTML = "<b>Pantalla:</b> " + esc(id);
+    if (id !== curId) { curId = id; cmt.value = (C.screens[id] && C.screens[id].text) || ""; }
+    updateCount();
+    [["optBig", "big"], ["optSmall", "small"], ["optFail", "failSave"], ["optMarks", "marks"], ["optProps", "props"], ["optVoice", "voice"], ["optNoPhoto", "nophoto"]].forEach(function (p) { document.getElementById(p[0]).checked = !!S[p[1]]; });
+    document.getElementById("markLegend").hidden = !S.marks;
+    document.getElementById("propLegend").hidden = !S.props;
+  }
+  /* Start on day N as if days 1..N-1 were done on consecutive days, each with its rule saved. */
+  function historyUpTo(st, n) {
+    DAYS.forEach(function (x) { st.d[x.n] = blankDay(); });
+    for (var k = 1; k < n; k++) { var dk = st.d[k]; dk.done = true; dk.started = true; dk.doneCal = k; dk.take = "saved"; dk.saved = { rule: k === 7 ? DAYS[6].rules.list[0] : DAYS[k - 1].rule, note: null }; if (k === 7) dk.pick = 0; }
+    st.cal = n; st.view = "home"; st.sheet = null; st.day = n; st.step = "s1";
+  }
+  document.getElementById("dayChips").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-start]"); if (!b) return; historyUpTo(S, +b.dataset.start); render();
+  });
+  document.getElementById("nextDay").addEventListener("click", function () { S.cal += 1; go("home"); render(); });
+  document.getElementById("gapDays").addEventListener("click", function () { S.cal += 3; go("home"); render(); });
+  var resetArmed = null, resetBtn = document.getElementById("reset");
+  resetBtn.addEventListener("click", function () {
+    if (!resetArmed) { resetBtn.textContent = "Toca otra vez para borrar las respuestas"; resetArmed = setTimeout(function () { resetArmed = null; resetBtn.textContent = "Reiniciar la semana"; }, 3500); return; }
+    clearTimeout(resetArmed); resetArmed = null; resetBtn.textContent = "Reiniciar la semana";
+    var keep = { big: S.big, small: S.small, failSave: S.failSave, marks: S.marks, props: S.props, voice: S.voice, nophoto: S.nophoto };
+    S = Object.assign(fresh(), keep); render();
+  });
+  [["optBig", "big"], ["optSmall", "small"], ["optFail", "failSave"], ["optMarks", "marks"], ["optProps", "props"], ["optVoice", "voice"], ["optNoPhoto", "nophoto"]].forEach(function (p) {
+    document.getElementById(p[0]).addEventListener("change", function (e) { S[p[1]] = e.target.checked; render(); if (!allView.hidden) renderAll(); if (!revView.hidden) renderRev(); });
+  });
+
+  /* ---------- every screen of a day, and the design review ---------- */
+  var allView = document.getElementById("allView"), tryView = document.getElementById("tryView"), revView = document.getElementById("revView");
+  var tabTry = document.getElementById("tabTry"), tabAll = document.getElementById("tabAll"), tabRev = document.getElementById("tabRev");
+  var allDay = 2;
+  var KINDS = [
+    ["home", "Hoy · antes de empezar"], ["s1", "1 · Empieza por ti"], ["idea", "2 · Una idea que ayuda"], ["check", "2 · Comprueba la idea (opcional)"],
+    ["s3", "3 · Hazlo tuyo"], ["take", "4 · Te llevas"], ["choose", "4 · Elegir qué guardar"], ["saved", "Cierre · con algo guardado"], ["unsaved", "Cierre · sin guardar"],
+    ["homeSaved", "Hoy · hecho, con algo guardado"], ["homeUnsaved", "Hoy · hecho, sin guardar"], ["tusdias", "Atlas · Tus días"]
+  ];
+  function snapState(n, kind, o) {
+    o = o || {};
+    var st = fresh(); historyUpTo(st, n); st.live = false;
+    ["big", "small", "marks", "props", "voice", "nophoto"].forEach(function (k) { st[k] = o[k] != null ? o[k] : S[k]; });
+    var day = DAYS[n - 1], ds = st.d[n];
+    var savedNow = { rule: n === 7 ? day.rules.list[0] : day.rule, note: null };
+    if (n === 7) ds.pick = 0;
+    if (o.gap) { st.cal = n + 2; }
+    if (o.firstDay) { DAYS.forEach(function (x) { st.d[x.n] = blankDay(); }); st.cal = 1; }
+    ds.started = kind !== "home";
+    var step = { s1: "s1", idea: "idea", check: "check", s3: "s3", take: "take", choose: "take", saved: "take", unsaved: "take" }[kind];
+    if (step) { st.view = "session"; st.step = step; }
+    if (kind === "s1") ds.s1 = 0;
+    if (kind === "check") ds.check = day.check.opts.findIndex(function (x) { return x.ok; });
+    if (kind === "s3") { ds.s3 = 0; if (day.example) ds.exOpen = true; if (day.rules) ds.rulesOpen = true; }
+    if (kind === "choose") ds.take = "choose";
+    if (kind === "saved" || kind === "homeSaved" || kind === "tusdias" || kind === "weekDone") { ds.take = "saved"; ds.saved = savedNow; ds.done = true; ds.doneCal = st.cal; }
+    if (kind === "unsaved" || kind === "homeUnsaved") { ds.take = "unsaved"; ds.done = true; ds.doneCal = st.cal; }
+    if (kind === "weekDone") st.cal += 1;
+    if (kind === "tusdias") st.view = "tusdias";
+    return st;
+  }
+  function frame(st, label, sub, openKey) {
+    var tall = st.view === "session" || st.view === "tusdias";
+    return '<figure class="snapfig"><div class="snap"><div class="snapin" inert><div class="' + appClass(st, " snapapp" + (tall ? " tall" : "")) + '">' + screenHTML(st) + "</div></div></div>" +
+      "<figcaption><span>" + esc(label) + (sub ? "<small>" + esc(sub) + "</small>" : "") + "</span>" + (openKey ? '<button type="button" data-open="' + openKey + '">Abrir</button>' : "") + "</figcaption></figure>";
+  }
+  function renderAll() {
+    document.getElementById("allChips").innerHTML = DAYS.map(function (d) { return '<button type="button" class="chip" data-all="' + d.n + '" aria-pressed="' + (allDay === d.n) + '">' + d.n + "</button>"; }).join("");
+    var day = DAYS[allDay - 1];
+    var kinds = KINDS.filter(function (k) { return k[0] !== "check" || day.check; });
+    if (allDay === 7) kinds = kinds.concat([["weekDone", "Hoy · a la mañana siguiente"]]);
+    document.getElementById("strip").innerHTML = kinds.map(function (k) { return frame(snapState(allDay, k[0]), k[1], "", allDay + ":" + k[0]); }).join("");
+  }
+  var REVIEW = [
+    { n: 1, kind: "home", o: { firstDay: true }, label: "1 · Día 1, antes de empezar", sub: "Sin historia: la bienvenida de Ale en lugar de un recuerdo." },
+    { n: 4, kind: "home", o: {}, label: "2 · Un día del medio", sub: "Ayer se llevó una regla: aparece como algo que eligió conservar." },
+    { n: 4, kind: "homeSaved", o: {}, label: "3 · Día hecho, con lo de hoy guardado", sub: "Lo de hoy manda; el recuerdo de ayer se retira. Tus días sigue a mano." },
+    { n: 4, kind: "saved", o: {}, label: "Cierre del día", sub: "El momento verde bosque de la marca, igual con o sin guardar." },
+    { n: 7, kind: "saved", o: {}, label: "4 · Día 7 hecho", sub: "Cierre de la semana, sin prometer una semana 2." },
+    { n: 7, kind: "weekDone", o: {}, label: "4 · Lo que sigue, a la mañana siguiente", sub: "Lo que se llevó esta semana y el camino a Tus días." },
+    { n: 5, kind: "home", o: { gap: true }, label: "Vuelve después de unos días", sub: "No dice «ayer»: dice el día. Y una línea de regreso de la app." },
+    { n: 4, kind: "home", o: { small: true, big: true }, label: "Pantalla pequeña, texto grande", sub: "375 × 667 al 125 %: el botón sigue a la vista; el recuerdo, al desplazar." },
+    { n: 4, kind: "home", o: { nophoto: true }, label: "Respaldo sólido, sin foto", sub: "Si la foto no carga o se ahorra datos: papel y arena, todo legible." }
+  ];
+  function renderRev() {
+    document.getElementById("revStrip").innerHTML = REVIEW.map(function (r, i) { return frame(snapState(r.n, r.kind, r.o), r.label, r.sub, "rev:" + i); }).join("");
+    document.getElementById("propTable").innerHTML = "<thead><tr><th>Dónde</th><th>V4.1 (aprobado para probar)</th><th>Propuesta</th></tr></thead><tbody>" +
+      [["Cierre sin guardar", PROP.unsaved.approved, PROP.unsaved.proposed], ["Botón para terminar", PROP.endNoSave.approved, PROP.endNoSave.proposed]]
+        .map(function (r) { return "<tr><td>" + esc(r[0]) + "</td><td>" + esc(r[1]) + "</td><td>" + esc(r[2]) + "</td></tr>"; }).join("") + "</tbody>";
+    document.getElementById("pendingList").innerHTML = [
+      "Todo el contenido de Dinero V4.1 (María y Alejandra), incluidas las seis comprobaciones nuevas.",
+      "Las cuatro decisiones de V4.1: la línea de apoyo del día 3, los organismos del día 6 por país, «alquiler» o «arriendo», y si las comprobaciones se sienten como examen.",
+      "«Para qué es hoy» en lugar de «Hoy aprenderás». Otras opciones: «Por qué hoy» (ya en la app) o el propósito solo, sin etiqueta.",
+      "«Ayer te llevaste», «Te llevaste el día N» y «Hoy te llevas» para lo que guardó.",
+      "Líneas que ya existen en la app como propuesta: «Día N hecho», «Hoy queda hecho, tal como lo dejaste.», «Tu día N te espera. No se pierde nada.», «Tu próximo paso».",
+      "La semana completa: «Lo que te llevaste esta semana», «Ver tu semana». Qué viene después de la semana 1 sigue sin definir; la pantalla no promete nada.",
+      "La nota de voz de Ale en «Una idea que ayuda»: el lugar está diseñado; el audio no está grabado."
+    ].map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
+  }
+  document.getElementById("allChips").addEventListener("click", function (e) { var b = e.target.closest("[data-all]"); if (!b) return; allDay = +b.dataset.all; renderAll(); });
+  function openSnap(key) {
+    var st;
+    if (key.indexOf("rev:") === 0) { var r = REVIEW[+key.slice(4)]; st = snapState(r.n, r.kind, r.o); }
+    else { var p = key.split(":"); st = snapState(+p[0], p[1]); }
+    st.failSave = S.failSave; S = st; showMode("try"); render();
+    try { document.getElementById("device").scrollIntoView({ block: "start", behavior: "smooth" }); } catch (err) {}
+  }
+  document.getElementById("strip").addEventListener("click", function (e) { var b = e.target.closest("[data-open]"); if (b) openSnap(b.dataset.open); });
+  document.getElementById("revStrip").addEventListener("click", function (e) { var b = e.target.closest("[data-open]"); if (b) openSnap(b.dataset.open); });
+  function showMode(mode) {
+    allView.hidden = mode !== "all"; tryView.hidden = mode !== "try"; revView.hidden = mode !== "rev";
+    tabAll.setAttribute("aria-selected", mode === "all"); tabTry.setAttribute("aria-selected", mode === "try"); tabRev.setAttribute("aria-selected", mode === "rev");
+    if (mode === "all") { allDay = homeState(S).n; renderAll(); }
+    if (mode === "rev") renderRev();
+    var hash = { all: "#todas", try: "#probar", rev: "#revision" }[mode];
+    if (hash !== location.hash) { try { history.replaceState(null, "", hash); } catch (e) {} }
+  }
+  tabTry.addEventListener("click", function () { showMode("try"); });
+  tabAll.addEventListener("click", function () { showMode("all"); });
+  tabRev.addEventListener("click", function () { showMode("rev"); });
+  function fromHash() { return location.hash === "#todas" ? "all" : location.hash === "#revision" ? "rev" : "try"; }
+  window.addEventListener("hashchange", function () { showMode(fromHash()); });
+
+  render();
+  showMode(fromHash());
+})();
+</script>

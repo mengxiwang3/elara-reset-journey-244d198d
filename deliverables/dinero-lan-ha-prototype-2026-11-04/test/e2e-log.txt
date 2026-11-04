@@ -1,0 +1,154 @@
+ok   day 1: title and purpose (V4.1 verbatim)
+ok   day 1: Ale's welcome, no reminder, no history
+ok   tabs are Hoy · Atlas · Círculos
+ok   home has the water ripple and drifting mist layers
+ok   day 1 home: targets ≥44px 
+ok   day 1 home: nothing wider than the screen 
+ok   day 1: home shows the day and its start
+ok   day 1: opening question
+ok   day 1: only the tapped response shows
+ok   day 1 s1: targets ≥44px 
+ok   day 1 s1: nothing wider than the screen 
+ok   day 1: idea and rule
+ok   day 1: optional check, skippable
+ok   day 1: check feedback
+ok   day 1: «Hazlo tuyo» question
+ok   day 1: «Usar esta frase» fills the note
+ok   day 1: «Te llevas» text
+ok   day 1: choose the rule and the note
+ok   day 1: completion with the kept rule
+ok   day 1: «Mañana» matches day 2
+ok   day 1: home shows the day done
+ok   day 1: home never shows her note
+ok   day 1: today's takeaway leads, yesterday's preview removed
+ok   day 2: home shows the day and its start
+ok   day 2: «Ayer te llevaste» with yesterday's rule
+ok   day 2: opening question
+ok   day 2: «Ayer viste» (opening rule)
+ok   day 2: only the tapped response shows
+ok   day 2: resume shows next step
+ok   day 2: resumes on «Una idea que ayuda»
+ok   day 2: idea and rule
+ok   day 2: optional check, skippable
+ok   day 2: check feedback
+ok   day 2: «Hazlo tuyo» question
+ok   day 2: «Te llevas» text
+ok   day 2: choose the rule and the note
+ok   day 2: completion with the kept rule
+ok   day 2: «Mañana» matches day 3
+ok   day 2 completion: targets ≥44px 
+ok   day 2 completion: nothing wider than the screen 
+ok   day 2: home shows the day done
+ok   day 2: home never shows her note
+ok   day 2: today's takeaway leads, yesterday's preview removed
+ok   day 2 home saved: targets ≥44px 
+ok   day 2 home saved: nothing wider than the screen 
+ok   share asks what to share
+ok   share is a no-op here
+ok   day 3: home shows the day and its start
+ok   day 3: «Ayer te llevaste» with yesterday's rule
+ok   day 3: opening question
+ok   day 3: «Ayer viste» (opening rule)
+ok   day 3: only the tapped response shows
+ok   day 3: idea and rule
+ok   day 3 idea: targets ≥44px 
+ok   day 3 idea: nothing wider than the screen 
+ok   day 3: optional check, skippable
+ok   day 3: check feedback
+ok   day 3: «Hazlo tuyo» question
+ok   day 3: «Usar esta frase» fills the note
+ok   day 3: «Te llevas» text
+ok   day 3: choose the rule and the note
+ok   day 3: save error
+ok   day 3: completion with the kept rule
+ok   day 3: «Mañana» matches day 4
+ok   day 3: home shows the day done
+ok   day 3: home never shows her note
+ok   day 3: today's takeaway leads, yesterday's preview removed
+ok   day 4: home shows the day and its start
+ok   day 4 home: targets ≥44px 
+ok   day 4 home: nothing wider than the screen 
+ok   day 4: opening question
+ok   day 4: «Ayer viste» (opening rule)
+ok   day 4: only the tapped response shows
+ok   day 4: idea and rule
+ok   day 4: optional check, skippable
+ok   day 4: check feedback
+ok   day 4: «Hazlo tuyo» question
+ok   day 4: «Te llevas» text
+ok   day 4: choose the rule and the note
+ok   day 4: completion without saving keeps V4.1 copy
+ok   day 4: home shows the day done
+ok   day 4: home never shows her note
+ok   day 4: calm done line, save still possible, no share
+ok   day 5: home shows the day and its start
+ok   day 5: day 4 kept nothing, so the reminder says «el día 3», not «ayer»
+ok   day 5: opening question
+ok   day 5: «Ayer viste» (opening rule)
+ok   day 5: only the tapped response shows
+ok   day 5: idea and rule
+ok   day 5: optional check, skippable
+ok   day 5: check feedback
+ok   day 5: «Hazlo tuyo» question
+ok   day 5: «Te llevas» text
+ok   day 5: choose the rule and the note
+ok   day 5: completion with the kept rule
+ok   day 5: «Mañana» matches day 6
+ok   day 5: home shows the day done
+ok   day 5: home never shows her note
+ok   day 5: today's takeaway leads, yesterday's preview removed
+ok   day 6: home shows the day and its start
+ok   day 6 after a gap: return line, no «ayer»
+ok   day 6: opening question
+ok   day 6 after a gap: «Ayer viste» hidden
+ok   day 6: only the tapped response shows
+ok   day 6: idea and rule
+ok   day 6: optional check, skippable
+ok   day 6: check feedback
+ok   day 6: «Hazlo tuyo» question
+ok   day 6: «Usar esta frase» fills the note
+ok   day 6: «Te llevas» text
+ok   day 6: choose the rule and the note
+ok   day 6: completion with the kept rule
+ok   day 6: «Mañana» matches day 7
+ok   day 6: home shows the day done
+ok   day 6: home never shows her note
+ok   day 6: today's takeaway leads, yesterday's preview removed
+ok   day 7: home shows the day and its start
+ok   day 7: opening question
+ok   day 7: «Ayer viste» (opening rule)
+ok   day 7: only the tapped response shows
+ok   day 7: idea and rule
+ok   day 7: «Hazlo tuyo» question
+ok   day 7 s3: targets ≥44px 
+ok   day 7 s3: nothing wider than the screen 
+ok   day 7: «Te llevas» text
+ok   day 7: choose the rule and the note
+ok   day 7: completion with the kept rule
+ok   day 7 completion: targets ≥44px 
+ok   day 7 completion: nothing wider than the screen 
+ok   day 7: home shows the day done
+ok   day 7: home never shows her note
+ok   day 7: week-ending state with its next step
+ok   day 7 home: targets ≥44px 
+ok   day 7 home: nothing wider than the screen 
+ok   after day 7: the week's keeps and a route to Atlas
+ok   Atlas: the week, each day, notes visible only here
+ok   Atlas tab is current
+ok   Atlas: targets ≥44px 
+ok   Atlas: nothing wider than the screen 
+ok   Atlas: reopen day 1
+ok   small + big home: targets ≥44px 
+ok   small + big home: nothing wider than the screen 
+ok   small + big: «Empezar» visible above the tab bar without scrolling
+ok   small + big s1: targets ≥44px 
+ok   small + big s1: nothing wider than the screen 
+ok   comment is kept per screen
+ok   comment count
+ok   all screens, day 7: 12 frames (no check, plus the next morning)
+ok   all screens, day 3: 12 frames
+ok   design review: 9 representative screens
+ok   page has no horizontal scroll at 390px
+ok   no console errors []
+
+152 passed, 0 failed
