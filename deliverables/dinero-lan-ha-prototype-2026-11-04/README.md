@@ -121,3 +121,7 @@ Saved takeaways come only from real choices: nothing is preselected, and jumping
 - Day 5 shows one product before and after (500 g → 400 g at the same price) and asks what changed; price per kilo appears on request.
 - Progressive disclosure throughout: pause 2 shows one idea and an activity; each activity step appears after the previous one (days 2 and 3 in order); «Más sobre esta idea» (explanation, example, V4.1 check, «Tengo otra pregunta») appears only after she tries the activity or taps «Prefiero leer primero»; in «Hazlo tuyo» the note appears after she picks something.
 - e2e: 233/233.
+
+## v9 — she chooses what to understand before the week (2026-11-05)
+
+Before day 1 she is asked «¿Qué te gustaría entender mejor esta semana?» and picks up to two of six topics (one per teaching day), «Todavía no sé», or skips. The order of the week does not change; she is told which day each topic arrives, those days are marked «Tu tema» on Inicio and in Tus días, and day 7 offers what she kept from those days first. She can change it in her profile. After day 7 she is asked what she wants to learn next (V3.2's list), noted without promising week 2. All wording is a proposal. e2e: 240/240.

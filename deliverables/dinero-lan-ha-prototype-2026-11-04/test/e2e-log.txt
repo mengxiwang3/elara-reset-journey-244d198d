@@ -1,3 +1,9 @@
+ok   before the week: she is asked what she wants to understand, with skip and «todavía no sé»
+ok   before the week: nothing is chosen for her
+ok   before the week: targets ≥44px 
+ok   before the week: nothing wider than the screen 
+ok   before the week: up to two topics
+ok   before the week: she is told which day each topic arrives
 ok   day 1: title on home (V4.1 verbatim)
 ok   day 1: Ale's welcome, no reminder, no history
 ok   tabs are Atlas · Círculos
@@ -103,7 +109,7 @@ ok   day 3: home shows the day done
 ok   day 3: home never shows her note
 ok   day 3: today's takeaway leads, yesterday's preview removed
 ok   day 4: home shows the day and its start
-ok   day 4: day 3's rule; her sentence stays private
+ok   day 4: day 3's rule, her sentence stays private, and the day she chose is marked
 ok   day 4 home: targets ≥44px 
 ok   day 4 home: nothing wider than the screen 
 ok   day 4: opening question
@@ -211,7 +217,8 @@ ok   day 7: home never shows her note
 ok   day 7: week-ending state with its next step
 ok   day 7 home: targets ≥44px 
 ok   day 7 home: nothing wider than the screen 
-ok   after day 7: the week's keeps and a route to Atlas
+ok   after day 7: the week's keeps, a route to Atlas, and what she wants next
+ok   after day 7: her choice is noted without promising week 2
 ok   Atlas: the week, each day, notes visible only here
 ok   Atlas tab is current
 ok   Atlas: targets ≥44px 
@@ -232,4 +239,4 @@ ok   design review: 9 representative screens
 ok   page has no horizontal scroll at 390px
 ok   no console errors []
 
-233 passed, 0 failed
+240 passed, 0 failed

@@ -360,6 +360,11 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 .chk .h2{font-size:calc(19*var(--u))}
 .strip7{display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; margin:10px 0 4px}
 .strip7 img{width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:8px; display:block}
+/* before the week */
+.topictag{display:inline-block; margin-left:6px; padding:1px 8px; border-radius:999px; background:#EAF3EE; color:var(--forest); font-size:11.5px; font-weight:700; letter-spacing:.03em; vertical-align:1px}
+.chipbtn:disabled{opacity:.45; cursor:default}
+.chips.tight .chipbtn{min-height:44px; padding:7px 14px}
+.nextweek{margin-top:16px; padding-top:14px; border-top:1px solid var(--hair); display:flex; flex-direction:column; gap:8px}
 /* applied activities */
 .act{margin-top:16px; padding-top:14px; border-top:1px solid var(--hair); display:flex; flex-direction:column; gap:10px; position:relative}
 .act .task{font-weight:700; font-size:calc(17*var(--u)); line-height:1.3; color:var(--ink)}
@@ -519,6 +524,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         <ul>
           <li><b>Una pausa, una cosa.</b> «Empieza por ti», «Una idea que ayuda» (con la comprobación opcional al final) y «Hazlo tuyo». Al terminar elige qué se lleva. Es el mismo contenido de V4.1: los cuatro momentos caben en tres pantallas.</li>
           <li><b>Un lugar de Arashiyama por día.</b> La misma mujer, pequeña y casi siempre de espaldas, hace algo distinto cada día: se detiene en la orilla, se sienta, cruza el puente, rema, compara dos cestas, elige un camino y mira lo recorrido. Imágenes generadas con IA; son propuesta.</li>
+          <li><b>Antes de la semana, ella elige qué quiere entender.</b> Hasta dos temas de una lista, o «Todavía no sé», o saltar. La semana no cambia de orden; la app le dice qué día llega su tema, lo marca en Inicio y en Tus días, y el día 7 le ofrece primero lo que guardó de esos días. Al terminar, se le pregunta qué quiere aprender después, sin prometer la semana 2.</li>
           <li><b>Todo aparece de a poco.</b> Primero una idea. Cada paso de la actividad aparece cuando termina el anterior. La explicación, el ejemplo y la comprobación de V4.1 aparecen después de probar o con «Prefiero leer primero». En «Hazlo tuyo», la nota aparece cuando ya eligió algo.</li>
           <li><b>Una actividad distinta cada día.</b> Una línea de tiempo con fechas (día 1), completar una ficha con su propio para qué, para cuándo y cuánto acceso necesita, sin respuesta correcta (2), armar una frase que da tiempo (3), mostrar saldo, cargos y pago por separado (4), ver un mismo producto antes y ahora y descubrir si cambió el precio o la cantidad (5), señalar señales de alerta y elegir una comprobación independiente (6) y volver a lo que guardó de verdad (7). Cada una es opcional, se puede saltar o pedir «Muéstrame cómo verlo», y es una propuesta.</li>
           <li><b>Llegar, no puntuar.</b> Al terminar: «Llegaste al puente.» y, la última noche, siete lugares juntos y «Lo que guardaste está en Tus días». No cuenta puntos ni dice que mejoró.</li>
@@ -640,6 +646,42 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   };
   function ico(name, size, sw) { return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (sw || 1.9) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + P[name] + "</svg>"; }
 
+  /* ---------- before the week: what she wants to understand (proposal) ---------- */
+  var TOPICS = [
+    { d: 1, t: "Saber si el dinero llega a tiempo" },
+    { d: 2, t: "Darle un propósito a mi dinero" },
+    { d: 3, t: "Responder cuando me piden dinero" },
+    { d: 4, t: "Entender mis deudas" },
+    { d: 5, t: "Entender por qué el dinero rinde menos" },
+    { d: 6, t: "Reconocer ofertas que no son lo que parecen" }
+  ];
+  var NEXTWEEK = ["Deudas e intereses", "Un colchón para imprevistos", "Empezar a invertir", "Todavía no sé"];
+  function myTopicDays(st) { return (st.pre && st.pre.picked || []).filter(function (i) { return i >= 0; }).map(function (i) { return TOPICS[i].d; }); }
+  function topicLine(st) {
+    var p = (st.pre && st.pre.picked) || [];
+    if (p.indexOf(-1) >= 0) return "Está bien no saberlo todavía. Puedes cambiarlo en tu perfil cuando quieras.";
+    return p.map(function (i) { var tp = TOPICS[i]; return "«" + tp.t + "» llega el día " + tp.d + "."; }).join(" ") + " La semana sigue el mismo orden, porque cada día se apoya en el anterior.";
+  }
+  function preweekHTML(st) {
+    var p = st.pre.picked, full = p.length >= 2;
+    var chips = TOPICS.map(function (tp, i) {
+      var on = p.indexOf(i) >= 0, off = !on && full;
+      return '<button type="button" class="chipbtn' + (on ? " on" : "") + '" data-act="topic" data-i="' + i + '" aria-pressed="' + on + '"' + (off ? ' aria-disabled="true" disabled' : "") + ">" + tp.t + "</button>";
+    }).join("") + '<button type="button" class="chipbtn' + (p.indexOf(-1) >= 0 ? " on" : "") + '" data-act="topic" data-i="-1" aria-pressed="' + (p.indexOf(-1) >= 0) + '">Todavía no sé</button>';
+    return '<span class="ptag">Propuesta</span><p class="eyebrow">Dinero y estabilidad · Antes de empezar</p>' +
+      '<h1 class="title" tabindex="-1" data-focus>¿Qué te gustaría entender mejor esta semana?</h1>' +
+      '<p class="meta">Elige hasta dos. Te avisamos qué día llega cada uno.</p>' +
+      '<div class="chips col tight mt10">' + chips + "</div>" + (p.length ? afb(topicLine(st)) : "") +
+      '<button type="button" class="btn mt14" data-act="pre-done"' + (p.length ? "" : " disabled") + ">Empezar la semana" + ico("arrow", 20, 2) + "</button>" +
+      '<button type="button" class="link u mt10" data-act="pre-skip"><span>Saltar por ahora</span></button>';
+  }
+  function nextWeekHTML(st) {
+    var v = st.nextWeek;
+    return '<div class="nextweek"><span class="ptag">Propuesta</span><p class="label">Antes de tu próxima semana</p><p class="q">¿Qué te gustaría aprender después?</p><div class="chips col">' +
+      NEXTWEEK.map(function (t, i) { return '<button type="button" class="chipbtn' + (v === i ? " on" : "") + '" data-act="nextweek" data-i="' + i + '" aria-pressed="' + (v === i) + '">' + t + "</button>"; }).join("") + "</div>" +
+      (v != null ? afb("Gracias. Lo anotamos: nos ayuda a decidir tu próxima semana.") : "") + "</div>";
+  }
+
   /* ---------- the walker ---------- */
   function walkerSVG(st, pose) {
     var c = st.wk || { outfit: 0, hair: 0, skin: 1 }, O = SW.outfit[c.outfit], H = SW.hair[c.hair], K = SW.skin[c.skin], PANTS = "#283041";
@@ -674,8 +716,8 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 
   /* ---------- state ---------- */
   function blankDay() { return { act: {}, made: null, carry: null, doubt: "", whyOpen: false, exOpen2: false, checkOpen: false, doubtOpen: false, started: false, last: "s1", s1: null, otherOpen: false, other: "", check: null, s3: null, note: "", notePass: false, exOpen: false, rulesOpen: false, pick: null, take: null, sel: {}, failed: false, done: false, doneCal: null, saved: null }; }
-  function fresh() { var d = {}; DAYS.forEach(function (x) { d[x.n] = blankDay(); }); return { wk: { outfit: 0, hair: 0, skin: 1 }, arrived: {}, cal: 1, view: "home", day: 1, step: "s1", sheet: null, share: { rule: true, note: false }, shared: false, showMine: false, big: false, small: false, failSave: false, marks: false, props: false, voice: false, nophoto: false, d: d }; }
-  function load() { try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.d && s.d[7] && s.cal) { s.sheet = null; if (!s.wk) s.wk = { outfit: 0, hair: 0, skin: 1 }; if (!s.arrived) s.arrived = {}; return s; } } catch (e) {} return null; }
+  function fresh() { var d = {}; DAYS.forEach(function (x) { d[x.n] = blankDay(); }); return { pre: { picked: [], done: false }, nextWeek: null, wk: { outfit: 0, hair: 0, skin: 1 }, arrived: {}, cal: 1, view: "home", day: 1, step: "s1", sheet: null, share: { rule: true, note: false }, shared: false, showMine: false, big: false, small: false, failSave: false, marks: false, props: false, voice: false, nophoto: false, d: d }; }
+  function load() { try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.d && s.d[7] && s.cal) { s.sheet = null; if (!s.wk) s.wk = { outfit: 0, hair: 0, skin: 1 }; if (!s.arrived) s.arrived = {}; if (!s.pre) s.pre = { picked: [], done: false }; return s; } } catch (e) {} return null; }
   function persist() { try { localStorage.setItem(KEY, JSON.stringify(Object.assign({}, S, { sheet: null, live: false }))); } catch (e) {} }
   var S = load() || fresh();
 
@@ -759,7 +801,9 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   /* ---------- Atlas home ---------- */
   function homeHTML(st) {
     var h = homeState(st), n = h.n, day = DAYS[n - 1], ds = st.d[n], body = "", eyebrowTxt = "Dinero y estabilidad · Día " + n + " de 7";
-    if (h.kind === "before" || h.kind === "resume") {
+    if (h.kind === "before" && n === 1 && !ds.started && !st.pre.done) {
+      body = preweekHTML(st);
+    } else if (h.kind === "before" || h.kind === "resume") {
       var gap = cameBackAfterGap(st, n);
       var prev = lastKept(st, n);
       /* Days 3 and 6 are more careful: day 3 recalls only a rule (never her question); day 6 recalls nothing. */
@@ -769,8 +813,9 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       var welcome = (n === 1 && !ds.started) ? '<button type="button" class="welcome" data-act="sheet" data-k="welcome"><span class="playdisc">' + ico("play", 16) + '</span><span class="t"><span class="label">Antes de empezar</span><b>Una bienvenida de Ale</b></span></button>' : "";
       var nextStep = h.kind === "resume" ? '<p class="meta">Tu próximo paso: ' + esc(MNAME[MOMENT[ds.last || "s1"]]) + "</p>" : '<p class="meta">' + ico("lock", 14, 2) + "<span>Unos 3 a 5 minutos · respuestas privadas</span></p>";
       body = (gap ? '<p class="returnnote voice it">Tu día ' + n + " te espera. No se pierde nada.</p>" : "") +
-        '<p class="eyebrow">Dinero y estabilidad · Día ' + n + " de 7</p>" +
+        '<p class="eyebrow">Dinero y estabilidad · Día ' + n + " de 7" + (myTopicDays(st).indexOf(n) >= 0 ? ' <span class="topictag">Tu tema</span>' : "") + "</p>" +
         '<h1 class="title" tabindex="-1" data-focus>' + T(st, day.title, day.m.title) + "</h1>" + nextStep +
+        (n === 1 && st.pre.picked.length && st.pre.picked.indexOf(-1) < 0 ? '<p class="meta">' + esc(st.pre.picked.map(function (i) { return "Tu tema llega el día " + TOPICS[i].d + "."; }).join(" ")) + "</p>" : "") +
         '<button type="button" class="btn mt14" data-act="start">' + (h.kind === "resume" ? "Seguir con el día " : "Empezar el día ") + n + ico("arrow", 20, 2) + "</button>" +
         welcome + reminder;
     } else if (h.kind === "doneToday") {
@@ -791,7 +836,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         '<h1 class="title" tabindex="-1" data-focus>Lo que te llevaste esta semana</h1>' +
         strip7() + (keptList.length ? keptList.slice(-3).map(function (t, i) { return slip(i === 0 ? "De tu semana" : "", t, {}); }).join("").replace(/<span class="label"><\/span>/g, "") :
           '<p class="voice mt14">Hiciste los siete días. Tus días guarda cada uno, por si quieres volver.</p>') +
-        '<button type="button" class="btn mt14" data-act="tusdias">Ver tus días</button>';
+        '<button type="button" class="btn mt14" data-act="tusdias">Ver tus días</button>' + nextWeekHTML(st);
       eyebrowTxt = "";
     }
     var heroAlt = '<img class="hero" src="' + day.photo.src + '" alt="" aria-hidden="true" style="object-position:' + day.photo.pos + '">';
@@ -946,13 +991,21 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     return out;
   }
   A[7] = function (st, day, ds) {
-    var items = weekItems(st), a = ax(ds);
+    var mine = myTopicDays(st), items = weekItems(st), a = ax(ds);
+    items.sort(function (x, y) { return (mine.indexOf(y.k) >= 0 ? 1 : 0) - (mine.indexOf(x.k) >= 0 ? 1 : 0); });
+    items.forEach(function (it) { if (mine.indexOf(it.k) >= 0) it.label += " · tu tema"; });
     var list = items.length ? '<div class="chips col">' + items.map(function (it, i) { var on = ds.carry && ds.carry.text === it.text && ds.carry.label === it.label; return '<button type="button" class="chipbtn tall' + (on ? " on" : "") + '" data-act="a" data-a="d7" data-v="i' + i + '" aria-pressed="' + on + '"><small>' + it.label + "</small><span>" + esc(it.text) + "</span></button>"; }).join("") + "</div>" :
       afb("Esta semana no guardaste nada. Eso también es una respuesta. Puedes dejar una duda por escrito o ver las reglas de la semana.");
     var doubt = discl("doubtOpen", "Dejar una duda por escrito", ds.doubtOpen, field(st, "doubt", "Algo que todavía quiero entender…", "Una duda pendiente"));
     return actWrap(items.length ? "Esto es lo que guardaste esta semana. ¿Quieres llevarte algo?" : "Tu semana.", "Solo tú ves esto. No tienes que elegir nada.", list + doubt);
   };
 
+  function st_pick(i) {
+    var p = S.pre.picked, at = p.indexOf(i);
+    if (at >= 0) p.splice(at, 1);
+    else if (i === -1) S.pre.picked = [-1];
+    else { if (p.indexOf(-1) >= 0) p = S.pre.picked = []; if (p.length < 2) p.push(i); }
+  }
   function actTouched(day, ds) { return !!((ds.act && Object.keys(ds.act).length) || ds.check != null || ds.carry || (ds.doubt || "").trim() || (day.n === 3 && ds.made)); }
   function actEvent(el, day, ds) {
     var a = ax(ds), v = el.dataset.v, k = el.dataset.a;
@@ -973,7 +1026,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       else if (v[0] === "m") { var key = v.slice(1), at = a.m.indexOf(key); if (at >= 0) a.m.splice(at, 1); else a.m.push(key); }
       else if (v[0] === "c") { a.c = +v.slice(1); ds.made = a.c === 0 ? "Comprobaré por mi cuenta: busco yo misma la autoridad financiera de mi país." : null; }
     }
-    else if (k === "d7") { var its = weekItems(S), it = its[+v.slice(1)]; ds.carry = ds.carry && it && ds.carry.text === it.text && ds.carry.label === it.label ? null : (it ? { label: it.label, text: it.text } : null); }
+    else if (k === "d7") { var mine7 = myTopicDays(S), its = weekItems(S); its.sort(function (x, y) { return (mine7.indexOf(y.k) >= 0 ? 1 : 0) - (mine7.indexOf(x.k) >= 0 ? 1 : 0); }); its.forEach(function (q) { if (mine7.indexOf(q.k) >= 0) q.label += " · tu tema"; }); var it = its[+v.slice(1)]; ds.carry = ds.carry && it && ds.carry.text === it.text && ds.carry.label === it.label ? null : (it ? { label: it.label, text: it.text } : null); }
   }
 
   var BODY = {
@@ -1085,7 +1138,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       var n = day.n, ds = st.d[n], body, cls = "drow";
       if (!ds.done && n > opened) { cls += " future"; body = '<p class="label">Día ' + n + '</p><p class="dt">Más adelante</p>'; }
       else {
-        body = '<p class="label">Día ' + n + '</p><p class="dt">' + esc(day.title) + "</p>";
+        body = '<p class="label">Día ' + n + (myTopicDays(st).indexOf(n) >= 0 ? ' · <span class="topictag">Tu tema</span>' : "") + '</p><p class="dt">' + esc(day.title) + "</p>";
         if (ds.done && ds.saved) {
           [["q", n === 6 ? "Tu frase" : "Tu pregunta"], ["rule", ""], ["carry", "Lo que elegiste"], ["made", MADE[n] || "Lo que armaste"], ["doubt", "Tu duda"], ["note", "Tu nota"]].forEach(function (f) {
             if (ds.saved[f[0]]) body += (f[1] ? '<p class="label" style="margin-top:4px">' + f[1] + "</p>" : "") + '<p class="kept">«' + esc(ds.saved[f[0]]) + "»</p>";
@@ -1123,6 +1176,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         '<p class="purpose" style="margin:0">Puedes pasar cualquier pregunta y terminar sin guardar nada. Lo que guardas queda en Tus días.</p>';
     } else if (st.sheet === "profile") {
       inner = '<h2 class="h2" id="sh-t" tabindex="-1" data-focus>Perfil y ajustes</h2>' +
+        '<p class="hint" style="margin:0">Tu tema de esta semana: ' + esc(st.pre.picked.length ? (st.pre.picked.indexOf(-1) >= 0 ? "todavía no sé" : st.pre.picked.map(function (i) { return TOPICS[i].t; }).join(" · ")) : "ninguno") + '</p><button type="button" class="link u" data-act="pre-reopen"><span>Cambiar mi tema</span></button>' +
         '<button type="button" class="switch" role="switch" aria-checked="' + !!st.showMine + '" data-act="mine"><span><span class="q" style="display:block;font-size:calc(16*var(--u))">Mostrar mis frases en el inicio</span><span class="hint">Si está apagado, el inicio solo muestra reglas, nunca tus notas.</span></span><span class="tr" aria-hidden="true"></span></button>';
     } else if (st.sheet === "welcome") {
       inner = '<p class="label">Antes de empezar</p><h2 class="h2" id="sh-t" tabindex="-1" data-focus>Una bienvenida de Ale</h2><div class="video">El video de bienvenida de Ale ya está en la app. En este prototipo no se reproduce.</div>';
@@ -1223,6 +1277,11 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       case "tusdias": case "atlas": go("tusdias"); break;
       case "circulos": go("circulos"); break;
       case "a": actEvent(el, day, ds); cheer = true; break;
+      case "topic": { var pk = st_pick(i); break; }
+      case "pre-done": S.pre.done = true; break;
+      case "pre-reopen": S.pre.done = false; S.sheet = null; S.view = "home"; break;
+      case "pre-skip": S.pre.done = true; S.pre.picked = []; break;
+      case "nextweek": S.nextWeek = S.nextWeek === i ? null : i; break;
       case "read-first": ds.moreOpen = true; ds.whyOpen = true; break;
       case "pick": ds[k] = i; cheer = true; break;
       case "pass": ds.s1 = ds.s1 === "pass" ? null : "pass"; cheer = true; break;
@@ -1367,7 +1426,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   var tabTry = document.getElementById("tabTry"), tabAll = document.getElementById("tabAll"), tabRev = document.getElementById("tabRev");
   var allDay = 2;
   var KINDS = [
-    ["home", "Hoy · antes de empezar"], ["s1", "Pausa 1 · Empieza por ti"], ["idea", "Pausa 2 · Una idea que ayuda"], ["act", "Pausa 2 · con la actividad resuelta"], ["check", "Pausa 2 · con la comprobación respondida"],
+    ["pre", "Antes de la semana · qué quiere entender"], ["home", "Hoy · antes de empezar"], ["s1", "Pausa 1 · Empieza por ti"], ["idea", "Pausa 2 · Una idea que ayuda"], ["act", "Pausa 2 · con la actividad resuelta"], ["check", "Pausa 2 · con la comprobación respondida"],
     ["s3", "Pausa 3 · Hazlo tuyo"], ["take", "Pausa 3 · Te llevas"], ["choose", "Pausa 3 · Elegir qué guardar"], ["saved", "Cierre · con algo guardado"], ["unsaved", "Cierre · sin guardar"],
     ["homeSaved", "Hoy · hecho, con algo guardado"], ["homeUnsaved", "Hoy · hecho, sin guardar"], ["tusdias", "Atlas · Tus días"]
   ];
@@ -1385,6 +1444,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     var savedNow = { rule: n === 7 ? day.rules.list[0] : day.rule, note: null };
     if (n === 7) ds.pick = 0;
     if (o.gap) { st.cal = n + 2; }
+    st.pre = { picked: [3], done: kind !== "pre" };
     if (o.firstDay) { DAYS.forEach(function (x) { st.d[x.n] = blankDay(); }); st.cal = 1; }
     ds.started = kind !== "home";
     var step = { s1: "s1", idea: "idea", act: "idea", check: "idea", s3: "s3", take: "take", choose: "take", saved: "take", unsaved: "take" }[kind];
@@ -1408,7 +1468,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   function renderAll() {
     document.getElementById("allChips").innerHTML = DAYS.map(function (d) { return '<button type="button" class="chip" data-all="' + d.n + '" aria-pressed="' + (allDay === d.n) + '">' + d.n + "</button>"; }).join("");
     var day = DAYS[allDay - 1];
-    var kinds = KINDS.filter(function (k) { return k[0] !== "check" || day.check; });
+    var kinds = KINDS.filter(function (k) { return (k[0] !== "check" || day.check) && (k[0] !== "pre" || allDay === 1); });
     if (allDay === 7) kinds = kinds.concat([["weekDone", "Hoy · a la mañana siguiente"]]);
     document.getElementById("strip").innerHTML = kinds.map(function (k) { return frame(snapState(allDay, k[0]), k[1], "", allDay + ":" + k[0]); }).join("");
   }
@@ -1436,6 +1496,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       "«Para qué es hoy» en lugar de «Hoy aprenderás». Otras opciones: «Por qué hoy» (ya en la app) o el propósito solo, sin etiqueta.",
       "«Ayer te llevaste», «Te llevaste el día N» y «Hoy te llevas» para lo que guardó.",
       "Líneas que ya existen en la app como propuesta: «Día N hecho», «Hoy queda hecho, tal como lo dejaste.», «Tu día N te espera. No se pierde nada.», «Tu próximo paso».",
+      "La pregunta antes de la semana: la lista de seis temas, «Todavía no sé», que no cambie el orden, y la pregunta del final sobre la próxima semana (Deudas e intereses, Un colchón para imprevistos, Empezar a invertir).",
       "Las siete actividades de la pausa 2 (texto de instrucciones, avisos y respuestas a los errores) y las etiquetas «Propuesta de actividad».",
       "«Llegaste al puente.» y las demás llegadas, el orden distinto de las opciones de la comprobación y las imágenes generadas con IA para cada lugar.",
       "La semana completa: «Lo que te llevaste esta semana», «Ver tu semana». Qué viene después de la semana 1 sigue sin definir; la pantalla no promete nada.",

@@ -42,8 +42,18 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
     ok(r.wide.length === 0, label + ": nothing wider than the screen " + (r.wide.length ? JSON.stringify(r.wide.slice(0, 4)) : ""));
   };
 
-  // Day 1, no history
+  // Before the week: what she wants to understand
   let t = await text();
+  ok(has(t, "¿Qué te gustaría entender mejor esta semana?") && has(t, "Saltar por ahora") && has(t, "Todavía no sé"), "before the week: she is asked what she wants to understand, with skip and «todavía no sé»");
+  ok(await app.locator('[data-act="pre-done"]').isDisabled(), "before the week: nothing is chosen for her");
+  await shot("d0-pre"); await audit("before the week");
+  await click('[data-act="topic"][data-i="3"]'); await click('[data-act="topic"][data-i="1"]');
+  ok((await app.locator('[data-act="topic"][disabled]').count()) === 4, "before the week: up to two topics");
+  t = await text(); ok(has(t, "llega el día 4") && has(t, "llega el día 2"), "before the week: she is told which day each topic arrives");
+  await click('[data-act="topic"][data-i="1"]');
+  await click('[data-act="pre-done"]');
+  // Day 1, no history
+  t = await text();
   ok(has(t, W.week[0].title), "day 1: title on home (V4.1 verbatim)");
   ok(has(t, "Una bienvenida de Ale") && !has(t, "te llevaste") && !has(t, "Tus días"), "day 1: Ale's welcome, no reminder, no history");
   ok((await app.locator(".tabs button").allInnerTexts()).join("|") === "Atlas|Círculos", "tabs are Atlas · Círculos");
@@ -59,7 +69,7 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
     ok(has(t, day.title) && has(t, "Empezar el día " + n), `day ${n}: home shows the day and its start`);
     if (n === 2) ok(has(t, "Ayer te llevaste") && has(t, week[0].s3.opts[0].phrase) && has(t, "Regla: " + week[0].rule), "day 2: «Ayer te llevaste» with her question from day 1 and the rule under it");
     if (n === 3) ok(has(t, "Ayer te llevaste") && has(t, week[1].rule) && !has(t, "¿Para qué y para cuándo quiero este dinero?"), "day 3 is more careful: only the rule returns, never her question");
-    if (n === 4) { ok(has(t, "Ayer te llevaste") && has(t, week[2].rule), "day 4: day 3's rule; her sentence stays private"); await shot("d4-0-home-middle"); await audit("day 4 home"); }
+    if (n === 4) { ok(has(t, "Ayer te llevaste") && has(t, week[2].rule) && has(t, "Tu tema"), "day 4: day 3's rule, her sentence stays private, and the day she chose is marked"); await shot("d4-0-home-middle"); await audit("day 4 home"); }
     if (n === 5) ok(has(t, "Te llevaste el día 3") && !has(t, "Ayer te llevaste"), "day 5: day 4 kept nothing, so the reminder says «el día 3», not «ayer»");
     if (n === 6) ok(has(t, "Tu día 6 te espera") && !has(t, "te llevaste") && !has(t, "Ayer"), "day 6 after a gap: return line, and no reminder of what she kept");
 
@@ -212,7 +222,9 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
   // Next morning after day 7
   await p.click("#nextDay"); await p.waitForTimeout(100);
   t = await text();
-  ok(has(t, "Lo que te llevaste esta semana") && has(t, "Ver tus días"), "after day 7: the week's keeps and a route to Atlas");
+  ok(has(t, "Lo que te llevaste esta semana") && has(t, "Ver tus días") && has(t, "¿Qué te gustaría aprender después?"), "after day 7: the week's keeps, a route to Atlas, and what she wants next");
+  await click('[data-act="nextweek"][data-i="0"]');
+  ok(has(await text(), "nos ayuda a decidir tu próxima semana") && !has(await text(), "semana 2 empieza"), "after day 7: her choice is noted without promising week 2");
   await shot("d8-week-done");
 
   // Atlas tab
