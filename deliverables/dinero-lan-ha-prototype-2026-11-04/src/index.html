@@ -305,14 +305,66 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 .snapapp.tall .plain .scroll{position:relative; bottom:auto; overflow:visible; padding-bottom:var(--tabh)}
 .snapapp .sheet{min-height:0}
 @media (prefers-reduced-motion: reduce){ .switch .tr, .switch .tr::after{transition:none} }
+/* ===== round 8: the reference look, and the walker ===== */
+.btn{background:var(--ink); color:#fff !important; font-weight:700}
+.btn:disabled{background:#C9CDD3}
+.tabs button[aria-current="page"]{color:var(--ink); font-weight:800}
+.tabs button{width:130px}
+.voice.it{font-family:var(--sans); font-style:normal; font-size:calc(16*var(--u)); font-weight:500; color:var(--ink)}
+.kept{font-family:var(--sans)}
+.place{background:#fff; font-weight:700; min-height:40px; padding:4px 16px 4px 12px; border-radius:20px; box-shadow:0 4px 14px -8px rgba(0,0,0,.35)}
+.disc{background:#fff; border:0; box-shadow:0 4px 14px -8px rgba(0,0,0,.35)}
+.moments{background:#fff}
+.page2{background:rgba(255,255,255,.95)}
+.heroBox{height:60%}
+.app.small .heroBox{height:50%}
+.band{height:calc(var(--band) + 64px); overflow:hidden}
+.app.small .band{height:calc(var(--band) + 40px)}
+.wk{position:absolute; z-index:1; width:var(--wks,44px); transform:translate(-50%,-100%); pointer-events:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.band .wk{--wks:36px}
+.wk svg{display:block; width:100%; height:auto; overflow:visible}
+.wk .lg{transform-box:fill-box; transform-origin:50% 0}
+.wk.moving .lg.l{animation:wkleg .45s ease-in-out infinite alternate}
+.wk.moving .lg.r{animation:wkleg .45s ease-in-out infinite alternate-reverse}
+@keyframes wkleg{from{transform:rotate(16deg)}to{transform:rotate(-16deg)}}
+.wk .arm{transform-box:fill-box; transform-origin:50% 100%}
+.wk.moving .arm.l{animation:wkarm .6s ease-in-out infinite alternate}
+.wk.moving .arm.r{animation:wkarm .6s ease-in-out infinite alternate-reverse}
+@keyframes wkarm{from{transform:rotate(-12deg)}to{transform:rotate(12deg)}}
+.wk .pad{transform-box:view-box; transform-origin:20px 40px; animation:wkpad 2.8s ease-in-out infinite}
+.wk.moving .pad{animation-duration:.9s}
+@keyframes wkpad{0%,100%{transform:rotate(-22deg)}50%{transform:rotate(22deg)}}
+.wk.float svg{animation:wkbob 3.4s ease-in-out infinite}
+@keyframes wkbob{0%,100%{transform:translateY(0)}50%{transform:translateY(1.6px)}}
+.wk.cheer svg{animation:wkhop .6s ease-out}
+@keyframes wkhop{0%{transform:translateY(0)}35%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+.spark{position:absolute; left:50%; top:35%; width:0; height:0}
+.spark i{position:absolute; width:5px; height:5px; margin:-2.5px; border-radius:50%; background:#fff; opacity:0; box-shadow:0 0 6px rgba(255,255,255,.95); animation:wkspark .9s ease-out forwards}
+@keyframes wkspark{0%{opacity:1; transform:translate(0,0) scale(.5)}100%{opacity:0; transform:translate(var(--dx),var(--dy)) scale(1.1)}}
+.ripple2{position:absolute; left:50%; bottom:-2px; width:10px; height:3px; margin-left:-5px; border-radius:50%; border:1.5px solid rgba(255,255,255,.9); opacity:0; animation:wkring 1.1s ease-out forwards}
+@keyframes wkring{0%{opacity:.9; transform:scale(1)}100%{opacity:0; transform:scale(6,4)}}
+.pinH{position:absolute; z-index:1; transform:translate(-50%,-100%); display:flex; flex-direction:column; align-items:center; pointer-events:none}
+.pinH span{padding:6px 12px; border-radius:999px; background:#fff; color:var(--ink); font-size:calc(13*var(--u)); line-height:1.3; font-weight:600; white-space:nowrap; box-shadow:0 4px 14px -6px rgba(0,0,0,.35)}
+.pinH i{display:block; width:1.5px; height:28px; background:#fff}
+.pinH b{display:block; width:7px; height:7px; border-radius:50%; background:#fff; margin-top:-2px}
+.swrow{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.sw{width:44px; height:44px; border-radius:50%; border:3px solid #fff; box-shadow:0 0 0 1px var(--line); cursor:pointer}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent)}
+.swlab{font-size:13px; color:var(--muted); min-width:56px}
+@media (prefers-reduced-motion: reduce){ .wk *, .wk svg{animation:none !important} .spark, .ripple2{display:none} }
+.snapapp .wk *, .snapapp .wk svg{animation:none !important}
+.snapapp .spark, .snapapp .ripple2{display:none}
+.nophoto .wk, .nophoto .pinH{display:none}
+.dayend .heroBox{height:46%}
+.app.small .dayend .heroBox{height:40%}
 </style>
 
 <div class="page">
   <header class="ph">
     <div>
-      <p class="kicker">Para María · Revisión de palabras y lecciones · Dinero V4.1</p>
+      <p class="kicker">Para María y Ale · Revisión de palabras y lecciones · Dinero V4.1</p>
       <h1 class="ptitle">Dinero en Lan Hạ</h1>
-      <p class="psub">Los siete días de «Dinero y estabilidad», tal como los vería una participante. Recórrelos día por día y, en cada pantalla, anota lo que cambiarías: una palabra que no suena natural, una idea que no se entiende, un ejemplo que sobra. Al terminar, copia tus comentarios y envíalos al equipo.</p>
+      <p class="psub">Los siete días de «Dinero y estabilidad», tal como los vería una participante, que recorre siete lugares de Lan Hạ: camina, rema, trepa y se sienta a mirar mientras responde. Recórrelos día por día y, en cada pantalla, anota lo que cambiarías: una palabra que no suena natural, una idea que no se entiende, un ejemplo que sobra. Al terminar, copia tus comentarios y envíalos al equipo.</p>
     </div>
     <div class="seg" role="tablist" aria-label="Vista">
       <button role="tab" id="tabTry" aria-selected="true" aria-controls="tryView">Probar</button>
@@ -368,6 +420,13 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         <summary>Qué cambió desde V4</summary>
         <ul class="chlist" id="changesList"></ul>
       </details>
+      <details class="more" open>
+        <summary>La caminante</summary>
+        <p class="fine">Una figura de espaldas que la representa en cada lugar, sin foto ni cara. Ella elige los colores.</p>
+        <div class="swrow" id="swOutfit" role="group" aria-label="Color de la ropa"><span class="swlab">Ropa</span></div>
+        <div class="swrow" id="swHair" role="group" aria-label="Color del pelo" style="margin-top:6px"><span class="swlab">Pelo</span></div>
+        <div class="swrow" id="swSkin" role="group" aria-label="Tono de piel" style="margin-top:6px"><span class="swlab">Piel</span></div>
+      </details>
       <details class="more">
         <summary>Probar también</summary>
         <fieldset class="toggles">
@@ -396,16 +455,14 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   <section id="revView" class="rev" role="tabpanel" aria-labelledby="tabRev" hidden>
     <div class="revtext">
       <div class="revcard">
-        <h3>Cómo vuelve la calidez</h3>
+        <h3>Ella dentro del lugar</h3>
         <ul>
-          <li><b>Más Ventana.</b> El paisaje llena la pantalla y un panel de vidrio blanco flota encima, con la tipografía sans cálida de Ventana. Sin papel beige. Los botones negros pasan al verde bosque de Elara.</li>
-          <li><b>El lugar sigue respirando.</b> La foto de cada día ocupa la mitad de arriba y cambia con la semana: muelle, niebla, balsas, cueva, laguna, pueblo, bahía.</li>
-          <li><b>El hilo del Atlas.</b> Siete puntos: azul donde ya caminó, a lápiz lo que viene. Muestra el progreso sin puntos, rachas ni premios.</li>
-          <li><b>Atlas vuelve como pestaña.</b> Hoy es la práctica del día; Atlas es el cuaderno de la semana: el lugar, el hilo y cada día con lo que se llevó.</li>
-          <li><b>Un lugar vivo, sin ruido.</b> En Hoy el agua se mueve apenas, la niebla pasa despacio y la foto respira. Se detiene si el teléfono pide menos movimiento.</li>
-          <li><b>Lo que se llevó, en la fila de Recuerdo.</b> Una fila discreta con un marcador verde, solo para lo que guardó, que lleva a Atlas. «Ayer» aparece solo si fue ayer; si no, dice el día.</li>
-          <li><b>Una voz humana con un lugar fijo.</b> Cada opción responde con su propia frase, en texto claro; la cursiva queda para dos líneas de compañía. Ale da la bienvenida el día 1, y su nota de voz tiene sitio en «Una idea que ayuda» cuando esté grabada.</li>
-          <li><b>Terminar se siente bien, guarde o no.</b> El cierre del día vuelve sobre el lugar, con una marca verde de hecho, igual con o sin guardar.</li>
+          <li><b>La caminante.</b> Una figura de espaldas, sin foto ni cara, la representa en cada lugar. Ella elige los colores de ropa, pelo y piel.</li>
+          <li><b>Una actividad por lugar.</b> Camina por el muelle, rema en kayak junto al acantilado, va en bote entre las balsas, trepa a la entrada de la cueva, rema de pie en la laguna, pasa en kayak por el pueblo flotante y se sienta a mirar la bahía.</li>
+          <li><b>Avanza mientras responde.</b> En la sesión, la foto de arriba la muestra a medio camino: cada momento la lleva un poco más allá y cada respuesta la hace avanzar un paso, con un pequeño brillo. No es un premio ni cuenta nada.</li>
+          <li><b>Al terminar, el siguiente lugar.</b> Un cartel marca a dónde va mañana. Al abrir el día siguiente, llega caminando.</li>
+          <li><b>Más foto, menos papel.</b> El paisaje llena la pantalla, la tarjeta es blanca, el botón es oscuro y hay una sola tipografía sans. Atlas es el inicio; Círculos, la otra pestaña.</li>
+          <li><b>Se detiene si el teléfono pide menos movimiento.</b></li>
         </ul>
       </div>
       <div class="revcard">
@@ -452,6 +509,30 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   var DAYS = W.week, U = W.ui;
   var KEY = "elara-dinero-lanha-v41b", CKEY = "elara-dinero-lanha-v41-comentarios";
   var PLACE = "Bahía de Lan Hạ", COUNTRY = "Vietnam", WEEKNO = 1;
+  var PLACES = ["El muelle", "La niebla", "Las balsas", "La cueva", "La laguna", "El pueblo flotante", "La bahía"];
+  function low(p) { return p.charAt(0).toLowerCase() + p.slice(1); }
+  /* The walker: what she does at each place, where she stands on the home photo (hx, hy in %), and her path across the session band (bx0 to bx1, by). */
+  var WALK = {
+    1: { pose: "walk", hx: 38, hy: 82, bx0: 14, bx1: 70, by: 88 },
+    2: { pose: "kayak", hx: 68, hy: 77, bx0: 20, bx1: 84, by: 82 },
+    3: { pose: "boat", hx: 56, hy: 66, bx0: 14, bx1: 80, by: 76 },
+    4: { pose: "climb", hx: 30, hy: 60, bx0: 14, bx1: 46, by: 66 },
+    5: { pose: "board", hx: 50, hy: 66, bx0: 16, bx1: 82, by: 78 },
+    6: { pose: "kayak", hx: 58, hy: 73, bx0: 14, bx1: 82, by: 88 },
+    7: { pose: "sit", hx: 46, hy: 68, bx0: 20, bx1: 64, by: 76 }
+  };
+  var SW = { outfit: ["#C94A1C", "#2F6B4F", "#3B5BA5", "#D9A21B"], hair: ["#231815", "#5A3A26", "#9A5B2E"], skin: ["#8D5B3E", "#B9825E", "#E2B48F"] };
+  /* Path Guide: closings keyed to what she said at the start (proposals, not V4.1). */
+  var CLOSE_PROP = {
+    1: { 2: "Si te sirve, deja a la vista cuánto falta y para qué pago. Ese número es información para tu próxima decisión, no una nota sobre ti." },
+    2: { 3: "Si te sirve, piensa para qué querrías un dinero y para cuándo, aunque hoy no tengas una cantidad." },
+    4: { 3: "Si algún día ves un estado de cuenta, ya sabes qué tres cosas mirar por separado." },
+    6: { 3: "Si ya enviaste dinero, lo más útil ahora es hablar pronto con tu banco o el servicio que usaste, y buscar la ayuda oficial de tu país. No envíes más dinero para recuperar lo anterior. Pedir ayuda no te hace menos cuidadosa." }
+  };
+  function closingLine(st, day, ds) {
+    var pr = CLOSE_PROP[day.n] && CLOSE_PROP[day.n][ds.s1];
+    return st.props && pr ? '<ins class="prop">' + esc(pr) + "</ins>" : T(st, day.tryLine, day.m.tryLine);
+  }
   var MOMENT = { s1: 1, idea: 2, check: 2, s3: 3, take: 4, done: 4 };
   var MNAME = { 1: "Empieza por ti", 2: "Una idea que ayuda", 3: "Hazlo tuyo", 4: "Te llevas" };
   /* Interface lines that are proposals (not V4.1). The two wording changes are only shown with «Ver las propuestas». */
@@ -480,14 +561,43 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
     bookmark: '<path d="M6.5 3.5h11v17l-5.5-4-5.5 4Z"/>',
     cal: '<rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/>',
+    photo: '<rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="15.5" cy="9.5" r="1.8"/><path d="M3.8 16.5l5-4.6 4.4 4 2.3-2 4.7 4.2"/>',
     play: '<path d="M8 5.5v13l11-6.5Z" fill="currentColor" stroke="none"/>'
   };
   function ico(name, size, sw) { return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (sw || 1.9) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + P[name] + "</svg>"; }
 
+  /* ---------- the walker ---------- */
+  function walkerSVG(st, pose) {
+    var c = st.wk || { outfit: 0, hair: 0, skin: 1 }, O = SW.outfit[c.outfit], H = SW.hair[c.hair], K = SW.skin[c.skin], PANTS = "#283041";
+    var head = '<rect x="18" y="13" width="4" height="5" rx="1" fill="' + K + '"/><circle cx="20" cy="10.5" r="5.8" fill="' + H + '"/><circle cx="20" cy="4.2" r="3" fill="' + H + '"/>';
+    var torso = function (y0, y1) { return '<path d="M12.6 ' + (y0 + 1) + ' Q20 ' + (y0 - 2.5) + ' 27.4 ' + (y0 + 1) + ' L26.6 ' + y1 + ' L13.4 ' + y1 + ' Z" fill="' + O + '"/>'; };
+    var armsDown = '<g class="arm l"><path d="M13.2 21.5 L10.6 33.5" stroke="' + K + '" stroke-width="3.2" stroke-linecap="round"/></g><g class="arm r"><path d="M26.8 21.5 L29.4 33.5" stroke="' + K + '" stroke-width="3.2" stroke-linecap="round"/></g>';
+    var legs = '<g class="lg l"><rect x="14.8" y="36" width="4.8" height="21" rx="2.4" fill="' + PANTS + '"/></g><g class="lg r"><rect x="20.4" y="36" width="4.8" height="21" rx="2.4" fill="' + PANTS + '"/></g>';
+    var paddle = function (col) { return '<g class="pad"><path d="M1 46 L39 34" stroke="#3A2A1E" stroke-width="1.8" stroke-linecap="round"/><ellipse cx="2.5" cy="45.5" rx="3.4" ry="1.6" transform="rotate(-18 2.5 45.5)" fill="' + col + '"/><ellipse cx="37.5" cy="34.5" rx="3.4" ry="1.6" transform="rotate(-18 37.5 34.5)" fill="' + col + '"/></g>'; };
+    var body = "";
+    if (pose === "walk") body = legs + torso(19, 38) + armsDown + head;
+    else if (pose === "kayak") body = torso(19, 44) + head + '<path d="M0 49 Q20 44 40 49 Q20 56 0 49 Z" fill="#E3A82B"/><path d="M8 48.6 Q20 46.4 32 48.6" stroke="#B57F14" stroke-width="1" fill="none"/>' + paddle("#E3A82B");
+    else if (pose === "boat") body = torso(19, 44) + head + '<path d="M-2 45 L42 45 L36 55 L4 55 Z" fill="#7A4F2E"/><path d="M-2 45 L42 45" stroke="#5C3A20" stroke-width="1.6"/>' + '<g class="pad"><path d="M4 50 L-6 58 M36 50 L46 58" stroke="#3A2A1E" stroke-width="1.8" stroke-linecap="round"/></g>';
+    else if (pose === "board") body = legs + torso(19, 38) + '<path d="M13.2 21.5 L8 30" stroke="' + K + '" stroke-width="3.2" stroke-linecap="round"/><path d="M26.8 21.5 L31 28" stroke="' + K + '" stroke-width="3.2" stroke-linecap="round"/>' + head + '<ellipse cx="20" cy="57.5" rx="21" ry="2.6" fill="#F2F2EE"/><g class="pad"><path d="M31 18 L34 58" stroke="#3A2A1E" stroke-width="1.6" stroke-linecap="round"/></g>';
+    else if (pose === "climb") body = '<g class="lg l"><rect x="14.8" y="36" width="4.8" height="21" rx="2.4" fill="' + PANTS + '"/></g><path d="M22.8 37 L28 45 L25 55" stroke="' + PANTS + '" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' + torso(19, 38) + '<g class="arm l"><path d="M13.6 21 L9 8" stroke="' + K + '" stroke-width="3.2" stroke-linecap="round"/></g><g class="arm r"><path d="M26.4 21 L32 11" stroke="' + K + '" stroke-width="3.2" stroke-linecap="round"/></g>' + head;
+    else body = '<ellipse cx="20" cy="54" rx="17" ry="5" fill="#6B675F"/><path d="M5 52 Q20 46 35 52" fill="#7C776E"/>' + torso(23, 49) + '<path d="M13.6 26 L11.5 40" stroke="' + K + '" stroke-width="3.2" stroke-linecap="round"/><path d="M26.4 26 L28.5 40" stroke="' + K + '" stroke-width="3.2" stroke-linecap="round"/>' + head.replace(/y="13"/, 'y="17"').replace(/cy="10.5"/, 'cy="14.5"').replace(/cy="4.2"/, 'cy="8.2"');
+    return '<svg viewBox="0 0 40 58" aria-hidden="true" focusable="false">' + body + "</svg>";
+  }
+  function walker(st, day, ctx, x, y, from) {
+    var w = WALK[day.n], fl = /kayak|boat|board/.test(w.pose);
+    return '<div class="wk' + (fl ? " float" : "") + '" data-ctx="' + ctx + '" data-x="' + x + '" data-y="' + y + '"' + (from != null ? ' data-from="' + from + '"' : "") + ' style="left:' + x + "%;top:" + y + '%">' + walkerSVG(st, w.pose) + "</div>";
+  }
+  function pinH(x, y, text) { return '<div class="pinH" style="left:' + x + "%;top:" + y + '%"><span>' + esc(text) + "</span><i></i><b></b></div>"; }
+  function bandPos(st, day, ds) {
+    var w = WALK[day.n], m = MOMENT[st.step] || 1, span = w.bx1 - w.bx0;
+    var answered = (st.step === "s1" && ds.s1 != null) || (st.step === "check" && ds.check != null) || (st.step === "s3" && (ds.s3 != null || ds.pick != null)) || (st.step === "take" && ds.take === "choose");
+    return Math.round(w.bx0 + (m - 1) * span / 4 + (answered ? span / 8 : 0));
+  }
+
   /* ---------- state ---------- */
   function blankDay() { return { started: false, last: "s1", s1: null, otherOpen: false, other: "", check: null, s3: null, note: "", notePass: false, exOpen: false, rulesOpen: false, pick: null, take: null, sel: { rule: true, note: true }, failed: false, done: false, doneCal: null, saved: null }; }
-  function fresh() { var d = {}; DAYS.forEach(function (x) { d[x.n] = blankDay(); }); return { cal: 1, view: "home", day: 1, step: "s1", sheet: null, share: { rule: true, note: false }, shared: false, showMine: false, big: false, small: false, failSave: false, marks: false, props: false, voice: false, nophoto: false, d: d }; }
-  function load() { try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.d && s.d[7] && s.cal) { s.sheet = null; return s; } } catch (e) {} return null; }
+  function fresh() { var d = {}; DAYS.forEach(function (x) { d[x.n] = blankDay(); }); return { wk: { outfit: 0, hair: 0, skin: 1 }, arrived: {}, cal: 1, view: "home", day: 1, step: "s1", sheet: null, share: { rule: true, note: false }, shared: false, showMine: false, big: false, small: false, failSave: false, marks: false, props: false, voice: false, nophoto: false, d: d }; }
+  function load() { try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.d && s.d[7] && s.cal) { s.sheet = null; if (!s.wk) s.wk = { outfit: 0, hair: 0, skin: 1 }; if (!s.arrived) s.arrived = {}; return s; } } catch (e) {} return null; }
   function persist() { try { localStorage.setItem(KEY, JSON.stringify(Object.assign({}, S, { sheet: null, live: false }))); } catch (e) {} }
   var S = load() || fresh();
 
@@ -518,8 +628,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   function img(day, cls) { return '<img class="' + (cls || "") + '" src="' + day.photo.src + '" alt="' + esc(day.photo.alt) + '" style="object-position:' + day.photo.pos + '">'; }
   function tabs(active) {
     return '<nav class="tabs" aria-label="Secciones">' +
-      '<button type="button" data-act="hoy"' + (active === "hoy" ? ' aria-current="page"' : "") + ">" + ico("sun", 26, 1.7) + "<span>Hoy</span></button>" +
-      '<button type="button" data-act="atlas"' + (active === "atlas" ? ' aria-current="page"' : "") + ">" + ico("atlas", 26, 1.7) + "<span>Atlas</span></button>" +
+      '<button type="button" data-act="hoy"' + (active === "hoy" || active === "atlas" ? ' aria-current="page"' : "") + ">" + ico("photo", 26, 1.8) + "<span>Atlas</span></button>" +
       '<button type="button" data-act="circulos"' + (active === "circulos" ? ' aria-current="page"' : "") + ">" + ico("people", 26, 1.7) + "<span>Círculos</span></button></nav>";
   }
   function thread(st, current, total, asButton) {
@@ -568,19 +677,16 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       var welcome = (n === 1 && !ds.started) ? '<button type="button" class="welcome" data-act="sheet" data-k="welcome"><span class="playdisc">' + ico("play", 16) + '</span><span class="t"><span class="label">Antes de empezar</span><b>Una bienvenida de Ale</b></span></button>' : "";
       var nextStep = h.kind === "resume" ? '<p class="meta">Tu próximo paso: ' + esc(MNAME[MOMENT[ds.last || "s1"]]) + "</p>" : '<p class="meta">' + ico("lock", 14, 2) + "<span>Unos 3 a 5 minutos · respuestas privadas</span></p>";
       body = (gap ? '<p class="returnnote voice it">Tu día ' + n + " te espera. No se pierde nada.</p>" : "") +
-        weekThread(st, n, "Día " + n + " de 7") +
         '<p class="eyebrow">Dinero y estabilidad · Día ' + n + " de 7</p>" +
-        '<h1 class="title" tabindex="-1" data-focus>' + T(st, day.title, day.m.title) + "</h1>" +
-        '<p class="purpose"><span class="label">Para qué es hoy</span>' + esc(day.purpose) + "</p>" + nextStep +
+        '<h1 class="title" tabindex="-1" data-focus>' + T(st, day.title, day.m.title) + "</h1>" + nextStep +
         '<button type="button" class="btn mt14" data-act="start">' + (h.kind === "resume" ? "Seguir con el día " : "Empezar el día ") + n + ico("arrow", 20, 2) + "</button>" +
         welcome + reminder;
     } else if (h.kind === "doneToday") {
       var sv = ds.saved, today = keptText(st, sv);
       var lead = today ? slip("Hoy te llevas", today, { cls: "today" }) :
         (sv && sv.note ? '<p class="voice mt14">Tu nota quedó en Tus días.</p>' : '<p class="voice it mt14">Hoy queda hecho, tal como lo dejaste.</p>');
-      var nextLine = day.next ? '<p class="next mt14">Mañana: ' + T(st, day.next, day.m.next) + "</p>" : '<p class="voice mt14">' + T(st, day.tryLine, day.m.tryLine) + "</p>";
-      body = weekThread(st, n + 1 > 7 ? 8 : n + 1, n === 7 ? "Semana completa" : "Día " + n + " de 7") +
-        '<p class="eyebrow done"><span class="tick">' + ico("check", 12, 3) + "</span><span>Día " + n + " hecho" + (n === 7 ? " · Semana " + WEEKNO + " completa" : "") + "</span></p>" +
+      var nextLine = day.next ? '<p class="next mt14">Mañana: ' + T(st, day.next, day.m.next) + "</p>" : '<p class="voice mt14">' + closingLine(st, day, ds) + "</p>";
+      body = '<p class="eyebrow done"><span class="tick">' + ico("check", 12, 3) + "</span><span>Día " + n + " hecho" + (n === 7 ? " · Semana " + WEEKNO + " completa" : "") + "</span></p>" +
         '<h1 class="title" tabindex="-1" data-focus>' + T(st, day.title, day.m.title) + "</h1>" + lead + nextLine +
         (n === 7 ? '<button type="button" class="btn mt14" data-act="tusdias">Ver tu semana</button>' : "") +
         '<div class="links mt10">' +
@@ -589,8 +695,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         "</div>" + (n === 7 ? "" : daysRow());
     } else { /* weekDone: the morning after day 7 */
       var keptList = DAYS.map(function (x) { return keptText(st, st.d[x.n].saved); }).filter(Boolean);
-      body = weekThread(st, 8, "Semana completa") +
-        '<p class="eyebrow">Semana ' + WEEKNO + " · Dinero y estabilidad</p>" +
+      body = '<p class="eyebrow">Semana ' + WEEKNO + " · Dinero y estabilidad</p>" +
         '<h1 class="title" tabindex="-1" data-focus>Lo que te llevaste esta semana</h1>' +
         (keptList.length ? keptList.slice(-3).map(function (t, i) { return slip(i === 0 ? "De tu semana" : "", t, {}); }).join("").replace(/<span class="label"><\/span>/g, "") :
           '<p class="voice mt14">Hiciste los siete días. Tus días guarda cada uno, por si quieres volver.</p>') +
@@ -598,9 +703,12 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       eyebrowTxt = "";
     }
     var heroAlt = '<img class="hero" src="' + day.photo.src + '" alt="" aria-hidden="true" style="object-position:' + day.photo.pos + '">';
+    var w = WALK[day.n], arrive = (h.kind === "before" && n > 1 && !st.arrived[n]) ? -10 : null;
+    var nextDay = DAYS[n], pinTxt = (h.kind === "doneToday" && nextDay) ? pinH(Math.min(w.hx + 26, 74), w.hy - 30, "Mañana, " + low(PLACES[n])) : "";
+    var scene = walker(st, day, "home-" + n + "-" + h.kind, w.hx, w.hy, arrive) + pinTxt;
     return '<div class="home">' + bg(day) + '<div class="heroFallback"></div>' +
-      '<div class="heroBox" style="--water:' + day.photo.water + '"><div class="heroInner">' + img(day, "hero") + heroAlt.replace('class="hero"', 'class="hero water"') + '</div><div class="mist" aria-hidden="true"></div></div>' +
-      '<div class="scroll"><div class="col"><div class="spacer"><div class="hdr"><p class="place">' + ico("pin", 16, 2) + esc(PLACE + ", " + COUNTRY) + "</p>" +
+      '<div class="heroBox" style="--water:' + day.photo.water + '"><div class="heroInner">' + img(day, "hero") + heroAlt.replace('class="hero"', 'class="hero water"') + scene + '</div><div class="mist" aria-hidden="true"></div></div>' +
+      '<div class="scroll"><div class="col"><div class="spacer"><div class="hdr"><p class="place">' + ico("pin", 16, 2) + esc("Lan Hạ · " + PLACES[day.n - 1]) + "</p>" +
       '<div class="hbtns"><button type="button" class="disc" data-act="sheet" data-k="help" aria-label="Ayuda">?</button><button type="button" class="disc" data-act="sheet" data-k="profile" aria-label="Perfil y ajustes">' + ico("person", 22, 1.8) + "</button></div></div></div>" +
       '<section class="page2" aria-label="Tu día">' + body + "</section></div></div>" + tabs("hoy") + "</div>";
   }
@@ -612,6 +720,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       var showYesterday = day.yesterday && st.day === firstOpen(st) && yesterdayAccurate(st, day.n);
       return eyebrow(day.n, "Empieza por ti") +
         '<h1 class="title" style="margin-top:-8px !important" tabindex="-1" data-focus>' + T(st, day.title, day.m.title) + "</h1>" +
+        '<p class="purpose"><span class="label">Para qué es hoy</span>' + esc(day.purpose) + "</p>" +
         (showYesterday ? '<div class="yday"><p class="label">Ayer viste</p><p class="voice">«' + esc(day.yesterday) + "»</p></div>" : "") +
         '<p class="q">' + esc(day.s1.q) + "</p>" + opts(st, "s1", day.s1.opts, ds.s1) +
         '<div class="passwrap"><button type="button" class="link" data-act="pass" aria-pressed="' + (ds.s1 === "pass") + '">Prefiero pasar</button>' +
@@ -672,7 +781,8 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     return bar('<div class="row2b">' + (i > 0 ? '<button type="button" class="btn2" data-act="back">Atrás</button>' : "") + '<button type="button" class="btn" data-act="next">' + label + ico("arrow", 20, 2) + "</button></div>");
   }
   function band(st, day, m) {
-    return '<div class="band">' + img(day) + '<div class="bandbar"><button type="button" class="disc" data-act="close" aria-label="Salir al inicio">' + ico("x", 20, 2.2) + "</button>" +
+    var ds = st.d[day.n], w = WALK[day.n];
+    return '<div class="band">' + img(day) + walker(st, day, "sess-" + day.n, bandPos(st, day, ds), w.by, st.step === "s1" && ds.s1 == null ? w.bx0 - 12 : null) + '<div class="bandbar"><button type="button" class="disc" data-act="close" aria-label="Salir al inicio">' + ico("x", 20, 2.2) + "</button>" +
       '<div class="moments" role="img" aria-label="Momento ' + m + " de 4: " + MNAME[m] + '">' + thread(st, m, 4) + "<span>" + m + " de 4</span></div></div></div>";
   }
   function sessionHTML(st) {
@@ -689,17 +799,18 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       inner = '<h2 class="h2" tabindex="-1" data-focus>' + esc(U.savedOk) + "</h2>" +
         (sv.rule ? slip(day.n === 7 ? "La regla que elegiste" : "La regla de hoy", sv.rule, {}) : "") +
         (sv.note ? slip("Tu nota", sv.note, {}) : "") +
-        '<p class="voice">' + T(st, day.tryLine, day.m.tryLine) + "</p>" + next;
+        '<p class="voice">' + closingLine(st, day, ds) + "</p>" + next;
     } else {
       inner = '<p class="read sm" tabindex="-1" data-focus>' + Pr(st, "unsaved") + "</p>" +
         '<div class="links"><button type="button" class="link u" data-act="goto" data-k="idea"><span>Volver a la explicación</span></button><button type="button" class="link u" data-act="choose"><span>Elegir qué guardar</span></button></div>' +
-        '<p class="voice">' + T(st, day.tryLine, day.m.tryLine) + "</p>" + next;
+        '<p class="voice">' + closingLine(st, day, ds) + "</p>" + next;
     }
-    return '<div class="dayend">' + bg(day) + '<div class="heroBox"><div class="heroInner">' + img(day, "hero") + "</div></div>" +
+    var w = WALK[day.n], nd = DAYS[day.n];
+    return '<div class="dayend">' + bg(day) + '<div class="heroBox"><div class="heroInner">' + img(day, "hero") + walker(st, day, "end-" + day.n, w.hx, w.hy, null) + (nd ? pinH(Math.min(w.hx + 26, 74), w.hy - 30, "Mañana, " + low(PLACES[day.n])) : "") + "</div></div>" +
       '<div class="scroll"><div class="col"><div class="spacer"></div><section class="page2" aria-label="Día terminado">' +
       '<p class="eyebrow done"><span class="tick">' + ico("check", 12, 3) + "</span><span>Día " + day.n + " hecho" + (day.n === 7 ? " · Semana " + WEEKNO + " completa" : "") + "</span></p>" +
       '<div class="stack">' + inner + "</div></section></div></div>" +
-      '<div class="actions"><button type="button" class="btn" data-act="home">Volver a Hoy</button></div></div>';
+      '<div class="actions"><button type="button" class="btn" data-act="home">Volver al inicio</button></div></div>';
   }
 
   /* ---------- Tus días, Círculos ---------- */
@@ -802,7 +913,33 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     if (nsc) nsc.scrollTop = key === lastKey ? top : 0;
     if (wantFocus && key !== lastKey) { var f = appEl.querySelector(S.sheet ? ".bsheet [data-focus]" : "[data-focus]"); if (f) f.focus({ preventScroll: true }); }
     wantFocus = false; lastKey = key;
+    moveWalker();
     syncPanel(); persist();
+  }
+  var lastWk = null, cheer = false;
+  function stillNow() { return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); }
+  function moveWalker() {
+    var el = appEl.querySelector(".wk"), doCheer = cheer; cheer = false;
+    if (!el) { lastWk = null; return; }
+    var ctx = el.dataset.ctx, x = +el.dataset.x, y = +el.dataset.y, from = el.dataset.from, base = ctx.split("-").slice(0, 2).join("-");
+    var still = stillNow() || !el.animate;
+    if (!still) {
+      var x0 = null;
+      if (lastWk && lastWk.base === base && lastWk.x !== x) x0 = lastWk.x;
+      else if (from != null && (!lastWk || lastWk.base !== base)) x0 = +from;
+      if (x0 != null) {
+        el.classList.add("moving");
+        var a = el.animate([{ left: x0 + "%" }, { left: x + "%" }], { duration: Math.min(2200, 500 + Math.abs(x - x0) * 40), easing: "ease-in-out" });
+        a.onfinish = function () { el.classList.remove("moving"); };
+      }
+      if (doCheer) {
+        el.classList.add("cheer");
+        var sp = '<span class="spark">' + [[-14, -16], [0, -22], [14, -16], [-20, -4], [20, -4]].map(function (d, i) { return '<i style="--dx:' + d[0] + "px;--dy:" + d[1] + "px;animation-delay:" + (i * 40) + 'ms"></i>'; }).join("") + "</span>";
+        el.insertAdjacentHTML("beforeend", sp + (el.classList.contains("float") ? '<span class="ripple2"></span>' : ""));
+      }
+    }
+    if (from != null && ctx.indexOf("home-") === 0) { var hn = +ctx.split("-")[1]; if (!S.arrived[hn]) { S.arrived[hn] = true; persist(); } }
+    lastWk = { base: base, x: x };
   }
   function go(view) { S.view = view; S.sheet = null; }
   function openSession(n, step) { S.day = n; S.step = step; S.view = "session"; S.sheet = null; S.d[n].started = true; }
@@ -818,10 +955,10 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       case "home": case "hoy": go("home"); break;
       case "tusdias": case "atlas": go("tusdias"); break;
       case "circulos": go("circulos"); break;
-      case "pick": ds[k] = i; break;
-      case "pass": ds.s1 = ds.s1 === "pass" ? null : "pass"; break;
+      case "pick": ds[k] = i; cheer = true; break;
+      case "pass": ds.s1 = ds.s1 === "pass" ? null : "pass"; cheer = true; break;
       case "toggle": ds[k] = !ds[k]; break;
-      case "rule-pick": ds.pick = ds.pick === i ? null : i; break;
+      case "rule-pick": ds.pick = ds.pick === i ? null : i; cheer = true; break;
       case "use-phrase": ds.note = day.s3.opts[i].phrase; ds.notePass = false; break;
       case "next": S.step = list[Math.min(list.indexOf(S.step) + 1, list.length - 1)]; ds.last = S.step; break;
       case "back": S.step = list[Math.max(list.indexOf(S.step) - 1, 0)]; ds.last = S.step; break;
@@ -906,6 +1043,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 
   /* ---------- review panel ---------- */
   function syncPanel() {
+    if (document.getElementById("swOutfit").children.length < 2) renderSwatches();
     document.getElementById("dayChips").innerHTML = DAYS.map(function (day) {
       return '<button type="button" class="chip" data-start="' + day.n + '" aria-pressed="' + (homeState(S).n === day.n && S.view === "home") + '" aria-label="Empezar en el día ' + day.n + ', con los días anteriores hechos">' + day.n + "</button>";
     }).join("");
@@ -917,11 +1055,20 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     document.getElementById("markLegend").hidden = !S.marks;
     document.getElementById("propLegend").hidden = !S.props;
   }
+  function renderSwatches() {
+    [["swOutfit", "outfit", "Ropa"], ["swHair", "hair", "Pelo"], ["swSkin", "skin", "Piel"]].forEach(function (g) {
+      var box = document.getElementById(g[0]);
+      box.innerHTML = '<span class="swlab">' + g[2] + "</span>" + SW[g[1]].map(function (c, i) { return '<button type="button" class="sw" data-sw="' + g[1] + '" data-i="' + i + '" aria-pressed="' + (S.wk[g[1]] === i) + '" aria-label="' + g[2] + " " + (i + 1) + '" style="background:' + c + '"></button>'; }).join("");
+    });
+  }
+  document.querySelector(".panel").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-sw]"); if (!b) return; S.wk[b.dataset.sw] = +b.dataset.i; renderSwatches(); render(); if (!allView.hidden) renderAll(); if (!revView.hidden) renderRev();
+  });
   /* Start on day N as if days 1..N-1 were done on consecutive days, each with its rule saved. */
   function historyUpTo(st, n) {
     DAYS.forEach(function (x) { st.d[x.n] = blankDay(); });
     for (var k = 1; k < n; k++) { var dk = st.d[k]; dk.done = true; dk.started = true; dk.doneCal = k; dk.take = "saved"; dk.saved = { rule: k === 7 ? DAYS[6].rules.list[0] : DAYS[k - 1].rule, note: null }; if (k === 7) dk.pick = 0; }
-    st.cal = n; st.view = "home"; st.sheet = null; st.day = n; st.step = "s1";
+    st.arrived = {}; st.cal = n; st.view = "home"; st.sheet = null; st.day = n; st.step = "s1";
   }
   document.getElementById("dayChips").addEventListener("click", function (e) {
     var b = e.target.closest("[data-start]"); if (!b) return; historyUpTo(S, +b.dataset.start); render();
@@ -996,7 +1143,8 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   function renderRev() {
     document.getElementById("revStrip").innerHTML = REVIEW.map(function (r, i) { return frame(snapState(r.n, r.kind, r.o), r.label, r.sub, "rev:" + i); }).join("");
     document.getElementById("propTable").innerHTML = "<thead><tr><th>Dónde</th><th>V4.1 (aprobado para probar)</th><th>Propuesta</th></tr></thead><tbody>" +
-      [["Cierre sin guardar", PROP.unsaved.approved, PROP.unsaved.proposed], ["Botón para terminar", PROP.endNoSave.approved, PROP.endNoSave.proposed]]
+      [["Cierre sin guardar", PROP.unsaved.approved, PROP.unsaved.proposed], ["Botón para terminar", PROP.endNoSave.approved, PROP.endNoSave.proposed]].concat(
+        Object.keys(CLOSE_PROP).map(function (dn) { var ix = +Object.keys(CLOSE_PROP[dn])[0], d = DAYS[dn - 1]; return ["Cierre del día " + dn + " si eligió «" + d.s1.opts[ix].t + "»", d.tryLine, CLOSE_PROP[dn][ix]]; }))
         .map(function (r) { return "<tr><td>" + esc(r[0]) + "</td><td>" + esc(r[1]) + "</td><td>" + esc(r[2]) + "</td></tr>"; }).join("") + "</tbody>";
     document.getElementById("pendingList").innerHTML = [
       "Todo el contenido de Dinero V4.1 (María y Alejandra), incluidas las seis comprobaciones nuevas.",

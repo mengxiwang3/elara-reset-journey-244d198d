@@ -1,6 +1,6 @@
-ok   day 1: title and purpose (V4.1 verbatim)
+ok   day 1: title on home (V4.1 verbatim)
 ok   day 1: Ale's welcome, no reminder, no history
-ok   tabs are Hoy · Atlas · Círculos
+ok   tabs are Atlas · Círculos
 ok   home has the water ripple and drifting mist layers
 ok   day 1 home: targets ≥44px 
 ok   day 1 home: nothing wider than the screen 

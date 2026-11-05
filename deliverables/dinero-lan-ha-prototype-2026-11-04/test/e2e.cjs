@@ -44,9 +44,9 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
 
   // Day 1, no history
   let t = await text();
-  ok(has(t, W.week[0].title) && has(t, W.week[0].purpose), "day 1: title and purpose (V4.1 verbatim)");
+  ok(has(t, W.week[0].title), "day 1: title on home (V4.1 verbatim)");
   ok(has(t, "Una bienvenida de Ale") && !has(t, "te llevaste") && !has(t, "Tus días"), "day 1: Ale's welcome, no reminder, no history");
-  ok((await app.locator(".tabs button").allInnerTexts()).join("|") === "Hoy|Atlas|Círculos", "tabs are Hoy · Atlas · Círculos");
+  ok((await app.locator(".tabs button").allInnerTexts()).join("|") === "Atlas|Círculos", "tabs are Atlas · Círculos");
   ok((await app.locator(".water").count()) === 1 && (await app.locator(".mist").count()) === 1, "home has the water ripple and drifting mist layers");
   await shot("d1-0-home"); await audit("day 1 home");
 
@@ -146,7 +146,7 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
   await shot("d8-week-done");
 
   // Atlas tab
-  await click('.tabs [data-act="atlas"]');
+  await click('[data-act="tusdias"]');
   t = await text();
   ok(has(t, "Atlas") && has(t, "Tus días") && has(t, "Hecho") && has(t, "Nota de prueba del día 2"), "Atlas: the week, each day, notes visible only here");
   ok((await app.locator('.tabs [aria-current="page"]').innerText()).includes("Atlas"), "Atlas tab is current");
