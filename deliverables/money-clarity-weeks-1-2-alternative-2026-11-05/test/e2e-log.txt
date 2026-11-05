@@ -50,8 +50,21 @@ ok   es skip day 14 reaches its close
 ok   es day 14 close shows the week letter
 ok   es skip: thread has 0 pieces
 ok   day 7 offers a rule built from day 3
-ok   day 14 compass prefill: Mi dinero es para seguridad, familia y descanso. Estoy soltando la frase anterior: El dinero no crece en los árboles.
+ok   day 14 compass prefill: Mi dinero es para seguridad, familia y descanso.
 ok   day 9 follow-up quotes day 8
+ok   day 14 doesn't claim she's letting go unless day 10 says so
+ok   day 7: fixed rules no longer claim to be built from her days
+ok   day 2: «nada me sorprendió» skips the why step
+ok   day 2: back returns over the skipped step
+ok   day 10: her own sentence is in the sort
+ok   day 14: letting go only after day 10 says so → Mi dinero es para seguridad, familia y descanso. Estoy soltando la frase anterior: La familia es primero.
+ok   day 12 asks about day 11's plan
+ok   day 12: «No pasó» gets its own reply
+ok   day 5: «Control» gets alternatives that fit it
+ok   day 13: pressure leads to the help message
+ok   day 13: Help opens a sheet
+ok   day 13: she can end the day without rehearsing
+ok   day 13: the disclosure isn't stored
 ok   layers off: no proposals in the day
 ok   no page errors 
-56 passed, 0 failed
+69 passed, 0 failed

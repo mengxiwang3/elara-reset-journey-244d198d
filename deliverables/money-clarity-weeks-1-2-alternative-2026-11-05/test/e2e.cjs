@@ -60,6 +60,37 @@ const ok = (c, m) => { c ? pass++ : fail++; log.push((c ? "ok   " : "FAIL ") + m
   const v14 = await p.$eval("#app textarea.field", (e) => e.value); ok(/Mi dinero es para/.test(v14), "day 14 compass prefill: " + v14);
   await p.click('#panel [data-pa="day"][data-n="9"]'); await p.click('#app [data-act="start"]');
   ok(/Dijiste: probar tu regla/.test(await appText()), "day 9 follow-up quotes day 8");
+  // the eight usefulness fixes
+  ok(!/Estoy soltando/.test(v14), "day 14 doesn't claim she's letting go unless day 10 says so");
+  await p.click('#panel [data-pa="day"][data-n="7"]'); await p.click('#app [data-act="start"]'); await p.click('#app [data-act="next"]');
+  ok(!/Hecha con tu día 1 y tu día 6/.test(await appText()), "day 7: fixed rules no longer claim to be built from her days");
+  await p.click('#panel [data-pa="day"][data-n="2"]'); await p.click('#app [data-act="start"]');
+  await p.click('#app [data-act="pick"]'); await p.click('#app [data-act="next"]');
+  await p.click('#app [data-act="multi"][data-k="5"]'); await p.click('#app [data-act="next"]');
+  await p.click('#app [data-act="pick"]'); await p.click('#app [data-act="next"]');
+  ok((await p.$eval("#panel .nowlabel", (e) => e.textContent)).endsWith("d2.feels"), "day 2: «nada me sorprendió» skips the why step");
+  await p.click('#app [data-act="back"]'); ok((await p.$eval("#panel .nowlabel", (e) => e.textContent)).endsWith("d2.surprised"), "day 2: back returns over the skipped step");
+  await p.click('#panel [data-pa="reset"]');
+  await p.click('#panel [data-pa="day"][data-n="10"]'); await p.click('#app [data-act="start"]');
+  await p.fill("#app textarea.field", "La familia es primero"); await p.click('#app [data-act="next"]'); await p.click('#app [data-act="next"]');
+  ok(/«La familia es primero»/.test(await appText()), "day 10: her own sentence is in the sort");
+  const cnt10 = (await p.$$("#app .sortrow")).length; for (let j = 0; j < cnt10; j++) { const rows = await p.$$("#app .sortrow"); await (await rows[j].$$("button"))[1].click(); }
+  for (let j = 0; j < 6; j++) { const nb = await p.$('#app [data-act="next"]'); if (!nb || await nb.isDisabled()) { const sk = await p.$('#app [data-act="skip"]'); if (sk) await sk.click(); else break; } else await nb.click(); if (await p.$("#app .dayend")) break; }
+  await p.click('#app [data-act="finish"][data-s="1"]');
+  await p.click('#panel [data-pa="next"]'); await p.click('#panel [data-pa="day"][data-n="14"]'); await p.click('#app [data-act="start"]');
+  const v14b = await p.$eval("#app textarea.field", (e) => e.value); ok(/soltando la frase anterior: La familia es primero/.test(v14b), "day 14: letting go only after day 10 says so → " + v14b);
+  await p.click('#panel [data-pa="day"][data-n="12"]'); await p.click('#app [data-act="start"]');
+  ok(/El día 11 planeaste/.test(await appText()), "day 12 asks about day 11's plan");
+  await p.click('#app [data-act="fu"][data-k="2"]'); ok(/No llegó el momento/.test(await appText()), "day 12: «No pasó» gets its own reply");
+  await p.click('#panel [data-pa="day"][data-n="5"]'); await p.click('#app [data-act="start"]');
+  await p.click('#app [data-act="pick"][data-k="1"]'); for (let j = 0; j < 4; j++) { const t = await appText(); if (/cubrir esa necesidad|darte un poco/.test(t)) break; const nb = await p.$('#app [data-act="next"]'); if (await nb.isDisabled()) { const pk = await p.$('#app [data-act="pick"]'); if (pk) await pk.click(); else await p.fill("#app textarea.field", "x"); } await p.click('#app [data-act="next"]'); }
+  ok(/Mirar mi saldo cinco minutos/.test(await appText()), "day 5: «Control» gets alternatives that fit it");
+  await p.click('#panel [data-pa="day"][data-n="13"]'); await p.click('#app [data-act="start"]');
+  await p.click('#app [data-act="safe"]'); ok(/abre Ayuda/.test(await appText()), "day 13: pressure leads to the help message");
+  await p.click('#app [data-act="help"]'); ok(!!(await p.$("#app .bsheet")), "day 13: Help opens a sheet");
+  await p.click('#app .bsheet [data-act="closehelp"]'); await p.click('#app [data-act="endnow"]');
+  ok(!!(await p.$("#app .dayend")), "day 13: she can end the day without rehearsing");
+  ok(!/_safe|presionada/.test(await p.evaluate(() => localStorage.getItem("elara-claridad-w12-alt-v1"))), "day 13: the disclosure isn't stored");
   // layers off: no proposal markup inside the app
   await p.click('#panel [data-pa="day"][data-n="7"]'); await p.click('#panel input[data-pa="layers"]');
   await p.click('#app [data-act="start"]'); await p.click('#app [data-act="next"]');

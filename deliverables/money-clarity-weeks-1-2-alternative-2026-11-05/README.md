@@ -39,3 +39,18 @@ Each layer is marked as a proposal. Turn off "Capas nuevas" to see only the appr
 - All marked lines.
 - Whether "Tu hilo" replaces or sits beside "Tu colección".
 - The AI images.
+
+## v2: usefulness fixes (2026-11-05)
+After an audit of all 14 days:
+1. **Day 14:** the draft says «Estoy soltando la frase anterior» only if on day 10 she marked her sentence «Ya no es mía».
+2. **Day 7:** with the new layers on, the three fixed rules no longer say «Hecha con tu día…», because they're the same for everyone.
+3. **Day 10:** her own sentence joins the «Todavía es mía / Ya no es mía» sort.
+4. **Days 5 and 6:** day 5's alternatives fit the need she named, and day 6 brings her alternative back.
+5. **Follow-ups:** day 12 asks how the spend planned on day 11 went, and day 14 asks about the day 13 conversation. «No pasó» is a full answer.
+6. **«La idea de hoy»:** only on days 1, 3, 8, 11, 12 and 14. On the other eight days it would repeat a line she had already read.
+7. **Day 13:** «Me siento presionada o amenazada por dinero» opens Help and lets her end the day. Nothing is stored. The Help route is a placeholder until Codedale wires it.
+8. **Day 2:** «Esta vez nada me sorprendió» skips «¿Qué te sorprendió de eso?».
+
+Still for María and Ale: should any week look at a real amount? None of the 14 days does.
+
+e2e: 69/69.
