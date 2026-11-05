@@ -1,11 +1,18 @@
+ok   es: before day 1 she sees what she'll learn
+ok   es: then she's asked what she wants to understand
+ok   es: her topic says which day it arrives
 ok   es answer day 1 reaches its close
 ok   es answer day 2 reaches its close
+ok   es: day 3 is tagged as her topic
 ok   es answer day 3 reaches its close
 ok   es answer day 4 reaches its close
 ok   es answer day 5 reaches its close
 ok   es answer day 6 reaches its close
 ok   es answer day 7 reaches its close
 ok   es day 7 close shows the week letter
+ok   es day 7 close sums up what she learned
+ok   es day 7 close recalls her topic
+ok   es: day 8 shows what week 2 teaches
 ok   es answer day 8 reaches its close
 ok   es answer day 9 reaches its close
 ok   es answer day 10 reaches its close
@@ -14,15 +21,23 @@ ok   es answer day 12 reaches its close
 ok   es answer day 13 reaches its close
 ok   es answer day 14 reaches its close
 ok   es day 14 close shows the week letter
+ok   es day 14 close sums up what she learned
 ok   es answer: thread has 14 pieces
+ok   en: before day 1 she sees what she'll learn
+ok   en: then she's asked what she wants to understand
+ok   en: her topic says which day it arrives
 ok   en answer day 1 reaches its close
 ok   en answer day 2 reaches its close
+ok   en: day 3 is tagged as her topic
 ok   en answer day 3 reaches its close
 ok   en answer day 4 reaches its close
 ok   en answer day 5 reaches its close
 ok   en answer day 6 reaches its close
 ok   en answer day 7 reaches its close
 ok   en day 7 close shows the week letter
+ok   en day 7 close sums up what she learned
+ok   en day 7 close recalls her topic
+ok   en: day 8 shows what week 2 teaches
 ok   en answer day 8 reaches its close
 ok   en answer day 9 reaches its close
 ok   en answer day 10 reaches its close
@@ -31,7 +46,10 @@ ok   en answer day 12 reaches its close
 ok   en answer day 13 reaches its close
 ok   en answer day 14 reaches its close
 ok   en day 14 close shows the week letter
+ok   en day 14 close sums up what she learned
 ok   en answer: thread has 14 pieces
+ok   es: before day 1 she sees what she'll learn
+ok   es: then she's asked what she wants to understand
 ok   es skip day 1 reaches its close
 ok   es skip day 2 reaches its close
 ok   es skip day 3 reaches its close
@@ -40,6 +58,8 @@ ok   es skip day 5 reaches its close
 ok   es skip day 6 reaches its close
 ok   es skip day 7 reaches its close
 ok   es day 7 close shows the week letter
+ok   es day 7 close sums up what she learned
+ok   es: day 8 shows what week 2 teaches
 ok   es skip day 8 reaches its close
 ok   es skip day 9 reaches its close
 ok   es skip day 10 reaches its close
@@ -48,6 +68,7 @@ ok   es skip day 12 reaches its close
 ok   es skip day 13 reaches its close
 ok   es skip day 14 reaches its close
 ok   es day 14 close shows the week letter
+ok   es day 14 close sums up what she learned
 ok   es skip: thread has 0 pieces
 ok   day 7 offers a rule built from day 3
 ok   day 14 compass prefill: Mi dinero es para seguridad, familia y descanso.
@@ -67,4 +88,4 @@ ok   day 13: she can end the day without rehearsing
 ok   day 13: the disclosure isn't stored
 ok   layers off: no proposals in the day
 ok   no page errors 
-69 passed, 0 failed
+90 passed, 0 failed

@@ -54,3 +54,12 @@ After an audit of all 14 days:
 Still for María and Ale: should any week look at a real amount? None of the 14 days does.
 
 e2e: 69/69.
+
+## v3: what she wants to learn, and what she'll learn (2026-11-05)
+- **Before day 1:**
+  - She sees "Esta semana vas a aprender a…" with four outcomes.
+  - She's asked "¿Qué te gustaría entender mejor?". She picks up to two of seven topics, or "Todavía no sé", or skips.
+  - Each topic says which day it arrives (days 1, 2, 3, 4, 5, 9 or 13). That day is tagged "Tu tema" on Hoy and in Tu hilo. The order of the days doesn't change.
+- **Day 8:** shows week 2's four outcomes before she starts.
+- **Days 7 and 14:** close with "Lo que aprendiste esta semana": the same outcomes, each with the piece she made that day, and "Querías entender «…»: lo trabajaste el día N".
+- **Status:** all new wording is a proposal. e2e: 90/90.

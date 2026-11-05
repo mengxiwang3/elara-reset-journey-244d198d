@@ -12,6 +12,15 @@ const ok = (c, m) => { c ? pass++ : fail++; log.push((c ? "ok   " : "FAIL ") + m
   async function appText() { return p.$eval("#app", (e) => e.innerText); }
   async function bad(where) { const t = await appText(); const raw = /\{[a-zA-Z0-9.#|]+\}|undefined|null|NaN/.test(t); if (raw) ok(false, where + ": raw token/undefined → " + (t.match(/.{0,40}(\{[a-zA-Z0-9.#|]+\}|undefined|null|NaN).{0,40}/) || [""])[0]); }
   async function walkDay(n, lang, mode) {
+    if (await p.$('#app [data-act="preNext"]')) {
+      ok(/(vas a aprender|you'll learn)/i.test(await appText()), lang + ": before day 1 she sees what she'll learn");
+      await p.click('#app [data-act="preNext"]');
+      ok(/(entender mejor|understand better)/i.test(await appText()), lang + ": then she's asked what she wants to understand");
+      if (mode === "skip") await p.click('#app [data-act="preSkip"]');
+      else { await p.click('#app [data-act="prePick"][data-k="2"]'); await p.click('#app [data-act="preDone"]'); ok(/(llega el día 3|arrives on day 3)/i.test(await appText()), lang + ": her topic says which day it arrives"); }
+    }
+    if (n === 3 && mode !== "skip") ok(/(Tu tema|Your topic)/.test(await appText()), lang + ": day 3 is tagged as her topic");
+    if (n === 8) ok(/(vas a aprender|you'll learn)/i.test(await appText()), lang + ": day 8 shows what week 2 teaches");
     await p.click('#app [data-act="start"]');
     for (let guard = 0; guard < 40; guard++) {
       const inEnd = await p.$("#app .dayend"); if (inEnd) break;
@@ -38,6 +47,8 @@ const ok = (c, m) => { c ? pass++ : fail++; log.push((c ? "ok   " : "FAIL ") + m
     if (!(await p.$("#app .dayend"))) { console.log(log.filter((l) => l.startsWith("FAIL")).join("\n")); console.log(await p.$eval("#panel .nowlabel", (e) => e.textContent)); await p.screenshot({ path: path.join(out, "stuck.png") }); process.exit(1); }
     await bad(lang + " d" + n + " close");
     if (n === 7 || n === 14) ok(/(semana|week)/i.test(await appText()), `${lang} day ${n} close shows the week letter`);
+    if (n === 7 || n === 14) ok(/(Lo que aprendiste|What you learned)/i.test(await appText()), `${lang} day ${n} close sums up what she learned`);
+    if (n === 7 && mode !== "skip") ok(/(lo trabajaste el día 3|worked on it on day 3)/.test(await appText()), `${lang} day 7 close recalls her topic`);
     await p.screenshot({ path: path.join(out, `${lang}-${mode}-d${n}-close.png`) });
     await p.click('#app [data-act="finish"][data-s="1"]');
     await bad(lang + " home after d" + n);

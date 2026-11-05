@@ -456,7 +456,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 
 /* ===== Weeks 1-2 alternative ===== */
 .page{max-width:1280px}
-.tag2{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:999px; background:#F8DCCB; color:#4A2410; vertical-align:2px; margin-left:6px}
+.tag2{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:999px; background:#F8DCCB; color:#4A2410; vertical-align:2px; margin-left:6px; align-self:flex-start}
 .nomarks .tag2{display:none}
 .marks .p, .marks ins.p{background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB; border-radius:3px; text-decoration:none}
 ins.p{text-decoration:none; color:inherit}
@@ -661,6 +661,15 @@ canvas.pad{width:100%; height:240px; border-radius:16px; background:#fff; border
       still10n: "Marcaste {n} como «Ya no es mía». No tienes que convencerte de nada: basta con notar cuándo hablan.",
       still10z: "Por ahora todas siguen siendo tuyas. Notar cuándo hablan ya es un paso.",
       weekT: "Tu semana en tu hilo", twoT: "Tus dos semanas",
+      willT: "Esta semana vas a aprender a…", learnedT: "Lo que aprendiste esta semana", preT: "Antes de empezar",
+      out: { 1: [[1, "Separar lo que puedes cambiar de lo que no"], [3, "Encontrar el momento en que gastas en automático y ponerle una pausa"], [4, "Poner un límite pequeño que puedas cumplir"], [7, "Escribir una regla propia para los días pesados"]],
+             2: [[9, "Decidir para qué quieres que sirva tu dinero"], [10, "Reconocer una frase heredada sobre el dinero y decidir si sigue siendo tuya"], [11, "Planear un gasto a propósito"], [13, "Encontrar palabras para un sí o un no sobre dinero"]] },
+      wkLen: "Siete días, unos minutos cada uno. Puedes saltar cualquier pregunta.",
+      topicQ: "¿Qué te gustaría entender mejor?", topicSub: "Elige hasta dos. Te decimos qué día llega cada uno. El orden de los días no cambia.",
+      topics: [[1, "Entender qué me pesa con el dinero"], [2, "Saber a dónde se va mi dinero"], [3, "Dejar de gastar en automático"], [4, "Ponerme límites que pueda cumplir"], [5, "Entender por qué gasto cuando me siento mal"], [9, "Decidir para qué es mi dinero"], [13, "Hablar de dinero con mi familia o mi pareja"]],
+      notSure: "Todavía no sé", arrives: "Llega el día {n}.", yourTopic: "Tu tema", topicLine: "Tu tema «{t}» llega el día {n}.",
+      startWeek: "Empezar la semana", later: "Saltar por ahora", seeLearn: "Seguir",
+      learnedSeen: "Lo viste", learnedSkip: "Todavía no", topicBack: "Querías entender «{t}»: lo trabajaste el día {n}.",
       inst5: "Ideas pensadas para lo que buscabas.", inst6: "Tu otra forma",
       inst: [["Un té o una ducha caliente, sin prisa", "Una llamada con alguien que quiero", "Acostarme temprano"],
              ["Mirar mi saldo cinco minutos, sin juzgarme", "Ordenar una cosa pequeña de mi casa", "Planear mañana en tres líneas"],
@@ -724,6 +733,15 @@ canvas.pad{width:100%; height:240px; border-radius:16px; background:#fff; border
       still10n: "You marked {n} as “No longer mine”. You don't have to convince yourself of anything: just notice when they speak.",
       still10z: "For now they're all still yours. Noticing when they speak is already a step.",
       weekT: "Your week in your thread", twoT: "Your two weeks",
+      willT: "This week you'll learn to…", learnedT: "What you learned this week", preT: "Before you start",
+      out: { 1: [[1, "Separate what you can change from what you can't"], [3, "Find the moment you spend on autopilot and put a pause there"], [4, "Set a small limit you can keep"], [7, "Write your own rule for heavy days"]],
+             2: [[9, "Decide what you want your money to do"], [10, "Spot an inherited money sentence and decide if it's still yours"], [11, "Plan a spend on purpose"], [13, "Find words for a yes or no about money"]] },
+      wkLen: "Seven days, a few minutes each. You can skip any question.",
+      topicQ: "What would you like to understand better?", topicSub: "Pick up to two. We'll tell you which day each one arrives. The order of the days doesn't change.",
+      topics: [[1, "Understand what weighs on me about money"], [2, "Know where my money goes"], [3, "Stop spending on autopilot"], [4, "Set limits I can keep"], [5, "Understand why I spend when I feel bad"], [9, "Decide what my money is for"], [13, "Talk about money with my family or partner"]],
+      notSure: "I don't know yet", arrives: "Arrives on day {n}.", yourTopic: "Your topic", topicLine: "Your topic “{t}” arrives on day {n}.",
+      startWeek: "Start the week", later: "Skip for now", seeLearn: "Continue",
+      learnedSeen: "You saw it", learnedSkip: "Not yet", topicBack: "You wanted to understand “{t}”: you worked on it on day {n}.",
       inst5: "Ideas chosen for what you were reaching for.", inst6: "Your other way",
       inst: [["Tea or a warm shower, unhurried", "A call with someone I love", "An early night in bed"],
              ["Look at my balance for five minutes, without judging", "Tidy one small thing at home", "Plan tomorrow in three lines"],
@@ -749,9 +767,10 @@ canvas.pad{width:100%; height:240px; border-radius:16px; background:#fff; border
   };
 
   /* ---------------- state ---------------- */
-  function fresh() { return { lang: "es", layers: true, marks: true, fill: true, day: 1, done: {}, saved: {}, ans: {}, view: "home", tab: 0, si: 0, rep: {}, cm: {} }; }
+  function fresh() { return { lang: "es", layers: true, marks: true, fill: true, day: 1, done: {}, saved: {}, ans: {}, view: "home", tab: 0, si: 0, rep: {}, cm: {}, pre: { step: 0, picked: [], done: false } }; }
   var S = fresh();
   try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.ans) S = Object.assign(fresh(), o); } } catch (e) {}
+  if (!S.pre) S.pre = { step: 0, picked: [], done: false };
   if (location.hash === "#en") S.lang = "en"; else if (location.hash === "#es") S.lang = "es";
   function persist() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
   function U() { return UI[S.lang]; }
@@ -807,6 +826,9 @@ canvas.pad{width:100%; height:240px; border-radius:16px; background:#fff; border
     return ok ? out : null;
   }
   function T(str, fb, n) { var r = tpl(str, n); if (r != null) return r; if (fb != null) { r = tpl(fb, n); if (r != null) return r; } return null; }
+  function myTopics() { return S.layers && S.pre && S.pre.done ? S.pre.picked.filter(function (i) { return i >= 0; }).map(function (i) { return { i: i, d: PP().topics[i][0], t: PP().topics[i][1] }; }) : []; }
+  function topicFor(n) { return myTopics().filter(function (x) { return x.d === n; })[0] || null; }
+  function topicTag(n) { return topicFor(n) ? ' <span class="topictag">' + esc(PP().yourTopic) + "</span>" : ""; }
   function fill(s, o) { return String(s).replace(/\{(\w)\}/g, function (_, k) { return o[k] != null ? o[k] : ""; }); }
 
   /* ---------------- the thread: what each day adds ---------------- */
@@ -846,13 +868,32 @@ canvas.pad{width:100%; height:240px; border-radius:16px; background:#fff; border
 
   function homeHTML() {
     var u = U(), n = S.day, c = C(n), body = "", done = !!S.done[n];
+    var p = PP();
+    var outList = function (w) { return '<ul class="read sm" style="padding-left:20px;display:flex;flex-direction:column;gap:6px;margin-top:8px">' + p.out[w].map(function (o) { return "<li><ins class=\"p\">" + esc(o[1]) + "</ins></li>"; }).join("") + "</ul>"; };
+    if (!done && n === 1 && S.layers && !S.pre.done && !(S.ans[1] && Object.keys(S.ans[1]).length)) {
+      if (S.pre.step === 0) {
+        body = '<p class="eyebrow">' + esc(eyebrowTxt(1)) + "</p>" + '<h1 class="title">' + esc(p.willT) + "</h1>" + tag() + outList(1) +
+          '<p class="meta">' + ico("lock", 14) + "<span>" + esc(p.wkLen) + "</span></p>" +
+          '<button type="button" class="btn mt14" data-act="preNext">' + esc(p.seeLearn) + ico("arrow", 20) + "</button>";
+      } else {
+        var pk = S.pre.picked;
+        body = '<p class="eyebrow">' + esc(p.preT) + "</p>" + '<h1 class="title">' + esc(p.topicQ) + "</h1>" + tag() + '<p class="hint mt10">' + esc(p.topicSub) + "</p>" +
+          '<div class="chips col mt10">' + p.topics.map(function (o, j) { var on = pk.indexOf(j) >= 0; return '<button type="button" class="chipbtn tall' + (on ? " on" : "") + '" data-act="prePick" data-k="' + j + '" aria-pressed="' + on + '"' + (!on && pk.filter(function (x) { return x >= 0; }).length >= 2 ? " disabled" : "") + "><span>" + esc(o[1]) + "</span><small>" + esc(fill(p.arrives, { n: o[0] })) + "</small></button>"; }).join("") +
+          '<button type="button" class="chipbtn' + (pk.indexOf(-1) >= 0 ? " on" : "") + '" data-act="prePick" data-k="-1" aria-pressed="' + (pk.indexOf(-1) >= 0) + '">' + esc(p.notSure) + "</button></div>" +
+          '<button type="button" class="btn mt14" data-act="preDone"' + (pk.length ? "" : " disabled") + ">" + esc(p.startWeek) + ico("arrow", 20) + "</button>" +
+          '<button type="button" class="link u" data-act="preSkip" style="align-self:center"><span>' + esc(p.later) + "</span></button>";
+      }
+      return '<div class="home">' + hero(n) + '<div class="scroll"><div class="col"><div class="spacer">' + header(n) + '</div><section class="page2">' + body + "</section></div></div>" + tabs(0) + "</div>";
+    }
     if (!done) {
       var started = S.view === "home" && S.si > 0 && S.sday === n;
-      body = '<p class="eyebrow">' + esc(eyebrowTxt(n)) + "</p>" +
+      body = '<p class="eyebrow">' + esc(eyebrowTxt(n)) + (S.layers ? topicTag(n) : "") + "</p>" +
         '<h1 class="title">' + esc(c.title) + "</h1>" +
         '<p class="purpose"><span class="label">' + u.forToday + "</span>" + esc(c.body) + "</p>" +
         '<p class="meta">' + ico("lock", 14) + "<span>~" + minutes(n) + " " + u.min + "</span></p>" +
-        '<button type="button" class="btn mt14" data-act="start">' + (started ? u.resume : u.start) + n + ico("arrow", 20) + "</button>";
+        (S.layers && n === 1 && !started && myTopics().length ? '<p class="meta">' + esc(myTopics().map(function (x) { return fill(p.topicLine, { t: x.t, n: x.d }); }).join(" ")) + tag() + "</p>" : "") +
+        '<button type="button" class="btn mt14" data-act="start">' + (started ? u.resume : u.start) + n + ico("arrow", 20) + "</button>" +
+        (S.layers && n === 8 && !started ? '<div class="layer mt14"><p class="lt">' + esc(p.willT) + tag() + "</p>" + outList(2) + "</div>" : "");
       if (c.intro) body += '<button type="button" class="welcome" data-act="video"><span class="playdisc">' + ico("play", 16) + '</span><span class="t"><span class="label">' + esc(c.intro.title) + "</span><b>" + u.welcomeT + "</b></span></button>" + (S.video === n ? '<p class="voice it">' + esc(c.intro.note) + "</p>" : "");
       if (S.layers) { var last = lastKnot(n); if (last) body += '<div class="slip"><span class="kic">' + ico("thread", 18) + '</span><span class="kb"><span class="label">' + esc(last.k.label) + " · " + u.day + " " + last.n + tag() + '</span><span class="kept">' + esc(last.k.main) + "</span></span></div>"; }
     } else {
@@ -872,7 +913,7 @@ canvas.pad{width:100%; height:240px; border-radius:16px; background:#fff; border
     for (var d = 1; d <= 14; d++) {
       if (d === 1 || d === 8) rows += '<li style="grid-template-columns:1fr"><p class="wk2">' + (d === 1 ? u.pW1 : u.pW2) + "</p></li>";
       var k = S.done[d] && S.saved[d] !== false ? knot(d) : null;
-      rows += '<li class="' + (k ? "on" : "") + '"><span class="kd">' + d + '</span><span><span class="hl1">' + esc(p.knot[d]) + '</span><br><span class="hl2">' + (k ? esc(k.main) : '<span class="hl3">' + (S.done[d] ? (S.saved[d] === false ? u.unsaved : u.noPiece) : u.notYet) + "</span>") + "</span>" + (k && k.extra ? '<br><span class="hl3">' + esc(k.extra) + "</span>" : "") + "</span></li>";
+      rows += '<li class="' + (k ? "on" : "") + '"><span class="kd">' + d + '</span><span><span class="hl1">' + esc(p.knot[d]) + "</span>" + topicTag(d) + '<br><span class="hl2">' + (k ? esc(k.main) : '<span class="hl3">' + (S.done[d] ? (S.saved[d] === false ? u.unsaved : u.noPiece) : u.notYet) + "</span>") + "</span>" + (k && k.extra ? '<br><span class="hl3">' + esc(k.extra) + "</span>" : "") + "</span></li>";
     }
     return '<div class="plain"><div class="scroll"><div class="pcol"><div class="pcard"><p class="eyebrow">' + u.hilo + tag() + '</p><p class="hint">' + u.empty + '</p><ul class="hilo">' + rows + "</ul></div></div></div>" + tabs(1) + "</div>";
   }
@@ -1059,7 +1100,11 @@ canvas.pad{width:100%; height:240px; border-radius:16px; background:#fff; border
       if (typeof idea === "string") h += '<div class="layer mt10"><p class="lt">' + p.ideaT + tag() + '</p><p><ins class="p">' + esc(idea) + "</ins></p></div>";
       var k = knot(n);
       if (k) h += '<div class="knot mt10"><p class="label">' + esc(u.savedQ) + " · " + esc(k.label) + tag() + '</p><p class="kv">' + esc(k.main) + "</p>" + (k.extra ? '<p class="ke">' + esc(k.extra) + "</p>" : "") + "</div>";
-      if (n === 7 || n === 14) { var lst = ""; for (var d = n - 6; d <= n; d++) { var kk = d === n ? k : (S.saved[d] !== false ? knot(d) : null); if (kk) lst += "<li class=\"on\"><span class=\"kd\">" + d + '</span><span><span class="hl1">' + esc(kk.label) + '</span><br><span class="hl2">' + esc(kk.main) + "</span></span></li>"; } if (lst) h += '<p class="label mt14">' + (n === 7 ? p.weekT : p.twoT) + tag() + '</p><ul class="hilo mt10">' + lst + "</ul>"; }
+      if (n === 7 || n === 14) {
+        var lst = p.out[n === 7 ? 1 : 2].map(function (o) { var d = o[0], kk = d === n ? k : (S.saved[d] !== false ? knot(d) : null), did = d === n || S.done[d]; return '<li class="' + (did ? "on" : "") + '"><span class="kd">' + d + '</span><span><span class="hl2"><ins class="p">' + esc(o[1]) + '</ins></span><br><span class="hl3">' + (kk ? esc(kk.label) + ": " + esc(kk.main) : esc(did ? p.learnedSeen : p.learnedSkip)) + "</span></span></li>"; }).join("");
+        h += '<p class="label mt14">' + esc(p.learnedT) + tag() + '</p><ul class="hilo mt10">' + lst + "</ul>";
+        myTopics().filter(function (x) { return n === 7 ? x.d <= 7 : x.d > 7; }).forEach(function (x) { h += '<p class="hint"><ins class="p">' + esc(fill(p.topicBack, { t: x.t, n: x.d })) + "</ins></p>"; });
+      }
       h += '<button type="button" class="btn mt14" data-act="finish" data-s="1">' + (k ? u.save : u.cont) + "</button>" + (k ? '<button type="button" class="link u" data-act="finish" data-s="0" style="align-self:center"><span>' + u.nosave + "</span></button>" : "");
     } else h += '<button type="button" class="btn mt14" data-act="finish" data-s="1">' + u.cont + "</button>";
     if (c.nextWeekTitle) h += '<p class="next mt14">' + u.nextWeek + esc(c.nextWeekTitle) + "</p>";
@@ -1133,6 +1178,12 @@ canvas.pad{width:100%; height:240px; border-radius:16px; background:#fff; border
     var b = e.target.closest("[data-act]"); if (!b) return;
     var act = b.dataset.act, n = S.sday, list = n ? steps(n) : null, st = list ? list[S.si] : null, a = n ? A(n) : null;
     switch (act) {
+      case "preNext": S.pre.step = 1; break;
+      case "prePick": var pk = S.pre.picked, j2 = +b.dataset.k, ix2 = pk.indexOf(j2);
+        if (ix2 >= 0) pk.splice(ix2, 1); else if (j2 === -1) S.pre.picked = [-1]; else { S.pre.picked = pk.filter(function (x) { return x >= 0; }); if (S.pre.picked.length < 2) S.pre.picked.push(j2); }
+        break;
+      case "preDone": S.pre.done = true; break;
+      case "preSkip": S.pre.done = true; S.pre.picked = []; break;
       case "start": safeOpen = false; if (S.sday !== S.day) { S.sday = S.day; S.si = 0; } S.view = "sess"; break;
       case "reread": S.sday = S.day; S.si = 0; S.view = "sess"; break;
       case "video": S.video = S.video === S.day ? null : S.day; break;
@@ -1200,7 +1251,7 @@ canvas.pad{width:100%; height:240px; border-radius:16px; background:#fff; border
   panelEl.addEventListener("click", function (e) {
     var b = e.target.closest("[data-pa]"); if (!b || b.tagName === "INPUT") return;
     var pa = b.dataset.pa;
-    if (pa === "day") { var n = +b.dataset.n; for (var d = 1; d < n; d++) { if (!S.done[d]) { S.done[d] = true; S.saved[d] = true; if (S.fill && !Object.keys(S.ans[d] || {}).length) S.ans[d] = sample(d); } } for (var d2 = n; d2 <= 14; d2++) { delete S.done[d2]; } S.day = n; S.view = "home"; S.tab = 0; S.si = 0; S.sday = null; }
+    if (pa === "day") { var n = +b.dataset.n; if (n > 1) { S.pre.done = true; } for (var d = 1; d < n; d++) { if (!S.done[d]) { S.done[d] = true; S.saved[d] = true; if (S.fill && !Object.keys(S.ans[d] || {}).length) S.ans[d] = sample(d); } } for (var d2 = n; d2 <= 14; d2++) { delete S.done[d2]; } S.day = n; S.view = "home"; S.tab = 0; S.si = 0; S.sday = null; }
     if (pa === "next") { if (S.day < 14 && S.done[S.day]) { S.day++; S.view = "home"; S.tab = 0; S.si = 0; S.sday = null; } }
     if (pa === "reset") { var keep = { lang: S.lang, cm: S.cm, layers: S.layers, marks: S.marks, fill: S.fill }; S = Object.assign(fresh(), keep); }
     if (pa === "copy") { copyAll(); return; }
@@ -1220,12 +1271,14 @@ canvas.pad{width:100%; height:240px; border-radius:16px; background:#fff; border
   /* ---------------- what changes, and what needs approval ---------------- */
   var WHY = {
     es: '<div class="revcard"><h3>Lo que no cambia</h3><ul><li>Los 14 días, su orden y su objetivo.</li><li>Todos los pasos, opciones, respuestas de Elara y referencias entre días («Dijiste: …», «Tu pausa y tu límite», la carta de cada semana), tal como están aprobados (commit 64c54d6 del repositorio de la app).</li><li>Saltar sigue siendo una respuesta en cada paso.</li></ul><p class="muted">Apaga «Capas nuevas» para ver solo lo aprobado.</p></div>' +
+      '<div class="revcard"><h3>0 · Antes y después de cada semana</h3><ul><li>Antes del día 1: «Esta semana vas a aprender a…» (cuatro resultados) y «¿Qué te gustaría entender mejor?» (hasta dos temas, o «Todavía no sé», o saltar). Cada tema dice qué día llega y ese día aparece como «Tu tema». El orden no cambia.</li><li>El día 8 muestra los cuatro resultados de la semana 2.</li><li>Los días 7 y 14 cierran con «Lo que aprendiste esta semana»: los mismos resultados, cada uno con la pieza que ella hizo, y el tema que eligió.</li></ul></div>' +
       '<div class="revcard"><h3>1 · Entender</h3><p>En seis días (1, 3, 8, 11, 12 y 14), al cerrar, <b>La idea de hoy</b>: una sola frase nueva. En los otros ocho no se añade, porque repetiría una frase de Elara que ella ya leyó ese día.</p></div>' +
       '<div class="revcard"><h3>2 · Practicar</h3><ul><li>Día 1 y día 5: «¿Cuándo lo vas a probar?» (opcional), para que el experimento tenga un momento.</li><li>Día 3: la pausa que encaja con su momento y su tiempo aparece marcada, con el porqué.</li><li>Día 4: revisión opcional del límite (una sola cosa, cuándo aplica, posible esta semana).</li><li>Día 7: además de las tres reglas aprobadas, una hecha con su día 3 y otra con su límite. Las tres aprobadas ya no dicen «Hecha con tu día…», porque son iguales para todas.</li><li>Día 5: las alternativas cambian según lo que buscaba (consuelo, control, recompensa, alivio o pertenencia).</li></ul></div>' +
       '<div class="revcard"><h3>3 · Respuestas útiles</h3><ul><li>Día 1: si pone algo en la columna equivocada de «Puedo / No puedo», se lo explica con amabilidad.</li><li>Días 6, 8, 9 y 10: la respuesta cambia según lo que eligió.</li><li>Día 5: «Tu par» une lo que buscaba con otra forma de cubrirlo.</li><li>Día 2: si nada la sorprendió, no se le pregunta «¿Qué te sorprendió de eso?».</li><li>Día 10: su propia frase entra en «Todavía es mía / Ya no es mía».</li><li>Día 14: el borrador solo dice «Estoy soltando la frase anterior» si el día 10 la marcó como «Ya no es mía».</li><li>Día 13: «Me siento presionada o amenazada por dinero» lleva a Ayuda y permite terminar el día, sin ensayar ni guardar nada.</li></ul></div>' +
       '<div class="revcard"><h3>4 · Continuar</h3><ul><li><b>Tu hilo</b>: cada día deja una pieza hecha por ella (14 en total). Los días 7 y 14 la muestran junta.</li><li>Los días 5, 10 y 13, que no tenían una referencia a días anteriores, abren con una.</li><li>Lo que no se revisaba ahora vuelve: el día 6 trae su alternativa del día 5; el día 12 pregunta por el gasto planeado el día 11; el día 14, por la conversación del día 13. «No pasó» es una respuesta completa.</li><li>Al terminar puede guardar o terminar sin guardar. Lo no guardado nunca se cita después: se usa la versión aprobada sin referencia.</li></ul></div>' +
       '<div class="revcard"><h3>Para aprobar (María y Ale)</h3><ul><li>Las frases nuevas: seis ideas del día, nombres de las piezas del hilo, las respuestas según su elección, las alternativas del día 5, las preguntas de seguimiento y las aperturas de los días 5, 10 y 13.</li><li>Día 13: la ruta de Ayuda tiene que existir y probarse antes de usar «abre Ayuda».</li><li>Si alguna semana debería mirar un número real (por ejemplo, un monto aproximado opcional el día 2). Hoy no lo hace ninguno de los 14 días.</li><li>Si «Tu hilo» reemplaza o convive con «Tu colección» de la app.</li><li>Las imágenes de Arashiyama son de IA y una propuesta; la semana 2 recorre los mismos siete lugares de vuelta.</li><li>El video de Alejandra no se reproduce en el prototipo.</li></ul></div>',
     en: '<div class="revcard"><h3>What doesn\'t change</h3><ul><li>The 14 days, their order and their goals.</li><li>Every step, option, Elara reply and cross-day reference (“You said: …”, “Your pause and your boundary”, each week\'s letter), as approved (commit 64c54d6 in the app repository).</li><li>Skipping is still an answer on every step.</li></ul><p class="muted">Turn off “New layers” to see only what\'s approved.</p></div>' +
+      '<div class="revcard"><h3>0 · Before and after each week</h3><ul><li>Before day 1: “This week you\'ll learn to…” (four outcomes) and “What would you like to understand better?” (up to two topics, “I don\'t know yet”, or skip). Each topic says which day it arrives, and that day is tagged “Your topic”. The order doesn\'t change.</li><li>Day 8 shows week 2\'s four outcomes.</li><li>Days 7 and 14 close with “What you learned this week”: the same outcomes, each with the piece she made, and the topic she chose.</li></ul></div>' +
       '<div class="revcard"><h3>1 · Understand</h3><p>On six days (1, 3, 8, 11, 12 and 14), at the close, <b>Today\'s idea</b>: one new sentence. The other eight don\'t get one, because it would repeat an Elara line she already read that day.</p></div>' +
       '<div class="revcard"><h3>2 · Practise</h3><ul><li>Days 1 and 5: “When will you try it?” (optional), so the experiment has a moment.</li><li>Day 3: the pause that fits her moment and time is marked, with why.</li><li>Day 4: an optional boundary check (one thing, when it applies, doable this week).</li><li>Day 7: besides the three approved rules, one built from her day 3 and one from her boundary. The three approved rules no longer say “Built from your Day…”, since they\'re the same for everyone.</li><li>Day 5: the alternatives change with what she was reaching for (comfort, control, reward, relief or belonging).</li></ul></div>' +
       '<div class="revcard"><h3>3 · Useful feedback</h3><ul><li>Day 1: if she puts something in the wrong “I can / I can\'t” column, it explains kindly.</li><li>Days 6, 8, 9 and 10: the reply changes with what she picked.</li><li>Day 5: “Your pair” links what she was reaching for with another way to meet it.</li><li>Day 2: if nothing surprised her, she isn\'t asked “What surprised you about it?”.</li><li>Day 10: her own sentence joins “Still mine / No longer mine”.</li><li>Day 14: the draft only says “I\'m letting go of the old sentence” if on day 10 she marked it “No longer mine”.</li><li>Day 13: “I feel pressured or threatened about money” leads to Help and lets her end the day, with no rehearsal and nothing saved.</li></ul></div>' +
