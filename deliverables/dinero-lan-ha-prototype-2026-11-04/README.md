@@ -114,3 +114,10 @@ Pause 2 now opens with one idea (the day's rule) and one optional activity; the 
 7. Retrieve something from her real week, or leave a doubt; nothing is offered if nothing was saved.
 
 Saved takeaways come only from real choices: nothing is preselected, and jumping to a day in the review panel leaves earlier days done without inventing takeaways. The question she chose returns the next morning with the rule underneath (day 3 shows only the rule; day 6 shows nothing). e2e: 223/223.
+
+## v8 — fixes and progressive disclosure (2026-11-05)
+
+- Day 2 is now a small card she fills in step by step (para qué, para cuándo, cuánto acceso); no right answer, and it can produce her own sentence to save.
+- Day 5 shows one product before and after (500 g → 400 g at the same price) and asks what changed; price per kilo appears on request.
+- Progressive disclosure throughout: pause 2 shows one idea and an activity; each activity step appears after the previous one (days 2 and 3 in order); «Más sobre esta idea» (explanation, example, V4.1 check, «Tengo otra pregunta») appears only after she tries the activity or taps «Prefiero leer primero»; in «Hazlo tuyo» the note appears after she picks something.
+- e2e: 233/233.

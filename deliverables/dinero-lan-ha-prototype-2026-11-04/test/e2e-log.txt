@@ -10,13 +10,14 @@ ok   day 1: only the tapped response shows
 ok   day 1 s1: targets ≥44px 
 ok   day 1 s1: nothing wider than the screen 
 ok   day 1: pause 2 opens with one idea and a marked activity
-ok   day 1: the full explanation is not open yet; the check is offered, optional
+ok   day 1: pause 2 shows one idea and an activity; more detail waits until she tries (or asks to read first)
 ok   day 1: pause 2 can be skipped
 ok   day 1: the timeline starts with one row
 ok   day 1: timeline revealed; 50 short on the due date, kindly explained
 ok   day 1: income earlier changes the result
 ok   day 1 activity: targets ≥44px 
 ok   day 1 activity: nothing wider than the screen 
+ok   day 1: after trying, «Más sobre esta idea» appears
 ok   day 1: «Ver el porqué» opens the full explanation
 ok   day 1: «Ver un ejemplo»
 ok   day 1: the V4.1 check is optional and unscored
@@ -39,12 +40,15 @@ ok   day 2: «Ayer viste» (opening rule)
 ok   day 2: only the tapped response shows
 ok   day 2: resume shows next step
 ok   day 2: pause 2 opens with one idea and a marked activity
-ok   day 2: the full explanation is not open yet; the check is offered, optional
+ok   day 2: pause 2 shows one idea and an activity; more detail waits until she tries (or asks to read first)
 ok   day 2: pause 2 can be skipped
-ok   day 2: a wrong pairing gets a kind explanation and can be changed
-ok   day 2: correct pairing confirmed
+ok   day 2: only the first step shows; the next ones wait
+ok   day 2: «para cuándo» appears after «para qué»
+ok   day 2: a mismatch gets a gentle observation, not a wrong mark
+ok   day 2: the card shows her own purpose, timing and access, no right answer
 ok   day 2 activity: targets ≥44px 
 ok   day 2 activity: nothing wider than the screen 
+ok   day 2: after trying, «Más sobre esta idea» appears
 ok   day 2: «Ver el porqué» opens the full explanation
 ok   day 2: «Ver un ejemplo»
 ok   day 2: the V4.1 check is optional and unscored
@@ -52,7 +56,7 @@ ok   day 2: the right answer is not always first
 ok   day 2: check feedback
 ok   day 2: «Hazlo tuyo» question
 ok   day 2: «Te llevas» text
-ok   day 2: choose what to keep (3 things, none preselected)
+ok   day 2: choose what to keep (4 things, none preselected)
 ok   day 2: nothing is preselected and saving waits for a choice
 ok   day 2: completion with the kept rule
 ok   day 2: «Mañana» matches day 3
@@ -71,13 +75,15 @@ ok   day 3: opening question
 ok   day 3: «Ayer viste» (opening rule)
 ok   day 3: only the tapped response shows
 ok   day 3: pause 2 opens with one idea and a marked activity
-ok   day 3: the full explanation is not open yet; the check is offered, optional
+ok   day 3: pause 2 shows one idea and an activity; more detail waits until she tries (or asks to read first)
 ok   day 3: pause 2 can be skipped
+ok   day 3: «cómo terminas» and the sentence wait until she says what she needs
 ok   day 3: a sentence that promises money is flagged gently
 ok   day 3: a sentence that gives time is confirmed
 ok   day 3: the built sentence is editable text
 ok   day 3 activity: targets ≥44px 
 ok   day 3 activity: nothing wider than the screen 
+ok   day 3: after trying, «Más sobre esta idea» appears
 ok   day 3: «Ver el porqué» opens the full explanation
 ok   day 3: «Ver un ejemplo»
 ok   day 3: the V4.1 check is optional and unscored
@@ -104,12 +110,13 @@ ok   day 4: opening question
 ok   day 4: «Ayer viste» (opening rule)
 ok   day 4: only the tapped response shows
 ok   day 4: pause 2 opens with one idea and a marked activity
-ok   day 4: the full explanation is not open yet; the check is offered, optional
+ok   day 4: pause 2 shows one idea and an activity; more detail waits until she tries (or asks to read first)
 ok   day 4: pause 2 can be skipped
 ok   day 4: balance, charges and payment revealed one by one
 ok   day 4: removing the interest shows how debt changes
 ok   day 4 activity: targets ≥44px 
 ok   day 4 activity: nothing wider than the screen 
+ok   day 4: after trying, «Más sobre esta idea» appears
 ok   day 4: «Ver el porqué» opens the full explanation
 ok   day 4: «Ver un ejemplo»
 ok   day 4: the V4.1 check is optional and unscored
@@ -129,12 +136,14 @@ ok   day 5: opening question
 ok   day 5: «Ayer viste» (opening rule)
 ok   day 5: only the tapped response shows
 ok   day 5: pause 2 opens with one idea and a marked activity
-ok   day 5: the full explanation is not open yet; the check is offered, optional
+ok   day 5: pause 2 shows one idea and an activity; more detail waits until she tries (or asks to read first)
 ok   day 5: pause 2 can be skipped
 ok   day 5: the tempting answer is explained kindly
-ok   day 5: correct comparison per kilo
+ok   day 5: the quantity change is named
+ok   day 5: price per kilo shows the same product costing more
 ok   day 5 activity: targets ≥44px 
 ok   day 5 activity: nothing wider than the screen 
+ok   day 5: after trying, «Más sobre esta idea» appears
 ok   day 5: «Ver el porqué» opens the full explanation
 ok   day 5: «Ver un ejemplo»
 ok   day 5: the V4.1 check is optional and unscored
@@ -155,7 +164,7 @@ ok   day 6: opening question
 ok   day 6 after a gap: «Ayer viste» hidden
 ok   day 6: only the tapped response shows
 ok   day 6: pause 2 opens with one idea and a marked activity
-ok   day 6: the full explanation is not open yet; the check is offered, optional
+ok   day 6: pause 2 shows one idea and an activity; more detail waits until she tries (or asks to read first)
 ok   day 6: pause 2 can be skipped
 ok   day 6: a neutral phrase is not treated as a warning sign
 ok   day 6: an independent check is offered after the first sign
@@ -163,6 +172,7 @@ ok   day 6: asking the sender gets a kind correction
 ok   day 6: independent check confirmed
 ok   day 6 activity: targets ≥44px 
 ok   day 6 activity: nothing wider than the screen 
+ok   day 6: after trying, «Más sobre esta idea» appears
 ok   day 6: «Ver el porqué» opens the full explanation
 ok   day 6: «Ver un ejemplo»
 ok   day 6: the V4.1 check is optional and unscored
@@ -222,4 +232,4 @@ ok   design review: 9 representative screens
 ok   page has no horizontal scroll at 390px
 ok   no console errors []
 
-223 passed, 0 failed
+233 passed, 0 failed

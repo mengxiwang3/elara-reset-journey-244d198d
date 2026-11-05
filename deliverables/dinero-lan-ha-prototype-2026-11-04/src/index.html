@@ -398,6 +398,13 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 .brow.off .btx{color:var(--ink2); text-decoration:line-through}
 .pk{display:grid; grid-template-columns:1fr 1fr; gap:10px}
 .pkc{border-radius:14px; background:var(--tint); padding:14px; display:flex; flex-direction:column; gap:2px; align-items:center}
+.pkc small{font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink2)}
+.kgrow{display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:calc(14.5*var(--u)); line-height:1.35}
+.kgrow span{background:var(--tint); border-radius:12px; padding:10px 12px}
+.ficha{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px}
+.ficha div{background:var(--tint); border-radius:12px; padding:9px 10px; display:flex; flex-direction:column; gap:2px; min-width:0}
+.ficha small{font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink2)}
+.ficha b{font-size:calc(14*var(--u)); font-weight:700; line-height:1.25}
 .pkc b{font-size:calc(22*var(--u)); font-weight:800}
 .pkc span{font-size:calc(16*var(--u)); font-weight:600; color:var(--ink2)}
 .msg{display:flex; flex-direction:column; gap:6px; padding:10px; border-radius:16px; background:var(--tint)}
@@ -512,7 +519,8 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         <ul>
           <li><b>Una pausa, una cosa.</b> «Empieza por ti», «Una idea que ayuda» (con la comprobación opcional al final) y «Hazlo tuyo». Al terminar elige qué se lleva. Es el mismo contenido de V4.1: los cuatro momentos caben en tres pantallas.</li>
           <li><b>Un lugar de Arashiyama por día.</b> La misma mujer, pequeña y casi siempre de espaldas, hace algo distinto cada día: se detiene en la orilla, se sienta, cruza el puente, rema, compara dos cestas, elige un camino y mira lo recorrido. Imágenes generadas con IA; son propuesta.</li>
-          <li><b>Una actividad distinta cada día.</b> Una línea de tiempo con fechas (día 1), emparejar propósitos con su plazo (2), armar una frase que da tiempo (3), mostrar saldo, cargos y pago por separado (4), comparar cantidad y precio (5), señalar señales de alerta y elegir una comprobación independiente (6) y volver a lo que guardó de verdad (7). Cada una es opcional, se puede saltar o pedir «Muéstrame cómo verlo», y es una propuesta.</li>
+          <li><b>Todo aparece de a poco.</b> Primero una idea. Cada paso de la actividad aparece cuando termina el anterior. La explicación, el ejemplo y la comprobación de V4.1 aparecen después de probar o con «Prefiero leer primero». En «Hazlo tuyo», la nota aparece cuando ya eligió algo.</li>
+          <li><b>Una actividad distinta cada día.</b> Una línea de tiempo con fechas (día 1), completar una ficha con su propio para qué, para cuándo y cuánto acceso necesita, sin respuesta correcta (2), armar una frase que da tiempo (3), mostrar saldo, cargos y pago por separado (4), ver un mismo producto antes y ahora y descubrir si cambió el precio o la cantidad (5), señalar señales de alerta y elegir una comprobación independiente (6) y volver a lo que guardó de verdad (7). Cada una es opcional, se puede saltar o pedir «Muéstrame cómo verlo», y es una propuesta.</li>
           <li><b>Llegar, no puntuar.</b> Al terminar: «Llegaste al puente.» y, la última noche, siete lugares juntos y «Lo que guardaste está en Tus días». No cuenta puntos ni dice que mejoró.</li>
           <li><b>La comprobación ya no tiene la respuesta correcta siempre primero.</b> Las opciones y las respuestas son las de V4.1; solo cambia el orden en los días 1, 3, 4 y 6.</li>
           <li><b>Su propio hilo.</b> «Antes te llevaste…» solo dice «ayer» cuando fue ayer. Lo que escribe es privado y compartirlo es aparte.</li>
@@ -690,7 +698,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   /* ---------- shared pieces ---------- */
   function ruleOf(day, ds) { return day.n === 7 ? (ds.pick != null ? day.rules.list[ds.pick] : null) : day.rule; }
   var QLAB = { 1: "Tu pregunta", 2: "Tu pregunta", 4: "Tu pregunta", 6: "Tu frase" };
-  var MADE = { 3: "Tu frase para ensayar", 6: "La comprobación que elegiste" };
+  var MADE = { 2: "Tu para qué y para cuándo", 3: "Tu frase para ensayar", 6: "La comprobación que elegiste" };
   function chosenQ(day, ds) {
     if (!QLAB[day.n] || ds.s3 == null) return null;
     var o = day.s3.opts[ds.s3]; if (!o) return null;
@@ -831,24 +839,30 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     return actWrap("Mira cómo se mueve el dinero, día a día.", "Es un ejemplo, no son tus cuentas.", '<ol class="tlrows">' + rows + "</ol>" + more + fin);
   };
 
-  /* 2. Match a purpose with its timing and access needs */
-  var P2 = ["Una mudanza dentro de cuatro semanas (US$300)", "Un imprevisto que podría aparecer cualquier día", "Algo para dentro de varios años"];
-  var N2 = ["Debe estar disponible si lo necesito de repente", "Puede esperar años sin tocarlo", "Lo necesito completo en pocas semanas, sin depender de una subida"];
-  var K2 = [2, 0, 1];
-  var H2 = ["Faltan cuatro semanas: lo que importa es tener el dinero completo ese día.", "Puede pasar cualquier día: lo que importa es poder usarlo cuando haga falta.", "Si falta mucho tiempo, puede esperar. Aun así, ninguna ganancia está asegurada."];
+  /* 2. Match a purpose with its timing and access: she fills a small card, one step at a time; no right answer */
+  var P2 = ["Un imprevisto", "Un pago que viene", "Algo más adelante", "Todavía no lo sé"];
+  var W2 = ["En unas semanas", "En unos meses", "Dentro de varios años", "No lo sé todavía"];
+  var X2 = ["Debe estar disponible por si lo necesito de repente", "Puede esperar sin que lo toque"];
+  var PS = ["un imprevisto", "un pago que viene", "algo más adelante", "algo que todavía no sé"];
+  var WS = ["en unas semanas", "en unos meses", "dentro de varios años", "todavía no lo sé"];
+  var XS = ["debería estar disponible por si lo necesito de repente", "puede esperar sin que lo toque"];
   A[2] = function (st, day, ds) {
-    var a = ax(ds), p = a.p || {}, sel = a.sel, done = Object.keys(p).length === 3;
-    var rows = P2.map(function (t, i) {
-      var on = sel === i;
-      return '<button type="button" class="pair' + (on ? " on" : "") + '" data-act="a" data-a="d2" data-v="s' + i + '" aria-pressed="' + on + '"><span class="ptxt">' + t + '</span><span class="pval">' + (p[i] != null ? N2[p[i]] : "Toca para emparejar") + "</span></button>";
-    }).join("");
-    var needs = sel != null ? '<p class="ahint">¿Qué necesita «' + P2[sel].toLowerCase() + '»?</p><div class="chips col">' + N2.map(function (t, j) { return chipb("d2", "n" + j, t, p[sel] === j); }).join("") + "</div>" : "";
-    var fb = "";
+    var a = ax(ds);
+    function grp(k, lab, list) { return '<p class="agl">' + lab + '</p><div class="chips' + (k === "X" ? " col" : "") + '">' + list.map(function (t, i) { return chipb("d2", k + i, t, a[k] === i); }).join("") + "</div>"; }
+    var inner = grp("P", "Para qué", P2);
+    if (a.P != null) inner += grp("W", "Para cuándo", W2);
+    if (a.P != null && a.W != null) inner += grp("X", "¿Cuánto acceso necesita?", X2);
+    var done = a.P != null && a.W != null && a.X != null;
     if (done) {
-      var bad = P2.map(function (_, i) { return i; }).filter(function (i) { return p[i] !== K2[i]; });
-      fb = bad.length ? afb("Casi. " + H2[bad[0]] + " Puedes cambiar la pareja.", true) : afb("Cada propósito tiene su plazo y su forma de acceso. Antes de comparar opciones, la pregunta es: ¿para qué es y cuándo lo necesito?");
+      inner += '<div class="ficha"><div><small>Para qué</small><b>' + P2[a.P] + '</b></div><div><small>Para cuándo</small><b>' + W2[a.W] + '</b></div><div><small>Acceso</small><b>' + (a.X === 0 ? "Disponible" : "Puede esperar") + "</b></div></div>";
+      if (a.P === 3 || a.W === 3) inner += afb("No saberlo también es un punto de partida. Lo primero es ponerle un para qué y un para cuándo.");
+      else if (a.P === 0 && a.X === 1) inner += afb("Un imprevisto puede llegar cualquier día. Ahí importa poder usar el dinero cuando haga falta.", true);
+      else if ((a.W === 0 || a.P === 1) && a.X === 1) inner += afb("Para algo que llega pronto, lo que importa es que el dinero esté completo y disponible ese día.", true);
+      else if (a.W === 2) inner += afb("Si falta mucho, tienes más margen. Aun así, ninguna ganancia está asegurada.");
+      else inner += afb("Ya tienes un para qué, un para cuándo y cuánto acceso necesitas. Esa es la pregunta antes de comparar opciones: ¿para qué es y cuándo lo necesito?");
+      ds.made = "Querría este dinero para " + PS[a.P] + ", lo necesitaría " + WS[a.W] + " y " + XS[a.X] + ".";
     }
-    return actWrap("Empareja cada propósito con lo que necesita.", "Toca un propósito y después lo que necesita. No es una recomendación de dónde poner tu dinero.", '<div class="pairs">' + rows + "</div>" + needs + fb + (done ? "" : showme("d2")));
+    return actWrap("Ponle un para qué y un para cuándo a un dinero.", "Elige lo que más se parezca. No hay respuesta correcta y no se guarda nada si no quieres.", inner + (done ? "" : showme("d2")));
   };
 
   /* 3. Build or edit a sentence that gives time before committing money */
@@ -857,11 +871,14 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   A[3] = function (st, day, ds) {
     var a = ax(ds);
     function grp(k, lab, list) { return '<p class="agl">' + lab + '</p><div class="chips">' + list.map(function (t, i) { return chipb("d3", k + i, t, a[k] === i); }).join("") + "</div>"; }
-    var fb = "";
-    if (a.B != null && a.C != null) fb = a.C === 3 ? afb("Esta frase promete dinero antes de revisar tus pagos. Si quieres darte tiempo, prueba otro final.", true) : afb("Esta frase te da tiempo sin prometer una cantidad. Es para ensayar: no tienes que enviarla.");
-    return actWrap("Arma una frase que te dé tiempo.", "Elige piezas y después edítala con tus palabras. Se queda contigo.",
-      grp("A", "Cómo empiezas · opcional", O3[0]) + grp("B", "Qué necesitas", O3[1]) + grp("C", "Cómo terminas", O3[2]) +
-      '<p class="agl">Tu frase</p>' + field(st, "made", "Tu frase aparecerá aquí. También puedes escribirla tú.", "Tu frase, editable") + fb + (a.B != null && a.C != null ? "" : showme("d3")));
+    var inner = grp("B", "Qué necesitas", O3[1]);
+    if (a.B != null) inner += grp("C", "Cómo terminas", O3[2]);
+    var composed = a.B != null && a.C != null;
+    if (composed) {
+      inner += grp("A", "Quieres empezar con algo · opcional", O3[0]) + '<p class="agl">Tu frase</p>' + field(st, "made", "Tu frase aparecerá aquí. También puedes escribirla tú.", "Tu frase, editable") +
+        (a.C === 3 ? afb("Esta frase promete dinero antes de revisar tus pagos. Si quieres darte tiempo, prueba otro final.", true) : afb("Esta frase te da tiempo sin prometer una cantidad. Es para ensayar: no tienes que enviarla."));
+    }
+    return actWrap("Arma una frase que te dé tiempo.", "Elige piezas y después edítala con tus palabras. Se queda contigo.", inner + (composed ? "" : showme("d3")));
   };
 
   /* 4. Reveal balance, charges and payment separately */
@@ -880,16 +897,18 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     return actWrap("Mira qué le pasa a una deuda en un mes.", "Es un ejemplo, no es tu deuda.", '<ol class="brows">' + out + res + "</ol>" + next + fin);
   };
 
-  /* 5. Compare package quantity and price */
+  /* 5. The same product, before and after: price and quantity */
   A[5] = function (st, day, ds) {
     var a = ax(ds), pick = a.pick;
-    var cards = '<div class="pk"><div class="pkc"><b>800 g</b><span>US$1,80</span></div><div class="pkc"><b>1 kg</b><span>US$2,00</span></div></div>';
-    var chips = '<div class="chips">' + chipb("d5", "p0", "El de 800 g", pick === 0) + chipb("d5", "p1", "El de 1 kg", pick === 1) + chipb("d5", "p2", "No estoy segura", pick === 2) + "</div>";
+    var cards = '<div class="pk"><div class="pkc"><small>Antes</small><b>500 g</b><span>US$4,00</span></div><div class="pkc"><small>Ahora</small><b>400 g</b><span>US$4,00</span></div></div>';
+    var chips = '<div class="chips">' + chipb("d5", "p0", "Cambió el precio", pick === 0) + chipb("d5", "p1", "Cambió la cantidad", pick === 1) + chipb("d5", "p2", "No cambió nada", pick === 2) + "</div>";
     var fb = "";
-    if (pick === 1) fb = afb("Sí. 1 kg a US$2,00 son US$2,00 por kilo. 800 g a US$1,80 son US$2,25 por kilo.");
-    else if (pick === 0) fb = afb("Cuesta menos en total, pero trae menos. Por kilo: 800 g a US$1,80 son US$2,25, y 1 kg a US$2,00 son US$2,00. Compara la misma cantidad.", true);
-    else if (pick === 2) fb = afb("Compara la misma cantidad. Si 800 g cuestan US$1,80, un kilo costaría US$2,25. El paquete de 1 kg sale más barato por kilo.", true);
-    return actWrap("Dos paquetes del mismo producto. ¿Cuál sale más barato por kilo?", "Es un ejemplo inventado.", cards + chips + fb);
+    if (pick === 1) fb = afb("Sí. El paquete cuesta lo mismo, pero trae 100 g menos.");
+    else if (pick === 0) fb = afb("El precio del paquete es el mismo: US$4,00. Mira cuánto trae.", true);
+    else if (pick === 2) fb = afb("Cuesta lo mismo, pero trae 100 g menos. Mira cuánto trae cada uno.", true);
+    var kg = "";
+    if (pick != null) kg = a.kg ? '<div class="kgrow"><span>Antes: <b>US$8,00 por kilo</b></span><span>Ahora: <b>US$10,00 por kilo</b></span></div>' + afb("Pagas más por la misma cantidad. Para comparar, mira siempre cuánto trae.") : '<button type="button" class="btn2 small" data-act="a" data-a="d5" data-v="kg">Ver el precio por kilo</button>';
+    return actWrap("El mismo café, antes y ahora. ¿Qué cambió?", "Es un ejemplo inventado.", cards + chips + fb + kg + (pick != null ? "" : showme("d5")));
   };
 
   /* 6. Spot warning signs in a fictional offer, then choose an independent check */
@@ -934,21 +953,20 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     return actWrap(items.length ? "Esto es lo que guardaste esta semana. ¿Quieres llevarte algo?" : "Tu semana.", "Solo tú ves esto. No tienes que elegir nada.", list + doubt);
   };
 
+  function actTouched(day, ds) { return !!((ds.act && Object.keys(ds.act).length) || ds.check != null || ds.carry || (ds.doubt || "").trim() || (day.n === 3 && ds.made)); }
   function actEvent(el, day, ds) {
     var a = ax(ds), v = el.dataset.v, k = el.dataset.a;
     if (k === "d1") { if (v === "next") a.n = Math.min(3, (a.n || 0) + 1); else if (v === "show") a.n = 3; else a.cob = +v.slice(1); }
     else if (k === "d2") {
-      a.p = a.p || {};
-      if (v === "show") { a.p = { 0: K2[0], 1: K2[1], 2: K2[2] }; a.sel = null; }
-      else if (v[0] === "s") { var i = +v.slice(1); a.sel = a.sel === i ? null : i; }
-      else if (v[0] === "n" && a.sel != null) { var j = +v.slice(1); Object.keys(a.p).forEach(function (q) { if (a.p[q] === j) delete a.p[q]; }); a.p[a.sel] = j; a.sel = null; }
+      if (v === "show") { a.P = 1; a.W = 0; a.X = 0; } else { var g2 = v[0], i2 = +v.slice(1); a[g2] = a[g2] === i2 ? null : i2; }
+      if (!(a.P != null && a.W != null && a.X != null)) ds.made = null;
     }
     else if (k === "d3") {
       if (v === "show") { a.A = 0; a.B = 0; a.C = 0; } else { var g = v[0], idx = +v.slice(1); a[g] = a[g] === idx ? null : idx; }
       if (a.B != null && a.C != null) ds.made = compose3(a);
     }
     else if (k === "d4") { if (v === "next") a.n = Math.min(3, (a.n || 0) + 1); else if (v === "show") a.n = 3; else if (v === "noint") a.noint = !a.noint; }
-    else if (k === "d5") { if (v === "show") a.pick = 2; else a.pick = +v.slice(1); }
+    else if (k === "d5") { if (v === "show") { a.pick = 1; a.kg = true; } else if (v === "kg") a.kg = true; else a.pick = +v.slice(1); }
     else if (k === "d6") {
       a.m = a.m || [];
       if (v === "show") a.m = ["gain", "risk", "rush", "rec"];
@@ -976,9 +994,11 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       var chk = day.check ? discl("checkOpen", "Comprobar si lo entendí · opcional", ds.checkOpen,
         '<p class="hint">' + esc(U.checkHint) + '</p><h2 class="h2" style="margin-top:2px">' + T(st, day.check.q, "new") + "</h2>" + opts(st, "check", day.check.opts, ds.check, "new")) : "";
       var other = discl("otherOpen", "Tengo otra pregunta", ds.otherOpen, field(st, "other", "Escribe tu pregunta…", "Tu pregunta") + '<p class="voice">' + esc(U.otherQ) + "</p>");
+      /* More detail is offered only after she has tried the activity (or asks to read first). */
+      var rest = day.n === 7 ? other : (actTouched(day, ds) || ds.moreOpen ? discl("moreOpen", "Más sobre esta idea", ds.moreOpen, more + chk + other) : '<button type="button" class="link u" data-act="read-first"><span>Prefiero leer primero</span></button>');
       var head = day.n === 7 ? '<p class="read">' + T(st, day.idea, day.m.idea) + "</p>" : '<div class="rulebox"><p class="label">La idea de hoy</p><p class="ruletext">' + esc(day.rule) + "</p></div>";
       return eyebrow(day.n, "Una idea que ayuda") + '<h2 class="h2 sr" tabindex="-1" data-focus>Una idea que ayuda</h2>' + ale + head +
-        A[day.n](st, day, ds) + (day.n === 7 ? "" : more + chk) + other;
+        A[day.n](st, day, ds) + rest;
     },
     s3: function (st, day, ds) {
       var ph = (day.noteAlt && ds.s3 === day.noteAlt.opt) ? day.noteAlt.text : day.note;
@@ -992,7 +1012,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         '<p class="voice">' + esc(U.notePass) + '.</p><button type="button" class="link u" data-act="toggle" data-k="notePass"><span>Escribir una nota</span></button>' :
         field(st, "note", ph, "Nota opcional") + '<button type="button" class="link" data-act="toggle" data-k="notePass">Prefiero pasar</button>') + "</div>";
       return eyebrow(day.n, "Hazlo tuyo") + '<h2 class="h2" style="margin-top:-8px" tabindex="-1" data-focus>' + T(st, day.s3.q, day.m.s3q) + "</h2>" +
-        opts(st, "s3", day.s3.opts, ds.s3) + rules + ex + note;
+        opts(st, "s3", day.s3.opts, ds.s3) + rules + ex + (ds.s3 != null || ds.noteOpen || ds.notePass ? note : '<button type="button" class="link u" data-act="toggle" data-k="noteOpen"><span>Escribir una nota con mis palabras</span></button>');
     },
     take: function (st, day, ds) {
       var head = eyebrow(day.n, "Te llevas");
@@ -1018,8 +1038,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       }
       return bar('<button type="button" class="btn" data-act="choose">Elegir qué guardar</button>' + row);
     }
-    var touched = (ds.act && Object.keys(ds.act).length) || ds.check != null || ds.carry || (ds.doubt || "").trim() || (day.n === 3 && ds.made);
-    var label = st.step === "idea" && !touched ? "Seguir sin la actividad" : "Seguir";
+    var label = st.step === "idea" && !actTouched(day, ds) ? "Seguir sin la actividad" : "Seguir";
     return bar('<div class="row2b">' + (i > 0 ? '<button type="button" class="btn2" data-act="back">Atrás</button>' : "") + '<button type="button" class="btn" data-act="next">' + label + ico("arrow", 20, 2) + "</button></div>");
   }
   function band(st, day, m) {
@@ -1204,6 +1223,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       case "tusdias": case "atlas": go("tusdias"); break;
       case "circulos": go("circulos"); break;
       case "a": actEvent(el, day, ds); cheer = true; break;
+      case "read-first": ds.moreOpen = true; ds.whyOpen = true; break;
       case "pick": ds[k] = i; cheer = true; break;
       case "pass": ds.s1 = ds.s1 === "pass" ? null : "pass"; cheer = true; break;
       case "toggle": ds[k] = !ds[k]; break;
@@ -1353,8 +1373,8 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   ];
   function solveAct(n, ds, st) {
     var a = ds.act = {};
-    if (n === 1) { a.n = 3; a.cob = 10; } else if (n === 2) { a.p = { 0: K2[0], 1: K2[1], 2: K2[2] }; } else if (n === 3) { a.A = 0; a.B = 0; a.C = 0; ds.made = compose3(a); }
-    else if (n === 4) { a.n = 3; } else if (n === 5) { a.pick = 1; } else if (n === 6) { a.m = ["gain", "risk", "rush", "rec"]; a.c = 0; ds.made = "Comprobaré por mi cuenta: busco yo misma la autoridad financiera de mi país."; }
+    if (n === 1) { a.n = 3; a.cob = 10; } else if (n === 2) { a.P = 1; a.W = 0; a.X = 0; ds.made = "Querría este dinero para un pago que viene, lo necesitaría en unas semanas y debería estar disponible por si lo necesito de repente."; } else if (n === 3) { a.A = 0; a.B = 0; a.C = 0; ds.made = compose3(a); }
+    else if (n === 4) { a.n = 3; } else if (n === 5) { a.pick = 1; a.kg = true; } else if (n === 6) { a.m = ["gain", "risk", "rush", "rec"]; a.c = 0; ds.made = "Comprobaré por mi cuenta: busco yo misma la autoridad financiera de mi país."; }
     else if (n === 7) { var it = weekItems(st)[0]; if (it) ds.carry = { label: it.label, text: it.text }; }
   }
   function snapState(n, kind, o) {
@@ -1370,7 +1390,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     var step = { s1: "s1", idea: "idea", act: "idea", check: "idea", s3: "s3", take: "take", choose: "take", saved: "take", unsaved: "take" }[kind];
     if (step) { st.view = "session"; st.step = step; }
     if (kind === "s1") ds.s1 = 0;
-    if (kind === "check") { ds.checkOpen = true; ds.check = day.check.opts.findIndex(function (x) { return x.ok; }); }
+    if (kind === "check") { ds.moreOpen = true; ds.checkOpen = true; ds.check = day.check.opts.findIndex(function (x) { return x.ok; }); }
     if (kind === "act") solveAct(n, ds, st);
     if (kind === "s3") { ds.s3 = 0; if (day.example) ds.exOpen = true; if (day.rules) ds.rulesOpen = true; }
     if (kind === "choose") ds.take = "choose";

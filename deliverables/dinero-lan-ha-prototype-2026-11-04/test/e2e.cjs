@@ -83,7 +83,7 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
     t = await text();
     ok(n === 7 ? has(t, day.idea.slice(0, 30)) && has(t, "Propuesta de actividad") : has(t, "La idea de hoy") && has(t, day.rule) && has(t, "Propuesta de actividad"), `day ${n}: pause 2 opens with one idea and a marked activity`);
     if (n < 7) {
-      ok(!has(t, day.idea.slice(0, 40)) && !has(t, "Comprobar si lo entendí") === false, `day ${n}: the full explanation is not open yet; the check is offered, optional`);
+      ok(!has(t, day.idea.slice(0, 40)) && !has(t, "Más sobre esta idea") && has(t, "Prefiero leer primero"), `day ${n}: pause 2 shows one idea and an activity; more detail waits until she tries (or asks to read first)`);
       ok(has(t, "Seguir sin la actividad"), `day ${n}: pause 2 can be skipped`);
     }
     // the activity
@@ -95,12 +95,15 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
       await tapA("d1", "c12");
       await shot("d1-2-activity"); await audit("day 1 activity");
     } else if (n === 2) {
-      await tapA("d2", "s0"); await tapA("d2", "n0"); await tapA("d2", "s1"); await tapA("d2", "n1"); await tapA("d2", "s2"); await tapA("d2", "n2");
-      t = await text(); ok(has(t, "Casi.") && has(t, "Puedes cambiar la pareja"), "day 2: a wrong pairing gets a kind explanation and can be changed");
-      await tapA("d2", "s0"); await tapA("d2", "n2"); await tapA("d2", "s1"); await tapA("d2", "n0"); await tapA("d2", "s2"); await tapA("d2", "n1");
-      t = await text(); ok(has(t, "Cada propósito tiene su plazo"), "day 2: correct pairing confirmed");
+      ok((await nOf('[data-a="d2"][data-v^="W"]')) === 0 && (await nOf('[data-a="d2"][data-v^="X"]')) === 0, "day 2: only the first step shows; the next ones wait");
+      await tapA("d2", "P0"); ok((await nOf('[data-a="d2"][data-v^="W"]')) === 4 && (await nOf('[data-a="d2"][data-v^="X"]')) === 0, "day 2: «para cuándo» appears after «para qué»");
+      await tapA("d2", "W0"); await tapA("d2", "X1");
+      t = await text(); ok(has(t, "Un imprevisto puede llegar cualquier día") , "day 2: a mismatch gets a gentle observation, not a wrong mark");
+      await tapA("d2", "X1"); await tapA("d2", "X0"); await tapA("d2", "P1");
+      t = await text(); ok(has(t, "Ya tienes un para qué") && (await nOf(".ficha")) === 1, "day 2: the card shows her own purpose, timing and access, no right answer");
       await shot("d2-2-activity"); await audit("day 2 activity");
     } else if (n === 3) {
+      ok((await nOf('[data-a="d3"][data-v^="C"]')) === 0 && (await nOf('textarea[data-field="made"]')) === 0, "day 3: «cómo terminas» and the sentence wait until she says what she needs");
       await tapA("d3", "B0"); await tapA("d3", "C3");
       t = await text(); ok(has(t, "promete dinero antes de revisar") , "day 3: a sentence that promises money is flagged gently");
       await tapA("d3", "C0");
@@ -115,8 +118,9 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
       await tapA("d4", "noint");
       await shot("d4-2-activity"); await audit("day 4 activity");
     } else if (n === 5) {
-      await tapA("d5", "p0"); t = await text(); ok(has(t, "Compara la misma cantidad") && has(t, "US$2,25"), "day 5: the tempting answer is explained kindly");
-      await tapA("d5", "p1"); t = await text(); ok(has(t, "Sí. 1 kg"), "day 5: correct comparison per kilo");
+      await tapA("d5", "p0"); t = await text(); ok(has(t, "El precio del paquete es el mismo") && has(t, "Ver el precio por kilo"), "day 5: the tempting answer is explained kindly");
+      await tapA("d5", "p1"); t = await text(); ok(has(t, "trae 100 g menos"), "day 5: the quantity change is named");
+      await tapA("d5", "kg"); t = await text(); ok(has(t, "US$10,00 por kilo") && has(t, "Pagas más por la misma cantidad"), "day 5: price per kilo shows the same product costing more");
       await shot("d5-2-activity"); await audit("day 5 activity");
     } else if (n === 6) {
       await tapA("d6", "mwa"); t = await text(); ok(has(t, "no prueba nada por sí solo"), "day 6: a neutral phrase is not treated as a warning sign");
@@ -133,6 +137,8 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
     }
     // more detail, on request
     if (n < 7) {
+      ok(has(await text(), "Más sobre esta idea"), `day ${n}: after trying, «Más sobre esta idea» appears`);
+      await click('[data-act="toggle"][data-k="moreOpen"]');
       await click('[data-act="toggle"][data-k="whyOpen"]');
       ok(has(await text(), day.idea.slice(0, 40)), `day ${n}: «Ver el porqué» opens the full explanation`);
       await click('[data-act="toggle"][data-k="exOpen2"]');
