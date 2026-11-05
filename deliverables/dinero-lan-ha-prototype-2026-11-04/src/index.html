@@ -360,6 +360,51 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 .chk .h2{font-size:calc(19*var(--u))}
 .strip7{display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; margin:10px 0 4px}
 .strip7 img{width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:8px; display:block}
+/* applied activities */
+.act{margin-top:16px; padding-top:14px; border-top:1px solid var(--hair); display:flex; flex-direction:column; gap:10px; position:relative}
+.act .task{font-weight:700; font-size:calc(17*var(--u)); line-height:1.3; color:var(--ink)}
+.act .ahint{font-size:calc(13.5*var(--u)); line-height:1.4; color:var(--ink2)}
+.act .agl{font-size:calc(12*var(--u)); font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink2); margin-top:4px}
+.ptag{align-self:flex-start; font-size:11.5px; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:999px; background:#F8DCCB; color:#4A2410}
+.notags .ptag{display:none}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chips.col{flex-direction:column}
+.chipbtn{min-height:44px; padding:9px 14px; border-radius:22px; border:1.5px solid var(--rule); background:#fff; font:600 calc(15*var(--u)) var(--sans); color:var(--ink); cursor:pointer; text-align:left; line-height:1.3}
+.chips.col .chipbtn{border-radius:14px; width:100%}
+.chipbtn.on{border-color:var(--forest); background:#F0F6F2; box-shadow:inset 0 0 0 1px var(--forest)}
+.chipbtn.tall{display:flex; flex-direction:column; gap:2px}
+.chipbtn.tall small{font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink2)}
+.btn2.small{min-height:44px; font-size:calc(15*var(--u)); padding:8px 16px; align-self:flex-start}
+.afb{padding:10px 12px; border-radius:12px; background:#EAF3EE; color:var(--ink); font-size:calc(14.5*var(--u)); line-height:1.45}
+.afb.soft{background:#FFF3DF}
+.tlrows,.brows{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px}
+.tlrow{display:grid; grid-template-columns:58px minmax(0,1fr) auto; gap:8px; align-items:center; padding:9px 12px; border-radius:12px; background:var(--tint); font-size:calc(14*var(--u)); line-height:1.3}
+.tlrow .when{font-weight:700; color:var(--ink2)}
+.tlrow .bal{font-weight:700; text-align:right}
+.tlrow.short{background:#FFF1EC; box-shadow:inset 0 0 0 1.5px #C94A1C}
+.pairs{display:flex; flex-direction:column; gap:8px}
+.pair{min-height:56px; padding:10px 14px; border-radius:14px; border:1.5px solid var(--rule); background:#fff; text-align:left; display:flex; flex-direction:column; gap:2px; cursor:pointer; color:var(--ink)}
+.pair.on{border-color:var(--forest); background:#F0F6F2}
+.pair .ptxt{font-weight:700; font-size:calc(15*var(--u)); line-height:1.3}
+.pair .pval{font-size:calc(13.5*var(--u)); color:var(--ink2); line-height:1.35}
+.brow{display:grid; grid-template-columns:56px minmax(0,1fr); grid-template-areas:"l b" "l t"; gap:2px 10px; align-items:center}
+.brow .blab{grid-area:l; font-size:calc(12.5*var(--u)); font-weight:700; color:var(--ink2); text-transform:uppercase; letter-spacing:.04em}
+.brow .bbar{grid-area:b; height:14px; border-radius:7px; background:var(--tint); overflow:hidden; display:block}
+.brow .bbar i{display:block; height:100%; border-radius:7px; background:var(--forest)}
+.brow .bbar i.b1{background:#C94A1C}
+.brow .bbar i.b2{background:#5B8F73}
+.brow .bbar i.b3{background:#26314D}
+.brow .btx{grid-area:t; font-size:calc(14.5*var(--u)); font-weight:600}
+.brow.off .btx{color:var(--ink2); text-decoration:line-through}
+.pk{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.pkc{border-radius:14px; background:var(--tint); padding:14px; display:flex; flex-direction:column; gap:2px; align-items:center}
+.pkc b{font-size:calc(22*var(--u)); font-weight:800}
+.pkc span{font-size:calc(16*var(--u)); font-weight:600; color:var(--ink2)}
+.msg{display:flex; flex-direction:column; gap:6px; padding:10px; border-radius:16px; background:var(--tint)}
+.msgl{min-height:44px; padding:8px 12px; border-radius:12px; border:1.5px solid transparent; background:#fff; text-align:left; font:500 calc(15*var(--u)) var(--sans); color:var(--ink); cursor:pointer; display:flex; justify-content:space-between; gap:8px; align-items:center}
+.msgl.on{border-color:#C94A1C; background:#FFF1EC}
+.rsub{display:block; margin-top:2px; font-size:calc(13*var(--u)); line-height:1.35; color:var(--ink2)}
+.msgl em{font-style:normal; font-size:calc(12*var(--u)); font-weight:700; color:#8A3412; white-space:nowrap}
 /* Arashiyama: portrait scenes, shown whole across the width so she stays above the card */
 .heroBox{height:auto !important; aspect-ratio:9/16; -webkit-mask-image:linear-gradient(#000 80%, transparent); mask-image:linear-gradient(#000 80%, transparent)}
 .app.small .home .heroBox{transform:translateY(-9%)}
@@ -441,6 +486,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
           <label><input type="checkbox" id="optBig"> Texto grande (125 %)</label>
           <label><input type="checkbox" id="optSmall"> Pantalla pequeña (375 × 667)</label>
           <label><input type="checkbox" id="optNoPhoto"> Sin foto (respaldo sólido)</label>
+          <label><input type="checkbox" id="optTags"> Ocultar las etiquetas «Propuesta de actividad»</label>
           <label><input type="checkbox" id="optVoice"> Lugar para la nota de voz de Ale (aún sin grabar)</label>
           <label><input type="checkbox" id="optFail"> Simular un error al guardar</label>
         </fieldset>
@@ -466,6 +512,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         <ul>
           <li><b>Una pausa, una cosa.</b> «Empieza por ti», «Una idea que ayuda» (con la comprobación opcional al final) y «Hazlo tuyo». Al terminar elige qué se lleva. Es el mismo contenido de V4.1: los cuatro momentos caben en tres pantallas.</li>
           <li><b>Un lugar de Arashiyama por día.</b> La misma mujer, pequeña y casi siempre de espaldas, hace algo distinto cada día: se detiene en la orilla, se sienta, cruza el puente, rema, compara dos cestas, elige un camino y mira lo recorrido. Imágenes generadas con IA; son propuesta.</li>
+          <li><b>Una actividad distinta cada día.</b> Una línea de tiempo con fechas (día 1), emparejar propósitos con su plazo (2), armar una frase que da tiempo (3), mostrar saldo, cargos y pago por separado (4), comparar cantidad y precio (5), señalar señales de alerta y elegir una comprobación independiente (6) y volver a lo que guardó de verdad (7). Cada una es opcional, se puede saltar o pedir «Muéstrame cómo verlo», y es una propuesta.</li>
           <li><b>Llegar, no puntuar.</b> Al terminar: «Llegaste al puente.» y, la última noche, siete lugares juntos y «Lo que guardaste está en Tus días». No cuenta puntos ni dice que mejoró.</li>
           <li><b>La comprobación ya no tiene la respuesta correcta siempre primero.</b> Las opciones y las respuestas son las de V4.1; solo cambia el orden en los días 1, 3, 4 y 6.</li>
           <li><b>Su propio hilo.</b> «Antes te llevaste…» solo dice «ayer» cuando fue ayer. Lo que escribe es privado y compartirlo es aparte.</li>
@@ -513,7 +560,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   var appEl = document.getElementById("app");
   if (!W) { appEl.innerHTML = '<p style="padding:24px">No se pudo cargar el contenido de la semana.</p>'; return; }
   var DAYS = W.week, U = W.ui;
-  var KEY = "elara-dinero-arashiyama-v41c", CKEY = "elara-dinero-lanha-v41-comentarios";
+  var KEY = "elara-dinero-arashiyama-v41d", CKEY = "elara-dinero-lanha-v41-comentarios";
   var PLACE = "Arashiyama", COUNTRY = "Kioto", WEEKNO = 1;
   var PLACES = ["La orilla", "El banco junto al agua", "El puente", "El río, desde el agua", "La calle del mercado", "La entrada al bambú", "El mirador"];
   /* Arashiyama scenes (AI-generated from one character reference). sy = where her feet are, % of image height (from the manifest). */
@@ -618,7 +665,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   }
 
   /* ---------- state ---------- */
-  function blankDay() { return { started: false, last: "s1", s1: null, otherOpen: false, other: "", check: null, s3: null, note: "", notePass: false, exOpen: false, rulesOpen: false, pick: null, take: null, sel: { rule: true, note: true }, failed: false, done: false, doneCal: null, saved: null }; }
+  function blankDay() { return { act: {}, made: null, carry: null, doubt: "", whyOpen: false, exOpen2: false, checkOpen: false, doubtOpen: false, started: false, last: "s1", s1: null, otherOpen: false, other: "", check: null, s3: null, note: "", notePass: false, exOpen: false, rulesOpen: false, pick: null, take: null, sel: {}, failed: false, done: false, doneCal: null, saved: null }; }
   function fresh() { var d = {}; DAYS.forEach(function (x) { d[x.n] = blankDay(); }); return { wk: { outfit: 0, hair: 0, skin: 1 }, arrived: {}, cal: 1, view: "home", day: 1, step: "s1", sheet: null, share: { rule: true, note: false }, shared: false, showMine: false, big: false, small: false, failSave: false, marks: false, props: false, voice: false, nophoto: false, d: d }; }
   function load() { try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.d && s.d[7] && s.cal) { s.sheet = null; if (!s.wk) s.wk = { outfit: 0, hair: 0, skin: 1 }; if (!s.arrived) s.arrived = {}; return s; } } catch (e) {} return null; }
   function persist() { try { localStorage.setItem(KEY, JSON.stringify(Object.assign({}, S, { sheet: null, live: false }))); } catch (e) {} }
@@ -634,17 +681,28 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   }
   function cameBackAfterGap(st, n) { return n > 1 && st.d[n - 1].done && st.d[n - 1].doneCal < st.cal - 1; }
   function yesterdayAccurate(st, n) { return n > 1 && st.d[n - 1].doneCal === st.cal - 1; }
-  function keptText(st, sv) { return sv ? (sv.rule || (st.showMine && sv.note) || null) : null; }
+  function keptText(st, sv) { return sv ? (sv.q || sv.rule || sv.carry || (st.showMine && (sv.made || sv.note)) || null) : null; }
   function lastKept(st, before) {
-    for (var k = before - 1; k >= 1; k--) { var t = keptText(st, st.d[k].saved); if (t) return { k: k, text: t }; }
+    for (var k = before - 1; k >= 1; k--) { var sv = st.d[k].saved, t = keptText(st, sv); if (t) return { k: k, text: t, sub: sv.q && sv.rule ? sv.rule : null }; }
     return null;
   }
 
   /* ---------- shared pieces ---------- */
   function ruleOf(day, ds) { return day.n === 7 ? (ds.pick != null ? day.rules.list[ds.pick] : null) : day.rule; }
+  var QLAB = { 1: "Tu pregunta", 2: "Tu pregunta", 4: "Tu pregunta", 6: "Tu frase" };
+  var MADE = { 3: "Tu frase para ensayar", 6: "La comprobación que elegiste" };
+  function chosenQ(day, ds) {
+    if (!QLAB[day.n] || ds.s3 == null) return null;
+    var o = day.s3.opts[ds.s3]; if (!o) return null;
+    return o.phrase || (/\?$/.test(o.t) ? o.t : null);
+  }
   function selectable(day, ds) {
-    var items = [], r = ruleOf(day, ds), note = ds.notePass ? "" : (ds.note || "").trim();
+    var items = [], r = ruleOf(day, ds), note = ds.notePass ? "" : (ds.note || "").trim(), q = chosenQ(day, ds);
     if (r) items.push({ k: "rule", label: day.n === 7 ? "La regla que elegiste" : "La regla de hoy", text: r });
+    if (q) items.push({ k: "q", label: QLAB[day.n], text: q });
+    if (MADE[day.n] && ds.made && ds.made.trim()) items.push({ k: "made", label: MADE[day.n], text: ds.made.trim() });
+    if (day.n === 7 && ds.carry) items.push({ k: "carry", label: "Lo que elegiste de tu semana", text: ds.carry.text });
+    if (day.n === 7 && (ds.doubt || "").trim()) items.push({ k: "doubt", label: "Una duda pendiente", text: ds.doubt.trim() });
     if (note) items.push({ k: "note", label: "Tu nota", text: note });
     return items;
   }
@@ -684,7 +742,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   /* What she chose to keep. On Hoy it is Ventana's quiet row, which also leads to Atlas; elsewhere, a label and the line. */
   function slip(label, text, opts2) {
     opts2 = opts2 || {};
-    if (opts2.go) return '<button type="button" class="rrow" data-act="tusdias" aria-label="' + esc(label) + ": " + esc(text) + '. Abrir Tus días en Atlas"><span class="rico">' + ico("bookmark", 18) + '</span><span class="rcol"><span class="rtop"><span class="label">' + esc(label) + '</span><span class="rlink">Tus días ›</span></span><span class="rq">«' + esc(text) + "»</span></span></button>";
+    if (opts2.go) return '<button type="button" class="rrow" data-act="tusdias" aria-label="' + esc(label) + ": " + esc(text) + '. Abrir Tus días en Atlas"><span class="rico">' + ico("bookmark", 18) + '</span><span class="rcol"><span class="rtop"><span class="label">' + esc(label) + '</span><span class="rlink">Tus días ›</span></span><span class="rq">«' + esc(text) + "»</span>" + (opts2.sub ? '<span class="rsub">Regla: ' + esc(opts2.sub) + "</span>" : "") + "</span></button>";
     return '<div class="kblock">' + (label ? '<p class="label">' + esc(label) + "</p>" : "") + '<p class="quote">«' + esc(text) + "»</p></div>";
   }
   function bg(day) { return '<div class="bgblur" style="background-image:url(\'' + day.photo.src + '\')"></div><div class="veil"></div>'; }
@@ -696,7 +754,10 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     if (h.kind === "before" || h.kind === "resume") {
       var gap = cameBackAfterGap(st, n);
       var prev = lastKept(st, n);
-      var reminder = prev ? slip((prev.k === n - 1 && yesterdayAccurate(st, n)) ? "Ayer te llevaste" : "Te llevaste el día " + prev.k, prev.text, { go: true }) : (n > 1 ? daysRow() : "");
+      /* Days 3 and 6 are more careful: day 3 recalls only a rule (never her question); day 6 recalls nothing. */
+      if (n === 6) prev = null;
+      else if (n === 3 && prev) { var rr = st.d[prev.k].saved && st.d[prev.k].saved.rule; prev = rr ? { k: prev.k, text: rr, sub: null } : null; }
+      var reminder = prev ? slip((prev.k === n - 1 && yesterdayAccurate(st, n)) ? "Ayer te llevaste" : "Te llevaste el día " + prev.k, prev.text, { go: true, sub: prev.sub }) : (n > 1 ? daysRow() : "");
       var welcome = (n === 1 && !ds.started) ? '<button type="button" class="welcome" data-act="sheet" data-k="welcome"><span class="playdisc">' + ico("play", 16) + '</span><span class="t"><span class="label">Antes de empezar</span><b>Una bienvenida de Ale</b></span></button>' : "";
       var nextStep = h.kind === "resume" ? '<p class="meta">Tu próximo paso: ' + esc(MNAME[MOMENT[ds.last || "s1"]]) + "</p>" : '<p class="meta">' + ico("lock", 14, 2) + "<span>Unos 3 a 5 minutos · respuestas privadas</span></p>";
       body = (gap ? '<p class="returnnote voice it">Tu día ' + n + " te espera. No se pierde nada.</p>" : "") +
@@ -706,7 +767,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         welcome + reminder;
     } else if (h.kind === "doneToday") {
       var sv = ds.saved, today = keptText(st, sv);
-      var lead = today ? slip("Hoy te llevas", today, { cls: "today" }) :
+      var lead = today ? slip("Hoy te llevas", today, { cls: "today", sub: sv && sv.q && sv.rule ? sv.rule : null }) :
         (sv && sv.note ? '<p class="voice mt14">Tu nota quedó en Tus días.</p>' : '<p class="voice it mt14">Hoy queda hecho, tal como lo dejaste.</p>');
       var nextLine = day.next ? '<p class="next mt14">Mañana: ' + T(st, day.next, day.m.next) + "</p>" : '<p class="voice mt14">' + closingLine(st, day, ds) + "</p>";
       body = '<p class="eyebrow done"><span class="tick">' + ico("check", 12, 3) + "</span><span>Día " + n + " hecho" + (n === 7 ? " · Semana " + WEEKNO + " completa" : "") + "</span></p>" +
@@ -738,6 +799,165 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 
   /* ---------- the day's practice ---------- */
   function eyebrow(n, txt) { return '<p class="eyebrow">Día ' + n + " · " + txt + "</p>"; }
+  /* ---------- applied activities, one per day (proposals: new instructional wording, not V4.1) ---------- */
+  var A = {};
+  function ax(ds) { if (!ds.act) ds.act = {}; return ds.act; }
+  function chipb(a, v, label, on) { return '<button type="button" class="chipbtn' + (on ? " on" : "") + '" data-act="a" data-a="' + a + '" data-v="' + v + '" aria-pressed="' + (!!on) + '">' + label + "</button>"; }
+  function afb(txt, soft) { return txt ? '<p class="afb' + (soft ? " soft" : "") + '" role="status">' + txt + "</p>" : ""; }
+  function showme(a) { return '<button type="button" class="link u" data-act="a" data-a="' + a + '" data-v="show"><span>Muéstrame cómo verlo</span></button>'; }
+  function usd(n) { return "US$" + (Math.round(n * 100) / 100).toFixed(Math.round(n) === n ? 0 : 2).replace(".", ","); }
+  function actWrap(task, hint, inner) {
+    return '<div class="act"><span class="ptag">Propuesta de actividad</span><p class="task">' + task + "</p>" + (hint ? '<p class="ahint">' + hint + "</p>" : "") + inner + "</div>";
+  }
+
+  /* 1. A payment timeline: what changes when income arrives later */
+  A[1] = function (st, day, ds) {
+    var a = ax(ds), cob = a.cob != null ? a.cob : 12, n = a.n || 0;
+    var ev = [{ d: 0, who: "Hoy", t: "Tienes", amt: 300, inc: true }, { d: 5, who: "Día 5", t: "Vence el alquiler", amt: -180 }, { d: 10, who: "Día 10", t: "Vence la luz", amt: -170 }, { d: cob, who: "Día " + cob, t: "Llega el cobro", amt: 200, inc: true }];
+    ev.sort(function (x, y) { return x.d - y.d || (y.inc ? 1 : 0) - (x.inc ? 1 : 0); });
+    var bal = 0, min = 0, rows = ev.slice(0, n + 1).map(function (e) {
+      bal += e.amt; if (bal < min) min = bal;
+      var short = bal < 0;
+      return '<li class="tlrow' + (short ? " short" : "") + '"><span class="when">' + e.who + '</span><span class="what">' + e.t + " · " + (e.amt > 0 ? "+" : "−") + usd(Math.abs(e.amt)) + '</span><span class="bal">' + (short ? "Faltan " + usd(-bal) : "Disponible " + usd(bal)) + "</span></li>";
+    }).join("");
+    var more = n < 3 ? '<button type="button" class="btn2 small" data-act="a" data-a="d1" data-v="next">Mostrar el siguiente día</button>' + showme("d1") : "";
+    var fin = "";
+    if (n >= 3) {
+      var chips = [8, 10, 12, 14].map(function (d) { return chipb("d1", "c" + d, "El día " + d, cob === d); }).join("");
+      fin = '<p class="ahint">¿Y si el cobro llega otro día? Pruébalo.</p><div class="chips">' + chips + "</div>" +
+        (min < 0 ? afb("El día 10 faltan " + usd(-min) + ". El cobro llega el día " + cob + ", después de la luz. Un dinero que todavía no llegó no cuenta como disponible.", true)
+          : afb("Con el cobro el día " + cob + ", la luz queda cubierta. Es el mismo dinero: lo que cambió fue la fecha."));
+    }
+    return actWrap("Mira cómo se mueve el dinero, día a día.", "Es un ejemplo, no son tus cuentas.", '<ol class="tlrows">' + rows + "</ol>" + more + fin);
+  };
+
+  /* 2. Match a purpose with its timing and access needs */
+  var P2 = ["Una mudanza dentro de cuatro semanas (US$300)", "Un imprevisto que podría aparecer cualquier día", "Algo para dentro de varios años"];
+  var N2 = ["Debe estar disponible si lo necesito de repente", "Puede esperar años sin tocarlo", "Lo necesito completo en pocas semanas, sin depender de una subida"];
+  var K2 = [2, 0, 1];
+  var H2 = ["Faltan cuatro semanas: lo que importa es tener el dinero completo ese día.", "Puede pasar cualquier día: lo que importa es poder usarlo cuando haga falta.", "Si falta mucho tiempo, puede esperar. Aun así, ninguna ganancia está asegurada."];
+  A[2] = function (st, day, ds) {
+    var a = ax(ds), p = a.p || {}, sel = a.sel, done = Object.keys(p).length === 3;
+    var rows = P2.map(function (t, i) {
+      var on = sel === i;
+      return '<button type="button" class="pair' + (on ? " on" : "") + '" data-act="a" data-a="d2" data-v="s' + i + '" aria-pressed="' + on + '"><span class="ptxt">' + t + '</span><span class="pval">' + (p[i] != null ? N2[p[i]] : "Toca para emparejar") + "</span></button>";
+    }).join("");
+    var needs = sel != null ? '<p class="ahint">¿Qué necesita «' + P2[sel].toLowerCase() + '»?</p><div class="chips col">' + N2.map(function (t, j) { return chipb("d2", "n" + j, t, p[sel] === j); }).join("") + "</div>" : "";
+    var fb = "";
+    if (done) {
+      var bad = P2.map(function (_, i) { return i; }).filter(function (i) { return p[i] !== K2[i]; });
+      fb = bad.length ? afb("Casi. " + H2[bad[0]] + " Puedes cambiar la pareja.", true) : afb("Cada propósito tiene su plazo y su forma de acceso. Antes de comparar opciones, la pregunta es: ¿para qué es y cuándo lo necesito?");
+    }
+    return actWrap("Empareja cada propósito con lo que necesita.", "Toca un propósito y después lo que necesita. No es una recomendación de dónde poner tu dinero.", '<div class="pairs">' + rows + "</div>" + needs + fb + (done ? "" : showme("d2")));
+  };
+
+  /* 3. Build or edit a sentence that gives time before committing money */
+  var O3 = [["Gracias por contármelo.", "Quiero ayudarte."], ["Necesito revisar mis pagos", "Quiero ver qué cantidad puedo sostener", "Necesito unos días"], ["antes de decirte una cantidad.", "antes de comprometerme.", "y te respondo el viernes.", "y mañana te lo paso."]];
+  function compose3(a) { return [a.A != null ? O3[0][a.A] : "", a.B != null ? O3[1][a.B] : "", a.C != null ? O3[2][a.C] : ""].filter(Boolean).join(" "); }
+  A[3] = function (st, day, ds) {
+    var a = ax(ds);
+    function grp(k, lab, list) { return '<p class="agl">' + lab + '</p><div class="chips">' + list.map(function (t, i) { return chipb("d3", k + i, t, a[k] === i); }).join("") + "</div>"; }
+    var fb = "";
+    if (a.B != null && a.C != null) fb = a.C === 3 ? afb("Esta frase promete dinero antes de revisar tus pagos. Si quieres darte tiempo, prueba otro final.", true) : afb("Esta frase te da tiempo sin prometer una cantidad. Es para ensayar: no tienes que enviarla.");
+    return actWrap("Arma una frase que te dé tiempo.", "Elige piezas y después edítala con tus palabras. Se queda contigo.",
+      grp("A", "Cómo empiezas · opcional", O3[0]) + grp("B", "Qué necesitas", O3[1]) + grp("C", "Cómo terminas", O3[2]) +
+      '<p class="agl">Tu frase</p>' + field(st, "made", "Tu frase aparecerá aquí. También puedes escribirla tú.", "Tu frase, editable") + fb + (a.B != null && a.C != null ? "" : showme("d3")));
+  };
+
+  /* 4. Reveal balance, charges and payment separately */
+  A[4] = function (st, day, ds) {
+    var a = ax(ds), n = a.n || 0, noint = !!a.noint;
+    var rows = [["Saldo", "Debes US$100", 100, "b0"], ["Cargos", "Se suman US$10 de interés", 10, "b1"], ["Tu pago", "Pagas US$20", 20, "b2"]];
+    var out = rows.slice(0, n).map(function (r, i) {
+      var skip = i === 1 && noint;
+      return '<li class="brow' + (skip ? " off" : "") + '"><span class="blab">' + r[0] + '</span><span class="bbar"><i class="' + r[3] + '" style="width:' + (r[2] / 130 * 100) + '%"></i></span><span class="btx">' + (skip ? "Sin interés" : r[1]) + "</span></li>";
+    }).join("");
+    var res = "";
+    if (n >= 3) { var end = 100 + (noint ? 0 : 10) - 20; res = '<li class="brow res"><span class="blab">Ahora</span><span class="bbar"><i class="b3" style="width:' + (end / 130 * 100) + '%"></i></span><span class="btx">Debes US$' + end + "</span></li>"; }
+    var next = n < 3 ? '<button type="button" class="btn2 small" data-act="a" data-a="d4" data-v="next">Mostrar ' + ["el saldo", "los cargos", "tu pago"][n] + "</button>" + showme("d4") : "";
+    var fin = n >= 3 ? '<div class="chips">' + chipb("d4", "noint", "Ver sin el interés", noint) + "</div>" +
+      (noint ? afb("Sin el interés, ese mismo pago habría bajado la deuda US$20.") : afb("Pagaste US$20, pero la deuda bajó US$10 porque se sumaron US$10. Es una cuenta simplificada.", true)) : "";
+    return actWrap("Mira qué le pasa a una deuda en un mes.", "Es un ejemplo, no es tu deuda.", '<ol class="brows">' + out + res + "</ol>" + next + fin);
+  };
+
+  /* 5. Compare package quantity and price */
+  A[5] = function (st, day, ds) {
+    var a = ax(ds), pick = a.pick;
+    var cards = '<div class="pk"><div class="pkc"><b>800 g</b><span>US$1,80</span></div><div class="pkc"><b>1 kg</b><span>US$2,00</span></div></div>';
+    var chips = '<div class="chips">' + chipb("d5", "p0", "El de 800 g", pick === 0) + chipb("d5", "p1", "El de 1 kg", pick === 1) + chipb("d5", "p2", "No estoy segura", pick === 2) + "</div>";
+    var fb = "";
+    if (pick === 1) fb = afb("Sí. 1 kg a US$2,00 son US$2,00 por kilo. 800 g a US$1,80 son US$2,25 por kilo.");
+    else if (pick === 0) fb = afb("Cuesta menos en total, pero trae menos. Por kilo: 800 g a US$1,80 son US$2,25, y 1 kg a US$2,00 son US$2,00. Compara la misma cantidad.", true);
+    else if (pick === 2) fb = afb("Compara la misma cantidad. Si 800 g cuestan US$1,80, un kilo costaría US$2,25. El paquete de 1 kg sale más barato por kilo.", true);
+    return actWrap("Dos paquetes del mismo producto. ¿Cuál sale más barato por kilo?", "Es un ejemplo inventado.", cards + chips + fb);
+  };
+
+  /* 6. Spot warning signs in a fictional offer, then choose an independent check */
+  var L6 = [["wa", "Hola, te escribo por WhatsApp.", null], ["gain", "20 % al mes", "Ganancia alta"], ["risk", "sin riesgo", "Sin riesgo"], ["rush", "envía hoy", "Prisa"], ["rec", "gana más si traes amigas", "Reclutamiento"]];
+  var C6 = ["Buscar yo misma la autoridad financiera de mi país", "Preguntarle a quien me escribió si es seguro", "Enviar una cantidad pequeña para probar"];
+  A[6] = function (st, day, ds) {
+    if (ds.s1 === 3) return '<div class="act"><span class="ptag">Propuesta de actividad</span><p class="task">Hoy no hace falta practicar.</p><p class="afb">' + esc(day.s1.opts[3].r) + "</p></div>";
+    var a = ax(ds), m = a.m || [], c = a.c;
+    var lines = L6.map(function (l) {
+      var on = m.indexOf(l[0]) >= 0;
+      return '<button type="button" class="msgl' + (on ? " on" : "") + '" data-act="a" data-a="d6" data-v="m' + l[0] + '" aria-pressed="' + on + '"><span>' + l[1] + "</span>" + (on && l[2] ? '<em>' + l[2] + "</em>" : "") + "</button>";
+    }).join("");
+    var sigs = m.filter(function (k) { return k !== "wa"; }).length, fb = "";
+    if (m.indexOf("wa") >= 0) fb = afb("Escribir por WhatsApp no prueba nada por sí solo. Mira la promesa, la prisa y el reclutamiento.", true);
+    else if (sigs >= 4) fb = afb("Ganancia alta, sin riesgo, prisa y reclutamiento juntos: es momento de parar y comprobar.");
+    else if (sigs > 0) fb = afb("Eso es una señal. Mira si hay más.");
+    var second = "";
+    if (sigs > 0) {
+      var order = [1, 0, 2], cf = "";
+      if (c === 0) cf = afb("Sí. Quien ofrece no puede confirmar su propia oferta. Comprueba quién es y cómo contactarla por otro medio.");
+      else if (c === 1) cf = afb("Casi. La misma persona que ofrece puede decir que es seguro. Busca una fuente independiente.", true);
+      else if (c === 2) cf = afb("Enviar poco no comprueba nada. Al principio pueden devolverte algo y después pedirte más.", true);
+      second = '<p class="agl">¿Cómo lo comprobarías por tu cuenta?</p><div class="chips col">' + order.map(function (i) { return chipb("d6", "c" + i, C6[i], c === i); }).join("") + "</div>" + cf;
+    }
+    return actWrap("Toca lo que te haría detenerte.", "Mensaje de ejemplo, inventado.", '<div class="msg">' + lines + "</div>" + fb + second + (sigs > 3 ? "" : showme("d6")));
+  };
+
+  /* 7. Retrieve and save an idea or question from her actual week */
+  function weekItems(st) {
+    var out = [];
+    for (var k = 1; k <= 6; k++) {
+      var sv = st.d[k].saved; if (!sv) continue;
+      [["q", k === 6 ? "tu frase" : "tu pregunta"], ["rule", "la regla"], ["made", "lo que armaste"], ["note", "tu nota"]].forEach(function (f) { if (sv[f[0]]) out.push({ k: k, f: f[0], label: "Día " + k + " · " + f[1], text: sv[f[0]] }); });
+    }
+    return out;
+  }
+  A[7] = function (st, day, ds) {
+    var items = weekItems(st), a = ax(ds);
+    var list = items.length ? '<div class="chips col">' + items.map(function (it, i) { var on = ds.carry && ds.carry.text === it.text && ds.carry.label === it.label; return '<button type="button" class="chipbtn tall' + (on ? " on" : "") + '" data-act="a" data-a="d7" data-v="i' + i + '" aria-pressed="' + on + '"><small>' + it.label + "</small><span>" + esc(it.text) + "</span></button>"; }).join("") + "</div>" :
+      afb("Esta semana no guardaste nada. Eso también es una respuesta. Puedes dejar una duda por escrito o ver las reglas de la semana.");
+    var doubt = discl("doubtOpen", "Dejar una duda por escrito", ds.doubtOpen, field(st, "doubt", "Algo que todavía quiero entender…", "Una duda pendiente"));
+    return actWrap(items.length ? "Esto es lo que guardaste esta semana. ¿Quieres llevarte algo?" : "Tu semana.", "Solo tú ves esto. No tienes que elegir nada.", list + doubt);
+  };
+
+  function actEvent(el, day, ds) {
+    var a = ax(ds), v = el.dataset.v, k = el.dataset.a;
+    if (k === "d1") { if (v === "next") a.n = Math.min(3, (a.n || 0) + 1); else if (v === "show") a.n = 3; else a.cob = +v.slice(1); }
+    else if (k === "d2") {
+      a.p = a.p || {};
+      if (v === "show") { a.p = { 0: K2[0], 1: K2[1], 2: K2[2] }; a.sel = null; }
+      else if (v[0] === "s") { var i = +v.slice(1); a.sel = a.sel === i ? null : i; }
+      else if (v[0] === "n" && a.sel != null) { var j = +v.slice(1); Object.keys(a.p).forEach(function (q) { if (a.p[q] === j) delete a.p[q]; }); a.p[a.sel] = j; a.sel = null; }
+    }
+    else if (k === "d3") {
+      if (v === "show") { a.A = 0; a.B = 0; a.C = 0; } else { var g = v[0], idx = +v.slice(1); a[g] = a[g] === idx ? null : idx; }
+      if (a.B != null && a.C != null) ds.made = compose3(a);
+    }
+    else if (k === "d4") { if (v === "next") a.n = Math.min(3, (a.n || 0) + 1); else if (v === "show") a.n = 3; else if (v === "noint") a.noint = !a.noint; }
+    else if (k === "d5") { if (v === "show") a.pick = 2; else a.pick = +v.slice(1); }
+    else if (k === "d6") {
+      a.m = a.m || [];
+      if (v === "show") a.m = ["gain", "risk", "rush", "rec"];
+      else if (v[0] === "m") { var key = v.slice(1), at = a.m.indexOf(key); if (at >= 0) a.m.splice(at, 1); else a.m.push(key); }
+      else if (v[0] === "c") { a.c = +v.slice(1); ds.made = a.c === 0 ? "Comprobaré por mi cuenta: busco yo misma la autoridad financiera de mi país." : null; }
+    }
+    else if (k === "d7") { var its = weekItems(S), it = its[+v.slice(1)]; ds.carry = ds.carry && it && ds.carry.text === it.text && ds.carry.label === it.label ? null : (it ? { label: it.label, text: it.text } : null); }
+  }
+
   var BODY = {
     s1: function (st, day, ds) {
       var showYesterday = day.yesterday && st.day === firstOpen(st) && yesterdayAccurate(st, day.n);
@@ -751,18 +971,14 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     },
     idea: function (st, day, ds) {
       var ale = st.voice ? '<button type="button" class="ale" data-act="sheet" data-k="ale"><span class="playdisc">' + ico("play", 16) + '</span><span class="t"><b>Escuchar a Ale</b><span>La misma idea, en su voz</span></span></button>' : "";
-      return eyebrow(day.n, "Una idea que ayuda") +
-        '<h2 class="h2 sr" tabindex="-1" data-focus>Una idea que ayuda</h2>' + ale +
-        '<p class="read">' + T(st, day.idea, day.m.idea) + "</p>" +
-        '<div class="rulebox"><p class="label">La regla de hoy</p><p class="ruletext">' + esc(day.rule) + "</p></div>" +
-        discl("otherOpen", "Tengo otra pregunta", ds.otherOpen, field(st, "other", "Escribe tu pregunta…", "Tu pregunta") + '<p class="voice">' + esc(U.otherQ) + "</p>") +
-        (day.check ? '<div class="chk"><p class="label">Comprueba la idea · opcional</p><h2 class="h2" style="margin-top:6px">' + T(st, day.check.q, "new") + "</h2>" +
-          '<p class="hint">' + esc(U.checkHint) + "</p>" + opts(st, "check", day.check.opts, ds.check, "new") + "</div>" : "");
-    },
-    check: function (st, day, ds) {
-      return eyebrow(day.n, "Comprueba la idea · opcional") +
-        '<h2 class="h2" style="margin-top:-8px" tabindex="-1" data-focus>' + T(st, day.check.q, "new") + "</h2>" +
-        '<p class="hint" style="margin-top:-6px">' + esc(U.checkHint) + "</p>" + opts(st, "check", day.check.opts, ds.check, "new");
+      var more = discl("whyOpen", "Ver el porqué", ds.whyOpen, '<p class="read">' + T(st, day.idea, day.m.idea) + "</p>") +
+        (day.example ? discl("exOpen2", "Ver un ejemplo", ds.exOpen2, '<p class="read sm">' + T(st, day.example, day.m.example) + "</p>") : "");
+      var chk = day.check ? discl("checkOpen", "Comprobar si lo entendí · opcional", ds.checkOpen,
+        '<p class="hint">' + esc(U.checkHint) + '</p><h2 class="h2" style="margin-top:2px">' + T(st, day.check.q, "new") + "</h2>" + opts(st, "check", day.check.opts, ds.check, "new")) : "";
+      var other = discl("otherOpen", "Tengo otra pregunta", ds.otherOpen, field(st, "other", "Escribe tu pregunta…", "Tu pregunta") + '<p class="voice">' + esc(U.otherQ) + "</p>");
+      var head = day.n === 7 ? '<p class="read">' + T(st, day.idea, day.m.idea) + "</p>" : '<div class="rulebox"><p class="label">La idea de hoy</p><p class="ruletext">' + esc(day.rule) + "</p></div>";
+      return eyebrow(day.n, "Una idea que ayuda") + '<h2 class="h2 sr" tabindex="-1" data-focus>Una idea que ayuda</h2>' + ale + head +
+        A[day.n](st, day, ds) + (day.n === 7 ? "" : more + chk) + other;
     },
     s3: function (st, day, ds) {
       var ph = (day.noteAlt && ds.s3 === day.noteAlt.opt) ? day.noteAlt.text : day.note;
@@ -771,7 +987,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
           var on = ds.pick === i;
           return '<div class="optwrap' + (on ? " sel" : "") + '"><button type="button" class="opt" data-act="rule-pick" data-i="' + i + '" aria-pressed="' + on + '"><span class="radio" aria-hidden="true"></span><span>' + esc(r) + "</span></button></div>";
         }).join("") + "</div>") : "";
-      var ex = day.example ? discl("exOpen", "Ver un ejemplo · opcional", ds.exOpen, '<p class="read sm">' + T(st, day.example, day.m.example) + "</p>") : "";
+      var ex = "";
       var note = '<div class="notebox"><p class="label">' + T(st, "Nota opcional", day.m.note) + "</p>" + (ds.notePass ?
         '<p class="voice">' + esc(U.notePass) + '.</p><button type="button" class="link u" data-act="toggle" data-k="notePass"><span>Escribir una nota</span></button>' :
         field(st, "note", ph, "Nota opcional") + '<button type="button" class="link" data-act="toggle" data-k="notePass">Prefiero pasar</button>') + "</div>";
@@ -802,7 +1018,8 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       }
       return bar('<button type="button" class="btn" data-act="choose">Elegir qué guardar</button>' + row);
     }
-    var label = (st.step === "idea" && day.check && ds.check == null) ? "Seguir sin responder" : "Seguir";
+    var touched = (ds.act && Object.keys(ds.act).length) || ds.check != null || ds.carry || (ds.doubt || "").trim() || (day.n === 3 && ds.made);
+    var label = st.step === "idea" && !touched ? "Seguir sin la actividad" : "Seguir";
     return bar('<div class="row2b">' + (i > 0 ? '<button type="button" class="btn2" data-act="back">Atrás</button>' : "") + '<button type="button" class="btn" data-act="next">' + label + ico("arrow", 20, 2) + "</button></div>");
   }
   function band(st, day, m) {
@@ -822,7 +1039,11 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     var next = day.next ? '<p class="next">Mañana: ' + T(st, day.next, day.m.next) + "</p>" : '<p class="label" style="margin-top:4px">Tu camino</p>' + strip7() + '<p class="voice">Siete lugares, a tu ritmo. Lo que guardaste está en Tus días.</p>';
     if (ds.take === "saved" && sv) {
       inner = '<h2 class="h2" tabindex="-1" data-focus>Llegaste ' + esc(toPlace(day.n)) + '.</h2><p class="voice" role="status">' + esc(U.savedOk) + ".</p>" +
+        (sv.q ? slip(QLAB[day.n] || "Tu pregunta", sv.q, {}) : "") +
         (sv.rule ? slip(day.n === 7 ? "La regla que elegiste" : "La regla de hoy", sv.rule, {}) : "") +
+        (sv.made ? slip(MADE[day.n] || "Lo que armaste", sv.made, {}) : "") +
+        (sv.carry ? slip("Lo que elegiste de tu semana", sv.carry, {}) : "") +
+        (sv.doubt ? slip("Una duda pendiente", sv.doubt, {}) : "") +
         (sv.note ? slip("Tu nota", sv.note, {}) : "") +
         '<p class="voice">' + closingLine(st, day, ds) + "</p>" + next;
     } else {
@@ -847,8 +1068,9 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       else {
         body = '<p class="label">Día ' + n + '</p><p class="dt">' + esc(day.title) + "</p>";
         if (ds.done && ds.saved) {
-          if (ds.saved.rule) body += '<p class="kept">«' + esc(ds.saved.rule) + "»</p>";
-          if (ds.saved.note) body += '<p class="label" style="margin-top:4px">Tu nota</p><p class="kept">«' + esc(ds.saved.note) + "»</p>";
+          [["q", n === 6 ? "Tu frase" : "Tu pregunta"], ["rule", ""], ["carry", "Lo que elegiste"], ["made", MADE[n] || "Lo que armaste"], ["doubt", "Tu duda"], ["note", "Tu nota"]].forEach(function (f) {
+            if (ds.saved[f[0]]) body += (f[1] ? '<p class="label" style="margin-top:4px">' + f[1] + "</p>" : "") + '<p class="kept">«' + esc(ds.saved[f[0]]) + "»</p>";
+          });
           body += '<div class="links"><button type="button" class="link u" data-act="open-day" data-n="' + n + '"><span>Releer</span></button></div>';
         } else if (ds.done) {
           body += '<span class="tag">Hecho</span><div class="links"><button type="button" class="link u" data-act="open-day" data-n="' + n + '"><span>Releer</span></button><button type="button" class="link u" data-act="choose-day" data-n="' + n + '"><span>Elegir qué guardar</span></button></div>';
@@ -889,6 +1111,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       inner = '<h2 class="h2" id="sh-t" tabindex="-1" data-focus>Escuchar a Ale</h2><p class="purpose" style="margin:0">Aquí iría la nota de voz de Ale con la misma enseñanza. Todavía no está grabada: en la app, este botón no aparece hasta que exista el audio.</p>';
     } else if (st.sheet === "share") {
       var hs = homeState(st), sv = st.d[hs.n].saved || {}, items = [];
+      if (sv.q) items.push({ k: "q", label: "La pregunta", text: sv.q });
       if (sv.rule) items.push({ k: "rule", label: "La regla", text: sv.rule });
       if (sv.note) items.push({ k: "note", label: "Tu nota", text: sv.note });
       inner = '<h2 class="h2" id="sh-t" tabindex="-1" data-focus>Compartir en Círculos</h2>' +
@@ -896,7 +1119,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
           '<p class="hint">Elige qué compartir. Solo se comparte lo que marques.</p><div class="opts">' + items.map(function (it) {
             var on = !!st.share[it.k];
             return '<div class="optwrap' + (on ? " sel" : "") + '"><button type="button" class="opt" data-act="share-sel" data-k="' + it.k + '" role="checkbox" aria-checked="' + on + '"><span class="box" aria-hidden="true">' + (on ? ico("check", 14, 3) : "") + '</span><span><span class="label" style="display:block">' + it.label + '</span><span class="kept" style="font-size:calc(17*var(--u))">«' + esc(it.text) + "»</span></span></button></div>";
-          }).join("") + '</div><p class="hint">Se compartiría en: Círculos.</p><button type="button" class="btn" data-act="share-go"' + ((st.share.rule && sv.rule) || (st.share.note && sv.note) ? "" : " disabled") + ">Compartir</button>");
+          }).join("") + '</div><p class="hint">Se compartiría en: Círculos.</p><button type="button" class="btn" data-act="share-go"' + ((st.share.rule && sv.rule) || (st.share.q && sv.q) || (st.share.note && sv.note) ? "" : " disabled") + ">Compartir</button>");
     }
     return '<button type="button" class="ovl" data-act="close-sheet" aria-label="Cerrar"></button><div class="bsheet" role="dialog" aria-modal="true" aria-labelledby="sh-t"><span class="grab" aria-hidden="true"></span>' + inner +
       '<button type="button" class="btn2" style="width:100%" data-act="close-sheet">Cerrar</button></div>';
@@ -906,7 +1129,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     var v = st.view === "session" ? sessionHTML(st) : st.view === "tusdias" ? tusDiasHTML(st) : st.view === "circulos" ? circulosHTML(st) : homeHTML(st);
     return v + sheetHTML(st);
   }
-  function appClass(st, extra) { return "app" + (st.big ? " big" : "") + (st.small ? " small" : "") + (st.nophoto ? " nophoto" : "") + (extra || ""); }
+  function appClass(st, extra) { return "app" + (st.big ? " big" : "") + (st.small ? " small" : "") + (st.nophoto ? " nophoto" : "") + (st.hideTags ? " notags" : "") + (extra || ""); }
   function screenKey(st) { return [st.view, st.day, st.step, st.view === "session" ? st.d[st.day].take : homeState(st).kind, st.sheet || "", st.cal].join("|"); }
   function describe(st) {
     if (st.sheet) return { help: "Ayuda", profile: "Perfil y ajustes", share: "Compartir en Círculos", welcome: "Una bienvenida de Ale", ale: "Escuchar a Ale" }[st.sheet];
@@ -975,11 +1198,12 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       case "start": { var h = homeState(S), t = S.d[h.n]; openSession(h.n, t.done ? "s1" : (t.last || "s1")); break; }
       case "reread": openSession(homeState(S).n, "s1"); break;
       case "open-day": { var d2 = S.d[n]; openSession(n, d2.done ? "s1" : (d2.last || "s1")); break; }
-      case "choose-day": { openSession(n, "take"); var dd = S.d[n]; dd.take = "choose"; dd.sel = { rule: true, note: true }; dd.failed = false; break; }
+      case "choose-day": { openSession(n, "take"); var dd = S.d[n]; dd.take = "choose"; dd.sel = {}; dd.failed = false; break; }
       case "close": ds.last = S.step; go("home"); break;
       case "home": case "hoy": go("home"); break;
       case "tusdias": case "atlas": go("tusdias"); break;
       case "circulos": go("circulos"); break;
+      case "a": actEvent(el, day, ds); cheer = true; break;
       case "pick": ds[k] = i; cheer = true; break;
       case "pass": ds.s1 = ds.s1 === "pass" ? null : "pass"; cheer = true; break;
       case "toggle": ds[k] = !ds[k]; break;
@@ -988,7 +1212,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       case "next": S.step = list[Math.min(list.indexOf(S.step) + 1, list.length - 1)]; ds.last = S.step; break;
       case "back": S.step = list[Math.max(list.indexOf(S.step) - 1, 0)]; ds.last = S.step; break;
       case "goto": S.step = k; ds.take = ds.done ? (ds.saved ? "saved" : "unsaved") : null; if (k === "idea" || k === "s3") ds.take = ds.done ? ds.take : null; ds.last = S.step; break;
-      case "choose": S.step = "take"; ds.take = "choose"; ds.sel = { rule: true, note: true }; ds.failed = false; break;
+      case "choose": S.step = "take"; ds.take = "choose"; ds.sel = {}; ds.failed = false; break;
       case "take-back": ds.take = ds.done ? (ds.saved ? "saved" : "unsaved") : null; break;
       case "sel": ds.sel[k] = !ds.sel[k]; break;
       case "save": {
@@ -1070,13 +1294,13 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   function syncPanel() {
 
     document.getElementById("dayChips").innerHTML = DAYS.map(function (day) {
-      return '<button type="button" class="chip" data-start="' + day.n + '" aria-pressed="' + (homeState(S).n === day.n && S.view === "home") + '" aria-label="Empezar en el día ' + day.n + ', con los días anteriores hechos">' + day.n + "</button>";
+      return '<button type="button" class="chip" data-start="' + day.n + '" aria-pressed="' + (homeState(S).n === day.n && S.view === "home") + '" aria-label="Empezar en el día ' + day.n + ', con los días anteriores hechos y sin guardar nada">' + day.n + "</button>";
     }).join("");
     var id = screenId(S);
     document.getElementById("nowLabel").innerHTML = "<b>Pantalla:</b> " + esc(id);
     if (id !== curId) { curId = id; cmt.value = (C.screens[id] && C.screens[id].text) || ""; }
     updateCount();
-    [["optBig", "big"], ["optSmall", "small"], ["optFail", "failSave"], ["optMarks", "marks"], ["optProps", "props"], ["optVoice", "voice"], ["optNoPhoto", "nophoto"]].forEach(function (p) { document.getElementById(p[0]).checked = !!S[p[1]]; });
+    [["optBig", "big"], ["optSmall", "small"], ["optFail", "failSave"], ["optMarks", "marks"], ["optProps", "props"], ["optVoice", "voice"], ["optNoPhoto", "nophoto"], ["optTags", "hideTags"]].forEach(function (p) { document.getElementById(p[0]).checked = !!S[p[1]]; });
     document.getElementById("markLegend").hidden = !S.marks;
     document.getElementById("propLegend").hidden = !S.props;
   }
@@ -1091,9 +1315,15 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     var b = e.target.closest("[data-sw]"); if (!b) return; S.wk[b.dataset.sw] = +b.dataset.i; renderSwatches(); render(); if (!allView.hidden) renderAll(); if (!revView.hidden) renderRev();
   });
   /* Start on day N as if days 1..N-1 were done on consecutive days, each with its rule saved. */
-  function historyUpTo(st, n) {
+  var EXQ = { 1: "¿Qué día estará el dinero disponible en mi cuenta?", 2: "¿Para qué y para cuándo quiero este dinero?", 4: "¿Qué cargos se añadieron?" };
+  /* Jumping to a day marks the earlier days done and keeps nothing for her. Only the strips of example screens use sample takeaways (ex). */
+  function historyUpTo(st, n, ex) {
     DAYS.forEach(function (x) { st.d[x.n] = blankDay(); });
-    for (var k = 1; k < n; k++) { var dk = st.d[k]; dk.done = true; dk.started = true; dk.doneCal = k; dk.take = "saved"; dk.saved = { rule: k === 7 ? DAYS[6].rules.list[0] : DAYS[k - 1].rule, note: null }; if (k === 7) dk.pick = 0; }
+    for (var k = 1; k < n; k++) {
+      var dk = st.d[k]; dk.done = true; dk.started = true; dk.doneCal = k;
+      if (ex) { dk.take = "saved"; dk.saved = { rule: k === 7 ? DAYS[6].rules.list[0] : DAYS[k - 1].rule, q: EXQ[k] || null, note: null }; if (k === 7) dk.pick = 0; }
+      else { dk.take = "unsaved"; dk.saved = null; }
+    }
     st.arrived = {}; st.cal = n; st.view = "home"; st.sheet = null; st.day = n; st.step = "s1";
   }
   document.getElementById("dayChips").addEventListener("click", function (e) {
@@ -1105,10 +1335,10 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   resetBtn.addEventListener("click", function () {
     if (!resetArmed) { resetBtn.textContent = "Toca otra vez para borrar las respuestas"; resetArmed = setTimeout(function () { resetArmed = null; resetBtn.textContent = "Reiniciar la semana"; }, 3500); return; }
     clearTimeout(resetArmed); resetArmed = null; resetBtn.textContent = "Reiniciar la semana";
-    var keep = { big: S.big, small: S.small, failSave: S.failSave, marks: S.marks, props: S.props, voice: S.voice, nophoto: S.nophoto };
+    var keep = { big: S.big, small: S.small, failSave: S.failSave, marks: S.marks, props: S.props, voice: S.voice, nophoto: S.nophoto, hideTags: S.hideTags };
     S = Object.assign(fresh(), keep); render();
   });
-  [["optBig", "big"], ["optSmall", "small"], ["optFail", "failSave"], ["optMarks", "marks"], ["optProps", "props"], ["optVoice", "voice"], ["optNoPhoto", "nophoto"]].forEach(function (p) {
+  [["optBig", "big"], ["optSmall", "small"], ["optFail", "failSave"], ["optMarks", "marks"], ["optProps", "props"], ["optVoice", "voice"], ["optNoPhoto", "nophoto"], ["optTags", "hideTags"]].forEach(function (p) {
     document.getElementById(p[0]).addEventListener("change", function (e) { S[p[1]] = e.target.checked; render(); if (!allView.hidden) renderAll(); if (!revView.hidden) renderRev(); });
   });
 
@@ -1117,24 +1347,31 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   var tabTry = document.getElementById("tabTry"), tabAll = document.getElementById("tabAll"), tabRev = document.getElementById("tabRev");
   var allDay = 2;
   var KINDS = [
-    ["home", "Hoy · antes de empezar"], ["s1", "Pausa 1 · Empieza por ti"], ["idea", "Pausa 2 · Una idea que ayuda"], ["check", "Pausa 2 · con la comprobación respondida"],
+    ["home", "Hoy · antes de empezar"], ["s1", "Pausa 1 · Empieza por ti"], ["idea", "Pausa 2 · Una idea que ayuda"], ["act", "Pausa 2 · con la actividad resuelta"], ["check", "Pausa 2 · con la comprobación respondida"],
     ["s3", "Pausa 3 · Hazlo tuyo"], ["take", "Pausa 3 · Te llevas"], ["choose", "Pausa 3 · Elegir qué guardar"], ["saved", "Cierre · con algo guardado"], ["unsaved", "Cierre · sin guardar"],
     ["homeSaved", "Hoy · hecho, con algo guardado"], ["homeUnsaved", "Hoy · hecho, sin guardar"], ["tusdias", "Atlas · Tus días"]
   ];
+  function solveAct(n, ds, st) {
+    var a = ds.act = {};
+    if (n === 1) { a.n = 3; a.cob = 10; } else if (n === 2) { a.p = { 0: K2[0], 1: K2[1], 2: K2[2] }; } else if (n === 3) { a.A = 0; a.B = 0; a.C = 0; ds.made = compose3(a); }
+    else if (n === 4) { a.n = 3; } else if (n === 5) { a.pick = 1; } else if (n === 6) { a.m = ["gain", "risk", "rush", "rec"]; a.c = 0; ds.made = "Comprobaré por mi cuenta: busco yo misma la autoridad financiera de mi país."; }
+    else if (n === 7) { var it = weekItems(st)[0]; if (it) ds.carry = { label: it.label, text: it.text }; }
+  }
   function snapState(n, kind, o) {
     o = o || {};
-    var st = fresh(); historyUpTo(st, n); st.live = false;
-    ["big", "small", "marks", "props", "voice", "nophoto"].forEach(function (k) { st[k] = o[k] != null ? o[k] : S[k]; });
+    var st = fresh(); historyUpTo(st, n, true); st.live = false;
+    ["big", "small", "marks", "props", "voice", "nophoto", "hideTags"].forEach(function (k) { st[k] = o[k] != null ? o[k] : S[k]; });
     var day = DAYS[n - 1], ds = st.d[n];
     var savedNow = { rule: n === 7 ? day.rules.list[0] : day.rule, note: null };
     if (n === 7) ds.pick = 0;
     if (o.gap) { st.cal = n + 2; }
     if (o.firstDay) { DAYS.forEach(function (x) { st.d[x.n] = blankDay(); }); st.cal = 1; }
     ds.started = kind !== "home";
-    var step = { s1: "s1", idea: "idea", check: "idea", s3: "s3", take: "take", choose: "take", saved: "take", unsaved: "take" }[kind];
+    var step = { s1: "s1", idea: "idea", act: "idea", check: "idea", s3: "s3", take: "take", choose: "take", saved: "take", unsaved: "take" }[kind];
     if (step) { st.view = "session"; st.step = step; }
     if (kind === "s1") ds.s1 = 0;
-    if (kind === "check") ds.check = day.check.opts.findIndex(function (x) { return x.ok; });
+    if (kind === "check") { ds.checkOpen = true; ds.check = day.check.opts.findIndex(function (x) { return x.ok; }); }
+    if (kind === "act") solveAct(n, ds, st);
     if (kind === "s3") { ds.s3 = 0; if (day.example) ds.exOpen = true; if (day.rules) ds.rulesOpen = true; }
     if (kind === "choose") ds.take = "choose";
     if (kind === "saved" || kind === "homeSaved" || kind === "tusdias" || kind === "weekDone") { ds.take = "saved"; ds.saved = savedNow; ds.done = true; ds.doneCal = st.cal; }
@@ -1179,6 +1416,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       "«Para qué es hoy» en lugar de «Hoy aprenderás». Otras opciones: «Por qué hoy» (ya en la app) o el propósito solo, sin etiqueta.",
       "«Ayer te llevaste», «Te llevaste el día N» y «Hoy te llevas» para lo que guardó.",
       "Líneas que ya existen en la app como propuesta: «Día N hecho», «Hoy queda hecho, tal como lo dejaste.», «Tu día N te espera. No se pierde nada.», «Tu próximo paso».",
+      "Las siete actividades de la pausa 2 (texto de instrucciones, avisos y respuestas a los errores) y las etiquetas «Propuesta de actividad».",
       "«Llegaste al puente.» y las demás llegadas, el orden distinto de las opciones de la comprobación y las imágenes generadas con IA para cada lugar.",
       "La semana completa: «Lo que te llevaste esta semana», «Ver tu semana». Qué viene después de la semana 1 sigue sin definir; la pantalla no promete nada.",
       "La nota de voz de Ale en «Una idea que ayuda»: el lugar está diseñado; el audio no está grabado."

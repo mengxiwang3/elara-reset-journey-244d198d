@@ -100,3 +100,17 @@ Rebuilt after reviewing the Codex seven-day screens. Each day is three pauses: �
 - Proposed closings by first answer (days 1, 2, 4, 6) still only under «Ver las propuestas».
 - Not included from the Codex version: Explorar tab, three links in the card, the orb in buttons.
 - e2e: 158/158.
+
+## v7 — one applied activity per day (2026-11-05)
+
+Pause 2 now opens with one idea (the day's rule) and one optional activity; the V4.1 explanation, example and check sit behind «Ver el porqué», «Ver un ejemplo» and «Comprobar si lo entendí». All activity wording is new and marked «Propuesta de actividad» (can be hidden in the panel).
+
+1. Payment timeline: reveal day by day, then move the day the income arrives.
+2. Match three purposes with their timing and access needs.
+3. Build and edit a sentence that gives time before committing money.
+4. Reveal balance, charges and payment separately; remove the interest to compare.
+5. Compare two packages by quantity and price (per kilo).
+6. Tap warning signs in a fictional offer, then choose an independent check. Someone who already sent money sees orientation first and no exercise.
+7. Retrieve something from her real week, or leave a doubt; nothing is offered if nothing was saved.
+
+Saved takeaways come only from real choices: nothing is preselected, and jumping to a day in the review panel leaves earlier days done without inventing takeaways. The question she chose returns the next morning with the rule underneath (day 3 shows only the rule; day 6 shows nothing). e2e: 223/223.

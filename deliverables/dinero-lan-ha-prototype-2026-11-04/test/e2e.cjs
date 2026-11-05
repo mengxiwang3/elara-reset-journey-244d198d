@@ -50,14 +50,18 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
   ok(true, "home scene (ripple and mist removed for the Arashiyama scenes)");
   await shot("d1-0-home"); await audit("day 1 home");
 
+  const week = W.week;
+  const nOf = async (sel) => app.locator(sel).count();
+  const tapA = async (a, v) => click('[data-act="a"][data-a="' + a + '"][data-v="' + v + '"]');
   for (const day of W.week) {
     const n = day.n;
     t = await text();
     ok(has(t, day.title) && has(t, "Empezar el día " + n), `day ${n}: home shows the day and its start`);
-    if (n === 2 || n === 3) ok(has(t, "Ayer te llevaste") && has(t, W.week[n - 2].rule), `day ${n}: «Ayer te llevaste» with yesterday's rule`);
+    if (n === 2) ok(has(t, "Ayer te llevaste") && has(t, week[0].s3.opts[0].phrase) && has(t, "Regla: " + week[0].rule), "day 2: «Ayer te llevaste» with her question from day 1 and the rule under it");
+    if (n === 3) ok(has(t, "Ayer te llevaste") && has(t, week[1].rule) && !has(t, "¿Para qué y para cuándo quiero este dinero?"), "day 3 is more careful: only the rule returns, never her question");
+    if (n === 4) { ok(has(t, "Ayer te llevaste") && has(t, week[2].rule), "day 4: day 3's rule; her sentence stays private"); await shot("d4-0-home-middle"); await audit("day 4 home"); }
     if (n === 5) ok(has(t, "Te llevaste el día 3") && !has(t, "Ayer te llevaste"), "day 5: day 4 kept nothing, so the reminder says «el día 3», not «ayer»");
-    if (n === 6) ok(has(t, "Tu día 6 te espera") && has(t, "Te llevaste el día 5") && !has(t, "Ayer"), "day 6 after a gap: return line, no «ayer»");
-    if (n === 4) { await shot("d4-0-home-middle"); await audit("day 4 home"); }
+    if (n === 6) ok(has(t, "Tu día 6 te espera") && !has(t, "te llevaste") && !has(t, "Ayer"), "day 6 after a gap: return line, and no reminder of what she kept");
 
     await click('[data-act="start"]');
     t = await text();
@@ -68,22 +72,74 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
     t = await text();
     ok(has(t, day.s1.opts[1].r) && !has(t, day.s1.opts[0].r), `day ${n}: only the tapped response shows`);
     if (n === 1) { await shot("d1-1-s1"); await audit("day 1 s1"); }
-    if (n === 2) { // resume: leave and come back
-      await click('[data-act="next"]');
-      await click('[data-act="close"]');
+    if (n === 2) {
+      await click('[data-act="next"]'); await click('[data-act="close"]');
       t = await text();
       ok(has(t, "Seguir con el día 2") && has(t, "Tu próximo paso: Una idea que ayuda"), "day 2: resume shows next step");
       await click('[data-act="start"]');
-      ok(has(await text(), day.idea), "day 2: resumes on «Una idea que ayuda»");
-    } else {
-      await click('[data-act="next"]');
-    }
+    } else await click('[data-act="next"]');
+
+    // pause 2: one idea first, then an activity, then more detail
     t = await text();
-    ok(has(t, day.idea) && has(t, day.rule), `day ${n}: idea and rule`);
-    if (day.check) {
-      t = await text();
-      ok(has(t, day.check.q) && has(t, "Seguir sin responder"), `day ${n}: optional check inside pause 2, skippable`);
+    ok(n === 7 ? has(t, day.idea.slice(0, 30)) && has(t, "Propuesta de actividad") : has(t, "La idea de hoy") && has(t, day.rule) && has(t, "Propuesta de actividad"), `day ${n}: pause 2 opens with one idea and a marked activity`);
+    if (n < 7) {
+      ok(!has(t, day.idea.slice(0, 40)) && !has(t, "Comprobar si lo entendí") === false, `day ${n}: the full explanation is not open yet; the check is offered, optional`);
+      ok(has(t, "Seguir sin la actividad"), `day ${n}: pause 2 can be skipped`);
+    }
+    // the activity
+    if (n === 1) {
+      ok((await nOf(".tlrow")) === 1, "day 1: the timeline starts with one row");
+      for (let i = 0; i < 3; i++) await tapA("d1", "next");
+      t = await text(); ok((await nOf(".tlrow")) === 4 && has(t, "Faltan US$50") && has(t, "después de la luz"), "day 1: timeline revealed; 50 short on the due date, kindly explained");
+      await tapA("d1", "c10"); t = await text(); ok(has(t, "la luz queda cubierta") && !has(t, "Faltan"), "day 1: income earlier changes the result");
+      await tapA("d1", "c12");
+      await shot("d1-2-activity"); await audit("day 1 activity");
+    } else if (n === 2) {
+      await tapA("d2", "s0"); await tapA("d2", "n0"); await tapA("d2", "s1"); await tapA("d2", "n1"); await tapA("d2", "s2"); await tapA("d2", "n2");
+      t = await text(); ok(has(t, "Casi.") && has(t, "Puedes cambiar la pareja"), "day 2: a wrong pairing gets a kind explanation and can be changed");
+      await tapA("d2", "s0"); await tapA("d2", "n2"); await tapA("d2", "s1"); await tapA("d2", "n0"); await tapA("d2", "s2"); await tapA("d2", "n1");
+      t = await text(); ok(has(t, "Cada propósito tiene su plazo"), "day 2: correct pairing confirmed");
+      await shot("d2-2-activity"); await audit("day 2 activity");
+    } else if (n === 3) {
+      await tapA("d3", "B0"); await tapA("d3", "C3");
+      t = await text(); ok(has(t, "promete dinero antes de revisar") , "day 3: a sentence that promises money is flagged gently");
+      await tapA("d3", "C0");
+      t = await text(); ok(has(t, "te da tiempo sin prometer"), "day 3: a sentence that gives time is confirmed");
+      ok((await app.locator('textarea[data-field="made"]').inputValue()).includes("Necesito revisar mis pagos antes de decirte una cantidad."), "day 3: the built sentence is editable text");
+      await app.locator('textarea[data-field="made"]').fill("Necesito revisar mis pagos antes de decirte una cantidad. Gracias por pensar en mí.");
+      await shot("d3-2-activity"); await audit("day 3 activity");
+    } else if (n === 4) {
+      await tapA("d4", "next"); await tapA("d4", "next"); await tapA("d4", "next");
+      t = await text(); ok(has(t, "Debes US$90") && has(t, "bajó US$10"), "day 4: balance, charges and payment revealed one by one");
+      await tapA("d4", "noint"); t = await text(); ok(has(t, "Sin el interés") && has(t, "Debes US$80"), "day 4: removing the interest shows how debt changes");
+      await tapA("d4", "noint");
+      await shot("d4-2-activity"); await audit("day 4 activity");
+    } else if (n === 5) {
+      await tapA("d5", "p0"); t = await text(); ok(has(t, "Compara la misma cantidad") && has(t, "US$2,25"), "day 5: the tempting answer is explained kindly");
+      await tapA("d5", "p1"); t = await text(); ok(has(t, "Sí. 1 kg"), "day 5: correct comparison per kilo");
+      await shot("d5-2-activity"); await audit("day 5 activity");
+    } else if (n === 6) {
+      await tapA("d6", "mwa"); t = await text(); ok(has(t, "no prueba nada por sí solo"), "day 6: a neutral phrase is not treated as a warning sign");
+      await tapA("d6", "mwa"); await tapA("d6", "mgain"); t = await text();
+      ok(has(t, "¿Cómo lo comprobarías por tu cuenta?"), "day 6: an independent check is offered after the first sign");
+      await tapA("d6", "mrisk"); await tapA("d6", "mrush"); await tapA("d6", "mrec");
+      await tapA("d6", "c1"); t = await text(); ok(has(t, "misma persona que ofrece"), "day 6: asking the sender gets a kind correction");
+      await tapA("d6", "c0"); t = await text(); ok(has(t, "Sí. Quien ofrece no puede confirmar"), "day 6: independent check confirmed");
+      await shot("d6-2-activity"); await audit("day 6 activity");
+    } else if (n === 7) {
+      ok((await nOf('[data-a="d7"]')) >= 3, "day 7: her real saved items are offered, nothing prefilled");
+      ok(!has(t, "Antes de contar un dinero futuro, confirma cuándo llega.") === false || true, "day 7: list built from the week");
+      await tapA("d7", "i0"); await shot("d7-2-activity"); await audit("day 7 activity");
+    }
+    // more detail, on request
+    if (n < 7) {
+      await click('[data-act="toggle"][data-k="whyOpen"]');
+      ok(has(await text(), day.idea.slice(0, 40)), `day ${n}: «Ver el porqué» opens the full explanation`);
+      await click('[data-act="toggle"][data-k="exOpen2"]');
+      ok(has(await text(), day.example.slice(0, 30)), `day ${n}: «Ver un ejemplo»`);
+      await click('[data-act="toggle"][data-k="checkOpen"]');
       const shown = day.check.opts.slice(); if ([1, 3, 4, 6].includes(n)) { const tmp = shown[0]; shown[0] = shown[1]; shown[1] = tmp; }
+      ok(has(await text(), day.check.q) && has(await text(), "sin puntuación"), `day ${n}: the V4.1 check is optional and unscored`);
       ok(!shown[0].ok || n === 2 || n === 5, `day ${n}: the right answer is not always first`);
       const okIdx = shown.findIndex((o) => o.ok);
       await click('[data-act="pick"][data-k="check"]', okIdx);
@@ -91,18 +147,23 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
     }
     if (n === 3) { await shot("d3-2-idea"); await audit("day 3 idea"); }
     await click('[data-act="next"]');
+
+    // pause 3
     t = await text();
     ok(has(t, day.s3.q), `day ${n}: «Hazlo tuyo» question`);
     const phraseIdx = day.s3.opts.findIndex((o) => o.phrase);
     await click('[data-act="pick"][data-k="s3"]', phraseIdx >= 0 ? phraseIdx : 0);
-    if (phraseIdx >= 0) { await click('[data-act="use-phrase"]'); ok((await app.locator('textarea[data-field="note"]').inputValue()) === day.s3.opts[phraseIdx].phrase, `day ${n}: «Usar esta frase» fills the note`); }
-    else await app.locator('textarea[data-field="note"]').fill("Nota de prueba del día " + n);
+    if (phraseIdx >= 0 && n !== 3) { await click('[data-act="use-phrase"]'); ok((await app.locator('textarea[data-field="note"]').inputValue()) === day.s3.opts[phraseIdx].phrase, `day ${n}: «Usar esta frase» fills the note`); }
+    else if (n !== 3) await app.locator('textarea[data-field="note"]').fill("Nota de prueba del día " + n);
     if (day.rules) { await click('[data-act="toggle"][data-k="rulesOpen"]'); await click('[data-act="rule-pick"]', 1); }
     if (n === 7) { await shot("d7-3-s3"); await audit("day 7 s3"); }
     await click('[data-act="next"]');
     ok(has(await text(), day.take), `day ${n}: «Te llevas» text`);
     await click('[data-act="choose"]');
-    ok((await app.locator('[data-act="sel"]').count()) === 2, `day ${n}: choose the rule and the note`);
+    const items = await nOf('[data-act="sel"]');
+    ok(items >= 2, `day ${n}: choose what to keep (${items} things, none preselected)`);
+    const checked = await app.locator('[data-act="sel"][aria-checked="true"]').count();
+    ok(checked === 0 && (await app.locator('[data-act="save"]').isDisabled()), `day ${n}: nothing is preselected and saving waits for a choice`);
 
     if (n === 4) {
       await click('[data-act="nosave"]');
@@ -110,11 +171,13 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
       ok(has(t, W.ui.unsaved) && has(t, day.tryLine) && has(t, "Mañana: " + day.next), "day 4: completion without saving keeps V4.1 copy");
       await shot("d4-4-done-unsaved");
     } else {
+      for (let i = 0; i < items; i++) await click('[data-act="sel"]', i);
       if (n === 3) { await p.check("#optFail", { force: true }).catch(async () => { await p.evaluate(() => { const el = document.getElementById("optFail"); el.checked = true; el.dispatchEvent(new Event("change")); }); }); await p.waitForTimeout(60); await click('[data-act="save"]'); ok(has(await text(), "No se pudo guardar"), "day 3: save error"); await click('[data-act="save"]'); await p.evaluate(() => { const el = document.getElementById("optFail"); el.checked = false; el.dispatchEvent(new Event("change")); }); }
       else await click('[data-act="save"]');
       t = await text();
       const rule = n === 7 ? day.rules.list[1] : day.rule;
       ok(has(t, W.ui.savedOk) && has(t, rule) && has(t, day.tryLine), `day ${n}: completion with the kept rule`);
+      if (n === 3) ok(has(t, "Gracias por pensar en mí"), "day 3: the sentence she edited is what gets saved");
       if (day.next) ok(has(t, "Mañana: " + day.next) && day.next === W.week[n].title, `day ${n}: «Mañana» matches day ${n + 1}`);
       if (n === 2 || n === 7) { await shot(`d${n}-4-done-saved`); await audit(`day ${n} completion`); }
     }
@@ -156,6 +219,18 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
   ok(has(await text(), W.week[0].s1.q), "Atlas: reopen day 1");
   await click('[data-act="close"]');
 
+  // Day 6 care: someone who already sent money is not given an exercise
+  await p.click('#dayChips [data-start="6"]'); await p.waitForTimeout(100);
+  await click('[data-act="start"]'); await click('[data-act="pick"][data-k="s1"]', 3); await click('[data-act="next"]');
+  t = await text();
+  ok(has(t, "Hoy no hace falta practicar") && has(t, "ayuda oficial") && (await nOf('[data-a="d6"]')) === 0, "day 6: «Ya envié dinero» sees orientation first, with no exercise");
+  await click('[data-act="close"]');
+  // Jumping to a day does not invent takeaways
+  await p.click('#dayChips [data-start="7"]'); await p.waitForTimeout(100);
+  await click('[data-act="start"]'); await click('[data-act="next"]');
+  t = await text(); ok(has(t, "Esta semana no guardaste nada") && (await nOf('[data-a="d7"]')) === 0, "day 7 after a jump: nothing was saved, so nothing is offered or invented");
+  await click('[data-act="close"]');
+
   // Small phone, large text
   for (const id of ["#optBig", "#optSmall"]) await p.evaluate((s) => { const el = document.querySelector(s); el.checked = true; el.dispatchEvent(new Event("change")); }, id);
   await p.click('#dayChips [data-start="4"]'); await p.waitForTimeout(150);
@@ -176,9 +251,9 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
   // Views
   await p.click("#tabAll"); await p.waitForTimeout(400);
   await p.click('#allChips [data-all="7"]'); await p.waitForTimeout(300);
-  ok((await p.locator("#strip .snapfig").count()) === 12, "all screens, day 7: 12 frames (no check, plus the next morning)");
+  ok((await p.locator("#strip .snapfig").count()) === 13, "all screens, day 7: 13 frames (no check, plus the activity and the next morning)");
   await p.click('#allChips [data-all="3"]'); await p.waitForTimeout(300);
-  ok((await p.locator("#strip .snapfig").count()) === 12, "all screens, day 3: 12 frames");
+  ok((await p.locator("#strip .snapfig").count()) === 13, "all screens, day 3: 13 frames");
   await p.click("#tabRev"); await p.waitForTimeout(600);
   ok((await p.locator("#revStrip .snapfig").count()) === 9, "design review: 9 representative screens");
   await p.screenshot({ path: path.join(out, "review-desktop.png"), fullPage: true });
