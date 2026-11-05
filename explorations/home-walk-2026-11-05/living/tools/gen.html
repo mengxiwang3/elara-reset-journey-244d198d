@@ -1,0 +1,41 @@
+<canvas id=c></canvas>
+<script>
+window.run = async function(){
+  const img = new Image(); img.src = '../living/photos/d2.webp'; await img.decode();
+  const W = img.width, H = img.height;
+  function cv(){ const c=document.createElement('canvas'); c.width=W; c.height=H; return c; }
+  const src = cv(), sx = src.getContext('2d'); sx.drawImage(img,0,0);
+  const L = [[0,0],[598,0],[604,30],[622,48],[636,75],[648,110],[662,140],[674,172],[686,200],[692,218],[684,242],[680,270],[674,298],[670,322],[668,340],[0,350]];
+  const R = [[1280,118],[1240,120],[1205,128],[1180,142],[1160,160],[1140,192],[1118,200],[1100,222],[1092,255],[1086,290],[1090,312],[1280,316]];
+  function mask(poly, water, blur){
+    const m=cv(), x=m.getContext('2d'); x.filter='blur('+blur+'px)'; x.fillStyle='#000';
+    x.beginPath(); poly.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1])); x.closePath(); x.fill();
+    if(water){ const g=x.createLinearGradient(0,300,0,334); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,'#000'); x.filter='none'; x.fillStyle=g; x.fillRect(0,300,W,H-300); }
+    return m;
+  }
+  function cut(m){ const o=cv(), x=o.getContext('2d'); x.drawImage(src,0,0); x.globalCompositeOperation='destination-in'; x.drawImage(m,0,0); return o; }
+  const fg = cut(mask(L,true,1.5)), mid = cut(mask(R,false,1.5));
+  // background: fill a band behind each cliff edge by mirroring what sits beside it
+  const d = sx.getImageData(0,0,W,H), p = d.data, out = new Uint8ClampedArray(p);
+  function edgeAt(poly,y,fromRight){ // x of polygon boundary at row y (scanline)
+    let xs=[]; for(let i=0;i<poly.length;i++){ const a=poly[i], b=poly[(i+1)%poly.length];
+      if((a[1]<=y&&b[1]>y)||(b[1]<=y&&a[1]>y)){ xs.push(a[0]+(y-a[1])*(b[0]-a[0])/(b[1]-a[1])); } }
+    xs.sort((u,v)=>u-v); return xs.length? (fromRight? xs[0] : xs[xs.length-1]) : null; }
+  const BAND = 90;
+  for(let y=0;y<334;y++){
+    const e = edgeAt(L,y,false);
+    if(e!=null){ const ei=Math.round(e)+6; for(let x=Math.max(0,ei-BAND); x<=ei; x++){ const mx=Math.min(W-1, ei+(ei-x)+4); const a=(y*W+x)*4, b=(y*W+mx)*4; for(let k=0;k<3;k++) out[a+k]=p[b+k]; } }
+    const r = edgeAt(R,y,true);
+    if(r!=null){ const ri=Math.round(r)-6; for(let x=ri; x<Math.min(W, ri+BAND); x++){ const mx=Math.max(0, ri-(x-ri)-4); const a=(y*W+x)*4, b=(y*W+mx)*4; for(let k=0;k<3;k++) out[a+k]=p[b+k]; } }
+  }
+  const bg=cv(), bx=bg.getContext('2d'); bx.putImageData(new ImageData(out,W,H),0,0);
+  // soften the filled bands
+  const soft=cv(), so=soft.getContext('2d'); so.filter='blur(6px)'; so.drawImage(bg,0,0);
+  const band=cv(), bdx=band.getContext('2d'); bdx.filter='blur(8px)'; bdx.fillStyle='#000';
+  for(let y=0;y<334;y+=2){ const e=edgeAt(L,y,false); if(e!=null) bdx.fillRect(e-BAND,y,BAND+8,2); const r=edgeAt(R,y,true); if(r!=null) bdx.fillRect(r-8,y,BAND+8,2); }
+  so.filter='none'; so.globalCompositeOperation='destination-in'; so.drawImage(band,0,0);
+  bx.drawImage(soft,0,0);
+  const prev=cv(), px=prev.getContext('2d'); px.drawImage(bg,0,0);
+  return { bg: bg.toDataURL('image/webp',0.9), mid: mid.toDataURL('image/webp',0.9), fg: fg.toDataURL('image/webp',0.92) };
+};
+</script>
