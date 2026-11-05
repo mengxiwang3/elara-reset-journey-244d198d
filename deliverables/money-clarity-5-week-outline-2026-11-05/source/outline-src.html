@@ -1,0 +1,206 @@
+<title>Claridad financiera · 5 semanas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<style>
+/* Layout: one long reading page. A five-step path across the top, then one band per week, each a list of seven days you can open. Ventana tokens (forest, ink, mist). */
+:root{
+  --bg:#F2F4F1; --surface:#FFFFFF; --ink:#1E2430; --ink2:#4A5160; --line:#DCE1DC; --tint:#EAF1EC; --forest:#1F3A2E; --forest-fg:#F7F1E8; --ember:#B8441A; --chip:#E7EBE6;
+  --w1:#5E8A6E; --w2:#33476E; --w3:#7C8F4E; --w4:#3F7A5A; --w5:#8A6A3E;
+  --sans:'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#0F1814; --surface:#15211C; --ink:#EEF1EC; --ink2:#B3BDB6; --line:#293832; --tint:#1A2A22; --forest:#CFE6D7; --forest-fg:#10201A; --ember:#F0A07C; --chip:#1D2B25; --w1:#8FC1A0; --w2:#9DB2E0; --w3:#B9CB86; --w4:#86C9A4; --w5:#D9B27C; color-scheme:dark } }
+:root[data-theme="dark"]{ --bg:#0F1814; --surface:#15211C; --ink:#EEF1EC; --ink2:#B3BDB6; --line:#293832; --tint:#1A2A22; --forest:#CFE6D7; --forest-fg:#10201A; --ember:#F0A07C; --chip:#1D2B25; --w1:#8FC1A0; --w2:#9DB2E0; --w3:#B9CB86; --w4:#86C9A4; --w5:#D9B27C; color-scheme:dark }
+body{background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:15.5px; line-height:1.55}
+.wrap{max-width:1080px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:24px 64px; display:flex; flex-direction:column; gap:36px}
+.top{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:16px}
+.top > div{min-width:0; max-width:680px}
+.kick{margin:0; font-size:13px; font-weight:700; color:var(--ink2); letter-spacing:.02em}
+h1{margin:6px 0 0; font-size:clamp(30px,5vw,46px); line-height:1.06; font-weight:800; letter-spacing:-.03em; text-wrap:balance}
+.lede{margin:12px 0 0; color:var(--ink2); max-width:64ch}
+.seg{display:flex; background:var(--chip); border-radius:999px; padding:4px; gap:4px; flex:none}
+.seg button{min-height:38px; border:0; border-radius:999px; padding:0 14px; background:transparent; color:var(--ink); font:600 14px var(--sans); cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--forest); color:var(--forest-fg)}
+button:focus-visible, summary:focus-visible, a:focus-visible{outline:3px solid var(--ember); outline-offset:2px}
+
+/* the path */
+.path{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:10px; counter-reset:w}
+.path li{position:relative; background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:14px 14px 16px; display:flex; flex-direction:column; gap:6px; min-width:0}
+.path li::before{content:""; position:absolute; left:14px; right:14px; top:0; height:4px; border-radius:0 0 4px 4px; background:var(--c)}
+.path .wn{font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--c)}
+.path .wt{font-size:18px; font-weight:800; line-height:1.2; letter-spacing:-.01em; text-wrap:balance}
+.path .ws{font-size:13.5px; line-height:1.45; color:var(--ink2)}
+.path .wk{margin-top:auto; padding-top:8px; border-top:1px solid var(--line); font-size:12.5px; line-height:1.35; color:var(--ink)}
+.path .wk b{display:block; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink2); font-weight:700}
+.path a{color:inherit; text-decoration:none}
+@media (max-width: 860px){ .path{grid-template-columns:repeat(2, minmax(0,1fr))} }
+@media (max-width: 480px){ .path{grid-template-columns:minmax(0,1fr)} }
+
+/* a week */
+.week{display:grid; grid-template-columns:minmax(0,280px) minmax(0,1fr); gap:24px; align-items:start; scroll-margin-top:16px}
+@media (max-width: 860px){ .week{grid-template-columns:minmax(0,1fr)} }
+.whead{position:sticky; top:16px; display:flex; flex-direction:column; gap:10px}
+@media (max-width: 860px){ .whead{position:static} }
+.whead .wn{font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--c)}
+.whead h2{margin:0; font-size:28px; line-height:1.1; font-weight:800; letter-spacing:-.02em; text-wrap:balance}
+.whead .ws{margin:0; color:var(--ink2); font-size:14.5px}
+.intro{margin:0; border-left:3px solid var(--c); padding:4px 0 4px 12px; font-size:14px; line-height:1.5; color:var(--ink)}
+.intro small{display:block; margin-top:4px; font-size:12px; color:var(--ink2); font-weight:600}
+.days{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px}
+details.day{background:var(--surface); border:1px solid var(--line); border-radius:16px}
+details.day[open]{border-color:var(--c)}
+details.day.key{box-shadow:inset 4px 0 0 var(--c)}
+details.day summary{list-style:none; cursor:pointer; display:grid; grid-template-columns:44px minmax(0,1fr) auto; gap:4px 14px; align-items:start; padding:14px 16px}
+details.day summary::-webkit-details-marker{display:none}
+.dn{grid-row:1 / span 2; width:44px; height:44px; border-radius:12px; background:var(--tint); display:grid; place-items:center; font-weight:800; font-size:16px; font-variant-numeric:tabular-nums; color:var(--ink)}
+.key .dn{background:var(--c); color:var(--surface)}
+.dt{font-weight:800; font-size:16.5px; line-height:1.3; letter-spacing:-.005em}
+.dl{font-size:12px; font-weight:700; color:var(--ink2); letter-spacing:.02em}
+.db{grid-column:2 / span 2; font-size:14.5px; line-height:1.45; color:var(--ink2)}
+.dm{font-size:12.5px; color:var(--ink2); white-space:nowrap; font-variant-numeric:tabular-nums; padding-top:2px}
+.dbody{padding:0 16px 16px 74px; display:flex; flex-direction:column; gap:10px}
+@media (max-width: 480px){ .dbody{padding-left:16px} }
+.steps{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px; counter-reset:s}
+.steps li{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:baseline; font-size:14.5px; line-height:1.4; padding:8px 10px; border-radius:10px; background:var(--tint)}
+.kind{font-size:11.5px; font-weight:700; letter-spacing:.03em; color:var(--ink2); white-space:nowrap}
+.back{display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:12.5px; color:var(--ink2)}
+.back a{display:inline-flex; align-items:center; min-height:28px; padding:2px 10px; border-radius:999px; border:1px solid var(--line); color:var(--ink); text-decoration:none; font-weight:600; font-variant-numeric:tabular-nums}
+.next{margin:4px 0 0; font-size:13px; color:var(--ink2); font-weight:600}
+
+/* notes */
+.notes{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:14px}
+.note{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 18px; display:flex; flex-direction:column; gap:8px; min-width:0}
+.note h3{margin:0; font-size:16px; font-weight:800}
+.note p, .note li{margin:0; font-size:14px; line-height:1.5}
+.note ul{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:6px}
+.note a{color:var(--ink); text-decoration-color:var(--line); text-underline-offset:3px}
+.sec{margin:0; font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ink2)}
+.legend{display:flex; flex-wrap:wrap; gap:8px 16px; font-size:12.5px; color:var(--ink2)}
+.legend span{display:inline-flex; gap:6px; align-items:center}
+.legend i{width:14px; height:14px; border-radius:4px; background:var(--tint); display:inline-block}
+.legend i.k{background:var(--forest)}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="kick" id="kick"></p>
+      <h1 id="h1"></h1>
+      <p class="lede" id="lede"></p>
+    </div>
+    <div class="seg" role="group" aria-label="Idioma / Language">
+      <button type="button" id="es" aria-pressed="true">Español</button>
+      <button type="button" id="en" aria-pressed="false">English</button>
+    </div>
+  </header>
+
+  <section aria-labelledby="pathT" style="display:flex;flex-direction:column;gap:12px">
+    <p class="sec" id="pathT"></p>
+    <ol class="path" id="path"></ol>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <div id="weeks" style="display:flex;flex-direction:column;gap:40px"></div>
+
+  <section style="display:flex;flex-direction:column;gap:12px">
+    <p class="sec" id="notesT"></p>
+    <div class="notes" id="notes"></div>
+  </section>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var D = /*DATA*/[];
+  var L = "es";
+  try { if (location.hash === "#en") L = "en"; else if (localStorage.getItem("elara-5w-lang") === "en") L = "en"; } catch (e) {}
+  var C = ["var(--w1)", "var(--w2)", "var(--w3)", "var(--w4)", "var(--w5)"];
+  /* Summaries written for this outline (not participant copy). Keystone = the day that gathers the week. */
+  var WK = {
+    es: [
+      { s: "Mirar el dinero sin juzgarlo. Encontrar una pausa y un límite pequeño.", key: 7, make: "Su regla de claridad" },
+      { s: "Elegir a propósito: para qué es su dinero, una frase heredada, un gasto planeado y una conversación.", key: 14, make: "Su brújula del dinero" },
+      { s: "Sostener lo que eligió cuando la vida empuja: un ancla, un rompevientos, una línea clara, un colchón pequeño y una persona a quien decirle el número.", key: 21, make: "Una carta para el próximo mes y su regla para sostener" },
+      { s: "Hacer crecer algo pequeño y regular: una cantidad, un lugar para ella, una petición y diez minutos a la semana.", key: 28, make: "Su regla para cultivar" },
+      { s: "Nombrar qué es suficiente: dar en sus términos, soltar comparaciones, mirar a un año y dejar de vigilar lo que no hace falta.", key: 35, make: "Su mapa de cinco semanas" }
+    ],
+    en: [
+      { s: "Look at money without judging it. Find one pause and one small boundary.", key: 7, make: "Her money clarity rule" },
+      { s: "Choose on purpose: what her money is for, an inherited sentence, one planned spend and one conversation.", key: 14, make: "Her money compass" },
+      { s: "Keep her choices when life pushes back: an anchor, a windbreak, a clear line, a small cushion and one person to say the number to.", key: 21, make: "A letter a month ahead and her rule for keeping" },
+      { s: "Grow something small and regular: one amount, a home for it, one ask and ten minutes a week.", key: 28, make: "Her rule for growing" },
+      { s: "Name what's enough: giving on her terms, letting go of comparisons, a one-year view and retiring what she doesn't need to watch.", key: 35, make: "Her five-week map" }
+    ]
+  };
+  var KIND = {
+    es: { read: "Leer", choose: "Elegir una", multi: "Elegir varias", sort: "Ordenar", reflect: "Escribir", scale: "Escala", followUp: "Seguimiento", resonance: "¿Te suena?", recall: "Recordar", blanks: "Completar", photo: "Foto" },
+    en: { read: "Read", choose: "Pick one", multi: "Pick several", sort: "Sort", reflect: "Write", scale: "Scale", followUp: "Follow-up", resonance: "Does it fit?", recall: "Recall", blanks: "Fill in", photo: "Photo" }
+  };
+  var T = {
+    es: {
+      kick: "Para María y Ale · Elara · Dinero",
+      h1: "Claridad financiera, las cinco semanas",
+      lede: "Los 35 días de la serie de dinero, tal como están en el texto aprobado de la app. Cada semana tiene siete días; el último junta la semana en algo que ella se lleva. Abre un día para ver sus pasos y a qué días anteriores vuelve.",
+      pathT: "El recorrido", week: "Semana", day: "Día", min: "min", makes: "Se lleva",
+      keyL: "Día que junta la semana", dayL: "Día", back: "Vuelve a", next: "La semana siguiente: ", alejandra: "Alejandra, al empezar la semana",
+      notesT: "Notas para el equipo"
+    },
+    en: {
+      kick: "For María and Ale · Elara · Money",
+      h1: "Money Clarity, the five weeks",
+      lede: "All 35 days of the money series, as they are in the app's approved copy. Each week has seven days; the last one gathers the week into something she keeps. Open a day to see its steps and which earlier days it comes back to.",
+      pathT: "The path", week: "Week", day: "Day", min: "min", makes: "She keeps",
+      keyL: "Day that gathers the week", dayL: "Day", back: "Comes back to", next: "Next week: ", alejandra: "Alejandra, at the start of the week",
+      notesT: "Notes for the team"
+    }
+  };
+  var NOTES = {
+    es: [
+      ["Fuente", "<p>El texto aprobado de los 35 días está en el repositorio de la app, en el commit <code>64c54d6</code> (6 de octubre de 2026), y viene de la exportación de 115 pantallas de Sleek. Las ramas actuales de la app reemplazaron la semana 1 por el borrador del 21 de octubre: hay que confirmar cuál es la versión vigente.</p>"],
+      ["Semanas 1 y 2", "<p>Ya tienen una alternativa que funciona, con estos mismos días y capas nuevas para entender, practicar, recibir respuestas y continuar: <a href=\"https://claude.ai/artifact/WAywhaBB6ubV72bhUwDn32\">Claridad · Semanas 1 y 2</a>.</p>"],
+      ["Números reales", "<p>Las semanas 1 y 2 no miran ninguna cantidad. Los primeros números aparecen en la semana 3: el colchón (día 19), decirle el número a alguien (día 20) y una cantidad regular en la semana 4 (días 22 y 23).</p>"],
+      ["Días que necesitan una ruta de ayuda", "<ul><li>Día 13: una conversación sobre dinero.</li><li>Día 20: decirle un número a alguien.</li><li>Día 25: pedir lo que vale.</li><li>Día 30: dar o rescatar.</li><li>Día 34: con quién seguir hablando de dinero.</li></ul><p>Si hay presión o amenazas, deberían llevar a Ayuda, no a un ensayo.</p>"],
+      ["El documento de conciliación", "<p>Ubica lecciones de V4.1 en las semanas 5, 7, 9 y 10. Esta serie tiene cinco semanas, así que esa numeración corresponde a otro mapa de días. Hay que confirmar el mapa antes de mover cualquier lección.</p>"]
+    ],
+    en: [
+      ["Source", "<p>The approved copy for all 35 days is in the app repository at commit <code>64c54d6</code> (6 October 2026), from the 115-screen Sleek export. The app's current branches replaced week 1 with the 21 October draft, so which version is current needs confirming.</p>"],
+      ["Weeks 1 and 2", "<p>These already have a working alternative, with the same days and new layers for understanding, practice, feedback and continuity: <a href=\"https://claude.ai/artifact/WAywhaBB6ubV72bhUwDn32\">Clarity · Weeks 1 and 2</a>.</p>"],
+      ["Real numbers", "<p>Weeks 1 and 2 never look at an amount. The first numbers appear in week 3: the cushion (day 19), saying the number to someone (day 20), and a regular amount in week 4 (days 22 and 23).</p>"],
+      ["Days that need a help route", "<ul><li>Day 13: a money conversation.</li><li>Day 20: saying a number to someone.</li><li>Day 25: asking for her worth.</li><li>Day 30: giving or rescuing.</li><li>Day 34: who to keep talking money with.</li></ul><p>Pressure or threats should lead to Help, not to a rehearsal.</p>"],
+      ["The reconciliation document", "<p>It places V4.1 lessons in weeks 5, 7, 9 and 10. This series has five weeks, so that numbering belongs to a different day map. The map needs confirming before any lesson moves.</p>"]
+    ]
+  };
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function clean(s) { return String(s).replace(/\{values#1\}/g, "…").replace(/\{[^}]+\}/g, "…"); }
+  function render() {
+    var t = T[L], wk = WK[L];
+    document.documentElement.lang = L;
+    document.title = L === "es" ? "Claridad financiera · 5 semanas" : "Money Clarity · 5 weeks";
+    ["kick", "h1", "lede", "pathT", "notesT"].forEach(function (id) { document.getElementById(id).textContent = t[id === "h1" ? "h1" : id]; });
+    document.getElementById("es").setAttribute("aria-pressed", L === "es"); document.getElementById("en").setAttribute("aria-pressed", L === "en");
+    var path = "";
+    for (var w = 0; w < 5; w++) { var first = D[w * 7][L]; path += '<li style="--c:' + C[w] + '"><a href="#semana-' + (w + 1) + '"><span class="wn">' + t.week + " " + (w + 1) + '</span><br><span class="wt">' + esc(first.week) + '</span></a><span class="ws">' + esc(wk[w].s) + '</span><span class="wk"><b>' + t.makes + "</b>" + esc(wk[w].make) + " · " + t.day + " " + wk[w].key + "</span></li>"; }
+    document.getElementById("path").innerHTML = path;
+    document.getElementById("legend").innerHTML = '<span><i class="k"></i>' + esc(t.keyL) + "</span>";
+    var html = "";
+    for (var w2 = 0; w2 < 5; w2++) {
+      var days = D.slice(w2 * 7, w2 * 7 + 7), f = days[0][L], last = days[6][L];
+      html += '<section class="week" id="semana-' + (w2 + 1) + '" style="--c:' + C[w2] + '"><div class="whead"><span class="wn">' + t.week + " " + (w2 + 1) + " · " + t.day + "s " + (w2 * 7 + 1) + "–" + (w2 * 7 + 7) + "</span><h2>" + esc(f.week) + '</h2><p class="ws">' + esc(wk[w2].s) + "</p>" + (f.intro ? '<p class="intro">' + esc(f.intro) + "<small>" + esc(t.alejandra) + "</small></p>" : "") + (last.next ? '<p class="next">' + esc(t.next + last.next) + "</p>" : "") + '</div><ol class="days">';
+      days.forEach(function (d) {
+        var c = d[L], isKey = d.n === wk[w2].key;
+        html += '<li><details class="day' + (isKey ? " key" : "") + '" id="dia-' + d.n + '"><summary><span class="dn">' + d.n + '</span><span>' + (c.level !== c.title ? '<span class="dl">' + esc(c.level) + '</span><br>' : "") + '<span class="dt">'  + esc(c.title) + '</span></span><span class="dm">~' + d.min + " " + t.min + '</span><span class="db">' + esc(c.body) + "</span></summary>" +
+          '<div class="dbody"><ol class="steps">' + c.steps.map(function (s, i) { return "<li><span>" + esc(clean(s)) + '</span><span class="kind">' + esc(KIND[L][d.kinds[i]] || d.kinds[i]) + "</span></li>"; }).join("") + "</ol>" +
+          (d.back.length ? '<div class="back"><span>' + t.back + "</span>" + d.back.map(function (b) { return '<a href="#dia-' + b + '" data-open="' + b + '">' + t.dayL + " " + b + "</a>"; }).join("") + "</div>" : "") + "</div></details></li>";
+      });
+      html += "</ol></section>";
+    }
+    document.getElementById("weeks").innerHTML = html;
+    document.getElementById("notes").innerHTML = NOTES[L].map(function (n) { return '<div class="note"><h3>' + esc(n[0]) + "</h3>" + n[1] + "</div>"; }).join("");
+  }
+  document.getElementById("es").onclick = function () { L = "es"; try { localStorage.setItem("elara-5w-lang", "es"); } catch (e) {} render(); };
+  document.getElementById("en").onclick = function () { L = "en"; try { localStorage.setItem("elara-5w-lang", "en"); } catch (e) {} render(); };
+  document.addEventListener("click", function (e) { var a = e.target.closest("[data-open]"); if (!a) return; var d = document.getElementById("dia-" + a.dataset.open); if (d) d.open = true; });
+  render();
+})();
+</script>

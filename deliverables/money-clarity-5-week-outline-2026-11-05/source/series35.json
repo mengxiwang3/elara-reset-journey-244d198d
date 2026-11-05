@@ -1,0 +1,3038 @@
+[
+ {
+  "n": 1,
+  "level": "Mirar sin juzgar",
+  "title": "Date cuenta de dónde estás",
+  "body": "Antes de cambiar nada, fíjate en cómo se ha sentido el dinero últimamente.",
+  "weekTitle": "Mirar sin juzgar",
+  "intro": "Esta semana no se trata de arreglar nada. Se trata de mirar con suavidad, cada día, unos minutos. Lo que veas es información, no un veredicto.",
+  "completeTitle": "Miraste la presión y elegiste una cosa para probar.",
+  "completeElara": "Te diste cuenta de que {pressure|lower} es lo que más pesa y elegiste una cosa en la que sí puedes influir mañana.",
+  "en": {
+   "level": "Look without judging",
+   "title": "Notice where you are",
+   "body": "Before changing anything, notice how money has been feeling lately.",
+   "weekTitle": "Look without judging",
+   "intro": "This week isn't about fixing anything. It's about looking gently, every day, for a few minutes. What you see is information, not a verdict."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "breathe",
+    "kind": "read",
+    "cfg": {
+     "breaths": 3,
+     "optional": true
+    },
+    "es": "Respira conmigo",
+    "en": "Breathe with me"
+   },
+   {
+    "id": "feeling",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "layout": "grid"
+    },
+    "es": "Veamos dónde estás ahora mismo.",
+    "en": "Let's notice where you are right now.",
+    "opts": [
+     "En calma",
+     "Bien",
+     "Con peso",
+     "No sé"
+    ]
+   },
+   {
+    "id": "pressure",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5,
+     "quiet": true
+    },
+    "es": "¿Qué te está generando más presión con el dinero ahora mismo?",
+    "en": "What's creating the most money pressure right now?",
+    "opts": [
+     "La incertidumbre sobre el futuro",
+     "No saber a dónde se va mi dinero",
+     "Gastar más de lo que quiero",
+     "No ganar lo suficiente",
+     "Mantener a otras personas"
+    ]
+   },
+   {
+    "id": "hands",
+    "kind": "sort",
+    "cfg": {
+     "itemCount": 4
+    },
+    "es": "Separando lo que está en tus manos.",
+    "en": "Sorting what's in your hands.",
+    "opts": [
+     "En qué decido gastar mañana",
+     "La inflación del mercado",
+     "Cancelar una suscripción que no uso",
+     "Los cambios económicos que vengan"
+    ]
+   },
+   {
+    "id": "space",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "draw",
+      "say"
+     ],
+     "optional": true
+    },
+    "es": "¿Qué es lo que más espacio ocupa en tu cabeza sobre el dinero últimamente?",
+    "en": "What has been taking up the most space in your head about money lately?"
+   },
+   {
+    "id": "commit",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 3,
+     "commit": true,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "Elige una cosa pequeña para mañana.",
+    "en": "Pick one small thing for tomorrow.",
+    "opts": [
+     "Planear un gasto con antelación",
+     "Hacer una pausa de 10 segundos antes de comprar",
+     "Nombrar algo que el dinero sostuvo hoy"
+    ]
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 2,
+  "level": "Mirar sin juzgar",
+  "title": "Nota las sorpresas",
+  "body": "Mira lo que pasó de verdad con el dinero esta semana, sin ponerle nota.",
+  "completeTitle": "Nota las sorpresas.",
+  "completeElara": "Cada pequeño darte cuenta crea espacio para elegir.",
+  "en": {
+   "level": "Look without judging",
+   "title": "Notice the surprises",
+   "body": "Look at what actually happened with money this week, without grading it."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "followup",
+    "kind": "followUp",
+    "cfg": {
+     "optionCount": 4,
+     "fromStep": "commit",
+     "presentation": "card"
+    },
+    "es": "Dijiste: {d1.commit|lower}. ¿Cómo te fue?",
+    "en": "You said: {d1.commit|lower}. How did it go?",
+    "opts": [
+     "Lo hice",
+     "Más o menos",
+     "No pasó",
+     "Se me olvidó"
+    ]
+   },
+   {
+    "id": "happened",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 6,
+     "maxPicks": 3,
+     "quiet": true,
+     "exclusiveOption": 5
+    },
+    "es": "¿Cuáles de estas pasaron en los últimos días?",
+    "en": "Which of these happened in the last few days?",
+    "opts": [
+     "Compré algo que no había planeado",
+     "Evité revisar mi cuenta",
+     "Pagué algo tarde, o casi",
+     "Gasté en otra persona",
+     "Dije que no a una compra",
+     "Nada en particular"
+    ]
+   },
+   {
+    "id": "surprised",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 1,
+     "optionsFrom": "happened",
+     "quiet": true
+    },
+    "es": "¿Cuál te sorprendió más?",
+    "en": "Which one surprised you most?",
+    "opts": [
+     "Esta vez nada me sorprendió"
+    ]
+   },
+   {
+    "id": "why",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write",
+      "say",
+      "draw"
+     ],
+     "deferReply": true
+    },
+    "es": "¿Qué te sorprendió de eso?",
+    "en": "What surprised you about it?"
+   },
+   {
+    "id": "feels",
+    "kind": "resonance",
+    "cfg": {
+     "optionCount": 3,
+     "noticedFrom": "why",
+     "ratesReply": true
+    },
+    "es": "¿Te parece acertado?",
+    "en": "Does that feel right?",
+    "opts": [
+     "Sí, exacto",
+     "En parte",
+     "No mucho"
+    ]
+   }
+  ],
+  "refs": [
+   "d1.commit"
+  ]
+ },
+ {
+  "n": 3,
+  "level": "La pausa",
+  "title": "Encuentra tu pausa",
+  "body": "Encuentra el momento en que el dinero se mueve antes de que decidas, y una pequeña pausa para ponerle.",
+  "completeTitle": "Encontraste tu pausa.",
+  "completeElara": "Basta una respiración para apagar el piloto automático.",
+  "en": {
+   "level": "The pause",
+   "title": "Find your pause",
+   "body": "Find the moment money moves before you decide, and one small pause to put there."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "choices",
+    "kind": "read",
+    "cfg": {},
+    "es": "Algunas decisiones de dinero pasan antes de que decidas.",
+    "en": "Some money choices happen before you decide."
+   },
+   {
+    "id": "when",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5
+    },
+    "es": "¿Cuándo suele pasarte a ti?",
+    "en": "When does yours usually happen?",
+    "opts": [
+     "De noche, con el celular",
+     "Cuando estoy cansada o estresada",
+     "Cuando alguien me pide dinero",
+     "En la caja",
+     "Justo después de cobrar"
+    ]
+   },
+   {
+    "id": "time",
+    "kind": "scale",
+    "cfg": {
+     "stopCount": 4,
+     "quiet": true
+    },
+    "es": "¿Cuánto tiempo sueles tener antes de que pase?",
+    "en": "How much time do you usually have before it happens?",
+    "opts": [
+     "Nada de tiempo",
+     "Unos segundos",
+     "Un minuto o dos",
+     "Tiempo de sobra"
+    ]
+   },
+   {
+    "id": "pause",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "commit": true,
+     "hold": true,
+     "keep": "sentence",
+     "deferReply": true
+    },
+    "es": "La próxima vez que pase, prueba una pausa.",
+    "en": "Next time it happens, try one pause.",
+    "opts": [
+     "Respirar una vez antes de pagar",
+     "Dejarlo en el carrito hasta mañana",
+     "Decir “déjame pensarlo”",
+     "Cerrar la app y volver más tarde"
+    ]
+   }
+  ],
+  "refs": [
+   "d1.feeling"
+  ]
+ },
+ {
+  "n": 4,
+  "level": "Límites",
+  "title": "Traza un límite suave",
+  "body": "Elige un lugar por donde se escapa el dinero y ponle un límite pequeño y amable.",
+  "completeTitle": "Un límite tranquilo.",
+  "completeElara": "Poner un límite es un acto de cuidado hacia tu yo del futuro.",
+  "en": {
+   "level": "Boundaries",
+   "title": "Draw a soft boundary",
+   "body": "Pick one place money slips away and put one small, kind boundary around it."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "followup",
+    "kind": "followUp",
+    "cfg": {
+     "optionCount": 4,
+     "fromStep": "pause",
+     "presentation": "full"
+    },
+    "es": "“Dijiste: {d3.pause|lower}.”",
+    "en": "“You said: {d3.pause|lower}.”",
+    "opts": [
+     "Lo hice",
+     "Más o menos",
+     "No pasó",
+     "Se me olvidó"
+    ]
+   },
+   {
+    "id": "slips",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 5,
+     "maxPicks": 3,
+     "quiet": true
+    },
+    "es": "¿Por dónde se te escapa el dinero sin que lo elijas?",
+    "en": "Where does money slip away without you choosing?",
+    "opts": [
+     "Suscripciones que olvidé",
+     "Comida a domicilio",
+     "Compras en línea",
+     "Cubrir a otras personas",
+     "Comisiones y recargos"
+    ]
+   },
+   {
+    "id": "area",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 1,
+     "optionsFrom": "slips",
+     "quiet": true
+    },
+    "es": "Elige uno para ponerle un límite esta semana.",
+    "en": "Pick one to put a boundary around this week.",
+    "opts": [
+     "El que más me cuesta"
+    ]
+   },
+   {
+    "id": "boundary",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write"
+     ],
+     "keep": "sentence",
+     "deferReply": true
+    },
+    "es": "Escribe tu límite en una línea.",
+    "en": "Write your boundary in one line."
+   },
+   {
+    "id": "start",
+    "kind": "resonance",
+    "cfg": {
+     "optionCount": 3,
+     "layout": "chips",
+     "noticedFrom": "boundary",
+     "hold": true
+    },
+    "es": "¿Cuándo empieza?",
+    "en": "When does it start?",
+    "opts": [
+     "Hoy",
+     "Mañana",
+     "Este fin de semana"
+    ]
+   }
+  ],
+  "refs": [
+   "d3.pause"
+  ]
+ },
+ {
+  "n": 5,
+  "level": "La necesidad real",
+  "title": "Lo que el dinero busca",
+  "body": "Mira debajo de un gasto el sentimiento que intentaba comprar.",
+  "completeTitle": "Ver la necesidad real.",
+  "completeElara": "Cuando nombras lo que necesitas, tienes más formas de encontrarlo.",
+  "en": {
+   "level": "The real need",
+   "title": "What money reaches for",
+   "body": "Look underneath one spend at the feeling it was trying to buy."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "reaching",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5,
+     "quiet": true
+    },
+    "es": "Piensa en un gasto reciente que te hizo sentir mejor un momento. ¿Qué estabas buscando?",
+    "en": "Think of a recent spend that made you feel better for a moment. What were you reaching for?",
+    "opts": [
+     "Consuelo",
+     "Control",
+     "Recompensa",
+     "Alivio",
+     "Pertenencia"
+    ]
+   },
+   {
+    "id": "moment",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "say",
+      "write"
+     ],
+     "optional": true,
+     "deferReply": true
+    },
+    "es": "Cuéntale a Elara sobre ese momento.",
+    "en": "Tell Elara about that moment."
+   },
+   {
+    "id": "need",
+    "kind": "resonance",
+    "cfg": {
+     "optionCount": 3,
+     "layout": "chips",
+     "noticedFrom": "moment",
+     "ratesReply": true
+    },
+    "es": "¿Te parece cierto?",
+    "en": "Does that feel true?",
+    "opts": [
+     "Sí, exacto",
+     "En parte",
+     "No mucho"
+    ]
+   },
+   {
+    "id": "instead",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 3,
+     "commit": true,
+     "deferReply": true
+    },
+    "es": "¿Qué más podría darte un poco de {reaching|lower} esta semana?",
+    "en": "What else could give you a little {reaching|lower} this week?",
+    "opts": [
+     "Una caminata sin el celular",
+     "Una llamada con alguien que quiero",
+     "Acostarme temprano"
+    ]
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 6,
+  "level": "Quedarse o soltar",
+  "title": "Quedarse o soltar",
+  "body": "Mira lo que probaste esta semana y elige qué llevar contigo.",
+  "completeTitle": "Elige una acción más tranquila.",
+  "completeElara": "Mañana lo ponemos en palabras.",
+  "en": {
+   "level": "Keep or let go",
+   "title": "Keep or let go",
+   "body": "Look back at what you tried this week and choose what to carry forward."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "tried",
+    "kind": "recall",
+    "cfg": {
+     "recall": [
+      {
+       "day": 3,
+       "step": "pause"
+      },
+      {
+       "day": 4,
+       "step": "boundary"
+      }
+     ]
+    },
+    "es": "Tu pausa y tu límite.",
+    "en": "Your pause and your boundary."
+   },
+   {
+    "id": "easier",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "quiet": true
+    },
+    "es": "¿Cuál se sintió más fácil?",
+    "en": "Which felt easier?",
+    "opts": [
+     "La pausa",
+     "El límite",
+     "Las dos",
+     "Ninguna todavía"
+    ]
+   },
+   {
+    "id": "keep",
+    "kind": "sort",
+    "cfg": {
+     "itemCount": 5,
+     "deferReply": true
+    },
+    "es": "¿Quedarse o soltar?",
+    "en": "Keep or let go?",
+    "opts": [
+     "Mi pausa",
+     "Mi límite",
+     "Revisar el dinero una vez por semana",
+     "Planear un gasto con antelación",
+     "Hablar de dinero con alguien"
+    ]
+   },
+   {
+    "id": "carry",
+    "kind": "read",
+    "cfg": {
+     "noticedFrom": "keep"
+    },
+    "es": "Lo que llevas contigo.",
+    "en": "What you're carrying forward."
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 7,
+  "level": "Tu regla",
+  "title": "Tu regla de claridad financiera",
+  "body": "Pon la semana en una frase que puedas llevar contigo.",
+  "nextWeekTitle": "De notar a elegir",
+  "letter": "Esta semana miraste el dinero cada día, incluso los días pesados. Notaste que se mueve más rápido {d3.when|lower}, y elegiste {d3.pause|lower}. La próxima semana, empecemos a elegir a propósito.",
+  "letterFallback": "Esta semana miraste el dinero cada día, incluso los días pesados. Encontraste una pausa y un límite propios. La próxima semana, empecemos a elegir a propósito.",
+  "en": {
+   "level": "Your rule",
+   "title": "Your money clarity rule",
+   "body": "Put the week into one sentence you can carry.",
+   "nextWeekTitle": "From noticing to choosing"
+  },
+  "minutes": 5,
+  "steps": [
+   {
+    "id": "look",
+    "kind": "read",
+    "cfg": {
+     "pager": "dots"
+    },
+    "es": "Mira lo que construiste esta semana.",
+    "en": "Look at what you built this week."
+   },
+   {
+    "id": "rule",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 3,
+     "quiet": true
+    },
+    "es": "¿Cuál de estas se siente más cierta para ti ahora?",
+    "en": "Which of these feels most true for you now?",
+    "opts": [
+     "“Cuando me siento abrumada, hago una pausa antes de gastar.”",
+     "“Miro mi dinero una vez por semana, sin juzgarme.”",
+     "“Mantengo un límite pequeño para poder decir que sí a lo que importa.”"
+    ]
+   },
+   {
+    "id": "mine",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write"
+     ],
+     "prefillFrom": "rule",
+     "keep": "rule",
+     "deferReply": true
+    },
+    "es": "Hazla tuya.",
+    "en": "Make it yours."
+   }
+  ],
+  "refs": [
+   "d3.when",
+   "d3.pause",
+   "d1.feeling",
+   "d4.boundary",
+   "d5.reaching"
+  ]
+ },
+ {
+  "n": 8,
+  "level": "De notar a elegir",
+  "title": "Revisa tu regla",
+  "body": "Mira cómo se sostuvo en la vida real la regla de la semana pasada.",
+  "weekTitle": "De notar a elegir",
+  "intro": "La semana pasada aprendiste a mirar. Esta semana se trata de elegir: a propósito, en cosas pequeñas, en los lugares donde el dinero de verdad se mueve.",
+  "completeTitle": "Revisa tu regla.",
+  "completeElara": "Tu regla ya tiene a dónde ir mañana.",
+  "en": {
+   "level": "From noticing to choosing",
+   "title": "Check in on your rule",
+   "body": "See how last week's rule held up in real life.",
+   "weekTitle": "From noticing to choosing",
+   "intro": "Last week you learned to look. This week is about choosing on purpose, in small ways, in the places money actually moves."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "held",
+    "kind": "recall",
+    "cfg": {
+     "recall": [
+      {
+       "day": 7,
+       "step": "mine"
+      }
+     ]
+    },
+    "es": "Veamos cómo se sostuvo tu regla.",
+    "en": "Let's see how your rule held up."
+   },
+   {
+    "id": "felt",
+    "kind": "scale",
+    "cfg": {
+     "stopCount": 5,
+     "quiet": true
+    },
+    "es": "Esta semana, el dinero se ha sentido…",
+    "en": "This week, money has felt…",
+    "opts": [
+     "Más pesado",
+     "Un poco más pesado",
+     "Igual",
+     "Un poco más ligero",
+     "Más ligero"
+    ]
+   },
+   {
+    "id": "where",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5,
+     "quiet": true
+    },
+    "es": "¿Dónde apareció más tu regla?",
+    "en": "Where did your rule show up most?",
+    "opts": [
+     "En la tienda",
+     "Comprando en línea",
+     "Con familia o amigos",
+     "Pagando cuentas",
+     "Casi no apareció"
+    ]
+   },
+   {
+    "id": "tomorrow",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "commit": true,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "¿Dónde vas a probar tu regla mañana?",
+    "en": "Where will you try your rule tomorrow?",
+    "opts": [
+     "En la tienda",
+     "Comprando en línea",
+     "Con familia o amigos",
+     "Pagando cuentas"
+    ]
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 9,
+  "level": "Para qué es el dinero",
+  "title": "Para qué quieres que el dinero haga espacio",
+  "body": "Nombra para qué es tu dinero, en orden.",
+  "completeTitle": "Para qué quieres que el dinero haga espacio.",
+  "completeElara": "Ahora sabes para qué es tu dinero.",
+  "en": {
+   "level": "What money is for",
+   "title": "What you want money to make room for",
+   "body": "Name what your money is for, in order."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "followup",
+    "kind": "followUp",
+    "cfg": {
+     "optionCount": 4,
+     "fromStep": "tomorrow",
+     "presentation": "card"
+    },
+    "es": "Dijiste: probar tu regla {d8.tomorrow|lower}. ¿Cómo te fue?",
+    "en": "You said: try your rule {d8.tomorrow|lower}. How did it go?",
+    "opts": [
+     "Lo hice",
+     "Más o menos",
+     "No pasó",
+     "Se me olvidó"
+    ]
+   },
+   {
+    "id": "values",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 8,
+     "maxPicks": 3,
+     "ranked": true,
+     "layout": "grid",
+     "quiet": true
+    },
+    "es": "¿Para qué quieres que el dinero haga espacio?",
+    "en": "What do you want money to make room for?",
+    "opts": [
+     "Descanso",
+     "Seguridad",
+     "Familia",
+     "Libertad",
+     "Alegría",
+     "Crecimiento",
+     "Generosidad",
+     "Belleza"
+    ]
+   },
+   {
+    "id": "little",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write",
+      "say",
+      "draw"
+     ],
+     "deferReply": true
+    },
+    "es": "¿Cómo se vería un poco más de {values#1|lower} este mes?",
+    "en": "What would a little more {values#1|lower} look like this month?"
+   },
+   {
+    "id": "first",
+    "kind": "read",
+    "cfg": {
+     "noticedFrom": "little"
+    },
+    "es": "{values#1} fue lo primero para ti.",
+    "en": "{values#1} came first for you."
+   },
+   {
+    "id": "share",
+    "kind": "scale",
+    "cfg": {
+     "stopCount": 4,
+     "escape": true,
+     "deferReply": true
+    },
+    "es": "La semana pasada, ¿cuánto de lo que gastaste hizo espacio para {values#1|lower}?",
+    "en": "Last week, how much of your spending made room for {values#1|lower}?",
+    "opts": [
+     "Muy poco",
+     "Algo",
+     "Más o menos la mitad",
+     "Casi todo"
+    ]
+   }
+  ],
+  "refs": [
+   "d8.tomorrow"
+  ]
+ },
+ {
+  "n": 10,
+  "level": "Tu historia con el dinero",
+  "title": "Tu historia con el dinero",
+  "body": "Encuentra una frase sobre el dinero con la que creciste, y decide si todavía es tuya.",
+  "completeTitle": "Tu historia con el dinero.",
+  "completeElara": "No tienes que quedarte con cada frase que te dieron.",
+  "en": {
+   "level": "Your money story",
+   "title": "Your money story",
+   "body": "Find a money sentence you grew up with and decide whether it's still yours."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "sentence",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "say",
+      "write"
+     ],
+     "keep": "sentence",
+     "deferReply": true
+    },
+    "es": "¿Qué frase sobre el dinero escuchaste mientras crecías?",
+    "en": "What's a money sentence you grew up hearing?"
+   },
+   {
+    "id": "still",
+    "kind": "sort",
+    "cfg": {
+     "itemCount": 4,
+     "sortLayout": "cards",
+     "quiet": true
+    },
+    "es": "¿Todavía es tuya, o ya no?",
+    "en": "Still yours, or not anymore?",
+    "opts": [
+     "El dinero no crece en los árboles.",
+     "Hablar de dinero es de mala educación.",
+     "Pedir más es egoísta.",
+     "Nunca alcanza."
+    ]
+   },
+   {
+    "id": "speaks",
+    "kind": "sort",
+    "cfg": {
+     "itemCount": 4,
+     "quiet": true,
+     "sortLayout": "columns"
+    },
+    "es": "¿Cuándo se hace oír ahora esa vieja frase?",
+    "en": "When does your old sentence speak up now?",
+    "opts": [
+     "Cuando gasto en mí",
+     "Cuando la familia pide ayuda",
+     "Cuando reviso mi saldo",
+     "Cuando quiero algo nuevo"
+    ]
+   },
+   {
+    "id": "noticed",
+    "kind": "read",
+    "cfg": {
+     "noticedFrom": "sentence"
+    },
+    "es": "Una frase que has cargado mucho tiempo.",
+    "en": "A sentence you've carried a long time."
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 11,
+  "level": "A propósito",
+  "title": "Un gasto que se sintió bien",
+  "body": "Mira de cerca una compra que coincidió con lo que te importa.",
+  "completeTitle": "Un gasto que se sintió bien.",
+  "completeElara": "A propósito: de eso se trata todo.",
+  "en": {
+   "level": "On purpose",
+   "title": "A spend that felt right",
+   "body": "Look closely at one purchase that matched what you care about."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "photo",
+    "kind": "photo",
+    "cfg": {
+     "quiet": true
+    },
+    "es": "Toma una foto de algo que compraste hace poco y que se sintió bien.",
+    "en": "Take a photo of something you bought recently that felt right."
+   },
+   {
+    "id": "why",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 5,
+     "maxPicks": 2,
+     "showFrom": "photo",
+     "quiet": true
+    },
+    "es": "¿Por qué se sintió bien?",
+    "en": "Why did it feel right?",
+    "opts": [
+     "Coincidía con lo que me importa",
+     "Lo planeé",
+     "Va a durar",
+     "Lo compartí",
+     "Nadie más tenía que aprobarlo"
+    ]
+   },
+   {
+    "id": "remembers",
+    "kind": "read",
+    "cfg": {},
+    "es": "Este gasto hizo algo bien.",
+    "en": "This spend did something right."
+   },
+   {
+    "id": "plan",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "layout": "chips",
+     "commit": true,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "Un gasto de esta semana que vas a planear a propósito.",
+    "en": "One spend this week you'll plan on purpose.",
+    "opts": [
+     "El súper",
+     "Algo para mí",
+     "Un regalo",
+     "Una cuenta que he evitado"
+    ]
+   }
+  ],
+  "refs": [
+   "d9.values"
+  ]
+ },
+ {
+  "n": 12,
+  "level": "Cómo se siente ahora",
+  "title": "Cómo se siente el dinero ahora",
+  "body": "Dale una forma a lo que sientes con el dinero esta semana.",
+  "completeTitle": "Cómo se siente el dinero ahora.",
+  "completeElara": "Le diste una forma a lo que sientes.",
+  "en": {
+   "level": "How it feels now",
+   "title": "How money feels now",
+   "body": "Give this week's money feeling a shape."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "reach",
+    "kind": "recall",
+    "cfg": {
+     "recall": [
+      {
+       "day": 5,
+       "step": "reaching"
+      }
+     ]
+    },
+    "es": "Dijiste que tus gastos buscaban {d5.reaching|lower}.",
+    "en": "You said your spending was reaching for {d5.reaching|lower}."
+   },
+   {
+    "id": "draw",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "draw"
+     ],
+     "shapes": true,
+     "askCaption": false,
+     "quiet": true
+    },
+    "es": "Dibuja cómo se siente el dinero esta semana.",
+    "en": "Draw how money feels this week."
+   },
+   {
+    "id": "title",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write"
+     ],
+     "showFrom": "draw",
+     "quiet": true,
+     "optional": true,
+     "minWords": 1
+    },
+    "es": "Ponle un título a tu dibujo.",
+    "en": "Give your drawing a title."
+   },
+   {
+    "id": "compare",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4
+    },
+    "es": "Comparado con la semana pasada, el impulso hacia {d5.reaching|lower} está…",
+    "en": "Compared with last week, the pull toward {d5.reaching|lower} is…",
+    "opts": [
+     "Más tranquilo",
+     "Más o menos igual",
+     "Más fuerte",
+     "Se convirtió en otra cosa"
+    ]
+   }
+  ],
+  "refs": [
+   "d5.reaching"
+  ]
+ },
+ {
+  "n": 13,
+  "level": "La conversación",
+  "title": "La conversación sobre dinero",
+  "body": "Encuentra las palabras para un sí o un no sobre dinero que has ido posponiendo.",
+  "completeTitle": "La conversación sobre dinero.",
+  "completeElara": "Encontrar las palabras cuenta, incluso antes de usarlas.",
+  "en": {
+   "level": "The conversation",
+   "title": "The money conversation",
+   "body": "Find the words for a money yes or no you've been putting off."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "who",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 6,
+     "quiet": true
+    },
+    "es": "¿Hay un sí o un no sobre dinero que has ido posponiendo?",
+    "en": "Is there a money yes or no you've been putting off?",
+    "opts": [
+     "Mi pareja",
+     "Mi familia",
+     "Una amiga",
+     "Alguien del trabajo",
+     "Yo misma",
+     "Ahora no"
+    ]
+   },
+   {
+    "id": "words",
+    "kind": "blanks",
+    "cfg": {
+     "fieldCount": 3,
+     "keep": "sentence",
+     "quiet": true
+    },
+    "es": "Encontremos tus palabras.",
+    "en": "Let's find your words.",
+    "opts": [
+     "Puedo",
+     "No puedo",
+     "Lo que puedo ofrecer es"
+    ]
+   },
+   {
+    "id": "say",
+    "kind": "read",
+    "cfg": {
+     "rehearse": true,
+     "optional": true
+    },
+    "es": "Dilo en voz alta una vez, solo para ti.",
+    "en": "Say it out loud once, just for you."
+   },
+   {
+    "id": "when",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 3,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "¿Cuándo podrías decirlo?",
+    "en": "When might you say it?",
+    "opts": [
+     "Esta semana",
+     "Cuando llegue el momento",
+     "No estoy lista, y está bien"
+    ]
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 14,
+  "level": "Tu brújula",
+  "title": "Tu brújula del dinero",
+  "body": "Resume dos semanas en una frase sobre para qué es tu dinero.",
+  "nextWeekTitle": "Sostener",
+  "letter": "Esta semana elegiste para qué es tu dinero: {d9.values|lower}. Encontraste las palabras para una conversación difícil, aunque todavía no estés lista para usarlas. La próxima semana se trata de sostener lo que elegiste, incluso cuando la vida empuja en contra.",
+  "letterFallback": "Esta semana elegiste para qué es tu dinero, y encontraste las palabras para una conversación difícil, aunque todavía no estés lista para usarlas. La próxima semana se trata de sostener lo que elegiste, incluso cuando la vida empuja en contra.",
+  "en": {
+   "level": "Your compass",
+   "title": "Your money compass",
+   "body": "Put two weeks into one sentence about what your money is for.",
+   "nextWeekTitle": "Keeping"
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "compass",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write"
+     ],
+     "keep": "rule",
+     "quiet": true
+    },
+    "es": "Aquí tienes un primer borrador de tu semana.",
+    "en": "Here's a first draft from your week."
+   },
+   {
+    "id": "carry",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 4,
+     "maxPicks": 2,
+     "quiet": true
+    },
+    "es": "¿Qué quieres llevar contigo?",
+    "en": "What do you want to carry with you?",
+    "opts": [
+     "Mi regla del dinero",
+     "Mi primer valor",
+     "Mi brújula del dinero",
+     "Mis palabras para la conversación"
+    ]
+   }
+  ],
+  "refs": [
+   "d9.values",
+   "d10.sentence",
+   "d7.mine",
+   "d13.words"
+  ]
+ },
+ {
+  "n": 15,
+  "level": "Sostener",
+  "title": "Lo que ves ahora",
+  "body": "Vuelve a leer lo que elegiste, y nota lo que ya cambió.",
+  "weekTitle": "Sostener",
+  "intro": "Ya miraste, y ya elegiste. Esta semana se trata de sostener lo que elegiste cuando la vida empuja en contra. Una isla de juncos sigue a flote porque alguien la sigue cuidando: un poco, seguido.",
+  "completeTitle": "Lo que ves ahora.",
+  "completeElara": "Tu brújula ya tiene un lugar mañana.",
+  "en": {
+   "level": "Keeping",
+   "title": "What you can see now",
+   "body": "Read back what you chose, and notice what has already shifted.",
+   "weekTitle": "Keeping",
+   "intro": "You've looked, and you've chosen. This week is about keeping what you chose when life pushes back. A reed island stays afloat because someone keeps tending it: a little, often."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "wrote",
+    "kind": "recall",
+    "cfg": {
+     "recall": [
+      {
+       "day": 14,
+       "step": "compass"
+      },
+      {
+       "day": 7,
+       "step": "mine"
+      }
+     ]
+    },
+    "es": "Esto es lo que elegiste.",
+    "en": "Here's what you chose."
+   },
+   {
+    "id": "shifted",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 6,
+     "maxPicks": 3,
+     "quiet": true,
+     "exclusiveOption": 5
+    },
+    "es": "¿Qué ya cambió, aunque sea un poco?",
+    "en": "What has already shifted, even a little?",
+    "opts": [
+     "Miro mi dinero antes",
+     "Hago una pausa antes de algunos gastos",
+     "Sé para qué es mi dinero",
+     "Hablo un poco más de dinero",
+     "Escucho la vieja frase cuando habla",
+     "Nada que pueda nombrar todavía"
+    ]
+   },
+   {
+    "id": "pushes",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5
+    },
+    "es": "¿Dónde empuja más fuerte la vida contra lo que elegiste?",
+    "en": "Where does life push back hardest on what you chose?",
+    "opts": [
+     "Una semana apretada antes de cobrar",
+     "Alguien que me pide ayuda",
+     "Un día difícil y un gusto rápido",
+     "Una cuenta que no vi venir",
+     "Sentir que voy detrás de los demás"
+    ]
+   },
+   {
+    "id": "tomorrow",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "commit": true,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "Una forma de tener tu brújula cerca mañana.",
+    "en": "One way to keep your compass close tomorrow.",
+    "opts": [
+     "Leerla en la mañana",
+     "Ponerla como recordatorio en el teléfono",
+     "Escribirla en una nota en mi cartera",
+     "Decirla una vez antes de pagar algo"
+    ]
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 16,
+  "level": "Tu ancla",
+  "title": "Tu ancla",
+  "body": "Encuentra lo que te da firmeza cuando el dinero hace ruido.",
+  "completeTitle": "Tu ancla.",
+  "completeElara": "Tienes algo a qué sujetarte cuando el dinero hace ruido.",
+  "en": {
+   "level": "Your anchor",
+   "title": "Your anchor",
+   "body": "Find the one thing that steadies you when money gets loud."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "followup",
+    "kind": "followUp",
+    "cfg": {
+     "optionCount": 4,
+     "fromStep": "tomorrow",
+     "presentation": "card"
+    },
+    "es": "Dijiste: {d15.tomorrow|lower}. ¿Cómo te fue?",
+    "en": "You said: {d15.tomorrow|lower}. How did it go?",
+    "opts": [
+     "Lo hice",
+     "Más o menos",
+     "No pasó",
+     "Se me olvidó"
+    ]
+   },
+   {
+    "id": "loud",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5,
+     "quiet": true
+    },
+    "es": "Cuando el dinero hace ruido, ¿qué suele estar haciéndolo?",
+    "en": "When money gets loud, what's usually making the noise?",
+    "opts": [
+     "Una cuenta o un pago que vence",
+     "Revisar mi saldo",
+     "El fin de mes",
+     "Alguien que necesita dinero de mí",
+     "Ver lo que otros tienen"
+    ]
+   },
+   {
+    "id": "steadies",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 6,
+     "maxPicks": 2,
+     "layout": "grid",
+     "quiet": true
+    },
+    "es": "¿Qué te da firmeza, aunque sea un poco?",
+    "en": "What steadies you, even a little?",
+    "opts": [
+     "Respirar antes de mirar",
+     "Leer mi brújula",
+     "Saber cuándo se pagan las cuentas",
+     "Hablar con alguien de confianza",
+     "Caminar primero, números después",
+     "Escribirlo"
+    ]
+   },
+   {
+    "id": "anchor",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write",
+      "say"
+     ],
+     "keep": "sentence",
+     "deferReply": true
+    },
+    "es": "Escribe tu ancla.",
+    "en": "Write your anchor."
+   },
+   {
+    "id": "holds",
+    "kind": "resonance",
+    "cfg": {
+     "optionCount": 3,
+     "layout": "chips",
+     "noticedFrom": "anchor",
+     "ratesReply": true
+    },
+    "es": "¿Se siente así para ti?",
+    "en": "Does that feel right?",
+    "opts": [
+     "Sí, exacto",
+     "En parte",
+     "No mucho"
+    ]
+   }
+  ],
+  "refs": [
+   "d15.tomorrow"
+  ]
+ },
+ {
+  "n": 17,
+  "level": "Lo que te desvía",
+  "title": "Lo que te desvía",
+  "body": "Nota los momentos, las personas y las apps que te inclinan fuera de tu rumbo.",
+  "completeTitle": "Lo que te desvía.",
+  "completeElara": "Pusiste un rompevientos justo donde sopla el viento.",
+  "en": {
+   "level": "What pulls you",
+   "title": "What pulls you",
+   "body": "Notice the moments, people and apps that lean you off course."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "pulls",
+    "kind": "sort",
+    "cfg": {
+     "itemCount": 5,
+     "sortLayout": "cards",
+     "quiet": true
+    },
+    "es": "¿Esto te saca de tu rumbo?",
+    "en": "Does this pull you off course?",
+    "opts": [
+     "Correos y avisos de ofertas",
+     "Ver el teléfono tarde en la noche",
+     "Planes que cuestan más de lo que quiero",
+     "Un pedido de la familia",
+     "Los primeros días después de cobrar"
+    ]
+   },
+   {
+    "id": "hardest",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "quiet": true
+    },
+    "es": "¿Cuándo es más fuerte el tirón?",
+    "en": "When is the pull strongest?",
+    "opts": [
+     "Tarde en la noche",
+     "Cuando estoy cansada o baja de ánimo",
+     "Cuando estoy con ciertas personas",
+     "Cuando siento que voy atrasada"
+    ]
+   },
+   {
+    "id": "lean",
+    "kind": "scale",
+    "cfg": {
+     "stopCount": 4
+    },
+    "es": "Cuando tira, ¿cuánto te inclinas?",
+    "en": "When it pulls, how far do you lean?",
+    "opts": [
+     "Lo noto y me quedo firme",
+     "Me inclino un poco",
+     "Me inclino bastante",
+     "Me tumba"
+    ]
+   },
+   {
+    "id": "windbreak",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "commit": true,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "Pon un pequeño rompevientos esta semana.",
+    "en": "Put up one small windbreak this week.",
+    "opts": [
+     "Apagar un tipo de aviso de compras",
+     "Darme de baja de los correos de una tienda",
+     "Esperar un día antes de decir sí a un plan",
+     "Dejar el teléfono fuera de la cama"
+    ]
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 18,
+  "level": "Tu límite",
+  "title": "Tu límite",
+  "body": "Elige una línea clara que vas a sostener este mes.",
+  "completeTitle": "Tu límite.",
+  "completeElara": "Una línea clara, sostenida durante un mes.",
+  "en": {
+   "level": "Your edge",
+   "title": "Your edge",
+   "body": "Choose one clear line you'll hold this month."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "followup",
+    "kind": "followUp",
+    "cfg": {
+     "optionCount": 4,
+     "fromStep": "windbreak",
+     "presentation": "full"
+    },
+    "es": "Tu rompevientos: {d17.windbreak|lower}.",
+    "en": "Your windbreak: {d17.windbreak|lower}.",
+    "opts": [
+     "Lo hice",
+     "Más o menos",
+     "No pasó",
+     "Se me olvidó"
+    ]
+   },
+   {
+    "id": "wall",
+    "kind": "read",
+    "cfg": {},
+    "es": "Un límite no es un muro.",
+    "en": "An edge isn't a wall."
+   },
+   {
+    "id": "edge",
+    "kind": "blanks",
+    "cfg": {
+     "fieldCount": 2,
+     "keep": "sentence"
+    },
+    "es": "Teje tu límite.",
+    "en": "Weave your edge.",
+    "opts": [
+     "Este mes, sostengo la línea en",
+     "Incluso cuando"
+    ]
+   },
+   {
+    "id": "tested",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "quiet": true
+    },
+    "es": "¿Dónde se va a poner a prueba primero?",
+    "en": "Where will it be tested first?",
+    "opts": [
+     "Este fin de semana",
+     "Justo después de cobrar",
+     "La próxima vez que alguien me pida",
+     "En línea, tarde en la noche"
+    ]
+   },
+   {
+    "id": "sure",
+    "kind": "scale",
+    "cfg": {
+     "stopCount": 4,
+     "escape": true,
+     "deferReply": true
+    },
+    "es": "¿Qué tan segura te sientes de poder sostenerla?",
+    "en": "How sure do you feel that you can hold it?",
+    "opts": [
+     "Poco",
+     "Algo",
+     "Bastante",
+     "Muy segura"
+    ]
+   }
+  ],
+  "refs": [
+   "d17.windbreak"
+  ]
+ },
+ {
+  "n": 19,
+  "level": "Un pequeño colchón",
+  "title": "Un pequeño colchón",
+  "body": "Aparta una cantidad pequeña para la semana que sale mal.",
+  "completeTitle": "Un pequeño colchón.",
+  "completeElara": "Un lugar suave donde caer, aunque sea pequeño.",
+  "en": {
+   "level": "A small cushion",
+   "title": "A small cushion",
+   "body": "Set aside one small amount for the week that goes wrong."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "wrong",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5,
+     "quiet": true
+    },
+    "es": "Cuando una semana sale mal con el dinero, suele ser porque…",
+    "en": "When a week goes wrong with money, it's usually because…",
+    "opts": [
+     "Llegó una cuenta que había olvidado",
+     "Algo se descompone",
+     "Alguien necesita ayuda",
+     "Los precios subieron otra vez",
+     "Gasté para sentirme mejor"
+    ]
+   },
+   {
+    "id": "cushion",
+    "kind": "read",
+    "cfg": {},
+    "es": "Un colchón no es un ahorro.",
+    "en": "A cushion isn't savings."
+   },
+   {
+    "id": "where",
+    "kind": "sort",
+    "cfg": {
+     "itemCount": 4,
+     "quiet": true
+    },
+    "es": "¿Dónde podría vivir tu colchón?",
+    "en": "Where could your cushion live?",
+    "opts": [
+     "Un frasco o un sobre",
+     "Una cuenta aparte",
+     "Una nota que dice que ya tiene destino",
+     "Efectivo guardado en casa"
+    ]
+   },
+   {
+    "id": "name",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write"
+     ],
+     "quiet": true,
+     "optional": true,
+     "minWords": 1
+    },
+    "es": "Si quieres, ponle a tu colchón un tamaño o un nombre.",
+    "en": "If you like, give your cushion a size or a name."
+   },
+   {
+    "id": "start",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 3,
+     "layout": "chips",
+     "commit": true,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "¿Cuándo lo vas a empezar?",
+    "en": "When will you start it?",
+    "opts": [
+     "Hoy",
+     "Este fin de semana",
+     "El próximo día de pago"
+    ]
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 20,
+  "level": "Quién te ayuda a ver",
+  "title": "Quién te ayuda a ver",
+  "body": "Encuentra a una persona a quien podrías decirle el número.",
+  "completeTitle": "Quién te ayuda a ver.",
+  "completeElara": "Algunas cosas se ven mejor con alguien al lado.",
+  "en": {
+   "level": "Who helps you see",
+   "title": "Who helps you see",
+   "body": "Find one person you could say the number to."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "followup",
+    "kind": "followUp",
+    "cfg": {
+     "optionCount": 4,
+     "fromStep": "start",
+     "presentation": "card"
+    },
+    "es": "Dijiste que empezarías tu colchón {d19.start|lower}. ¿Dónde está ahora?",
+    "en": "You said you'd start your cushion {d19.start|lower}. Where is it now?",
+    "opts": [
+     "Empezado",
+     "Planeado",
+     "Todavía no",
+     "Cambié de idea"
+    ]
+   },
+   {
+    "id": "who",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5,
+     "quiet": true
+    },
+    "es": "¿A quién podrías decirle un número de dinero, en voz alta?",
+    "en": "Who could you say a money number to, out loud?",
+    "opts": [
+     "Mi pareja",
+     "Una amiga",
+     "Alguien de mi familia",
+     "Un profesional",
+     "Nadie todavía"
+    ]
+   },
+   {
+    "id": "safe",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 5,
+     "maxPicks": 2,
+     "layout": "chips",
+     "quiet": true
+    },
+    "es": "¿Qué hace que contarle a alguien se sienta seguro?",
+    "en": "What makes someone safe to tell?",
+    "opts": [
+     "No me juzga",
+     "Lo guarda en privado",
+     "Ha pasado por lo mismo",
+     "No corre a arreglarlo",
+     "Me dice la verdad, con cariño"
+    ]
+   },
+   {
+    "id": "first",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "say",
+      "write"
+     ],
+     "keep": "sentence",
+     "deferReply": true
+    },
+    "es": "¿Qué te gustaría decir primero?",
+    "en": "What would you want to say first?"
+   },
+   {
+    "id": "lantern",
+    "kind": "resonance",
+    "cfg": {
+     "optionCount": 3,
+     "layout": "chips",
+     "noticedFrom": "first",
+     "ratesReply": true
+    },
+    "es": "¿Se siente así para ti?",
+    "en": "Does that feel right?",
+    "opts": [
+     "Sí, exacto",
+     "En parte",
+     "No mucho"
+    ]
+   }
+  ],
+  "refs": [
+   "d19.start"
+  ]
+ },
+ {
+  "n": 21,
+  "level": "Una carta para el próximo mes",
+  "title": "Una carta para el próximo mes",
+  "body": "Escríbete a ti misma para el primer día del mes que viene.",
+  "nextWeekTitle": "Cultivar",
+  "letter": "Esta semana seguiste cuidando lo que elegiste. Encontraste un ancla para los días ruidosos, “{d16.anchor}”, y tejiste un límite para este mes: {d18.edge#1|lower}. La próxima semana sembramos algo pequeño y lo dejamos crecer despacio.",
+  "letterFallback": "Esta semana seguiste cuidando lo que elegiste: un ancla para los días ruidosos, un límite para este mes y un pequeño colchón para la semana que sale mal. La próxima semana sembramos algo pequeño y lo dejamos crecer despacio.",
+  "en": {
+   "level": "A letter a month ahead",
+   "title": "A letter a month ahead",
+   "body": "Write to yourself on the first of next month.",
+   "nextWeekTitle": "Growing"
+  },
+  "minutes": 5,
+  "steps": [
+   {
+    "id": "look",
+    "kind": "read",
+    "cfg": {
+     "pager": "dots"
+    },
+    "es": "Mira lo que sostuviste esta semana.",
+    "en": "Look at what you kept this week."
+   },
+   {
+    "id": "month",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write",
+      "say"
+     ],
+     "keep": "sentence"
+    },
+    "es": "Escríbete para el primer día del próximo mes.",
+    "en": "Write to yourself on the first of next month."
+   },
+   {
+    "id": "rule",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write"
+     ],
+     "keep": "rule",
+     "quiet": true
+    },
+    "es": "Aquí tienes un primer borrador de tu semana.",
+    "en": "Here's a first draft from your week."
+   },
+   {
+    "id": "carry",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 4,
+     "maxPicks": 2,
+     "quiet": true
+    },
+    "es": "¿Qué quieres llevar contigo?",
+    "en": "What do you want to carry with you?",
+    "opts": [
+     "Mi ancla",
+     "Mi límite",
+     "Mi colchón",
+     "Mi carta"
+    ]
+   }
+  ],
+  "refs": [
+   "d16.anchor",
+   "d18.edge",
+   "d17.windbreak",
+   "d19.start"
+  ]
+ },
+ {
+  "n": 22,
+  "level": "Cultivar",
+  "title": "Siembra una cantidad",
+  "body": "Elige una cantidad regular, por pequeña que sea, y siémbrala.",
+  "weekTitle": "Cultivar",
+  "intro": "La guadua hace crecer sus raíces durante años antes de que algo se vea sobre la tierra. Esta semana siembras algo pequeño y regular, y confías en la parte que todavía no se ve.",
+  "completeTitle": "Siembra una cantidad.",
+  "completeElara": "Ya está en la tierra, o está por estarlo. Ahora le toca crecer despacio.",
+  "en": {
+   "level": "Growing",
+   "title": "Plant one amount",
+   "body": "Choose one regular amount, however small, and plant it.",
+   "weekTitle": "Growing",
+   "intro": "Guadua grows roots for years before anything shows above the ground. This week you plant something small and regular, and trust the part you can't see yet."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "kept",
+    "kind": "recall",
+    "cfg": {
+     "recall": [
+      {
+       "day": 21,
+       "step": "rule"
+      }
+     ]
+    },
+    "es": "Antes de sembrar, tu regla para sostener.",
+    "en": "Before we plant, your keeping rule."
+   },
+   {
+    "id": "small",
+    "kind": "read",
+    "cfg": {},
+    "es": "Aquí lo pequeño cuenta.",
+    "en": "Small counts here."
+   },
+   {
+    "id": "often",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "layout": "chips",
+     "quiet": true
+    },
+    "es": "¿Cada cuánto podría entrar?",
+    "en": "How often could it go in?",
+    "opts": [
+     "Cada día de pago",
+     "Cada semana",
+     "Una vez al mes",
+     "Cuando haya espacio"
+    ]
+   },
+   {
+    "id": "toward",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4
+    },
+    "es": "¿Hacia qué está creciendo?",
+    "en": "What is it growing toward?",
+    "opts": [
+     "Un colchón más grande",
+     "Algo para lo que estoy ahorrando",
+     "Más descanso, más adelante",
+     "Todavía no lo sé"
+    ]
+   },
+   {
+    "id": "plant",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 3,
+     "commit": true,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "Siémbrala.",
+    "en": "Plant it.",
+    "opts": [
+     "Hoy",
+     "Mañana",
+     "El próximo día de pago"
+    ]
+   }
+  ],
+  "refs": [
+   "d9.values"
+  ]
+ },
+ {
+  "n": 23,
+  "level": "Dónde vive",
+  "title": "Dónde vive",
+  "body": "Dale a tu cantidad un hogar, y un día en que se mueve.",
+  "completeTitle": "Dónde vive.",
+  "completeElara": "Ya tiene un hogar y un día. Así se extienden las raíces.",
+  "en": {
+   "level": "Where it lives",
+   "title": "Where it lives",
+   "body": "Give your amount a home, and a day it moves."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "followup",
+    "kind": "followUp",
+    "cfg": {
+     "optionCount": 4,
+     "fromStep": "plant",
+     "presentation": "full"
+    },
+    "es": "Planeaste sembrarla: {d22.plant|lower}.",
+    "en": "You planned to plant it {d22.plant|lower}.",
+    "opts": [
+     "Entró",
+     "Una parte",
+     "Todavía no",
+     "Se me olvidó"
+    ]
+   },
+   {
+    "id": "home",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5,
+     "layout": "grid",
+     "quiet": true
+    },
+    "es": "¿Dónde vive?",
+    "en": "Where does it live?",
+    "opts": [
+     "Un frasco o un sobre",
+     "Una cuenta aparte",
+     "Un apartado en mi app del banco",
+     "Una nota que la marca",
+     "No lo he decidido"
+    ]
+   },
+   {
+    "id": "reach",
+    "kind": "scale",
+    "cfg": {
+     "stopCount": 4
+    },
+    "es": "En un día difícil, ¿qué tan fácil es alcanzarla?",
+    "en": "On a hard day, how easy is it to reach?",
+    "opts": [
+     "A un toque",
+     "A unos pasos",
+     "Difícil de alcanzar",
+     "Fuera de alcance"
+    ]
+   },
+   {
+    "id": "moves",
+    "kind": "blanks",
+    "cfg": {
+     "fieldCount": 2,
+     "keep": "sentence"
+    },
+    "es": "¿Cuándo se mueve?",
+    "en": "When does it move?",
+    "opts": [
+     "Se mueve el",
+     "Sabré que se movió porque"
+    ]
+   },
+   {
+    "id": "rename",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write"
+     ],
+     "quiet": true,
+     "optional": true,
+     "minWords": 1
+    },
+    "es": "Ponle un nombre.",
+    "en": "Give it a name."
+   }
+  ],
+  "refs": [
+   "d22.plant"
+  ]
+ },
+ {
+  "n": 24,
+  "level": "Raíces que no ves",
+  "title": "Raíces que no ves",
+  "body": "Nota lo que ya está mejor y que ningún saldo muestra.",
+  "completeTitle": "Raíces que no ves.",
+  "completeElara": "Crecer cuenta antes de que se vea.",
+  "en": {
+   "level": "Roots you can't see",
+   "title": "Roots you can't see",
+   "body": "Notice what's already better that no balance shows."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "better",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 6,
+     "maxPicks": 3,
+     "layout": "grid",
+     "quiet": true
+    },
+    "es": "¿Qué está mejor que hace unas semanas, y ningún saldo lo muestra?",
+    "en": "What's better than a few weeks ago, that no balance shows?",
+    "opts": [
+     "Miro antes",
+     "Entro menos en pánico",
+     "Sé para qué es",
+     "Hago pausas más seguido",
+     "Hablo más del tema",
+     "Duermo un poco mejor"
+    ]
+   },
+   {
+    "id": "counts",
+    "kind": "sort",
+    "cfg": {
+     "itemCount": 5,
+     "sortLayout": "cards",
+     "quiet": true
+    },
+    "es": "¿Esto cuenta como crecer, para ti?",
+    "en": "Does this count as growing, for you?",
+    "opts": [
+     "Que el saldo suba",
+     "Sentirme más tranquila al revisar",
+     "Sostener mi límite",
+     "Pedir ayuda antes",
+     "Menos gastos de los que me arrepiento"
+    ]
+   },
+   {
+    "id": "proof",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write",
+      "say",
+      "draw"
+     ],
+     "keep": "sentence",
+     "deferReply": true
+    },
+    "es": "Cuéntame de un momento en que lo notaste.",
+    "en": "Tell me about one moment you noticed it."
+   },
+   {
+    "id": "roots",
+    "kind": "read",
+    "cfg": {
+     "noticedFrom": "proof"
+    },
+    "es": "Raíces que no ves.",
+    "en": "Roots you can't see."
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 25,
+  "level": "Pedir lo que vales",
+  "title": "Pedir lo que vales",
+  "body": "Encuentra las palabras para una petición, y practícalas una vez.",
+  "completeTitle": "Pedir lo que vales.",
+  "completeElara": "Practicaste la frase. Eso es casi todo el valor que hace falta.",
+  "en": {
+   "level": "Asking for your worth",
+   "title": "Asking for your worth",
+   "body": "Find the words for one ask, and practise them once."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "ask",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5,
+     "layout": "grid",
+     "quiet": true
+    },
+    "es": "¿Qué petición has ido posponiendo?",
+    "en": "What's one ask you've been putting off?",
+    "opts": [
+     "Un aumento",
+     "Una tarifa más alta",
+     "Que me quiten un cargo",
+     "Un reembolso",
+     "Dinero que me deben"
+    ]
+   },
+   {
+    "id": "stops",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 5,
+     "maxPicks": 2,
+     "quiet": true
+    },
+    "es": "¿Qué te detiene para pedirlo?",
+    "en": "What stops you from asking?",
+    "opts": [
+     "No quiero parecer interesada",
+     "Me pueden decir que no",
+     "No sé qué decir",
+     "No estoy segura de merecerlo",
+     "Me da pena"
+    ]
+   },
+   {
+    "id": "words",
+    "kind": "blanks",
+    "cfg": {
+     "fieldCount": 3,
+     "keep": "sentence",
+     "quiet": true
+    },
+    "es": "Encontremos tus palabras.",
+    "en": "Let's find your words.",
+    "opts": [
+     "Te pido",
+     "Porque",
+     "Lo que me gustaría ahora es"
+    ]
+   },
+   {
+    "id": "say",
+    "kind": "read",
+    "cfg": {
+     "rehearse": true,
+     "optional": true
+    },
+    "es": "Dilo en voz alta una vez, solo para ti.",
+    "en": "Say it out loud once, just for you."
+   },
+   {
+    "id": "when",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 3,
+     "commit": true,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "¿Cuándo lo vas a pedir?",
+    "en": "When will you ask?",
+    "opts": [
+     "Esta semana",
+     "Antes de que termine el mes",
+     "Después de practicar una vez más"
+    ]
+   }
+  ],
+  "refs": [
+   "d10.sentence"
+  ]
+ },
+ {
+  "n": 26,
+  "level": "Lo que lo va comiendo",
+  "title": "Lo que lo va comiendo",
+  "body": "Encuentra las pequeñas fugas que mordisquean lo que estás cultivando.",
+  "completeTitle": "Lo que lo va comiendo.",
+  "completeElara": "Un mordisco menos. La hoja puede crecer.",
+  "en": {
+   "level": "What eats at it",
+   "title": "What eats at it",
+   "body": "Find the small leaks that nibble at what you're growing."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "followup",
+    "kind": "followUp",
+    "cfg": {
+     "optionCount": 4,
+     "fromStep": "when",
+     "presentation": "card"
+    },
+    "es": "Tu petición: {d25.ask|lower}. ¿Dónde está ahora?",
+    "en": "Your ask: {d25.ask|lower}. Where is it now?",
+    "opts": [
+     "Lo pedí",
+     "Me estoy preparando",
+     "Todavía no",
+     "Cambié de idea"
+    ]
+   },
+   {
+    "id": "nibbles",
+    "kind": "sort",
+    "cfg": {
+     "itemCount": 5,
+     "quiet": true
+    },
+    "es": "¿Qué se va comiendo lo que estás cultivando?",
+    "en": "What eats at what you're growing?",
+    "opts": [
+     "Suscripciones que no uso",
+     "Comisiones o recargos por atraso",
+     "Gastos por culpa",
+     "Costos de envío a domicilio",
+     "Pequeños gustos diarios"
+    ]
+   },
+   {
+    "id": "guilt",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write",
+      "say"
+     ],
+     "optional": true
+    },
+    "es": "¿Hay algún gasto que intenta pedir perdón?",
+    "en": "Is there a spend that tries to say sorry?"
+   },
+   {
+    "id": "trim",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "commit": true,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "Espanta un escarabajo esta semana.",
+    "en": "Brush off one beetle this week.",
+    "opts": [
+     "Cancelar una suscripción",
+     "Pedir que me devuelvan un cargo",
+     "Esperar un día antes de un gasto por culpa",
+     "Quitar una tarjeta guardada de una app"
+    ]
+   }
+  ],
+  "refs": [
+   "d25.ask"
+  ]
+ },
+ {
+  "n": 27,
+  "level": "Cuidar",
+  "title": "Cuidar",
+  "body": "Arma una revisión semanal de diez minutos que de verdad puedas mantener.",
+  "completeTitle": "Cuidar.",
+  "completeElara": "Diez minutos, una vez por semana. Así llega la lluvia a las raíces.",
+  "en": {
+   "level": "Tending",
+   "title": "Tending",
+   "body": "Make a ten-minute weekly money check you can actually keep."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "followup",
+    "kind": "followUp",
+    "cfg": {
+     "optionCount": 4,
+     "fromStep": "trim",
+     "presentation": "full"
+    },
+    "es": "Tu fuga: {d26.trim|lower}.",
+    "en": "Your one leak: {d26.trim|lower}.",
+    "opts": [
+     "Lo hice",
+     "Más o menos",
+     "No pasó",
+     "Se me olvidó"
+    ]
+   },
+   {
+    "id": "day",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "layout": "chips",
+     "quiet": true
+    },
+    "es": "¿Cuándo caben diez minutos, una vez por semana?",
+    "en": "When could ten minutes fit, once a week?",
+    "opts": [
+     "Domingo en la noche",
+     "Lunes en la mañana",
+     "El día de pago",
+     "Viernes a la hora de comer"
+    ]
+   },
+   {
+    "id": "check",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 6,
+     "maxPicks": 3,
+     "ranked": true,
+     "quiet": true
+    },
+    "es": "¿Qué va en tus diez minutos?",
+    "en": "What goes in your ten minutes?",
+    "opts": [
+     "Mirar mi saldo",
+     "Mover mi cantidad",
+     "Revisar cargos nuevos",
+     "Leer mi brújula",
+     "Anotar un gasto que se sintió bien",
+     "Mirar la semana que viene"
+    ]
+   },
+   {
+    "id": "feel",
+    "kind": "scale",
+    "cfg": {
+     "stopCount": 5
+    },
+    "es": "Ahora mismo, una revisión semanal del dinero se siente…",
+    "en": "Right now, a weekly money check feels…",
+    "opts": [
+     "Como pavor",
+     "Incómoda",
+     "Ni bien ni mal",
+     "Bien",
+     "Casi agradable"
+    ]
+   },
+   {
+    "id": "promise",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write"
+     ],
+     "keep": "sentence",
+     "deferReply": true
+    },
+    "es": "Tus diez minutos, en una frase.",
+    "en": "Your ten minutes, in one line."
+   }
+  ],
+  "refs": [
+   "d26.trim"
+  ]
+ },
+ {
+  "n": 28,
+  "level": "Primera cosecha",
+  "title": "Primera cosecha",
+  "body": "Mira en qué se convirtió un mes de cosas pequeñas.",
+  "nextWeekTitle": "Lo suficiente",
+  "letter": "Esta semana sembraste algo pequeño que entra {d22.often|lower}, y le diste un hogar. Encontraste las palabras para pedir lo que vales, y diez minutos por semana para cuidarlo todo. La próxima semana, desde más arriba, miramos qué significa suficiente para ti.",
+  "letterFallback": "Esta semana sembraste algo pequeño y le diste un hogar. Encontraste las palabras para pedir lo que vales, y diez minutos por semana para cuidarlo todo. La próxima semana, desde más arriba, miramos qué significa suficiente para ti.",
+  "en": {
+   "level": "First harvest",
+   "title": "First harvest",
+   "body": "Look at what a month of small things became.",
+   "nextWeekTitle": "Enough"
+  },
+  "minutes": 5,
+  "steps": [
+   {
+    "id": "look",
+    "kind": "read",
+    "cfg": {
+     "pager": "dots"
+    },
+    "es": "Mira lo que creció esta semana.",
+    "en": "Look at what grew this week."
+   },
+   {
+    "id": "became",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5
+    },
+    "es": "Hasta ahora, ¿en qué se ha convertido?",
+    "en": "So far, what has it become?",
+    "opts": [
+     "En más de lo que esperaba",
+     "En más o menos lo que esperaba",
+     "En menos de lo que esperaba, pero real",
+     "Sobre todo en un hábito, todavía poco dinero",
+     "Prefiero no decirlo"
+    ]
+   },
+   {
+    "id": "rule",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write"
+     ],
+     "keep": "rule",
+     "quiet": true
+    },
+    "es": "Aquí tienes un primer borrador de tu semana.",
+    "en": "Here's a first draft from your week."
+   },
+   {
+    "id": "carry",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 4,
+     "maxPicks": 2,
+     "quiet": true
+    },
+    "es": "¿Qué quieres llevar contigo?",
+    "en": "What do you want to carry with you?",
+    "opts": [
+     "Mi cantidad",
+     "Su hogar",
+     "Mi petición",
+     "Mis diez minutos"
+    ]
+   }
+  ],
+  "refs": [
+   "d22.often",
+   "d23.rename",
+   "d24.better",
+   "d25.ask",
+   "d27.day",
+   "d27.promise"
+  ]
+ },
+ {
+  "n": 29,
+  "level": "Lo suficiente",
+  "title": "Qué es suficiente",
+  "body": "Nombra cómo se ve lo suficiente este mes, y defiéndelo.",
+  "weekTitle": "Lo suficiente",
+  "intro": "Desde aquí arriba ves cada lugar que recorriste. Esta última semana se trata de lo suficiente: qué significa para ti, y una práctica que vas a mantener mucho después de cerrar la app.",
+  "completeTitle": "Qué es suficiente.",
+  "completeElara": "Nombraste lo que te basta, y le respondiste a la voz que pide más.",
+  "en": {
+   "level": "Enough",
+   "title": "What is enough",
+   "body": "Name what enough looks like this month, and stand by it.",
+   "weekTitle": "Enough",
+   "intro": "From up here you can see every place you've walked. This last week is about enough: what it means for you, and a practice you'll keep long after you close the app."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "grew",
+    "kind": "recall",
+    "cfg": {
+     "recall": [
+      {
+       "day": 28,
+       "step": "rule"
+      }
+     ]
+    },
+    "es": "Antes de subir, tu regla para cultivar.",
+    "en": "Before we climb, your growing rule."
+   },
+   {
+    "id": "enough",
+    "kind": "blanks",
+    "cfg": {
+     "fieldCount": 1,
+     "keep": "sentence",
+     "deferReply": true
+    },
+    "es": "¿Qué es suficiente para ti, este mes?",
+    "en": "What is enough for you, this month?",
+    "opts": [
+     "Este mes, me basta con"
+    ]
+   },
+   {
+    "id": "heard",
+    "kind": "read",
+    "cfg": {
+     "noticedFrom": "enough"
+    },
+    "es": "Lo que te basta.",
+    "en": "Your enough."
+   },
+   {
+    "id": "argues",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5,
+     "quiet": true
+    },
+    "es": "¿Qué discute con lo que te basta?",
+    "en": "What argues with your enough?",
+    "opts": [
+     "Los anuncios y las redes",
+     "Mi propia preocupación",
+     "Alguien cercano",
+     "Las personas con quienes me comparo",
+     "Nada, se siente bien"
+    ]
+   },
+   {
+    "id": "defend",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write",
+      "say"
+     ]
+    },
+    "es": "Respóndele en una frase.",
+    "en": "Answer it in one line."
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 30,
+  "level": "Dar en tus términos",
+  "title": "Dar en tus términos",
+  "body": "Mira cómo das, y dónde dar se vuelve rescatar.",
+  "completeTitle": "Dar en tus términos.",
+  "completeElara": "Generosa, y en tus términos. Las dos cosas pueden ser ciertas.",
+  "en": {
+   "level": "Giving on your terms",
+   "title": "Giving on your terms",
+   "body": "Look at how you give, and where giving turns into rescuing."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "gives",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 6,
+     "maxPicks": 3,
+     "layout": "chips",
+     "quiet": true
+    },
+    "es": "¿A dónde va tu dinero cuando es para otras personas?",
+    "en": "Where does your money go to other people?",
+    "opts": [
+     "Familia",
+     "Amistades",
+     "Una causa que me importa",
+     "Regalos",
+     "Cuentas que no son mías",
+     "Préstamos que no vuelven"
+    ]
+   },
+   {
+    "id": "line",
+    "kind": "sort",
+    "cfg": {
+     "itemCount": 5,
+     "sortLayout": "cards",
+     "quiet": true
+    },
+    "es": "¿Dar, o rescatar?",
+    "en": "Giving, or rescuing?",
+    "opts": [
+     "Dar lo que planeé",
+     "Dar porque quiero",
+     "Dar para que no se molesten",
+     "Dar cuando me lo piden por segunda vez",
+     "Dar de mi colchón"
+    ]
+   },
+   {
+    "id": "terms",
+    "kind": "blanks",
+    "cfg": {
+     "fieldCount": 3,
+     "keep": "sentence"
+    },
+    "es": "Tus términos para dar.",
+    "en": "Your terms for giving.",
+    "opts": [
+     "Doy a",
+     "Doy de",
+     "Hago una pausa cuando"
+    ]
+   },
+   {
+    "id": "next",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "commit": true,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "Una decisión de dar esta semana.",
+    "en": "One giving choice this week.",
+    "opts": [
+     "Dar un regalo que planeé",
+     "Decir “esta vez no” una vez",
+     "Preguntar antes de cubrir algo",
+     "Mantener mis términos como están"
+    ]
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 31,
+  "level": "El dinero de los demás",
+  "title": "El dinero de los demás",
+  "body": "Nota una comparación, y suéltala.",
+  "completeTitle": "El dinero de los demás.",
+  "completeElara": "Su dinero es una sombra en una cresta lejana. El tuyo es el suelo bajo tus pies.",
+  "en": {
+   "level": "Other people's money",
+   "title": "Other people's money",
+   "body": "Notice one comparison, and put it down."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "followup",
+    "kind": "followUp",
+    "cfg": {
+     "optionCount": 4,
+     "fromStep": "next",
+     "presentation": "card"
+    },
+    "es": "Elegiste: {d30.next|lower}. ¿Cómo te fue?",
+    "en": "You chose: {d30.next|lower}. How did it go?",
+    "opts": [
+     "Lo hice",
+     "Más o menos",
+     "No pasó",
+     "Se me olvidó"
+    ]
+   },
+   {
+    "id": "against",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 5,
+     "quiet": true
+    },
+    "es": "¿Con el dinero de quién comparas el tuyo?",
+    "en": "Whose money do you measure yours against?",
+    "opts": [
+     "Amigas de mi edad",
+     "Gente en internet",
+     "Hermanos o primos",
+     "Gente del trabajo",
+     "Quien pensé que sería a estas alturas"
+    ]
+   },
+   {
+    "id": "shadow",
+    "kind": "scale",
+    "cfg": {
+     "stopCount": 4
+    },
+    "es": "¿Cuánto nubla esa comparación tu propia vista?",
+    "en": "How much does that comparison cloud your own view?",
+    "opts": [
+     "Casi nada",
+     "Un poco",
+     "Bastante",
+     "Lo cubre todo"
+    ]
+   },
+   {
+    "id": "unseen",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write",
+      "say"
+     ]
+    },
+    "es": "¿Qué no puedes ver de su dinero?",
+    "en": "What can't you see about their money?"
+   },
+   {
+    "id": "down",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "keep": "sentence",
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "Una comparación para soltar esta semana.",
+    "en": "One comparison to put down this week.",
+    "opts": [
+     "Silenciar una cuenta que me hace sentir atrás",
+     "Dejar de adivinar cuánto ganan los demás",
+     "Dejar que mis tiempos sean míos",
+     "Cuando me comparo, releo lo que me basta"
+    ]
+   }
+  ],
+  "refs": [
+   "d30.next"
+  ]
+ },
+ {
+  "n": 32,
+  "level": "A lo lejos",
+  "title": "A lo lejos",
+  "body": "Mira tu dinero dentro de un año, en tres frases.",
+  "completeTitle": "A lo lejos.",
+  "completeElara": "Dentro de un año, te vas a alegrar de haber empezado esto.",
+  "en": {
+   "level": "The long view",
+   "title": "The long view",
+   "body": "See your money a year from now, in three sentences."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "came",
+    "kind": "recall",
+    "cfg": {
+     "recall": [
+      {
+       "day": 1,
+       "step": "feeling"
+      },
+      {
+       "day": 9,
+       "step": "values"
+      },
+      {
+       "day": 14,
+       "step": "compass"
+      }
+     ]
+    },
+    "es": "Mira cuánto has avanzado.",
+    "en": "Look how far you've come."
+   },
+   {
+    "id": "year",
+    "kind": "blanks",
+    "cfg": {
+     "fieldCount": 3,
+     "keep": "sentence"
+    },
+    "es": "Dentro de un año, en tres frases.",
+    "en": "A year from now, in three sentences.",
+    "opts": [
+     "Dentro de un año, el dinero se siente",
+     "Todavía mantengo",
+     "Me alegra haber"
+    ]
+   },
+   {
+    "id": "view",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "draw"
+     ],
+     "shapes": true,
+     "quiet": true,
+     "optional": true
+    },
+    "es": "Dibuja la vista desde un año adelante.",
+    "en": "Draw the view from a year out."
+   },
+   {
+    "id": "thank",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "¿Qué te va a agradecer esa tú del futuro?",
+    "en": "What will that future you thank you for?",
+    "opts": [
+     "Mantener mis diez minutos",
+     "Mantener mi colchón",
+     "Sostener mi límite",
+     "Pedir lo que valgo"
+    ]
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 33,
+  "level": "Lo que puedes dejar de vigilar",
+  "title": "Lo que puedes dejar de vigilar",
+  "body": "Encuentra una revisión, una app o una preocupación que puedes jubilar.",
+  "completeTitle": "Lo que puedes dejar de vigilar.",
+  "completeElara": "Menos vigilar, más vivir. Quédate un rato en la piedra plana.",
+  "en": {
+   "level": "What you can stop watching",
+   "title": "What you can stop watching",
+   "body": "Find one check, app or worry you can retire."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "stone",
+    "kind": "read",
+    "cfg": {
+     "breaths": 3,
+     "optional": true
+    },
+    "es": "Siéntate un momento.",
+    "en": "Sit down for a moment."
+   },
+   {
+    "id": "watch",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 6,
+     "maxPicks": 3,
+     "quiet": true,
+     "exclusiveOption": 5
+    },
+    "es": "¿Qué vigilas más de lo que necesitas?",
+    "en": "What do you watch more than you need to?",
+    "opts": [
+     "Mi saldo, varias veces al día",
+     "Precios de cosas que ya compré",
+     "Lo que gastan los demás",
+     "Apps de compras",
+     "Calcular el peor escenario en mi cabeza",
+     "Nada, aquí estoy bien"
+    ]
+   },
+   {
+    "id": "costs",
+    "kind": "scale",
+    "cfg": {
+     "stopCount": 4
+    },
+    "es": "¿Cuánta de tu atención se lleva todo ese vigilar?",
+    "en": "How much of your attention does all that watching take?",
+    "opts": [
+     "Muy poca",
+     "Algo",
+     "Mucha",
+     "Casi toda"
+    ]
+   },
+   {
+    "id": "retire",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4,
+     "commit": true,
+     "keep": "sentence",
+     "hold": true,
+     "deferReply": true
+    },
+    "es": "Jubila una cosa esta semana.",
+    "en": "Retire one thing this week.",
+    "opts": [
+     "Revisar mi saldo una vez al día como máximo",
+     "Borrar una app de compras",
+     "No calcular el peor escenario de noche",
+     "Dejar de revisar lo que gastan otros"
+    ]
+   }
+  ],
+  "refs": []
+ },
+ {
+  "n": 34,
+  "level": "Quién camina contigo",
+  "title": "Quién camina contigo",
+  "body": "Elige con quién vas a seguir hablando de dinero.",
+  "completeTitle": "Quién camina contigo.",
+  "completeElara": "Tu hilo se une al de quienes caminan contigo.",
+  "en": {
+   "level": "Who walks with you",
+   "title": "Who walks with you",
+   "body": "Choose who you'll keep talking money with."
+  },
+  "minutes": 4,
+  "steps": [
+   {
+    "id": "followup",
+    "kind": "followUp",
+    "cfg": {
+     "optionCount": 4,
+     "fromStep": "retire",
+     "presentation": "card"
+    },
+    "es": "Dijiste: {d33.retire|lower}. ¿Cómo te fue?",
+    "en": "You said: {d33.retire|lower}. How did it go?",
+    "opts": [
+     "Lo hice",
+     "Más o menos",
+     "No pasó",
+     "Se me olvidó"
+    ]
+   },
+   {
+    "id": "who",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 6,
+     "maxPicks": 2,
+     "layout": "chips",
+     "quiet": true,
+     "exclusiveOption": 5
+    },
+    "es": "¿Con quién vas a seguir hablando de dinero?",
+    "en": "Who will you keep talking money with?",
+    "opts": [
+     "Mi pareja",
+     "Una amiga",
+     "Alguien de mi familia",
+     "Un grupo de mujeres de confianza",
+     "Un profesional",
+     "Solo yo, por ahora"
+    ]
+   },
+   {
+    "id": "how",
+    "kind": "choose",
+    "cfg": {
+     "optionCount": 4
+    },
+    "es": "¿Cómo lo vas a mantener?",
+    "en": "How will you keep it going?",
+    "opts": [
+     "Un café de dinero al mes",
+     "Un mensaje cuando se ponga difícil",
+     "Compartir un pequeño logro por semana",
+     "Una revisión mensual conmigo misma"
+    ]
+   },
+   {
+    "id": "tell",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write",
+      "say"
+     ],
+     "keep": "sentence",
+     "deferReply": true
+    },
+    "es": "¿Qué te gustaría que supieran de cómo se siente el dinero ahora?",
+    "en": "What would you want them to know about how money feels now?"
+   },
+   {
+    "id": "joins",
+    "kind": "read",
+    "cfg": {
+     "noticedFrom": "tell"
+    },
+    "es": "Tu hilo se une al de quienes caminan contigo.",
+    "en": "Your thread joins theirs."
+   }
+  ],
+  "refs": [
+   "d33.retire"
+  ]
+ },
+ {
+  "n": 35,
+  "level": "Tu mapa",
+  "title": "Tu mapa",
+  "body": "Pon cinco semanas en una página que puedas guardar.",
+  "letter": "Hace cinco semanas empezaste mirando, incluso en los días pesados. Elegiste para qué es tu dinero: {d9.values|lower}. Lo sostuviste cuando la vida empujó, cultivaste algo pequeño y nombraste lo que te basta. Tu mapa ya es tuyo, con la app o sin ella. Conoces el camino.",
+  "letterFallback": "Hace cinco semanas empezaste mirando, incluso en los días pesados. Elegiste para qué es tu dinero, lo sostuviste cuando la vida empujó, cultivaste algo pequeño y nombraste lo que te basta. Tu mapa ya es tuyo, con la app o sin ella. Conoces el camino.",
+  "en": {
+   "level": "Your map",
+   "title": "Your map",
+   "body": "Put five weeks on one page you can keep."
+  },
+  "minutes": 5,
+  "steps": [
+   {
+    "id": "look",
+    "kind": "read",
+    "cfg": {
+     "pager": "dots"
+    },
+    "es": "Mira todo el camino que hiciste.",
+    "en": "Look at the whole way you came."
+   },
+   {
+    "id": "practice",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 6,
+     "maxPicks": 3,
+     "quiet": true
+    },
+    "es": "¿Qué vas a seguir haciendo, con la app o sin ella?",
+    "en": "What will you keep doing, with or without the app?",
+    "opts": [
+     "La pausa antes de pagar",
+     "Mis diez minutos por semana",
+     "Mi colchón",
+     "Mi límite",
+     "Hablar de dinero con alguien",
+     "Mirar sin juzgar"
+    ]
+   },
+   {
+    "id": "map",
+    "kind": "reflect",
+    "cfg": {
+     "modes": [
+      "write"
+     ],
+     "keep": "rule",
+     "quiet": true
+    },
+    "es": "Aquí tienes un primer borrador de tus cinco semanas.",
+    "en": "Here's a first draft from your five weeks."
+   },
+   {
+    "id": "carry",
+    "kind": "multi",
+    "cfg": {
+     "optionCount": 4,
+     "maxPicks": 2,
+     "quiet": true
+    },
+    "es": "¿Qué quieres llevar contigo?",
+    "en": "What do you want to carry with you?",
+    "opts": [
+     "Mi mapa",
+     "Mi regla",
+     "Mi brújula",
+     "Lo que me basta"
+    ]
+   }
+  ],
+  "refs": [
+   "d9.values",
+   "d7.mine",
+   "d14.compass",
+   "d21.rule",
+   "d28.rule",
+   "d29.enough",
+   "d18.edge"
+  ]
+ }
+]
