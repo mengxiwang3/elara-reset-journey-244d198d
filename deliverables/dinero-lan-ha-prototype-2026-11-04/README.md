@@ -137,3 +137,7 @@ Before day 1 she is asked «¿Qué te gustaría entender mejor esta semana?» an
 - **Day 1** now separates a timing problem from money that doesn't stretch, as V4.1 intends: besides moving the payment date, she can make the payment smaller («Solo US$30»), and the feedback names a «faltante total» that moving the date doesn't fix, a «desfase de fechas», or both at once. If she answered «Aunque cobre, no me alcanza», the example starts with the smaller payment.
 - **Days 2, 3 and 6:** if she made something in pause 2 (her card, her sentence, her check), «Hazlo tuyo» asks «¿Te llevas lo que armaste?» and offers it first; V4.1's options move behind «Ver otras opciones». If she keeps it, only that item is selected when she chooses what to save.
 - New wording marked as a proposal. e2e: 259/259.
+
+## v12 — day 4 for women with no debt (2026-11-05)
+
+If she answers «No tengo deuda o prefiero no usar la mía», day 4 shows a sample statement she reads line by line (saldo anterior, intereses y cargos, pago recibido) instead of «a debt»; nothing asks about her accounts. Her kit piece becomes «Lo que miraría en un estado de cuenta» and the close says «Hoy practicaste cómo leer las tres líneas de un estado de cuenta». e2e: 266/266.

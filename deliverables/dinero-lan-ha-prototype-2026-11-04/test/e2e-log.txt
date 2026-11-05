@@ -244,6 +244,13 @@ ok   Atlas: targets ≥44px
 ok   Atlas: nothing wider than the screen 
 ok   Atlas: reopen day 1
 ok   day 6: «Ya envié dinero» sees orientation first, with no exercise
+ok   day 4, no debt: a sample statement instead of «a debt»
+ok   day 4, no debt: each line explains itself when tapped
+ok   day 4, no debt: the result and a takeaway she can use later
+ok   day 4 no debt: targets ≥44px 
+ok   day 4 no debt: nothing wider than the screen 
+ok   day 4, no debt: the close names what she practiced
+ok   day 4, no debt: her kit piece is named for her
 ok   day 7 after a jump: nothing was saved, so nothing is offered or invented
 ok   small + big home: targets ≥44px 
 ok   small + big home: nothing wider than the screen 
@@ -258,4 +265,4 @@ ok   design review: 9 representative screens
 ok   page has no horizontal scroll at 390px
 ok   no console errors []
 
-259 passed, 0 failed
+266 passed, 0 failed

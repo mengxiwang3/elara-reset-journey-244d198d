@@ -257,6 +257,22 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
   t = await text();
   ok(has(t, "Hoy no hace falta practicar") && has(t, "ayuda oficial") && (await nOf('[data-a="d6"]')) === 0, "day 6: «Ya envié dinero» sees orientation first, with no exercise");
   await click('[data-act="close"]');
+  // Day 4 adapts for women with no debt
+  await p.click('#dayChips [data-start="4"]'); await p.waitForTimeout(100);
+  await click('[data-act="start"]'); await click('[data-act="pick"][data-k="s1"]', 3); await click('[data-act="next"]');
+  t = await text();
+  ok(has(t, "Estado de cuenta de ejemplo") && !has(t, "Mira qué le pasa a una deuda") && !has(t, "Debes US$"), "day 4, no debt: a sample statement instead of «a debt»");
+  await click('[data-act="a"][data-a="d4"][data-v="l0"]'); await click('[data-act="a"][data-a="d4"][data-v="l1"]');
+  t = await text(); ok(has(t, "Lo que se debía al empezar el mes") && has(t, "Hace que la deuda crezca") && !has(t, "Saldo nuevo"), "day 4, no debt: each line explains itself when tapped");
+  await click('[data-act="a"][data-a="d4"][data-v="l2"]');
+  t = await text(); ok(has(t, "Saldo nuevo") && has(t, "mira estas tres líneas por separado"), "day 4, no debt: the result and a takeaway she can use later");
+  await shot("d4-nodebt"); await audit("day 4 no debt");
+  await click('[data-act="next"]'); await click('[data-act="pick"][data-k="s3"]', 0); await click('[data-act="next"]'); await click('[data-act="choose"]'); await click('[data-act="sel"]', 0); await click('[data-act="save"]');
+  ok(has(await text(), "Hoy practicaste cómo leer las tres líneas de un estado de cuenta"), "day 4, no debt: the close names what she practiced");
+  await click('[data-act="home"]'); await click('[data-act="tusdias"]');
+  ok(has(await text(), "Lo que miraría en un estado de cuenta"), "day 4, no debt: her kit piece is named for her");
+  await click('[data-act="hoy"]');
+
   // Jumping to a day does not invent takeaways
   await p.click('#dayChips [data-start="7"]'); await p.waitForTimeout(100);
   await click('[data-act="start"]'); await click('[data-act="next"]');
