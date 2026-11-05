@@ -131,3 +131,9 @@ Before day 1 she is asked «¿Qué te gustaría entender mejor esta semana?» an
 - **Lo que armaste esta semana** (in Atlas → Tus días): one piece per day, only from what she chose to keep: the date to confirm, her para qué y para cuándo, her sentence for asking for time, what she wants to clarify about a debt, what she will compare, her independent check, the idea she keeps. Unsaved days read «Este día terminó sin guardar. Puedes volver cuando quieras.» Day 7's close shows the filled pieces; the home screen after the week lists only their names (her words stay in Tus días).
 - **Hoy practicaste cómo…** on each day's close and in Tus días, only if she did the activity; otherwise «Hoy viste cómo…».
 - All wording is a proposal. e2e: 249/249.
+
+## v11 — day 1 teaches both halves; no repetition in «Hazlo tuyo» (2026-11-05)
+
+- **Day 1** now separates a timing problem from money that doesn't stretch, as V4.1 intends: besides moving the payment date, she can make the payment smaller («Solo US$30»), and the feedback names a «faltante total» that moving the date doesn't fix, a «desfase de fechas», or both at once. If she answered «Aunque cobre, no me alcanza», the example starts with the smaller payment.
+- **Days 2, 3 and 6:** if she made something in pause 2 (her card, her sentence, her check), «Hazlo tuyo» asks «¿Te llevas lo que armaste?» and offers it first; V4.1's options move behind «Ver otras opciones». If she keeps it, only that item is selected when she chooses what to save.
+- New wording marked as a proposal. e2e: 259/259.

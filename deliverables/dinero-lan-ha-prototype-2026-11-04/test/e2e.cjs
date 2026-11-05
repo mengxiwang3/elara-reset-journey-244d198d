@@ -102,7 +102,10 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
       for (let i = 0; i < 3; i++) await tapA("d1", "next");
       t = await text(); ok((await nOf(".tlrow")) === 4 && has(t, "Faltan US$50") && has(t, "después de la luz"), "day 1: timeline revealed; 50 short on the due date, kindly explained");
       await tapA("d1", "c10"); t = await text(); ok(has(t, "la luz queda cubierta") && !has(t, "Faltan"), "day 1: income earlier changes the result");
-      await tapA("d1", "c12");
+      await tapA("d1", "a30"); t = await text();
+      ok(has(t, "faltante total") && has(t, "cambiar la fecha no lo resuelve") , "day 1: a smaller payment shows a total shortfall that moving the date does not fix");
+      await tapA("d1", "c12"); t = await text(); ok(has(t, "Pueden pasar las dos cosas a la vez"), "day 1: late and short at once is named");
+      await tapA("d1", "a200");
       await shot("d1-2-activity"); await audit("day 1 activity");
     } else if (n === 2) {
       ok((await nOf('[data-a="d2"][data-v^="W"]')) === 0 && (await nOf('[data-a="d2"][data-v^="X"]')) === 0, "day 2: only the first step shows; the next ones wait");
@@ -166,7 +169,13 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
 
     // pause 3
     t = await text();
-    ok(has(t, day.s3.q), `day ${n}: «Hazlo tuyo» question`);
+    ok(has(t, day.s3.q) || [2, 3, 6].includes(n), `day ${n}: «Hazlo tuyo» question (behind «Ver otras opciones» when she made something)`);
+    if ([2, 3, 6].includes(n)) {
+      ok(has(t, "¿Te llevas lo que armaste?") && (await nOf('[data-act="pick"][data-k="s3"]')) === 0, `day ${n}: «Hazlo tuyo» offers what she just made first, without asking her to choose again`);
+      await click('[data-act="keep-made"]'); ok(has(await text(), "Me lo llevo") && (await nOf('textarea[data-field="note"]')) === 1, `day ${n}: keeping it opens the optional note`);
+      await click('[data-act="toggle"][data-k="otherS3"]');
+      if (n === 3) { await shot("d3-3-s3"); await audit("day 3 hazlo tuyo"); }
+    }
     const phraseIdx = day.s3.opts.findIndex((o) => o.phrase);
     await click('[data-act="pick"][data-k="s3"]', phraseIdx >= 0 ? phraseIdx : 0);
     if (phraseIdx >= 0 && n !== 3) { await click('[data-act="use-phrase"]'); ok((await app.locator('textarea[data-field="note"]').inputValue()) === day.s3.opts[phraseIdx].phrase, `day ${n}: «Usar esta frase» fills the note`); }
@@ -179,7 +188,8 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
     const items = await nOf('[data-act="sel"]');
     ok(items >= 2, `day ${n}: choose what to keep (${items} things, none preselected)`);
     const checked = await app.locator('[data-act="sel"][aria-checked="true"]').count();
-    ok(checked === 0 && (await app.locator('[data-act="save"]').isDisabled()), `day ${n}: nothing is preselected and saving waits for a choice`);
+    if ([2, 3, 6].includes(n)) ok(checked === 1, `day ${n}: only what she said she'd keep is selected`);
+    else ok(checked === 0 && (await app.locator('[data-act="save"]').isDisabled()), `day ${n}: nothing is preselected and saving waits for a choice`);
 
     if (n === 4) {
       await click('[data-act="nosave"]');
@@ -187,7 +197,7 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
       ok(has(t, W.ui.unsaved) && has(t, day.tryLine) && has(t, "Mañana: " + day.next), "day 4: completion without saving keeps V4.1 copy");
       await shot("d4-4-done-unsaved");
     } else {
-      for (let i = 0; i < items; i++) await click('[data-act="sel"]', i);
+      for (let i = 0; i < items; i++) { if ((await app.locator('[data-act="sel"]').nth(i).getAttribute("aria-checked")) !== "true") await click('[data-act="sel"]', i); }
       if (n === 3) { await p.check("#optFail", { force: true }).catch(async () => { await p.evaluate(() => { const el = document.getElementById("optFail"); el.checked = true; el.dispatchEvent(new Event("change")); }); }); await p.waitForTimeout(60); await click('[data-act="save"]'); ok(has(await text(), "No se pudo guardar"), "day 3: save error"); await click('[data-act="save"]'); await p.evaluate(() => { const el = document.getElementById("optFail"); el.checked = false; el.dispatchEvent(new Event("change")); }); }
       else await click('[data-act="save"]');
       t = await text();

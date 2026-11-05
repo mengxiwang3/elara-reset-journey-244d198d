@@ -21,6 +21,8 @@ ok   day 1: pause 2 can be skipped
 ok   day 1: the timeline starts with one row
 ok   day 1: timeline revealed; 50 short on the due date, kindly explained
 ok   day 1: income earlier changes the result
+ok   day 1: a smaller payment shows a total shortfall that moving the date does not fix
+ok   day 1: late and short at once is named
 ok   day 1 activity: targets ≥44px 
 ok   day 1 activity: nothing wider than the screen 
 ok   day 1: after trying, «Más sobre esta idea» appears
@@ -29,7 +31,7 @@ ok   day 1: «Ver un ejemplo»
 ok   day 1: the V4.1 check is optional and unscored
 ok   day 1: the right answer is not always first
 ok   day 1: check feedback
-ok   day 1: «Hazlo tuyo» question
+ok   day 1: «Hazlo tuyo» question (behind «Ver otras opciones» when she made something)
 ok   day 1: «Usar esta frase» fills the note
 ok   day 1: «Te llevas» text
 ok   day 1: choose what to keep (3 things, none preselected)
@@ -61,10 +63,12 @@ ok   day 2: «Ver un ejemplo»
 ok   day 2: the V4.1 check is optional and unscored
 ok   day 2: the right answer is not always first
 ok   day 2: check feedback
-ok   day 2: «Hazlo tuyo» question
+ok   day 2: «Hazlo tuyo» question (behind «Ver otras opciones» when she made something)
+ok   day 2: «Hazlo tuyo» offers what she just made first, without asking her to choose again
+ok   day 2: keeping it opens the optional note
 ok   day 2: «Te llevas» text
 ok   day 2: choose what to keep (4 things, none preselected)
-ok   day 2: nothing is preselected and saving waits for a choice
+ok   day 2: only what she said she'd keep is selected
 ok   day 2: completion with the kept rule
 ok   day 2: the close names what she practiced
 ok   day 2: «Mañana» matches day 3
@@ -99,10 +103,14 @@ ok   day 3: the right answer is not always first
 ok   day 3: check feedback
 ok   day 3 idea: targets ≥44px 
 ok   day 3 idea: nothing wider than the screen 
-ok   day 3: «Hazlo tuyo» question
+ok   day 3: «Hazlo tuyo» question (behind «Ver otras opciones» when she made something)
+ok   day 3: «Hazlo tuyo» offers what she just made first, without asking her to choose again
+ok   day 3: keeping it opens the optional note
+ok   day 3 hazlo tuyo: targets ≥44px 
+ok   day 3 hazlo tuyo: nothing wider than the screen 
 ok   day 3: «Te llevas» text
 ok   day 3: choose what to keep (2 things, none preselected)
-ok   day 3: nothing is preselected and saving waits for a choice
+ok   day 3: only what she said she'd keep is selected
 ok   day 3: save error
 ok   day 3: completion with the kept rule
 ok   day 3: the sentence she edited is what gets saved
@@ -131,7 +139,7 @@ ok   day 4: «Ver un ejemplo»
 ok   day 4: the V4.1 check is optional and unscored
 ok   day 4: the right answer is not always first
 ok   day 4: check feedback
-ok   day 4: «Hazlo tuyo» question
+ok   day 4: «Hazlo tuyo» question (behind «Ver otras opciones» when she made something)
 ok   day 4: «Te llevas» text
 ok   day 4: choose what to keep (3 things, none preselected)
 ok   day 4: nothing is preselected and saving waits for a choice
@@ -158,7 +166,7 @@ ok   day 5: «Ver un ejemplo»
 ok   day 5: the V4.1 check is optional and unscored
 ok   day 5: the right answer is not always first
 ok   day 5: check feedback
-ok   day 5: «Hazlo tuyo» question
+ok   day 5: «Hazlo tuyo» question (behind «Ver otras opciones» when she made something)
 ok   day 5: «Te llevas» text
 ok   day 5: choose what to keep (3 things, none preselected)
 ok   day 5: nothing is preselected and saving waits for a choice
@@ -188,11 +196,13 @@ ok   day 6: «Ver un ejemplo»
 ok   day 6: the V4.1 check is optional and unscored
 ok   day 6: the right answer is not always first
 ok   day 6: check feedback
-ok   day 6: «Hazlo tuyo» question
+ok   day 6: «Hazlo tuyo» question (behind «Ver otras opciones» when she made something)
+ok   day 6: «Hazlo tuyo» offers what she just made first, without asking her to choose again
+ok   day 6: keeping it opens the optional note
 ok   day 6: «Usar esta frase» fills the note
 ok   day 6: «Te llevas» text
 ok   day 6: choose what to keep (4 things, none preselected)
-ok   day 6: nothing is preselected and saving waits for a choice
+ok   day 6: only what she said she'd keep is selected
 ok   day 6: completion with the kept rule
 ok   day 6: the close names what she practiced
 ok   day 6: «Mañana» matches day 7
@@ -208,7 +218,7 @@ ok   day 7: her real saved items are offered, nothing prefilled
 ok   day 7: list built from the week
 ok   day 7 activity: targets ≥44px 
 ok   day 7 activity: nothing wider than the screen 
-ok   day 7: «Hazlo tuyo» question
+ok   day 7: «Hazlo tuyo» question (behind «Ver otras opciones» when she made something)
 ok   day 7 s3: targets ≥44px 
 ok   day 7 s3: nothing wider than the screen 
 ok   day 7: «Te llevas» text
@@ -248,4 +258,4 @@ ok   design review: 9 representative screens
 ok   page has no horizontal scroll at 390px
 ok   no console errors []
 
-249 passed, 0 failed
+259 passed, 0 failed

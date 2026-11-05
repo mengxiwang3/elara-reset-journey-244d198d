@@ -360,6 +360,9 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 .chk .h2{font-size:calc(19*var(--u))}
 .strip7{display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; margin:10px 0 4px}
 .strip7 img{width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:8px; display:block}
+.madecard{border-radius:14px; background:var(--tint); padding:12px 14px; display:flex; flex-direction:column; gap:6px}
+.madecard .kv{font-size:calc(16*var(--u)); line-height:1.4; font-weight:600}
+.madecard .chipbtn{align-self:flex-start}
 /* the week kit and practice lines */
 .pract{font-size:calc(15*var(--u)); line-height:1.45; font-weight:600; color:var(--forest)}
 .pract.sm{font-size:calc(13.5*var(--u)); margin-top:2px}
@@ -535,6 +538,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         <ul>
           <li><b>Una pausa, una cosa.</b> «Empieza por ti», «Una idea que ayuda» (con la comprobación opcional al final) y «Hazlo tuyo». Al terminar elige qué se lleva. Es el mismo contenido de V4.1: los cuatro momentos caben en tres pantallas.</li>
           <li><b>Un lugar de Arashiyama por día.</b> La misma mujer, pequeña y casi siempre de espaldas, hace algo distinto cada día: se detiene en la orilla, se sienta, cruza el puente, rema, compara dos cestas, elige un camino y mira lo recorrido. Imágenes generadas con IA; son propuesta.</li>
+          <li><b>Sin repetir.</b> Si en la pausa 2 armó algo (su ficha, su frase o su comprobación), «Hazlo tuyo» se lo ofrece primero; las opciones de V4.1 quedan en «Ver otras opciones». El día 1 muestra también el faltante total: con un cobro de solo US$30, cambiar la fecha no alcanza. Si dijo «Aunque cobre, no me alcanza», el ejemplo empieza así.</li>
           <li><b>Un resultado visible.</b> Cada día deja una pieza hecha por ella (la fecha que quiere confirmar, su para qué y para cuándo, su frase para pedir tiempo, lo que quiere aclarar de una deuda, lo que va a comparar, su comprobación, la idea que se lleva). Se juntan en «Lo que armaste esta semana», solo con lo que eligió guardar. Al cerrar cada día: «Hoy practicaste cómo…» si hizo la actividad, o «Hoy viste cómo…» si no.</li>
           <li><b>Antes de la semana, ella elige qué quiere entender.</b> Hasta dos temas de una lista, o «Todavía no sé», o saltar. La semana no cambia de orden; la app le dice qué día llega su tema, lo marca en Inicio y en Tus días, y el día 7 le ofrece primero lo que guardó de esos días. Al terminar, se le pregunta qué quiere aprender después, sin prometer la semana 2.</li>
           <li><b>Todo aparece de a poco.</b> Primero una idea. Cada paso de la actividad aparece cuando termina el anterior. La explicación, el ejemplo y la comprobación de V4.1 aparecen después de probar o con «Prefiero leer primero». En «Hazlo tuyo», la nota aparece cuando ya eligió algo.</li>
@@ -880,7 +884,9 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   /* 1. A payment timeline: what changes when income arrives later */
   A[1] = function (st, day, ds) {
     var a = ax(ds), cob = a.cob != null ? a.cob : 12, n = a.n || 0;
-    var ev = [{ d: 0, who: "Hoy", t: "Tienes", amt: 300, inc: true }, { d: 5, who: "Día 5", t: "Vence el alquiler", amt: -180 }, { d: 10, who: "Día 10", t: "Vence la luz", amt: -170 }, { d: cob, who: "Día " + cob, t: "Llega el cobro", amt: 200, inc: true }];
+    /* If she said «Aunque cobre, no me alcanza», the example starts with a smaller payment. */
+    var amt = a.amt != null ? a.amt : (ds.s1 === 2 ? 30 : 200);
+    var ev = [{ d: 0, who: "Hoy", t: "Tienes", amt: 300, inc: true }, { d: 5, who: "Día 5", t: "Vence el alquiler", amt: -180 }, { d: 10, who: "Día 10", t: "Vence la luz", amt: -170 }, { d: cob, who: "Día " + cob, t: "Llega el cobro", amt: amt, inc: true }];
     ev.sort(function (x, y) { return x.d - y.d || (y.inc ? 1 : 0) - (x.inc ? 1 : 0); });
     var bal = 0, min = 0, rows = ev.slice(0, n + 1).map(function (e) {
       bal += e.amt; if (bal < min) min = bal;
@@ -890,10 +896,14 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     var more = n < 3 ? '<button type="button" class="btn2 small" data-act="a" data-a="d1" data-v="next">Mostrar el siguiente día</button>' + showme("d1") : "";
     var fin = "";
     if (n >= 3) {
-      var chips = [8, 10, 12, 14].map(function (d) { return chipb("d1", "c" + d, "El día " + d, cob === d); }).join("");
-      fin = '<p class="ahint">¿Y si el cobro llega otro día? Pruébalo.</p><div class="chips">' + chips + "</div>" +
-        (min < 0 ? afb("El día 10 faltan " + usd(-min) + ". El cobro llega el día " + cob + ", después de la luz. Un dinero que todavía no llegó no cuenta como disponible.", true)
-          : afb("Con el cobro el día " + cob + ", la luz queda cubierta. Es el mismo dinero: lo que cambió fue la fecha."));
+      var end = 300 + amt - 350, late = cob > 10;
+      var msg = end < 0
+        ? (late ? afb("Aunque el cobro llegara a tiempo, faltarían " + usd(-end) + ": eso es un faltante total, y cambiar la fecha no lo resuelve. Además llega después de la luz, así que también hay un desfase de fechas. Pueden pasar las dos cosas a la vez.", true)
+                : afb("El cobro llega a tiempo, pero aun así faltan " + usd(-end) + ". Eso es un faltante total: cambiar la fecha no lo resuelve.", true))
+        : (min < 0 ? afb("El día 10 faltan " + usd(-min) + ". El cobro llega el día " + cob + ", después de la luz. Es un desfase de fechas: un dinero que todavía no llegó no cuenta como disponible.", true)
+                   : afb("Con el cobro el día " + cob + ", la luz queda cubierta. Es el mismo dinero: lo que cambió fue la fecha."));
+      fin = '<p class="agl">¿Y si el cobro llega otro día?</p><div class="chips">' + [8, 10, 12, 14].map(function (d) { return chipb("d1", "c" + d, "El día " + d, cob === d); }).join("") + "</div>" +
+        '<p class="agl">¿Y si el cobro fuera menor?</p><div class="chips">' + chipb("d1", "a200", "US$200", amt === 200) + chipb("d1", "a30", "Solo US$30", amt === 30) + "</div>" + msg;
     }
     return actWrap("Mira cómo se mueve el dinero, día a día.", "Es un ejemplo, no son tus cuentas.", '<ol class="tlrows">' + rows + "</ol>" + more + fin);
   };
@@ -1047,7 +1057,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   function actTouched(day, ds) { return !!((ds.act && Object.keys(ds.act).length) || ds.check != null || ds.carry || (ds.doubt || "").trim() || (day.n === 3 && ds.made)); }
   function actEvent(el, day, ds) {
     var a = ax(ds), v = el.dataset.v, k = el.dataset.a;
-    if (k === "d1") { if (v === "next") a.n = Math.min(3, (a.n || 0) + 1); else if (v === "show") a.n = 3; else a.cob = +v.slice(1); }
+    if (k === "d1") { if (v === "next") a.n = Math.min(3, (a.n || 0) + 1); else if (v === "show") a.n = 3; else if (v[0] === "a") a.amt = +v.slice(1); else a.cob = +v.slice(1); }
     else if (k === "d2") {
       if (v === "show") { a.P = 1; a.W = 0; a.X = 0; } else { var g2 = v[0], i2 = +v.slice(1); a[g2] = a[g2] === i2 ? null : i2; }
       if (!(a.P != null && a.W != null && a.X != null)) ds.made = null;
@@ -1102,8 +1112,17 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       var note = '<div class="notebox"><p class="label">' + T(st, "Nota opcional", day.m.note) + "</p>" + (ds.notePass ?
         '<p class="voice">' + esc(U.notePass) + '.</p><button type="button" class="link u" data-act="toggle" data-k="notePass"><span>Escribir una nota</span></button>' :
         field(st, "note", ph, "Nota opcional") + '<button type="button" class="link" data-act="toggle" data-k="notePass">Prefiero pasar</button>') + "</div>";
+      var made = MADE[day.n] && day.n !== 7 && ds.made && ds.made.trim();
+      var noteOrLink = ds.s3 != null || ds.keepMade || ds.noteOpen || ds.notePass ? note : '<button type="button" class="link u" data-act="toggle" data-k="noteOpen"><span>Escribir una nota con mis palabras</span></button>';
+      if (made) {
+        /* She already made something in pause 2: offer it first instead of asking her to choose again. */
+        return eyebrow(day.n, "Hazlo tuyo") + '<span class="ptag">Propuesta</span><h2 class="h2" style="margin-top:2px" tabindex="-1" data-focus>¿Te llevas lo que armaste?</h2>' +
+          '<div class="madecard"><p class="label">' + esc(MADE[day.n]) + '</p><p class="kv">«' + esc(ds.made.trim()) + "»</p>" +
+          '<button type="button" class="chipbtn' + (ds.keepMade ? " on" : "") + '" data-act="keep-made" aria-pressed="' + !!ds.keepMade + '">' + (ds.keepMade ? "Me lo llevo" : "Llevarme esto") + "</button></div>" +
+          discl("otherS3", "Ver otras opciones", ds.otherS3, '<p class="q" style="margin:0">' + T(st, day.s3.q, day.m.s3q) + "</p>" + opts(st, "s3", day.s3.opts, ds.s3)) + noteOrLink;
+      }
       return eyebrow(day.n, "Hazlo tuyo") + '<h2 class="h2" style="margin-top:-8px" tabindex="-1" data-focus>' + T(st, day.s3.q, day.m.s3q) + "</h2>" +
-        opts(st, "s3", day.s3.opts, ds.s3) + rules + ex + (ds.s3 != null || ds.noteOpen || ds.notePass ? note : '<button type="button" class="link u" data-act="toggle" data-k="noteOpen"><span>Escribir una nota con mis palabras</span></button>');
+        opts(st, "s3", day.s3.opts, ds.s3) + rules + ex + noteOrLink;
     },
     take: function (st, day, ds) {
       var head = eyebrow(day.n, "Te llevas");
@@ -1321,6 +1340,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       case "pre-reopen": S.pre.done = false; S.sheet = null; S.view = "home"; break;
       case "pre-skip": S.pre.done = true; S.pre.picked = []; break;
       case "nextweek": S.nextWeek = S.nextWeek === i ? null : i; break;
+      case "keep-made": ds.keepMade = !ds.keepMade; break;
       case "read-first": ds.moreOpen = true; ds.whyOpen = true; break;
       case "pick": ds[k] = i; cheer = true; break;
       case "pass": ds.s1 = ds.s1 === "pass" ? null : "pass"; cheer = true; break;
@@ -1330,7 +1350,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       case "next": S.step = list[Math.min(list.indexOf(S.step) + 1, list.length - 1)]; ds.last = S.step; break;
       case "back": S.step = list[Math.max(list.indexOf(S.step) - 1, 0)]; ds.last = S.step; break;
       case "goto": S.step = k; ds.take = ds.done ? (ds.saved ? "saved" : "unsaved") : null; if (k === "idea" || k === "s3") ds.take = ds.done ? ds.take : null; ds.last = S.step; break;
-      case "choose": S.step = "take"; ds.take = "choose"; ds.sel = {}; ds.failed = false; break;
+      case "choose": S.step = "take"; ds.take = "choose"; ds.sel = ds.keepMade && ds.made ? { made: true } : {}; ds.failed = false; break;
       case "take-back": ds.take = ds.done ? (ds.saved ? "saved" : "unsaved") : null; break;
       case "sel": ds.sel[k] = !ds.sel[k]; break;
       case "save": {
@@ -1535,6 +1555,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       "«Para qué es hoy» en lugar de «Hoy aprenderás». Otras opciones: «Por qué hoy» (ya en la app) o el propósito solo, sin etiqueta.",
       "«Ayer te llevaste», «Te llevaste el día N» y «Hoy te llevas» para lo que guardó.",
       "Líneas que ya existen en la app como propuesta: «Día N hecho», «Hoy queda hecho, tal como lo dejaste.», «Tu día N te espera. No se pierde nada.», «Tu próximo paso».",
+      "«¿Te llevas lo que armaste?», «Llevarme esto», «Ver otras opciones», y los textos nuevos del día 1 sobre faltante total y desfase de fechas.",
       "«Lo que armaste esta semana» (los siete nombres de las piezas) y las siete líneas «Hoy practicaste cómo…» / «Hoy viste cómo…».",
       "La pregunta antes de la semana: la lista de seis temas, «Todavía no sé», que no cambie el orden, y la pregunta del final sobre la próxima semana (Deudas e intereses, Un colchón para imprevistos, Empezar a invertir).",
       "Las siete actividades de la pausa 2 (texto de instrucciones, avisos y respuestas a los errores) y las etiquetas «Propuesta de actividad».",
