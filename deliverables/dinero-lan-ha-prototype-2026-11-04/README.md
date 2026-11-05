@@ -125,3 +125,9 @@ Saved takeaways come only from real choices: nothing is preselected, and jumping
 ## v9 — she chooses what to understand before the week (2026-11-05)
 
 Before day 1 she is asked «¿Qué te gustaría entender mejor esta semana?» and picks up to two of six topics (one per teaching day), «Todavía no sé», or skips. The order of the week does not change; she is told which day each topic arrives, those days are marked «Tu tema» on Inicio and in Tus días, and day 7 offers what she kept from those days first. She can change it in her profile. After day 7 she is asked what she wants to learn next (V3.2's list), noted without promising week 2. All wording is a proposal. e2e: 240/240.
+
+## v10 — the week kit and «Hoy practicaste» (2026-11-05)
+
+- **Lo que armaste esta semana** (in Atlas → Tus días): one piece per day, only from what she chose to keep: the date to confirm, her para qué y para cuándo, her sentence for asking for time, what she wants to clarify about a debt, what she will compare, her independent check, the idea she keeps. Unsaved days read «Este día terminó sin guardar. Puedes volver cuando quieras.» Day 7's close shows the filled pieces; the home screen after the week lists only their names (her words stay in Tus días).
+- **Hoy practicaste cómo…** on each day's close and in Tus días, only if she did the activity; otherwise «Hoy viste cómo…».
+- All wording is a proposal. e2e: 249/249.

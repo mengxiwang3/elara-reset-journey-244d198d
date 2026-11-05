@@ -194,6 +194,8 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
       const rule = n === 7 ? day.rules.list[1] : day.rule;
       ok(has(t, W.ui.savedOk) && has(t, rule) && has(t, day.tryLine), `day ${n}: completion with the kept rule`);
       if (n === 3) ok(has(t, "Gracias por pensar en mí"), "day 3: the sentence she edited is what gets saved");
+      ok(has(t, "Hoy practicaste cómo"), `day ${n}: the close names what she practiced`);
+      if (n === 7) ok(has(t, "Esta semana armaste esto") && has(t, "Mi frase para pedir tiempo") && !has(t, "Lo que quiero aclarar de una deuda"), "day 7: the kit shows only what she kept (day 4 was finished without saving)");
       if (day.next) ok(has(t, "Mañana: " + day.next) && day.next === W.week[n].title, `day ${n}: «Mañana» matches day ${n + 1}`);
       if (n === 2 || n === 7) { await shot(`d${n}-4-done-saved`); await audit(`day ${n} completion`); }
     }
@@ -223,6 +225,7 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
   await p.click("#nextDay"); await p.waitForTimeout(100);
   t = await text();
   ok(has(t, "Lo que te llevaste esta semana") && has(t, "Ver tus días") && has(t, "¿Qué te gustaría aprender después?"), "after day 7: the week's keeps, a route to Atlas, and what she wants next");
+  ok(has(t, "Esta semana armaste") && !has(t, "Gracias por pensar en mí"), "after day 7: home names the pieces she made; her words stay in Tus días");
   await click('[data-act="nextweek"][data-i="0"]');
   ok(has(await text(), "nos ayuda a decidir tu próxima semana") && !has(await text(), "semana 2 empieza"), "after day 7: her choice is noted without promising week 2");
   await shot("d8-week-done");
@@ -231,6 +234,7 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
   await click('[data-act="tusdias"]');
   t = await text();
   ok(has(t, "Atlas") && has(t, "Tus días") && has(t, "Hecho") && has(t, "Nota de prueba del día 2"), "Atlas: the week, each day, notes visible only here");
+  ok(has(t, "Lo que armaste esta semana") && has(t, "Gracias por pensar en mí") && has(t, "Este día terminó sin guardar"), "Atlas: the kit gathers her own pieces; an unsaved day is shown kindly, not as missing");
   ok((await app.locator('.tabs [aria-current="page"]').innerText()).includes("Atlas"), "Atlas tab is current");
   await shot("atlas"); await audit("Atlas");
   await click('[data-act="open-day"]', 0);

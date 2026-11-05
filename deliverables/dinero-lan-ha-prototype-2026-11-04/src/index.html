@@ -360,6 +360,17 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 .chk .h2{font-size:calc(19*var(--u))}
 .strip7{display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; margin:10px 0 4px}
 .strip7 img{width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:8px; display:block}
+/* the week kit and practice lines */
+.pract{font-size:calc(15*var(--u)); line-height:1.45; font-weight:600; color:var(--forest)}
+.pract.sm{font-size:calc(13.5*var(--u)); margin-top:2px}
+.kitlist{list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; gap:6px}
+.kit{display:grid; grid-template-columns:26px minmax(0,1fr); gap:10px; align-items:start; padding:10px 12px; border-radius:12px; background:var(--tint)}
+.kit .kd{width:26px; height:26px; border-radius:50%; display:grid; place-items:center; font-size:12.5px; font-weight:700; color:var(--ink2); box-shadow:inset 0 0 0 1.5px #C3CBC6}
+.kit.on .kd{background:var(--forest); color:#fff; box-shadow:none}
+.kit .kl{font-size:calc(12*var(--u)); font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink2)}
+.kit .kv{font-size:calc(15*var(--u)); line-height:1.4; font-weight:600; color:var(--ink); margin-top:2px}
+.kit .ke{font-size:calc(13.5*var(--u)); line-height:1.4; color:var(--ink2); margin-top:2px}
+.kitlabels{margin:4px 0 0; padding-left:20px; display:flex; flex-direction:column; gap:4px; font-size:calc(15*var(--u)); font-weight:600}
 /* before the week */
 .topictag{display:inline-block; margin-left:6px; padding:1px 8px; border-radius:999px; background:#EAF3EE; color:var(--forest); font-size:11.5px; font-weight:700; letter-spacing:.03em; vertical-align:1px}
 .chipbtn:disabled{opacity:.45; cursor:default}
@@ -524,6 +535,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         <ul>
           <li><b>Una pausa, una cosa.</b> «Empieza por ti», «Una idea que ayuda» (con la comprobación opcional al final) y «Hazlo tuyo». Al terminar elige qué se lleva. Es el mismo contenido de V4.1: los cuatro momentos caben en tres pantallas.</li>
           <li><b>Un lugar de Arashiyama por día.</b> La misma mujer, pequeña y casi siempre de espaldas, hace algo distinto cada día: se detiene en la orilla, se sienta, cruza el puente, rema, compara dos cestas, elige un camino y mira lo recorrido. Imágenes generadas con IA; son propuesta.</li>
+          <li><b>Un resultado visible.</b> Cada día deja una pieza hecha por ella (la fecha que quiere confirmar, su para qué y para cuándo, su frase para pedir tiempo, lo que quiere aclarar de una deuda, lo que va a comparar, su comprobación, la idea que se lleva). Se juntan en «Lo que armaste esta semana», solo con lo que eligió guardar. Al cerrar cada día: «Hoy practicaste cómo…» si hizo la actividad, o «Hoy viste cómo…» si no.</li>
           <li><b>Antes de la semana, ella elige qué quiere entender.</b> Hasta dos temas de una lista, o «Todavía no sé», o saltar. La semana no cambia de orden; la app le dice qué día llega su tema, lo marca en Inicio y en Tus días, y el día 7 le ofrece primero lo que guardó de esos días. Al terminar, se le pregunta qué quiere aprender después, sin prometer la semana 2.</li>
           <li><b>Todo aparece de a poco.</b> Primero una idea. Cada paso de la actividad aparece cuando termina el anterior. La explicación, el ejemplo y la comprobación de V4.1 aparecen después de probar o con «Prefiero leer primero». En «Hazlo tuyo», la nota aparece cuando ya eligió algo.</li>
           <li><b>Una actividad distinta cada día.</b> Una línea de tiempo con fechas (día 1), completar una ficha con su propio para qué, para cuándo y cuánto acceso necesita, sin respuesta correcta (2), armar una frase que da tiempo (3), mostrar saldo, cargos y pago por separado (4), ver un mismo producto antes y ahora y descubrir si cambió el precio o la cantidad (5), señalar señales de alerta y elegir una comprobación independiente (6) y volver a lo que guardó de verdad (7). Cada una es opcional, se puede saltar o pedir «Muéstrame cómo verlo», y es una propuesta.</li>
@@ -739,12 +751,12 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 
   /* ---------- shared pieces ---------- */
   function ruleOf(day, ds) { return day.n === 7 ? (ds.pick != null ? day.rules.list[ds.pick] : null) : day.rule; }
-  var QLAB = { 1: "Tu pregunta", 2: "Tu pregunta", 4: "Tu pregunta", 6: "Tu frase" };
+  var QLAB = { 1: "Tu pregunta", 2: "Tu pregunta", 4: "Tu pregunta", 5: "Lo que vas a comparar", 6: "Tu frase" };
   var MADE = { 2: "Tu para qué y para cuándo", 3: "Tu frase para ensayar", 6: "La comprobación que elegiste" };
   function chosenQ(day, ds) {
     if (!QLAB[day.n] || ds.s3 == null) return null;
     var o = day.s3.opts[ds.s3]; if (!o) return null;
-    return o.phrase || (/\?$/.test(o.t) ? o.t : null);
+    return o.phrase || (/\?$/.test(o.t) || day.n === 5 ? o.t : null);
   }
   function selectable(day, ds) {
     var items = [], r = ruleOf(day, ds), note = ds.notePass ? "" : (ds.note || "").trim(), q = chosenQ(day, ds);
@@ -834,8 +846,10 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       var keptList = DAYS.map(function (x) { return keptText(st, st.d[x.n].saved); }).filter(Boolean);
       body = '<p class="eyebrow">Semana ' + WEEKNO + " · Dinero y estabilidad</p>" +
         '<h1 class="title" tabindex="-1" data-focus>Lo que te llevaste esta semana</h1>' +
-        strip7() + (keptList.length ? keptList.slice(-3).map(function (t, i) { return slip(i === 0 ? "De tu semana" : "", t, {}); }).join("").replace(/<span class="label"><\/span>/g, "") :
-          '<p class="voice mt14">Hiciste los siete días. Tus días guarda cada uno, por si quieres volver.</p>') +
+        strip7() + (kitLabels(st).length ? '<p class="label mt10">Esta semana armaste</p><ul class="kitlabels">' + kitLabels(st).map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>" +
+          '<p class="hint" style="margin:0">Tus palabras están en Tus días, solo para ti.</p>' :
+          (keptList.length ? keptList.slice(-3).map(function (t, i) { return slip(i === 0 ? "De tu semana" : "", t, {}); }).join("").replace(/<span class="label"><\/span>/g, "") :
+          '<p class="voice mt14">Hiciste los siete días. Tus días guarda cada uno, por si quieres volver.</p>')) +
         '<button type="button" class="btn mt14" data-act="tusdias">Ver tus días</button>' + nextWeekHTML(st);
       eyebrowTxt = "";
     }
@@ -1006,6 +1020,30 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     else if (i === -1) S.pre.picked = [-1];
     else { if (p.indexOf(-1) >= 0) p = S.pre.picked = []; if (p.length < 2) p.push(i); }
   }
+  /* The week kit: one thing per day, only from what she chose to keep (never prefilled). Proposal. */
+  var KIT = [
+    { d: 1, l: "La fecha que quiero confirmar", f: ["note", "q"] },
+    { d: 2, l: "Mi para qué y para cuándo", f: ["made", "note", "q"] },
+    { d: 3, l: "Mi frase para pedir tiempo", f: ["made", "note"] },
+    { d: 4, l: "Lo que quiero aclarar de una deuda", f: ["note", "q"] },
+    { d: 5, l: "Lo que voy a comparar", f: ["note", "q"] },
+    { d: 6, l: "Mi comprobación antes de enviar dinero", f: ["made", "q", "note"] },
+    { d: 7, l: "La idea que me llevo", f: ["carry", "rule", "doubt"] }
+  ];
+  function kitValue(st, k) { var sv = st.d[k.d].saved; if (!sv) return null; for (var i = 0; i < k.f.length; i++) if (sv[k.f[i]]) return sv[k.f[i]]; return null; }
+  function kitHTML(st, mode) {
+    var rows = KIT.map(function (k) {
+      var v = kitValue(st, k), ds = st.d[k.d];
+      if (mode === "filled" && !v) return "";
+      var body = v ? '<p class="kv">«' + esc(v) + "»</p>" : '<p class="ke">' + (ds.done ? "Este día terminó sin guardar. Puedes volver cuando quieras." : "Llega el día " + k.d + ".") + "</p>";
+      return '<li class="kit' + (v ? " on" : "") + '"><span class="kd" aria-hidden="true">' + k.d + '</span><div class="kb"><p class="kl">' + k.l + "</p>" + body + "</div></li>";
+    }).join("");
+    return '<ol class="kitlist">' + rows + "</ol>";
+  }
+  function kitLabels(st) { return KIT.filter(function (k) { return kitValue(st, k); }).map(function (k) { return k.l; }); }
+  var SKILL = { 1: "saber si un dinero llega antes de que venza un pago", 2: "ponerle un para qué y un para cuándo a un dinero", 3: "pedir tiempo antes de comprometer dinero", 4: "ver qué baja de verdad cuando pagas una deuda", 5: "comparar precios con la misma cantidad", 6: "parar y comprobar una oferta antes de enviar dinero", 7: "volver a lo que te sirvió esta semana" };
+  /* Honest wording: «practicaste» only if she did the activity; otherwise «viste». */
+  function practLine(day, ds) { return (actTouched(day, ds) ? "Hoy practicaste cómo " : "Hoy viste cómo ") + SKILL[day.n] + "."; }
   function actTouched(day, ds) { return !!((ds.act && Object.keys(ds.act).length) || ds.check != null || ds.carry || (ds.doubt || "").trim() || (day.n === 3 && ds.made)); }
   function actEvent(el, day, ds) {
     var a = ax(ds), v = el.dataset.v, k = el.dataset.a;
@@ -1108,9 +1146,9 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   /* Completion: the same calm moment over the place, whether or not she saved. */
   function doneHTML(st, day, ds) {
     var sv = ds.saved, inner;
-    var next = day.next ? '<p class="next">Mañana: ' + T(st, day.next, day.m.next) + "</p>" : '<p class="label" style="margin-top:4px">Tu camino</p>' + strip7() + '<p class="voice">Siete lugares, a tu ritmo. Lo que guardaste está en Tus días.</p>';
+    var next = day.next ? '<p class="next">Mañana: ' + T(st, day.next, day.m.next) + "</p>" : '<p class="label" style="margin-top:4px">Tu camino</p>' + strip7() + '<p class="voice">Siete lugares, a tu ritmo. Lo que guardaste está en Tus días.</p>' + (kitLabels(st).length ? '<p class="label" style="margin-top:6px">Esta semana armaste esto</p>' + kitHTML(st, "filled") : "");
     if (ds.take === "saved" && sv) {
-      inner = '<h2 class="h2" tabindex="-1" data-focus>Llegaste ' + esc(toPlace(day.n)) + '.</h2><p class="voice" role="status">' + esc(U.savedOk) + ".</p>" +
+      inner = '<h2 class="h2" tabindex="-1" data-focus>Llegaste ' + esc(toPlace(day.n)) + '.</h2><p class="pract">' + practLine(day, ds) + '</p><p class="voice" role="status">' + esc(U.savedOk) + ".</p>" +
         (sv.q ? slip(QLAB[day.n] || "Tu pregunta", sv.q, {}) : "") +
         (sv.rule ? slip(day.n === 7 ? "La regla que elegiste" : "La regla de hoy", sv.rule, {}) : "") +
         (sv.made ? slip(MADE[day.n] || "Lo que armaste", sv.made, {}) : "") +
@@ -1119,7 +1157,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         (sv.note ? slip("Tu nota", sv.note, {}) : "") +
         '<p class="voice">' + closingLine(st, day, ds) + "</p>" + next;
     } else {
-      inner = '<h2 class="h2" tabindex="-1" data-focus>Llegaste ' + esc(toPlace(day.n)) + '.</h2><p class="read sm">' + Pr(st, "unsaved") + "</p>" +
+      inner = '<h2 class="h2" tabindex="-1" data-focus>Llegaste ' + esc(toPlace(day.n)) + '.</h2><p class="pract">' + practLine(day, ds) + '</p><p class="read sm">' + Pr(st, "unsaved") + "</p>" +
         '<div class="links"><button type="button" class="link u" data-act="goto" data-k="idea"><span>Volver a la explicación</span></button><button type="button" class="link u" data-act="choose"><span>Elegir qué guardar</span></button></div>' +
         '<p class="voice">' + closingLine(st, day, ds) + "</p>" + next;
     }
@@ -1138,7 +1176,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       var n = day.n, ds = st.d[n], body, cls = "drow";
       if (!ds.done && n > opened) { cls += " future"; body = '<p class="label">Día ' + n + '</p><p class="dt">Más adelante</p>'; }
       else {
-        body = '<p class="label">Día ' + n + (myTopicDays(st).indexOf(n) >= 0 ? ' · <span class="topictag">Tu tema</span>' : "") + '</p><p class="dt">' + esc(day.title) + "</p>";
+        body = '<p class="label">Día ' + n + (myTopicDays(st).indexOf(n) >= 0 ? ' · <span class="topictag">Tu tema</span>' : "") + '</p><p class="dt">' + esc(day.title) + "</p>" + (ds.done ? '<p class="pract sm">' + practLine(day, ds) + "</p>" : "");
         if (ds.done && ds.saved) {
           [["q", n === 6 ? "Tu frase" : "Tu pregunta"], ["rule", ""], ["carry", "Lo que elegiste"], ["made", MADE[n] || "Lo que armaste"], ["doubt", "Tu duda"], ["note", "Tu nota"]].forEach(function (f) {
             if (ds.saved[f[0]]) body += (f[1] ? '<p class="label" style="margin-top:4px">' + f[1] + "</p>" : "") + '<p class="kept">«' + esc(ds.saved[f[0]]) + "»</p>";
@@ -1157,7 +1195,8 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       '<p class="eyebrow">Semana ' + WEEKNO + ' · Dinero y estabilidad</p><h1 class="title" style="margin-top:0 !important" tabindex="-1" data-focus>Atlas</h1>' +
       '<figure class="mounted"><img src="' + here.photo.src + '" alt="' + esc(here.photo.alt) + '" style="object-position:' + here.photo.pos + '"><figcaption>' + esc(PLACE + ", " + COUNTRY) + "</figcaption></figure>" +
       '<div class="threadrow" role="img" aria-label="Tu semana: ' + esc(walkedLabel) + '">' + thread(st, open, 7) + '<span class="threadlab">' + esc(walkedLabel) + "</span></div>" +
-      '<h2 class="h2" style="margin-top:6px">Tus días</h2>' +
+      '<h2 class="h2" style="margin-top:6px">Lo que armaste esta semana</h2><p class="hint" style="margin:0">Solo con lo que tú elegiste guardar.</p>' + kitHTML(st, "full") +
+      '<h2 class="h2" style="margin-top:10px">Tus días</h2>' +
       '<ol class="dlist">' + rows + "</ol></div></div></div>" + tabs("atlas") + "</div>";
   }
   function circulosHTML(st) {
@@ -1496,6 +1535,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       "«Para qué es hoy» en lugar de «Hoy aprenderás». Otras opciones: «Por qué hoy» (ya en la app) o el propósito solo, sin etiqueta.",
       "«Ayer te llevaste», «Te llevaste el día N» y «Hoy te llevas» para lo que guardó.",
       "Líneas que ya existen en la app como propuesta: «Día N hecho», «Hoy queda hecho, tal como lo dejaste.», «Tu día N te espera. No se pierde nada.», «Tu próximo paso».",
+      "«Lo que armaste esta semana» (los siete nombres de las piezas) y las siete líneas «Hoy practicaste cómo…» / «Hoy viste cómo…».",
       "La pregunta antes de la semana: la lista de seis temas, «Todavía no sé», que no cambie el orden, y la pregunta del final sobre la próxima semana (Deudas e intereses, Un colchón para imprevistos, Empezar a invertir).",
       "Las siete actividades de la pausa 2 (texto de instrucciones, avisos y respuestas a los errores) y las etiquetas «Propuesta de actividad».",
       "«Llegaste al puente.» y las demás llegadas, el orden distinto de las opciones de la comprobación y las imágenes generadas con IA para cada lugar.",
