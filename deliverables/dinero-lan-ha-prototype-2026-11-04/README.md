@@ -141,3 +141,16 @@ Before day 1 she is asked «¿Qué te gustaría entender mejor esta semana?» an
 ## v12 — day 4 for women with no debt (2026-11-05)
 
 If she answers «No tengo deuda o prefiero no usar la mía», day 4 shows a sample statement she reads line by line (saldo anterior, intereses y cargos, pago recibido) instead of «a debt»; nothing asks about her accounts. Her kit piece becomes «Lo que miraría en un estado de cuenta» and the close says «Hoy practicaste cómo leer las tres líneas de un estado de cuenta». e2e: 266/266.
+
+## v13 — Spanish / English toggle (2026-11-05)
+
+A toggle at the top of the page («Español | English», or the link with `#en` / `#es`) switches the whole prototype, and the choice is remembered in the browser. Spanish is still the version María and Alejandra review; English is a reading aid for the team.
+
+- **Lesson content** comes from the English V4.1 (`content-en.mjs` → `src/data-en.js`, built with `tools/make-data-en.mjs`). The structure, options and correct answers are the same as in Spanish.
+- **Interface and proposal text** is translated by `src/i18n-en.js`, which is built from `tools/dict.py` and `tools/rules.js`. It holds a dictionary of the interface strings plus rules for strings that contain numbers. Day 3's sentence builder uses English pieces directly.
+- English answers and comments are kept separately from the Spanish ones.
+- **Checks:**
+  - Spanish e2e: 266/266.
+  - `test/en-crawl.cjs` walked every screen, the design review and 1,500 random taps in English with no errors.
+  - The only lines it still flags are ones containing María's and Alejandra's names.
+- The English interface wording is a translation of the proposals, not approved copy.

@@ -34,6 +34,8 @@ body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:1
 .seg{display:flex; flex-wrap:wrap; background:var(--chip); border-radius:999px; padding:4px; gap:4px}
 .seg button{min-height:40px; border:0; border-radius:999px; padding:0 14px; background:transparent; color:var(--fg); font:600 14px var(--sans); cursor:pointer}
 .seg button[aria-selected="true"]{background:var(--accent); color:var(--accent-fg)}
+.langbar{display:flex; justify-content:flex-end; margin-bottom:8px}
+.langbar .seg button{min-height:34px; font-size:13px}
 button:focus-visible, textarea:focus-visible, summary:focus-visible, input:focus-visible{outline:3px solid #D9773F; outline-offset:2px}
 
 .try{display:grid; grid-template-columns:auto minmax(0, 360px); gap:28px; align-items:start; justify-content:center}
@@ -453,6 +455,10 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 </style>
 
 <div class="page">
+  <div class="langbar" data-noi18n><div class="seg" role="group" aria-label="Idioma / Language">
+    <button type="button" id="langEs" lang="es" aria-pressed="true">Español</button>
+    <button type="button" id="langEn" lang="en" aria-pressed="false">English</button>
+  </div></div>
   <header class="ph">
     <div>
       <p class="kicker">Para María y Ale · Revisión de palabras y lecciones · Dinero V4.1</p>
@@ -592,14 +598,70 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   </filter>
 </svg>
 <script src="data.js"></script>
+<script src="data-en.js"></script>
+<script src="i18n-en.js"></script>
+<script>
+/* Language: Spanish is the reviewed version; English is a reading aid for the team. */
+(function () {
+  var L = "es";
+  if (location.hash === "#en") L = "en"; else if (location.hash === "#es") L = "es";
+  else { try { L = localStorage.getItem("elara-lang") === "en" ? "en" : "es"; } catch (e) {} }
+  if (L === "en" && !(window.ELARA_WEEK_EN && window.trEN)) L = "es";
+  window.ELARA_LANG = L;
+  document.documentElement.lang = L;
+  function setLang(x) {
+    try { localStorage.setItem("elara-lang", x); } catch (e) {}
+    if (location.hash !== "#" + x) location.hash = x;
+    location.reload();
+  }
+  function wire() {
+    var es = document.getElementById("langEs"), en = document.getElementById("langEn");
+    es.setAttribute("aria-pressed", L === "es"); en.setAttribute("aria-pressed", L === "en");
+    es.setAttribute("aria-selected", L === "es"); en.setAttribute("aria-selected", L === "en");
+    es.onclick = function () { if (L !== "es") setLang("es"); };
+    en.onclick = function () { if (L !== "en") setLang("en"); };
+  }
+  wire();
+  window.addEventListener("hashchange", function () { var h = location.hash.slice(1); if ((h === "en" || h === "es") && h !== L) setLang(h); });
+  if (L !== "en") return;
+  document.title = "Money in Arashiyama";
+  var ATTR = ["aria-label", "placeholder", "title", "alt"], busy = false;
+  function skip(n) { for (var e = n.nodeType === 1 ? n : n.parentNode; e; e = e.parentNode) { if (e.nodeType === 1 && (e.tagName === "SCRIPT" || e.tagName === "STYLE" || e.hasAttribute("data-noi18n"))) return true; } return false; }
+  function trText(t) { var v = t.nodeValue; if (!v || !/[A-Za-zÁÉÍÓÚáéíóúñÑ¿¡«]/.test(v)) return; var r = window.trEN(v); if (r !== v) t.nodeValue = r; }
+  function trEl(el) { for (var i = 0; i < ATTR.length; i++) { var a = el.getAttribute(ATTR[i]); if (a) { var r = window.trEN(a); if (r !== a) el.setAttribute(ATTR[i], r); } } }
+  function walk(root) {
+    if (skip(root)) return;
+    if (root.nodeType === 3) { trText(root); return; }
+    if (root.nodeType !== 1) return;
+    trEl(root);
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, { acceptNode: function (n) { return n.nodeType === 1 && (n.tagName === "SCRIPT" || n.tagName === "STYLE" || n.hasAttribute("data-noi18n")) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; } });
+    var n; while ((n = w.nextNode())) { if (n.nodeType === 3) trText(n); else trEl(n); }
+  }
+  window.ELARA_I18N_WALK = walk;
+  function start() {
+    walk(document.body);
+    new MutationObserver(function (ms) {
+      if (busy) return; busy = true;
+      try { ms.forEach(function (m) {
+        if (m.type === "childList") m.addedNodes.forEach(walk);
+        else if (m.type === "characterData") { if (!skip(m.target)) trText(m.target); }
+        else if (m.type === "attributes" && m.target.nodeType === 1 && !skip(m.target)) trEl(m.target);
+      }); } finally { busy = false; }
+    }).observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ATTR });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
+})();
+</script>
 <script>
 (function () {
   "use strict";
-  var W = window.ELARA_WEEK;
+  var EN = window.ELARA_LANG === "en";
+  var W = EN ? window.ELARA_WEEK_EN : window.ELARA_WEEK;
   var appEl = document.getElementById("app");
   if (!W) { appEl.innerHTML = '<p style="padding:24px">No se pudo cargar el contenido de la semana.</p>'; return; }
   var DAYS = W.week, U = W.ui;
   var KEY = "elara-dinero-arashiyama-v41d", CKEY = "elara-dinero-lanha-v41-comentarios";
+  if (EN) { KEY += "-en"; CKEY += "-en"; }
   var PLACE = "Arashiyama", COUNTRY = "Kioto", WEEKNO = 1;
   var PLACES = ["La orilla", "El banco junto al agua", "El puente", "El río, desde el agua", "La calle del mercado", "La entrada al bambú", "El mirador"];
   /* Arashiyama scenes (AI-generated from one character reference). sy = where her feet are, % of image height (from the manifest). */
@@ -945,6 +1007,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 
   /* 3. Build or edit a sentence that gives time before committing money */
   var O3 = [["Gracias por contármelo.", "Quiero ayudarte."], ["Necesito revisar mis pagos", "Quiero ver qué cantidad puedo sostener", "Necesito unos días"], ["antes de decirte una cantidad.", "antes de comprometerme.", "y te respondo el viernes.", "y mañana te lo paso."]];
+  if (EN) O3 = [["Thanks for telling me.", "I want to help you."], ["I need to check my payments", "I want to see what amount I can keep up", "I need a few days"], ["before I tell you an amount.", "before I commit.", "and I\u2019ll get back to you on Friday.", "and I\u2019ll send it to you tomorrow."]];
   function compose3(a) { return [a.A != null ? O3[0][a.A] : "", a.B != null ? O3[1][a.B] : "", a.C != null ? O3[2][a.C] : ""].filter(Boolean).join(" "); }
   A[3] = function (st, day, ds) {
     var a = ax(ds);
@@ -1480,7 +1543,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     var b = e.target.closest("[data-sw]"); if (!b) return; S.wk[b.dataset.sw] = +b.dataset.i; renderSwatches(); render(); if (!allView.hidden) renderAll(); if (!revView.hidden) renderRev();
   });
   /* Start on day N as if days 1..N-1 were done on consecutive days, each with its rule saved. */
-  var EXQ = { 1: "¿Qué día estará el dinero disponible en mi cuenta?", 2: "¿Para qué y para cuándo quiero este dinero?", 4: "¿Qué cargos se añadieron?" };
+  var EXQ = { 1: DAYS[0].s3.opts[0].phrase, 2: DAYS[1].s3.opts[0].t, 4: DAYS[3].s3.opts[0].t };
   /* Jumping to a day marks the earlier days done and keeps nothing for her. Only the strips of example screens use sample takeaways (ex). */
   function historyUpTo(st, n, ex) {
     DAYS.forEach(function (x) { st.d[x.n] = blankDay(); });
