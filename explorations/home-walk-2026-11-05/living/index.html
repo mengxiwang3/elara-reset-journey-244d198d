@@ -41,10 +41,6 @@ button:focus-visible{outline:3px solid #3E8E66; outline-offset:2px}
 .layer{position:absolute; inset:-7%; will-change:transform}
 .layer img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:47% 50%; user-select:none; -webkit-user-drag:none; pointer-events:none}
 .water img{filter:url(#ripple); -webkit-mask-image:linear-gradient(transparent 66%, #000 72%); mask-image:linear-gradient(transparent 66%, #000 72%)}
-.rustle{opacity:0}
-.rustle img{-webkit-mask-image:radial-gradient(circle at var(--rx,50%) var(--ry,30%), #000 0, #000 34px, transparent 70px); mask-image:radial-gradient(circle at var(--rx,50%) var(--ry,30%), #000 0, #000 34px, transparent 70px)}
-.rustle.go{opacity:1; animation:shake .7s ease-out}
-@keyframes shake{0%{transform:translate(0,0) rotate(0)}15%{transform:translate(1.6px,-.6px) rotate(.25deg)}30%{transform:translate(-1.4px,.5px) rotate(-.2deg)}45%{transform:translate(1px,-.3px)}60%{transform:translate(-.7px,.3px)}80%{transform:translate(.3px,0)}100%{transform:none}}
 .mist{position:absolute; left:-30%; right:-30%; top:18%; height:45%; opacity:.5; mix-blend-mode:screen; filter:blur(12px); pointer-events:none;
   background:radial-gradient(36% 45% at 62% 55%, rgba(255,255,255,.85), transparent 72%), radial-gradient(28% 36% at 90% 40%, rgba(255,255,255,.7), transparent 72%)}
 .mistdrift{position:absolute; inset:0; animation:drift 48s ease-in-out infinite alternate; pointer-events:none}
@@ -57,7 +53,7 @@ canvas.fx{position:absolute; inset:0; width:100%; height:100%; pointer-events:no
 .pin i{display:block; margin-left:56%; width:1.5px; height:34px; background:#fff}
 .pin b{display:block; margin-left:calc(56% - 3px); width:7px; height:7px; border-radius:50%; background:#fff; margin-top:-2px; box-shadow:0 0 0 3px rgba(255,255,255,.35); animation:pulse 2.6s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}50%{box-shadow:0 0 0 7px rgba(255,255,255,0)}}
-.hint{position:absolute; left:50%; top:196px; transform:translateX(-50%); padding:7px 14px; border-radius:999px; background:rgba(14,22,19,.5); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); color:#fff; font-size:13px; font-weight:600; white-space:nowrap; pointer-events:none; transition:opacity .6s}
+.hint{position:absolute; left:50%; top:132px; transform:translateX(-50%); padding:7px 14px; border-radius:999px; background:rgba(14,22,19,.5); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); color:#fff; font-size:13px; font-weight:600; white-space:nowrap; pointer-events:none; transition:opacity .6s}
 .hint.off{opacity:0}
 .top{position:absolute; left:16px; right:16px; top:30px; z-index:3; display:flex; align-items:center; justify-content:space-between; gap:12px; pointer-events:none}
 .place{display:flex; align-items:center; gap:8px; height:44px; padding:0 18px 0 14px; border-radius:999px; background:#fff; color:var(--ink); font-size:15px; font-weight:700; box-shadow:0 4px 16px -8px rgba(0,0,0,.35)}
@@ -74,11 +70,28 @@ canvas.fx{position:absolute; inset:0; width:100%; height:100%; pointer-events:no
 .tabs{position:absolute; left:0; right:0; bottom:0; z-index:4; height:83px; background:#fff; display:flex; justify-content:space-around; padding:6px 24px 0}
 .tabs button{width:120px; min-height:50px; border:0; background:none; color:var(--ink2); display:flex; flex-direction:column; align-items:center; gap:3px; font:600 13px var(--sans); cursor:pointer}
 .tabs button[aria-current="page"]{color:var(--ink); font-weight:800}
-.toast{position:absolute; left:50%; bottom:96px; transform:translateX(-50%); z-index:5; padding:8px 14px; border-radius:12px; background:var(--ink); color:#fff; font-size:14px; opacity:0; transition:opacity .3s; pointer-events:none}
+.toast{position:absolute; left:50%; top:96px; transform:translateX(-50%); z-index:5; padding:8px 14px; border-radius:12px; background:var(--ink); color:#fff; font-size:14px; opacity:0; transition:opacity .3s; pointer-events:none}
 .toast.on{opacity:1}
 .still .mistdrift, .still .pin b{animation:none}
+.still .scene.arrive .stage{animation:none}
 .still .water img{filter:none}
 @media (prefers-reduced-motion: reduce){ .mistdrift, .pin b{animation:none} .water img{filter:none} }
+/* walking between days */
+.stage{transition:transform 0s}
+.scene.leave .stage{transition:transform .8s cubic-bezier(.5,0,.75,0), opacity .8s; transform:scale(1.14) !important; opacity:0}
+.scene.arrive .stage{animation:arrive 1s cubic-bezier(.2,.7,.2,1)}
+@keyframes arrive{from{transform:scale(1.08); opacity:0}to{transform:scale(1); opacity:1}}
+.card{transition:opacity .35s, transform .35s}
+.card.swap{opacity:0; transform:translateY(10px)}
+.donebadge{display:inline-flex; align-items:center; gap:6px}
+.donebadge svg{color:var(--forest2)}
+.second{margin-top:10px; min-height:44px; border:0; background:none; color:var(--ink); font:700 15px var(--sans); cursor:pointer}
+.weekrow{display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:6px}
+.weekrow button{position:relative; aspect-ratio:3/4; min-height:44px; border-radius:10px; border:2px solid transparent; padding:0; overflow:hidden; cursor:pointer; background:#ccc}
+.weekrow button img{width:100%; height:100%; object-fit:cover; display:block}
+.weekrow button span{position:absolute; left:4px; bottom:3px; color:#fff; font:800 13px var(--sans); text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.weekrow button[aria-current="true"]{border-color:var(--accent)}
+@media (prefers-reduced-motion: reduce){ .scene.leave .stage{transition:opacity .3s; transform:none !important} .scene.arrive .stage{animation:none} }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -90,61 +103,55 @@ canvas.fx{position:absolute; inset:0; width:100%; height:100%; pointer-events:no
 
 <div class="page">
   <div class="device"><div class="screen" id="screen">
-    <div class="under" aria-hidden="true"></div>
-    <div class="scene" id="scene" role="img" aria-label="Bahía de Lan Hạ: un acantilado verde junto al agua y montañas entre la niebla. Mueve el ratón o arrastra para mirar alrededor; toca los árboles o el agua.">
+    <div class="under" id="under" aria-hidden="true"></div>
+    <div class="scene" id="scene" role="img" aria-label="">
       <div class="stage" id="stage">
-        <div class="layer far" id="far"><img src="photos/d2-bg.webp" alt=""></div>
+        <div class="layer far" id="far"><img id="farimg" src="photos/d2-bg.webp" alt=""></div>
         <div class="mistdrift"><div class="mist" id="mist"></div></div>
         <div class="layer near" id="near"><img src="photos/d2-fg.webp" alt=""></div>
-        <div class="layer rustle" id="rustle"><img src="photos/d2-fg.webp" alt=""></div>
-        <div class="layer water" id="water"><img src="photos/d2-fg.webp" alt=""></div>
+        <div class="layer water" id="water"><img id="waterimg" src="photos/d2-fg.webp" alt=""></div>
       </div>
-      <div class="pinwrap" id="pinwrap" aria-hidden="true"><div class="pin"><span>Tu próxima pausa</span><i></i><b></b></div></div>
+      <div class="pinwrap" id="pinwrap" aria-hidden="true"><div class="pin" id="pin"><span id="pintext">Mañana, las balsas</span><i></i><b></b></div></div>
       <canvas class="fx" id="fx"></canvas>
       <div class="hint" id="hint">Mueve o toca el paisaje</div>
     </div>
     <div class="top">
-      <p class="place" style="margin:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>Bahía de Lan Hạ</p>
+      <p class="place" style="margin:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></svg><span id="placename">Lan Hạ · La niebla</span></p>
       <button class="disc" type="button" aria-label="Perfil y ajustes"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6"/><path d="M5 20c1.1-3.6 3.8-5.5 7-5.5s5.9 1.9 7 5.5"/></svg></button>
     </div>
-    <section class="card" aria-label="Tu día de hoy">
-      <p class="eyebrow">Dinero y estabilidad · Día 2 de 7</p>
-      <h2 class="title">¿Qué te gustaría que ese dinero te permitiera?</h2>
-      <p class="meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>3 a 5 minutos · respuestas privadas</p>
-      <button class="startbtn" type="button" id="start">Empezar el día 2 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      <button class="keep" type="button"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v16l-5-3.6L7 20Z"/></svg></span><span style="display:flex; flex-direction:column; gap:2px; flex:1; min-width:0"><span style="display:flex; justify-content:space-between; gap:8px"><span style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:.05em; color:var(--ink2)">AYER GUARDASTE</span><span style="font-size:14px; line-height:16px; font-weight:700">Tus días ›</span></span><span style="font-size:15px; line-height:20px; font-weight:500">«Antes de contar un dinero futuro, confirma cuándo llega.»</span></span></button>
-    </section>
+    <section class="card" id="card" aria-live="polite" aria-label="Tu día de hoy"></section>
     <nav class="tabs" aria-label="Secciones">
       <button type="button" aria-current="page"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="15.5" cy="9.5" r="1.8"/><path d="M3.8 16.5l5-4.6 4.4 4 2.3-2 4.7 4.2"/></svg><span>Atlas</span></button>
       <button type="button"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="3.5"/><circle cx="16.5" cy="10" r="2.8"/><path d="M3 19.5c.7-3.4 3.1-5.2 6-5.2s5.3 1.8 6 5.2"/><path d="M15.2 14.6c.5-.1 1-.2 1.5-.2 2.3 0 4 1.4 4.6 4.1"/></svg><span>Círculos</span></button>
     </nav>
-    <div class="toast" id="toast" role="status">Prototipo: el día empieza en la app.</div>
+    <div class="toast" id="toast" role="status">Prototipo: aquí empezaría la sesión.</div>
   </div></div>
 
   <aside class="guide">
-    <h1>Lan Hạ en movimiento</h1>
-    <p>Un paisaje que responde, sin juego ni puntos: se mueve un poco contigo y reacciona cuando lo tocas.</p>
+    <h1>El paseo de la semana</h1>
+    <p>Siete días, siete lugares de Lan Hạ. Toca «Empezar» para dar el día por hecho y luego camina al siguiente lugar.</p>
+    <div class="weekrow" id="weekrow" role="group" aria-label="Ir a un día"></div>
     <ul>
-      <li><span class="k">↔</span><span><b>Mira alrededor</b>Mueve el ratón sobre el paisaje, o arrastra con el dedo. La foto está recortada en capas: el acantilado y el agua cercanos se mueven más que las montañas del fondo.</span></li>
-      <li><span class="k">🍃</span><span><b>Toca los árboles</b>Las ramas se mueven y caen unas hojas. Al pasar el ratón por encima, se agitan un poco.</span></li>
+      <li><span class="k">↔</span><span><b>Mira alrededor</b>Mueve el ratón o arrastra. En el día 2 la foto está recortada en capas: el acantilado y el agua cercanos se mueven más que las montañas.</span></li>
+      <li><span class="k">🍃</span><span><b>Toca el paisaje</b>Caen unas hojas. Al pasar el ratón ya no se mueve nada: las montañas se quedan quietas.</span></li>
       <li><span class="k">≈</span><span><b>Toca el agua</b>Se abren ondas y brilla la luz.</span></li>
     </ul>
     <div class="row">
       <button class="pbtn" type="button" id="motion" aria-pressed="true">Movimiento activado</button>
       <button class="pbtn" type="button" id="tilt" hidden>Usar la inclinación del teléfono</button>
     </div>
-    <p class="fine"><b>Sobre inclinar el teléfono:</b> en la app, el paisaje seguiría la inclinación del teléfono. Aquí lo intentamos si el navegador lo permite; si no, arrastra con el dedo.</p>
-    <p class="fine">Se detiene si tu teléfono pide menos movimiento. Las fotos son las de la app. «3 a 5 minutos» y «Ayer guardaste» vienen de tu referencia: la duración aún está por medir y «Ayer» solo vale si el día 1 fue ayer.</p>
+    <p class="fine"><b>Para revisar:</b> «3 a 5 minutos» es orientativo, por medir. Los títulos y reglas son los de V4.1 («tu dinero»), todavía en revisión con María y Alejandra. Los nombres de los lugares son nuestros, no del contenido.</p>
+    <p class="fine">Las fotos son las de la app; son pequeñas, así que a pantalla completa se ven algo suaves. Solo el día 2 tiene capas de profundidad por ahora.</p>
   </aside>
 </div>
-
 <script>
 (function(){
   "use strict";
-  var scene=document.getElementById("scene"), stage=document.getElementById("stage"), far=document.getElementById("far"), near=document.getElementById("near"), pinwrap=document.getElementById("pinwrap"), water=document.getElementById("water"), rustle=document.getElementById("rustle"), mist=document.getElementById("mist");
+  var scene=document.getElementById("scene"), stage=document.getElementById("stage"), far=document.getElementById("far"), near=document.getElementById("near"), pinwrap=document.getElementById("pinwrap"), water=document.getElementById("water"), mist=document.getElementById("mist");
   var cv=document.getElementById("fx"), ctx=cv.getContext("2d"), hint=document.getElementById("hint"), screen=document.getElementById("screen");
   var reduce=false; try{ reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){}
   var motionOn=!reduce;
+  var DAYS=[{"n": 1, "title": "¿Llega antes de que tengas que pagar?", "rule": "Antes de contar un dinero futuro, confirma cuándo llega.", "pos": "16% 50%", "water": 0.56, "alt": "Bahía de Lan Hạ: un muelle de madera y barcas sobre el agua, con montañas entre la niebla", "place": "El muelle", "src": "photos/d1.webp"}, {"n": 2, "title": "¿Qué te gustaría que tu dinero te permitiera?", "rule": "El dinero para un pago cercano no debería depender de que una inversión suba.", "pos": "20% 50%", "water": 0.72, "alt": "Bahía de Lan Hạ: un acantilado verde junto al agua y montañas entre la niebla", "place": "La niebla", "src": "photos/d2-bg.webp"}, {"n": 3, "title": "Antes de decir que sí", "rule": "Puedes querer ayudar y tomarte tiempo para ver lo que puedes asumir.", "pos": "42% 50%", "water": 0.6, "alt": "Bahía de Lan Hạ: balsas de madera sobre agua tranquila, entre montañas verdes", "place": "Las balsas", "src": "photos/d3.webp"}, {"n": 4, "title": "Pago, pero ¿qué está bajando?", "rule": "Mira por separado el saldo, los cargos y el pago.", "pos": "30% 50%", "water": 0.72, "alt": "Bahía de Lan Hạ: la entrada de una cueva de roca sobre agua verde", "place": "La cueva", "src": "photos/d4.webp"}, {"n": 5, "title": "¿Cambió tu gasto o cambió el precio?", "rule": "Para comparar precios, compara también la cantidad.", "pos": "50% 50%", "water": 0.6, "alt": "Bahía de Lan Hạ: un canal de agua quieta entre dos laderas verdes", "place": "La laguna", "src": "photos/d5.webp"}, {"n": 6, "title": "Cuando una promesa toca una necesidad", "rule": "Ganancias altas, “sin riesgo” y prisa: para y comprueba antes de enviar dinero.", "pos": "42% 50%", "water": 0.74, "alt": "Bahía de Lan Hạ: un pueblo flotante con casas de colores sobre el agua", "place": "El pueblo flotante", "src": "photos/d6.webp"}, {"n": 7, "title": "¿Qué te serviría volver a encontrar?", "rule": "Elige una idea que te sirva, o termina sin guardar.", "pos": "18% 50%", "water": 0.62, "alt": "Bahía de Lan Hạ: barcas de madera en el agua, con montañas entre la niebla", "place": "La bahía", "src": "photos/lh-hero.jpg"}];
   var W=390,H=560,dpr=Math.min(2,window.devicePixelRatio||1);
   function size(){ var r=scene.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
   size(); window.addEventListener("resize",size);
@@ -154,7 +161,7 @@ canvas.fx{position:absolute; inset:0; width:100%; height:100%; pointer-events:no
   function setTarget(x,y){ tx=Math.max(-1,Math.min(1,x)); ty=Math.max(-1,Math.min(1,y)); lastInput=performance.now(); hideHint(); }
   scene.addEventListener("pointermove",function(e){
     var r=scene.getBoundingClientRect(), x=(e.clientX-r.left)/r.width*2-1, y=(e.clientY-r.top)/r.height*2-1;
-    if(e.pointerType==="mouse"){ setTarget(x,y); hover(e.clientX-r.left,e.clientY-r.top); }
+    if(e.pointerType==="mouse"){ setTarget(x,y); }
     else if(dragging){ setTarget(x,y); }
   });
   scene.addEventListener("pointerdown",function(e){ dragging=true; });
@@ -174,16 +181,14 @@ canvas.fx{position:absolute; inset:0; width:100%; height:100%; pointer-events:no
   /* ---- effects ---- */
   var leaves=[], rings=[], glints=[];
   var LEAF=["#4E6B3A","#6E8B4A","#8FA45E","#A4B07A","#3F5A30"];
-  function isWater(x,y){ return y>H*0.69; }
-  function isTrees(x,y){ return y<H*0.68 && x<W*0.70; }
+  function waterY(){ return -0.07*H + cur.water*1.14*H; }
+  function isWater(x,y){ return y>waterY(); }
+  function isTrees(x,y){ return y<waterY()-20; }
   function dropLeaves(x,y,n){ for(var i=0;i<n;i++){ leaves.push({x:x+(Math.random()-.5)*50,y:y+(Math.random()-.5)*30,vx:(Math.random()-.5)*.6,vy:.3+Math.random()*.5,r:Math.random()*6.28,vr:(Math.random()-.5)*.08,s:5+Math.random()*4,ph:Math.random()*6.28,c:LEAF[(Math.random()*LEAF.length)|0],life:0}); } }
-  function shake(x,y){ rustle.style.setProperty("--rx",(x/W*100)+"%"); rustle.style.setProperty("--ry",(y/H*100)+"%"); rustle.classList.remove("go"); void rustle.offsetWidth; rustle.classList.add("go"); }
   function splash(x,y){ for(var i=0;i<3;i++) rings.push({x:x,y:y,t:-i*12}); for(var j=0;j<10;j++) glints.push({x:x+(Math.random()-.5)*120,y:y+(Math.random()-.5)*26,t:-Math.random()*30,s:2+Math.random()*3}); }
-  var lastHover=0;
-  function hover(x,y){ if(!motionOn) return; var now=performance.now(); if(now-lastHover<420) return; if(isTrees(x,y)){ lastHover=now; shake(x,y); if(Math.random()<.35) dropLeaves(x,y,1); } }
   scene.addEventListener("click",function(e){
     var r=scene.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top; hideHint();
-    if(isWater(x,y)) splash(x,y); else if(isTrees(x,y)){ shake(x,y); dropLeaves(x,y,motionOn?9:3); } else { dropLeaves(x,y,motionOn?4:2); }
+    if(isWater(x,y)) splash(x,y); else if(isTrees(x,y)){ dropLeaves(x,y,motionOn?7:3); } else { dropLeaves(x,y,motionOn?4:2); }
   });
 
   function hideHint(){ if(!hint.classList.contains("off")) hint.classList.add("off"); }
@@ -199,8 +204,8 @@ canvas.fx{position:absolute; inset:0; width:100%; height:100%; pointer-events:no
     cx+=(gx-cx)*.06; cy+=(gy-cy)*.06;
     stage.style.transform="rotateY("+(cx*2.2)+"deg) rotateX("+(-cy*1.6)+"deg)";
     far.style.transform="translate3d("+(-cx*5)+"px,"+(-cy*3)+"px,0) scale(1.01)";
-    near.style.transform="translate3d("+(-cx*22)+"px,"+(-cy*8)+"px,0) scale(1.03)";
-    rustle.style.transform=near.style.transform; water.style.transform=near.style.transform;
+    near.style.transform="translate3d("+(-cx*(cur.n===2?22:5))+"px,"+(-cy*8)+"px,0) scale(1.03)";
+    water.style.transform=cur.n===2?near.style.transform:far.style.transform;
     pinwrap.style.transform="translate3d("+(-cx*5)+"px,"+(-cy*3)+"px,0)";
     mist.style.transform="translate3d("+(-cx*12)+"px,"+(-cy*5)+"px,0)";
     draw();
@@ -225,6 +230,70 @@ canvas.fx{position:absolute; inset:0; width:100%; height:100%; pointer-events:no
   mBtn.addEventListener("click",function(){ motionOn=!motionOn; syncMotion(); });
   syncMotion();
   var toast=document.getElementById("toast"), tt;
-  document.getElementById("start").addEventListener("click",function(){ toast.classList.add("on"); clearTimeout(tt); tt=setTimeout(function(){ toast.classList.remove("on"); },2200); });
+  function say(m){ toast.textContent=m; toast.classList.add("on"); clearTimeout(tt); tt=setTimeout(function(){ toast.classList.remove("on"); },2200); }
+
+  /* ---- the week ---- */
+  var cur=DAYS[1], state="today";
+  var card=document.getElementById("card"), farimg=document.getElementById("farimg"), waterimg=document.getElementById("waterimg"), nearEl=near, under=document.getElementById("under");
+  var pin=document.getElementById("pin"), pintext=document.getElementById("pintext"), placename=document.getElementById("placename"), weekrow=document.getElementById("weekrow");
+  var ARROW='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var LOCK='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>';
+  var MARK='<span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v16l-5-3.6L7 20Z"/></svg></span>';
+  var TICK='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  function toPlace(p){ return /^El /.test(p)? 'al '+p.slice(3) : 'a '+lower(p); }
+  function lower(p){ return p.charAt(0).toLowerCase()+p.slice(1); }
+  function keepRow(label,text,link){ return '<button class="keep" type="button" data-act="days">'+MARK+'<span style="display:flex; flex-direction:column; gap:2px; flex:1; min-width:0"><span style="display:flex; justify-content:space-between; gap:8px"><span style="font-size:12px; line-height:16px; font-weight:700; letter-spacing:.05em; color:var(--ink2)">'+label+'</span><span style="font-size:14px; line-height:16px; font-weight:700">'+(link||"Tus días ›")+'</span></span><span style="font-size:15px; line-height:20px; font-weight:500">'+text+'</span></span></button>'; }
+  function cardHTML(){
+    var d=cur, prev=DAYS[d.n-2], next=DAYS[d.n];
+    if(state==="today"){
+      return '<p class="eyebrow">Dinero y estabilidad · Día '+d.n+' de 7</p><h2 class="title">'+esc(d.title)+'</h2>'+
+        '<p class="meta">'+LOCK+'3 a 5 minutos · respuestas privadas</p>'+
+        '<button class="startbtn" type="button" data-act="start">Empezar el día '+d.n+' '+ARROW+'</button>'+
+        (prev? keepRow("GUARDASTE EL DÍA "+prev.n, "«"+esc(prev.rule)+"»") : keepRow("TU PASEO", "Siete lugares de Lan Hạ, uno por día. Hoy empiezas en "+lower(d.place)+".", "Ver ›"));
+    }
+    if(next){
+      return '<p class="eyebrow donebadge">'+TICK+'Día '+d.n+' de 7 · hecho</p><h2 class="title">Hoy queda hecho.</h2>'+
+        '<p class="meta">Mañana te '+(/^Las |^Los /.test(next.place)?'esperan ':'espera ')+lower(next.place)+'. No se pierde nada si vuelves otro día.</p>'+
+        '<button class="startbtn" type="button" data-act="walk">Caminar '+toPlace(next.place)+' '+ARROW+'</button>'+
+        keepRow("GUARDASTE HOY", "«"+esc(d.rule)+"»");
+    }
+    return '<p class="eyebrow donebadge">'+TICK+'Día 7 de 7 · hecho</p><h2 class="title">Recorriste los siete lugares.</h2>'+
+      '<p class="meta">Lo que guardaste te espera en Tus días, para volver cuando lo necesites.</p>'+
+      '<button class="startbtn" type="button" data-act="days">Ver tus días '+ARROW+'</button>'+
+      '<button class="second" type="button" data-act="restart">Volver al día 1</button>';
+  }
+  var PIN={1:[300,250],2:[322,318],3:[290,262],4:[300,250],5:[285,262],6:[300,250],7:[290,262]};
+  function paint(){
+    var d=cur, next=DAYS[d.n];
+    var layered=d.n===2;
+    farimg.src=d.src; farimg.style.objectPosition=layered?"47% 50%":d.pos;
+    nearEl.style.display=layered?"":"none";
+    waterimg.src=layered?"photos/d2-fg.webp":d.src; waterimg.style.objectPosition=farimg.style.objectPosition;
+    var wf=layered?0.69:d.water; waterimg.style.webkitMaskImage=waterimg.style.maskImage="linear-gradient(transparent "+Math.round(wf*100-4)+"%, #000 "+Math.round(wf*100+2)+"%)";
+    under.style.backgroundImage="url("+(layered?"photos/d2.webp":d.src)+")";
+    scene.setAttribute("aria-label",d.alt+". Mueve el ratón o arrastra para mirar alrededor; toca el paisaje o el agua.");
+    placename.textContent="Lan Hạ · "+d.place;
+    pin.style.display=(next&&state==="today")||(next&&state==="done")?"":"none";
+    if(next){ pintext.textContent="Mañana, "+lower(next.place); pin.style.left=PIN[d.n][0]+"px"; pin.style.top=PIN[d.n][1]+"px"; }
+    card.innerHTML=cardHTML();
+    [].forEach.call(weekrow.children,function(b,i){ b.setAttribute("aria-current",String(i===d.n-1)); });
+  }
+  function swapCard(fn){ card.classList.add("swap"); setTimeout(function(){ fn(); card.classList.remove("swap"); },motionOn?260:0); }
+  function go(n,st){
+    var target=DAYS[n-1];
+    if(!motionOn){ cur=target; state=st||"today"; paint(); return; }
+    scene.classList.remove("arrive"); scene.classList.add("leave"); card.classList.add("swap");
+    setTimeout(function(){ cur=target; state=st||"today"; paint(); scene.classList.remove("leave"); void scene.offsetWidth; scene.classList.add("arrive"); card.classList.remove("swap"); },800);
+  }
+  card.addEventListener("click",function(e){
+    var b=e.target.closest("[data-act]"); if(!b) return; var a=b.getAttribute("data-act");
+    if(a==="start"){ swapCard(function(){ state="done"; paint(); }); say("Prototipo: aquí iría la sesión del día "+cur.n+"."); }
+    else if(a==="walk"){ go(cur.n+1); }
+    else if(a==="restart"){ go(1); }
+    else if(a==="days"){ say("Prototipo: Tus días está en Atlas."); }
+  });
+  DAYS.forEach(function(d){ var b=document.createElement("button"); b.type="button"; b.setAttribute("aria-label","Día "+d.n+": "+d.place); b.innerHTML='<img src="'+(d.n===2?"photos/d2.webp":d.src)+'" alt="" style="object-position:'+d.pos+'"><span>'+d.n+'</span>'; b.addEventListener("click",function(){ go(d.n); }); weekrow.appendChild(b); });
+  paint();
 })();
 </script>
