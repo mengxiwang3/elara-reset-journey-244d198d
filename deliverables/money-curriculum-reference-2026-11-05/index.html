@@ -1,0 +1,284 @@
+<title>Dinero V4.1 con hilo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: one reading column; the week is a stack of day cards, each with four short blocks (what returns, during the day, what she takes, when it doesn't fit). */
+:root{
+  --bg:#F3F5F4; --surface:#FFFFFF; --fg:#1E2430; --muted:#555F6B; --line:#DCE1DE; --accent:#1F3A2E; --accent-soft:#E6EFE9; --accent-fg:#FFFFFF;
+  --prop-bg:#F8DCCB; --prop-fg:#4A2410; --care-bg:#FFF3DF; --care-line:#E8C98F; --care-fg:#5B3F08;
+  --sans:'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0F1412; --surface:#171D1B; --fg:#ECEFED; --muted:#A9B1AD; --line:#2A3330; --accent:#9FD3B5; --accent-soft:#1E2B25; --accent-fg:#10201A;
+  --prop-bg:#4A3024; --prop-fg:#F6D9C8; --care-bg:#2E2614; --care-line:#5C4A1F; --care-fg:#F0D9A5; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0F1412; --surface:#171D1B; --fg:#ECEFED; --muted:#A9B1AD; --line:#2A3330; --accent:#9FD3B5; --accent-soft:#1E2B25; --accent-fg:#10201A;
+  --prop-bg:#4A3024; --prop-fg:#F6D9C8; --care-bg:#2E2614; --care-line:#5C4A1F; --care-fg:#F0D9A5; color-scheme:dark }
+body{background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:15px; line-height:1.55}
+.wrap{max-width:1040px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:32px 64px; display:flex; flex-direction:column; gap:36px}
+.kicker{margin:0; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+h1{margin:6px 0 0; font-size:clamp(30px,5vw,44px); line-height:1.08; font-weight:800; letter-spacing:-.03em; text-wrap:balance}
+.lede{margin:14px 0 0; max-width:66ch; font-size:17px; color:var(--muted)}
+h2{margin:0; font-size:22px; line-height:1.2; font-weight:800; letter-spacing:-.02em; text-wrap:balance}
+h3{margin:0; font-size:16px; line-height:1.3; font-weight:700}
+p{margin:0}
+.sec{display:flex; flex-direction:column; gap:16px}
+.sub{color:var(--muted); max-width:70ch}
+.rules{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px}
+.rule{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px 16px; display:flex; flex-direction:column; gap:4px; min-width:0}
+.rule b{font-weight:700}
+.rule span{color:var(--muted)}
+
+/* the thread: what Tus días shows on day 7 if she kept something every day */
+.thread{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:8px 18px; list-style:none; margin:0; display:flex; flex-direction:column}
+.thread li{display:grid; grid-template-columns:20px minmax(0,1fr); column-gap:14px; padding:12px 0; position:relative}
+.thread li+li{border-top:1px solid var(--line)}
+.thread .dot{width:12px; height:12px; border-radius:50%; background:var(--accent); margin-top:6px; justify-self:center}
+.thread .dot.open{background:transparent; box-shadow:inset 0 0 0 2px var(--accent)}
+.thread .meta{font-size:12.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--muted)}
+.thread .line{font-size:16px; font-weight:600}
+.thread .note{font-size:13.5px; color:var(--muted)}
+
+.day{background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden; display:flex; flex-direction:column}
+.dayhead{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 14px; padding:16px 18px 12px}
+.dayhead .n{font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+.dayhead h3{font-size:19px; letter-spacing:-.01em; flex:1 1 280px; min-width:0}
+.purpose{padding:0 18px 14px; color:var(--muted)}
+.blocks{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--line)}
+.blk{padding:14px 18px 16px; display:flex; flex-direction:column; gap:6px; min-width:0}
+.blk+.blk{border-left:1px solid var(--line)}
+.blk .lab{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.blk p+p{margin-top:4px}
+.care{background:var(--care-bg); color:var(--care-fg); border-top:1px solid var(--care-line); padding:10px 18px; font-size:14px; font-weight:600}
+q{quotes:none; font-weight:600}
+q::before{content:"«"} q::after{content:"»"}
+ins.prop{text-decoration:none; background:var(--prop-bg); color:var(--prop-fg); border-radius:3px; padding:0 2px; box-shadow:0 0 0 2px var(--prop-bg)}
+.legend{display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:13.5px; color:var(--muted)}
+.cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:8px; min-width:0}
+.card ul, .card ol{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:6px}
+.dec{counter-reset:d; list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px}
+.dec li{counter-increment:d; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px 16px 14px 52px; position:relative}
+.dec li::before{content:counter(d); position:absolute; left:16px; top:14px; width:24px; height:24px; border-radius:50%; background:var(--accent); color:var(--accent-fg); font-size:13px; font-weight:700; display:grid; place-items:center}
+.dec b{display:block; margin-bottom:2px}
+.dec span{color:var(--muted)}
+.en{background:var(--accent-soft); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:8px}
+.foot{font-size:13px; color:var(--muted)}
+@media (max-width: 900px){
+  .blocks{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .blk:nth-child(3){border-left:0}
+  .blk:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width: 560px){
+  .blocks{grid-template-columns:minmax(0,1fr)}
+  .blk+.blk{border-left:0; border-top:1px solid var(--line)}
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="kicker">Para María y Ale · Referencia del currículum de Dinero</p>
+    <h1>Dinero V4.1 con hilo</h1>
+    <p class="lede">Una semana introductoria: seis ideas, una por día, y un repaso. Conserva los temas, las preguntas, las opciones y las respuestas de V4.1. Cambia cómo se muestran (una idea a la vez, primero probar y después leer más) y qué vuelve de un día a otro (la pregunta que ella eligió). Es la referencia propuesta para el currículum de Dinero. El texto nuevo y el apoyo del día 6 por país siguen pendientes de María y Ale.</p>
+  </header>
+
+  <section class="sec" aria-labelledby="h-promesa">
+    <h2 id="h-promesa">Qué promete la semana</h2>
+    <p class="sub">Seis días enseñan una idea cada uno y el séptimo repasa. En una semana no se aprende todo, así que la promesa es pequeña.</p>
+    <div class="cols">
+      <div class="card"><h3>Sí promete</h3><ul>
+        <li>Preguntas más claras sobre su dinero.</li>
+        <li>Entender mejor una situación concreta suya.</li>
+        <li>Una o dos ideas que puede volver a encontrar.</li>
+      </ul></div>
+      <div class="card"><h3>No promete</h3><ul>
+        <li>Dominar el tema.</li>
+        <li>Ahorrar más, decidir mejor o evitar una pérdida.</li>
+        <li>Que algo cambie en siete días. El día 7 no trae nada nuevo y no pide demostrar nada.</li>
+      </ul></div>
+    </div>
+    <p>Línea propuesta para la bienvenida y el cierre: <ins class="prop">Esta semana es una introducción. Al terminar, tendrás preguntas más claras y una idea o dos para volver a encontrar. No hace falta dominar nada.</ins></p>
+  </section>
+
+  <section class="sec" aria-labelledby="h-reglas">
+    <h2 id="h-reglas">Cómo funciona el hilo</h2>
+    <div class="rules">
+      <div class="rule"><b>Vuelve la pregunta que eligió.</b><span>Al abrir el día siguiente aparece la pregunta o la frase que eligió llevarse (texto de V4.1), con la regla debajo. Lo que escribió con sus propias palabras solo aparece si activa «Mostrar mis frases en el inicio».</span></div>
+      <div class="rule"><b>Una idea a la vez.</b><span>Cada día abre con una sola idea, la regla del día. Primero la prueba. El porqué y el ejemplo de V4.1 quedan detrás de «Ver el porqué» y «Ver un ejemplo».</span></div>
+      <div class="rule"><b>«Ayer» solo si fue ayer.</b><span>Si pasaron más días, dice «el día 3». Si no guardó nada, no aparece ningún recordatorio y el día cuenta igual.</span></div>
+      <div class="rule"><b>Sin puntos ni mejoras.</b><span>Terminar un día nunca dice que aprendió ni que mejoró. El día 7 no le pide demostrar nada.</span></div>
+      <div class="rule"><b>Privado por defecto.</b><span>Lo que escribe se queda en su teléfono. Compartir en Círculos es un paso aparte, y ella elige qué.</span></div>
+      <div class="rule"><b>Los días 3 y 6 son más cuidadosos.</b><span>Hablan de dinero que otra persona pide y de ofertas que presionan. El día 3 muestra solo la regla anterior, sin su pregunta. El día 6 no muestra recordatorio.</span></div>
+      <div class="rule"><b>Siempre hay una salida.</b><span>Cada día tiene una opción para no responder, no escribir o no guardar, y el día termina igual.</span></div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-hilo">
+    <h2 id="h-hilo">Así se vería «Tus días» el día 7</h2>
+    <p class="sub">Ejemplo de una participante que eligió siempre la primera opción de «Hazlo tuyo» y guardó la regla de cada día. Todo es texto de V4.1; los nombres de los lugares son una propuesta del prototipo.</p>
+    <ol class="thread">
+      <li><span class="dot"></span><div><p class="meta">Día 1 · La orilla</p><p class="line">Antes de contar un dinero futuro, confirma cuándo llega.</p><p class="note">Eligió: ¿Qué día estará el dinero disponible en mi cuenta?</p></div></li>
+      <li><span class="dot"></span><div><p class="meta">Día 2 · El banco junto al agua</p><p class="line">El dinero para un pago cercano no debería depender de que una inversión suba.</p><p class="note">Eligió: ¿Para qué y para cuándo quiero este dinero?</p></div></li>
+      <li><span class="dot"></span><div><p class="meta">Día 3 · El puente</p><p class="line">Puedes querer ayudar y tomarte tiempo para ver lo que puedes asumir.</p><p class="note">Eligió ensayar: «Necesito revisar mis pagos antes de decirte una cantidad». No vuelve en la apertura del día 4.</p></div></li>
+      <li><span class="dot"></span><div><p class="meta">Día 4 · El río, desde el agua</p><p class="line">Mira por separado el saldo, los cargos y el pago.</p><p class="note">Eligió: ¿Qué cargos se añadieron?</p></div></li>
+      <li><span class="dot"></span><div><p class="meta">Día 5 · La calle del mercado</p><p class="line">Para comparar precios, compara también la cantidad.</p><p class="note">Eligió comparar algo que compra seguido.</p></div></li>
+      <li><span class="dot"></span><div><p class="meta">Día 6 · La entrada al bambú</p><p class="line">Ganancias altas, “sin riesgo” y prisa: para y comprueba antes de enviar dinero.</p><p class="note">Eligió tener a mano una frase para ganar tiempo. No vuelve en ningún recordatorio.</p></div></li>
+      <li><span class="dot open"></span><div><p class="meta">Día 7 · El mirador</p><p class="line">Elige una de las seis, o ninguna.</p><p class="note">Si no guardó nada en la semana, esta lista queda vacía y el cierre dice que no hay otra tarea.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="sec" aria-labelledby="h-dia">
+    <h2 id="h-dia">Cómo se ve un día</h2>
+    <p class="sub">Es el mismo texto de V4.1. Cambia el orden y cuánto se ve a la vez. Es una propuesta de presentación.</p>
+    <ol class="dec">
+      <li><b>Empieza por ti.</b><span>Una pregunta sobre su situación y sus opciones. Todavía no se enseña nada.</span></li>
+      <li><b>Una idea que ayuda.</b><span>Aparece solo la regla del día. Ella la prueba con la comprobación opcional, ve la respuesta de V4.1 a su opción y, si quiere, abre «Ver el porqué» y «Ver un ejemplo».</span></li>
+      <li><b>Hazlo tuyo.</b><span>Elige qué pregunta o frase llevarse, y después qué guardar. Termina como una llegada, sin puntos.</span></li>
+    </ol>
+  </section>
+
+  <section class="sec" aria-labelledby="h-dias">
+    <h2 id="h-dias">Día por día</h2>
+    <p class="legend"><ins class="prop">Texto con este fondo</ins> es propuesta, separada de V4.1.</p>
+
+    <article class="day">
+      <div class="dayhead"><span class="n">Día 1 · La orilla</span><h3>¿Llega antes de que tengas que pagar?</h3></div>
+      <p class="purpose">Separar un problema de fechas de un dinero que no alcanza.</p>
+      <div class="blocks">
+        <div class="blk"><span class="lab">Qué vuelve</span><p>Nada: es el primer día. Antes de empezar, Ale da la bienvenida.</p></div>
+        <div class="blk"><span class="lab">Durante el día</span><p>Elige cuál de cuatro situaciones se parece a la suya. Primero ve una sola idea: la regla del día. Detrás de «Ver el porqué»: faltante total y desfase de fechas.</p></div>
+        <div class="blk"><span class="lab">Qué se lleva</span><p>La regla: <q>Antes de contar un dinero futuro, confirma cuándo llega.</q></p><p>Si quiere, su frase: <q>¿Qué día estará el dinero disponible en mi cuenta?</q> o su nota «La fecha que quiero confirmar es…».</p></div>
+        <div class="blk"><span class="lab">Si no encaja</span><p>«Hoy prefiero no mirar mi dinero»: el día termina igual, sin nota.</p><p>Si elige «Aunque cobre, no me alcanza», el cierre habla de cuánto falta, no de fechas: <ins class="prop">Si te sirve, deja a la vista cuánto falta y para qué pago. Ese número es información para tu próxima decisión, no una nota sobre ti.</ins></p></div>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="dayhead"><span class="n">Día 2 · El banco junto al agua</span><h3>¿Qué te gustaría que tu dinero te permitiera?</h3></div>
+      <p class="purpose">Darle al dinero un propósito y una fecha antes de elegir qué hacer con él.</p>
+      <div class="blocks">
+        <div class="blk"><span class="lab">Qué vuelve</span><p>Su pregunta del día 1, si la eligió: <q>¿Qué día estará el dinero disponible en mi cuenta?</q> Debajo, la regla: <q>Antes de contar un dinero futuro, confirma cuándo llega.</q></p></div>
+        <div class="blk"><span class="lab">Durante el día</span><p>Primero ve una sola idea: la regla del día. Detrás de «Ver el porqué»: ahorrar, invertir y poder acceder al dinero. La pregunta de apertura no cambia, y el recordatorio queda arriba, nunca dentro de ella.</p></div>
+        <div class="blk"><span class="lab">Qué se lleva</span><p>La regla: <q>El dinero para un pago cercano no debería depender de que una inversión suba.</q></p><p>Si quiere, su nota: «Querría este dinero para… Lo necesitaría…».</p></div>
+        <div class="blk"><span class="lab">Si no encaja</span><p>Si no guardó nada el día 1, no hay recordatorio.</p><p>Si elige «Ahora no puedo apartar dinero»: <ins class="prop">Si te sirve, piensa para qué querrías un dinero y para cuándo, aunque hoy no tengas una cantidad.</ins></p></div>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="dayhead"><span class="n">Día 3 · El puente</span><h3>Antes de decir que sí</h3></div>
+      <p class="purpose">Preparar una respuesta que te dé tiempo para decidir.</p>
+      <div class="blocks">
+        <div class="blk"><span class="lab">Qué vuelve</span><p>Solo la regla anterior, con «Antes te llevaste» o «el día N». No vuelve su pregunta del día 2.</p></div>
+        <div class="blk"><span class="lab">Durante el día</span><p>Primero ve una sola idea: la regla del día. Detrás de «Ver el porqué»: querer ayudar, poder dar y decidir darlo. Es un día sobre una persona real que pide dinero: ninguna opción la empuja a decir que sí ni a ensayar una respuesta.</p></div>
+        <div class="blk"><span class="lab">Qué se lleva</span><p>La regla: <q>Puedes querer ayudar y tomarte tiempo para ver lo que puedes asumir.</q></p><p>Si quiere, una frase para ensayar. No tiene que enviarla.</p></div>
+        <div class="blk"><span class="lab">Si no encaja</span><p>«Esto no me pasa; quiero aprender una frase» y «No quiero preparar una respuesta hoy» son salidas completas.</p></div>
+      </div>
+      <p class="care">Pendiente de V4.1: la línea de apoyo del día 3 y su verificación por país.</p>
+    </article>
+
+    <article class="day">
+      <div class="dayhead"><span class="n">Día 4 · El río, desde el agua</span><h3>Pago, pero ¿qué está bajando?</h3></div>
+      <p class="purpose">Entender qué parte de un pago reduce lo que debes.</p>
+      <div class="blocks">
+        <div class="blk"><span class="lab">Qué vuelve</span><p>Su pregunta del día 2, si la eligió: <q>¿Para qué y para cuándo quiero este dinero?</q> Debajo, la regla del día 3: <q>Puedes querer ayudar y tomarte tiempo para ver lo que puedes asumir.</q></p></div>
+        <div class="blk"><span class="lab">Durante el día</span><p>Primero ve una sola idea: la regla del día. Detrás de «Ver el porqué»: saldo, cargos y pagos. Si no tiene deuda o prefiere no usar la suya, el ejemplo numérico es opcional y no se le pregunta nada sobre sus cuentas.</p></div>
+        <div class="blk"><span class="lab">Qué se lleva</span><p>La regla: <q>Mira por separado el saldo, los cargos y el pago.</q></p><p>Si quiere, su nota: «La línea o pregunta que quiero aclarar es…».</p></div>
+        <div class="blk"><span class="lab">Si no encaja</span><p>Si no tiene deuda: <ins class="prop">Si algún día ves un estado de cuenta, ya sabes qué tres cosas mirar por separado.</ins></p></div>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="dayhead"><span class="n">Día 5 · La calle del mercado</span><h3>¿Cambió tu gasto o cambió el precio?</h3></div>
+      <p class="purpose">Distinguir una subida de precio de un cambio en lo que compras.</p>
+      <div class="blocks">
+        <div class="blk"><span class="lab">Qué vuelve</span><p>Su pregunta del día 4, si la eligió: <q>¿Cuánto bajó realmente el saldo?</q> Debajo, la regla: <q>Mira por separado el saldo, los cargos y el pago.</q> Si eligió ver una cuenta sencilla, vuelve solo la regla.</p></div>
+        <div class="blk"><span class="lab">Durante el día</span><p>Primero ve una sola idea: la regla del día. Detrás de «Ver el porqué»: precio, cantidad e inflación. Si vive donde los precios cambian muy rápido, la app no aplica una tasa como si fuera la de su país.</p></div>
+        <div class="blk"><span class="lab">Qué se lleva</span><p>La regla: <q>Para comparar precios, compara también la cantidad.</q></p><p>Si quiere, su nota: «Quiero comparar… La cantidad y las fechas serían…».</p></div>
+        <div class="blk"><span class="lab">Si no encaja</span><p>El cierre de V4.1 ya sirve para todas las opciones: ver una subida no significa que tenga que comprar menos ni invertir hoy.</p></div>
+      </div>
+    </article>
+
+    <article class="day">
+      <div class="dayhead"><span class="n">Día 6 · La entrada al bambú</span><h3>Cuando una promesa toca una necesidad</h3></div>
+      <p class="purpose">Preparar una pausa y una comprobación antes de enviar dinero.</p>
+      <div class="blocks">
+        <div class="blk"><span class="lab">Qué vuelve</span><p>Nada. No hay recordatorio de apertura. La regla del día 5 sigue en «Tus días».</p></div>
+        <div class="blk"><span class="lab">Durante el día</span><p>Primero ve una sola idea: la regla del día. Detrás de «Ver el porqué»: las tres señales y cómo comprobar la autoridad de su país.</p><p>Si dice «Ya envié dinero y estoy preocupada», deja el ejercicio y ve primero la orientación: hablar pronto con el banco o el servicio de pago y buscar ayuda oficial de su país. No se le pide nota ni guardar.</p></div>
+        <div class="blk"><span class="lab">Qué se lleva</span><p>La regla: <q>Ganancias altas, “sin riesgo” y prisa: para y comprueba antes de enviar dinero.</q></p><p>Si quiere, su frase: <q>No voy a enviar dinero antes de revisar quién lo recibe y cómo funciona.</q></p></div>
+        <div class="blk"><span class="lab">Si no encaja</span><p>Si ya envió dinero, el cierre cambia: <ins class="prop">Si ya enviaste dinero, lo más útil ahora es hablar pronto con tu banco o el servicio que usaste, y buscar la ayuda oficial de tu país. No envíes más dinero para recuperar lo anterior. Pedir ayuda no te hace menos cuidadosa.</ins></p></div>
+      </div>
+      <p class="care">Pendiente de V4.1: los organismos de ayuda por país.</p>
+    </article>
+
+    <article class="day">
+      <div class="dayhead"><span class="n">Día 7 · El mirador</span><h3>¿Qué te serviría volver a encontrar?</h3></div>
+      <p class="purpose">Recuperar una idea útil y dejarla a mano, sin demostrar que cambiaste.</p>
+      <div class="blocks">
+        <div class="blk"><span class="lab">Qué vuelve</span><p>Todo lo que guardó en la semana, junto, en «Tus días»: reglas y las preguntas que eligió. No solo lo del día anterior.</p></div>
+        <div class="blk"><span class="lab">Durante el día</span><p>No trae ninguna idea nueva. Elige una de las seis o termina sin guardar. Si dice «No encontré algo que me sirviera», no tiene que elegir una regla.</p></div>
+        <div class="blk"><span class="lab">Qué se lleva</span><p>Una sola regla, una frase que ya confirmó o una duda pendiente. También puede no guardar nada.</p></div>
+        <div class="blk"><span class="lab">Si no encaja</span><p>Si no guardó nada en la semana, «Tus días» queda vacío y el cierre dice que no hay otra tarea. No dice que mejoró ni que aprendió.</p></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="sec" aria-labelledby="h-codex">
+    <h2 id="h-codex">Qué tomamos de la otra propuesta y qué dejamos</h2>
+    <div class="cols">
+      <div class="card"><h3>Lo que tomamos</h3><ul>
+        <li>Que su propia pregunta vuelva al día siguiente, además de la regla.</li>
+        <li>Un lugar donde se junta lo suyo, aquí «Tus días» (allí «Mi mapa»).</li>
+        <li>Tres pausas por día, con la comprobación dentro de la segunda.</li>
+        <li>Terminar como una llegada («Llegaste al puente.»), sin puntos.</li>
+      </ul></div>
+      <div class="card"><h3>Lo que dejamos</h3><ul>
+        <li>Una sola situación para toda la semana, un cobro que se retrasa. V4.1 mantiene sus seis temas, incluida la pausa ante ofertas del día 6. Por eso se presenta como una semana introductoria.</li>
+        <li>Una comprobación con una sola respuesta correcta como estructura de todos los días.</li>
+        <li>La pestaña Explorar.</li>
+        <li>El título del día 2 usado con el contenido de otro día.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-dec">
+    <h2 id="h-dec">Decisiones para María y Ale</h2>
+    <ol class="dec">
+      <li><b>¿Qué vuelve por defecto?</b><span>Propuesta: la pregunta que eligió (texto de V4.1) y la regla. Sus propias palabras solo si activa «Mostrar mis frases en el inicio».</span></li>
+      <li><b>¿Cómo se promete la semana?</b><span>Propuesta: preguntas más claras y mejor comprensión, sin hablar de dominar el tema ni de mejores decisiones.</span></li>
+      <li><b>¿Cómo se llama el lugar donde se junta lo suyo?</b><span>El prototipo usa «Tus días», dentro de Atlas. La otra propuesta usa «Mi mapa».</span></li>
+      <li><b>¿Está bien que los días 3 y 6 no traigan su pregunta?</b><span>Es lo más cuidadoso, pero esos días se sienten menos continuos con los demás.</span></li>
+      <li><b>Apoyo por país del día 6 y línea de apoyo del día 3.</b><span>Siguen sin verificar. Hace falta que María y Ale confirmen los organismos de cada país.</span></li>
+      <li><b>¿Cómo se escribe el recordatorio?</b><span>Hoy el prototipo dice «Ayer te llevaste» o «Te llevaste el día N». La otra propuesta usa «Antes guardaste».</span></li>
+      <li><b>¿Qué pasa después del día 7?</b><span>Sigue sin definirse. La pantalla final no promete una semana 2.</span></li>
+      <li><b>¿Aprueban los textos de interfaz nuevos?</b><span>«Antes te llevaste», «Llegaste al puente.», «Siete lugares, a tu ritmo. Lo que guardaste está en Tus días.», «Ver el porqué», la línea de la promesa y los cuatro cierres marcados como propuesta.</span></li>
+    </ol>
+  </section>
+
+  <section class="sec" aria-labelledby="h-estado">
+    <h2 id="h-estado">Qué ya está en el prototipo y qué falta</h2>
+    <div class="cols">
+      <div class="card"><h3>Ya está</h3><ul>
+        <li>El recordatorio de la última regla guardada, con «ayer» solo cuando es verdad.</li>
+        <li>«Tus días» con lo que guardó cada día.</li>
+        <li>Tres pausas, la llegada al terminar y los siete lugares el día 7.</li>
+        <li>Los cierres por primera respuesta de los días 1, 2, 4 y 6, con «Ver las propuestas».</li>
+      </ul></div>
+      <div class="card"><h3>Falta construir</h3><ul>
+        <li>Que vuelva la pregunta que eligió, y no solo la regla.</li>
+        <li>Mostrar solo la regla primero y dejar el porqué y el ejemplo detrás de «Ver el porqué» y «Ver un ejemplo». Hoy la idea completa aparece antes de que ella pruebe nada.</li>
+        <li>Quitar el recordatorio de apertura el día 6, y la pregunta el día 3.</li>
+        <li>Que el día 6, quien ya envió dinero vea primero la orientación y no se le pida guardar.</li>
+        <li>Que el día 7 junte todo lo guardado y quede vacío si no guardó nada.</li>
+        <li>La línea de la promesa en la bienvenida y en el cierre del día 7, cuando se apruebe.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="en" aria-labelledby="h-en">
+    <h2 id="h-en">In English</h2>
+    <p>This is an introductory week: six teaching days and a recap. It keeps V4.1's topics, questions, options and replies as written. What changes is presentation and continuity. Each day opens with one idea (the day's rule); she tries it first, and the explanation and example sit behind «see why» and «see an example». The question she chose to keep returns the next morning, with the rule beneath it. Her own free-text words appear only if she turns that on. Days 3 and 6 are more careful, because they deal with people asking for money and with pressuring offers. The promise is clearer questions and better understanding, not mastery or better decisions. Proposed wording and the day-6 country-specific support still need approval from María and Ale.</p>
+  </section>
+
+  <p class="foot">Contenido: Dinero V4.1, sin cambios. Los nombres de los lugares y las líneas marcadas como propuesta son del prototipo y no están aprobados. El apoyo del día 6 por país sigue sin verificar.</p>
+</div>
