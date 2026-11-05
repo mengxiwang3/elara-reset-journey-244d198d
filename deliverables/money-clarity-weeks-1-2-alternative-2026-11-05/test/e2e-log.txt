@@ -1,0 +1,57 @@
+ok   es answer day 1 reaches its close
+ok   es answer day 2 reaches its close
+ok   es answer day 3 reaches its close
+ok   es answer day 4 reaches its close
+ok   es answer day 5 reaches its close
+ok   es answer day 6 reaches its close
+ok   es answer day 7 reaches its close
+ok   es day 7 close shows the week letter
+ok   es answer day 8 reaches its close
+ok   es answer day 9 reaches its close
+ok   es answer day 10 reaches its close
+ok   es answer day 11 reaches its close
+ok   es answer day 12 reaches its close
+ok   es answer day 13 reaches its close
+ok   es answer day 14 reaches its close
+ok   es day 14 close shows the week letter
+ok   es answer: thread has 14 pieces
+ok   en answer day 1 reaches its close
+ok   en answer day 2 reaches its close
+ok   en answer day 3 reaches its close
+ok   en answer day 4 reaches its close
+ok   en answer day 5 reaches its close
+ok   en answer day 6 reaches its close
+ok   en answer day 7 reaches its close
+ok   en day 7 close shows the week letter
+ok   en answer day 8 reaches its close
+ok   en answer day 9 reaches its close
+ok   en answer day 10 reaches its close
+ok   en answer day 11 reaches its close
+ok   en answer day 12 reaches its close
+ok   en answer day 13 reaches its close
+ok   en answer day 14 reaches its close
+ok   en day 14 close shows the week letter
+ok   en answer: thread has 14 pieces
+ok   es skip day 1 reaches its close
+ok   es skip day 2 reaches its close
+ok   es skip day 3 reaches its close
+ok   es skip day 4 reaches its close
+ok   es skip day 5 reaches its close
+ok   es skip day 6 reaches its close
+ok   es skip day 7 reaches its close
+ok   es day 7 close shows the week letter
+ok   es skip day 8 reaches its close
+ok   es skip day 9 reaches its close
+ok   es skip day 10 reaches its close
+ok   es skip day 11 reaches its close
+ok   es skip day 12 reaches its close
+ok   es skip day 13 reaches its close
+ok   es skip day 14 reaches its close
+ok   es day 14 close shows the week letter
+ok   es skip: thread has 0 pieces
+ok   day 7 offers a rule built from day 3
+ok   day 14 compass prefill: Mi dinero es para seguridad, familia y descanso. Estoy soltando la frase anterior: El dinero no crece en los árboles.
+ok   day 9 follow-up quotes day 8
+ok   layers off: no proposals in the day
+ok   no page errors 
+56 passed, 0 failed

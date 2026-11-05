@@ -1,0 +1,718 @@
+<title>Claridad · Semanas 1 y 2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..600&display=swap" rel="stylesheet">
+<style>
+/*VENTANA_CSS*/
+/* ===== Weeks 1-2 alternative ===== */
+.page{max-width:1280px}
+.tag2{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:999px; background:#F8DCCB; color:#4A2410; vertical-align:2px; margin-left:6px}
+.nomarks .tag2{display:none}
+.marks .p, .marks ins.p{background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB; border-radius:3px; text-decoration:none}
+ins.p{text-decoration:none; color:inherit}
+.layer{border-radius:14px; background:#EAF3EE; padding:12px 14px; display:flex; flex-direction:column; gap:6px}
+.layer.soft{background:#FFF3DF}
+.layer .lt{font-size:calc(12*var(--u)); font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink2)}
+.layer p{font-size:calc(15*var(--u)); line-height:1.45; color:var(--ink)}
+.reply{display:flex; gap:10px; align-items:flex-start; background:var(--tint); border-radius:14px; padding:12px 14px}
+.orb{flex:none; width:26px; height:26px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #FFE7A8, #E39A2D 55%, #B8641A); box-shadow:0 0 10px rgba(227,154,45,.45); margin-top:1px}
+.reply p{font-size:calc(16*var(--u)); line-height:1.5; color:var(--ink)}
+.rec{display:flex; flex-direction:column; gap:8px}
+.recitem{background:var(--tint); border-radius:12px; padding:12px 14px; display:flex; flex-direction:column; gap:3px}
+.recitem .label{font-size:calc(11.5*var(--u))}
+.recitem .rv{font-size:calc(16.5*var(--u)); line-height:1.4; font-weight:600}
+.sortrow{display:flex; flex-direction:column; gap:6px; padding:10px 12px; border-radius:14px; border:1px solid var(--line2); background:#fff}
+.sortrow .st{font-size:calc(15.5*var(--u)); font-weight:600; line-height:1.35}
+.sortrow .sb{display:flex; gap:8px}
+.sortrow .sb button{flex:1; min-height:44px; border-radius:12px; border:1.5px solid var(--rule); background:#fff; font:600 calc(14*var(--u)) var(--sans); color:var(--ink); cursor:pointer}
+.sortrow .sb button[aria-pressed="true"]{background:var(--forest); color:#fff; border-color:var(--forest)}
+.sortrow.off{background:#FFF5EF; border-color:#E8CDBE}
+.scale{display:grid; gap:8px}
+.scale button{min-height:52px; border-radius:14px; border:1.5px solid var(--rule); background:#fff; font:600 calc(15*var(--u)) var(--sans); color:var(--ink); cursor:pointer; text-align:left; padding:10px 14px}
+.scale button[aria-pressed="true"]{border-color:var(--forest); background:#F0F6F2; box-shadow:inset 0 0 0 1px var(--forest)}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.grid2 .optwrap .opt{flex-direction:column; gap:2px}
+.rank{flex:none; width:24px; height:24px; border-radius:50%; background:var(--forest); color:#fff; font-size:13px; font-weight:800; display:grid; place-items:center}
+.rank.e{background:#fff; box-shadow:inset 0 0 0 2px #B4BCB7}
+.sub{display:block; margin-top:2px; font-size:calc(13.5*var(--u)); line-height:1.35; color:var(--ink2); font-weight:500}
+.fit{display:inline-block; margin-top:4px; font-size:calc(12*var(--u)); font-weight:700; color:var(--forest); background:#E3F1E8; border-radius:999px; padding:2px 8px}
+.breath{align-self:center; width:150px; height:150px; border-radius:50%; background:radial-gradient(circle, #DDEDE3, #A9CDB8); animation:br 8s ease-in-out infinite; display:grid; place-items:center; font-weight:700; color:var(--forest)}
+@keyframes br{0%,100%{transform:scale(.75)}50%{transform:scale(1)}}
+@media (prefers-reduced-motion: reduce){ .breath{animation:none} }
+canvas.pad{width:100%; height:240px; border-radius:16px; background:#fff; border:1.5px solid var(--rule); touch-action:none; display:block}
+.photoin{display:flex; flex-direction:column; gap:8px}
+.photoin img{width:100%; max-height:220px; object-fit:cover; border-radius:14px}
+.ideas{display:flex; flex-wrap:wrap; gap:6px}
+.fieldrow{display:flex; flex-direction:column; gap:6px}
+.fieldrow label{font-size:calc(14*var(--u)); font-weight:700}
+.inp{width:100%; min-height:48px; border:1.5px solid #918780; border-radius:12px; padding:10px 12px; font:500 calc(16*var(--u)) var(--sans); color:var(--ink); background:#fff}
+.inp::placeholder, .field::placeholder{color:var(--placeholder)}
+.say{display:flex; flex-direction:column; gap:6px}
+.say p{font-size:calc(19*var(--u)); line-height:1.45; font-weight:700}
+.knot{border-radius:16px; background:var(--tint); padding:14px; display:flex; flex-direction:column; gap:4px}
+.knot .kv{font-size:calc(17*var(--u)); line-height:1.4; font-weight:700}
+.knot .ke{font-size:calc(14*var(--u)); color:var(--ink2); line-height:1.4}
+.hilo{list-style:none; margin:0; padding:0; display:flex; flex-direction:column}
+.hilo li{display:grid; grid-template-columns:22px minmax(0,1fr); gap:12px; position:relative; padding-bottom:16px}
+.hilo li::before{content:""; position:absolute; left:10px; top:22px; bottom:0; width:2px; background:#D3DAD5}
+.hilo li:last-child::before{display:none}
+.hilo .kd{width:22px; height:22px; border-radius:50%; box-shadow:inset 0 0 0 2px #C3CBC6; background:#fff; font-size:11px; font-weight:800; display:grid; place-items:center; color:var(--ink2); position:relative; z-index:1}
+.hilo li.on .kd{background:var(--forest); color:#fff; box-shadow:none}
+.hilo li.on::before{background:var(--forest)}
+.hilo .hl1{font-size:calc(12*var(--u)); font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink2)}
+.hilo .hl2{font-size:calc(15.5*var(--u)); line-height:1.4; font-weight:600; color:var(--ink)}
+.hilo .hl3{font-size:calc(13.5*var(--u)); color:var(--ink2)}
+.hilo .wk2{margin:6px 0 10px; font-size:calc(13*var(--u)); font-weight:800; color:var(--ink)}
+.letter{font-size:calc(17*var(--u)); line-height:1.55; color:var(--ink); font-weight:500}
+.skip{min-height:44px; border:0; background:none; font:600 calc(14.5*var(--u)) var(--sans); color:var(--ink2); cursor:pointer; padding:0 4px; text-decoration:underline; text-decoration-color:var(--rule); text-underline-offset:4px}
+.xbtn{flex:none; width:40px; height:40px; border-radius:50%; border:0; background:#fff; display:grid; place-items:center; cursor:pointer; box-shadow:0 1px 4px rgba(26,22,21,.15); color:var(--ink)}
+.dots{display:flex; gap:5px; align-items:center}
+.dots i{width:7px; height:7px; border-radius:50%; background:#C3CBC6}
+.dots i.d{background:var(--forest)}
+.dots i.c{width:18px; border-radius:4px; background:var(--ember)}
+.why{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px}
+.why .revcard h3{font-size:18px}
+.pill{display:inline-block; font-size:12px; font-weight:700; padding:2px 8px; border-radius:999px; background:var(--chip); color:var(--fg)}
+.daychips{display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:6px}
+.daychips .chip{min-width:0}
+.wklab{font-size:12px; font-weight:700; color:var(--muted); margin:4px 0 2px}
+</style>
+
+<div class="page">
+  <div class="langbar"><div class="seg" role="group" aria-label="Idioma / Language">
+    <button type="button" id="langEs" aria-pressed="true">Español</button>
+    <button type="button" id="langEn" aria-pressed="false">English</button>
+  </div></div>
+  <header class="ph">
+    <div>
+      <p class="kicker" id="kick"></p>
+      <h1 class="ptitle" id="ptitle"></h1>
+      <p class="psub" id="psub"></p>
+    </div>
+  </header>
+
+  <section class="try">
+    <div class="device" id="device"><div class="screen"><div class="app" id="app"></div></div></div>
+    <aside class="panel" id="panel"></aside>
+  </section>
+
+  <section class="why" id="why"></section>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="ripple" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.09" numOctaves="2" seed="3"><animate attributeName="baseFrequency" dur="18s" values="0.012 0.09;0.014 0.1;0.012 0.09" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="7"/></filter></svg>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  "use strict";
+  var DATA = window.ELARA_W12, appEl = document.getElementById("app"), panelEl = document.getElementById("panel");
+  if (!DATA) { appEl.innerHTML = '<p style="padding:24px">No se pudo cargar el contenido.</p>'; return; }
+  var KEY = "elara-claridad-w12-alt-v1";
+
+  /* ---------------- places: week 1 walks in, week 2 walks back the same path ---------------- */
+  var SY = [55.6, 55.3, 46.6, 50, 57.1, 54.8, 53.5];
+  var PL = { es: ["La orilla", "El banco junto al agua", "El puente", "El río, desde el agua", "La calle del mercado", "La entrada al bambú", "El mirador"], en: ["The riverbank", "The bench by the water", "The bridge", "The river, from the water", "The market street", "The edge of the bamboo forest", "The lookout"] };
+  function photoIx(n) { return n <= 7 ? n - 1 : 14 - n; }
+  function photo(n) { var i = photoIx(n); return { src: "photos/k" + (i + 1) + ".webp", band: "50% " + Math.max(0, Math.min(100, Math.round((SY[i] / 100 * 693 - 174) / 461 * 100))) + "%" }; }
+
+  /* ---------------- interface words (new review chrome; not participant copy) ---------------- */
+  var UI = {
+    es: {
+      kick: "Para María y Ale · Claridad financiera · Semanas 1 y 2 · Una alternativa",
+      ptitle: "Mirar, y después elegir",
+      psub: "Los 14 días aprobados de Claridad financiera, con su mismo orden, objetivos, textos y referencias entre días. La alternativa no cambia las lecciones: añade cuatro capas para aprender mejor (entender, practicar, recibir una respuesta útil y continuar). Todo lo nuevo está marcado como propuesta. Apaga «Capas nuevas» para ver los mismos días como están aprobados.",
+      place: "Arashiyama, Kioto", w: "Semana", day: "Día", of: "de", min: "min",
+      start: "Empezar el día ", resume: "Seguir con el día ", done: " hecho", forToday: "Para qué es hoy",
+      cont: "Continuar", skip: "Saltar", back: "Atrás", exit: "Salir", next: "Seguir", other: "Otra cosa",
+      tabs: ["Hoy", "Tu hilo", "Círculos"], hilo: "Tu hilo", tomorrow: "Mañana: ",
+      save: "Guardar en mi hilo", nosave: "Terminar sin guardar", savedQ: "Lo que llevas de hoy", nothing: "Hoy queda hecho, tal como lo dejaste.",
+      noRecall: "Todavía no hay nada guardado aquí. Puedes seguir igual.", pick: "Elige", upTo: "Elige hasta ", picked: " elegidas",
+      sayNote: "En el prototipo no se graba nada: escribe lo que dirías.", drawClear: "Borrar", photoAdd: "Elegir una foto", photoNote: "La foto solo se ve en esta pantalla; no se guarda.",
+      later: "Elara te espera mañana.", weekDone: "Semana completa", seeHilo: "Ver tu hilo", reread: "Releer el día ",
+      empty: "Aquí aparece lo que guardes cada día. Solo tú lo ves.", notYet: "Todavía no", noPiece: "Ese día no dejó una pieza.", unsaved: "Terminado sin guardar",
+      circles: "Círculos no forma parte de este prototipo.", welcomeT: "Una bienvenida de Alejandra", video: "Video de Alejandra · ", videoNo: "En el prototipo no se reproduce.",
+      introNote: "", weekLetter: "Tu carta de la semana", nextWeek: "La próxima semana: ",
+      /* panel */
+      pLang: "Idioma", pLayers: "Capas nuevas (la alternativa)", pMarks: "Marcar lo que es propuesta", pDays: "Ir a un día", pW1: "Semana 1 · Mirar sin juzgar", pW2: "Semana 2 · De notar a elegir",
+      pFill: "Al saltar, llenar los días anteriores con respuestas de ejemplo", pNext: "Pasar al día siguiente", pReset: "Reiniciar", pScreen: "Pantalla: ",
+      pCmt: "Tu comentario sobre esta pantalla", pCmtPh: "Por ejemplo: esta respuesta no cambia según lo que elegí.", pCopy: "Copiar todos mis comentarios", pCopied: "Copiado", pNoCmt: "Todavía sin comentarios", pCount: " comentarios",
+      pSaved: "Se guarda en este navegador. No se envía nada.", pCopyFail: "No se pudo copiar. Selecciona el texto:"
+    },
+    en: {
+      kick: "For María and Ale · Money Clarity · Weeks 1 and 2 · One alternative",
+      ptitle: "Look, then choose",
+      psub: "The 14 approved Money Clarity days, with the same order, goals, copy and cross-day references. The alternative doesn't change the lessons: it adds four layers for better learning (understanding, practice, useful feedback and continuity). Everything new is marked as a proposal. Turn off “New layers” to see the same days as approved.",
+      place: "Arashiyama, Kyoto", w: "Week", day: "Day", of: "of", min: "min",
+      start: "Start day ", resume: "Continue day ", done: " done", forToday: "What today is for",
+      cont: "Continue", skip: "Skip", back: "Back", exit: "Exit", next: "Next", other: "Something else",
+      tabs: ["Today", "Your thread", "Circles"], hilo: "Your thread", tomorrow: "Tomorrow: ",
+      save: "Save to my thread", nosave: "Finish without saving", savedQ: "What you take from today", nothing: "Today is done, just as you left it.",
+      noRecall: "Nothing saved here yet. You can continue anyway.", pick: "Pick", upTo: "Pick up to ", picked: " picked",
+      sayNote: "Nothing is recorded in the prototype: type what you'd say.", drawClear: "Clear", photoAdd: "Choose a photo", photoNote: "The photo is only shown on this screen; it isn't saved.",
+      later: "Elara will be here tomorrow.", weekDone: "Week complete", seeHilo: "See your thread", reread: "Reread day ",
+      empty: "What you save each day appears here. Only you can see it.", notYet: "Not yet", noPiece: "That day left no piece.", unsaved: "Finished without saving",
+      circles: "Circles isn't part of this prototype.", welcomeT: "A welcome from Alejandra", video: "Alejandra's video · ", videoNo: "It doesn't play in the prototype.",
+      weekLetter: "Your letter for the week", nextWeek: "Next week: ",
+      pLang: "Language", pLayers: "New layers (the alternative)", pMarks: "Mark what's a proposal", pDays: "Go to a day", pW1: "Week 1 · Look without judging", pW2: "Week 2 · From noticing to choosing",
+      pFill: "When jumping, fill earlier days with sample answers", pNext: "Go to the next day", pReset: "Restart", pScreen: "Screen: ",
+      pCmt: "Your comment on this screen", pCmtPh: "For example: this reply doesn't change with what I picked.", pCopy: "Copy all my comments", pCopied: "Copied", pNoCmt: "No comments yet", pCount: " comments",
+      pSaved: "Saved in this browser. Nothing is sent.", pCopyFail: "Couldn't copy. Select the text:"
+    }
+  };
+
+  /* ---------------- PROPOSALS: new participant wording (María and Alejandra to approve) ---------------- */
+  var P = {
+    es: {
+      /* Understanding: the day's idea, said once at the close. Lines marked a:true reuse approved copy. */
+      idea: {
+        1: "Lo que está en tus manos es más pequeño que lo que pesa. Por eso se puede mover.",
+        2: { a: "Las sorpresas sirven. Muestran por dónde se mueve el dinero antes de que hayas podido mirar." },
+        3: "Las decisiones rápidas tienen un momento. Si conoces tu momento, puedes poner una pausa justo antes.",
+        4: { a: "Un límite no es un castigo. Es una decisión que tomas una vez, para no tener que tomarla cada día." },
+        5: { a: "Cuando nombras lo que necesitas, tienes más formas de encontrarlo." },
+        6: { a: "Lo que te quedas es lo que vas a llevar contigo. Más tranquila suele significar más pequeño, no más estricto." },
+        7: { a: "Una regla clara le da a tu mente un ancla fácil cuando el estrés intenta elegir por ti." },
+        8: "Una regla se vuelve tuya cuando la llevas a un lugar real.",
+        9: { a: "Ver dónde ya aparece es como empiezas a elegirlo." },
+        10: { a: "No tienes que quedarte con cada frase que te dieron." },
+        11: "Un gasto se siente bien cuando coincide con lo que te importa. Planearlo a propósito hace que pase más seguido.",
+        12: "Lo que sientes con el dinero cambia. Darle una forma te deja ver si cambió.",
+        13: { a: "Encontrar las palabras cuenta, incluso antes de usarlas." },
+        14: "Una brújula no te dice qué comprar: te recuerda para qué es tu dinero cuando tienes que elegir."
+      },
+      ideaT: "La idea de hoy", practT: "Hoy practicaste",
+      /* Continuity: the piece each day adds to her thread */
+      knot: { 1: "Tu experimento", 2: "Tu sorpresa", 3: "Tu pausa", 4: "Tu límite", 5: "Lo que buscabas", 6: "Te quedas con", 7: "Tu regla", 8: "Dónde la pruebas", 9: "Para qué es tu dinero", 10: "La frase que heredaste", 11: "Un gasto a propósito", 12: "Cómo se siente ahora", 13: "Tus palabras", 14: "Tu brújula" },
+      when4: "Cuando: ", start4: "Empieza: ", other5: "Otra forma: ", still10: "Ya no es mía: ", cmp12: "Comparado con la semana pasada: ", noneKept: "Por ahora, nada.",
+      from: "Viene de tu día ",
+      open5: "El día 3 notaste que el dinero se mueve rápido {d3.when|lower}. Hoy miramos qué busca ese momento.",
+      open10: "Ayer elegiste para qué es tu dinero: {d9.values|lower}. Hoy miramos una frase que a veces empuja en otra dirección.",
+      open13a: "El día 1 dijiste que lo que más pesa es mantener a otras personas. Hoy buscamos palabras para eso.",
+      open13b: "El día 4 notaste que el dinero se te escapa cubriendo a otras personas. Hoy buscamos palabras para eso.",
+      /* Practice: one optional "when" so the experiment has a moment */
+      whenQ: "¿Cuándo lo vas a probar? (opcional)", whenO: ["Por la mañana", "Al mediodía", "Por la tarde", "Por la noche"],
+      pairT: "Tu par", pair: "Cuando busco {reaching|lower}, también puedo: {instead|lower}.",
+      /* Feedback that reads her answer */
+      handsOk: "Separaste lo que depende de ti. Las dos cosas de «Puedo» son pequeñas y de mañana: ahí va tu energía esta semana.",
+      handsIn: "Pusiste «{x}» en «No puedo». Esa sí depende de ti, aunque hoy se sienta difícil. Puede ser tu experimento.",
+      handsOut: "Pusiste «{x}» en «Puedo». Eso no lo decides tú. Lo que sí decides es cómo respondes, por ejemplo en qué gastas mañana.",
+      why2: "Guarda esta sorpresa en tu hilo. El día 3 buscamos el momento en que pasa.",
+      fit: "Encaja con tu momento",
+      fitWhy: ["Tu momento llega rápido; una respiración cabe en un segundo.", "En línea, la pausa más fácil es dejarlo para mañana.", "Cuando alguien te pide dinero, «déjame pensarlo» te da tiempo sin decir que no.", "Cerrar y volver más tarde corta el impulso cuando estás cansada."],
+      chkT: "Revisa tu límite (opcional)", chk: ["Es una sola cosa", "Sé cuándo aplica", "Lo puedo cumplir esta semana"],
+      chkHint: "Si algo no encaja, hazlo más pequeño. Por ejemplo: en vez de «nada de compras», «nada de domicilio entre semana».",
+      chkOk: "Pequeño, concreto y posible: así se ve un límite suave.",
+      keepMany: "Te quedas con {n}. Si una tuviera que ser la principal, ¿cuál sería? Mañana tu regla puede salir de esa.",
+      keepNone: "Esta semana no te quedas con ninguna, y está bien. Tu regla de mañana puede salir de lo que notaste.",
+      ruleFrom: "Hecha con tu día 3", ruleFrom4: "Hecha con tu límite del día 4",
+      where8no: "Pasa, sobre todo al principio. Por eso hoy eliges un lugar concreto para mañana.",
+      where8: "Apareció {x}. Mañana puedes probarla en el mismo lugar o en otro.",
+      share9low: "Es un punto de partida, no una nota. El día 11 vas a planear un gasto que haga espacio para {values#1|lower}.",
+      share9: "Ya aparece. El día 11 vas a planear uno más, a propósito.",
+      still10n: "Marcaste {n} como «Ya no es mía». No tienes que convencerte de nada: basta con notar cuándo hablan.",
+      still10z: "Por ahora todas siguen siendo tuyas. Notar cuándo hablan ya es un paso.",
+      weekT: "Tu semana en tu hilo", twoT: "Tus dos semanas"
+    },
+    en: {
+      idea: {
+        1: "What's in your hands is smaller than what weighs on you. That's why it can move.",
+        2: { a: "Surprises are useful. They show where money moves before you've had a chance to look." },
+        3: "Quick decisions have a moment. If you know your moment, you can put a pause right before it.",
+        4: { a: "A boundary isn't a punishment. It's a decision you make once, so you don't have to make it every day." },
+        5: { a: "When you name what you need, you have more ways to find it." },
+        6: { a: "What you keep is what you'll carry. Calmer usually means smaller, not stricter." },
+        7: { a: "A clear rule gives your mind an easy anchor when stress tries to choose for you." },
+        8: "A rule becomes yours when you take it somewhere real.",
+        9: { a: "Seeing where it already shows up is how you start choosing it." },
+        10: { a: "You don't have to keep every sentence you were handed." },
+        11: "A spend feels good when it matches what matters to you. Planning it on purpose makes that happen more often.",
+        12: "How money feels changes. Giving it a shape lets you see whether it changed.",
+        13: { a: "Finding the words counts, even before you use them." },
+        14: "A compass doesn't tell you what to buy: it reminds you what your money is for when you have to choose."
+      },
+      ideaT: "Today's idea", practT: "Today you practiced",
+      knot: { 1: "Your experiment", 2: "Your surprise", 3: "Your pause", 4: "Your boundary", 5: "What you were reaching for", 6: "You're keeping", 7: "Your rule", 8: "Where you'll try it", 9: "What your money is for", 10: "The sentence you inherited", 11: "A spend on purpose", 12: "How it feels now", 13: "Your words", 14: "Your compass" },
+      when4: "When: ", start4: "Starts: ", other5: "Another way: ", still10: "No longer mine: ", cmp12: "Compared with last week: ", noneKept: "Nothing for now.",
+      from: "From your day ",
+      open5: "On day 3 you noticed money moves fastest {d3.when|lower}. Today we look at what that moment is reaching for.",
+      open10: "Yesterday you chose what your money is for: {d9.values|lower}. Today we look at a sentence that sometimes pulls the other way.",
+      open13a: "On day 1 you said supporting other people weighs the most. Today we look for words for that.",
+      open13b: "On day 4 you noticed money slipping away covering for other people. Today we look for words for that.",
+      whenQ: "When will you try it? (optional)", whenO: ["In the morning", "At midday", "In the afternoon", "In the evening"],
+      pairT: "Your pair", pair: "When I'm reaching for {reaching|lower}, I can also: {instead|lower}.",
+      handsOk: "You separated what depends on you. The two things under “I can” are small and about tomorrow: that's where your energy goes this week.",
+      handsIn: "You put “{x}” under “I can't”. That one does depend on you, even if it feels hard today. It could be your experiment.",
+      handsOut: "You put “{x}” under “I can”. That isn't yours to decide. What you do decide is how you respond, for example what you spend on tomorrow.",
+      why2: "Keep this surprise in your thread. On day 3 we look for the moment it happens.",
+      fit: "Fits your moment",
+      fitWhy: ["Your moment comes fast; one breath fits in a second.", "Online, the easiest pause is leaving it until tomorrow.", "When someone asks you for money, “let me think about it” gives you time without saying no.", "Closing the app and coming back later breaks the pull when you're tired."],
+      chkT: "Check your boundary (optional)", chk: ["It's one thing", "I know when it applies", "I can keep it this week"],
+      chkHint: "If something doesn't fit, make it smaller. For example: instead of “no shopping”, “no takeout on weeknights”.",
+      chkOk: "Small, specific and doable: that's what a gentle boundary looks like.",
+      keepMany: "You're keeping {n}. If one had to be the main one, which would it be? Tomorrow your rule can grow from that one.",
+      keepNone: "You're not keeping any this week, and that's fine. Tomorrow's rule can grow from what you noticed.",
+      ruleFrom: "Built from your day 3", ruleFrom4: "Built from your day 4 boundary",
+      where8no: "That happens, especially at first. That's why today you pick one specific place for tomorrow.",
+      where8: "It showed up {x}. Tomorrow you can try it in the same place or somewhere new.",
+      share9low: "That's a starting point, not a grade. On day 11 you'll plan one spend that makes room for {values#1|lower}.",
+      share9: "It's already showing up. On day 11 you'll plan one more, on purpose.",
+      still10n: "You marked {n} as “No longer mine”. You don't have to convince yourself of anything: just notice when they speak.",
+      still10z: "For now they're all still yours. Noticing when they speak is already a step.",
+      weekT: "Your week in your thread", twoT: "Your two weeks"
+    }
+  };
+  /* Day 7: a rule built from her own day 3 (when + pause), in first person. Proposal. */
+  var RULE3 = {
+    es: { when: ["Cuando es de noche y estoy con el celular", "Cuando estoy cansada o estresada", "Cuando alguien me pide dinero", "Cuando estoy en la caja", "Justo después de cobrar"], pause: ["respiro una vez antes de pagar", "lo dejo en el carrito hasta mañana", "digo «déjame pensarlo»", "cierro la app y vuelvo más tarde"], b: "Mantengo mi límite: {d4.boundary|lower}." },
+    en: { when: ["Late at night on my phone", "When I'm tired or stressed", "When someone asks me for money", "At checkout", "Right after payday"], pause: ["I take one breath before I pay", "I leave it in the cart until tomorrow", "I say “let me think about it”", "I close the app and come back later"], b: "I keep my boundary: {d4.boundary|lower}." }
+  };
+
+  /* ---------------- state ---------------- */
+  function fresh() { return { lang: "es", layers: true, marks: true, fill: true, day: 1, done: {}, saved: {}, ans: {}, view: "home", tab: 0, si: 0, rep: {}, cm: {} }; }
+  var S = fresh();
+  try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.ans) S = Object.assign(fresh(), o); } } catch (e) {}
+  if (location.hash === "#en") S.lang = "en"; else if (location.hash === "#es") S.lang = "es";
+  function persist() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  function U() { return UI[S.lang]; }
+  function PP() { return P[S.lang]; }
+  function C(n) { return DATA[S.lang].days[n - 1]; }
+  function STR(n) { return DATA.structure[n - 1].steps; }
+  function stepCopy(n, id) { return C(n).steps[id]; }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function A(n) { if (!S.ans[n]) S.ans[n] = {}; return S.ans[n]; }
+  /* Callbacks use only what she kept: a day finished without saving reads as empty everywhere else. */
+  function usable(n, from) { return n === from || !(S.layers && S.saved[n] === false); }
+  function prop(html, block) { return S.layers ? (block ? html : '<ins class="p">' + html + "</ins>") : ""; }
+  function tag() { return '<span class="tag2">' + (S.lang === "es" ? "Propuesta" : "Proposal") + "</span>"; }
+
+  /* ---------------- reading answers ---------------- */
+  function cfg(n, id) { var s = STR(n).find(function (x) { return x.id === id; }); return s ? (s.config || {}) : {}; }
+  function kind(n, id) { var s = STR(n).find(function (x) { return x.id === id; }); return s ? s.kind : null; }
+  function optsFor(n, id) {
+    var c = stepCopy(n, id), cf = cfg(n, id), list = [];
+    if (cf.optionsFrom) { var src = val(n, cf.optionsFrom, n); if (Array.isArray(src)) src.forEach(function (t) { list.push(t); }); }
+    (c.options || []).forEach(function (t) { list.push(t); });
+    return list;
+  }
+  function val(n, id, from) {
+    if (from != null && !usable(n, from)) return null;
+    var v = (S.ans[n] || {})[id]; if (!v || v.skip) return null;
+    var k = kind(n, id), c = stepCopy(n, id);
+    if (k === "choose") return v.other ? v.other : (v.k != null ? optsFor(n, id)[v.k] : null);
+    if (k === "multi") { var cf = cfg(n, id), arr = (v.picks || []).filter(function (i) { return i !== cf.exclusiveOption; }).map(function (i) { return c.options[i]; }); if (v.other) arr.push(v.other); return arr.length ? arr : null; }
+    if (k === "scale") return c.stops[v.i];
+    if (k === "followUp" || k === "resonance") return c.options[v.k];
+    if (k === "reflect") return v.t ? v.t : (v.drew ? (S.lang === "es" ? "(un dibujo)" : "(a drawing)") : null);
+    if (k === "blanks") return (v.f || []).some(Boolean) ? v.f : null;
+    if (k === "photo") return v.cap || null;
+    if (k === "sort") return v.m || null;
+    return null;
+  }
+  function joinList(a) { var y = S.lang === "es" ? " y " : " and "; if (a.length < 2) return a.join(""); return a.slice(0, -1).join(", ") + y + a[a.length - 1]; }
+  /* {d3.pause|lower}, {values#1}, {d9.values|lower}: approved tokens. A missing value fails the whole line so the fallback shows. */
+  function tpl(str, n) {
+    if (str == null) return null;
+    var ok = true;
+    var out = String(str).replace(/\{([^}]+)\}/g, function (_, ref) {
+      var m = ref.match(/^(?:d(\d+)\.)?([a-zA-Z]+)(?:#(\d+))?(?:\|(lower))?$/);
+      if (!m) { if (/^[a-z]$/.test(ref)) return "{" + ref + "}"; ok = false; return ""; }
+      var d = m[1] ? +m[1] : n, v = val(d, m[2], n);
+      if (Array.isArray(v)) v = m[3] ? v[+m[3] - 1] : joinList(v);
+      if (v == null || v === "") { ok = false; return ""; }
+      v = String(v).replace(/^[“"«]|[”"»]$/g, "");
+      return m[4] ? v.toLowerCase() : v;
+    });
+    return ok ? out : null;
+  }
+  function T(str, fb, n) { var r = tpl(str, n); if (r != null) return r; if (fb != null) { r = tpl(fb, n); if (r != null) return r; } return null; }
+  function fill(s, o) { return String(s).replace(/\{(\w)\}/g, function (_, k) { return o[k] != null ? o[k] : ""; }); }
+
+  /* ---------------- the thread: what each day adds ---------------- */
+  function knot(n) {
+    var a = S.ans[n] || {}, p = PP(), v = function (id) { return val(n, id); };
+    var main = null, extra = null;
+    switch (n) {
+      case 1: main = v("commit"); if (a._when != null) extra = p.whenO[a._when]; break;
+      case 2: main = v("surprised"); extra = v("why"); break;
+      case 3: main = v("pause"); extra = v("when") ? p.when4 + v("when") : null; break;
+      case 4: main = v("boundary"); extra = v("start") ? p.start4 + v("start") : null; break;
+      case 5: main = v("reaching"); extra = v("instead") ? p.other5 + v("instead") : null; break;
+      case 6: var m = v("keep"), kp = []; if (m) Object.keys(m).forEach(function (i) { if (m[i] === 0) kp.push(stepCopy(6, "keep").items[i]); }); main = kp.length ? joinList(kp) : (m ? p.noneKept : null); break;
+      case 7: main = v("mine") || v("rule"); break;
+      case 8: main = v("tomorrow"); break;
+      case 9: var vv = v("values"); main = vv ? vv.map(function (x, i) { return (i + 1) + ". " + x; }).join("  ") : null; extra = v("little"); break;
+      case 10: main = v("sentence"); var sm = v("still"), no = []; if (sm) Object.keys(sm).forEach(function (i) { if (sm[i] === 1) no.push(stepCopy(10, "still").items[i].replace(/\.$/, "")); }); extra = no.length ? p.still10 + joinList(no) : null; break;
+      case 11: main = v("plan"); extra = a.plan && a.plan.detail ? a.plan.detail : v("photo"); break;
+      case 12: main = v("title"); extra = v("compare") ? p.cmp12 + v("compare").toLowerCase() : null; break;
+      case 13: var w = v("words"); if (w) { var f = stepCopy(13, "words").fields; main = w.map(function (x, i) { return x ? f[i] + " " + x + "." : ""; }).filter(Boolean).join(" "); } extra = v("when"); break;
+      case 14: main = v("compass"); break;
+    }
+    return main ? { label: p.knot[n], main: main, extra: extra } : null;
+  }
+
+  /* ---------------- icons ---------------- */
+  function ico(k, s) { s = s || 18; var P2 = { pin: '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>', arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>', check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>', x: '<path d="M6 6l12 12M18 6L6 18"/>', back: '<path d="M19 12H5M11 6l-6 6 6 6"/>', play: '<path d="M8 5l11 7-11 7z" fill="currentColor"/>', sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>', thread: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="12" r="2.5"/><circle cx="7" cy="18" r="2.5"/><path d="M8.3 7.2l7.4 3.6M15.8 13.4l-6.7 3.4"/>', people: '<circle cx="9" cy="8" r="3.2"/><path d="M3 19c.6-3.3 3-5 6-5s5.4 1.7 6 5"/><path d="M16 5.5a3 3 0 0 1 0 5.6M18 14.5c1.6.6 2.7 2 3 4.5"/>', lock: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>' }; return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + P2[k] + "</svg>"; }
+
+  /* ---------------- screens ---------------- */
+  function weekOf(n) { return n <= 7 ? 1 : 2; }
+  function dayInWeek(n) { return n <= 7 ? n : n - 7; }
+  function eyebrowTxt(n) { var u = U(); return u.w + " " + weekOf(n) + " · " + (C(n).level) + " · " + u.day + " " + dayInWeek(n) + " " + u.of + " 7"; }
+  function tabs(i) { var u = U(); return '<nav class="tabs">' + ["sun", "thread", "people"].map(function (k, j) { return '<button type="button" data-act="tab" data-i="' + j + '"' + (i === j ? ' aria-current="page"' : "") + ">" + ico(k, 24) + "<span>" + u.tabs[j] + "</span></button>"; }).join("") + "</nav>"; }
+  function hero(n) { var ph = photo(n); return '<div class="heroBox" style="--water:1"><div class="heroInner"><img class="hero" src="' + ph.src + '" alt="" style="object-position:50% 0%"></div></div>'; }
+  function header(n) { var u = U(); return '<div class="hdr"><div class="pills"><p class="place">' + ico("pin", 16) + esc(u.place) + '</p><p class="place dayplace">' + u.day + " " + n + " · " + esc(PL[S.lang][photoIx(n)]) + "</p></div></div>"; }
+  function minutes(n) { return (DATA.structure[n - 1].config || {}).minutes || 3; }
+
+  function homeHTML() {
+    var u = U(), n = S.day, c = C(n), body = "", done = !!S.done[n];
+    if (!done) {
+      var started = S.view === "home" && S.si > 0 && S.sday === n;
+      body = '<p class="eyebrow">' + esc(eyebrowTxt(n)) + "</p>" +
+        '<h1 class="title">' + esc(c.title) + "</h1>" +
+        '<p class="purpose"><span class="label">' + u.forToday + "</span>" + esc(c.body) + "</p>" +
+        '<p class="meta">' + ico("lock", 14) + "<span>~" + minutes(n) + " " + u.min + "</span></p>" +
+        '<button type="button" class="btn mt14" data-act="start">' + (started ? u.resume : u.start) + n + ico("arrow", 20) + "</button>";
+      if (c.intro) body += '<button type="button" class="welcome" data-act="video"><span class="playdisc">' + ico("play", 16) + '</span><span class="t"><span class="label">' + esc(c.intro.title) + "</span><b>" + u.welcomeT + "</b></span></button>" + (S.video === n ? '<p class="voice it">' + esc(c.intro.note) + "</p>" : "");
+      if (S.layers) { var last = lastKnot(n); if (last) body += '<div class="slip"><span class="kic">' + ico("thread", 18) + '</span><span class="kb"><span class="label">' + esc(last.k.label) + " · " + u.day + " " + last.n + tag() + '</span><span class="kept">' + esc(last.k.main) + "</span></span></div>"; }
+    } else {
+      var k = S.layers && S.saved[n] !== false ? knot(n) : null, nx = n < 14 ? C(n + 1) : null;
+      body = '<p class="eyebrow done"><span class="tick">' + ico("check", 12) + "</span><span>" + u.day + " " + n + u.done + (n === 7 || n === 14 ? " · " + u.weekDone : "") + "</span></p>" +
+        '<h1 class="title">' + esc(c.title) + "</h1>" +
+        (k ? '<div class="slip today"><span class="kic">' + ico("thread", 18) + '</span><span class="kb"><span class="label">' + esc(k.label) + tag() + '</span><span class="kept">' + esc(k.main) + "</span></span></div>" : '<p class="voice it mt14">' + u.nothing + "</p>") +
+        (nx ? '<p class="next mt14">' + u.tomorrow + esc(nx.title) + "</p>" : "") +
+        '<div class="links mt10"><button type="button" class="link u" data-act="reread"><span>' + u.reread + n + "</span></button>" + (S.layers ? '<button type="button" class="link u" data-act="tab" data-i="1"><span>' + u.seeHilo + "</span></button>" : "") + "</div>";
+    }
+    return '<div class="home">' + hero(n) + '<div class="scroll"><div class="col"><div class="spacer">' + header(n) + '</div><section class="page2">' + body + "</section></div></div>" + tabs(0) + "</div>";
+  }
+  function lastKnot(n) { for (var d = n - 1; d >= 1; d--) { if (S.done[d] && usable(d, n)) { var k = knot(d); if (k) return { n: d, k: k }; } } return null; }
+
+  function hiloHTML() {
+    var u = U(), p = PP(), rows = "";
+    for (var d = 1; d <= 14; d++) {
+      if (d === 1 || d === 8) rows += '<li style="grid-template-columns:1fr"><p class="wk2">' + (d === 1 ? u.pW1 : u.pW2) + "</p></li>";
+      var k = S.done[d] && S.saved[d] !== false ? knot(d) : null;
+      rows += '<li class="' + (k ? "on" : "") + '"><span class="kd">' + d + '</span><span><span class="hl1">' + esc(p.knot[d]) + '</span><br><span class="hl2">' + (k ? esc(k.main) : '<span class="hl3">' + (S.done[d] ? (S.saved[d] === false ? u.unsaved : u.noPiece) : u.notYet) + "</span>") + "</span>" + (k && k.extra ? '<br><span class="hl3">' + esc(k.extra) + "</span>" : "") + "</span></li>";
+    }
+    return '<div class="plain"><div class="scroll"><div class="pcol"><div class="pcard"><p class="eyebrow">' + u.hilo + tag() + '</p><p class="hint">' + u.empty + '</p><ul class="hilo">' + rows + "</ul></div></div></div>" + tabs(1) + "</div>";
+  }
+
+  /* ---------------- a step ---------------- */
+  function steps(n) { return STR(n); }
+  function stepHTML(n, i) {
+    var st = steps(n)[i], id = st.id, k = st.kind, cf = st.config || {}, c = stepCopy(n, id), a = A(n), v = a[id], u = U(), p = PP(), h = "";
+    var title = T(c.title, c.titleFallback, n);
+    if (title == null) title = (c.titleFallback || c.title || "").replace(/\{[^}]+\}/g, "…");
+    /* continuity layer: where today comes from (days without an approved callback) */
+    if (i === 0 && S.layers) {
+      var open = null;
+      if (n === 5) open = T(p.open5, null, n);
+      if (n === 10) open = T(p.open10, null, n);
+      if (n === 13) { var pr = (S.ans[1] || {}).pressure, sl = (S.ans[4] || {}).slips; if (usable(1, 13) && pr && pr.k === 4) open = p.open13a; else if (usable(4, 13) && sl && (sl.picks || []).indexOf(3) >= 0) open = p.open13b; }
+      if (open) h += '<div class="yday"><p class="label">' + p.from.trim() + tag() + '</p><p class="voice">' + esc(open) + "</p></div>";
+    }
+    if (c.eyebrow) h += '<p class="label">' + esc(c.eyebrow) + "</p>";
+    h += '<h2 class="h2" tabindex="-1" data-focus>' + esc(title) + "</h2>";
+    if (c.body && k !== "followUp") h += '<p class="hint">' + esc(c.body) + "</p>";
+    if (c.remember) { var rm = T(c.remember, c.rememberFallback, n); if (rm) h += '<div class="yday"><p class="voice">' + esc(rm) + "</p></div>"; }
+    if (c.prompt) h += '<p class="q">' + esc(c.prompt) + "</p>";
+
+    if (k === "read") {
+      if (cf.breaths) h += '<div class="breath">' + (S.lang === "es" ? "Inhala · exhala" : "Breathe in · out") + "</div>";
+      if (c.bullets) { var bl = c.bullets.map(function (b) { return T(b, null, n); }).filter(Boolean); if (cf.rehearse) h += '<div class="say">' + bl.map(function (b) { return "<p>" + esc(b) + "</p>"; }).join("") + "</div>"; else h += '<ul class="read sm" style="padding-left:20px;display:flex;flex-direction:column;gap:6px">' + bl.map(function (b) { return "<li>" + esc(b) + "</li>"; }).join("") + "</ul>"; }
+      if (c.noticedQuote) h += '<div class="rulebox"><p class="ruletext">' + esc(c.noticedQuote) + "</p></div>";
+      if (c.note) h += '<p class="hint">' + esc(c.note) + "</p>";
+    }
+    if (k === "recall") {
+      var labs = c.recallLabels || [];
+      h += '<div class="rec">' + (cf.recall || []).map(function (r, j) { var x = val(r.day, r.step, n); if (Array.isArray(x)) x = joinList(x); return '<div class="recitem"><span class="label">' + esc(labs[j] || "") + " · " + u.day + " " + r.day + '</span><span class="rv">' + (x ? "«" + esc(String(x).replace(/^[“"«]|[”"»]$/g, "")) + "»" : '<span class="hint">' + u.noRecall + "</span>") + "</span></div>"; }).join("") + "</div>";
+      if (c.note) h += '<p class="hint">' + esc(c.note) + "</p>";
+    }
+    if (k === "choose" || k === "followUp" || k === "resonance") {
+      if (k === "followUp" && c.body) h += '<p class="hint">' + esc(c.body) + "</p>";
+      if (k === "resonance") { var nt = c.noticed ? T(c.noticed, c.noticedFallback, n) : null; if (nt) h += '<p class="voice">' + esc(nt) + "</p>"; if (c.noticedQuote) h += '<div class="rulebox"><p class="ruletext">' + esc(c.noticedQuote) + "</p></div>"; }
+      var list = k === "choose" ? optsFor(n, id) : c.options, subs = c.sublines || [];
+      var extraOpts = [];
+      if (n === 7 && id === "rule" && S.layers) extraOpts = ruleFromHer();
+      var rec = (n === 3 && id === "pause" && S.layers) ? fitPause() : -1;
+      var grid = cf.layout === "grid";
+      h += '<div class="' + (grid ? "grid2" : "opts") + '">';
+      extraOpts.forEach(function (o, j) { var on = v && v.ext === j; h += '<div class="optwrap' + (on ? " sel" : "") + '"><button type="button" class="opt" data-act="pick" data-x="' + j + '" aria-pressed="' + !!on + '"><span class="radio"></span><span><ins class="p">' + esc(o.t) + '</ins><span class="sub">' + esc(o.s) + tag() + "</span></span></button></div>"; });
+      list.forEach(function (t, j) {
+        var on = v && v.k === j && v.ext == null, sb = subs[j] ? T(subs[j], null, n) : null;
+        h += '<div class="optwrap' + (on ? " sel" : "") + '"><button type="button" class="opt" data-act="pick" data-k="' + j + '" aria-pressed="' + !!on + '">' + (grid ? "" : '<span class="radio"></span>') + "<span>" + esc(t) + (sb ? '<span class="sub">' + esc(sb) + "</span>" : "") + (j === rec ? '<br><span class="fit">' + p.fit + "</span>" + tag() : "") + "</span></button>" +
+          (on && k === "followUp" && c.replies ? '<div class="resp"><p class="voice">' + esc(c.replies[j]) + "</p></div>" : "") + "</div>";
+      });
+      if (c.otherLabel) { var oo = v && v.other != null; h += '<div class="optwrap' + (oo ? " sel" : "") + '"><button type="button" class="opt" data-act="pickother" aria-pressed="' + oo + '">' + (grid ? "" : '<span class="radio"></span>') + "<span>" + esc(c.otherLabel) + (c.otherSubline ? '<span class="sub">' + esc(c.otherSubline) + "</span>" : "") + "</span></button>" + (oo ? '<div class="resp"><input class="inp" data-in="other" value="' + esc(v.other) + '" placeholder="' + esc(c.otherPlaceholder || "") + '" aria-label="' + esc(c.otherLabel) + '"></div>' : "") + "</div>"; }
+      h += "</div>";
+      if (c.detailLabel && v && (v.k != null || v.other != null)) h += '<div class="fieldrow"><label for="det">' + esc(c.detailLabel) + '</label><input id="det" class="inp" data-in="detail" value="' + esc(v.detail || "") + '" placeholder="' + esc(c.detailPlaceholder || "") + '"></div>';
+      if (rec >= 0 && S.layers) h += '<div class="layer"><p class="lt">' + p.fit + tag() + "</p><p>" + esc(p.fitWhy[rec]) + "</p></div>";
+    }
+    if (k === "multi") {
+      var picks = (v && v.picks) || [], max = cf.maxPicks || c.options.length, grid2 = cf.layout === "grid";
+      h += '<p class="hint">' + (picks.length ? picks.length + "/" + max : "") + "</p>";
+      h += '<div class="' + (grid2 ? "grid2" : "opts") + '">' + c.options.map(function (t, j) { var ix = picks.indexOf(j), on = ix >= 0, sb = c.sublines && c.sublines[j] ? T(c.sublines[j], null, n) : null; return '<div class="optwrap' + (on ? " sel" : "") + '"><button type="button" class="opt" data-act="multi" data-k="' + j + '" aria-pressed="' + on + '">' + (cf.ranked ? '<span class="rank' + (on ? "" : " e") + '">' + (on ? ix + 1 : "") + "</span>" : '<span class="box">' + (on ? ico("check", 14) : "") + "</span>") + "<span>" + esc(t) + (sb ? '<span class="sub">' + esc(sb) + "</span>" : "") + "</span></button></div>"; }).join("") + "</div>";
+      if (c.otherLabel) h += '<input class="inp" data-in="mother" value="' + esc((v && v.other) || "") + '" placeholder="' + esc(c.otherLabel + " · " + (c.otherPlaceholder || "")) + '" aria-label="' + esc(c.otherLabel) + '">';
+    }
+    if (k === "sort") {
+      var m = (v && v.m) || {};
+      h += '<div class="opts">' + c.items.map(function (t, j) { var off = n === 1 && id === "hands" && S.layers && m[j] != null && m[j] !== (j === 0 || j === 2 ? 0 : 1); return '<div class="sortrow' + (off ? " off" : "") + '"><p class="st">' + esc(t) + '</p><div class="sb">' + c.columns.map(function (col, ci) { return '<button type="button" data-act="sort" data-k="' + j + '" data-c="' + ci + '" aria-pressed="' + (m[j] === ci) + '">' + esc(col) + "</button>"; }).join("") + "</div></div>"; }).join("") + "</div>";
+    }
+    if (k === "scale") h += '<div class="scale">' + c.stops.map(function (t, j) { return '<button type="button" data-act="scale" data-k="' + j + '" aria-pressed="' + !!(v && v.i === j) + '">' + esc(t) + "</button>"; }).join("") + "</div>";
+    if (k === "reflect") {
+      var modes = cf.modes || ["write"];
+      if (modes.indexOf("draw") >= 0 && modes.indexOf("write") < 0 && modes.indexOf("say") < 0) h += '<canvas class="pad" id="pad" aria-label="' + esc(title) + '"></canvas><button type="button" class="skip" data-act="clearpad" style="align-self:flex-start">' + u.drawClear + "</button>";
+      if (c.ideas) h += '<div class="ideas">' + c.ideas.map(function (t, j) { return '<button type="button" class="chipbtn" data-act="idea" data-k="' + j + '">' + esc(t) + "</button>"; }).join("") + "</div>";
+      if (id !== "draw") {
+        var pre = v && v.t != null ? v.t : prefill(n, id, c, cf);
+        if (pre && !(v && v.t != null) && !(v && v.skip)) { A(n)[id] = Object.assign({}, v, { t: pre }); }
+        if (modes.indexOf("say") >= 0 && modes.indexOf("write") < 0) h += '<p class="hint">' + u.sayNote + "</p>";
+        h += '<textarea class="field" data-in="t" aria-label="' + esc(title) + '" placeholder="' + esc(c.placeholder || "") + '">' + esc(pre || "") + "</textarea>";
+      }
+      if (c.note) h += '<p class="hint">' + esc(c.note) + "</p>";
+    }
+    if (k === "blanks") {
+      var f = (v && v.f) || ["", "", ""];
+      h += c.fields.map(function (lab, j) { return '<div class="fieldrow"><label for="bf' + j + '">' + esc(lab) + '…</label><input id="bf' + j + '" class="inp" data-in="f" data-k="' + j + '" value="' + esc(f[j] || "") + '" placeholder="' + esc(c.placeholders[j] || "") + '"><div class="ideas">' + (c.examples[j] || []).map(function (t) { return '<button type="button" class="chipbtn" data-act="ex" data-k="' + j + '" data-t="' + esc(t) + '">' + esc(t) + "</button>"; }).join("") + "</div></div>"; }).join("");
+    }
+    if (k === "photo") {
+      h += '<div class="photoin">' + (S.photoURL ? '<img src="' + S.photoURL + '" alt="">' : "") + '<label class="btn2 small" style="display:inline-flex;align-items:center;cursor:pointer">' + u.photoAdd + '<input type="file" accept="image/*" data-in="photo" class="sr"></label><p class="hint">' + u.photoNote + '</p><p class="hint">' + esc(c.note) + '</p><input class="inp" data-in="cap" value="' + esc((v && v.cap) || "") + '" placeholder="' + esc(c.placeholder) + '"></div>';
+    }
+    /* Elara's approved reply, then the proposal layers that read her answer */
+    h += replyBlock(n, id, k, c, v);
+    return h;
+  }
+  function prefill(n, id, c, cf) {
+    if (c.prefill) return T(c.prefill, c.prefillFallback, n) || "";
+    if (cf.prefillFrom) { var r = (S.ans[n] || {})[cf.prefillFrom]; if (r && r.ext != null) { var e = ruleFromHer()[r.ext]; return e ? e.t : ""; } var x = val(n, cf.prefillFrom); return x ? String(x).replace(/^[“"«]|[”"»]$/g, "") : ""; }
+    return "";
+  }
+  function answered(n, id) {
+    var v = (S.ans[n] || {})[id], k = kind(n, id);
+    if (!v) return k === "read" || k === "recall";
+    if (v.skip) return true;
+    if (k === "sort") { var c = stepCopy(n, id); return Object.keys(v.m || {}).length === c.items.length; }
+    if (k === "multi") return (v.picks || []).length > 0 || !!v.other;
+    if (k === "reflect") return !!(v.t && v.t.trim()) || !!v.drew;
+    if (k === "blanks") return (v.f || []).some(function (x) { return x && x.trim(); });
+    if (k === "photo") return !!(v.cap || v.has);
+    return true;
+  }
+  function needsReplyTap(n, id) { var k = kind(n, id); return (k === "reflect" || k === "sort" || k === "blanks") && !!stepCopy(n, id).elara; }
+  function replyBlock(n, id, k, c, v) {
+    var p = PP(), h = "", key = n + "." + id, show = v && !v.skip && answered(n, id) && (!needsReplyTap(n, id) || S.rep[key]);
+    if (!show) return "";
+    if (c.elara && k !== "read") h += '<div class="reply" role="status"><span class="orb" aria-hidden="true"></span><p>' + esc(T(c.elara, null, n) || c.elara) + "</p></div>";
+    if (!S.layers) return h;
+    var L = function (txt, soft, title) { return txt ? '<div class="layer' + (soft ? " soft" : "") + '">' + (title ? '<p class="lt">' + esc(title) + tag() + "</p>" : "") + "<p>" + (title ? "" : tag() + " ") + esc(txt) + "</p></div>" : ""; };
+    if (n === 1 && id === "hands") { var m = v.m, ci = stepCopy(1, "hands").items, wrongIn = [0, 2].filter(function (j) { return m[j] === 1; }), wrongOut = [1, 3].filter(function (j) { return m[j] === 0; }); h += wrongIn.length ? L(fill(p.handsIn, { x: ci[wrongIn[0]] }), true) : wrongOut.length ? L(fill(p.handsOut, { x: ci[wrongOut[0]] }), true) : L(p.handsOk); }
+    if ((n === 1 && id === "commit") || (n === 5 && id === "instead")) { var aw = A(n)._when; h += '<div class="layer"><p class="lt">' + esc(p.whenQ) + tag() + '</p><div class="chips">' + p.whenO.map(function (t, j) { return '<button type="button" class="chipbtn' + (aw === j ? " on" : "") + '" data-act="when" data-k="' + j + '" aria-pressed="' + (aw === j) + '">' + esc(t) + "</button>"; }).join("") + "</div></div>"; }
+    if (n === 5 && id === "instead") { var pr = T(p.pair, null, 5); if (pr) h += '<div class="knot"><p class="label">' + p.pairT + tag() + '</p><p class="kv">' + esc(pr) + "</p></div>"; }
+    if (n === 2 && id === "why") h += L(p.why2);
+    if (n === 4 && id === "boundary") { var ch = A(4)._chk || []; h += '<div class="layer"><p class="lt">' + esc(p.chkT) + tag() + '</p><div class="chips col">' + p.chk.map(function (t, j) { var on = ch.indexOf(j) >= 0; return '<button type="button" class="chipbtn' + (on ? " on" : "") + '" data-act="chk" data-k="' + j + '" aria-pressed="' + on + '">' + (on ? "✓ " : "") + esc(t) + "</button>"; }).join("") + "</div>" + (A(4)._chkTouched ? "<p>" + esc(ch.length === 3 ? p.chkOk : p.chkHint) + "</p>" : "") + "</div>"; }
+    if (n === 6 && id === "keep") { var kept = Object.keys(v.m).filter(function (j) { return v.m[j] === 0; }).length; if (kept > 2) h += L(fill(p.keepMany, { n: kept })); if (kept === 0) h += L(p.keepNone); }
+    if (n === 8 && id === "where") h += v.k === 4 ? L(p.where8no) : L(fill(p.where8, { x: String(val(8, "where")).toLowerCase() }));
+    if (n === 9 && id === "share") { var t9 = v.i === 0 ? T(p.share9low, null, 9) : p.share9; h += L(t9); }
+    if (n === 10 && id === "still") { var no = Object.keys(v.m).filter(function (j) { return v.m[j] === 1; }).length; h += L(no ? fill(p.still10n, { n: no }) : p.still10z); }
+    return h;
+  }
+  function fitPause() {
+    var w = (S.ans[3] || {}).when, t = (S.ans[3] || {}).time;
+    if (!w || w.k == null) return -1;
+    var map = { 0: 1, 2: 2, 3: 0, 4: 1 };
+    if (w.k === 1) return t && t.i != null && t.i <= 1 ? 0 : 3;
+    return map[w.k] != null ? map[w.k] : -1;
+  }
+  function ruleFromHer() {
+    var r = RULE3[S.lang], p = PP(), out = [], w = (S.ans[3] || {}).when, pz = (S.ans[3] || {}).pause;
+    if (usable(3, 7) && w && w.k != null && pz && pz.k != null) out.push({ t: "“" + r.when[w.k] + ", " + r.pause[pz.k] + ".”", s: p.ruleFrom });
+    var b = T(r.b, null, 7); if (b) out.push({ t: "“" + b + "”", s: p.ruleFrom4 });
+    return out;
+  }
+
+  function sessHTML() {
+    var n = S.sday, list = steps(n), i = S.si, st = list[i], u = U(), c = stepCopy(n, st.id), ph = photo(n);
+    var dots = list.map(function (_, j) { return "<i" + (j < i ? ' class="d"' : j === i ? ' class="c"' : "") + "></i>"; }).join("");
+    var inner = stepHTML(n, i), isLast = i === list.length - 1, ok = answered(n, st.id), key = n + "." + st.id;
+    var waitReply = ok && needsReplyTap(n, st.id) && !S.rep[key] && !((S.ans[n] || {})[st.id] || {}).skip;
+    var cta = waitReply ? u.cont : (c.cta || (isLast ? u.cont : u.cont));
+    var optional = st.kind !== "read" && st.kind !== "recall";
+    return '<div class="sess"><div class="scroll"><div class="band"><img src="' + ph.src + '" alt="" style="object-position:' + ph.band + '"><div class="bandbar"><button type="button" class="xbtn" data-act="exit" aria-label="' + u.exit + '">' + ico("x", 18) + '</button><span class="moments">' + u.day + " " + n + ' <span class="dots">' + dots + "</span></span></div></div>" +
+      '<div class="sheet">' + inner + "</div></div>" +
+      '<div class="actions"><div class="row2b">' + (i > 0 ? '<button type="button" class="btn2" data-act="back">' + u.back + "</button>" : "") + '<button type="button" class="btn" data-act="next"' + (ok || st.kind === "read" || st.kind === "recall" ? "" : " disabled") + ">" + esc(cta) + "</button></div>" +
+      (optional && !ok ? '<button type="button" class="skip" data-act="skip" style="align-self:center">' + esc(c.skipLabel || u.skip) + "</button>" : "") + "</div></div>";
+  }
+
+  function endHTML() {
+    var n = S.sday, c = C(n), u = U(), p = PP(), h = "";
+    var ct = c.completeTitle ? (T(c.completeTitle, null, n) || c.completeTitle) : null, ce = c.completeElara ? T(c.completeElara, null, n) : null;
+    h += '<p class="eyebrow done"><span class="tick">' + ico("check", 12) + "</span><span>" + u.day + " " + n + u.done + "</span></p>";
+    if (c.letter) { h += '<p class="label mt10">' + u.weekLetter + '</p><p class="letter">' + esc(T(c.letter, c.letterFallback, n) || c.letterFallback) + "</p>"; }
+    else { h += '<h1 class="title">' + esc(ct || c.title) + "</h1>" + (ce ? '<div class="reply mt10"><span class="orb"></span><p>' + esc(ce) + "</p></div>" : ""); }
+    if (S.layers) {
+      var idea = p.idea[n], it = typeof idea === "string" ? '<ins class="p">' + esc(idea) + "</ins>" + tag() : esc(idea.a);
+      h += '<div class="layer mt10"><p class="lt">' + p.ideaT + (typeof idea === "string" ? "" : tag()) + "</p><p>" + it + "</p></div>";
+      var k = knot(n);
+      if (k) h += '<div class="knot mt10"><p class="label">' + esc(u.savedQ) + " · " + esc(k.label) + tag() + '</p><p class="kv">' + esc(k.main) + "</p>" + (k.extra ? '<p class="ke">' + esc(k.extra) + "</p>" : "") + "</div>";
+      if (n === 7 || n === 14) { var lst = ""; for (var d = n - 6; d <= n; d++) { var kk = d === n ? k : (S.saved[d] !== false ? knot(d) : null); if (kk) lst += "<li class=\"on\"><span class=\"kd\">" + d + '</span><span><span class="hl1">' + esc(kk.label) + '</span><br><span class="hl2">' + esc(kk.main) + "</span></span></li>"; } if (lst) h += '<p class="label mt14">' + (n === 7 ? p.weekT : p.twoT) + tag() + '</p><ul class="hilo mt10">' + lst + "</ul>"; }
+      h += '<button type="button" class="btn mt14" data-act="finish" data-s="1">' + (k ? u.save : u.cont) + "</button>" + (k ? '<button type="button" class="link u" data-act="finish" data-s="0" style="align-self:center"><span>' + u.nosave + "</span></button>" : "");
+    } else h += '<button type="button" class="btn mt14" data-act="finish" data-s="1">' + u.cont + "</button>";
+    if (c.nextWeekTitle) h += '<p class="next mt14">' + u.nextWeek + esc(c.nextWeekTitle) + "</p>";
+    else if (n < 14) h += '<p class="next mt14">' + u.tomorrow + esc(C(n + 1).title) + "</p>";
+    return '<div class="dayend">' + hero(n) + '<div class="scroll"><div class="col"><div class="spacer">' + header(n) + '</div><section class="page2">' + h + "</section></div></div></div>";
+  }
+
+  /* ---------------- render ---------------- */
+  var lastScreen = "";
+  function screenKey() { return S.view === "sess" ? "d" + S.sday + "." + steps(S.sday)[S.si].id : S.view === "end" ? "d" + S.sday + ".close" : S.tab === 1 ? "hilo" : "home.d" + S.day + (S.done[S.day] ? ".done" : ""); }
+  function render() {
+    document.documentElement.lang = S.lang;
+    appEl.className = "app" + (S.marks ? " marks" : " nomarks");
+    var html = S.view === "sess" ? sessHTML() : S.view === "end" ? endHTML() : S.tab === 1 ? hiloHTML() : S.tab === 2 ? '<div class="plain"><div class="scroll"><div class="pcol"><div class="pcard"><p class="voice">' + U().circles + "</p></div></div></div>" + tabs(2) + "</div>" : homeHTML();
+    appEl.innerHTML = html;
+    var sk = screenKey();
+    if (sk !== lastScreen) { var f = appEl.querySelector("[data-focus]"); var sc = appEl.querySelector(".scroll"); if (sc) sc.scrollTop = 0; lastScreen = sk; }
+    if (document.getElementById("pad")) setupPad();
+    renderPanel(); renderChrome(); persist();
+  }
+  function renderChrome() {
+    var u = U();
+    document.getElementById("kick").textContent = u.kick; document.getElementById("ptitle").textContent = u.ptitle; document.getElementById("psub").textContent = u.psub;
+    document.title = S.lang === "es" ? "Claridad · Semanas 1 y 2" : "Clarity · Weeks 1 and 2";
+    document.getElementById("langEs").setAttribute("aria-pressed", S.lang === "es"); document.getElementById("langEn").setAttribute("aria-pressed", S.lang === "en");
+    document.getElementById("why").innerHTML = WHY[S.lang];
+  }
+  function renderPanel() {
+    var u = U(), sk = screenKey(), cm = S.cm[sk] || "", n = Object.keys(S.cm).filter(function (k) { return S.cm[k]; }).length;
+    var chips = function (a, b) { var h = ""; for (var d = a; d <= b; d++) h += '<button type="button" class="chip" data-pa="day" data-n="' + d + '" aria-pressed="' + (S.day === d && S.view !== "sess" || S.view === "sess" && S.sday === d) + '">' + d + "</button>"; return h; };
+    panelEl.innerHTML =
+      '<fieldset class="toggles"><label><input type="checkbox" data-pa="layers"' + (S.layers ? " checked" : "") + "> " + u.pLayers + '</label><label><input type="checkbox" data-pa="marks"' + (S.marks ? " checked" : "") + "> " + u.pMarks + "</label></fieldset>" +
+      "<div><h2>" + u.pDays + '</h2><p class="wklab">' + u.pW1 + '</p><div class="daychips">' + chips(1, 7) + '</div><p class="wklab">' + u.pW2 + '</p><div class="daychips">' + chips(8, 14) + "</div></div>" +
+      '<label class="hl"><input type="checkbox" data-pa="fill"' + (S.fill ? " checked" : "") + "> " + u.pFill + "</label>" +
+      '<div class="prow"><button type="button" class="pbtn primary" data-pa="next"' + (S.day >= 14 || !S.done[S.day] ? " disabled" : "") + ">" + u.pNext + '</button><button type="button" class="pbtn" data-pa="reset">' + u.pReset + "</button></div>" +
+      '<div class="cbox"><h2>' + u.pCmt + '</h2><p class="nowlabel">' + u.pScreen + esc(sk) + '</p><textarea class="ctext" id="cmt" placeholder="' + esc(u.pCmtPh) + '">' + esc(cm) + '</textarea><p class="fine">' + u.pSaved + '</p><div class="prow"><button type="button" class="pbtn" data-pa="copy">' + u.pCopy + '</button><span class="fine" id="cstat">' + (n ? n + u.pCount : u.pNoCmt) + '</span></div><textarea class="ctext" id="copyBox" hidden readonly></textarea></div>';
+  }
+
+  /* ---------------- drawing pad ---------------- */
+  function setupPad() {
+    var cv = document.getElementById("pad"), r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    cv.width = r.width * dpr; cv.height = r.height * dpr; var g = cv.getContext("2d"); g.scale(dpr, dpr); g.lineWidth = 3; g.lineCap = "round"; g.strokeStyle = "#1F3A2E";
+    if (S.padImg) { var im = new Image(); im.onload = function () { g.drawImage(im, 0, 0, r.width, r.height); }; im.src = S.padImg; }
+    var down = false, last = null;
+    function pt(e) { var b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; }
+    cv.addEventListener("pointerdown", function (e) { down = true; last = pt(e); cv.setPointerCapture(e.pointerId); });
+    cv.addEventListener("pointermove", function (e) { if (!down) return; var q = pt(e); g.beginPath(); g.moveTo(last[0], last[1]); g.lineTo(q[0], q[1]); g.stroke(); last = q; });
+    cv.addEventListener("pointerup", function () { if (!down) return; down = false; var sid = steps(S.sday)[S.si].id; S.padImg = cv.toDataURL(); var a = A(S.sday); var was = a[sid] && a[sid].drew; a[sid] = Object.assign({}, a[sid], { drew: true }); delete a[sid].skip; if (!was) render(); });
+  }
+
+  /* ---------------- sample answers for jumping ahead (only approved options, ideas and placeholders) ---------------- */
+  function sample(n) {
+    var a = {}, list = steps(n);
+    list.forEach(function (st) {
+      var c = stepCopy(n, st.id), k = st.kind;
+      if (k === "choose") a[st.id] = { k: n === 1 && st.id === "pressure" ? 4 : n === 3 && st.id === "when" ? 1 : 0 };
+      else if (k === "multi") a[st.id] = { picks: st.config && st.config.ranked ? [1, 2, 0] : [0, 3].filter(function (i) { return i < c.options.length; }) };
+      else if (k === "followUp" || k === "resonance") a[st.id] = { k: 1 };
+      else if (k === "scale") a[st.id] = { i: 1 };
+      else if (k === "sort") { var m = {}; c.items.forEach(function (_, j) { m[j] = n === 1 ? (j === 0 || j === 2 ? 0 : 1) : (j % 2); }); a[st.id] = { m: m }; }
+      else if (k === "reflect") a[st.id] = { t: c.ideas ? c.ideas[0] : /…$/.test(c.placeholder || "") ? (c.placeholder || "").replace(/…$/, "") + (S.lang === "es" ? " (respuesta de ejemplo)" : " (sample answer)") : (c.placeholder || "") };
+      else if (k === "blanks") a[st.id] = { f: c.placeholders.slice() };
+      else if (k === "photo") a[st.id] = { cap: (c.placeholder || "").replace(/^[^“"«]*[“"«]|[”"»].*$/g, "") };
+    });
+    if (n === 7) a.mine = { t: String(stepCopy(7, "rule").options[0]).replace(/^[“"«]|[”"»]$/g, "") };
+    return a;
+  }
+
+  /* ---------------- events ---------------- */
+  appEl.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-act]"); if (!b) return;
+    var act = b.dataset.act, n = S.sday, list = n ? steps(n) : null, st = list ? list[S.si] : null, a = n ? A(n) : null;
+    switch (act) {
+      case "start": if (S.sday !== S.day) { S.sday = S.day; S.si = 0; } S.view = "sess"; break;
+      case "reread": S.sday = S.day; S.si = 0; S.view = "sess"; break;
+      case "video": S.video = S.video === S.day ? null : S.day; break;
+      case "exit": S.view = "home"; S.tab = 0; break;
+      case "tab": S.tab = +b.dataset.i; S.view = "home"; break;
+      case "back": if (S.si > 0) S.si--; break;
+      case "skip": a[st.id] = { skip: true }; advance(); return render();
+      case "next":
+        var key = n + "." + st.id;
+        if (answered(n, st.id) && needsReplyTap(n, st.id) && !S.rep[key] && !(a[st.id] || {}).skip) { S.rep[key] = true; break; }
+        if (!a[st.id] && (st.kind === "read" || st.kind === "recall")) a[st.id] = { seen: true };
+        advance(); return render();
+      case "pick": var c = stepCopy(n, st.id); if (b.dataset.x != null) a[st.id] = { ext: +b.dataset.x }; else a[st.id] = { k: +b.dataset.k, detail: (a[st.id] || {}).detail }; break;
+      case "pickother": a[st.id] = { other: (a[st.id] && a[st.id].other) || "" }; break;
+      case "multi": var cf = st.config || {}, v = a[st.id] && a[st.id].picks ? a[st.id] : (a[st.id] = { picks: [] }), j = +b.dataset.k, ix = v.picks.indexOf(j);
+        delete v.skip;
+        if (ix >= 0) v.picks.splice(ix, 1);
+        else if (j === cf.exclusiveOption) v.picks = [j];
+        else { v.picks = v.picks.filter(function (x) { return x !== cf.exclusiveOption; }); if (v.picks.length < (cf.maxPicks || 99)) v.picks.push(j); }
+        break;
+      case "sort": var sv = a[st.id] && a[st.id].m ? a[st.id] : (a[st.id] = { m: {} }); sv.m[b.dataset.k] = +b.dataset.c; delete S.rep[n + "." + st.id]; break;
+      case "scale": a[st.id] = { i: +b.dataset.k }; break;
+      case "idea": a[st.id] = { t: stepCopy(n, st.id).ideas[+b.dataset.k] }; delete S.rep[n + "." + st.id]; break;
+      case "ex": var bv = a[st.id] && a[st.id].f ? a[st.id] : (a[st.id] = { f: ["", "", ""] }); bv.f[+b.dataset.k] = b.dataset.t; break;
+      case "when": a._when = a._when === +b.dataset.k ? null : +b.dataset.k; break;
+      case "chk": var ch = a._chk || (a._chk = []), ci = ch.indexOf(+b.dataset.k); if (ci >= 0) ch.splice(ci, 1); else ch.push(+b.dataset.k); a._chkTouched = true; break;
+      case "clearpad": S.padImg = null; if (a[st.id]) delete a[st.id].drew; break;
+      case "finish": S.done[n] = true; S.saved[n] = S.layers ? b.dataset.s === "1" : true; S.view = "home"; S.tab = 0; S.si = 0; break;
+    }
+    render();
+  });
+  function advance() { var list = steps(S.sday); if (S.si < list.length - 1) S.si++; else S.view = "end"; }
+  appEl.addEventListener("input", function (e) {
+    var t = e.target, d = t.dataset.in; if (!d || !S.sday) return;
+    var st = steps(S.sday)[S.si], a = A(S.sday), was = answered(S.sday, st.id);
+    if (d === "t") { a[st.id] = Object.assign({}, a[st.id], { t: t.value }); delete a[st.id].skip; delete S.rep[S.sday + "." + st.id]; }
+    if (d === "other") a[st.id] = { other: t.value };
+    if (d === "mother") { var v = a[st.id] && a[st.id].picks ? a[st.id] : (a[st.id] = { picks: [] }); v.other = t.value; }
+    if (d === "detail") (a[st.id] || (a[st.id] = {})).detail = t.value;
+    if (d === "f") { var bv = a[st.id] && a[st.id].f ? a[st.id] : (a[st.id] = { f: ["", "", ""] }); bv.f[+t.dataset.k] = t.value; }
+    if (d === "cap") (a[st.id] || (a[st.id] = {})).cap = t.value;
+    persist();
+    var now = answered(S.sday, st.id), btn = appEl.querySelector('[data-act="next"]'); if (btn) btn.disabled = !now;
+    if (was !== now) { var sk = appEl.querySelector('[data-act="skip"]'); if (sk) sk.hidden = now; }
+  });
+  appEl.addEventListener("change", function (e) {
+    var t = e.target; if (t.dataset.in !== "photo" || !t.files || !t.files[0]) return;
+    if (S.photoURL) URL.revokeObjectURL(S.photoURL); S.photoURL = URL.createObjectURL(t.files[0]); var a = A(S.sday); (a.photo || (a.photo = {})).has = true; render();
+  });
+  appEl.addEventListener("focusout", function (e) { if (e.target.dataset && (e.target.dataset.in === "t" || e.target.dataset.in === "f")) { /* keep typing smooth: no re-render while writing */ } });
+
+  panelEl.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-pa]"); if (!b || b.tagName === "INPUT") return;
+    var pa = b.dataset.pa;
+    if (pa === "day") { var n = +b.dataset.n; for (var d = 1; d < n; d++) { if (!S.done[d]) { S.done[d] = true; S.saved[d] = true; if (S.fill && !Object.keys(S.ans[d] || {}).length) S.ans[d] = sample(d); } } for (var d2 = n; d2 <= 14; d2++) { delete S.done[d2]; } S.day = n; S.view = "home"; S.tab = 0; S.si = 0; S.sday = null; }
+    if (pa === "next") { if (S.day < 14 && S.done[S.day]) { S.day++; S.view = "home"; S.tab = 0; S.si = 0; S.sday = null; } }
+    if (pa === "reset") { var keep = { lang: S.lang, cm: S.cm, layers: S.layers, marks: S.marks, fill: S.fill }; S = Object.assign(fresh(), keep); }
+    if (pa === "copy") { copyAll(); return; }
+    render();
+  });
+  panelEl.addEventListener("change", function (e) { var t = e.target; if (t.dataset.pa === "layers") S.layers = t.checked; if (t.dataset.pa === "marks") S.marks = t.checked; if (t.dataset.pa === "fill") S.fill = t.checked; render(); });
+  panelEl.addEventListener("input", function (e) { if (e.target.id === "cmt") { S.cm[screenKey()] = e.target.value; persist(); var n = Object.keys(S.cm).filter(function (k) { return S.cm[k]; }).length; document.getElementById("cstat").textContent = n ? n + U().pCount : U().pNoCmt; } });
+  function copyAll() {
+    var u = U(), txt = Object.keys(S.cm).filter(function (k) { return S.cm[k]; }).map(function (k) { return "[" + k + "] " + S.cm[k]; }).join("\n\n");
+    var st = document.getElementById("cstat"), box = document.getElementById("copyBox");
+    function fail() { box.hidden = false; box.value = txt; box.select(); st.textContent = u.pCopyFail; }
+    try { navigator.clipboard.writeText(txt).then(function () { st.textContent = u.pCopied; }, fail); } catch (x) { fail(); }
+  }
+  document.getElementById("langEs").onclick = function () { S.lang = "es"; render(); };
+  document.getElementById("langEn").onclick = function () { S.lang = "en"; render(); };
+
+  /* ---------------- what changes, and what needs approval ---------------- */
+  var WHY = {
+    es: '<div class="revcard"><h3>Lo que no cambia</h3><ul><li>Los 14 días, su orden y su objetivo.</li><li>Todos los pasos, opciones, respuestas de Elara y referencias entre días («Dijiste: …», «Tu pausa y tu límite», la carta de cada semana), tal como están aprobados (commit 64c54d6 del repositorio de la app).</li><li>Saltar sigue siendo una respuesta en cada paso.</li></ul><p class="muted">Apaga «Capas nuevas» para ver solo lo aprobado.</p></div>' +
+      '<div class="revcard"><h3>1 · Entender</h3><p>Al cerrar cada día, <b>La idea de hoy</b>: una sola frase. En ocho días es una frase de Elara ya aprobada; en seis (1, 3, 8, 11, 12 y 14) es nueva.</p></div>' +
+      '<div class="revcard"><h3>2 · Practicar</h3><ul><li>Día 1 y día 5: «¿Cuándo lo vas a probar?» (opcional), para que el experimento tenga un momento.</li><li>Día 3: la pausa que encaja con su momento y su tiempo aparece marcada, con el porqué.</li><li>Día 4: revisión opcional del límite (una sola cosa, cuándo aplica, posible esta semana).</li><li>Día 7: además de las tres reglas aprobadas, una hecha con su día 3 y otra con su límite.</li></ul></div>' +
+      '<div class="revcard"><h3>3 · Respuestas útiles</h3><ul><li>Día 1: si pone algo en la columna equivocada de «Puedo / No puedo», se lo explica con amabilidad.</li><li>Días 6, 8, 9 y 10: la respuesta cambia según lo que eligió.</li><li>Día 5: «Tu par» une lo que buscaba con otra forma de cubrirlo.</li></ul></div>' +
+      '<div class="revcard"><h3>4 · Continuar</h3><ul><li><b>Tu hilo</b>: cada día deja una pieza hecha por ella (14 en total). Los días 7 y 14 la muestran junta.</li><li>Los días 5, 10 y 13, que no tenían una referencia a días anteriores, abren con una.</li><li>Al terminar puede guardar o terminar sin guardar. Lo no guardado nunca se cita después: se usa la versión aprobada sin referencia.</li></ul></div>' +
+      '<div class="revcard"><h3>Para aprobar (María y Ale)</h3><ul><li>Las frases nuevas: seis ideas del día, nombres de las piezas del hilo, las respuestas según su elección y las aperturas de los días 5, 10 y 13.</li><li>Si «Tu hilo» reemplaza o convive con «Tu colección» de la app.</li><li>Las imágenes de Arashiyama son de IA y una propuesta; la semana 2 recorre los mismos siete lugares de vuelta.</li><li>El video de Alejandra no se reproduce en el prototipo.</li></ul></div>',
+    en: '<div class="revcard"><h3>What doesn\'t change</h3><ul><li>The 14 days, their order and their goals.</li><li>Every step, option, Elara reply and cross-day reference (“You said: …”, “Your pause and your boundary”, each week\'s letter), as approved (commit 64c54d6 in the app repository).</li><li>Skipping is still an answer on every step.</li></ul><p class="muted">Turn off “New layers” to see only what\'s approved.</p></div>' +
+      '<div class="revcard"><h3>1 · Understand</h3><p>At each day\'s close, <b>Today\'s idea</b>: one sentence. On eight days it\'s an approved Elara line; on six (1, 3, 8, 11, 12 and 14) it\'s new.</p></div>' +
+      '<div class="revcard"><h3>2 · Practise</h3><ul><li>Days 1 and 5: “When will you try it?” (optional), so the experiment has a moment.</li><li>Day 3: the pause that fits her moment and time is marked, with why.</li><li>Day 4: an optional boundary check (one thing, when it applies, doable this week).</li><li>Day 7: besides the three approved rules, one built from her day 3 and one from her boundary.</li></ul></div>' +
+      '<div class="revcard"><h3>3 · Useful feedback</h3><ul><li>Day 1: if she puts something in the wrong “I can / I can\'t” column, it explains kindly.</li><li>Days 6, 8, 9 and 10: the reply changes with what she picked.</li><li>Day 5: “Your pair” links what she was reaching for with another way to meet it.</li></ul></div>' +
+      '<div class="revcard"><h3>4 · Continue</h3><ul><li><b>Your thread</b>: each day leaves one piece she made (14 in all). Days 7 and 14 show them together.</li><li>Days 5, 10 and 13, which had no link to earlier days, open with one.</li><li>At the end she can save or finish without saving. Unsaved answers are never quoted later: the approved version without a callback is used.</li></ul></div>' +
+      '<div class="revcard"><h3>For approval (María and Ale)</h3><ul><li>The new lines: six day ideas, the thread\'s piece names, the choice-based replies and the openings on days 5, 10 and 13.</li><li>Whether “Your thread” replaces or sits beside the app\'s “Your collection”.</li><li>The Arashiyama images are AI-generated and a proposal; week 2 walks the same seven places back.</li><li>Alejandra\'s video doesn\'t play in the prototype.</li></ul></div>'
+  };
+
+  render();
+})();
+</script>

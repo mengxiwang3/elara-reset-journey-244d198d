@@ -1,0 +1,2312 @@
+{
+ "es": {
+  "meta": {
+   "name": "Claridad financiera",
+   "tagline": "Desenreda la presión y el peso mental que traes con el dinero."
+  },
+  "days": [
+   {
+    "level": "Mirar sin juzgar",
+    "title": "Date cuenta de dónde estás",
+    "body": "Antes de cambiar nada, fíjate en cómo se ha sentido el dinero últimamente.",
+    "weekTitle": "Mirar sin juzgar",
+    "intro": {
+     "title": "Mirar sin juzgar",
+     "guide": "Alejandra",
+     "duration": "1 minuto",
+     "length": "1:04",
+     "note": "Esta semana no se trata de arreglar nada. Se trata de mirar con suavidad, cada día, unos minutos. Lo que veas es información, no un veredicto."
+    },
+    "completeTitle": "Miraste la presión y elegiste una cosa para probar.",
+    "completeElara": "Te diste cuenta de que {pressure|lower} es lo que más pesa y elegiste una cosa en la que sí puedes influir mañana.",
+    "steps": {
+     "breathe": {
+      "title": "Respira conmigo",
+      "body": "Antes de mirar el dinero, tres respiraciones lentas juntas."
+     },
+     "feeling": {
+      "title": "Veamos dónde estás ahora mismo.",
+      "body": "Antes de cambiar nada, entendamos cómo se ha sentido el dinero últimamente.",
+      "prompt": "Cuando piensas en el dinero últimamente, ¿qué sentimiento aparece primero?",
+      "options": [
+       "En calma",
+       "Bien",
+       "Con peso",
+       "No sé"
+      ],
+      "sublines": [
+       "Con suficiente calma para mirar",
+       "En un punto intermedio",
+       "Cargando bastante",
+       "Difícil de nombrar todavía"
+      ],
+      "elara": "Lo que apareció primero es el lugar correcto para empezar. Lo haremos más pequeño y veremos qué lo está creando de verdad."
+     },
+     "pressure": {
+      "title": "¿Qué te está generando más presión con el dinero ahora mismo?",
+      "body": "Elige lo que hoy se siente más pesado.",
+      "options": [
+       "La incertidumbre sobre el futuro",
+       "No saber a dónde se va mi dinero",
+       "Gastar más de lo que quiero",
+       "No ganar lo suficiente",
+       "Mantener a otras personas"
+      ],
+      "otherLabel": "Otra cosa",
+      "otherPlaceholder": "Añade una nota…"
+     },
+     "hands": {
+      "title": "Separando lo que está en tus manos.",
+      "body": "Distingue lo que puedes influir hoy de lo que está fuera de tu control.",
+      "items": [
+       "En qué decido gastar mañana",
+       "La inflación del mercado",
+       "Cancelar una suscripción que no uso",
+       "Los cambios económicos que vengan"
+      ],
+      "columns": [
+       "Puedo",
+       "No puedo"
+      ],
+      "elara": "Fíjate cuánta energía se va en cosas que no puedes cambiar. Volver a una sola decisión pequeña te da espacio para respirar."
+     },
+     "space": {
+      "title": "¿Qué es lo que más espacio ocupa en tu cabeza sobre el dinero últimamente?",
+      "body": "No lo pienses demasiado. Una frase o unas palabras en voz alta son suficientes.",
+      "placeholder": "Lo que me ronda la cabeza es…",
+      "elara": "Gracias por nombrarlo. Así es como empieza a hacerse más pequeño."
+     },
+     "commit": {
+      "title": "Elige una cosa pequeña para mañana.",
+      "body": "Elige una micro-acción para probar cómo cambia tu relación con el dinero.",
+      "options": [
+       "Planear un gasto con antelación",
+       "Hacer una pausa de 10 segundos antes de comprar",
+       "Nombrar algo que el dinero sostuvo hoy"
+      ],
+      "sublines": [
+       "Decide una compra antes de que mañana se complique.",
+       "Nota el impulso antes de terminar la compra.",
+       "Reconoce una compra que de verdad te sirvió a ti o a alguien más."
+      ],
+      "cta": "Completar la práctica del día 1",
+      "elara": "Ese es tu experimento. Lo bastante pequeño para intentarlo de verdad. Mañana veremos cómo te fue."
+     }
+    }
+   },
+   {
+    "level": "Mirar sin juzgar",
+    "title": "Nota las sorpresas",
+    "body": "Mira lo que pasó de verdad con el dinero esta semana, sin ponerle nota.",
+    "teaser": "Nota las sorpresas",
+    "completeTitle": "Nota las sorpresas.",
+    "completeElara": "Cada pequeño darte cuenta crea espacio para elegir.",
+    "steps": {
+     "followup": {
+      "title": "Dijiste: {d1.commit|lower}. ¿Cómo te fue?",
+      "titleFallback": "¿Cómo te fue con lo pequeño que elegiste ayer?",
+      "eyebrow": "Ayer",
+      "options": [
+       "Lo hice",
+       "Más o menos",
+       "No pasó",
+       "Se me olvidó"
+      ],
+      "replies": [
+       "Hiciste lo que dijiste que harías. Eso importa más de lo que parece.",
+       "A medias también cuenta. Notaste el momento. Esa es la práctica.",
+       "Hay días que no dejan espacio. Eso también es información, no un fracaso.",
+       "Olvidarlo es parte de cómo empieza un hábito nuevo. Ya volverá."
+      ]
+     },
+     "happened": {
+      "title": "¿Cuáles de estas pasaron en los últimos días?",
+      "body": "Elige hasta tres. Sin juzgarte.",
+      "options": [
+       "Compré algo que no había planeado",
+       "Evité revisar mi cuenta",
+       "Pagué algo tarde, o casi",
+       "Gasté en otra persona",
+       "Dije que no a una compra",
+       "Nada en particular"
+      ]
+     },
+     "surprised": {
+      "title": "¿Cuál te sorprendió más?",
+      "body": "Elige la que se te quedó en la cabeza.",
+      "options": [
+       "Esta vez nada me sorprendió"
+      ]
+     },
+     "why": {
+      "title": "¿Qué te sorprendió de eso?",
+      "body": "Con una frase basta.",
+      "placeholder": "Me sorprendió porque…",
+      "elara": "Las sorpresas sirven. Muestran por dónde se mueve el dinero antes de que hayas podido mirar."
+     },
+     "feels": {
+      "title": "¿Te parece acertado?",
+      "noticedQuote": "Las sorpresas sirven. Muestran por dónde se mueve el dinero antes de que hayas podido mirar.",
+      "options": [
+       "Sí, exacto",
+       "En parte",
+       "No mucho"
+      ],
+      "cta": "Terminar por hoy"
+     }
+    }
+   },
+   {
+    "level": "La pausa",
+    "title": "Encuentra tu pausa",
+    "body": "Encuentra el momento en que el dinero se mueve antes de que decidas, y una pequeña pausa para ponerle.",
+    "teaser": "Encuentra tu pausa",
+    "completeTitle": "Encontraste tu pausa.",
+    "completeElara": "Basta una respiración para apagar el piloto automático.",
+    "steps": {
+     "choices": {
+      "title": "Algunas decisiones de dinero pasan antes de que decidas.",
+      "bullets": [
+       "Darle a “comprar” a medianoche.",
+       "Decir que sí antes de revisar.",
+       "Agarrar algo en la caja."
+      ],
+      "cta": "Conozco uno"
+     },
+     "when": {
+      "title": "¿Cuándo suele pasarte a ti?",
+      "remember": "El día 1, el dinero se sentía como {d1.feeling|lower}. Aquí es donde suele moverse más rápido.",
+      "options": [
+       "De noche, con el celular",
+       "Cuando estoy cansada o estresada",
+       "Cuando alguien me pide dinero",
+       "En la caja",
+       "Justo después de cobrar"
+      ],
+      "otherLabel": "Otra cosa",
+      "otherPlaceholder": "Escribe tu momento…"
+     },
+     "time": {
+      "title": "¿Cuánto tiempo sueles tener antes de que pase?",
+      "stops": [
+       "Nada de tiempo",
+       "Unos segundos",
+       "Un minuto o dos",
+       "Tiempo de sobra"
+      ]
+     },
+     "pause": {
+      "title": "La próxima vez que pase, prueba una pausa.",
+      "body": "Elige un compromiso realista para las próximas 24 horas.",
+      "options": [
+       "Respirar una vez antes de pagar",
+       "Dejarlo en el carrito hasta mañana",
+       "Decir “déjame pensarlo”",
+       "Cerrar la app y volver más tarde"
+      ],
+      "cta": "Lo voy a intentar",
+      "elara": "Basta una respiración para apagar el piloto automático."
+     }
+    }
+   },
+   {
+    "level": "Límites",
+    "title": "Traza un límite suave",
+    "body": "Elige un lugar por donde se escapa el dinero y ponle un límite pequeño y amable.",
+    "teaser": "Traza un límite suave",
+    "completeTitle": "Un límite tranquilo.",
+    "completeElara": "Poner un límite es un acto de cuidado hacia tu yo del futuro.",
+    "steps": {
+     "followup": {
+      "title": "“Dijiste: {d3.pause|lower}.”",
+      "titleFallback": "Ayer elegiste una pausa para probar.",
+      "body": "¿Cómo te fue?",
+      "eyebrow": "Ayer",
+      "options": [
+       "Lo hice",
+       "Más o menos",
+       "No pasó",
+       "Se me olvidó"
+      ],
+      "replies": [
+       "Encontraste la pausa y la usaste. Esa es toda la habilidad, practicada una vez.",
+       "Algo quedó. Media pausa también interrumpe el piloto automático.",
+       "No se dio, o llegó demasiado rápido. Las dos cosas te dicen algo.",
+       "Así es al principio. Lo de hoy se construye encima igual."
+      ]
+     },
+     "slips": {
+      "title": "¿Por dónde se te escapa el dinero sin que lo elijas?",
+      "body": "Elige hasta tres.",
+      "options": [
+       "Suscripciones que olvidé",
+       "Comida a domicilio",
+       "Compras en línea",
+       "Cubrir a otras personas",
+       "Comisiones y recargos"
+      ],
+      "otherLabel": "Otra cosa",
+      "otherPlaceholder": "Escribe aquí…"
+     },
+     "area": {
+      "title": "Elige uno para ponerle un límite esta semana.",
+      "body": "Solo uno. Lo pequeño es la idea.",
+      "options": [
+       "El que más me cuesta"
+      ]
+     },
+     "boundary": {
+      "title": "Escribe tu límite en una línea.",
+      "body": "Toca un ejemplo o escribe el tuyo.",
+      "ideas": [
+       "Nada de domicilio entre semana",
+       "Cancelar una suscripción",
+       "Revisar antes de decir que sí"
+      ],
+      "placeholder": "Nada de domicilio entre semana…",
+      "elara": "Un límite no es un castigo. Es una decisión que tomas una vez, para no tener que tomarla cada día."
+     },
+     "start": {
+      "title": "¿Cuándo empieza?",
+      "noticedQuote": "Un límite no es un castigo. Es una decisión que tomas una vez, para no tener que tomarla cada día.",
+      "options": [
+       "Hoy",
+       "Mañana",
+       "Este fin de semana"
+      ],
+      "cta": "Terminar por hoy"
+     }
+    }
+   },
+   {
+    "level": "La necesidad real",
+    "title": "Lo que el dinero busca",
+    "body": "Mira debajo de un gasto el sentimiento que intentaba comprar.",
+    "teaser": "Lo que el dinero busca",
+    "completeTitle": "Ver la necesidad real.",
+    "completeElara": "Cuando nombras lo que necesitas, tienes más formas de encontrarlo.",
+    "steps": {
+     "reaching": {
+      "title": "Piensa en un gasto reciente que te hizo sentir mejor un momento. ¿Qué estabas buscando?",
+      "body": "Elige el sentimiento principal que querías sentir.",
+      "options": [
+       "Consuelo",
+       "Control",
+       "Recompensa",
+       "Alivio",
+       "Pertenencia"
+      ],
+      "sublines": [
+       "“Algo suave después de un día difícil”",
+       "“Sentir que tengo todo bajo control, aunque sea un rato”",
+       "“Me lo gané, me merezco un gusto”",
+       "“Quitarme la presión o la tensión”",
+       "“Seguir conectada con la gente que quiero”"
+      ],
+      "otherLabel": "Otra cosa",
+      "otherSubline": "Toca para escribir la tuya",
+      "otherPlaceholder": "Lo que estaba buscando…"
+     },
+     "moment": {
+      "title": "Cuéntale a Elara sobre ese momento.",
+      "body": "¿Qué estaba pasando justo antes?",
+      "placeholder": "Justo antes, yo estaba…",
+      "elara": "Gracias por volver a ese momento. Lo que vino justo antes suele ser la historia de verdad."
+     },
+     "need": {
+      "title": "¿Te parece cierto?",
+      "noticed": "Ese gasto intentaba darte {reaching|lower}. Es una necesidad real.",
+      "noticedFallback": "Ese gasto intentaba cubrir una necesidad real.",
+      "noticedQuote": "El dinero es solo una forma de cubrirla.",
+      "options": [
+       "Sí, exacto",
+       "En parte",
+       "No mucho"
+      ]
+     },
+     "instead": {
+      "title": "¿Qué más podría darte un poco de {reaching|lower} esta semana?",
+      "titleFallback": "¿Qué más podría cubrir esa necesidad esta semana?",
+      "body": "Elige una alternativa que se sienta amable y fácil.",
+      "options": [
+       "Una caminata sin el celular",
+       "Una llamada con alguien que quiero",
+       "Acostarme temprano"
+      ],
+      "otherLabel": "Otra cosa",
+      "otherPlaceholder": "Algo que me ayudaría…",
+      "cta": "Terminar por hoy",
+      "elara": "Cuando nombras lo que necesitas, tienes más formas de encontrarlo."
+     }
+    }
+   },
+   {
+    "level": "Quedarse o soltar",
+    "title": "Quedarse o soltar",
+    "body": "Mira lo que probaste esta semana y elige qué llevar contigo.",
+    "teaser": "Quedarse o soltar",
+    "completeTitle": "Elige una acción más tranquila.",
+    "completeElara": "Mañana lo ponemos en palabras.",
+    "steps": {
+     "tried": {
+      "title": "Tu pausa y tu límite.",
+      "eyebrow": "Esta semana probaste",
+      "recallLabels": [
+       "Tu pausa",
+       "Tu límite"
+      ],
+      "note": "Veamos cómo se sintieron en la vida real esta semana.",
+      "cta": "Vamos a ver"
+     },
+     "easier": {
+      "title": "¿Cuál se sintió más fácil?",
+      "body": "Fíjate qué práctica encontró menos resistencia.",
+      "options": [
+       "La pausa",
+       "El límite",
+       "Las dos",
+       "Ninguna todavía"
+      ]
+     },
+     "keep": {
+      "title": "¿Quedarse o soltar?",
+      "body": "Pon cada una del lado que se sienta correcto.",
+      "items": [
+       "Mi pausa",
+       "Mi límite",
+       "Revisar el dinero una vez por semana",
+       "Planear un gasto con antelación",
+       "Hablar de dinero con alguien"
+      ],
+      "columns": [
+       "Me quedo",
+       "Ahora no"
+      ],
+      "elara": "Lo que te quedas es lo que vas a llevar contigo. Más tranquila suele significar más pequeño, no más estricto."
+     },
+     "carry": {
+      "title": "Lo que llevas contigo.",
+      "noticedQuote": "Lo que te quedas es lo que vas a llevar contigo. Más tranquila suele significar más pequeño, no más estricto.",
+      "note": "Una sola práctica tranquila que continúa es la que más diferencia hace.",
+      "cta": "Terminar por hoy"
+     }
+    }
+   },
+   {
+    "level": "Tu regla",
+    "title": "Tu regla de claridad financiera",
+    "body": "Pon la semana en una frase que puedas llevar contigo.",
+    "teaser": "Tu regla de claridad financiera",
+    "nextWeekTitle": "De notar a elegir",
+    "letter": "Esta semana miraste el dinero cada día, incluso los días pesados. Notaste que se mueve más rápido {d3.when|lower}, y elegiste {d3.pause|lower}. La próxima semana, empecemos a elegir a propósito.",
+    "letterFallback": "Esta semana miraste el dinero cada día, incluso los días pesados. Encontraste una pausa y un límite propios. La próxima semana, empecemos a elegir a propósito.",
+    "steps": {
+     "look": {
+      "title": "Mira lo que construiste esta semana.",
+      "body": "Hace siete días empezaste mirando. Esto es lo que encontraste.",
+      "bullets": [
+       "El dinero se sentía como {d1.feeling|lower}.",
+       "Tu pausa: {d3.pause|lower}.",
+       "Tu límite: {d4.boundary|lower}.",
+       "Lo que buscabas: {d5.reaching|lower}."
+      ],
+      "remember": "Empezaste sintiendo {d1.feeling|lower} y construiste una pausa: {d3.pause|lower}.",
+      "cta": "Vamos a escribirla"
+     },
+     "rule": {
+      "title": "¿Cuál de estas se siente más cierta para ti ahora?",
+      "body": "Elige una para empezar.",
+      "options": [
+       "“Cuando me siento abrumada, hago una pausa antes de gastar.”",
+       "“Miro mi dinero una vez por semana, sin juzgarme.”",
+       "“Mantengo un límite pequeño para poder decir que sí a lo que importa.”"
+      ],
+      "sublines": [
+       "Hecha con tu día 3 y tu día 5",
+       "Hecha con tu día 1 y tu día 6",
+       "Hecha con tu límite del día 4"
+      ],
+      "otherLabel": "Voy a escribir la mía",
+      "otherPlaceholder": "Mi regla es…"
+     },
+     "mine": {
+      "title": "Hazla tuya.",
+      "body": "Cambia cualquier palabra. Que quede en una sola frase.",
+      "note": "Una regla clara le da a tu mente un ancla fácil cuando el estrés intenta elegir por ti.",
+      "placeholder": "Cuando…, yo…",
+      "cta": "Esta es mi regla",
+      "elara": "Ahora es tuya. Una frase, lista para el próximo día pesado."
+     }
+    }
+   },
+   {
+    "level": "De notar a elegir",
+    "title": "Revisa tu regla",
+    "body": "Mira cómo se sostuvo en la vida real la regla de la semana pasada.",
+    "weekTitle": "De notar a elegir",
+    "intro": {
+     "title": "De notar a elegir",
+     "guide": "Alejandra",
+     "duration": "1 minuto",
+     "length": "1:04",
+     "note": "La semana pasada aprendiste a mirar. Esta semana se trata de elegir: a propósito, en cosas pequeñas, en los lugares donde el dinero de verdad se mueve."
+    },
+    "teaser": "Revisa tu regla",
+    "completeTitle": "Revisa tu regla.",
+    "completeElara": "Tu regla ya tiene a dónde ir mañana.",
+    "steps": {
+     "held": {
+      "title": "Veamos cómo se sostuvo tu regla.",
+      "body": "Sin calificaciones. Solo notar.",
+      "eyebrow": "La semana pasada escribiste",
+      "recallLabels": [
+       "Tu regla de la semana 1"
+      ],
+      "cta": "Vamos a ver"
+     },
+     "felt": {
+      "title": "Esta semana, el dinero se ha sentido…",
+      "stops": [
+       "Más pesado",
+       "Un poco más pesado",
+       "Igual",
+       "Un poco más ligero",
+       "Más ligero"
+      ]
+     },
+     "where": {
+      "title": "¿Dónde apareció más tu regla?",
+      "options": [
+       "En la tienda",
+       "Comprando en línea",
+       "Con familia o amigos",
+       "Pagando cuentas",
+       "Casi no apareció"
+      ]
+     },
+     "tomorrow": {
+      "title": "¿Dónde vas a probar tu regla mañana?",
+      "options": [
+       "En la tienda",
+       "Comprando en línea",
+       "Con familia o amigos",
+       "Pagando cuentas"
+      ],
+      "otherLabel": "Otra cosa",
+      "otherPlaceholder": "Dónde la vas a probar…",
+      "cta": "Voy a probar esto",
+      "elara": "Tu regla ya tiene a dónde ir mañana."
+     }
+    }
+   },
+   {
+    "level": "Para qué es el dinero",
+    "title": "Para qué quieres que el dinero haga espacio",
+    "body": "Nombra para qué es tu dinero, en orden.",
+    "teaser": "Para qué quieres que el dinero haga espacio",
+    "completeTitle": "Para qué quieres que el dinero haga espacio.",
+    "completeElara": "Ahora sabes para qué es tu dinero.",
+    "steps": {
+     "followup": {
+      "title": "Dijiste: probar tu regla {d8.tomorrow|lower}. ¿Cómo te fue?",
+      "titleFallback": "¿Cómo te fue con tu regla?",
+      "eyebrow": "Ayer",
+      "options": [
+       "Lo hice",
+       "Más o menos",
+       "No pasó",
+       "Se me olvidó"
+      ],
+      "replies": [
+       "Llevaste tu regla a un lugar real. Así es como se vuelve tuya.",
+       "Más o menos también cuenta. Notaste dónde se sostuvo.",
+       "El momento no llegó, o llegó demasiado rápido. La regla sigue ahí para el próximo.",
+       "Ya volverá a ti. Las reglas se quedan cuando se prueban, no cuando se recuerdan."
+      ]
+     },
+     "values": {
+      "title": "¿Para qué quieres que el dinero haga espacio?",
+      "body": "Elige tres, en orden.",
+      "options": [
+       "Descanso",
+       "Seguridad",
+       "Familia",
+       "Libertad",
+       "Alegría",
+       "Crecimiento",
+       "Generosidad",
+       "Belleza"
+      ]
+     },
+     "little": {
+      "title": "¿Cómo se vería un poco más de {values#1|lower} este mes?",
+      "titleFallback": "¿Cómo se vería un poco más de lo que importa este mes?",
+      "body": "Una cosa pequeña y real.",
+      "placeholder": "Veinte dólares apartados que no toco",
+      "elara": "Eso es algo real: lo bastante pequeño para hacerlo, y apunta directo a lo que te importa."
+     },
+     "first": {
+      "title": "{values#1} fue lo primero para ti.",
+      "titleFallback": "Elegiste qué va primero.",
+      "noticedQuote": "Veamos dónde aparece ya en lo que gastas.",
+      "cta": "Continuar"
+     },
+     "share": {
+      "title": "La semana pasada, ¿cuánto de lo que gastaste hizo espacio para {values#1|lower}?",
+      "titleFallback": "La semana pasada, ¿cuánto de lo que gastaste hizo espacio para lo que importa?",
+      "body": "Confía en tu primer instinto.",
+      "stops": [
+       "Muy poco",
+       "Algo",
+       "Más o menos la mitad",
+       "Casi todo"
+      ],
+      "cta": "Terminar por hoy",
+      "elara": "Ver dónde ya aparece es como empiezas a elegirlo."
+     }
+    }
+   },
+   {
+    "level": "Tu historia con el dinero",
+    "title": "Tu historia con el dinero",
+    "body": "Encuentra una frase sobre el dinero con la que creciste, y decide si todavía es tuya.",
+    "teaser": "Tu historia con el dinero",
+    "completeTitle": "Tu historia con el dinero.",
+    "completeElara": "No tienes que quedarte con cada frase que te dieron.",
+    "steps": {
+     "sentence": {
+      "title": "¿Qué frase sobre el dinero escuchaste mientras crecías?",
+      "body": "Dila como la escuchabas, en el idioma que sea.",
+      "ideas": [
+       "El dinero no crece en los árboles",
+       "De dinero no se habla",
+       "La familia es primero"
+      ],
+      "placeholder": "La frase que escuchaba era…",
+      "elara": "Esa frase te ha acompañado mucho tiempo. No tienes que discutir con ella; solo nota cuándo habla."
+     },
+     "still": {
+      "title": "¿Todavía es tuya, o ya no?",
+      "body": "Quédate con tu primera reacción.",
+      "items": [
+       "El dinero no crece en los árboles.",
+       "Hablar de dinero es de mala educación.",
+       "Pedir más es egoísta.",
+       "Nunca alcanza."
+      ],
+      "columns": [
+       "Todavía es mía",
+       "Ya no es mía"
+      ]
+     },
+     "speaks": {
+      "title": "¿Cuándo se hace oír ahora esa vieja frase?",
+      "body": "Mueve cada momento al lado que le corresponde.",
+      "items": [
+       "Cuando gasto en mí",
+       "Cuando la familia pide ayuda",
+       "Cuando reviso mi saldo",
+       "Cuando quiero algo nuevo"
+      ],
+      "columns": [
+       "Se hace oír",
+       "Se queda callada"
+      ]
+     },
+     "noticed": {
+      "title": "Una frase que has cargado mucho tiempo.",
+      "noticedQuote": "Esa frase te ha acompañado mucho tiempo. No tienes que discutir con ella; solo nota cuándo habla.",
+      "cta": "Terminar por hoy"
+     }
+    }
+   },
+   {
+    "level": "A propósito",
+    "title": "Un gasto que se sintió bien",
+    "body": "Mira de cerca una compra que coincidió con lo que te importa.",
+    "teaser": "Un gasto que se sintió bien",
+    "completeTitle": "Un gasto que se sintió bien.",
+    "completeElara": "A propósito: de eso se trata todo.",
+    "steps": {
+     "photo": {
+      "title": "Toma una foto de algo que compraste hace poco y que se sintió bien.",
+      "body": "Un café, un libro, un pase de autobús. Lo que sea.",
+      "note": "Por favor no fotografíes tarjetas, recibos ni pantallas del banco. Tu foto es privada.",
+      "placeholder": "Unas palabras, como “El café de la mañana”"
+     },
+     "why": {
+      "title": "¿Por qué se sintió bien?",
+      "body": "Elige hasta dos.",
+      "options": [
+       "Coincidía con lo que me importa",
+       "Lo planeé",
+       "Va a durar",
+       "Lo compartí",
+       "Nadie más tenía que aprobarlo"
+      ]
+     },
+     "remembers": {
+      "title": "Este gasto hizo algo bien.",
+      "remember": "Dijiste que el dinero debería hacer espacio para {d9.values#1|lower} y {d9.values#2|lower}. Este gasto hizo espacio para lo que te importa, y eso vale la pena conservarlo.",
+      "rememberFallback": "El dinero que coincide con lo que te importa vale la pena conservarlo.",
+      "cta": "Continuar"
+     },
+     "plan": {
+      "title": "Un gasto de esta semana que vas a planear a propósito.",
+      "body": "Elige un enfoque y, si quieres, agrega un detalle.",
+      "options": [
+       "El súper",
+       "Algo para mí",
+       "Un regalo",
+       "Una cuenta que he evitado"
+      ],
+      "detailLabel": "Agrega un detalle rápido (opcional)",
+      "detailPlaceholder": "Hacer la lista del súper del domingo antes de ir",
+      "cta": "Lo voy a planear",
+      "elara": "Planeado a propósito. Esa es toda la habilidad, practicada una vez."
+     }
+    }
+   },
+   {
+    "level": "Cómo se siente ahora",
+    "title": "Cómo se siente el dinero ahora",
+    "body": "Dale una forma a lo que sientes con el dinero esta semana.",
+    "teaser": "Cómo se siente el dinero ahora",
+    "completeTitle": "Cómo se siente el dinero ahora.",
+    "completeElara": "Le diste una forma a lo que sientes.",
+    "steps": {
+     "reach": {
+      "title": "Dijiste que tus gastos buscaban {d5.reaching|lower}.",
+      "titleFallback": "La semana pasada miraste qué buscan tus gastos.",
+      "body": "Veamos cómo se siente ese impulso ahora.",
+      "eyebrow": "La semana pasada",
+      "recallLabels": [
+       "Lo que notaste"
+      ],
+      "cta": "Seguir"
+     },
+     "draw": {
+      "title": "Dibuja cómo se siente el dinero esta semana.",
+      "body": "Líneas, colores, formas. No tiene que parecerse a nada.",
+      "cta": "Listo"
+     },
+     "title": {
+      "title": "Ponle un título a tu dibujo.",
+      "body": "Unas pocas palabras bastan.",
+      "placeholder": "Todavía un nudo, pero más flojo"
+     },
+     "compare": {
+      "title": "Comparado con la semana pasada, el impulso hacia {d5.reaching|lower} está…",
+      "titleFallback": "Comparado con la semana pasada, ese impulso está…",
+      "options": [
+       "Más tranquilo",
+       "Más o menos igual",
+       "Más fuerte",
+       "Se convirtió en otra cosa"
+      ],
+      "cta": "Terminar por hoy",
+      "elara": "Hiciera lo que hiciera, esta semana lo miraste en vez de apartar la mirada."
+     }
+    }
+   },
+   {
+    "level": "La conversación",
+    "title": "La conversación sobre dinero",
+    "body": "Encuentra las palabras para un sí o un no sobre dinero que has ido posponiendo.",
+    "teaser": "La conversación sobre dinero",
+    "completeTitle": "La conversación sobre dinero.",
+    "completeElara": "Encontrar las palabras cuenta, incluso antes de usarlas.",
+    "steps": {
+     "who": {
+      "title": "¿Hay un sí o un no sobre dinero que has ido posponiendo?",
+      "body": "¿Con quién es? No hacen falta nombres.",
+      "options": [
+       "Mi pareja",
+       "Mi familia",
+       "Una amiga",
+       "Alguien del trabajo",
+       "Yo misma",
+       "Ahora no"
+      ]
+     },
+     "words": {
+      "title": "Encontremos tus palabras.",
+      "body": "Llena lo que quieras. Mantenlo simple.",
+      "fields": [
+       "Puedo",
+       "No puedo",
+       "Lo que puedo ofrecer es"
+      ],
+      "placeholders": [
+       "ayudar este mes",
+       "hacerme cargo del total",
+       "mi tiempo y mi apoyo este fin de semana"
+      ],
+      "examples": [
+       [
+        "pagar la cena",
+        "pagar la mitad"
+       ],
+       [
+        "prestar dinero ahora",
+        "ser aval"
+       ],
+       [
+        "buscar opciones juntas",
+        "escucharte"
+       ]
+      ]
+     },
+     "say": {
+      "title": "Dilo en voz alta una vez, solo para ti.",
+      "body": "No se graba ni se guarda nada.",
+      "bullets": [
+       "“Puedo {words#1}.”",
+       "“No puedo {words#2}.”",
+       "“Lo que puedo ofrecer es {words#3}.”"
+      ],
+      "skipLabel": "Omitir",
+      "cta": "Listo"
+     },
+     "when": {
+      "title": "¿Cuándo podrías decirlo?",
+      "body": "Elige el momento que te deje respirar.",
+      "options": [
+       "Esta semana",
+       "Cuando llegue el momento",
+       "No estoy lista, y está bien"
+      ],
+      "cta": "Terminar por hoy",
+      "elara": "Encontrar las palabras cuenta, incluso antes de usarlas."
+     }
+    }
+   },
+   {
+    "level": "Tu brújula",
+    "title": "Tu brújula del dinero",
+    "body": "Resume dos semanas en una frase sobre para qué es tu dinero.",
+    "teaser": "Tu brújula del dinero",
+    "nextWeekTitle": "Sostener",
+    "letter": "Esta semana elegiste para qué es tu dinero: {d9.values|lower}. Encontraste las palabras para una conversación difícil, aunque todavía no estés lista para usarlas. La próxima semana se trata de sostener lo que elegiste, incluso cuando la vida empuja en contra.",
+    "letterFallback": "Esta semana elegiste para qué es tu dinero, y encontraste las palabras para una conversación difícil, aunque todavía no estés lista para usarlas. La próxima semana se trata de sostener lo que elegiste, incluso cuando la vida empuja en contra.",
+    "steps": {
+     "compass": {
+      "title": "Aquí tienes un primer borrador de tu semana.",
+      "body": "Cambia lo que quieras. Es tuyo.",
+      "eyebrow": "Tu brújula del dinero",
+      "prefill": "Mi dinero es para {d9.values|lower}. Estoy soltando la frase anterior: {d10.sentence}.",
+      "prefillFallback": "Mi dinero es para {d9.values|lower}.",
+      "placeholder": "Mi dinero es para…",
+      "note": "Puedes cambiarlo cuando quieras.",
+      "cta": "Esta es mi brújula"
+     },
+     "carry": {
+      "title": "¿Qué quieres llevar contigo?",
+      "body": "Elige hasta dos.",
+      "options": [
+       "Mi regla del dinero",
+       "Mi primer valor",
+       "Mi brújula del dinero",
+       "Mis palabras para la conversación"
+      ],
+      "sublines": [
+       "“{d7.mine}”",
+       "“{d9.values#1}”",
+       "“{compass}”",
+       "“Puedo {d13.words#1}.”"
+      ],
+      "cta": "Ver mi semana"
+     }
+    }
+   }
+  ]
+ },
+ "en": {
+  "meta": {
+   "name": "Money Clarity",
+   "tagline": "Untangle the pressure and mental load around your money."
+  },
+  "days": [
+   {
+    "level": "Look without judging",
+    "title": "Notice where you are",
+    "body": "Before changing anything, notice how money has been feeling lately.",
+    "weekTitle": "Look without judging",
+    "intro": {
+     "title": "Look without judging",
+     "guide": "Alejandra",
+     "duration": "1 min",
+     "length": "1:04",
+     "note": "This week isn't about fixing anything. It's about looking gently, every day, for a few minutes. What you see is information, not a verdict."
+    },
+    "completeTitle": "You looked at the pressure and picked one thing to try.",
+    "completeElara": "You noticed that {pressure|lower} is carrying the most weight, and you chose one thing you can influence tomorrow.",
+    "steps": {
+     "breathe": {
+      "title": "Breathe with me",
+      "body": "Before we look at money, three slow breaths together."
+     },
+     "feeling": {
+      "title": "Let's notice where you are right now.",
+      "body": "Before changing anything, let's understand how money has been feeling lately.",
+      "prompt": "When you think about money lately, what feeling shows up first?",
+      "options": [
+       "Calm",
+       "Okay",
+       "Heavy",
+       "Not sure"
+      ],
+      "sublines": [
+       "Steady enough to look",
+       "Somewhere in the middle",
+       "Carrying a lot",
+       "Hard to name yet"
+      ],
+      "elara": "Whatever showed up first is the right place to start. We'll make it smaller and look at what's actually creating it."
+     },
+     "pressure": {
+      "title": "What's creating the most money pressure right now?",
+      "body": "Choose the one that feels heaviest today.",
+      "options": [
+       "Uncertainty about the future",
+       "Not knowing where my money goes",
+       "Spending more than I want to",
+       "Not earning enough",
+       "Supporting other people"
+      ],
+      "otherLabel": "Something else",
+      "otherPlaceholder": "Add a note…"
+     },
+     "hands": {
+      "title": "Sorting what's in your hands.",
+      "body": "Separate what you can influence today from what is outside your control.",
+      "items": [
+       "What I choose to spend tomorrow",
+       "Market inflation rates",
+       "Canceling an unused subscription",
+       "Future economic shifts"
+      ],
+      "columns": [
+       "I can",
+       "I can't"
+      ],
+      "elara": "Notice how much energy goes into things you can't change. Bringing focus back to one small choice creates room to breathe."
+     },
+     "space": {
+      "title": "What has been taking up the most space in your head about money lately?",
+      "body": "Don't overthink it. A sentence or a few spoken words is enough.",
+      "placeholder": "What's been on my mind is…",
+      "elara": "Thank you for naming it. This is how it starts to get smaller."
+     },
+     "commit": {
+      "title": "Pick one small thing for tomorrow.",
+      "body": "Choose one micro-action to test how it shifts your relationship with money.",
+      "options": [
+       "Plan one expense ahead",
+       "Pause for 10 seconds before buying",
+       "Name one thing money supported today"
+      ],
+      "sublines": [
+       "Decide on one purchase before tomorrow gets busy.",
+       "Notice the impulse before completing the transaction.",
+       "Recognize a purchase that genuinely served you or someone else."
+      ],
+      "cta": "Complete Day 1 practice",
+      "elara": "That's your experiment. Small enough to actually try. Tomorrow we'll look at how it went."
+     }
+    }
+   },
+   {
+    "level": "Look without judging",
+    "title": "Notice the surprises",
+    "body": "Look at what actually happened with money this week, without grading it.",
+    "teaser": "Notice the surprises",
+    "completeTitle": "Notice the surprises.",
+    "completeElara": "Every small awareness creates space to choose.",
+    "steps": {
+     "followup": {
+      "title": "You said: {d1.commit|lower}. How did it go?",
+      "titleFallback": "How did yesterday's small thing go?",
+      "eyebrow": "Yesterday",
+      "options": [
+       "Did it",
+       "Kind of",
+       "Didn't happen",
+       "I forgot"
+      ],
+      "replies": [
+       "You did what you said you would. That matters more than it looks.",
+       "Partway still counts. You noticed the moment. That's the practice.",
+       "Some days don't make room. That's information too, not a failure.",
+       "Forgetting is part of how a new habit starts. It'll come back to you."
+      ]
+     },
+     "happened": {
+      "title": "Which of these happened in the last few days?",
+      "body": "Pick up to three. No judging.",
+      "options": [
+       "Bought something I didn't plan",
+       "Avoided checking my account",
+       "Paid something late, or almost",
+       "Spent on someone else",
+       "Said no to a purchase",
+       "Nothing stands out"
+      ]
+     },
+     "surprised": {
+      "title": "Which one surprised you most?",
+      "body": "Pick the one that lingered in your thoughts.",
+      "options": [
+       "Nothing surprised me this time"
+      ]
+     },
+     "why": {
+      "title": "What surprised you about it?",
+      "body": "A sentence is plenty.",
+      "placeholder": "It surprised me because…",
+      "elara": "Surprises are useful. They show where money moves before you've had a chance to look."
+     },
+     "feels": {
+      "title": "Does that feel right?",
+      "noticedQuote": "Surprises are useful. They show where money moves before you've had a chance to look.",
+      "options": [
+       "Yes, exactly",
+       "Partly",
+       "Not really"
+      ],
+      "cta": "Finish today"
+     }
+    }
+   },
+   {
+    "level": "The pause",
+    "title": "Find your pause",
+    "body": "Find the moment money moves before you decide, and one small pause to put there.",
+    "teaser": "Find your pause",
+    "completeTitle": "You found your pause.",
+    "completeElara": "A breath is all it takes to switch off automatic mode.",
+    "steps": {
+     "choices": {
+      "title": "Some money choices happen before you decide.",
+      "bullets": [
+       "Tapping “buy” at midnight.",
+       "Saying yes before you check.",
+       "Grabbing something at checkout."
+      ],
+      "cta": "I know one"
+     },
+     "when": {
+      "title": "When does yours usually happen?",
+      "remember": "On Day 1, money felt like {d1.feeling|lower}. This is where it tends to move fastest.",
+      "options": [
+       "Late at night on my phone",
+       "When I'm tired or stressed",
+       "When someone asks me for money",
+       "At checkout",
+       "Right after payday"
+      ],
+      "otherLabel": "Something else",
+      "otherPlaceholder": "Type your moment…"
+     },
+     "time": {
+      "title": "How much time do you usually have before it happens?",
+      "stops": [
+       "No time at all",
+       "A few seconds",
+       "A minute or two",
+       "Plenty of time"
+      ]
+     },
+     "pause": {
+      "title": "Next time it happens, try one pause.",
+      "body": "Choose one realistic commitment for the next 24 hours.",
+      "options": [
+       "Take one breath before I pay",
+       "Leave it in the cart until tomorrow",
+       "Say “let me think about it”",
+       "Close the app and come back later"
+      ],
+      "cta": "I'll try this",
+      "elara": "A breath is all it takes to switch off automatic mode."
+     }
+    }
+   },
+   {
+    "level": "Boundaries",
+    "title": "Draw a soft boundary",
+    "body": "Pick one place money slips away and put one small, kind boundary around it.",
+    "teaser": "Draw a soft boundary",
+    "completeTitle": "One quiet boundary.",
+    "completeElara": "Setting a boundary is an act of care for your future self.",
+    "steps": {
+     "followup": {
+      "title": "“You said: {d3.pause|lower}.”",
+      "titleFallback": "Yesterday you chose a pause to try.",
+      "body": "How did it go?",
+      "eyebrow": "Yesterday",
+      "options": [
+       "Did it",
+       "Kind of",
+       "Didn't happen",
+       "I forgot"
+      ],
+      "replies": [
+       "You found the pause and used it. That's the whole skill, practised once.",
+       "Some of it landed. A half-pause still interrupts the automatic.",
+       "It didn't come up, or it came too fast. Both tell you something.",
+       "That's how it goes at first. Today builds on it anyway."
+      ]
+     },
+     "slips": {
+      "title": "Where does money slip away without you choosing?",
+      "body": "Pick up to three.",
+      "options": [
+       "Subscriptions I forgot about",
+       "Takeout and delivery",
+       "Online shopping",
+       "Covering for other people",
+       "Fees and late charges"
+      ],
+      "otherLabel": "Something else",
+      "otherPlaceholder": "Type here…"
+     },
+     "area": {
+      "title": "Pick one to put a boundary around this week.",
+      "body": "Just one. Small is the point.",
+      "options": [
+       "The one that costs me most"
+      ]
+     },
+     "boundary": {
+      "title": "Write your boundary in one line.",
+      "body": "Tap an example or write your own.",
+      "ideas": [
+       "No takeout on weeknights",
+       "Cancel one subscription",
+       "Check before I say yes"
+      ],
+      "placeholder": "No takeout on weeknights…",
+      "elara": "A boundary isn't a punishment. It's a decision you make once, so you don't have to make it every day."
+     },
+     "start": {
+      "title": "When does it start?",
+      "noticedQuote": "A boundary isn't a punishment. It's a decision you make once, so you don't have to make it every day.",
+      "options": [
+       "Today",
+       "Tomorrow",
+       "This weekend"
+      ],
+      "cta": "Finish today"
+     }
+    }
+   },
+   {
+    "level": "The real need",
+    "title": "What money reaches for",
+    "body": "Look underneath one spend at the feeling it was trying to buy.",
+    "teaser": "What money reaches for",
+    "completeTitle": "Seeing the real need.",
+    "completeElara": "When you name what you need, you have more ways to find it.",
+    "steps": {
+     "reaching": {
+      "title": "Think of a recent spend that made you feel better for a moment. What were you reaching for?",
+      "body": "Choose the primary feeling you wanted to feel.",
+      "options": [
+       "Comfort",
+       "Control",
+       "Reward",
+       "Relief",
+       "Belonging"
+      ],
+      "sublines": [
+       "“Something soft after a hard day”",
+       "“Feeling on top of things, even briefly”",
+       "“I earned this, I deserve a treat”",
+       "“Taking off the pressure or tension”",
+       "“Staying connected to the people around me”"
+      ],
+      "otherLabel": "Something else",
+      "otherSubline": "Tap to type your own",
+      "otherPlaceholder": "What I was reaching for…"
+     },
+     "moment": {
+      "title": "Tell Elara about that moment.",
+      "body": "What was happening right before?",
+      "placeholder": "Right before, I was…",
+      "elara": "Thank you for walking back into that moment. What came right before is usually the real story."
+     },
+     "need": {
+      "title": "Does that feel true?",
+      "noticed": "The spend was trying to give you {reaching|lower}. That's a real need.",
+      "noticedFallback": "That spend was trying to meet a real need.",
+      "noticedQuote": "Money is just one way to meet it.",
+      "options": [
+       "Yes, exactly",
+       "Partly",
+       "Not really"
+      ]
+     },
+     "instead": {
+      "title": "What else could give you a little {reaching|lower} this week?",
+      "titleFallback": "What else could meet that need this week?",
+      "body": "Choose an alternative that feels gentle and easy.",
+      "options": [
+       "A walk without my phone",
+       "A call with someone I love",
+       "An early night in bed"
+      ],
+      "otherLabel": "Something else",
+      "otherPlaceholder": "Something that would help…",
+      "cta": "Finish today",
+      "elara": "When you name what you need, you have more ways to find it."
+     }
+    }
+   },
+   {
+    "level": "Keep or let go",
+    "title": "Keep or let go",
+    "body": "Look back at what you tried this week and choose what to carry forward.",
+    "teaser": "Keep or let go",
+    "completeTitle": "Choose one calmer action.",
+    "completeElara": "Tomorrow, we put it into words.",
+    "steps": {
+     "tried": {
+      "title": "Your pause and your boundary.",
+      "eyebrow": "This week you tried",
+      "recallLabels": [
+       "Your pause",
+       "Your boundary"
+      ],
+      "note": "Let's check in on how these felt in real life this week.",
+      "cta": "Let's look"
+     },
+     "easier": {
+      "title": "Which felt easier?",
+      "body": "Notice which practice met the least resistance.",
+      "options": [
+       "The pause",
+       "The boundary",
+       "Both",
+       "Neither yet"
+      ]
+     },
+     "keep": {
+      "title": "Keep or let go?",
+      "body": "Move each one to the side that feels right.",
+      "items": [
+       "My pause",
+       "My boundary",
+       "Checking money once a week",
+       "Planning one spend ahead",
+       "Talking to someone about money"
+      ],
+      "columns": [
+       "Keep",
+       "Not now"
+      ],
+      "elara": "What you keep is what you'll carry. Calmer usually means smaller, not stricter."
+     },
+     "carry": {
+      "title": "What you're carrying forward.",
+      "noticedQuote": "What you keep is what you'll carry. Calmer usually means smaller, not stricter.",
+      "note": "One quiet practice carried forward makes the biggest difference.",
+      "cta": "Finish today"
+     }
+    }
+   },
+   {
+    "level": "Your rule",
+    "title": "Your money clarity rule",
+    "body": "Put the week into one sentence you can carry.",
+    "teaser": "Your money clarity rule",
+    "nextWeekTitle": "From noticing to choosing",
+    "letter": "This week you looked at money every day, even on the heavy days. You noticed it moves fastest {d3.when|lower}, and you chose to {d3.pause|lower}. Next week, let's start choosing on purpose.",
+    "letterFallback": "This week you looked at money every day, even on the heavy days. You found a pause and a boundary of your own. Next week, let's start choosing on purpose.",
+    "steps": {
+     "look": {
+      "title": "Look at what you built this week.",
+      "body": "Seven days ago you started by looking. Here's what you found.",
+      "bullets": [
+       "Money felt like {d1.feeling|lower}.",
+       "Your pause: {d3.pause|lower}.",
+       "Your boundary: {d4.boundary|lower}.",
+       "What you were reaching for: {d5.reaching|lower}."
+      ],
+      "remember": "You started with {d1.feeling|lower}, then built a pause: {d3.pause|lower}.",
+      "cta": "Let's write it"
+     },
+     "rule": {
+      "title": "Which of these feels most true for you now?",
+      "body": "Pick one to start from.",
+      "options": [
+       "“When I feel overwhelmed, I pause before I spend.”",
+       "“I look at my money once a week, without judging.”",
+       "“I keep one small boundary so I can say yes to what matters.”"
+      ],
+      "sublines": [
+       "Built from your Day 3 & Day 5",
+       "Built from your Day 1 & Day 6",
+       "Built from your Day 4 boundary"
+      ],
+      "otherLabel": "I'll write my own",
+      "otherPlaceholder": "My rule is…"
+     },
+     "mine": {
+      "title": "Make it yours.",
+      "body": "Change any word. Keep it to one sentence.",
+      "note": "A clear rule gives your mind an easy anchor when stress tries to choose for you.",
+      "placeholder": "When I…, I…",
+      "cta": "This is my rule",
+      "elara": "That's yours now. One sentence, ready for the next heavy day."
+     }
+    }
+   },
+   {
+    "level": "From noticing to choosing",
+    "title": "Check in on your rule",
+    "body": "See how last week's rule held up in real life.",
+    "weekTitle": "From noticing to choosing",
+    "intro": {
+     "title": "From noticing to choosing",
+     "guide": "Alejandra",
+     "duration": "1 min",
+     "length": "1:04",
+     "note": "Last week you learned to look. This week is about choosing on purpose, in small ways, in the places money actually moves."
+    },
+    "teaser": "Check in on your rule",
+    "completeTitle": "Check in on your rule.",
+    "completeElara": "Your rule has a place to go tomorrow.",
+    "steps": {
+     "held": {
+      "title": "Let's see how your rule held up.",
+      "body": "No grading. Just noticing.",
+      "eyebrow": "Last week you wrote",
+      "recallLabels": [
+       "Your week 1 rule"
+      ],
+      "cta": "Let's look"
+     },
+     "felt": {
+      "title": "This week, money has felt…",
+      "stops": [
+       "Heavier",
+       "A bit heavier",
+       "About the same",
+       "A bit lighter",
+       "Lighter"
+      ]
+     },
+     "where": {
+      "title": "Where did your rule show up most?",
+      "options": [
+       "At the store",
+       "Shopping online",
+       "With family or friends",
+       "Paying bills",
+       "It didn't show up much"
+      ]
+     },
+     "tomorrow": {
+      "title": "Where will you try your rule tomorrow?",
+      "options": [
+       "At the store",
+       "Shopping online",
+       "With family or friends",
+       "Paying bills"
+      ],
+      "otherLabel": "Something else",
+      "otherPlaceholder": "Where you'll try it…",
+      "cta": "I'll try this",
+      "elara": "Your rule has a place to go tomorrow."
+     }
+    }
+   },
+   {
+    "level": "What money is for",
+    "title": "What you want money to make room for",
+    "body": "Name what your money is for, in order.",
+    "teaser": "What you want money to make room for",
+    "completeTitle": "What you want money to make room for.",
+    "completeElara": "You know what your money is for now.",
+    "steps": {
+     "followup": {
+      "title": "You said: try your rule {d8.tomorrow|lower}. How did it go?",
+      "titleFallback": "How did your rule go?",
+      "eyebrow": "Yesterday",
+      "options": [
+       "Did it",
+       "Kind of",
+       "Didn't happen",
+       "I forgot"
+      ],
+      "replies": [
+       "You took your rule somewhere real. That's how it becomes yours.",
+       "Kind of still counts. You noticed where it held.",
+       "The moment didn't come, or came too fast. The rule is still there for the next one.",
+       "It'll come back to you. Rules stick by being tried, not remembered."
+      ]
+     },
+     "values": {
+      "title": "What do you want money to make room for?",
+      "body": "Pick three, in order.",
+      "options": [
+       "Rest",
+       "Security",
+       "Family",
+       "Freedom",
+       "Joy",
+       "Growth",
+       "Generosity",
+       "Beauty"
+      ]
+     },
+     "little": {
+      "title": "What would a little more {values#1|lower} look like this month?",
+      "titleFallback": "What would a little more of what matters look like this month?",
+      "body": "One small, real thing.",
+      "placeholder": "Twenty dollars set aside that I don't touch",
+      "elara": "That's a real thing. It's small enough to do, and it points straight at what matters to you."
+     },
+     "first": {
+      "title": "{values#1} came first for you.",
+      "titleFallback": "You chose what comes first.",
+      "noticedQuote": "Let's see where it already shows up in your spending.",
+      "cta": "Continue"
+     },
+     "share": {
+      "title": "Last week, how much of your spending made room for {values#1|lower}?",
+      "titleFallback": "Last week, how much of your spending made room for what matters?",
+      "body": "Trust your first instinct.",
+      "stops": [
+       "Very little",
+       "Some",
+       "About half",
+       "Most of it"
+      ],
+      "cta": "Finish today",
+      "elara": "Seeing where it already shows up is how you start choosing it."
+     }
+    }
+   },
+   {
+    "level": "Your money story",
+    "title": "Your money story",
+    "body": "Find a money sentence you grew up with and decide whether it's still yours.",
+    "teaser": "Your money story",
+    "completeTitle": "Your money story.",
+    "completeElara": "You don't have to keep every sentence you were given.",
+    "steps": {
+     "sentence": {
+      "title": "What's a money sentence you grew up hearing?",
+      "body": "Say it the way you heard it, in any language.",
+      "ideas": [
+       "Money doesn't grow on trees",
+       "We don't talk about money",
+       "Family comes first"
+      ],
+      "placeholder": "The sentence I heard was…",
+      "elara": "That sentence has been with you a long time. You don't have to argue with it. Just notice when it talks."
+     },
+     "still": {
+      "title": "Still yours, or not anymore?",
+      "body": "Go with your first reaction.",
+      "items": [
+       "Money doesn't grow on trees.",
+       "Talking about money is rude.",
+       "Asking for more is selfish.",
+       "There's never enough."
+      ],
+      "columns": [
+       "Still mine",
+       "Not mine anymore"
+      ]
+     },
+     "speaks": {
+      "title": "When does your old sentence speak up now?",
+      "body": "Move each moment to the side that fits.",
+      "items": [
+       "When I spend on myself",
+       "When family asks for help",
+       "When I check my balance",
+       "When I want something new"
+      ],
+      "columns": [
+       "It speaks up",
+       "It stays quiet"
+      ]
+     },
+     "noticed": {
+      "title": "A sentence you've carried a long time.",
+      "noticedQuote": "That sentence has been with you a long time. You don't have to argue with it. Just notice when it talks.",
+      "cta": "Finish today"
+     }
+    }
+   },
+   {
+    "level": "On purpose",
+    "title": "A spend that felt right",
+    "body": "Look closely at one purchase that matched what you care about.",
+    "teaser": "A spend that felt right",
+    "completeTitle": "A spend that felt right.",
+    "completeElara": "On purpose is the whole point.",
+    "steps": {
+     "photo": {
+      "title": "Take a photo of something you bought recently that felt right.",
+      "body": "A coffee, a book, a bus pass. Anything.",
+      "note": "Please don't photograph cards, receipts or bank screens. Your photo stays private.",
+      "placeholder": "A few words, like “Morning coffee”"
+     },
+     "why": {
+      "title": "Why did it feel right?",
+      "body": "Pick up to two.",
+      "options": [
+       "It matched what I care about",
+       "I planned it",
+       "It'll last",
+       "I shared it",
+       "No one else had to approve it"
+      ]
+     },
+     "remembers": {
+      "title": "This spend did something right.",
+      "remember": "You said money should make room for {d9.values#1|lower} and {d9.values#2|lower}. This spend made room for what you care about. That's worth keeping.",
+      "rememberFallback": "Money that matches what you care about is worth keeping.",
+      "cta": "Continue"
+     },
+     "plan": {
+      "title": "One spend this week you'll plan on purpose.",
+      "body": "Choose a focus, and add a detail if you like.",
+      "options": [
+       "Groceries",
+       "Something for me",
+       "A gift",
+       "A bill I've been avoiding"
+      ],
+      "detailLabel": "Add a quick detail (optional)",
+      "detailPlaceholder": "Planning Sunday's grocery list before I go",
+      "cta": "I'll plan it",
+      "elara": "Planned on purpose. That's the whole skill, practised once."
+     }
+    }
+   },
+   {
+    "level": "How it feels now",
+    "title": "How money feels now",
+    "body": "Give this week's money feeling a shape.",
+    "teaser": "How money feels now",
+    "completeTitle": "How money feels now.",
+    "completeElara": "You gave the feeling a shape.",
+    "steps": {
+     "reach": {
+      "title": "You said your spending was reaching for {d5.reaching|lower}.",
+      "titleFallback": "Last week you looked at what your spending reaches for.",
+      "body": "Let's see how that pull feels now.",
+      "eyebrow": "Last week",
+      "recallLabels": [
+       "What you noticed"
+      ],
+      "cta": "Keep going"
+     },
+     "draw": {
+      "title": "Draw how money feels this week.",
+      "body": "Lines, colors, shapes. It doesn't need to look like anything.",
+      "cta": "Done"
+     },
+     "title": {
+      "title": "Give your drawing a title.",
+      "body": "A few words is plenty.",
+      "placeholder": "Still a knot, just looser"
+     },
+     "compare": {
+      "title": "Compared with last week, the pull toward {d5.reaching|lower} is…",
+      "titleFallback": "Compared with last week, that pull is…",
+      "options": [
+       "Quieter",
+       "About the same",
+       "Stronger",
+       "It's turned into something else"
+      ],
+      "cta": "Finish today",
+      "elara": "Whatever it did, you looked at it this week instead of looking away."
+     }
+    }
+   },
+   {
+    "level": "The conversation",
+    "title": "The money conversation",
+    "body": "Find the words for a money yes or no you've been putting off.",
+    "teaser": "The money conversation",
+    "completeTitle": "The money conversation.",
+    "completeElara": "Finding the words counts, even before you use them.",
+    "steps": {
+     "who": {
+      "title": "Is there a money yes or no you've been putting off?",
+      "body": "Who is it with? No names needed.",
+      "options": [
+       "A partner",
+       "Family",
+       "A friend",
+       "Someone at work",
+       "Myself",
+       "Not right now"
+      ]
+     },
+     "words": {
+      "title": "Let's find your words.",
+      "body": "Fill in as much as you'd like. Keep it simple.",
+      "fields": [
+       "I can",
+       "I can't",
+       "What I can offer is"
+      ],
+      "placeholders": [
+       "help this month",
+       "take on the full amount",
+       "my time and support this weekend"
+      ],
+      "examples": [
+       [
+        "cover dinner",
+        "pay half"
+       ],
+       [
+        "loan money right now",
+        "co-sign"
+       ],
+       [
+        "research options together",
+        "a listening ear"
+       ]
+      ]
+     },
+     "say": {
+      "title": "Say it out loud once, just for you.",
+      "body": "Nothing is recorded or saved.",
+      "bullets": [
+       "“I can {words#1}.”",
+       "“I can't {words#2}.”",
+       "“What I can offer is {words#3}.”"
+      ],
+      "skipLabel": "Skip speaking",
+      "cta": "Done"
+     },
+     "when": {
+      "title": "When might you say it?",
+      "body": "Choose the timing that gives you room to breathe.",
+      "options": [
+       "This week",
+       "When the moment comes",
+       "I'm not ready, and that's okay"
+      ],
+      "cta": "Finish today",
+      "elara": "Finding the words counts, even before you use them."
+     }
+    }
+   },
+   {
+    "level": "Your compass",
+    "title": "Your money compass",
+    "body": "Put two weeks into one sentence about what your money is for.",
+    "teaser": "Your money compass",
+    "nextWeekTitle": "Keeping",
+    "letter": "This week you chose what your money is for: {d9.values|lower}. You found the words for a hard conversation, even if you're not ready to use them yet. Next week is about keeping what you chose, even when life pushes back.",
+    "letterFallback": "This week you chose what your money is for, and you found the words for a hard conversation, even if you're not ready to use them yet. Next week is about keeping what you chose, even when life pushes back.",
+    "steps": {
+     "compass": {
+      "title": "Here's a first draft from your week.",
+      "body": "Change anything. It's yours.",
+      "eyebrow": "Your money compass",
+      "prefill": "My money is for {d9.values|lower}. I'm letting go of the old sentence: {d10.sentence}.",
+      "prefillFallback": "My money is for {d9.values|lower}.",
+      "placeholder": "My money is for…",
+      "note": "You can change this anytime.",
+      "cta": "This is my compass"
+     },
+     "carry": {
+      "title": "What do you want to carry with you?",
+      "body": "Pick up to two.",
+      "options": [
+       "My money rule",
+       "My first value",
+       "My money compass",
+       "My conversation words"
+      ],
+      "sublines": [
+       "“{d7.mine}”",
+       "“{d9.values#1}”",
+       "“{compass}”",
+       "“I can {d13.words#1}.”"
+      ],
+      "cta": "See my week"
+     }
+    }
+   }
+  ]
+ },
+ "structure": [
+  {
+   "day": 1,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "breathe",
+     "kind": "read",
+     "config": {
+      "breaths": 3,
+      "optional": true
+     }
+    },
+    {
+     "id": "feeling",
+     "kind": "choose",
+     "config": {
+      "optionCount": 4,
+      "layout": "grid"
+     }
+    },
+    {
+     "id": "pressure",
+     "kind": "choose",
+     "config": {
+      "optionCount": 5,
+      "quiet": true
+     }
+    },
+    {
+     "id": "hands",
+     "kind": "sort",
+     "config": {
+      "itemCount": 4
+     }
+    },
+    {
+     "id": "space",
+     "kind": "reflect",
+     "config": {
+      "modes": [
+       "draw",
+       "say"
+      ],
+      "optional": true
+     }
+    },
+    {
+     "id": "commit",
+     "kind": "choose",
+     "config": {
+      "optionCount": 3,
+      "commit": true,
+      "hold": true,
+      "deferReply": true
+     }
+    }
+   ]
+  },
+  {
+   "day": 2,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "followup",
+     "kind": "followUp",
+     "config": {
+      "optionCount": 4,
+      "fromStep": "commit",
+      "presentation": "card"
+     }
+    },
+    {
+     "id": "happened",
+     "kind": "multi",
+     "config": {
+      "optionCount": 6,
+      "maxPicks": 3,
+      "quiet": true,
+      "exclusiveOption": 5
+     }
+    },
+    {
+     "id": "surprised",
+     "kind": "choose",
+     "config": {
+      "optionCount": 1,
+      "optionsFrom": "happened",
+      "quiet": true
+     }
+    },
+    {
+     "id": "why",
+     "kind": "reflect",
+     "config": {
+      "modes": [
+       "write",
+       "say",
+       "draw"
+      ],
+      "deferReply": true
+     }
+    },
+    {
+     "id": "feels",
+     "kind": "resonance",
+     "config": {
+      "optionCount": 3,
+      "noticedFrom": "why",
+      "ratesReply": true
+     }
+    }
+   ]
+  },
+  {
+   "day": 3,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "choices",
+     "kind": "read"
+    },
+    {
+     "id": "when",
+     "kind": "choose",
+     "config": {
+      "optionCount": 5
+     }
+    },
+    {
+     "id": "time",
+     "kind": "scale",
+     "config": {
+      "stopCount": 4,
+      "quiet": true
+     }
+    },
+    {
+     "id": "pause",
+     "kind": "choose",
+     "config": {
+      "optionCount": 4,
+      "commit": true,
+      "hold": true,
+      "keep": "sentence",
+      "deferReply": true
+     }
+    }
+   ]
+  },
+  {
+   "day": 4,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "followup",
+     "kind": "followUp",
+     "config": {
+      "optionCount": 4,
+      "fromStep": "pause",
+      "presentation": "full"
+     }
+    },
+    {
+     "id": "slips",
+     "kind": "multi",
+     "config": {
+      "optionCount": 5,
+      "maxPicks": 3,
+      "quiet": true
+     }
+    },
+    {
+     "id": "area",
+     "kind": "choose",
+     "config": {
+      "optionCount": 1,
+      "optionsFrom": "slips",
+      "quiet": true
+     }
+    },
+    {
+     "id": "boundary",
+     "kind": "reflect",
+     "config": {
+      "modes": [
+       "write"
+      ],
+      "keep": "sentence",
+      "deferReply": true
+     }
+    },
+    {
+     "id": "start",
+     "kind": "resonance",
+     "config": {
+      "optionCount": 3,
+      "layout": "chips",
+      "noticedFrom": "boundary",
+      "hold": true
+     }
+    }
+   ]
+  },
+  {
+   "day": 5,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "reaching",
+     "kind": "choose",
+     "config": {
+      "optionCount": 5,
+      "quiet": true
+     }
+    },
+    {
+     "id": "moment",
+     "kind": "reflect",
+     "config": {
+      "modes": [
+       "say",
+       "write"
+      ],
+      "optional": true,
+      "deferReply": true
+     }
+    },
+    {
+     "id": "need",
+     "kind": "resonance",
+     "config": {
+      "optionCount": 3,
+      "layout": "chips",
+      "noticedFrom": "moment",
+      "ratesReply": true
+     }
+    },
+    {
+     "id": "instead",
+     "kind": "choose",
+     "config": {
+      "optionCount": 3,
+      "commit": true,
+      "deferReply": true
+     }
+    }
+   ]
+  },
+  {
+   "day": 6,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "tried",
+     "kind": "recall",
+     "config": {
+      "recall": [
+       {
+        "day": 3,
+        "step": "pause"
+       },
+       {
+        "day": 4,
+        "step": "boundary"
+       }
+      ]
+     }
+    },
+    {
+     "id": "easier",
+     "kind": "choose",
+     "config": {
+      "optionCount": 4,
+      "quiet": true
+     }
+    },
+    {
+     "id": "keep",
+     "kind": "sort",
+     "config": {
+      "itemCount": 5,
+      "deferReply": true
+     }
+    },
+    {
+     "id": "carry",
+     "kind": "read",
+     "config": {
+      "noticedFrom": "keep"
+     }
+    }
+   ]
+  },
+  {
+   "day": 7,
+   "kind": "reflect",
+   "config": {
+    "minutes": 5,
+    "header": "centered"
+   },
+   "steps": [
+    {
+     "id": "look",
+     "kind": "read",
+     "config": {
+      "pager": "dots"
+     }
+    },
+    {
+     "id": "rule",
+     "kind": "choose",
+     "config": {
+      "optionCount": 3,
+      "quiet": true
+     }
+    },
+    {
+     "id": "mine",
+     "kind": "reflect",
+     "config": {
+      "modes": [
+       "write"
+      ],
+      "prefillFrom": "rule",
+      "keep": "rule",
+      "deferReply": true
+     }
+    }
+   ]
+  },
+  {
+   "day": 8,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "held",
+     "kind": "recall",
+     "config": {
+      "recall": [
+       {
+        "day": 7,
+        "step": "mine"
+       }
+      ]
+     }
+    },
+    {
+     "id": "felt",
+     "kind": "scale",
+     "config": {
+      "stopCount": 5,
+      "quiet": true
+     }
+    },
+    {
+     "id": "where",
+     "kind": "choose",
+     "config": {
+      "optionCount": 5,
+      "quiet": true
+     }
+    },
+    {
+     "id": "tomorrow",
+     "kind": "choose",
+     "config": {
+      "optionCount": 4,
+      "commit": true,
+      "hold": true,
+      "deferReply": true
+     }
+    }
+   ]
+  },
+  {
+   "day": 9,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "followup",
+     "kind": "followUp",
+     "config": {
+      "optionCount": 4,
+      "fromStep": "tomorrow",
+      "presentation": "card"
+     }
+    },
+    {
+     "id": "values",
+     "kind": "multi",
+     "config": {
+      "optionCount": 8,
+      "maxPicks": 3,
+      "ranked": true,
+      "layout": "grid",
+      "quiet": true
+     }
+    },
+    {
+     "id": "little",
+     "kind": "reflect",
+     "config": {
+      "modes": [
+       "write",
+       "say",
+       "draw"
+      ],
+      "deferReply": true
+     }
+    },
+    {
+     "id": "first",
+     "kind": "read",
+     "config": {
+      "noticedFrom": "little"
+     }
+    },
+    {
+     "id": "share",
+     "kind": "scale",
+     "config": {
+      "stopCount": 4,
+      "escape": true,
+      "deferReply": true
+     }
+    }
+   ]
+  },
+  {
+   "day": 10,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "sentence",
+     "kind": "reflect",
+     "config": {
+      "modes": [
+       "say",
+       "write"
+      ],
+      "keep": "sentence",
+      "deferReply": true
+     }
+    },
+    {
+     "id": "still",
+     "kind": "sort",
+     "config": {
+      "itemCount": 4,
+      "sortLayout": "cards",
+      "quiet": true
+     }
+    },
+    {
+     "id": "speaks",
+     "kind": "sort",
+     "config": {
+      "itemCount": 4,
+      "quiet": true,
+      "sortLayout": "columns"
+     }
+    },
+    {
+     "id": "noticed",
+     "kind": "read",
+     "config": {
+      "noticedFrom": "sentence"
+     }
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "photo",
+     "kind": "photo",
+     "config": {
+      "quiet": true
+     }
+    },
+    {
+     "id": "why",
+     "kind": "multi",
+     "config": {
+      "optionCount": 5,
+      "maxPicks": 2,
+      "showFrom": "photo",
+      "quiet": true
+     }
+    },
+    {
+     "id": "remembers",
+     "kind": "read"
+    },
+    {
+     "id": "plan",
+     "kind": "choose",
+     "config": {
+      "optionCount": 4,
+      "layout": "chips",
+      "commit": true,
+      "hold": true,
+      "deferReply": true
+     }
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "reach",
+     "kind": "recall",
+     "config": {
+      "recall": [
+       {
+        "day": 5,
+        "step": "reaching"
+       }
+      ]
+     }
+    },
+    {
+     "id": "draw",
+     "kind": "reflect",
+     "config": {
+      "modes": [
+       "draw"
+      ],
+      "shapes": true,
+      "askCaption": false,
+      "quiet": true
+     }
+    },
+    {
+     "id": "title",
+     "kind": "reflect",
+     "config": {
+      "modes": [
+       "write"
+      ],
+      "showFrom": "draw",
+      "quiet": true,
+      "optional": true,
+      "minWords": 1
+     }
+    },
+    {
+     "id": "compare",
+     "kind": "choose",
+     "config": {
+      "optionCount": 4
+     }
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "who",
+     "kind": "choose",
+     "config": {
+      "optionCount": 6,
+      "quiet": true
+     }
+    },
+    {
+     "id": "words",
+     "kind": "blanks",
+     "config": {
+      "fieldCount": 3,
+      "keep": "sentence",
+      "quiet": true
+     }
+    },
+    {
+     "id": "say",
+     "kind": "read",
+     "config": {
+      "rehearse": true,
+      "optional": true
+     }
+    },
+    {
+     "id": "when",
+     "kind": "choose",
+     "config": {
+      "optionCount": 3,
+      "hold": true,
+      "deferReply": true
+     }
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "kind": "reflect",
+   "config": {
+    "minutes": 4
+   },
+   "steps": [
+    {
+     "id": "compass",
+     "kind": "reflect",
+     "config": {
+      "modes": [
+       "write"
+      ],
+      "keep": "rule",
+      "quiet": true
+     }
+    },
+    {
+     "id": "carry",
+     "kind": "multi",
+     "config": {
+      "optionCount": 4,
+      "maxPicks": 2,
+      "quiet": true
+     }
+    }
+   ]
+  }
+ ]
+}
