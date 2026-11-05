@@ -1,0 +1,76 @@
+{
+  "place": "Arashiyama, Kioto",
+  "character": "Latin American woman in her early 30s, warm medium-brown skin, dark wavy low bun, sage-green linen shirt, cream trousers, white canvas sneakers, small tan crossbody bag.",
+  "days": [
+    {
+      "day": 1,
+      "file": "arashiyama-d1.png",
+      "subject_x_pct": 39.6,
+      "subject_y_pct": 55.6,
+      "subject_height_pct": 12.1,
+      "facing": "three-quarter",
+      "calm_bottom_40": true,
+      "notes": "Coordinates are visually estimated throughout. All seven PNGs exported to 1080x1920 from native 941x1672. Feet about 0.6 percentage points below requested 55% boundary; figure slightly larger than 10%."
+    },
+    {
+      "day": 2,
+      "file": "arashiyama-d2.png",
+      "subject_x_pct": 51.9,
+      "subject_y_pct": 55.3,
+      "subject_height_pct": 12,
+      "facing": "three-quarter",
+      "calm_bottom_40": true,
+      "notes": "Feet about 0.3 percentage points below requested boundary; seated figure slightly larger than 10%."
+    },
+    {
+      "day": 3,
+      "file": "arashiyama-d3.png",
+      "subject_x_pct": 48.5,
+      "subject_y_pct": 46.6,
+      "subject_height_pct": 11.1,
+      "facing": "three-quarter",
+      "calm_bottom_40": true,
+      "notes": "Bridge ends extend outside frame; location is an interpretation, not a verified depiction of Togetsukyo."
+    },
+    {
+      "day": 4,
+      "file": "arashiyama-d4.png",
+      "subject_x_pct": 49.5,
+      "subject_y_pct": 50,
+      "subject_height_pct": 7.9,
+      "facing": "back",
+      "calm_bottom_40": true,
+      "notes": "Seated figure slightly smaller than 10%; feet are inside the boat."
+    },
+    {
+      "day": 5,
+      "file": "arashiyama-d5.png",
+      "subject_x_pct": 50.5,
+      "subject_y_pct": 57.1,
+      "subject_height_pct": 14.5,
+      "facing": "side",
+      "calm_bottom_40": true,
+      "notes": "Figure larger than requested; feet 2.1 percentage points below requested boundary. Comparing two baskets of similar pears rather than two individual items."
+    },
+    {
+      "day": 6,
+      "file": "arashiyama-d6.png",
+      "subject_x_pct": 48.6,
+      "subject_y_pct": 54.8,
+      "subject_height_pct": 14.5,
+      "facing": "back",
+      "calm_bottom_40": true,
+      "notes": "Figure larger than requested; upper foliage denser than other scenes."
+    },
+    {
+      "day": 7,
+      "file": "arashiyama-d7.png",
+      "subject_x_pct": 49.6,
+      "subject_y_pct": 53.5,
+      "subject_height_pct": 12.5,
+      "facing": "three-quarter",
+      "calm_bottom_40": true,
+      "notes": "Seated figure slightly larger than 10%."
+    }
+  ]
+}

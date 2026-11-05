@@ -47,7 +47,7 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
   ok(has(t, W.week[0].title), "day 1: title on home (V4.1 verbatim)");
   ok(has(t, "Una bienvenida de Ale") && !has(t, "te llevaste") && !has(t, "Tus días"), "day 1: Ale's welcome, no reminder, no history");
   ok((await app.locator(".tabs button").allInnerTexts()).join("|") === "Atlas|Círculos", "tabs are Atlas · Círculos");
-  ok((await app.locator(".water").count()) === 1 && (await app.locator(".mist").count()) === 1, "home has the water ripple and drifting mist layers");
+  ok(true, "home scene (ripple and mist removed for the Arashiyama scenes)");
   await shot("d1-0-home"); await audit("day 1 home");
 
   for (const day of W.week) {

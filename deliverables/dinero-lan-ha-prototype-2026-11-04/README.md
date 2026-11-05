@@ -81,3 +81,12 @@ Version 1 used beige paper, taped notes and italic quotes, and read as vintage s
   - terracotta `#C94A1C`, and `#B8441A` on forest.
 - **Thread:** forest where she has walked and light grey ahead.
 - **Type:** Fraunces for titles; Instrument Sans for everything else.
+
+## v5 — Arashiyama (2026-11-05)
+
+The Money week now walks through Arashiyama, Kyoto, in seven AI-generated scenes (ChatGPT, one character reference: `sources/arashiyama/character.webp`; framing data in `sources/arashiyama/manifest.json`). They are proposals, not real photos of the place or of a participant, and need María and Ale's approval, including whether the woman represents the participants.
+
+- Each scene is shown whole across the width so she stays above the card; the session band and the day-end screen recentre on her.
+- Place pills: «Arashiyama, Kioto» and «Día N · <lugar>». Place names are proposals.
+- The drawn walker, sparkles, mist and ripple are gone.
+- e2e: 152/152.

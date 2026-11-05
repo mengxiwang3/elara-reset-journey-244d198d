@@ -1,4 +1,4 @@
-<title>Dinero en Lan Hạ</title>
+<title>Dinero en Arashiyama</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -355,16 +355,26 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 .snapapp .wk *, .snapapp .wk svg{animation:none !important}
 .snapapp .spark, .snapapp .ripple2{display:none}
 .nophoto .wk, .nophoto .pinH{display:none}
-.dayend .heroBox{height:46%}
-.app.small .dayend .heroBox{height:40%}
+
+/* Arashiyama: portrait scenes, shown whole across the width so she stays above the card */
+.heroBox{height:auto !important; aspect-ratio:9/16; -webkit-mask-image:linear-gradient(#000 80%, transparent); mask-image:linear-gradient(#000 80%, transparent)}
+.app.small .home .heroBox{transform:translateY(-9%)}
+.heroInner{animation-duration:60s}
+@keyframes breathe{from{transform:scale(1)} to{transform:scale(1.035)}}
+.home .water, .home .mist{display:none}
+.bgblur{background-position:center bottom}
+.hdr{align-items:flex-start}
+.pills{display:flex; flex-direction:column; align-items:flex-start; gap:6px; min-width:0}
+.place{white-space:nowrap}
+.dayplace{min-height:32px; padding:4px 12px; font-size:calc(13*var(--u)); font-weight:600}
 </style>
 
 <div class="page">
   <header class="ph">
     <div>
       <p class="kicker">Para María y Ale · Revisión de palabras y lecciones · Dinero V4.1</p>
-      <h1 class="ptitle">Dinero en Lan Hạ</h1>
-      <p class="psub">Los siete días de «Dinero y estabilidad», tal como los vería una participante, que recorre siete lugares de Lan Hạ: camina, rema, trepa y se sienta a mirar mientras responde. Recórrelos día por día y, en cada pantalla, anota lo que cambiarías: una palabra que no suena natural, una idea que no se entiende, un ejemplo que sobra. Al terminar, copia tus comentarios y envíalos al equipo.</p>
+      <h1 class="ptitle">Dinero en Arashiyama</h1>
+      <p class="psub">Los siete días de «Dinero y estabilidad», tal como los vería una participante, que recorre siete lugares de Arashiyama, en Kioto: la orilla, un banco, el puente, el río, una tienda, el bambú y el mirador. Recórrelos día por día y, en cada pantalla, anota lo que cambiarías: una palabra que no suena natural, una idea que no se entiende, un ejemplo que sobra. Al terminar, copia tus comentarios y envíalos al equipo.</p>
     </div>
     <div class="seg" role="tablist" aria-label="Vista">
       <button role="tab" id="tabTry" aria-selected="true" aria-controls="tryView">Probar</button>
@@ -420,13 +430,6 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         <summary>Qué cambió desde V4</summary>
         <ul class="chlist" id="changesList"></ul>
       </details>
-      <details class="more" open>
-        <summary>La caminante</summary>
-        <p class="fine">Una figura de espaldas que la representa en cada lugar, sin foto ni cara. Ella elige los colores.</p>
-        <div class="swrow" id="swOutfit" role="group" aria-label="Color de la ropa"><span class="swlab">Ropa</span></div>
-        <div class="swrow" id="swHair" role="group" aria-label="Color del pelo" style="margin-top:6px"><span class="swlab">Pelo</span></div>
-        <div class="swrow" id="swSkin" role="group" aria-label="Tono de piel" style="margin-top:6px"><span class="swlab">Piel</span></div>
-      </details>
       <details class="more">
         <summary>Probar también</summary>
         <fieldset class="toggles">
@@ -439,7 +442,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         </fieldset>
       </details>
       <p class="fine"><b>Contenido:</b> Dinero V4.1, sin cambios. Todo es propuesta hasta que María y Alejandra lo aprueben.</p>
-      <p class="fine"><b>Fotos:</b> las de la app para la bahía de Lan Hạ, una por día. El día 7 usa la foto general de la bahía.</p>
+      <p class="fine"><b>Imágenes:</b> generadas con IA (ChatGPT) a partir de un mismo personaje de referencia. No son fotos reales de Arashiyama ni de una participante. Son propuesta, igual que el texto.</p>
       <p class="fine"><b>Privacidad:</b> lo que escribas se queda en este navegador. No se envía ni se comparte nada.</p>
     </aside>
   </section>
@@ -457,12 +460,10 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
       <div class="revcard">
         <h3>Ella dentro del lugar</h3>
         <ul>
-          <li><b>La caminante.</b> Una figura de espaldas, sin foto ni cara, la representa en cada lugar. Ella elige los colores de ropa, pelo y piel.</li>
-          <li><b>Una actividad por lugar.</b> Camina por el muelle, rema en kayak junto al acantilado, va en bote entre las balsas, trepa a la entrada de la cueva, rema de pie en la laguna, pasa en kayak por el pueblo flotante y se sienta a mirar la bahía.</li>
-          <li><b>Avanza mientras responde.</b> En la sesión, la foto de arriba la muestra a medio camino: cada momento la lleva un poco más allá y cada respuesta la hace avanzar un paso, con un pequeño brillo. No es un premio ni cuenta nada.</li>
-          <li><b>Al terminar, el siguiente lugar.</b> Un cartel marca a dónde va mañana. Al abrir el día siguiente, llega caminando.</li>
-          <li><b>Más foto, menos papel.</b> El paisaje llena la pantalla, la tarjeta es blanca, el botón es oscuro y hay una sola tipografía sans. Atlas es el inicio; Círculos, la otra pestaña.</li>
-          <li><b>Se detiene si el teléfono pide menos movimiento.</b></li>
+          <li><b>Una mujer como ellas, en cada lugar.</b> La misma mujer, de espaldas o de perfil, pequeña en el paisaje. No mira a cámara: el lugar es lo principal.</li>
+          <li><b>Cada lugar acompaña la lección.</b> Se detiene en la orilla (fechas), se sienta a pensar (propósito), se para en el puente antes de seguir (decir que sí), rema (deudas), compara dos cestas (precios), se detiene donde el camino se divide (ofertas) y mira el camino recorrido (repaso).</li>
+          <li><b>La imagen manda.</b> Se ve entera a lo ancho; la tarjeta blanca tapa solo el camino o el agua de abajo.</li>
+          <li><b>Imágenes con IA, marcadas como propuesta.</b> Hay que decidir con María y Ale si la mujer representa bien a las participantes y si se usan imágenes generadas en la app.</li>
         </ul>
       </div>
       <div class="revcard">
@@ -508,8 +509,19 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   if (!W) { appEl.innerHTML = '<p style="padding:24px">No se pudo cargar el contenido de la semana.</p>'; return; }
   var DAYS = W.week, U = W.ui;
   var KEY = "elara-dinero-lanha-v41b", CKEY = "elara-dinero-lanha-v41-comentarios";
-  var PLACE = "Bahía de Lan Hạ", COUNTRY = "Vietnam", WEEKNO = 1;
-  var PLACES = ["El muelle", "La niebla", "Las balsas", "La cueva", "La laguna", "El pueblo flotante", "La bahía"];
+  var PLACE = "Arashiyama", COUNTRY = "Kioto", WEEKNO = 1;
+  var PLACES = ["La orilla", "El banco junto al agua", "El puente", "El río, desde el agua", "La calle del mercado", "La entrada al bambú", "El mirador"];
+  /* Arashiyama scenes (AI-generated from one character reference). sy = where her feet are, % of image height (from the manifest). */
+  var KY = [
+    { sy: 55.6, alt: "Arashiyama, Kioto: una mujer de pie en la orilla del río, con montañas verdes al fondo" },
+    { sy: 55.3, alt: "Arashiyama, Kioto: una mujer sentada en un banco de madera frente al río, con un cuaderno" },
+    { sy: 46.6, alt: "Arashiyama, Kioto: una mujer detenida a mitad de un puente de madera sobre el río" },
+    { sy: 50, alt: "Arashiyama, Kioto: una mujer rema en un bote de madera por el río tranquilo" },
+    { sy: 57.1, alt: "Arashiyama, Kioto: una mujer mira dos cestas de peras en una tienda de madera abierta a la calle" },
+    { sy: 54.8, alt: "Arashiyama, Kioto: una mujer se detiene donde el camino se divide, a la entrada de un bosque de bambú" },
+    { sy: 53.5, alt: "Arashiyama, Kioto: una mujer sentada en un muro de piedra mira el valle y el río desde un mirador" }
+  ];
+  DAYS.forEach(function (d, i) { d.photo = { src: "photos/k" + (i + 1) + ".webp", pos: "50% 0%", band: "50% " + Math.max(0, Math.min(100, Math.round((KY[i].sy / 100 * 693 - 174) / 461 * 100))) + "%", water: 1, alt: KY[i].alt, sy: KY[i].sy }; });
   function low(p) { return p.charAt(0).toLowerCase() + p.slice(1); }
   /* The walker: what she does at each place, where she stands on the home photo (hx, hy in %), and her path across the session band (bx0 to bx1, by). */
   var WALK = {
@@ -583,11 +595,13 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     else body = '<ellipse cx="20" cy="54" rx="17" ry="5" fill="#6B675F"/><path d="M5 52 Q20 46 35 52" fill="#7C776E"/>' + torso(23, 49) + '<path d="M13.6 26 L11.5 40" stroke="' + K + '" stroke-width="3.2" stroke-linecap="round"/><path d="M26.4 26 L28.5 40" stroke="' + K + '" stroke-width="3.2" stroke-linecap="round"/>' + head.replace(/y="13"/, 'y="17"').replace(/cy="10.5"/, 'cy="14.5"').replace(/cy="4.2"/, 'cy="8.2"');
     return '<svg viewBox="0 0 40 58" aria-hidden="true" focusable="false">' + body + "</svg>";
   }
-  function walker(st, day, ctx, x, y, from) {
+  function walker() { return ""; }
+  function walkerOld(st, day, ctx, x, y, from) {
     var w = WALK[day.n], fl = /kayak|boat|board/.test(w.pose);
     return '<div class="wk' + (fl ? " float" : "") + '" data-ctx="' + ctx + '" data-x="' + x + '" data-y="' + y + '"' + (from != null ? ' data-from="' + from + '"' : "") + ' style="left:' + x + "%;top:" + y + '%">' + walkerSVG(st, w.pose) + "</div>";
   }
-  function pinH(x, y, text) { return '<div class="pinH" style="left:' + x + "%;top:" + y + '%"><span>' + esc(text) + "</span><i></i><b></b></div>"; }
+  function pinH() { return ""; }
+  function pinHOld(x, y, text) { return '<div class="pinH" style="left:' + x + "%;top:" + y + '%"><span>' + esc(text) + "</span><i></i><b></b></div>"; }
   function bandPos(st, day, ds) {
     var w = WALK[day.n], m = MOMENT[st.step] || 1, span = w.bx1 - w.bx0;
     var answered = (st.step === "s1" && ds.s1 != null) || (st.step === "check" && ds.check != null) || (st.step === "s3" && (ds.s3 != null || ds.pick != null)) || (st.step === "take" && ds.take === "choose");
@@ -642,7 +656,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     return h;
   }
   function weekThread(st, n, label) {
-    return '<button type="button" class="thread" data-act="tusdias" aria-label="Tu semana en Lan Hạ: ' + esc(label) + '. Abrir Tus días">' + thread(st, n, 7) + "</button>";
+    return '<button type="button" class="thread" data-act="tusdias" aria-label="Tu semana en Arashiyama: ' + esc(label) + '. Abrir Tus días">' + thread(st, n, 7) + "</button>";
   }
   function opts(st, k, list, sel, forceMark) {
     return '<div class="opts">' + list.map(function (o, i) {
@@ -708,7 +722,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     var scene = walker(st, day, "home-" + n + "-" + h.kind, w.hx, w.hy, arrive) + pinTxt;
     return '<div class="home">' + bg(day) + '<div class="heroFallback"></div>' +
       '<div class="heroBox" style="--water:' + day.photo.water + '"><div class="heroInner">' + img(day, "hero") + heroAlt.replace('class="hero"', 'class="hero water"') + scene + '</div><div class="mist" aria-hidden="true"></div></div>' +
-      '<div class="scroll"><div class="col"><div class="spacer"><div class="hdr"><p class="place">' + ico("pin", 16, 2) + esc("Lan Hạ · " + PLACES[day.n - 1]) + "</p>" +
+      '<div class="scroll"><div class="col"><div class="spacer"><div class="hdr"><div class="pills"><p class="place">' + ico("pin", 16, 2) + esc(PLACE + ", " + COUNTRY) + '</p><p class="place dayplace">Día ' + day.n + " · " + esc(PLACES[day.n - 1]) + "</p></div>" +
       '<div class="hbtns"><button type="button" class="disc" data-act="sheet" data-k="help" aria-label="Ayuda">?</button><button type="button" class="disc" data-act="sheet" data-k="profile" aria-label="Perfil y ajustes">' + ico("person", 22, 1.8) + "</button></div></div></div>" +
       '<section class="page2" aria-label="Tu día">' + body + "</section></div></div>" + tabs("hoy") + "</div>";
   }
@@ -782,7 +796,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
   }
   function band(st, day, m) {
     var ds = st.d[day.n], w = WALK[day.n];
-    return '<div class="band">' + img(day) + walker(st, day, "sess-" + day.n, bandPos(st, day, ds), w.by, st.step === "s1" && ds.s1 == null ? w.bx0 - 12 : null) + '<div class="bandbar"><button type="button" class="disc" data-act="close" aria-label="Salir al inicio">' + ico("x", 20, 2.2) + "</button>" +
+    return '<div class="band">' + img(day).replace("object-position:" + day.photo.pos, "object-position:" + day.photo.band) + walker(st, day, "sess-" + day.n, bandPos(st, day, ds), w.by, st.step === "s1" && ds.s1 == null ? w.bx0 - 12 : null) + '<div class="bandbar"><button type="button" class="disc" data-act="close" aria-label="Salir al inicio">' + ico("x", 20, 2.2) + "</button>" +
       '<div class="moments" role="img" aria-label="Momento ' + m + " de 4: " + MNAME[m] + '">' + thread(st, m, 4) + "<span>" + m + " de 4</span></div></div></div>";
   }
   function sessionHTML(st) {
@@ -806,7 +820,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
         '<p class="voice">' + closingLine(st, day, ds) + "</p>" + next;
     }
     var w = WALK[day.n], nd = DAYS[day.n];
-    return '<div class="dayend">' + bg(day) + '<div class="heroBox"><div class="heroInner">' + img(day, "hero") + walker(st, day, "end-" + day.n, w.hx, w.hy, null) + (nd ? pinH(Math.min(w.hx + 26, 74), w.hy - 30, "Mañana, " + low(PLACES[day.n])) : "") + "</div></div>" +
+    return '<div class="dayend">' + bg(day) + '<div class="heroBox" style="transform:translateY(-' + Math.max(0, Math.round(day.photo.sy - 42)) + '%)"><div class="heroInner">' + img(day, "hero") + walker(st, day, "end-" + day.n, w.hx, w.hy, null) + (nd ? pinH(Math.min(w.hx + 26, 74), w.hy - 30, "Mañana, " + low(PLACES[day.n])) : "") + "</div></div>" +
       '<div class="scroll"><div class="col"><div class="spacer"></div><section class="page2" aria-label="Día terminado">' +
       '<p class="eyebrow done"><span class="tick">' + ico("check", 12, 3) + "</span><span>Día " + day.n + " hecho" + (day.n === 7 ? " · Semana " + WEEKNO + " completa" : "") + "</span></p>" +
       '<div class="stack">' + inner + "</div></section></div></div>" +
@@ -1010,7 +1024,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     persistC(); updateCount();
   });
   function compile() {
-    var lines = ["Comentarios sobre «Dinero en Lan Hạ» (Dinero V4.1)", ""];
+    var lines = ["Comentarios sobre «Dinero en Arashiyama» (Dinero V4.1)", ""];
     var items = Object.keys(C.screens).map(function (k) { return C.screens[k]; }).filter(function (x) { return (x.text || "").trim(); }).sort(function (a, b) { return a.rank - b.rank; });
     items.forEach(function (x) { lines.push("■ " + x.label); lines.push(x.text.trim()); lines.push(""); });
     var dec = W.decide.map(function (q, i) { return { q: q, a: ((C.decide || [])[i] || "").trim() }; }).filter(function (x) { return x.a; });
@@ -1043,7 +1057,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
 
   /* ---------- review panel ---------- */
   function syncPanel() {
-    if (document.getElementById("swOutfit").children.length < 2) renderSwatches();
+
     document.getElementById("dayChips").innerHTML = DAYS.map(function (day) {
       return '<button type="button" class="chip" data-start="' + day.n + '" aria-pressed="' + (homeState(S).n === day.n && S.view === "home") + '" aria-label="Empezar en el día ' + day.n + ', con los días anteriores hechos">' + day.n + "</button>";
     }).join("");
@@ -1056,6 +1070,7 @@ ins.prop{text-decoration:none; background:#F8DCCB; box-shadow:0 0 0 2px #F8DCCB;
     document.getElementById("propLegend").hidden = !S.props;
   }
   function renderSwatches() {
+    if (!document.getElementById("swOutfit")) return;
     [["swOutfit", "outfit", "Ropa"], ["swHair", "hair", "Pelo"], ["swSkin", "skin", "Piel"]].forEach(function (g) {
       var box = document.getElementById(g[0]);
       box.innerHTML = '<span class="swlab">' + g[2] + "</span>" + SW[g[1]].map(function (c, i) { return '<button type="button" class="sw" data-sw="' + g[1] + '" data-i="' + i + '" aria-pressed="' + (S.wk[g[1]] === i) + '" aria-label="' + g[2] + " " + (i + 1) + '" style="background:' + c + '"></button>'; }).join("");
