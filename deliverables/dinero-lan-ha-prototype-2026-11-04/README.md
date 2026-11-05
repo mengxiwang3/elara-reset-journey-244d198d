@@ -90,3 +90,13 @@ The Money week now walks through Arashiyama, Kyoto, in seven AI-generated scenes
 - Place pills: «Arashiyama, Kioto» and «Día N · <lugar>». Place names are proposals.
 - The drawn walker, sparkles, mist and ripple are gone.
 - e2e: 152/152.
+
+## v6 — three pauses (2026-11-05)
+
+Rebuilt after reviewing the Codex seven-day screens. Each day is three pauses: «Empieza por ti», «Una idea que ayuda» (the optional check sits at the end of it) and «Hazlo tuyo» (then «Te llevas»). Same V4.1 content, no copy changes; the four moments fit in three screens. «Tres pausas» is a proposal: no screen count or duration is promised until it is timed.
+
+- The check no longer lists the right answer first every day (order swapped on days 1, 3, 4, 6; options and replies unchanged).
+- Arrival language on finishing: «Llegaste al puente.»; a strip of the seven places on day 7. No points, no claim of improvement.
+- Proposed closings by first answer (days 1, 2, 4, 6) still only under «Ver las propuestas».
+- Not included from the Codex version: Explorar tab, three links in the card, the orb in buttons.
+- e2e: 158/158.

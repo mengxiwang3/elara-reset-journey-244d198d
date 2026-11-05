@@ -80,16 +80,17 @@ const ok = (c, m) => { (c ? pass++ : fail++); log.push((c ? "ok   " : "FAIL ") +
     }
     t = await text();
     ok(has(t, day.idea) && has(t, day.rule), `day ${n}: idea and rule`);
-    if (n === 3) { await shot("d3-2-idea"); await audit("day 3 idea"); }
-    await click('[data-act="next"]');
     if (day.check) {
       t = await text();
-      ok(has(t, day.check.q) && has(t, "Seguir sin responder"), `day ${n}: optional check, skippable`);
-      const okIdx = day.check.opts.findIndex((o) => o.ok);
+      ok(has(t, day.check.q) && has(t, "Seguir sin responder"), `day ${n}: optional check inside pause 2, skippable`);
+      const shown = day.check.opts.slice(); if ([1, 3, 4, 6].includes(n)) { const tmp = shown[0]; shown[0] = shown[1]; shown[1] = tmp; }
+      ok(!shown[0].ok || n === 2 || n === 5, `day ${n}: the right answer is not always first`);
+      const okIdx = shown.findIndex((o) => o.ok);
       await click('[data-act="pick"][data-k="check"]', okIdx);
-      ok(has(await text(), day.check.opts[okIdx].r), `day ${n}: check feedback`);
-      await click('[data-act="next"]');
+      ok(has(await text(), shown[okIdx].r), `day ${n}: check feedback`);
     }
+    if (n === 3) { await shot("d3-2-idea"); await audit("day 3 idea"); }
+    await click('[data-act="next"]');
     t = await text();
     ok(has(t, day.s3.q), `day ${n}: «Hazlo tuyo» question`);
     const phraseIdx = day.s3.opts.findIndex((o) => o.phrase);

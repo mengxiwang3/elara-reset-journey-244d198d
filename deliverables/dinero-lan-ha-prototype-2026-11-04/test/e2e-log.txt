@@ -10,7 +10,8 @@ ok   day 1: only the tapped response shows
 ok   day 1 s1: targets ≥44px 
 ok   day 1 s1: nothing wider than the screen 
 ok   day 1: idea and rule
-ok   day 1: optional check, skippable
+ok   day 1: optional check inside pause 2, skippable
+ok   day 1: the right answer is not always first
 ok   day 1: check feedback
 ok   day 1: «Hazlo tuyo» question
 ok   day 1: «Usar esta frase» fills the note
@@ -29,7 +30,8 @@ ok   day 2: only the tapped response shows
 ok   day 2: resume shows next step
 ok   day 2: resumes on «Una idea que ayuda»
 ok   day 2: idea and rule
-ok   day 2: optional check, skippable
+ok   day 2: optional check inside pause 2, skippable
+ok   day 2: the right answer is not always first
 ok   day 2: check feedback
 ok   day 2: «Hazlo tuyo» question
 ok   day 2: «Te llevas» text
@@ -51,10 +53,11 @@ ok   day 3: opening question
 ok   day 3: «Ayer viste» (opening rule)
 ok   day 3: only the tapped response shows
 ok   day 3: idea and rule
+ok   day 3: optional check inside pause 2, skippable
+ok   day 3: the right answer is not always first
+ok   day 3: check feedback
 ok   day 3 idea: targets ≥44px 
 ok   day 3 idea: nothing wider than the screen 
-ok   day 3: optional check, skippable
-ok   day 3: check feedback
 ok   day 3: «Hazlo tuyo» question
 ok   day 3: «Usar esta frase» fills the note
 ok   day 3: «Te llevas» text
@@ -72,7 +75,8 @@ ok   day 4: opening question
 ok   day 4: «Ayer viste» (opening rule)
 ok   day 4: only the tapped response shows
 ok   day 4: idea and rule
-ok   day 4: optional check, skippable
+ok   day 4: optional check inside pause 2, skippable
+ok   day 4: the right answer is not always first
 ok   day 4: check feedback
 ok   day 4: «Hazlo tuyo» question
 ok   day 4: «Te llevas» text
@@ -87,7 +91,8 @@ ok   day 5: opening question
 ok   day 5: «Ayer viste» (opening rule)
 ok   day 5: only the tapped response shows
 ok   day 5: idea and rule
-ok   day 5: optional check, skippable
+ok   day 5: optional check inside pause 2, skippable
+ok   day 5: the right answer is not always first
 ok   day 5: check feedback
 ok   day 5: «Hazlo tuyo» question
 ok   day 5: «Te llevas» text
@@ -103,7 +108,8 @@ ok   day 6: opening question
 ok   day 6 after a gap: «Ayer viste» hidden
 ok   day 6: only the tapped response shows
 ok   day 6: idea and rule
-ok   day 6: optional check, skippable
+ok   day 6: optional check inside pause 2, skippable
+ok   day 6: the right answer is not always first
 ok   day 6: check feedback
 ok   day 6: «Hazlo tuyo» question
 ok   day 6: «Usar esta frase» fills the note
@@ -151,4 +157,4 @@ ok   design review: 9 representative screens
 ok   page has no horizontal scroll at 390px
 ok   no console errors []
 
-152 passed, 0 failed
+158 passed, 0 failed
