@@ -3,7 +3,7 @@
 Local preview only. Not deployed. `homepage-v2/` and `homepage-v3/` are the preserved earlier versions.
 
 Run: open `index.html`, or `python3 -m http.server 4194 --bind 127.0.0.1` in this folder.
-Files: `index.html`, `nosotras.html`, `page.css`, `stage.js` (traveler and phones), `globe.js` + `land.js` (Atlas globe), `app.js` (state, copy in es/en, every other interaction), `assets/`.
+Files: `index.html`, `nosotras.html`, `page.css`, `stage.js` (traveler and phones), `globe.js` (Atlas globe), `app.js` (state, copy in es/en, every other interaction), `assets/`.
 
 ## Palette (corrected)
 Reference: the app's Explore header and tab bar, `#263E56`.
@@ -52,5 +52,6 @@ Recuperar tu energía has no destination, plate or souvenir: shown as "Destino e
 
 ## Other limits
 - Explore capture is 303 px wide and soft; its thumbnails are crops of it.
-- Coastlines on the globe are Natural Earth 1:110m (public domain), simplified.
+- Atlas globe: ported from the app prototype (its WebGL shader, `paper-earth.jpg` texture, marker markup and CSS, rotation speed 0.055 rad/s, drag factors, keyboard keys). Marker photos are the app's scene images. Its marker colours (green selected ring and visited badge) are the app's and are deliberately not recoloured to the homepage palette. The homepage shows its five destinations plus the app's six locked "Por descubrir" markers; it adds a pause while off-screen. Touching the globe does not scroll the page, as in the app.
+- The app prototype (reachable at its chatgpt.site URL) shows three destinations per area, including energy (Arrecife, Puerto de Sídney, Milford Sound) and rhythm starting in Lisboa. The homepage mapping and practice copy were not re-aligned to it in this pass.
 - Tested in headless Chromium at 390, 768 and 1280. Not tested on a real iPhone or Safari.

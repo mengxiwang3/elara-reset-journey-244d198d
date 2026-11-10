@@ -130,7 +130,7 @@ window.ElaraStage = (() => {
   }
   function layout() {
     const stage = $('#stage'), w = stage.clientWidth;
-    scale = stacked.matches ? (w <= 520 ? clamp(w / 390, .78, 1) : .92) : clamp(w / 400, .6, 1);     // the active phone stays full size on a phone, so its text stays readable
+    scale = stacked.matches ? clamp(w / 390, .78, 1) : clamp(w / 400, .6, 1);     // the active phone stays full size on a phone, so its text stays readable
     viewW = w / scale; stage.style.height = HT * scale + 'px'; draw();
   }
   function frame(now) {

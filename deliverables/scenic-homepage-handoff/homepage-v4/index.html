@@ -56,10 +56,10 @@
   </div>
   <div class="colgrid">
     <ul class="strip" id="strip" aria-label="Colección de ejemplo"></ul>
-    <figure class="atlas-live">
-      <canvas id="globe" width="260" height="260" role="img" aria-label="Globo del Atlas con los cinco destinos"></canvas>
-      <figcaption><b data-i18n="atlas.h">Tu Atlas</b> <span data-i18n="atlas.p">Gira el globo o toca un destino para ir.</span></figcaption>
-    </figure>
+    <div class="atlas-live">
+      <div class="paper-globe-stage" id="globe-stage" data-scroll-drag="ignore"><canvas tabindex="0" aria-label="Globo de papel interactivo. Flechas para girar, espacio para pausar."></canvas></div>
+      <p class="fine" data-i18n="atlas.p">Tu Atlas. Gira el globo o toca un destino para ir.</p>
+    </div>
   </div>
   <article class="postcard" id="postcard" hidden tabindex="-1" aria-labelledby="pc-title"></article>
   <div class="week">
@@ -181,7 +181,6 @@
   <a class="brand" href="#top"><img src="assets/orb.png" alt="" width="22" height="22" loading="lazy">elara</a>
   <nav aria-label="Legal"><a data-privacy href="https://holaelara.com/privacidad" data-i18n="ft.privacy">Privacidad</a><a href="https://holaelara.com/terms-and-conditions" data-i18n="ft.terms">Términos</a><a href="https://holaelara.com/support" data-i18n="ft.support">Soporte</a></nav>
 </footer>
-<script defer src="land.js"></script>
 <script defer src="stage.js"></script>
 <script defer src="globe.js"></script>
 <script defer src="app.js"></script>

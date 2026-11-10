@@ -73,7 +73,7 @@
     'recap.top': ['Volver a los destinos', 'Back to the destinations'],
     'tour.pause': ['Pausar el recorrido', 'Pause the tour'], 'tour.play': ['Ver el recorrido automático', 'Play the automatic tour'],
     'st.walk': ['Camina hacia', 'Walking to'], 'st.at': ['Estás en', 'You are in'],
-    'atlas.h': ['Tu Atlas', 'Your Atlas'], 'atlas.p': ['Gira el globo o toca un destino para ir.', 'Turn the globe or tap a destination to go there.'],
+    'atlas.p': ['Tu Atlas. Gira el globo o toca un destino para ir.', 'Your Atlas. Turn the globe or tap a destination to go there.'],
     'soon': ['Destino en preparación', 'Destination in preparation'],
   };
   let lang = 'es';
@@ -214,7 +214,7 @@
           el('span', {}, [el('b', { textContent: `${L(d.item)} · ${L(d.area)}` }), takeaway(d).ph])])))]
       : [el('p', { textContent: t('recap.none') }), el('a', { href: '#top', className: 'recap-link', textContent: t('recap.top') })]));
   }
-  function renderGlobe() { window.ElaraGlobe.set({ current: state.dest, collected: state.collected.map(k => DEST.findIndex(d => d.key === k)), labels: DEST.map(d => L(d.place)) }); }
+  function renderGlobe() { window.ElaraGlobe.set({ lang, current: state.dest, collected: state.collected.map(k => DEST.findIndex(d => d.key === k)) }); }
   function renderTour() { const b = $('#tour'); b.hidden = Stage.still(); b.textContent = t(autoplay ? 'tour.pause' : 'tour.play'); b.setAttribute('aria-pressed', String(!autoplay)); }
   function renderStatus() { $('#status').textContent = `${t(arrived ? 'st.at' : 'st.walk')} ${L(DEST[state.dest].place)} · ${L(DEST[state.dest].area)}`; }
   function renderAll(focusRole) {

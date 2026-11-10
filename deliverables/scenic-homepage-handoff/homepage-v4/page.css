@@ -127,10 +127,28 @@ h3{font-size:19px;line-height:1.25;font-weight:600;letter-spacing:-.01em;color:v
 
 /* Collection strip: real state, kept and not kept are told apart by text and shape as well as colour */
 .tab{font-size:14px;font-weight:600;color:var(--muted)}
-.colgrid{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:32px;align-items:center}
-.atlas-live{display:grid;justify-items:center;gap:6px;text-align:center;font-size:14px;color:var(--muted)}
-.atlas-live canvas{width:260px;height:260px;max-width:100%;cursor:grab;touch-action:pan-y}
-.atlas-live b{color:var(--head)}
+.colgrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px;align-items:center}
+.atlas-live{display:grid;justify-items:center;gap:10px;text-align:center}
+/* Atlas globe: marker and stage styles copied from the app prototype, colours included. Not part of the homepage palette. */
+.paper-globe-stage{aspect-ratio:1;touch-action:none;isolation:isolate;width:min(280px,100%);margin:0 auto;position:relative}
+.paper-globe-stage:after{content:"";filter:blur(8px);z-index:-1;background:#88b6ca30;border-radius:50%;height:7%;position:absolute;bottom:2%;left:22%;right:22%}
+.paper-globe-stage canvas{outline-offset:-12px;width:100%;height:100%;display:block;cursor:grab}
+.paper-globe-pin{background:#fff;border:2px solid #fff;border-radius:50%;width:42px;height:42px;padding:2px;position:absolute;transform:translate(-50%,-50%);box-shadow:0 2px 7px #35597344;cursor:pointer}
+.paper-globe-pin.is-selected{outline-offset:3px;outline:2px solid #5c8c82}
+.paper-globe-pin img{object-fit:cover;border-radius:50%;width:100%;height:100%;display:block}
+.paper-globe-pin span{background:#729d8b;border:1px solid #fff;border-radius:50%;width:8px;height:8px;position:absolute;bottom:-1px;right:-1px}
+.paper-globe-pin[hidden]{display:none}
+.paper-globe-pin.is-locked{color:#768fa5;cursor:default;background:#f2f6f9e8;border:1px solid #fff;width:28px;height:28px;padding:5px;box-shadow:0 2px 4px #496b7e25}
+.paper-globe-pin.is-locked>svg{width:13px;height:13px;margin:auto;display:block}
+.paper-globe-pin.is-visited>span{color:#fff;background:#5d8a73;place-items:center;width:17px;height:17px;display:grid;bottom:-3px;right:-3px}
+.paper-globe-pin.is-visited>span>svg{width:11px;height:11px}
+.paper-globe-pin .paper-pin-label{color:#36546a;white-space:normal;text-align:center;pointer-events:none;background:#fffffff2;border-radius:8px;width:max-content;max-width:104px;padding:5px 8px;font-size:10px;line-height:1.25;display:block;position:absolute;top:calc(100% + 7px);left:50%;transform:translate(-50%);box-shadow:0 2px 8px #23445218}
+.paper-globe-pin.is-selected .paper-pin-label{color:#fff;background:#36556b}
+.paper-globe-pin:not(.is-selected) .paper-pin-label{visibility:hidden}
+.paper-globe-pin:hover .paper-pin-label,.paper-globe-pin:focus-visible .paper-pin-label{visibility:visible}
+.paper-globe-pin:focus-visible{border-radius:50%}
+.paper-globe-pin:not(.is-locked)::after{content:"";position:absolute;inset:-6px;border-radius:50%}   /* larger tap area, same look */
+.paper-globe-fallback{padding:40px 10px;font-size:14px;color:var(--muted)}
 .strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
 .slot{display:flex;flex-direction:column;align-items:flex-start;gap:6px;width:100%;height:100%;min-height:150px;padding:14px;border:1px dashed var(--edge);border-radius:16px;background:#fff;font:inherit;font-size:13px;line-height:1.3;text-align:left;color:var(--muted);cursor:pointer}
 .slot img{width:auto;height:50px;margin-bottom:auto;opacity:.28;filter:grayscale(1)}
