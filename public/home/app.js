@@ -57,7 +57,8 @@
       'What you choose in this page’s demonstration is remembered only in your browser during the visit, and you can clear it with “Start again”. It is not app progress. In the app you can ask us to delete your account and data from <a href="https://holaelara.com/request-account-deletion">this page</a>. Details are in the <a href="https://holaelara.com/privacy">Privacy Policy</a>. Elara is not therapy or a medical service.'],
     'join.h1': ['Tu próxima parada:', 'Your next stop:'], 'join.h2': ['algo para ti.', 'something for you.'],
     'join.after': ['Se abre el formulario en holaelara.com. Después de unirte, te escribimos antes de abrir; mientras tanto no tienes que hacer nada. Sin spam, y puedes darte de baja cuando quieras.', 'This opens the form on holaelara.com. After you join, we write to you before we open; until then there is nothing you need to do. No spam, and you can leave whenever you like.'],
-    'ft.privacy': ['Privacidad', 'Privacy'], 'ft.terms': ['Términos', 'Terms'], 'ft.support': ['Soporte', 'Support'],
+    'ft.privacy': ['Privacidad', 'Privacy'], 'ft.terms': ['Términos', 'Terms'], 'ft.support': ['Soporte', 'Support'], 'ft.contact': ['Contacto', 'Contact'],
+    'ft.note': ['Hecho por dos mujeres que también lo necesitaban. Elara no es terapia ni un servicio médico.', 'Made by two women who needed it too. Elara is not therapy or a medical service.'],
     // dynamic
     'card.change': ['Cambiar', 'Change'], 'card.chose': ['Elegiste', 'You chose'],
     'card.keep': ['Guardar', 'Keep'], 'card.kept': ['ya está en tu pasaporte', 'is in your passport'],
@@ -75,7 +76,8 @@
     'cp.2': ['Estudia y trabaja; organiza su semana los domingos.', 'She studies and works; she plans her week on Sundays.'],
     'cp.3': ['Mamá de dos; busca conversaciones cortas y sin juicio.', 'Mum of two; looking for short conversations without judgement.'],
     'cp.t1': ['Una nueva ciudad', 'A new city'], 'cp.t2': ['Vida universitaria', 'University life'], 'cp.t3': ['Soy mamá', 'I am a mum'],
-    'cp.fine': ['Demostración: perfiles ilustrativos. En esta página no se envían solicitudes ni se conecta a nadie.', 'Demonstration: illustrative profiles. No requests are sent and no one is connected on this page.'],
+    'cp.fine': ['Pantalla de la app.', 'App screen.'],
+    'cp.alt': ['Pantalla Conexiones de la app: mujeres con ciudad y temas en común, cada una con un botón para conectar.', 'The app’s Connections screen: women with their city and shared topics, each with a button to connect.'],
   };
   let lang = 'es';
   try { if (sessionStorage.getItem('elara-lang') === 'en') lang = 'en'; } catch (e) { /* storage unavailable: stay in Spanish */ }
@@ -158,6 +160,7 @@
     document.documentElement.lang = lang;
     $$('[data-i18n]').forEach(n => { n.textContent = t(n.dataset.i18n); });
     $$('[data-i18n-html]').forEach(n => { n.innerHTML = t(n.dataset.i18nHtml); });
+    $$('[data-i18n-alt]').forEach(n => { n.alt = t(n.dataset.i18nAlt); });
     $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     $$('[data-signup]').forEach(a => { a.href = SITE ? (lang === 'en' ? '#waitlist' : '#lista') : (lang === 'en' ? 'https://holaelara.com/en#waitlist' : 'https://holaelara.com/#lista'); });
     $$('[data-privacy]').forEach(a => { a.href = (SITE ? '' : 'https://holaelara.com') + (lang === 'en' ? '/privacy' : '/privacidad'); });
@@ -301,7 +304,6 @@
     openBtn.addEventListener('click', () => setThread(thread.hidden));
     const tabs = $$('[data-ctab]'), panes = $$('[data-cpane]');
     tabs.forEach(b => b.addEventListener('click', () => { stop(); running = false; setStep(4); setThread(false); ui(); tabs.forEach(x => x.setAttribute('aria-selected', String(x === b))); panes.forEach(p => { p.hidden = p.dataset.cpane !== b.dataset.ctab; }); stage.classList.toggle('tab-people', b.dataset.ctab === 'people'); }));
-    $$('[data-common]').forEach(b => b.addEventListener('click', () => { const p = b.nextElementSibling, open = p.hidden; p.hidden = !open; b.setAttribute('aria-expanded', String(open)); }));
     new IntersectionObserver(es => { inView = es[0].isIntersecting; if (inView && !played) play(); else if (inView) carryOn(); else hold(); }, { threshold: .45 }).observe(stage);
     document.addEventListener('visibilitychange', () => (document.hidden ? hold() : carryOn()));
     window.__circles = { get step() { return step; }, get running() { return running; }, get ticking() { return timer !== null; } };
