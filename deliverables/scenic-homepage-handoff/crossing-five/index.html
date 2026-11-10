@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es" data-motion="on">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Elara · Prototipo del recorrido</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="crossing.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="https://holaelara.com/">Elara</a>
+  <span class="tag">Prototipo de animación · no es la página pública</span>
+</header>
+
+<main class="hero">
+  <section class="intro">
+    <h1>Cada día, una pregunta te lleva <em>un paso más lejos.</em></h1>
+    <p class="lead">Llegas a un lugar, respondes una pregunta y te llevas una herramienta y un recuerdo. Después sigues caminando.</p>
+    <p class="cta"><a class="btn primary" href="https://holaelara.com/">Unirme a la lista de espera</a></p>
+    <p class="alt"><a href="https://elara-seven-day-journey.karawang3.chatgpt.site/?lang=es">O abre el prototipo de la app</a></p>
+  </section>
+
+  <section class="show" aria-label="Demostración: una viajera camina por cuatro destinos de la app">
+    <div class="stage" id="stage" tabindex="0">
+      <img class="poster" id="poster" src="assets/poster.jpg" alt="Una viajera camina de una pantalla de la app a la siguiente: Kioto, Venecia, Machu Picchu y Ciudad de México.">
+      <div class="world" id="world" hidden>
+        <canvas id="scene" role="img" aria-label="La misma viajera camina de Kioto a Venecia, Machu Picchu y Ciudad de México, una pantalla tras otra."></canvas>
+        <div class="cards" id="cards"></div>
+      </div>
+    </div>
+    <div class="under">
+      <div class="controls" id="controls" hidden>
+        <button id="prev" aria-label="Paso anterior">‹</button>
+        <button id="play" class="wide">Pausar</button>
+        <button id="next" aria-label="Paso siguiente">›</button>
+        <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Posición en la secuencia">
+        <button id="replay" class="wide ghost">Repetir</button>
+      </div>
+      <p class="status" id="status" aria-live="polite">Si la animación no carga, la imagen resume la escena y los enlaces siguen funcionando.</p>
+      <p class="proto" id="proto" hidden>
+        <label><input type="checkbox" id="outfit" checked> Cambiar de ropa en cada destino</label>
+        <span>Demostración: nada de lo que toques aquí cambia tu progreso real ni se publica.</span>
+      </p>
+    </div>
+  </section>
+</main>
+<script type="module" src="crossing.mjs"></script>
+</body>
+</html>

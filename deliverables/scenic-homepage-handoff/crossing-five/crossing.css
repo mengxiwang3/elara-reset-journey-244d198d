@@ -1,0 +1,80 @@
+:root{
+  --white:#fff; --mist:#f2f7fa; --blue:#d9e9f2; --blue-2:#9fc3d6; --teal:#0f3d47; --teal-2:#2c5f6a; --ink:#0c2a31; --amber:#e9a23b;
+  --sans:"Instrument Sans","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --serif:"Baskerville","Libre Baskerville","Baskerville Old Face",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--sans);line-height:1.45;overflow-x:hidden}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:14px;padding:16px 32px;border-bottom:1px solid var(--blue)}
+.brand{font-family:var(--serif);font-style:italic;font-size:24px;text-decoration:none;color:var(--teal)}
+.tag{font-size:12px;color:var(--teal-2)}
+
+/* Opening screen: a short headline and one button beside the animation, which takes about two thirds and runs to the page edge. */
+.hero{display:grid;grid-template-columns:minmax(280px,1fr) 2fr;align-items:center;gap:8px;padding:20px 0 40px}
+.intro{padding:0 16px 0 32px;max-width:440px;justify-self:end}
+h1{margin:0 0 14px;font-size:clamp(28px,2.7vw,40px);line-height:1.1;font-weight:600;letter-spacing:-.01em;color:var(--teal)}
+h1 em{font-family:var(--serif);font-weight:400}
+.lead{margin:0 0 20px;font-size:16px}
+.cta{margin:0 0 10px}
+.btn{display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:999px;border:1px solid var(--teal);font-size:15px;font-weight:600;text-decoration:none;color:var(--teal)}
+.btn.primary{background:var(--teal);color:#fff}
+.alt{margin:0;font-size:13.5px;color:var(--teal-2)}
+
+.show{min-width:0}
+.stage{position:relative;height:640px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 95%,transparent 100%)}
+.stage:focus-visible{outline:2px solid var(--amber);outline-offset:-2px}
+.poster{display:block;width:100%;height:100%;object-fit:cover;object-position:42% 50%}
+.ready .poster{display:none}
+.world{position:absolute;inset:0}
+.world[hidden]{display:none}
+#scene{position:absolute;left:0;top:0;width:100%;height:100%}
+.cards{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0;will-change:transform;pointer-events:none}
+
+.card{position:absolute;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.95);box-shadow:0 6px 22px rgba(12,42,49,.16);transition:opacity .4s;color:var(--ink)}
+.card[data-stage="0"]{opacity:0}
+.card .where{margin:0 0 3px;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--teal-2)}
+.card h2{margin:0 0 6px;font-size:21px;line-height:1.12;font-weight:600;letter-spacing:-.01em;color:var(--teal)}
+.card .q{margin:0 0 9px;font-size:14px;line-height:1.3;font-weight:600;color:var(--ink)}
+.card .lesson{display:flex;gap:8px;align-items:flex-start;margin:0;font-size:13px;line-height:1.38;opacity:0;transition:opacity .4s}
+.card .lesson img{flex:none;width:20px;height:20px;margin-top:1px}
+.card .keep{display:flex;gap:9px;align-items:center;margin:9px 0 0;padding-top:8px;border-top:1px solid var(--blue);font-size:11.5px;color:var(--teal-2);opacity:0;transition:opacity .4s}
+.card .keep img{flex:none;width:32px;height:32px;object-fit:contain;transform:translateY(6px) scale(.8);transition:transform .5s}
+.card .keep b{display:block;color:var(--teal);font-size:13px}
+.card[data-stage="2"] .lesson,.card[data-stage="3"] .lesson{opacity:1}
+.card[data-stage="3"] .keep{opacity:1}
+.card[data-stage="3"] .keep img{transform:none}
+.next{position:absolute;width:168px;margin:0;padding:9px 12px;border-radius:14px;background:rgba(255,255,255,.94);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--teal-2);opacity:0;transition:opacity .5s}
+.next.on{opacity:1}
+.next b{display:block;font-size:16px;letter-spacing:0;text-transform:none;color:var(--teal)}
+.next i{display:block;font-style:normal;font-size:12px;letter-spacing:0;text-transform:none;color:var(--ink)}
+
+.under{max-width:760px;margin:0 auto;padding:0 24px}
+.controls{display:flex;align-items:center;gap:8px;margin-top:12px}
+.controls[hidden],.proto[hidden]{display:none}
+.controls button{min-width:44px;height:44px;border-radius:999px;border:1px solid var(--blue-2);background:#fff;font:600 14px var(--sans);color:var(--teal);cursor:pointer}
+.controls button.wide{padding:0 16px}
+.controls button.ghost{border-color:transparent;text-decoration:underline}
+.controls button:disabled{opacity:.4;cursor:default}
+.controls button:focus-visible,.btn:focus-visible,#scrub:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+#scrub{flex:1;min-width:60px;accent-color:var(--teal)}
+.status{margin:10px 0 0;font-size:13.5px;color:var(--teal-2);min-height:20px}
+.proto{display:flex;flex-wrap:wrap;gap:6px 18px;margin:6px 0 0;font-size:12px;color:var(--teal-2)}
+.proto label{display:flex;gap:6px;align-items:center;color:var(--teal)}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:minmax(0,1fr);gap:18px;padding-top:22px}
+  .intro{justify-self:start;padding:0 20px;max-width:560px}
+  .top{padding:14px 20px}
+  .stage{-webkit-mask-image:none;mask-image:none}
+  .under{padding:0 16px}
+}
+@media (max-width:520px){.tag{display:none}.controls button.ghost{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+[data-motion="off"] *{transition:none!important}
+/* ?shot=1: stage only, for the poster and for frame captures */
+.shot .top,.shot .intro,.shot .under{display:none}
+.shot .hero{display:block;padding:0}.shot .stage{-webkit-mask-image:none;mask-image:none}
+.shot *{transition:none!important}

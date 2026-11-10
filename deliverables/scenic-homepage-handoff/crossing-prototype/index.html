@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es" data-motion="on">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Elara · Prototipo del cruce</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="crossing.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="https://holaelara.com/">Elara</a>
+  <span class="tag">Prototipo local · cruce Kioto → Venecia</span>
+</header>
+
+<main class="page">
+  <section class="intro">
+    <p class="eyebrow">Una práctica diaria, un destino a la vez</p>
+    <h1>Cada día, una pregunta te lleva <em>un paso más lejos.</em></h1>
+    <p class="lead">Elara es una práctica corta para mirar tu vida con más claridad. Llegas a un lugar, respondes una pregunta, te llevas una herramienta y un recuerdo. Después sigues caminando.</p>
+    <ol class="steps" id="steps">
+      <li data-step="0"><b>Una pregunta</b> al llegar</li>
+      <li data-step="1"><b>Una herramienta</b> que puedes usar hoy</li>
+      <li data-step="2"><b>Un recuerdo</b> para tu colección</li>
+      <li data-step="3"><b>El camino sigue</b> hasta el próximo destino</li>
+    </ol>
+    <p class="cta">
+      <a class="btn primary" href="https://holaelara.com/">Unirme a la lista de espera</a>
+      <a class="btn" href="https://elara-seven-day-journey.karawang3.chatgpt.site/?lang=es">Abrir el prototipo</a>
+    </p>
+    <p class="later">Más adelante en el recorrido: Atlas, Explorar y Círculos. Todavía no están animados en este prototipo.</p>
+  </section>
+
+  <section class="show" aria-label="Demostración: la viajera cruza de Kioto a Venecia">
+    <div class="stage" id="stage">
+      <img class="poster" id="poster" src="assets/poster.jpg" alt="Una viajera camina por un sendero de Kioto hacia una calle de Venecia, en dos pantallas de la app una junto a la otra.">
+      <div class="world" id="world" hidden>
+        <canvas id="scene" role="img" aria-label="La misma viajera camina desde el sendero de Kioto hasta una calle de Venecia."></canvas>
+        <div class="phone" data-phone="0"></div>
+        <div class="phone" data-phone="1"></div>
+        <article class="card" data-card="0" aria-label="Kioto, demostración"></article>
+        <article class="card" data-card="1" aria-label="Venecia, demostración"></article>
+      </div>
+    </div>
+
+    <div class="controls" id="controls" hidden>
+      <button id="prev" aria-label="Paso anterior">‹</button>
+      <button id="play" class="wide">Pausar</button>
+      <button id="next" aria-label="Paso siguiente">›</button>
+      <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Posición en la secuencia">
+      <button id="replay" class="wide ghost">Repetir</button>
+    </div>
+    <p class="status" id="status" aria-live="polite">Si la animación no carga, la imagen de arriba resume la escena y los enlaces siguen funcionando.</p>
+    <p class="proto" id="proto" hidden>
+      <label><input type="checkbox" id="outfit" checked> Cambiar de ropa al pasar el marco</label>
+      <span>Demostración: nada de lo que toques aquí cambia tu progreso real ni se publica.</span>
+    </p>
+  </section>
+</main>
+<script type="module" src="crossing.mjs"></script>
+</body>
+</html>

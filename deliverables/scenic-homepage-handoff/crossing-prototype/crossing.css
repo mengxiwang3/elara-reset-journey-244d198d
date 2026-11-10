@@ -1,0 +1,89 @@
+:root{
+  --white:#fff; --mist:#f2f7fa; --blue:#d9e9f2; --blue-2:#9fc3d6; --teal:#0f3d47; --teal-2:#2c5f6a; --ink:#0c2a31; --amber:#e9a23b;
+  --sans:"Instrument Sans","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --serif:"Baskerville","Libre Baskerville","Baskerville Old Face",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--sans);line-height:1.45}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:14px;padding:18px 24px;border-bottom:1px solid var(--blue)}
+.brand{font-family:var(--serif);font-style:italic;font-size:24px;text-decoration:none;color:var(--teal)}
+.tag{font-size:12px;color:var(--teal-2)}
+.page{display:grid;grid-template-columns:minmax(280px,360px) auto;gap:40px;align-items:center;justify-content:center;max-width:1240px;margin:0 auto;padding:28px 24px 56px}
+.eyebrow{margin:0 0 10px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-2)}
+h1{margin:0 0 14px;font-size:34px;line-height:1.12;font-weight:600;letter-spacing:-.01em;color:var(--teal)}
+h1 em{font-family:var(--serif);font-weight:400}
+.lead{margin:0 0 18px;font-size:16px;color:var(--ink)}
+.steps{list-style:none;margin:0 0 20px;padding:0;counter-reset:s;border-top:1px solid var(--blue)}
+.steps li{counter-increment:s;display:flex;gap:10px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--blue);font-size:14px;color:var(--teal-2);transition:color .2s}
+.steps li::before{content:counter(s);flex:none;width:20px;height:20px;border-radius:50%;border:1px solid var(--blue-2);font-size:11px;line-height:18px;text-align:center}
+.steps li b{font-weight:600;color:var(--teal)}
+.steps li.on{color:var(--ink)}
+.steps li.on::before{background:var(--teal);border-color:var(--teal);color:#fff}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px}
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--teal);font-size:14px;font-weight:600;text-decoration:none;color:var(--teal)}
+.btn.primary{background:var(--teal);color:#fff}
+.later{margin:0;font-size:12.5px;color:var(--teal-2)}
+
+.show{min-width:0}
+.stage{position:relative;width:736px;max-width:100%;height:620px;overflow:hidden;margin:0 auto}
+.poster{display:block;width:100%;height:100%;object-fit:contain}
+.ready .poster{display:none}
+.world{position:absolute;left:0;top:0;width:736px;height:620px;transform-origin:0 0;will-change:transform}
+.world[hidden]{display:none}
+#scene{position:absolute;left:0;top:0;width:736px;height:620px}
+/* The phone frames sit above the traveler: she passes behind the shared frame. */
+.phone{position:absolute;top:0;width:368px;height:620px;border:10px solid var(--teal);border-radius:38px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.phone[data-phone="0"]{left:0}
+.phone[data-phone="1"]{left:368px}
+
+.card{position:absolute;top:26px;width:320px;padding:12px 14px 12px;border-radius:18px;background:rgba(255,255,255,.95);box-shadow:0 6px 22px rgba(12,42,49,.16);transition:opacity .45s;color:var(--ink)}
+.card[data-card="0"]{left:24px}
+.card[data-card="1"]{left:392px}
+.card[data-stage="0"]{opacity:0;pointer-events:none}
+.card.dim{opacity:.92}
+.card .where{display:flex;justify-content:space-between;gap:8px;margin:0 0 6px;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--teal-2)}
+.card .where i{font-family:var(--serif);font-size:13px;letter-spacing:0;text-transform:none;color:var(--teal)}
+.card h2{margin:0 0 9px;font-size:17px;line-height:1.22;font-weight:600;color:var(--teal);min-height:42px}
+.card .choices{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px}
+.card button{min-height:38px;padding:5px 8px;border-radius:12px;border:1px solid var(--blue-2);background:#fff;font:600 12px/1.2 var(--sans);color:var(--teal);cursor:pointer}
+.card button:hover{background:var(--mist)}
+.card button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.card button:focus-visible,.controls button:focus-visible,.btn:focus-visible,#scrub:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.card .lesson{display:flex;gap:8px;align-items:flex-start;min-height:70px;margin:0;font-size:12.5px;line-height:1.4;opacity:0;transition:opacity .4s}
+.card .lesson img{flex:none;width:22px;height:22px;margin-top:1px}
+.card .keep{display:flex;gap:9px;align-items:center;min-height:40px;margin:8px 0 0;padding-top:8px;border-top:1px solid var(--blue);font-size:11.5px;color:var(--teal-2);opacity:0;transition:opacity .4s}
+.card .keep img{flex:none;width:32px;height:32px;object-fit:contain;transform:translateY(6px) scale(.8);transition:transform .5s}
+.card .keep b{display:block;color:var(--teal);font-size:12.5px}
+.card[data-stage="2"] .lesson,.card[data-stage="3"] .lesson{opacity:1}
+.card[data-stage="3"] .keep{opacity:1}
+.card[data-stage="3"] .keep img{transform:none}
+
+.controls{display:flex;align-items:center;gap:8px;max-width:736px;margin:14px auto 0}
+.controls[hidden],.proto[hidden]{display:none}
+.controls button{min-width:44px;height:44px;border-radius:999px;border:1px solid var(--blue-2);background:#fff;font:600 14px var(--sans);color:var(--teal);cursor:pointer}
+.controls button.wide{padding:0 16px}
+.controls button.ghost{border-color:transparent;text-decoration:underline}
+.controls button:disabled{opacity:.4;cursor:default}
+#scrub{flex:1;min-width:60px;accent-color:var(--teal)}
+.status{max-width:736px;margin:10px auto 0;font-size:13px;color:var(--teal-2);min-height:20px}
+.proto{display:flex;flex-wrap:wrap;gap:6px 18px;max-width:736px;margin:6px auto 0;font-size:12px;color:var(--teal-2)}
+.proto label{display:flex;gap:6px;align-items:center;color:var(--teal)}
+
+@media (max-width:1180px){
+  .page{grid-template-columns:minmax(0,736px);gap:22px;padding-top:20px}
+  h1{font-size:28px}
+}
+@media (max-width:520px){
+  .top{padding:14px 16px}.tag{display:none}
+  .page{padding:16px 12px 40px}
+  h1{font-size:25px}
+  .controls button.ghost{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+[data-motion="off"] *{transition:none!important}
+/* ?shot=1: stage only, for the poster and for frame captures */
+.shot .top,.shot .intro,.shot .controls,.shot .status,.shot .proto{display:none}
+.shot .page{display:block;padding:0;max-width:none}.shot .stage{margin:0}
+.shot *{transition:none!important}

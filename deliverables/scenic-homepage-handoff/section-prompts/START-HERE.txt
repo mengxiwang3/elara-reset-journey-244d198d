@@ -1,0 +1,14 @@
+ELARA HOMEPAGE — SIX INDEPENDENT DESIGN PASSES
+
+Open the local preview first: http://127.0.0.1:4186/motion.html#inside
+
+Use one prompt per separate Claude session. Give each session access to product-preview/ and its assets. Text-only chat cannot open localhost on your laptop: use Claude CLI locally or provide the source folder. These prompts are prepared, not automatically running.
+
+1. Hero: continuous traveler crossing: 01-hero-crossing.txt
+2. Interactive daily practice: 02-practice.txt
+3. Six paths chooser: 03-paths.txt
+4. Collection to kit to weekly postcard: 04-atlas.txt
+5. Explore resource library: 05-explore.txt
+6. Circles and final invitation: 06-circles-close.txt
+
+Integration owner: combine reviewed section patches sequentially, preserving the shared traveler hero and all controls. Verify desktop/mobile, focus, reduced motion, no broken assets or fake functionality. No production deployment until reviewed.
