@@ -1,8 +1,8 @@
-// Lower sections: the example practice and the six-area chooser. Local only: nothing is sent or saved.
+// Guided practice and the six-area chooser. Local only: nothing is sent or saved.
 const replies = [...document.querySelectorAll('[data-reply]')], hint = document.querySelector('#example-hint');
 replies.forEach(b => b.addEventListener('click', () => {
   replies.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-  hint.textContent = 'Puedes elegir la otra frase para comparar.';
+  hint.textContent = 'Prueba también la otra respuesta. Aquí no hay una correcta.';
 }));
 const paths = [...document.querySelectorAll('[data-path]')], panels = [...document.querySelectorAll('[data-panel]')];
 paths.forEach((b, i) => b.addEventListener('click', () => {

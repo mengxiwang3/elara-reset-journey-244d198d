@@ -38,9 +38,9 @@ const CARDS = [
 const BEATS = [];
 CARDS.forEach((c, i) => {
   const t0 = i * SEG, name = c.place.split(',')[0];
-  BEATS.push({ t: t0, say: `${name}. Al llegar, una pregunta sobre ${c.area.toLowerCase()}.` },
-    { t: t0 + 1.5, say: `${name}. Una herramienta que puedes usar hoy.` },
-    { t: t0 + 3, say: `${name}. Un recuerdo para tu colección.` });
+  BEATS.push({ t: t0, say: `${name}. Llegas y te espera una pregunta sobre ${c.area.toLowerCase()}.` },
+    { t: t0 + 1.5, say: `${name}. Te llevas una herramienta para usar hoy.` },
+    { t: t0 + 3, say: `${name}. Y un recuerdo para tu colección.` });
   if (i < STOPS - 1) BEATS.push({ t: t0 + DWELL, walk: true, say: `Sigue caminando: de ${name} a ${CARDS[i + 1].place.split(',')[0]}.` });
 });
 const beatAt = t => { let i = 0; BEATS.forEach((b, j) => { if (t >= b.t - 1e-6) i = j; }); return i; };
@@ -108,17 +108,17 @@ function draw() {
   const tr = traveler(T), cam = camera(tr);
   ctx.setTransform(dpr * scale, 0, 0, dpr * scale, 0, 0); ctx.clearRect(0, 0, viewW, HT); ctx.translate(-cam, 0);
   const wins = PHONES.map(ph => ({ ph, ...windowOf(ph, tr.body.x) })).sort((a, b) => a.f - b.f);   // nearest phone is drawn last, in front
-  const INK = '#1f3447';
+  const INK = '#1b2440';
   const phone = (w, shadow) => {
     if (w.x + w.w < cam - 40 || w.x > cam + viewW + 40) return;
     const ph = w.ph, plate = img[ph.key], PW = WL * ph.m, PH = HL * ph.m;
-    if (shadow) { ctx.save(); ctx.shadowColor = `rgba(31,52,71,${(.14 + .16 * w.f).toFixed(3)})`; ctx.shadowBlur = 14 + 18 * w.f; ctx.shadowOffsetY = 6 + 8 * w.f;
+    if (shadow) { ctx.save(); ctx.shadowColor = `rgba(34,32,28,${(.14 + .16 * w.f).toFixed(3)})`; ctx.shadowBlur = 14 + 18 * w.f; ctx.shadowOffsetY = 6 + 8 * w.f;
       ctx.fillStyle = INK; ctx.beginPath(); ctx.roundRect(w.x, w.y, w.w, w.h, w.r); ctx.fill(); ctx.restore(); }
     ctx.save(); ctx.beginPath(); ctx.roundRect(w.x, w.y, w.w, w.h, w.r); ctx.clip();
     // The scenery is fixed in the world; a smaller phone simply shows less of it.
     const s = Math.max(PW / plate.width, PH / plate.height), iw = plate.width * s, ih = plate.height * s;
     ctx.drawImage(plate, ph.cx - iw / 2, ph.bottom - ih, iw, ih);
-    if (w.f < 1) { ctx.fillStyle = `rgba(241,244,251,${(.3 * (1 - w.f)).toFixed(3)})`; ctx.fillRect(w.x, w.y, w.w, w.h); }   // resting phones fade back; she never does
+    if (w.f < 1) { ctx.fillStyle = `rgba(246,238,223,${(.34 * (1 - w.f)).toFixed(3)})`; ctx.fillRect(w.x, w.y, w.w, w.h); }   // resting phones fade back; she never does
     if (META[ph.key] && Math.abs(tr.body.x - ph.cx) < PITCH + H0) drawTraveler(tr, sameOutfit ? 'kyoto' : ph.key);
     ctx.restore();
     ctx.lineWidth = 2.5; ctx.strokeStyle = INK; ctx.beginPath(); ctx.roundRect(w.x + 1.25, w.y + 1.25, w.w - 2.5, w.h - 2.5, w.r - 1.25); ctx.stroke();
@@ -137,9 +137,9 @@ function buildCards() {
   $('#cards').innerHTML = CARDS.map((c, i) => {
     const ph = PHONES[i], w = WL * ph.m - 30;
     return `<article class="card" data-card="${i}" data-stage="0" style="left:${ph.cx - w / 2}px;top:${ph.bottom - HL * ph.m + WL * ph.m * .17}px;width:${w}px">
-      <p class="where">${c.place}</p><h2>${c.area}</h2><p class="q">${c.q}</p>
+      <p class="where">${c.place} · ${c.area}</p><h2>${c.q}</h2>
       <p class="lesson"><img src="assets/orb.png" alt=""><span>${c.lesson}</span></p>
-      <p class="keep"><img src="assets/${c.keep[1]}.png" alt=""><span><b>${c.keep[0]}</b>Un recuerdo de este lugar</span></p></article>`;
+      <p class="keep"><img src="assets/${c.keep[1]}.png" alt=""><span><b>${c.keep[0]}</b>Tu recuerdo de este lugar</span></p></article>`;
   }).join('') + (() => { const ph = PHONES[4]; return `<p class="next" id="nextchip" style="left:${ph.cx - 84}px;top:${ph.bottom - HS * ph.m + 44}px">Próximo destino<b>Mar Rojo</b><i>Confianza en ti</i></p>`; })();
 }
 function cardStage(i) {
@@ -154,7 +154,7 @@ function sync() {
   $('#nextchip').classList.toggle('on', T > (STOPS - 1) * SEG + .4);
   const s = still();
   $('#play').textContent = s ? 'Sin animación' : ended ? 'Repetir' : paused ? 'Reproducir' : 'Pausar';
-  $('#play').disabled = s; $('#scrub').hidden = s;
+  $('#play').disabled = s; $('#scrub').hidden = s; $('#play').setAttribute('aria-pressed', String(paused && !ended && !s));
   $('#prev').disabled = beat === 0 && T < .05; $('#next').disabled = beat === BEATS.length - 1;
   if (document.activeElement !== $('#scrub')) $('#scrub').value = Math.round(T / T_END * 1000);
   if (beat !== lastBeat) { lastBeat = beat; $('#status').textContent = BEATS[beat].say; }
@@ -193,7 +193,6 @@ try {
   $('#world').hidden = false; $('#controls').hidden = false; 
   document.documentElement.classList.add('ready'); loaded = true;
   $('#play').onclick = () => { if (T >= T_END - 1e-3) T = 0; paused = !paused; last = performance.now(); sync(); };
-  $('#replay').onclick = () => { T = 0; paused = still(); last = performance.now(); sync(); };
   $('#prev').onclick = () => jump(-1); $('#next').onclick = () => jump(1);
   $('#scrub').oninput = e => { T = e.target.value / 1000 * T_END; paused = true; sync(); };
   $('#stage').addEventListener('keydown', e => { if (e.key === 'ArrowRight') jump(1); if (e.key === 'ArrowLeft') jump(-1); });

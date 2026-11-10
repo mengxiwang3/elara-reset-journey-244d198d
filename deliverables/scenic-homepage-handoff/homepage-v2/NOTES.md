@@ -11,13 +11,20 @@ Files: `index.html`, `page.css` (whole page), `crossing.mjs` (traveler animation
 - Everything drawn is a function of one timeline. Phones are windows onto one world; she walks one straight ground line.
 - App screens in the lower sections are static captures from `product-preview/assets/`.
 
+## Revision 2 (brief of 10 Nov)
+- Hero: new headline and supporting copy; "Unirme a la lista de espera" primary, "Prueba una pregunta" secondary, which jumps to the practice.
+- First frame shows destination, question and souvenir. The tool line slides in after 1.5 s.
+- Controls are labelled: Pausar / Anterior / Siguiente, plus the scrubber. At the end Pausar becomes Repetir.
+- Order: hero, guided practice, what you keep (Mi colección, Mi kit personal, Atlas), six areas, compact Explorar and Círculos previews, waitlist close.
+- Practice: each response shows what it gives and a phrase to use. No scoring; both can be tried.
+- Style follows the live site tokens: cream paper, forest, navy, terracotta orange, Fraunces + Instrument Sans (Google Fonts). This replaces the white/blue/purple palette of revision 1.
+- Draft copy to approve: everything in the practice feedback, the "Lo que te llevas" lines, section headings, the Venice question and lesson.
+
 ## Changes from crossing-five
 - One outfit for the whole walk. No cut-out in any plate sits at her ground line: the Kyoto fence post and Venice mooring poles are about a third of her height, and the Kyoto tree, Venice wall, Andes rock and Mexico tree all meet the ground behind her path, so her feet would show below them. `?outfit=change` restores the old per-phone outfits (with the visible cut).
 - Hand-over between phones is a short dissolve of the overlap strip instead of a z-order swap. No pop.
 - Resting phones fade back; she does not, so she is never tinted differently on two sides of a phone edge.
 - Animation stops drawing while scrolled out of view.
-- Palette: white, blue, restrained purple (kickers, selected states, focus ring, scrubber). Amber and beige removed.
-- Lower sections rebuilt on one pattern: practice example, six areas, Atlas/collection/kit, Explore, Circles, close.
 - Works without JavaScript: poster, both example tools and all six areas are readable.
 
 ## Switches
