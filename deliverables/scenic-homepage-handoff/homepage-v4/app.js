@@ -41,11 +41,14 @@
         'circ.open': ['Abrir la conversación', 'Open the conversation'], 'circ.close': ['Cerrar la conversación', 'Close the conversation'],
     'circ.count': ['1 respuesta', '1 reply'], 'circ.pause': ['Pausar', 'Pause'], 'circ.resume': ['Continuar', 'Continue'],
     'topic.ciudad': ['Una nueva ciudad', 'A new city'], 'topic.uni': ['Vida universitaria', 'University life'], 'topic.mama': ['Soy mamá', 'I am a mum'], 'topic.amigas': ['Amistades adultas', 'Adult friendships'],
-    'exp.h': ['Explorar: para los días que piden un poco más.', 'Explore: for the days that ask for a little more.'], 'exp.for': ['Te sirve para', 'It helps you'],
-    'exp.fine': ['Recursos tomados de la versión de prueba.', 'Resources taken from the test version.'],
-    'res.taller': ['<b>Tu próxima decisión, con más claridad</b>Taller · 45 min', '<b>Your next decision, with more clarity</b>Workshop · 45 min'],
-    'res.l1': ['<b>Antes del siguiente paso</b>Lectura guiada · 2 min', '<b>Before the next step</b>Guided reading · 2 min'],
-    'res.l2': ['<b>Antes de pedir otra opinión</b>Lectura guiada · 2 min', '<b>Before asking for another opinion</b>Guided reading · 2 min'],
+    'exp.h': ['Explorar: para los días que piden un poco más.', 'Explore: for the days that ask for a little more.'], 
+    'exp.fine': ['Son lugares a los que vuelves a propósito, no contenido para consumir sin fin.', 'These are places you return to on purpose, not content to consume without end.'],
+    'res.taller': ['<b>Talleres en vivo</b>Con fecha y hora', '<b>Live workshops</b>With a date and time'],
+    'res.voces': ['<b>Voces que acompañan</b>Conversaciones guiadas', '<b>Voices that keep you company</b>Guided conversations'],
+    'res.escucha': ['<b>La sala de escucha</b>Audio corto', '<b>The Listening Room</b>Short audio'],
+    'exp.lead': ['Elara no es solo una práctica diaria. Cuando quieres quedarte más tiempo con algo, Explorar irá abriéndose poco a poco en beta.', 'Elara is not only a daily practice. When you want to stay with something longer, Explore will open up gradually in beta.'],
+    'exp.alt': ['Pantalla Explorar de la app, con talleres, audios, videos y guías.', 'The app’s Explore screen, with workshops, audio, videos and guides.'],
+    'pair.you': ['Tú', 'You'],
     'faq.h': ['Preguntas prácticas', 'Practical questions'],
     'faq.q1': ['¿Qué pasa en una práctica diaria?', 'What happens in a daily practice?'],
     'faq.a1': ['Llegas a un lugar, lees una situación concreta, respondes una pregunta y te llevas una herramienta y un recuerdo. Como en la práctica de arriba.', 'You arrive somewhere, read a concrete situation, answer one question and leave with a tool and a souvenir. Like the practice above.'],
@@ -310,13 +313,13 @@
 
   // ---------------------------------------------------------------- Explore: what each sample resource helps with
   const explore = (() => {
-    const RES = {
-      taller: ['Ordenar una decisión que tienes pendiente y salir con un siguiente paso escrito.', 'Sort out a decision you have pending and leave with a written next step.'],
-      l1: ['Parar dos minutos antes de avanzar y revisar si ese paso sigue teniendo sentido.', 'Stop for two minutes before moving on and check that the step still makes sense.'],
-      l2: ['Reconocer lo que ya sabes antes de preguntarle a alguien más.', 'Recognise what you already know before asking someone else.'],
+    const RES = {                                         // the live site's own descriptions
+      taller: [['Talleres en vivo', 'Live workshops'], ['Un taller destacado, con fecha y hora. Pronto disponible.', 'One featured workshop, with a date and time. Coming soon.']],
+      voces: [['Voces que acompañan', 'Voices that keep you company'], ['Voces de mujeres y conversaciones guiadas. Se irán abriendo en beta.', 'Women’s voices and guided conversations. They will open up gradually in beta.']],
+      escucha: [['La sala de escucha', 'The Listening Room'], ['Audio corto para cocinar, caminar, descansar o aterrizar antes de dormir.', 'Short audio for cooking, walking, resting or settling before sleep.']],
     };
     const res = $$('[data-res]'); let cur = 'taller';
-    const relabel = () => { res.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.res === cur))); $('#res-help').textContent = L(RES[cur]); };
+    const relabel = () => { res.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.res === cur))); $('#res-name').textContent = L(RES[cur][0]); $('#res-help').textContent = L(RES[cur][1]); };
     res.forEach(b => b.addEventListener('click', () => { cur = b.dataset.res; relabel(); }));
     return { relabel };
   })();

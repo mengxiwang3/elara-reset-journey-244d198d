@@ -91,6 +91,11 @@
     <p><b data-i18n="es.h">No es inglés, traducido. Es español, entendido.</b> <span data-i18n="es.p">El peso de ser la hija mayor, la familia que llama, los dos mundos que habitas. También está disponible en inglés.</span></p>
     <p><b data-i18n="sv.h">Construido con ellas, no para ellas.</b> <span data-i18n="sv.p">Más de 4600 mujeres respondieron nuestra encuesta; casi 1 de cada 3 eligió el dinero como lo primero que resolvería. Por eso la práctica de arriba empieza ahí.</span></p>
   </div>
+  <ul class="pairs" lang="es" aria-label="Cómo responde Elara">
+    <li><p class="pair-me"><span data-i18n="pair.you">Tú</span>«Hoy fue mucho.»</p><p class="pair-elara"><span>Elara</span>«Hoy fue mucho, y está bien.»</p></li>
+    <li><p class="pair-me"><span data-i18n="pair.you">Tú</span>«No sé por dónde empezar.»</p><p class="pair-elara"><span>Elara</span>«Busquemos un lugar pequeño para empezar.»</p></li>
+    <li><p class="pair-me"><span data-i18n="pair.you">Tú</span>«Aquí puedo ser yo.»</p><p class="pair-elara"><span>Elara</span>«Aquí no tienes que actuar.»</p></li>
+  </ul>
   <div class="usline" id="nosotras">
     <ul class="people">
       <li><img src="assets/founder-mengxi.jpg" alt="Mengxi Wang" width="56" height="56" loading="lazy"><span><b>Mengxi Wang</b><span data-i18n="us.r1">Producto y diseño</span></span></li>
@@ -145,20 +150,21 @@
 
 <section class="band explore" id="explore">
   <div class="head">
-        <h2 data-i18n="exp.h">Explorar: para los días que piden un poco más.</h2>
+    <h2 data-i18n="exp.h">Explorar: para los días que piden un poco más.</h2>
+    <p data-i18n="exp.lead">Elara no es solo una práctica diaria. Cuando quieres quedarte más tiempo con algo, Explorar irá abriéndose poco a poco en beta.</p>
   </div>
   <div class="resources">
-    <div class="res-list" role="group" aria-label="Recursos">
-      <button type="button" class="res" data-res="taller" aria-pressed="true"><img src="assets/explore-taller.jpg" alt="" width="66" height="82" loading="lazy"><span data-i18n-html="res.taller"><b>Tu próxima decisión, con más claridad</b>Taller · 45 min</span></button>
-      <button type="button" class="res" data-res="l1" aria-pressed="false"><img src="assets/explore-lectura-1.jpg" alt="" width="62" height="68" loading="lazy"><span data-i18n-html="res.l1"><b>Antes del siguiente paso</b>Lectura guiada · 2 min</span></button>
-      <button type="button" class="res" data-res="l2" aria-pressed="false"><img src="assets/explore-lectura-2.jpg" alt="" width="62" height="66" loading="lazy"><span data-i18n-html="res.l2"><b>Antes de pedir otra opinión</b>Lectura guiada · 2 min</span></button>
+    <div class="res-list" role="group" aria-label="Explorar">
+      <button type="button" class="res" data-res="taller" aria-pressed="true"><img src="assets/explore-taller.jpg" alt="" width="56" height="56" loading="lazy"><span data-i18n-html="res.taller"><b>Talleres en vivo</b>Con fecha y hora</span></button>
+      <button type="button" class="res" data-res="voces" aria-pressed="false"><img src="assets/explore-voces.jpg" alt="" width="56" height="56" loading="lazy"><span data-i18n-html="res.voces"><b>Voces que acompañan</b>Conversaciones guiadas</span></button>
+      <button type="button" class="res" data-res="escucha" aria-pressed="false"><img src="assets/explore-escucha.jpg" alt="" width="56" height="56" loading="lazy"><span data-i18n-html="res.escucha"><b>La sala de escucha</b>Audio corto</span></button>
     </div>
     <div class="res-detail">
-      <p class="tab" data-i18n="exp.for">Te sirve para</p>
-      <p id="res-help" aria-live="polite">Ordenar una decisión que tienes pendiente y salir con un siguiente paso escrito.</p>
-      <p class="fine" data-i18n="exp.fine">Recursos tomados de la versión de prueba.</p>
+      <p class="tab" id="res-name">Talleres en vivo</p>
+      <p id="res-help" aria-live="polite">Un taller destacado, con fecha y hora. Pronto disponible.</p>
+      <p class="fine" data-i18n="exp.fine">Son lugares a los que vuelves a propósito, no contenido para consumir sin fin.</p>
     </div>
-    <div class="crop"><img src="assets/explore.png" width="303" height="626" loading="lazy" decoding="async" alt="Pantalla Explorar de la app, con talleres, audios, videos y guías de ejemplo."></div>
+    <div class="crop"><img src="assets/explore.png" width="303" height="626" loading="lazy" decoding="async" data-i18n-alt="exp.alt" alt="Pantalla Explorar de la app, con talleres, audios, videos y guías."></div>
   </div>
 </section>
 
