@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es" data-motion="on">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elara · Una pregunta al día para dar tu siguiente paso</title>
+<meta name="description" content="Cada día llegas a un lugar nuevo, reflexionas sobre algo que estás viviendo y te llevas una herramienta para usar en tu vida.">
+<link rel="icon" type="image/png" href="assets/orb.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap">
+<link rel="stylesheet" href="page.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#practice">Saltar a la práctica</a>
+<header class="top">
+  <a class="brand" href="#top"><img src="assets/orb.png" alt="" width="26" height="26">elara</a>
+  <nav class="nav" aria-label="Secciones">
+    <a href="#practice">Prueba una pregunta</a><a href="#keep">Lo que te llevas</a><a href="#circles">Círculos</a><a href="#nosotras">Nosotras</a>
+  </nav>
+  <a class="btn primary small" href="https://holaelara.com/#lista">Unirme a la lista</a>
+</header>
+
+<main id="top">
+<div class="hero">
+  <section class="intro">
+    <h1>Una pregunta al día para dar <span>tu siguiente paso.</span></h1>
+    <p class="lead"><span class="long">Cada día llegas a un lugar nuevo, reflexionas sobre algo que estás viviendo y te llevas una herramienta para usar en tu vida.</span><span class="short">Un lugar nuevo, una pregunta y una herramienta para tu vida.</span></p>
+    <p class="ctas"><a class="btn primary" href="https://holaelara.com/#lista">Unirme a la lista<span class="wide-only">&nbsp;de espera</span></a><a class="btn" href="#practice">Prueba una pregunta</a></p>
+  </section>
+
+  <section class="show" aria-label="Demostración: una viajera camina por cuatro destinos de la app">
+    <div class="stage" id="stage" tabindex="0">
+      <img class="poster" id="poster" src="assets/poster.jpg" width="940" height="640" alt="La viajera llega a Kioto. En la pantalla: una pregunta sobre claridad financiera y un recuerdo, la taza de Kioto.">
+      <div class="world" id="world" hidden>
+        <canvas id="scene" role="img" aria-label="La misma viajera camina de Kioto a Venecia, Machu Picchu y Ciudad de México. En cada lugar la esperan una pregunta, una herramienta y un recuerdo."></canvas>
+        <div class="cards" id="cards"></div>
+      </div>
+    </div>
+    <div class="under">
+      <div class="controls" id="controls" hidden>
+        <button type="button" id="play" class="main">Pausar</button>
+        <p class="status" id="status" aria-live="polite"></p>
+      </div>
+      <details class="demo" id="demo" hidden>
+        <summary>Controles de la demo</summary>
+        <div class="demo-row">
+          <button type="button" id="prev">‹ Anterior</button>
+          <button type="button" id="next">Siguiente ›</button>
+          <button type="button" id="replay">Repetir</button>
+          <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Posición en el recorrido">
+          <label class="check"><input type="checkbox" id="outfit" checked> Cambiar de ropa en cada destino</label>
+        </div>
+      </details>
+      <noscript><p class="status">La imagen resume la escena: llegas a un lugar, respondes una pregunta y te llevas un recuerdo.</p></noscript>
+    </div>
+  </section>
+</div>
+
+<section class="band quiet" id="para-ti">
+  <p class="kicker">Si esto te suena familiar</p>
+  <h2>Para la mujer que sostiene todo, <em>aunque nadie lo note.</em></h2>
+  <ul class="recognise">
+    <li>Funcionando al máximo, agotada en silencio.</li>
+    <li>Suavidad y ambición, al mismo tiempo.</li>
+    <li>Tu cultura, tu familia, tus estándares.</li>
+  </ul>
+  <p class="aside">Elara te ayuda a ver dónde estás, qué está pidiendo atención y cuál es el siguiente paso pequeño.</p>
+</section>
+
+<section class="band practice" id="practice">
+  <div class="copy">
+    <p class="kicker">Prueba una pregunta</p>
+    <h2>Una situación real, una frase que sí puedes usar.</h2>
+    <p>Así es una práctica en Elara. Elige la respuesta que más se parece a ti.</p>
+  </div>
+  <div class="example">
+    <p class="label"><img src="assets/orb.png" alt="" width="22" height="22" loading="lazy">Ejemplo · Claridad financiera</p>
+    <p class="scenario">Alguien de tu familia te pide dinero. Quieres ayudar, pero todavía no sabes cuánto puedes aportar.</p>
+    <h3 id="example-q">¿Qué le dirías?</h3>
+    <div class="answers" role="group" aria-labelledby="example-q">
+      <button type="button" class="answer" id="answer-a" data-reply aria-pressed="false">Voy a revisar cuánto puedo aportar y te digo mañana.</button>
+      <div class="tool">
+        <p>Dar un momento concreto para responder te permite revisar tus posibilidades sin dejar a la otra persona esperando.</p>
+      </div>
+      <button type="button" class="answer" id="answer-b" data-reply aria-pressed="false">Sí, después veo cómo me organizo.</button>
+      <div class="tool">
+        <p>Quieres ayudar. Decir que sí antes de revisar puede dejarte con un compromiso que todavía no sabes si puedes cumplir.</p>
+        <label for="alt-phrase">Una alternativa que puedes editar</label>
+        <textarea id="alt-phrase" rows="2" spellcheck="false">Quiero ayudarte. Déjame revisar cuánto puedo aportar y mañana te respondo.</textarea>
+      </div>
+    </div>
+    <p class="hint" id="example-hint" aria-live="polite">Toca una respuesta para ver qué aprendes con ella.</p>
+    <p class="fine">Es un ejemplo. Nada de lo que elijas o escribas se envía ni se guarda.</p>
+  </div>
+</section>
+
+<section class="band keep" id="keep">
+  <div class="head">
+    <p class="kicker">Lo que te llevas</p>
+    <h2>Un recuerdo del lugar, una herramienta para tu vida.</h2>
+    <p>Cada recuerdo guarda una frase que puedes volver a usar. Toca uno.</p>
+  </div>
+  <div class="kept">
+    <div class="shelf" role="group" aria-label="Recuerdos de ejemplo">
+      <button type="button" class="memento" data-keep="cup" aria-pressed="true"><img src="assets/souvenir-cup.png" alt="" width="106" height="114" loading="lazy"><span><b>Taza de Kioto</b>Claridad financiera</span></button>
+      <button type="button" class="memento" data-keep="boat" aria-pressed="false"><img src="assets/souvenir-boat.png" alt="" width="107" height="96" loading="lazy"><span><b>Velero de Venecia</b>Ritmo diario</span></button>
+      <button type="button" class="memento" data-keep="flask" aria-pressed="false"><img src="assets/souvenir-flask.png" alt="" width="84" height="110" loading="lazy"><span><b>Cantimplora de los Andes</b>Encontrar tu propósito</span></button>
+      <button type="button" class="memento" data-keep="bracelet" aria-pressed="false"><img src="assets/souvenir-bracelet.png" alt="" width="110" height="61" loading="lazy"><span><b>Pulsera tejida</b>Amor y límites</span></button>
+    </div>
+    <div class="kitbox">
+      <p class="tab">La frase de este recuerdo</p>
+      <blockquote id="keep-phrase" aria-live="polite">Quiero ayudarte. Déjame revisar cuánto puedo aportar y mañana te respondo.</blockquote>
+      <button type="button" class="btn small" id="keep-save">Guardar en mi kit</button>
+      <div class="kitlist">
+        <p class="tab">Mi kit personal <span id="kit-count">0</span></p>
+        <ul id="kit-items" aria-live="polite"><li class="empty">Aquí se juntan las frases que quieres volver a usar.</li></ul>
+      </div>
+    </div>
+    <figure class="atlasbox">
+      <div class="crop"><img src="assets/atlas.png" width="303" height="626" loading="lazy" decoding="async" alt="Pantalla Atlas de la app: un globo con los destinos visitados y el acceso a Mi colección."></div>
+      <figcaption><b>Atlas.</b> El mapa de tu recorrido. Al cerrar la semana recibes una postal con lo que te llevas.</figcaption>
+    </figure>
+  </div>
+  <p class="fine">Demostración: en esta página no se guarda nada.</p>
+</section>
+
+<section class="band paths" id="paths">
+  <div class="inner">
+    <p class="kicker">Seis áreas de tu vida</p>
+    <h2>¿Qué quieres explorar después?</h2>
+    <div class="picker" role="group" aria-label="Las seis áreas">
+      <button type="button" data-path="money" aria-pressed="true">Claridad financiera</button>
+      <button type="button" data-path="purpose" aria-pressed="false">Encontrar tu propósito</button>
+      <button type="button" data-path="confidence" aria-pressed="false">Confianza en ti</button>
+      <button type="button" data-path="energy" aria-pressed="false">Recuperar tu energía</button>
+      <button type="button" data-path="relationships" aria-pressed="false">Amor y límites</button>
+      <button type="button" data-path="rhythm" aria-pressed="false">Ritmo diario</button>
+    </div>
+    <div class="detail" aria-live="polite">
+      <span class="num" id="path-number">En tu primera semana</span>
+      <div class="panels">
+        <p data-panel="money"><b>Claridad financiera. </b>Observa una decisión sobre tu dinero y prepara una regla que tenga sentido para ti.</p>
+        <p data-panel="purpose" hidden><b>Encontrar tu propósito. </b>Reúne pistas sobre lo que te importa y diseña una prueba pequeña antes de decidir.</p>
+        <p data-panel="confidence" hidden><b>Confianza en ti. </b>Reconoce lo que sí sabes y practica revisar una decisión con razones.</p>
+        <p data-panel="energy" hidden><b>Recuperar tu energía. </b>Observa qué te da energía, qué te cuesta y prueba un ajuste posible.</p>
+        <p data-panel="relationships" hidden><b>Amor y límites. </b>Distingue lo que puedes ofrecer y prepara una petición o un límite concreto.</p>
+        <p data-panel="rhythm" hidden><b>Ritmo diario. </b>Prueba una señal y un siguiente paso para retomar una rutina cuando cambia tu día.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band circles" id="circles">
+  <div class="copy">
+    <p class="kicker">Círculos</p>
+    <h2>Tu pregunta puede <em>abrir una conversación.</em></h2>
+    <p>Elige un tema que estés viviendo, lee o pregunta. Tú decides cuándo participar.</p>
+    <p class="circle-ctl"><button type="button" class="btn small" id="circle-replay">Ver de nuevo</button><button type="button" class="btn small" id="circle-pause" hidden>Pausar</button></p>
+    <p class="fine">Demostración con perfiles y mensajes de ejemplo. No son personas reales ni conversaciones en vivo.</p>
+  </div>
+  <div class="circle-stage" id="circle-stage" data-step="4">
+    <div class="mini" aria-label="Vista de ejemplo de Círculos">
+      <div class="mini-top"><b>Círculos</b><span>Ejemplo</span></div>
+      <div class="topics" role="group" aria-label="Temas de ejemplo">
+        <button type="button" data-topic="ciudad" aria-pressed="true">Una nueva ciudad</button>
+        <button type="button" data-topic="uni" aria-pressed="false">Vida universitaria</button>
+        <button type="button" data-topic="mama" aria-pressed="false">Soy mamá</button>
+        <button type="button" data-topic="amigas" aria-pressed="false">Amistades adultas</button>
+      </div>
+      <article class="post">
+        <p class="who"><span class="av" aria-hidden="true">P</span><b>Paula M.</b><i>Perfil de ejemplo</i></p>
+        <p class="q" id="circle-q">Me mudé hace poco. ¿Cómo empezaron a hacer amigas sin conocer a nadie?</p>
+        <p class="meta"><span id="circle-count">1 respuesta</span></p>
+        <button type="button" class="open" id="circle-open" aria-expanded="false" aria-controls="circle-thread">Abrir la conversación</button>
+      </article>
+    </div>
+    <div class="thread" id="circle-thread" hidden>
+      <p class="thread-top"><b id="circle-topic">Una nueva ciudad</b><span>Conversación de ejemplo</span></p>
+      <div class="msg"><p class="who"><span class="av" aria-hidden="true">P</span><b>Paula M.</b><i>Perfil de ejemplo</i></p><p id="thread-q">Me mudé hace poco. ¿Cómo empezaron a hacer amigas sin conocer a nadie?</p></div>
+      <div class="msg reply"><p class="who"><span class="av alt" aria-hidden="true">S</span><b>Sofía A.</b><i>Perfil de ejemplo</i></p><p id="thread-r">Me ayudó volver al mismo lugar cada semana. La conversación empezó después de vernos varias veces.</p></div>
+      <p class="fine">Aquí no puedes responder: es una demostración.</p>
+    </div>
+    <div class="reply-peek" aria-hidden="true"><span class="av alt">S</span><p id="circle-r">Me ayudó volver al mismo lugar cada semana. La conversación empezó después de vernos varias veces.</p></div>
+  </div>
+</section>
+
+<section class="band explore" id="explore">
+  <div class="head">
+    <p class="kicker">Explorar</p>
+    <h2>Para los días que piden un poco más.</h2>
+  </div>
+  <div class="resources">
+    <div class="res-list" role="group" aria-label="Recursos de ejemplo">
+      <button type="button" class="res" data-res="taller" aria-pressed="true"><img src="assets/explore-taller.jpg" alt="" width="66" height="82" loading="lazy"><span><b>Tu próxima decisión, con más claridad</b>Taller · 45 min</span></button>
+      <button type="button" class="res" data-res="l1" aria-pressed="false"><img src="assets/explore-lectura-1.jpg" alt="" width="62" height="68" loading="lazy"><span><b>Antes del siguiente paso</b>Lectura guiada · 2 min</span></button>
+      <button type="button" class="res" data-res="l2" aria-pressed="false"><img src="assets/explore-lectura-2.jpg" alt="" width="62" height="66" loading="lazy"><span><b>Antes de pedir otra opinión</b>Lectura guiada · 2 min</span></button>
+    </div>
+    <div class="res-detail">
+      <p class="tab">Te sirve para</p>
+      <p id="res-help" aria-live="polite">Ordenar una decisión que tienes pendiente y salir con un siguiente paso escrito.</p>
+      <p class="fine">Recursos de ejemplo tomados de la versión de prueba.</p>
+    </div>
+    <div class="crop"><img src="assets/explore.png" width="303" height="626" loading="lazy" decoding="async" alt="Pantalla Explorar de la app, con talleres, audios, videos y guías de ejemplo."></div>
+  </div>
+</section>
+
+<section class="band quiet us" id="nosotras">
+  <div class="culture">
+    <p class="kicker">Español primero</p>
+    <h2>No es inglés, traducido. <em>Es español, entendido.</em></h2>
+    <p>El peso de ser la hija mayor, la familia que llama, los dos mundos que habitas. Elara parte de ahí. También está disponible en inglés.</p>
+  </div>
+  <div class="founders">
+    <p class="kicker">Una nota de nosotras</p>
+    <p class="note">Lo veíamos en nuestra vida y en miles de mensajes: mujeres que por fuera parecen tenerlo todo resuelto y por dentro funcionan en vacío. No encontrábamos el lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. (La verdad, también para nosotras.)</p>
+    <ul class="people">
+      <li><img src="assets/founder-mengxi.jpg" alt="Mengxi Wang" width="56" height="56" loading="lazy"><span><b>Mengxi Wang</b>Producto y diseño</span></li>
+      <li><img src="assets/founder-alejandra.jpg" alt="Alejandra Ramirez" width="56" height="56" loading="lazy"><span><b>Alejandra Ramirez</b>Creadora y comunidad</span></li>
+    </ul>
+    <p class="soon">Un saludo de Alejandra, próximamente.</p>
+  </div>
+</section>
+
+<section class="band facts" id="beta">
+  <ul>
+    <li><b>Unos minutos al día.</b>Una práctica corta, a tu ritmo, y puedes pausar cuando quieras.</li>
+    <li><b>Beta: abriendo pronto.</b>Te escribimos antes de abrir. Sin spam, y puedes darte de baja cuando quieras.</li>
+    <li><b>Tu privacidad.</b>Lee la <a href="https://holaelara.com/privacidad">Política de Privacidad</a>. Elara no es terapia ni un servicio médico.</li>
+  </ul>
+</section>
+
+<section class="close" id="try">
+  <div>
+    <p class="kicker">Próximo destino</p>
+    <h2>Tu próxima parada: <em>algo para ti.</em></h2>
+    <p class="ctas"><a class="btn primary" href="https://holaelara.com/#lista">Unirme a la lista de espera</a></p>
+    <p class="fine">En español e inglés.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <a class="brand" href="#top"><img src="assets/orb.png" alt="" width="22" height="22" loading="lazy">elara</a>
+  <nav aria-label="Legal y ayuda"><a href="https://holaelara.com/privacidad">Privacidad</a><a href="https://holaelara.com/terms-and-conditions">Términos</a><a href="https://holaelara.com/support">Soporte</a></nav>
+</footer>
+<script defer src="crossing.js"></script>
+<script defer src="story.js"></script>
+</body>
+</html>
