@@ -48,6 +48,8 @@ h3{font-size:19px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
 /* Wide desktop: a fixed-width copy column, so the phones keep the same distance from the headline at any width */
 @media (min-width:1100px){.hero{grid-template-columns:calc(var(--side) + 430px) minmax(0,1fr)}.intro{padding-right:44px}}
 .lead{max-width:440px;font-size:19px;line-height:1.45;color:var(--muted)}
+/* Review option B: ?hero=warm or #hero-warm gives the hero a near-white with a warm undertone. Nothing else changes. */
+.hero-warm .hero{background:#faf8f4}
 .show{position:relative;min-width:0}
 /* Wide desktop: the whole animation block (phones, controls, caption) sits 24px closer to the headline; less on narrower desktops */
 @media (min-width:901px){.show{left:clamp(-24px,calc((1000px - 100vw)*.1),0px)}}

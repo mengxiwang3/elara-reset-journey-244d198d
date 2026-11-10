@@ -20,6 +20,11 @@ Files: `index.html`, `page.css` (whole page), `crossing.js` (traveler animation)
 - Style follows the live site tokens: cream paper, forest, navy, terracotta orange, Fraunces + Instrument Sans (Google Fonts). This replaces the white/blue/purple palette of revision 1.
 - Draft copy to approve: everything in the practice feedback, the "Lo que te llevas" lines, section headings, the Venice question and lesson.
 
+## Hero background review (A/B)
+- A is the default: white hero. B adds only `.hero{background:#faf8f4}`; open with `?hero=warm` (or `#hero-warm` on the hosted copy). Nothing else differs.
+- Comparison sheets: screens/hero-ab-desktop.jpg and screens/hero-ab-mobile.jpg, same paused Kyoto frame (t=0), with the app "Hoy" capture from product-preview beside each.
+- Undecided. Remove the switch once one is chosen.
+
 ## Revision 5 (layout and launch cleanup)
 - Wide desktop: the animation block (phones, controls, scrubber, caption) sits 24 px closer to the headline; the shift tapers to 0 by 1000 px. The copy column has a fixed width from 1100 px up, so the gap is the same at 1280, 1440 and 1920: 35 px from the text to the animation area, and the leftmost phone's shadow clears the text at every point of the timeline.
 - Tablet and phone: the traveler is centred, with the headline and both buttons above.
