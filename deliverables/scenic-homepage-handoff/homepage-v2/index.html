@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es" data-motion="on">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Elara · Prototipo de página de inicio</title>
+<meta name="description" content="Prototipo local de la página de inicio de Elara. No es la página pública.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="page.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#practice">Saltar la animación</a>
+<header class="top">
+  <a class="brand" href="#top"><img src="assets/orb.png" alt="" width="26" height="26">elara</a>
+  <nav class="nav" aria-label="Secciones">
+    <a href="#practice">La práctica</a><a href="#atlas">Atlas</a><a href="#explore">Explorar</a><a href="#circles">Círculos</a>
+  </nav>
+  <a class="btn primary small" href="https://holaelara.com/">Unirme a la lista</a>
+</header>
+
+<main id="top">
+<div class="hero">
+  <section class="intro">
+    <p class="kicker">Prototipo · no es la página pública</p>
+    <h1>Cada día, una pregunta te lleva <em>un paso más lejos.</em></h1>
+    <p class="lead">Llegas a un lugar, respondes una pregunta y te llevas una herramienta y un recuerdo. Después sigues caminando.</p>
+    <p class="cta"><a class="btn primary" href="https://holaelara.com/">Unirme a la lista de espera</a></p>
+    <p class="alt"><a href="https://elara-seven-day-journey.karawang3.chatgpt.site/?lang=es">O abre el prototipo de la app ↗</a></p>
+  </section>
+
+  <section class="show" aria-label="Demostración: una viajera camina por cuatro destinos de la app">
+    <div class="stage" id="stage" tabindex="0">
+      <img class="poster" id="poster" src="assets/poster.jpg" width="940" height="640" alt="Una viajera camina de una pantalla de la app a la siguiente: Kioto, Venecia, Machu Picchu y Ciudad de México.">
+      <div class="world" id="world" hidden>
+        <canvas id="scene" role="img" aria-label="La misma viajera camina de Kioto a Venecia, Machu Picchu y Ciudad de México, una pantalla tras otra."></canvas>
+        <div class="cards" id="cards"></div>
+      </div>
+    </div>
+    <div class="under">
+      <div class="controls" id="controls" hidden>
+        <button id="prev" aria-label="Paso anterior">‹</button>
+        <button id="play" class="wide">Pausar</button>
+        <button id="next" aria-label="Paso siguiente">›</button>
+        <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Posición en la secuencia">
+        <button id="replay" class="wide ghost">Repetir</button>
+      </div>
+      <p class="status" id="status" aria-live="polite">La imagen resume la escena: una viajera pasa de una pantalla de la app a la siguiente.</p>
+    </div>
+  </section>
+</div>
+
+<section class="band practice" id="practice">
+  <div class="copy">
+    <p class="kicker">01 · La práctica diaria</p>
+    <h2>Algo pequeño. <em>Algo que sí puedes usar.</em></h2>
+    <p>No necesitas resolver tu vida hoy. Unos minutos, una situación concreta y un siguiente paso.</p>
+    <p class="aside">Pruébalo aquí con un ejemplo.</p>
+  </div>
+  <div class="example">
+    <p class="label"><img src="assets/orb.png" alt="" width="22" height="22" loading="lazy">Una práctica de ejemplo</p>
+    <p class="scenario">Alguien de tu familia te pide dinero. Quieres ayudar, pero todavía no sabes cuánto puedes aportar.</p>
+    <h3 id="example-q">¿Qué podrías decir antes de responder?</h3>
+    <div class="answers" role="group" aria-labelledby="example-q">
+      <button type="button" class="answer" data-reply aria-pressed="false">Voy a revisar cuánto puedo aportar y te digo mañana.</button>
+      <p class="tool"><strong>Haz espacio antes del sí.</strong> Decir cuándo vas a responder te permite revisar tus posibilidades sin prometer algo que aún no sabes si puedes cumplir.</p>
+      <button type="button" class="answer" data-reply aria-pressed="false">Sí, después veo cómo me organizo.</button>
+      <p class="tool"><strong>Revisa antes de comprometerte.</strong> Ese sí deja la organización para después. Puedes editarlo: «Déjame revisar cuánto puedo aportar y mañana te respondo».</p>
+    </div>
+    <p class="hint" id="example-hint" aria-live="polite">Elige una frase para ver la herramienta.</p>
+    <p class="fine">Ejemplo guiado. Tu respuesta no se envía ni se guarda.</p>
+  </div>
+</section>
+
+<section class="band paths tint-blue" id="paths">
+  <div class="inner">
+    <p class="kicker">02 · Seis áreas de tu vida</p>
+    <h2>¿Por dónde quieres <em>empezar?</em></h2>
+    <div class="picker" role="group" aria-label="Las seis áreas">
+      <button type="button" data-path="money" aria-pressed="true">Claridad financiera</button>
+      <button type="button" data-path="purpose" aria-pressed="false">Encontrar tu propósito</button>
+      <button type="button" data-path="confidence" aria-pressed="false">Confianza en ti</button>
+      <button type="button" data-path="energy" aria-pressed="false">Recuperar tu energía</button>
+      <button type="button" data-path="relationships" aria-pressed="false">Amor y límites</button>
+      <button type="button" data-path="rhythm" aria-pressed="false">Ritmo diario</button>
+    </div>
+    <div class="detail" aria-live="polite">
+      <span class="num" id="path-number">01 / 06</span>
+      <div class="panels">
+        <p data-panel="money"><b>Claridad financiera. </b>Observa una decisión sobre tu dinero y prepara una regla que tenga sentido para ti.</p>
+        <p data-panel="purpose" hidden><b>Encontrar tu propósito. </b>Reúne pistas sobre lo que te importa y diseña una prueba pequeña antes de decidir.</p>
+        <p data-panel="confidence" hidden><b>Confianza en ti. </b>Reconoce lo que sí sabes y practica revisar una decisión con razones.</p>
+        <p data-panel="energy" hidden><b>Recuperar tu energía. </b>Observa qué te da energía, qué te cuesta y prueba un ajuste posible.</p>
+        <p data-panel="relationships" hidden><b>Amor y límites. </b>Distingue lo que puedes ofrecer y prepara una petición o un límite concreto.</p>
+        <p data-panel="rhythm" hidden><b>Ritmo diario. </b>Prueba una señal y un siguiente paso para retomar una rutina cuando cambia tu día.</p>
+      </div>
+      <a class="link" id="path-link" href="https://elara-seven-day-journey.karawang3.chatgpt.site/?journey=money&day=1&lang=es">Ver esta práctica en el prototipo ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="band atlas flip" id="atlas">
+  <figure class="screen arch">
+    <img src="assets/atlas.png" width="303" height="626" loading="lazy" decoding="async" alt="Pantalla Atlas de la app: un globo con los destinos, el recorrido actual y el acceso a Mi colección.">
+    <figcaption class="note"><span>No solo dónde estuviste</span>También lo que descubriste.</figcaption>
+  </figure>
+  <div class="copy">
+    <p class="kicker">03 · Atlas, colección y kit</p>
+    <h2>Un recuerdo del lugar. <em>Una pista sobre ti.</em></h2>
+    <ol class="steps">
+      <li><span>01</span><div><h3>Tu colección</h3><p>Un recuerdo pequeño por cada parada.</p></div></li>
+      <li><span>02</span><div><h3>Tu kit personal</h3><p>Frases y herramientas para volver a usar.</p></div></li>
+      <li><span>03</span><div><h3>Tu postal de la semana</h3><p>Lo que te llevas del recorrido.</p></div></li>
+    </ol>
+    <ul class="keepsakes" aria-label="Recuerdos de ejemplo">
+      <li><img src="assets/souvenir-cup.png" alt="" width="53" height="57" loading="lazy">Taza de Kioto</li>
+      <li><img src="assets/souvenir-boat.png" alt="" width="54" height="48" loading="lazy">Velero de Venecia</li>
+      <li><img src="assets/souvenir-flask.png" alt="" width="42" height="55" loading="lazy">Cantimplora de los Andes</li>
+      <li><img src="assets/souvenir-bracelet.png" alt="" width="55" height="31" loading="lazy">Pulsera tejida</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band explore tint-blue" id="explore">
+  <div class="copy">
+    <p class="kicker">04 · Explorar</p>
+    <h2>Para cuando quieres <em>ir un poco más allá.</em></h2>
+    <p>Un audio para escuchar, una guía para consultar, un taller para profundizar. A tu ritmo, y guardas lo que quieras retomar.</p>
+    <ul class="chips"><li>Audios</li><li>Videos</li><li>Guías</li><li>Talleres</li><li>Empleos</li></ul>
+    <p class="fine">La biblioteca y los empleos del prototipo son ejemplos.</p>
+  </div>
+  <figure class="screen tilt-r">
+    <img src="assets/explore.png" width="303" height="626" loading="lazy" decoding="async" alt="Pantalla Explorar de la app: pestañas de talleres, audios, videos, guías y empleos, con recursos de ejemplo.">
+  </figure>
+</section>
+
+<section class="band circles flip" id="circles">
+  <figure class="screen tilt-l lilac">
+    <img src="assets/circles.png" width="303" height="626" loading="lazy" decoding="async" alt="Pantalla Círculos de la app: conversaciones con perfiles de ejemplo.">
+  </figure>
+  <div class="copy">
+    <p class="kicker">05 · Círculos</p>
+    <h2>Tu pregunta puede <em>abrir una conversación.</em></h2>
+    <p>Busca un tema que estés viviendo, comparte una pregunta o empieza por leer. Tú eliges cuándo participar.</p>
+    <ul class="chips lilac"><li>Vida universitaria</li><li>Soy mamá</li><li>Una nueva ciudad</li><li>Amistades adultas</li></ul>
+    <p class="fine">Perfiles y conversaciones de muestra. El prototipo no conecta con personas reales.</p>
+  </div>
+</section>
+
+<section class="close" id="try">
+  <img src="assets/orb.png" alt="" width="48" height="48" loading="lazy">
+  <h2>Tu próxima parada: <em>algo para ti.</em></h2>
+  <p class="cta"><a class="btn primary" href="https://holaelara.com/">Unirme a la lista de espera</a></p>
+  <p class="alt"><a href="https://elara-seven-day-journey.karawang3.chatgpt.site/?lang=es&journey=money&day=1">O prueba un día en el prototipo ↗</a></p>
+  <p class="fine">Versión de prueba · español e inglés</p>
+</section>
+</main>
+
+<footer class="foot">
+  <a class="brand" href="#top"><img src="assets/orb.png" alt="" width="22" height="22" loading="lazy">elara</a>
+  <span>Prototipo local. Nada de lo que toques aquí cambia tu progreso real ni se publica.</span>
+  <a href="https://holaelara.com/">holaelara.com ↗</a>
+</footer>
+<script type="module" src="crossing.mjs"></script>
+<script type="module" src="story.mjs"></script>
+</body>
+</html>
