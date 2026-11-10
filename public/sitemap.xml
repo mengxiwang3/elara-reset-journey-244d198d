@@ -22,4 +22,16 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://holaelara.com/privacidad"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://holaelara.com/privacy"/>
   </url>
+  <url>
+    <loc>https://holaelara.com/terms-and-conditions</loc>
+  </url>
+  <url>
+    <loc>https://holaelara.com/support</loc>
+  </url>
+  <url>
+    <loc>https://holaelara.com/request-account-deletion</loc>
+  </url>
+  <url>
+    <loc>https://holaelara.com/nosotras</loc>
+  </url>
 </urlset>

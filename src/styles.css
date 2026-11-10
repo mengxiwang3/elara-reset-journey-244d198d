@@ -2944,3 +2944,7 @@ strong, b { font-weight: 600; }
 /* Explore: a short list, art as small thumbnails */
 .e-ex-places { max-width: 34rem; }
 .e-ex-places .e-place { grid-template-columns: 7.5rem 1fr; }
+
+/* Legal pages (terms, support, account deletion): two rules that are on the live site but were never committed. */
+.e-legal__steps{gap:.4rem;margin-bottom:0;padding-left:1.4rem;list-style:decimal;display:grid}
+.e-legal__note{background:var(--tint);color:var(--ink);border-radius:14px;padding:.9rem 1.1rem}

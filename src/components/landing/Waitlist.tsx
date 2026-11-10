@@ -11,7 +11,7 @@ import { Reveal } from "./Reveal";
  * happening now, and it never asks for a tap.
  */
 
-const COPY = {
+export const COPY = {
   es: {
     label: "Lista de espera",
     title: "Sé una de las primeras mujeres dentro de Elara.",

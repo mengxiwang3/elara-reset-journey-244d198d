@@ -9,12 +9,31 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
+import { Route as SupportRouteImport } from './routes/support'
+import { Route as RequestAccountDeletionRouteImport } from './routes/request-account-deletion'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
+import { Route as NosotrasRouteImport } from './routes/nosotras'
 import { Route as EsRouteImport } from './routes/es'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
+  id: '/terms-and-conditions',
+  path: '/terms-and-conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestAccountDeletionRoute = RequestAccountDeletionRouteImport.update({
+  id: '/request-account-deletion',
+  path: '/request-account-deletion',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -23,6 +42,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PrivacidadRoute = PrivacidadRouteImport.update({
   id: '/privacidad',
   path: '/privacidad',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NosotrasRoute = NosotrasRouteImport.update({
+  id: '/nosotras',
+  path: '/nosotras',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EsRoute = EsRouteImport.update({
@@ -45,42 +69,107 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/en': typeof EnRoute
   '/es': typeof EsRoute
+  '/nosotras': typeof NosotrasRoute
   '/privacidad': typeof PrivacidadRoute
   '/privacy': typeof PrivacyRoute
+  '/request-account-deletion': typeof RequestAccountDeletionRoute
+  '/support': typeof SupportRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/en': typeof EnRoute
   '/es': typeof EsRoute
+  '/nosotras': typeof NosotrasRoute
   '/privacidad': typeof PrivacidadRoute
   '/privacy': typeof PrivacyRoute
+  '/request-account-deletion': typeof RequestAccountDeletionRoute
+  '/support': typeof SupportRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/en': typeof EnRoute
   '/es': typeof EsRoute
+  '/nosotras': typeof NosotrasRoute
   '/privacidad': typeof PrivacidadRoute
   '/privacy': typeof PrivacyRoute
+  '/request-account-deletion': typeof RequestAccountDeletionRoute
+  '/support': typeof SupportRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/en' | '/es' | '/privacidad' | '/privacy'
+  fullPaths:
+    | '/'
+    | '/en'
+    | '/es'
+    | '/nosotras'
+    | '/privacidad'
+    | '/privacy'
+    | '/request-account-deletion'
+    | '/support'
+    | '/terms-and-conditions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/en' | '/es' | '/privacidad' | '/privacy'
-  id: '__root__' | '/' | '/en' | '/es' | '/privacidad' | '/privacy'
+  to:
+    | '/'
+    | '/en'
+    | '/es'
+    | '/nosotras'
+    | '/privacidad'
+    | '/privacy'
+    | '/request-account-deletion'
+    | '/support'
+    | '/terms-and-conditions'
+  id:
+    | '__root__'
+    | '/'
+    | '/en'
+    | '/es'
+    | '/nosotras'
+    | '/privacidad'
+    | '/privacy'
+    | '/request-account-deletion'
+    | '/support'
+    | '/terms-and-conditions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EnRoute: typeof EnRoute
   EsRoute: typeof EsRoute
+  NosotrasRoute: typeof NosotrasRoute
   PrivacidadRoute: typeof PrivacidadRoute
   PrivacyRoute: typeof PrivacyRoute
+  RequestAccountDeletionRoute: typeof RequestAccountDeletionRoute
+  SupportRoute: typeof SupportRoute
+  TermsAndConditionsRoute: typeof TermsAndConditionsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms-and-conditions': {
+      id: '/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof TermsAndConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/request-account-deletion': {
+      id: '/request-account-deletion'
+      path: '/request-account-deletion'
+      fullPath: '/request-account-deletion'
+      preLoaderRoute: typeof RequestAccountDeletionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -93,6 +182,13 @@ declare module '@tanstack/react-router' {
       path: '/privacidad'
       fullPath: '/privacidad'
       preLoaderRoute: typeof PrivacidadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nosotras': {
+      id: '/nosotras'
+      path: '/nosotras'
+      fullPath: '/nosotras'
+      preLoaderRoute: typeof NosotrasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es': {
@@ -123,8 +219,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EnRoute: EnRoute,
   EsRoute: EsRoute,
+  NosotrasRoute: NosotrasRoute,
   PrivacidadRoute: PrivacidadRoute,
   PrivacyRoute: PrivacyRoute,
+  RequestAccountDeletionRoute: RequestAccountDeletionRoute,
+  SupportRoute: SupportRoute,
+  TermsAndConditionsRoute: TermsAndConditionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
