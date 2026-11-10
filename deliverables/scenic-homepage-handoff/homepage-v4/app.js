@@ -37,7 +37,6 @@
     'circ.h': ['Círculos: tu pregunta puede abrir una conversación.', 'Circles: your question can open a conversation.'],
     'circ.p': ['Elige un tema que estés viviendo, lee o pregunta. Tú decides cuándo participar.', 'Pick a topic you are living through, read or ask. You decide when to take part.'],
     'circ.replay': ['Ver de nuevo', 'Play again'],
-    'circ.fine': ['Demostración: los perfiles y mensajes son ilustrativos. No son personas reales ni conversaciones en vivo.', 'Demonstration: the profiles and messages are illustrative. These are not real people or live conversations.'],
     'circ.noreply': ['Aquí no puedes responder: es una demostración.', 'You cannot reply here: this is a demonstration.'],
         'circ.open': ['Abrir la conversación', 'Open the conversation'], 'circ.close': ['Cerrar la conversación', 'Close the conversation'],
     'circ.count': ['1 respuesta', '1 reply'], 'circ.pause': ['Pausar', 'Pause'], 'circ.resume': ['Continuar', 'Continue'],
