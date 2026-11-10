@@ -20,6 +20,11 @@ Files: `index.html`, `page.css` (whole page), `crossing.js` (traveler animation)
 - Style follows the live site tokens: cream paper, forest, navy, terracotta orange, Fraunces + Instrument Sans (Google Fonts). This replaces the white/blue/purple palette of revision 1.
 - Draft copy to approve: everything in the practice feedback, the "Lo que te llevas" lines, section headings, the Venice question and lesson.
 
+## Hero headline (app style)
+- The hero h1 now follows the app's Hoy heading: Instrument Sans 700, one colour (#1f3b42, sampled from the Hoy capture), no italic serif, no blue. "tu siguiente paso." sits on its own line and stays on one line from 320 px up.
+- Only the hero h1 changed. Section headings below still use the blue italic serif phrase; align them if this is approved.
+- `?headline=old` (or `#headline-old`) shows the previous version. Sheets: screens/headline-compare-desktop.jpg and headline-compare-mobile.jpg.
+
 ## Hero background review (A/B)
 - A is the default: white hero. B adds only `.hero{background:#faf8f4}`; open with `?hero=warm` (or `#hero-warm` on the hosted copy). Nothing else differs.
 - Comparison sheets: screens/hero-ab-desktop.jpg and screens/hero-ab-mobile.jpg, same paused Kyoto frame (t=0), with the app "Hoy" capture from product-preview beside each.
