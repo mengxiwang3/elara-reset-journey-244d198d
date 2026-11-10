@@ -93,9 +93,10 @@ html:has(.v4){-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-paddin
 /* Destination controls: the six areas, each with its place */
 .v4 .under{max-width:760px;margin:0 auto;padding:0 24px}
 .v4 .pick{margin-top:10px;font-size:15px;color:var(--muted)}
-.v4 .dests{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.v4 .dest{display:grid;gap:1px;min-height:48px;margin:0;padding:6px 14px;border:1px solid var(--edge);border-radius:14px;background:#fff;font:inherit;font-size:13px;line-height:1.2;text-align:left;color:var(--muted);cursor:pointer}
-.v4 .dest b{font-size:14.5px;color:var(--head)}
+.v4 .dests{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin-top:8px}
+.v4 .dest{display:grid;align-content:start;gap:2px;min-width:0;min-height:52px;margin:0;padding:7px 9px;border:1px solid var(--edge);border-radius:14px;background:#fff;font:inherit;font-size:13px;line-height:1.2;text-align:left;color:var(--muted);cursor:pointer}
+.v4 .dest b{font-size:13.5px;line-height:1.15;color:var(--head)}
+.v4 .dest span{font-size:12px}
 .v4 .dest:hover{border-color:var(--head)}
 .v4 .dest[aria-current=true]{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue),inset 0 -4px var(--blue);background:var(--sky)}
 .v4 .dest[aria-current=true] b{color:var(--blue)}
@@ -263,7 +264,7 @@ html:has(.v4){-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-paddin
 .v4 .resources{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr) 190px;gap:32px;align-items:start}
 .v4 .res-list{display:grid;gap:8px}
 .v4 .res{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center;min-height:76px;padding:10px 14px 10px 10px;border:1px solid var(--line);border-radius:16px;background:#fff;font:inherit;font-size:14px;text-align:left;color:var(--muted);cursor:pointer}
-.v4 .res img{width:56px;height:56px;border-radius:10px;object-fit:cover}
+.v4 .res img{width:56px;height:56px;padding:6px;border-radius:12px;object-fit:contain;background:var(--grain),var(--sky)}
 .v4 .res b{display:block;font-size:16.5px;line-height:1.25;color:var(--head)}
 .v4 .res:hover{border-color:var(--blue)}
 .v4 .res[aria-pressed=true]{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue);background:var(--sky)}
@@ -297,11 +298,12 @@ html:has(.v4){-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-paddin
 .v4 .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px var(--side);font-size:14px;color:var(--muted)}
 .v4 .foot .brand{font-size:20px}
 .v4 .foot-note{flex:1;min-width:0;font-size:13.5px}
-.v4 .foot nav{display:flex;gap:24px}
+.v4 .foot nav{display:flex;flex-wrap:wrap;gap:4px 24px}
 .v4 .foot a:not(.brand){padding:12px 0}
 
 @media (max-width:900px){
 .v4 .nav{display:none}
+.v4 .dests{grid-template-columns:repeat(3,minmax(0,1fr))}
 .v4 .top{justify-content:space-between}
 .v4 .hero{grid-template-columns:minmax(0,1fr);gap:8px;padding-top:12px}
 .v4 .intro{gap:12px;padding:0 20px;max-width:600px;justify-self:center;width:100%}
@@ -350,7 +352,7 @@ html:has(.v4){-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-paddin
 .v4 .btn.small{padding:0 12px;font-size:14px}
 .v4 .join,.v4 .join .ctas,.v4 .join .btn{width:100%}
 .v4 .close{padding:40px 20px}
-.v4 .dest{flex:1 1 calc(50% - 8px)}
+.v4 .dests{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (prefers-reduced-motion:reduce){
 html:has(.v4){scroll-behavior:auto}
@@ -360,6 +362,11 @@ html:has(.v4){scroll-behavior:auto}
 .shot .v4 .top,.shot .v4 .intro,.shot .v4 .under,.shot .v4 .band,.shot .v4 .close,.shot .v4 .foot,.shot .v4 .skip{display:none}
 .shot .v4 .hero{display:block;padding:0}
 .shot .v4 .stage{-webkit-mask-image:none;mask-image:none}
+
+/* Desktop: the destination row runs the full page width under the copy and the phones: six names on one line */
+@media (min-width:901px){
+.v4 .hero .under{grid-column:1/-1;width:100%;max-width:none;margin:4px 0 0;padding:0 var(--side)}
+.v4 .hero .dest b{white-space:nowrap}}
 
 /* ---- Site integration: the page lives inside holaelara.com, next to the older cream pages ---- */
 html:has(.v4),html:has(.v4) body{background:#fff}
