@@ -23,6 +23,7 @@ Files: `index.html`, `page.css` (whole page), `crossing.js` (traveler animation)
 ## Hero background review (A/B)
 - A is the default: white hero. B adds only `.hero{background:#faf8f4}`; open with `?hero=warm` (or `#hero-warm` on the hosted copy). Nothing else differs.
 - Comparison sheets: screens/hero-ab-desktop.jpg and screens/hero-ab-mobile.jpg, same paused Kyoto frame (t=0), with the app "Hoy" capture from product-preview beside each.
+- C: light sky blue fading to white, soft clouds on the left; open with `?hero=sky` (or `#hero-sky`). Screens: screens/hero-c-sky-desktop.jpg and hero-c-sky-mobile.jpg.
 - Undecided. Remove the switch once one is chosen.
 
 ## Revision 5 (layout and launch cleanup)

@@ -50,6 +50,36 @@ h3{font-size:19px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
 .lead{max-width:440px;font-size:19px;line-height:1.45;color:var(--muted)}
 /* Review option B: ?hero=warm or #hero-warm gives the hero a near-white with a warm undertone. Nothing else changes. */
 .hero-warm .hero{background:#faf8f4}
+/* Review option C: ?hero=sky or #hero-sky. Light sky blue fading to white at the bottom, with soft clouds on the left behind the copy. */
+.hero-sky .hero{position:relative;isolation:isolate;background:linear-gradient(180deg,#c6e0f9 0%,#dcedfc 36%,#f3f9ff 72%,#fff 100%)}
+.hero-sky .hero::before{content:"";position:absolute;z-index:-1;inset:0 44% 0 0;pointer-events:none;filter:blur(7px);opacity:.92;
+  -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 95%);mask-image:linear-gradient(180deg,#000 55%,transparent 95%);
+  background:
+    radial-gradient(ellipse 157px 35px at 20% 17%,rgba(255,255,255,1) 0,rgba(255,255,255,1) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 65px 50px at 14.75% 13.64%,rgba(255,255,255,1) 0,rgba(255,255,255,1) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 81px 65px at 21.05% 11.225%,rgba(255,255,255,1) 0,rgba(255,255,255,1) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 58px 44px at 27.35% 14.27%,rgba(255,255,255,1) 0,rgba(255,255,255,1) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 120px 27px at 70% 30%,rgba(255,255,255,0.85) 0,rgba(255,255,255,0.85) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 49px 38px at 66.0% 27.439999999999998%,rgba(255,255,255,0.85) 0,rgba(255,255,255,0.85) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 62px 49px at 70.8% 25.6%,rgba(255,255,255,0.85) 0,rgba(255,255,255,0.85) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 44px 33px at 75.6% 27.92%,rgba(255,255,255,0.85) 0,rgba(255,255,255,0.85) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 135px 30px at 9% 60%,rgba(255,255,255,0.7) 0,rgba(255,255,255,0.7) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 55px 43px at 4.5% 57.12%,rgba(255,255,255,0.7) 0,rgba(255,255,255,0.7) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 70px 55px at 9.9% 55.05%,rgba(255,255,255,0.7) 0,rgba(255,255,255,0.7) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 50px 37px at 15.3% 57.66%,rgba(255,255,255,0.7) 0,rgba(255,255,255,0.7) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 105px 23px at 86% 74%,rgba(255,255,255,0.6) 0,rgba(255,255,255,0.6) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 43px 33px at 82.5% 71.76%,rgba(255,255,255,0.6) 0,rgba(255,255,255,0.6) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 54px 43px at 86.7% 70.15%,rgba(255,255,255,0.6) 0,rgba(255,255,255,0.6) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 39px 29px at 90.9% 72.18%,rgba(255,255,255,0.6) 0,rgba(255,255,255,0.6) 42%,rgba(255,255,255,0) 100%)}
+@media (max-width:900px){.hero-sky .hero::before{inset:0 0 50% 0;background:
+    radial-gradient(ellipse 112px 25px at 26% 22%,rgba(255,255,255,1) 0,rgba(255,255,255,1) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 46px 36px at 22.25% 19.6%,rgba(255,255,255,1) 0,rgba(255,255,255,1) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 58px 46px at 26.75% 17.875%,rgba(255,255,255,1) 0,rgba(255,255,255,1) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 42px 31px at 31.25% 20.05%,rgba(255,255,255,1) 0,rgba(255,255,255,1) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 90px 20px at 80% 58%,rgba(255,255,255,0.8) 0,rgba(255,255,255,0.8) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 37px 28px at 77.0% 56.08%,rgba(255,255,255,0.8) 0,rgba(255,255,255,0.8) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 46px 37px at 80.6% 54.7%,rgba(255,255,255,0.8) 0,rgba(255,255,255,0.8) 42%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 33px 25px at 84.2% 56.44%,rgba(255,255,255,0.8) 0,rgba(255,255,255,0.8) 42%,rgba(255,255,255,0) 100%)}}
 .show{position:relative;min-width:0}
 /* Wide desktop: the whole animation block (phones, controls, caption) sits 24px closer to the headline; less on narrower desktops */
 @media (min-width:901px){.show{left:clamp(-24px,calc((1000px - 100vw)*.1),0px)}}
