@@ -4,7 +4,7 @@ Local prototype only. Not deployed. `crossing-five/`, `crossing-prototype/`, `pr
 
 Run: `python3 -m http.server 4192 --bind 127.0.0.1` in this folder, then open http://localhost:4192/
 
-Files: `index.html`, `page.css` (whole page), `crossing.mjs` (traveler animation), `story.mjs` (example practice, six-area chooser).
+Files: `index.html`, `page.css` (whole page), `crossing.js` (traveler animation), `story.js` (guided practice, six-area chooser). Plain scripts, no modules, so `index.html` also runs opened straight from the folder.
 
 ## What moves and what is static
 - The traveler is a 2D sprite animation: 3 side-walk poses + 1 standing pose. Not video, not a rigged character.
@@ -19,6 +19,13 @@ Files: `index.html`, `page.css` (whole page), `crossing.mjs` (traveler animation
 - Practice: each response shows what it gives and a phrase to use. No scoring; both can be tried.
 - Style follows the live site tokens: cream paper, forest, navy, terracotta orange, Fraunces + Instrument Sans (Google Fonts). This replaces the white/blue/purple palette of revision 1.
 - Draft copy to approve: everything in the practice feedback, the "Lo que te llevas" lines, section headings, the Venice question and lesson.
+
+## Revision 5 (layout and launch cleanup)
+- Wide desktop: the animation block (phones, controls, scrubber, caption) sits 24 px closer to the headline; the shift tapers to 0 by 1000 px. The copy column has a fixed width from 1100 px up, so the gap is the same at 1280, 1440 and 1920: 35 px from the text to the animation area, and the leftmost phone's shadow clears the text at every point of the timeline.
+- Tablet and phone: the traveler is centred, with the headline and both buttons above.
+- Added a Repetir button. Controls: Pausar, Repetir, Anterior, Siguiente, scrubber (arrow keys, Home, End).
+- Launch cleanup: removed the "Prototipo" hero label, the "Prototipo local" footer note, the six-area link to the ChatGPT-hosted demo, and the noindex tag. Footer links to the live Términos and Soporte pages. Page title and description are real.
+- Not deployed. The folder is self-contained apart from Google Fonts.
 
 ## Revision 4 (no beige)
 - Cream, grain, Fraunces, orange tabs, rounded shadowed cards and the dark green close are gone.

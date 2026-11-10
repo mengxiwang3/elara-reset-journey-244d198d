@@ -3,10 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<title>Elara · Prototipo de página de inicio</title>
-<meta name="description" content="Prototipo local de la página de inicio de Elara. No es la página pública.">
-<link rel="icon" href="data:,">
+<title>Elara · Una pregunta al día para dar tu siguiente paso</title>
+<meta name="description" content="Cada día llegas a un lugar nuevo, reflexionas sobre algo que estás viviendo y te llevas una herramienta para usar en tu vida.">
+<link rel="icon" type="image/png" href="assets/orb.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap">
 <link rel="stylesheet" href="page.css">
@@ -25,7 +24,6 @@
 <main id="top">
 <div class="hero">
   <section class="intro">
-    <p class="kicker">Prototipo · no es la página pública</p>
     <h1>Una pregunta al día para dar <em>tu siguiente paso.</em></h1>
     <p class="lead">Cada día llegas a un lugar nuevo, reflexionas sobre algo que estás viviendo y te llevas una herramienta para usar en tu vida.</p>
     <p class="ctas"><a class="btn primary" href="https://holaelara.com/">Unirme a la lista de espera</a><a class="btn" href="#practice">Prueba una pregunta</a></p>
@@ -42,6 +40,7 @@
     <div class="under">
       <div class="controls" id="controls" hidden>
         <button type="button" id="play" class="main">Pausar</button>
+        <button type="button" id="replay">Repetir</button>
         <button type="button" id="prev">‹ Anterior</button>
         <button type="button" id="next">Siguiente ›</button>
         <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Posición en el recorrido">
@@ -127,7 +126,6 @@
         <p data-panel="relationships" hidden><b>Amor y límites. </b>Distingue lo que puedes ofrecer y prepara una petición o un límite concreto.</p>
         <p data-panel="rhythm" hidden><b>Ritmo diario. </b>Prueba una señal y un siguiente paso para retomar una rutina cuando cambia tu día.</p>
       </div>
-      <a class="link" id="path-link" href="https://elara-seven-day-journey.karawang3.chatgpt.site/?journey=money&day=1&lang=es">Ver esta práctica en el prototipo ↗</a>
     </div>
   </div>
 </section>
@@ -169,10 +167,9 @@
 
 <footer class="foot">
   <a class="brand" href="#top"><img src="assets/orb.png" alt="" width="22" height="22" loading="lazy">elara</a>
-  <span>Prototipo local. Nada de lo que toques aquí cambia tu progreso real ni se publica.</span>
-  <a href="https://holaelara.com/">holaelara.com ↗</a>
+  <nav aria-label="Legal y ayuda"><a href="https://holaelara.com/terms-and-conditions">Términos</a><a href="https://holaelara.com/support">Soporte</a></nav>
 </footer>
-<script type="module" src="crossing.mjs"></script>
-<script type="module" src="story.mjs"></script>
+<script defer src="crossing.js"></script>
+<script defer src="story.js"></script>
 </body>
 </html>

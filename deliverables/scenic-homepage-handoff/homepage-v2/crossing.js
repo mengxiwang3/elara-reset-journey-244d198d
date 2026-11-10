@@ -1,3 +1,5 @@
+// Classic script (no modules), so the page also runs when opened straight from a folder.
+(async () => {
 // Elara crossing prototype, five phones: ONE traveler, one timeline, one straight path.
 // Every phone is a window of a different size onto the same world. The phones vary; her
 // ground line does not. Everything drawn is a pure function of T (seconds), so pausing,
@@ -111,7 +113,8 @@ function drawTraveler(tr, key) {
   drawPose(sheet, meta, WALK_SIDE[n % 4], foot, body, 1);
   drawPose(sheet, meta, STAND, body, body, tr.stand);
 }
-function camera(tr) { return tr.body.x - viewW * (viewW > 700 ? .42 : .5); }   // the camera follows her; nothing spins
+const stacked = matchMedia('(max-width: 900px)');       // tablet and phone: the copy sits above, so she is centred
+function camera(tr) { return tr.body.x - viewW * (stacked.matches ? .5 : .42); }   // the camera follows her; nothing spins
 function draw() {
   const dpr = Math.min(2, devicePixelRatio || 1), cw = Math.round(viewW * scale * dpr), ch = Math.round(HT * scale * dpr);
   if (canvas.width !== cw || canvas.height !== ch) { canvas.width = cw; canvas.height = ch; }
@@ -210,6 +213,7 @@ try {
   $('#world').hidden = false; $('#controls').hidden = false; 
   document.documentElement.classList.add('ready'); loaded = true;
   $('#play').onclick = () => { if (T >= T_END - 1e-3) T = 0; paused = !paused; last = performance.now(); sync(); };
+  $('#replay').onclick = () => { T = 0; paused = still(); last = performance.now(); sync(); };
   $('#prev').onclick = () => jump(-1); $('#next').onclick = () => jump(1);
   $('#scrub').oninput = e => { T = e.target.value / 1000 * T_END; paused = true; sync(); };
   $('#stage').addEventListener('keydown', e => { if (e.key === 'ArrowRight') jump(1); if (e.key === 'ArrowLeft') jump(-1); });
@@ -217,8 +221,10 @@ try {
   new ResizeObserver(layout).observe($('#stage'));
   new IntersectionObserver(es => { visible = es[0].isIntersecting; last = performance.now(); }).observe($('#stage'));   // no drawing while it is scrolled away
   layout(); sync(); last = performance.now(); requestAnimationFrame(frame);
-  window.__crossing = { get T() { return T; }, set T(v) { T = v; paused = true; sync(); }, traveler: () => traveler(T), get paused() { return paused; }, T_END, SEG, DWELL, STEP, PHONES, arrive, BEATS, state: () => ({ t: traveler(T), cards: CARDS.map((_, i) => cardState(i)), caption: BEATS[beatAt(T)].say }) };
+  window.__crossing = { get T() { return T; }, set T(v) { T = v; paused = true; sync(); }, traveler: () => traveler(T), get paused() { return paused; }, T_END, SEG, DWELL, STEP, PHONES, arrive, HT, get scale() { return scale; }, left: () => { const tr = traveler(T), cam = camera(tr); return Math.min(...PHONES.map(ph => windowOf(ph, tr.body.x)).filter(w => w.x + w.w > cam).map(w => w.x - cam)); }, BEATS, state: () => ({ t: traveler(T), cards: CARDS.map((_, i) => cardState(i)), caption: BEATS[beatAt(T)].say }) };
 } catch (err) {
   $('#status').textContent = 'La animación no pudo cargarse. La imagen resume la escena y los enlaces siguen funcionando.';
   console.error(err);
 }
+
+})();

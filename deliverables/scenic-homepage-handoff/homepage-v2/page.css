@@ -23,7 +23,7 @@ h1,h2,h3,p,ul,ol,figure,blockquote{margin:0}
 /* Type: one sans, set large and tight; a single italic serif phrase per heading */
 .kicker{font-size:14px;font-weight:600;color:var(--purple)}
 h1,h2{font-weight:600;letter-spacing:-.035em;color:var(--ink);text-wrap:balance}
-h1{font-size:clamp(40px,4.6vw,66px);line-height:.98}
+h1{font-size:clamp(40px,4.6vw,56px);line-height:.98}
 h2{font-size:clamp(32px,3.6vw,52px);line-height:1.02}
 h1 em,h2 em{font-family:var(--serif);font-weight:400;font-size:1.1em;letter-spacing:-.02em;color:var(--blue)}
 h3{font-size:19px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
@@ -44,9 +44,13 @@ h3{font-size:19px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
 
 /* Hero */
 .hero{display:grid;grid-template-columns:minmax(320px,1fr) 1.5fr;align-items:center;gap:8px;padding:24px 0 44px}
-.intro{display:grid;gap:20px;padding:0 16px 0 var(--side);max-width:calc(540px + var(--side));justify-self:start}
+.intro{display:grid;gap:20px;padding:0 44px 0 var(--side);justify-self:start}
+/* Wide desktop: a fixed-width copy column, so the phones keep the same distance from the headline at any width */
+@media (min-width:1100px){.hero{grid-template-columns:calc(var(--side) + 430px) minmax(0,1fr)}.intro{padding-right:44px}}
 .lead{max-width:440px;font-size:19px;line-height:1.45;color:var(--muted)}
-.show{min-width:0}
+.show{position:relative;min-width:0}
+/* Wide desktop: the whole animation block (phones, controls, caption) sits 24px closer to the headline; less on narrower desktops */
+@media (min-width:901px){.show{left:clamp(-24px,calc((1000px - 100vw)*.1),0px)}}
 .stage{position:relative;height:640px;overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 95%,transparent 100%)}
 .stage:focus-visible{outline-offset:-3px}
@@ -127,12 +131,12 @@ html:not(.js) .hint{display:none}
 .picker button{min-height:64px;padding:12px 0;border:0;border-bottom:1px solid var(--line);background:none;font:inherit;font-size:clamp(20px,2.3vw,30px);font-weight:600;letter-spacing:-.03em;text-align:left;color:#9aa2b6;cursor:pointer}
 .picker button:hover{color:var(--ink)}
 .picker button[aria-pressed=true]{color:var(--blue);border-bottom-color:var(--blue)}
-.detail{display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:center;margin-top:26px;min-height:58px}
+.detail{display:grid;grid-template-columns:64px 1fr;gap:24px;align-items:center;margin-top:26px;min-height:58px}
 .num{font-size:14px;font-weight:600;color:var(--purple);font-variant-numeric:tabular-nums}
 .panels p{max-width:600px;font-size:18px}
 .js .panels b{display:none}
 .link{padding:13px 0;font-size:15px;font-weight:600;color:var(--blue);text-underline-offset:4px;white-space:nowrap}
-html:not(.js) .picker,html:not(.js) .num,html:not(.js) .link{display:none}
+html:not(.js) .picker,html:not(.js) .num{display:none}
 html:not(.js) .detail{display:block}
 html:not(.js) [data-panel][hidden]{display:block!important}
 html:not(.js) [data-panel]{margin-top:10px}
@@ -159,13 +163,14 @@ html:not(.js) [data-panel]{margin-top:10px}
 .close :focus-visible{outline-color:#fff}
 .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px var(--side);font-size:14px;color:var(--muted)}
 .foot .brand{font-size:20px}
+.foot nav{display:flex;gap:24px}
 .foot a:not(.brand){padding:12px 0}
 
 @media (max-width:900px){
   .nav{display:none}
   .top{justify-content:space-between}
   .hero{grid-template-columns:minmax(0,1fr);gap:22px;padding-top:28px}
-  .intro{padding:0 20px;max-width:600px}
+  .intro{padding:0 20px;max-width:600px;justify-self:center;width:100%}
   .stage{-webkit-mask-image:none;mask-image:none}
   .under{padding:0 20px}
   .band{padding:56px var(--side)}
@@ -188,7 +193,9 @@ html:not(.js) [data-panel]{margin-top:10px}
 @media (max-width:520px){
   .ctas .btn{width:100%}
   .close>div,.close .ctas{width:100%}
-  .controls button{flex:1 1 0;padding:0 10px}
+  .controls{display:grid;grid-template-columns:1fr 1fr}
+  .controls button{padding:0 10px}
+  #scrub{grid-column:1/-1;width:100%}
   #scrub{flex-basis:100%}
   .preview{grid-template-columns:112px minmax(0,1fr);gap:16px}
   .preview .crop{height:150px}.preview .crop img{width:98px}
