@@ -29,7 +29,7 @@
   <section class="intro">
     <p class="for" data-i18n="hero.for">Para la mujer que sostiene todo, aunque nadie lo note.</p>
     <h1><span data-i18n="h1.a">Una pregunta al día para dar</span> <span data-i18n="h1.b">tu siguiente paso.</span></h1>
-    <p class="lead" data-i18n="lead">Elige un destino, responde una pregunta sobre algo que estás viviendo y llévate una herramienta para usar en tu vida.</p>
+    <p class="lead" data-i18n="lead">Elige un destino, responde una pregunta sobre tu vida y llévate una herramienta.</p>
     <p class="ctas"><a class="btn primary" data-signup href="https://holaelara.com/#lista" data-i18n="cta">Unirme a la lista de espera</a></p>
   </section>
 
@@ -41,19 +41,19 @@
         <div class="cards" id="cards"></div>
       </div>
     </div>
-    <div class="under">
-      <p class="pick" id="pick-label" data-i18n="pick">Elige un destino. Cada uno es un área de tu vida.</p>
+    <noscript><p class="under fine">Con JavaScript puedes elegir un destino y responder la pregunta. Sin él, la imagen resume la escena.</p></noscript>
+  </section>
+  <div class="under">
+      <p class="pick" id="pick-label" data-i18n="pick">Cada destino es un área de tu vida.</p>
       <div class="dests" id="dests" role="group" aria-labelledby="pick-label"></div>
       <p class="tour"><button type="button" id="tour" hidden>Pausar el recorrido</button><span class="status" id="status" aria-live="polite"></span></p>
     </div>
-    <noscript><p class="under fine">Con JavaScript puedes elegir un destino y responder la pregunta. Sin él, la imagen resume la escena.</p></noscript>
-  </section>
 </div>
 
 <section class="band keep" id="coleccion">
   <div class="head">
     <h2 data-i18n="col.h">Lo que te llevas de esta visita</h2>
-    <p id="col-sub" data-i18n="col.empty">Responde una pregunta arriba y guarda su recuerdo. Aparecerá aquí, junto a la frase que te llevas.</p>
+    <p id="col-sub" data-i18n="col.empty">Responde una pregunta y guarda su recuerdo: aparecerá aquí.</p>
   </div>
   <div class="colgrid">
     <div class="passport"><p class="pass-title"><b data-i18n="pass.h">Tu pasaporte</b></p>
@@ -75,12 +75,12 @@
       <p class="slip today"><span data-i18n="week.t">Hoy empiezas ahí</span><b data-i18n="week.tq">¿Qué pasó cuando lo probaste?</b></p>
     </div>
   </div>
-  <p class="fine demo-note"><span data-i18n="col.fine">Demostración: tus elecciones se recuerdan en este navegador durante tu visita. No se envían ni se guardan en una cuenta, y no cuentan como progreso en la app.</span> <button type="button" id="reset" class="linkbtn" data-i18n="reset">Empezar de nuevo</button> <span id="reset-note" role="status"></span></p>
+  <p class="fine demo-note"><span data-i18n="col.fine">Tus elecciones se recuerdan solo en este navegador durante la visita. No se envían ni cuentan como progreso en la app.</span> <button type="button" id="reset" class="linkbtn" data-i18n="reset">Empezar de nuevo</button> <span id="reset-note" role="status"></span></p>
 </section>
 
 <section class="band quiet" id="para-ti">
   <h2><span data-i18n="you.h1">Para la mujer que sostiene todo,</span> <em data-i18n="you.h2">aunque nadie lo note.</em></h2>
-  <p class="aside" data-i18n="you.p">Elara te ayuda a ver dónde estás, qué está pidiendo atención y cuál es el siguiente paso pequeño. Cada destino es una pausa corta para mirar una situación como estas y salir con algo que puedas usar ese mismo día.</p>
+  <p class="aside" data-i18n="you.p">Elara te ayuda a ver dónde estás y cuál es tu siguiente paso pequeño.</p>
   <ul class="recognise">
     <li data-i18n="you.1">Te piden dinero y todavía no sabes cuánto puedes dar.</li>
     <li data-i18n="you.2">Resuelves todo para todos, y casi nadie te pregunta cómo estás.</li>
@@ -88,8 +88,8 @@
     <li data-i18n="you.4">Por fuera, todo en orden. Por dentro, no sabes qué quieres ahora.</li>
   </ul>
   <div class="trust">
-    <p><b data-i18n="es.h">No es inglés, traducido. Es español, entendido.</b> <span data-i18n="es.p">El peso de ser la hija mayor, la familia que llama, los dos mundos que habitas. También está disponible en inglés.</span></p>
-    <p><b data-i18n="sv.h">Construido con ellas, no para ellas.</b> <span data-i18n="sv.p">Más de 4600 mujeres respondieron nuestra encuesta; casi 1 de cada 3 eligió el dinero como lo primero que resolvería. Por eso la práctica de arriba empieza ahí.</span></p>
+    <p><b data-i18n="es.h">No es inglés, traducido. Es español, entendido.</b> <span data-i18n="es.p">La hija mayor, la familia que llama, los dos mundos que habitas. También en inglés.</span></p>
+    <p><b data-i18n="sv.h">Construido con ellas, no para ellas.</b> <span data-i18n="sv.p">Más de 4600 mujeres respondieron nuestra encuesta. Casi 1 de cada 3 eligió el dinero primero, por eso empezamos ahí.</span></p>
   </div>
   <ul class="pairs" lang="es" aria-label="Cómo responde Elara">
     <li><p class="pair-me"><span data-i18n="pair.you">Tú</span>“Hoy fue mucho.”</p><p class="pair-elara"><span>Elara</span>“Hoy fue mucho, y está bien.”</p></li>
@@ -109,7 +109,7 @@
 <section class="band circles" id="circles">
   <div class="copy">
         <h2 data-i18n="circ.h">Círculos: tu pregunta puede abrir una conversación.</h2>
-    <p data-i18n="circ.p">Elige un tema que estés viviendo, lee o pregunta. Tú decides cuándo participar.</p>
+    <p data-i18n="circ.p">Elige un tema, lee o pregunta. Tú decides cuándo participar.</p>
     <p class="circle-ctl"><button type="button" class="btn small" id="circle-replay" data-i18n="circ.replay">Ver de nuevo</button><button type="button" class="btn small" id="circle-pause" hidden>Pausar</button></p>
     </div>
   <div class="circle-stage" id="circle-stage" data-step="4">
@@ -151,18 +151,18 @@
 <section class="band explore" id="explore">
   <div class="head">
     <h2 data-i18n="exp.h">Explorar: para los días que piden un poco más.</h2>
-    <p data-i18n="exp.lead">Elara no es solo una práctica diaria. Cuando quieres quedarte más tiempo con algo, Explorar irá abriéndose poco a poco en beta.</p>
+    <p data-i18n="exp.lead">Más allá de la práctica diaria. Se irá abriendo poco a poco en la beta.</p>
   </div>
   <div class="resources">
     <div class="res-list" role="group" aria-label="Explorar">
-      <button type="button" class="res" data-res="taller" aria-pressed="true"><img src="assets/explore-taller.jpg" alt="" width="56" height="56" loading="lazy"><span data-i18n-html="res.taller"><b>Talleres en vivo</b>Con fecha y hora</span></button>
-      <button type="button" class="res" data-res="voces" aria-pressed="false"><img src="assets/explore-voces.jpg" alt="" width="56" height="56" loading="lazy"><span data-i18n-html="res.voces"><b>Voces que acompañan</b>Conversaciones guiadas</span></button>
-      <button type="button" class="res" data-res="escucha" aria-pressed="false"><img src="assets/explore-escucha.jpg" alt="" width="56" height="56" loading="lazy"><span data-i18n-html="res.escucha"><b>La sala de escucha</b>Audio corto</span></button>
+      <button type="button" class="res" data-res="taller" aria-pressed="true"><img src="assets/explore-taller.png" alt="" width="56" height="56" loading="lazy"><span data-i18n-html="res.taller"><b>Talleres en vivo</b>Con fecha y hora</span></button>
+      <button type="button" class="res" data-res="voces" aria-pressed="false"><img src="assets/explore-voces.png" alt="" width="56" height="56" loading="lazy"><span data-i18n-html="res.voces"><b>Voces que acompañan</b>Conversaciones guiadas</span></button>
+      <button type="button" class="res" data-res="escucha" aria-pressed="false"><img src="assets/explore-escucha.png" alt="" width="56" height="56" loading="lazy"><span data-i18n-html="res.escucha"><b>La sala de escucha</b>Audio corto</span></button>
     </div>
     <div class="res-detail">
       <p class="tab" id="res-name">Talleres en vivo</p>
       <p id="res-help" aria-live="polite">Un taller destacado, con fecha y hora. Pronto disponible.</p>
-      <p class="fine" data-i18n="exp.fine">Son lugares a los que vuelves a propósito, no contenido para consumir sin fin.</p>
+      <p class="fine" data-i18n="exp.fine">Lugares a los que vuelves a propósito, no contenido sin fin.</p>
     </div>
     <div class="crop"><img src="assets/explore.png" width="303" height="626" loading="lazy" decoding="async" data-i18n-alt="exp.alt" alt="Pantalla Explorar de la app, con talleres, audios, videos y guías."></div>
   </div>
@@ -171,10 +171,10 @@
 <section class="band faq" id="preguntas">
   <h2 data-i18n="faq.h">Preguntas prácticas</h2>
   <div class="qa">
-    <details><summary data-i18n="faq.q1">¿Qué pasa en una práctica diaria?</summary><p data-i18n="faq.a1">Llegas a un lugar, lees una situación concreta, respondes una pregunta y te llevas una herramienta y un recuerdo. Como en la práctica de arriba.</p></details>
-    <details><summary data-i18n="faq.q2">¿Cuánto tiempo necesito?</summary><p data-i18n="faq.a2">Unos minutos al día. Vas a tu ritmo y puedes pausar cuando quieras.</p></details>
-    <details><summary data-i18n="faq.q3">¿Puedo usarla en español o en inglés?</summary><p data-i18n="faq.a3">En los dos. Elara se piensa primero en español y también está en inglés.</p></details>
-    <details><summary data-i18n="faq.q7">¿Qué pasa con mis respuestas y cómo las borro?</summary><p data-i18n-html="faq.a7">Lo que eliges en la demostración de esta página se recuerda solo en tu navegador durante la visita, y puedes borrarlo con el botón Empezar de nuevo. No es progreso de la app. En la app puedes pedir que eliminemos tu cuenta y tus datos desde <a href="https://holaelara.com/request-account-deletion">esta página</a>. Los detalles están en la <a href="https://holaelara.com/privacidad">Política de Privacidad</a>. Elara no es terapia ni un servicio médico.</p></details>
+    <details><summary data-i18n="faq.q1">¿Qué pasa en una práctica diaria?</summary><p data-i18n="faq.a1">Lees una situación, respondes una pregunta y te llevas una herramienta y un recuerdo, como arriba.</p></details>
+    <details><summary data-i18n="faq.q2">¿Cuánto tiempo necesito?</summary><p data-i18n="faq.a2">Unos minutos al día, a tu ritmo.</p></details>
+    <details><summary data-i18n="faq.q3">¿Puedo usarla en español o en inglés?</summary><p data-i18n="faq.a3">En los dos. Elara nace en español y también está en inglés.</p></details>
+    <details><summary data-i18n="faq.q7">¿Qué pasa con mis respuestas y cómo las borro?</summary><p data-i18n-html="faq.a7">Aquí, tus elecciones solo se recuerdan en tu navegador y las borras con Empezar de nuevo. En la app puedes pedir que eliminemos tu cuenta y tus datos <a href="https://holaelara.com/request-account-deletion">aquí</a>; más en la <a href="https://holaelara.com/privacidad">Política de Privacidad</a>. Elara no es terapia ni un servicio médico.</p></details>
   </div>
 </section>
 
@@ -183,14 +183,14 @@
   <div class="join">
     <h2><span data-i18n="join.h1">Tu próxima parada:</span> <em data-i18n="join.h2">algo para ti.</em></h2>
     <p class="ctas"><a class="btn primary" data-signup href="https://holaelara.com/#lista" data-i18n="cta">Unirme a la lista de espera</a></p>
-    <p class="fine" data-i18n="join.after">Se abre el formulario en holaelara.com. Después de unirte, te escribimos antes de abrir; mientras tanto no tienes que hacer nada. Sin spam, y puedes darte de baja cuando quieras.</p>
+    <p class="fine" data-i18n="join.after">Abre el formulario en holaelara.com. Te escribimos antes de abrir; sin spam.</p>
   </div>
 </section>
 </main>
 
 <footer class="foot">
   <a class="brand" href="#top"><img src="assets/orb.png" alt="" width="22" height="22" loading="lazy">elara</a>
-  <p class="foot-note" data-i18n="ft.note">Hecho por dos mujeres que también lo necesitaban. Elara no es terapia ni un servicio médico.</p>
+  <p class="foot-note" data-i18n="ft.note">Elara no es terapia ni un servicio médico.</p>
   <nav aria-label="Legal"><a data-privacy href="https://holaelara.com/privacidad" data-i18n="ft.privacy">Privacidad</a><a href="https://holaelara.com/terms-and-conditions" data-i18n="ft.terms">Términos</a><a href="https://holaelara.com/support" data-i18n="ft.support">Soporte</a><a href="mailto:hola@holaelara.com" data-i18n="ft.contact">Contacto</a><a href="https://instagram.com/holaelara">Instagram</a></nav>
 </footer>
 <script defer src="destinations.js"></script>
