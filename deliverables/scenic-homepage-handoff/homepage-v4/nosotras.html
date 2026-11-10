@@ -15,7 +15,9 @@
 .bignote{padding:26px 28px;border-radius:4px;background:var(--grain),var(--lilac);box-shadow:0 14px 30px rgba(22,36,54,.12);font-size:20px;line-height:1.5;color:var(--head);transform:rotate(-.6deg)}
 .bignote cite{display:block;margin-top:14px;font-family:var(--serif);font-size:24px;font-style:italic}
 .who{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin:44px 0 0;padding:0;list-style:none}
-.who li{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center}
+.who li{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:start}
+.about .bio{margin-top:8px;font-size:16px}
+.ig{display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--blue);text-underline-offset:4px}
 .who img{width:96px;height:96px;border-radius:50%;object-fit:cover}
 .who b{display:block;font-size:20px;color:var(--head)}
 .who span{color:var(--muted)}
@@ -35,13 +37,13 @@
 </header>
 <main class="about">
   <h1 id="h">Nosotras</h1>
-  <blockquote class="bignote"><span id="note">Lo veíamos en nuestra vida y en miles de mensajes: mujeres que por fuera parecen tenerlo todo resuelto y por dentro funcionan en vacío. No encontrábamos el lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. (La verdad, también para nosotras.)</span><cite id="sign">Mengxi y Ale</cite></blockquote>
+  <blockquote class="bignote"><span id="note">Lo veíamos en nuestra vida y en miles de mensajes: mujeres que por fuera parecen tenerlo todo resuelto y por dentro funcionan en vacío. Elara es para ti. (La verdad, también para nosotras.)</span><cite id="sign">Mengxi y Ale</cite></blockquote>
   <ul class="who">
-    <li><img src="assets/founder-mengxi.jpg" alt="Mengxi Wang" width="96" height="96"><div><b>Mengxi Wang</b><span id="r1">Producto y diseño</span></div></li>
-    <li><img src="assets/founder-alejandra.jpg" alt="Alejandra Ramirez" width="96" height="96"><div><b>Alejandra Ramirez</b><span id="r2">Creadora y comunidad</span></div></li>
+    <li><img src="assets/founder-mengxi.jpg" alt="Mengxi Wang" width="96" height="96"><div><b>Mengxi Wang</b><span id="r1">Producto y diseño</span><p id="b1" class="bio">Mengxi construye el producto: lo que ves, cómo se siente y cómo funciona cada día.</p><a class="ig" href="https://instagram.com/karawang">@karawang</a></div></li>
+    <li><img src="assets/founder-alejandra.jpg" alt="Alejandra Ramirez" width="96" height="96"><div><b>Alejandra Ramirez</b><span id="r2">Creadora y comunidad</span><p id="b2" class="bio">Alejandra crea con la comunidad: más de 80 000 mujeres la siguen, y sus mensajes son el punto de partida de Elara.</p><a class="ig" href="https://instagram.com/alejandra.travels">@alejandra.travels</a></div></li>
   </ul>
   <h2 id="fh">Cómo nos ayuda lo que nos cuentas</h2>
-  <p id="fp">Más de 4600 mujeres respondieron nuestra encuesta, y el dinero fue lo que más salió. Por eso Elara empieza ahí. Leemos cada respuesta, de verdad.</p>
+  <p id="fp">Más de 4600 mujeres nos contaron, con honestidad, lo que estaban cargando. El dinero fue lo que más salió: casi 1 de cada 3 lo eligió como lo primero que resolvería. Por eso Elara empieza ahí. Leemos cada respuesta, de verdad.</p>
   <a class="back" id="back" href="index.html">Volver al inicio</a>
 </main>
 <footer class="foot">
@@ -52,9 +54,11 @@
 (function () {
   var S = {
     h: ['Nosotras', 'About us'], sign: ['Mengxi y Ale', 'Mengxi and Ale'], r1: ['Producto y diseño', 'Product and design'], r2: ['Creadora y comunidad', 'Creator and community'],
-    note: ['Lo veíamos en nuestra vida y en miles de mensajes: mujeres que por fuera parecen tenerlo todo resuelto y por dentro funcionan en vacío. No encontrábamos el lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. (La verdad, también para nosotras.)', 'We saw it in our own lives and in thousands of messages: women who look like they have it all together and are running on empty inside. We couldn\'t find the soft place we needed, so we started building it. Elara is for you. (Honestly, for us too.)'],
+    note: ['Lo veíamos en nuestra vida y en miles de mensajes: mujeres que por fuera parecen tenerlo todo resuelto y por dentro funcionan en vacío. Elara es para ti. (La verdad, también para nosotras.)', 'We saw it in our own lives and in thousands of messages: women who look like they have it all together and are running on empty inside. Elara is for you. (Honestly, for us too.)'],
+    b1: ['Mengxi construye el producto: lo que ves, cómo se siente y cómo funciona cada día.', 'Mengxi builds the product: what you see, how it feels and how each day works.'],
+    b2: ['Alejandra crea con la comunidad: más de 80 000 mujeres la siguen, y sus mensajes son el punto de partida de Elara.', 'Alejandra creates with the community: more than 80,000 women follow her, and their messages are where Elara starts.'],
     fh: ['Cómo nos ayuda lo que nos cuentas', 'How what you tell us shapes Elara'],
-    fp: ['Más de 4600 mujeres respondieron nuestra encuesta, y el dinero fue lo que más salió. Por eso Elara empieza ahí. Leemos cada respuesta, de verdad.', 'More than 4,600 women answered our survey, and money came up most. So Elara starts there. We read every reply, really.'],
+    fp: ['Más de 4600 mujeres nos contaron, con honestidad, lo que estaban cargando. El dinero fue lo que más salió: casi 1 de cada 3 lo eligió como lo primero que resolvería. Por eso Elara empieza ahí. Leemos cada respuesta, de verdad.', 'More than 4,600 women told us, honestly, what they were carrying. Money came up most: almost 1 in 3 chose it as the first thing they would fix. So Elara starts there. We read every reply, really.'],
     back: ['Volver al inicio', 'Back to the homepage'], cta: ['Unirme a la lista', 'Join the list'], pv: ['Privacidad', 'Privacy'], tm: ['Términos', 'Terms'], sp: ['Soporte', 'Support']
   };
   var lang = 'es';

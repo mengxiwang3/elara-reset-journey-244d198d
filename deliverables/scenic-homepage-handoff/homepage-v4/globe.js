@@ -6,23 +6,22 @@ window.ElaraGlobe = (() => {
   const LOCK = '<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 4.63601C5 3.76031 5.24219 3.1054 5.64323 2.67357C6.03934 2.24705 6.64582 1.9783 7.5014 1.9783C8.35745 1.9783 8.96306 2.24652 9.35823 2.67208C9.75838 3.10299 10 3.75708 10 4.63325V5.99999H5V4.63601ZM4 5.99999V4.63601C4 3.58148 4.29339 2.65754 4.91049 1.99307C5.53252 1.32329 6.42675 0.978302 7.5014 0.978302C8.57583 0.978302 9.46952 1.32233 10.091 1.99162C10.7076 2.65557 11 3.57896 11 4.63325V5.99999H12C12.5523 5.99999 13 6.44771 13 6.99999V13C13 13.5523 12.5523 14 12 14H3C2.44772 14 2 13.5523 2 13V6.99999C2 6.44771 2.44772 5.99999 3 5.99999H4ZM3 6.99999H12V13H3V6.99999Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>';
   const CHECK = '<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/></svg>';
   // Coordinates and place names as in the app. The five homepage destinations, then the app's locked "to discover" markers.
+  // The shared destination list, then the app's locked "to discover" markers (one per area, placed as in the app).
   const PINS = [
-    { lat: 35, lon: 135, img: 'pin-kyoto.jpg', title: ['Arashiyama, Kioto', 'Arashiyama, Kyoto'], label: ['Kioto', 'Kyoto'] },
-    { lat: 45.4408, lon: 12.3155, img: 'pin-venice.jpg', title: ['Venecia, Italia', 'Venice, Italy'], label: ['Venecia', 'Venice'] },
-    { lat: -13.16, lon: -72.54, img: 'pin-andes.jpg', title: ['Machu Picchu, Perú', 'Machu Picchu, Peru'], label: ['Machu Picchu', 'Machu Picchu'] },
-    { lat: 19.4, lon: -99.1, img: 'pin-mexico.jpg', title: ['Ciudad de México', 'Mexico City'], label: ['Ciudad de México', 'Mexico City'] },
-    { lat: 27.2579, lon: 33.8116, img: 'pin-redsea.jpg', title: ['Costa del mar Rojo, Egipto', 'Red Sea Coast, Egypt'], label: ['Mar Rojo', 'Red Sea'] },
+    ...window.ELARA_DEST.map(d => ({ lat: d.lat, lon: d.lon, img: d.pin, title: d.title, label: d.place })),
     ...[[44, 117, 'Asia', 'Asia'], [-4.16, -90.54, 'Sudamérica', 'South America'], [6.7, 16.8, 'África', 'Africa'], [-9.3, 129.7, 'Oceanía', 'Oceania'], [28.4, -117.1, 'Norteamérica', 'North America'], [47.7, -27.1, 'Europa', 'Europe']]
       .map(([lat, lon, es, en]) => ({ lat, lon, locked: true, title: ['Por descubrir · ' + es, 'To discover · ' + en] })),
   ];
-  let current = 0, collected = [], lang = 0, pick = () => {}, visible = false, fallback = false;
+  let current = 0, collected = [], lang = 0, pick = () => {}, visible = false, fallback = false, hover = false, press = null, started = false;
   const m = { yaw: PINS[0].lon * RAD, pitch: PINS[0].lat * RAD, targetYaw: PINS[0].lon * RAD, targetPitch: PINS[0].lat * RAD, spinning: !reduced.matches, drag: false, lastX: 0, lastY: 0 };
+  const choose = i => { const p = PINS[i]; if (p.locked) return; m.spinning = false; turnTo(p); pick(i); };
   const turnTo = p => { m.targetYaw = m.yaw + Math.atan2(Math.sin(p.lon * RAD - m.yaw), Math.cos(p.lon * RAD - m.yaw)); m.targetPitch = p.lat * RAD; };
 
   // ---- markers (same markup and classes as the app)
   const els = PINS.map((p, i) => {
     const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.disabled = !!p.locked;
-    b.addEventListener('click', () => { if (p.locked) return; m.spinning = false; turnTo(p); pick(i); });
+    b.dataset.i = i;
+    b.addEventListener('click', e => { if (e.detail === 0) choose(i); });   // keyboard only; pointer taps are decided on release, below
     stage.append(b); return b;
   });
   function renderPins() {
@@ -34,10 +33,13 @@ window.ElaraGlobe = (() => {
   }
 
   // ---- WebGL (shader copied from the app)
-  const gl = canvas.getContext('webgl', { alpha: true, antialias: true, preserveDrawingBuffer: true });
-  let yawLoc, pitchLoc, ready = false, last = 0;
+  let gl = null, yawLoc, pitchLoc, ready = false, last = 0;
   const fail = () => { fallback = true; canvas.hidden = true; els.forEach(b => { b.hidden = true; }); const p = document.createElement('p'); p.className = 'paper-globe-fallback'; p.textContent = ['Puedes elegir un destino en la lista.', 'You can choose a destination from the list.'][lang]; stage.append(p); };
-  if (!gl) fail(); else try {
+  function start() {                                     // runs once, when the globe is near the viewport
+    if (started) return; started = true;
+    gl = canvas.getContext('webgl', { alpha: true, antialias: true, preserveDrawingBuffer: true });
+    if (!gl) return fail();
+    try {
     const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw Error('Atlas shader unavailable'); return s; };
     const vs = sh(gl.VERTEX_SHADER, 'attribute vec2 p;varying vec2 uv;void main(){uv=p;gl_Position=vec4(p,0.,1.);}');
     const fs = sh(gl.FRAGMENT_SHADER, `precision highp float;varying vec2 uv;uniform sampler2D earth;uniform float yaw;uniform float pitch;
@@ -51,9 +53,10 @@ window.ElaraGlobe = (() => {
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, earth); gl.uniform1i(gl.getUniformLocation(prog, 'earth'), 0);
-      canvas.dataset.ready = 'true'; ready = true; draw(); requestAnimationFrame(frame); };
+      canvas.dataset.ready = 'true'; ready = true; draw(); stage.classList.add('is-live'); requestAnimationFrame(frame); };
     earth.onerror = fail; earth.src = 'assets/paper-earth.jpg';
-  } catch (e) { fail(); }
+    } catch (e) { fail(); }
+  }
   function draw() {
     if (!ready || fallback) return;
     const px = Math.round(canvas.clientWidth * Math.min(devicePixelRatio || 1, 2));
@@ -66,27 +69,34 @@ window.ElaraGlobe = (() => {
       b.style.left = 50 + x / 1.15 * 50 + '%'; b.style.top = 50 - y / 1.15 * 50 + '%'; });
   }
   function frame(now) {
+    if (!canvas.isConnected) return;
     requestAnimationFrame(frame);
     const dt = Math.min(.05, (now - (last || now)) / 1000); last = now;
     if (!visible || document.hidden) return;             // homepage addition: rest while off-screen or in a hidden tab
-    if (m.spinning && !m.drag && !reduced.matches) m.targetYaw += dt * .055;
+    if (m.spinning && !m.drag && !hover && !reduced.matches) m.targetYaw += dt * .055;   // pointing at it pauses the spin, so markers hold still to be tapped
     const k = reduced.matches ? 1 : .1;
     m.yaw += (m.targetYaw - m.yaw) * k; m.pitch += (m.targetPitch - m.pitch) * k; draw();
   }
   stage.addEventListener('focusin', () => { m.spinning = false; });
-  stage.addEventListener('pointerdown', e => { m.spinning = false; if (e.target.closest('button')) return; m.drag = true; m.lastX = e.clientX; m.lastY = e.clientY; stage.setPointerCapture(e.pointerId); });
-  stage.addEventListener('pointermove', e => { if (!m.drag) return; m.targetYaw -= (e.clientX - m.lastX) * .009; m.targetPitch = Math.max(-1.1, Math.min(1.1, m.targetPitch + (e.clientY - m.lastY) * .006)); m.lastX = e.clientX; m.lastY = e.clientY; });
-  stage.addEventListener('pointerup', () => { m.drag = false; }); stage.addEventListener('pointercancel', () => { m.drag = false; });
+  stage.addEventListener('pointerenter', () => { hover = true; }); stage.addEventListener('pointerleave', () => { hover = false; });
+  // A press that moves is a drag, wherever it starts; only a press that stays put on a marker opens that destination.
+  stage.addEventListener('pointerdown', e => { m.spinning = false; const b = e.target.closest('.paper-globe-pin'); press = { x: e.clientX, y: e.clientY, pin: b ? +b.dataset.i : -1, moved: false };
+    m.drag = true; m.lastX = e.clientX; m.lastY = e.clientY; try { stage.setPointerCapture(e.pointerId); } catch (err) { /* fine */ } });
+  stage.addEventListener('pointermove', e => { if (!m.drag) return; if (press && Math.hypot(e.clientX - press.x, e.clientY - press.y) > 6) press.moved = true; if (press && !press.moved) return;
+    m.targetYaw -= (e.clientX - m.lastX) * .009; m.targetPitch = Math.max(-1.1, Math.min(1.1, m.targetPitch + (e.clientY - m.lastY) * .006)); m.lastX = e.clientX; m.lastY = e.clientY; });
+  stage.addEventListener('pointerup', () => { m.drag = false; const p = press; press = null; if (p && !p.moved && p.pin >= 0) choose(p.pin); });
+  stage.addEventListener('pointercancel', () => { m.drag = false; press = null; });
   canvas.addEventListener('keydown', e => { if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', ' '].includes(e.key)) return; e.preventDefault(); const was = m.spinning; m.spinning = false;
     if (e.key === 'Home') turnTo(PINS[current]); else if (e.key === ' ') m.spinning = !was; else if (e.key === 'ArrowLeft') m.targetYaw -= .18; else if (e.key === 'ArrowRight') m.targetYaw += .18;
     else m.targetPitch = Math.max(-1.1, Math.min(1.1, m.targetPitch + (e.key === 'ArrowUp' ? .12 : -.12))); });
   new IntersectionObserver(es => { visible = es[0].isIntersecting; last = 0; }).observe(stage);
+  new IntersectionObserver(es => { if (es[0].isIntersecting) start(); }, { rootMargin: '700px 0px' }).observe(stage);
   renderPins();
   return {
     set(o) { if ('lang' in o) { lang = o.lang === 'en' ? 1 : 0; canvas.setAttribute('aria-label', ['Globo de papel interactivo. Flechas para girar, espacio para pausar.', 'Interactive paper globe. Arrow keys rotate, space pauses.'][lang]); }
       if ('collected' in o) collected = o.collected;
       if ('current' in o && o.current !== current) { current = o.current; m.spinning = false; turnTo(PINS[current]); }
       renderPins(); draw(); },
-    onPick(f) { pick = f; }, get lon() { return m.yaw / RAD; }, get spinning() { return m.spinning; }, state: m,
+    onPick(f) { pick = f; }, start, get lon() { return m.yaw / RAD; }, get spinning() { return m.spinning; }, state: m,
   };
 })();

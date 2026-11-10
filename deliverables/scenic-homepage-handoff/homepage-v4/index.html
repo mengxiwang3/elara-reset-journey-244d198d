@@ -55,7 +55,8 @@
     <p id="col-sub" data-i18n="col.empty">Responde una pregunta arriba y guarda su recuerdo. Aparecerá aquí con la frase que elegiste.</p>
   </div>
   <div class="colgrid">
-    <ul class="strip" id="strip" aria-label="Colección de ejemplo"></ul>
+    <div class="passport"><p class="pass-title"><b data-i18n="pass.h">Tu pasaporte</b><span data-i18n="sample">Ejemplo</span></p>
+      <ul class="strip" id="strip" aria-label="Colección de ejemplo"></ul></div>
     <div class="atlas-live">
       <div class="paper-globe-stage" id="globe-stage" data-scroll-drag="ignore"><canvas tabindex="0" aria-label="Globo de papel interactivo. Flechas para girar, espacio para pausar."></canvas></div>
       <p class="fine" data-i18n="atlas.p">Tu Atlas. Gira el globo o toca un destino para ir.</p>
@@ -92,6 +93,10 @@
     <p><b data-i18n="es.h">No es inglés, traducido. Es español, entendido.</b> <span data-i18n="es.p">El peso de ser la hija mayor, la familia que llama, los dos mundos que habitas. También está disponible en inglés.</span></p>
     <p><b data-i18n="sv.h">Construido con ellas.</b> <span data-i18n="sv.p">Más de 4600 mujeres respondieron nuestra encuesta; casi 1 de cada 3 eligió el dinero como lo primero que resolvería. Por eso el ejemplo de arriba empieza ahí.</span></p>
   </div>
+  <figure class="videoslot" id="ale-video" data-video="">
+    <img src="assets/founder-alejandra.jpg" alt="" width="112" height="112" loading="lazy">
+    <figcaption><b data-i18n="vid.h">Alejandra te cuenta por qué hacemos Elara</b><span data-i18n="vid.soon">Video próximamente</span></figcaption>
+  </figure>
   <div class="usline" id="nosotras">
     <ul class="people">
       <li><img src="assets/founder-mengxi.jpg" alt="Mengxi Wang" width="56" height="56" loading="lazy"><span><b>Mengxi Wang</b><span data-i18n="us.r1">Producto y diseño</span></span></li>
@@ -112,6 +117,11 @@
   <div class="circle-stage" id="circle-stage" data-step="4">
     <div class="mini" aria-label="Vista de ejemplo de Círculos">
       <div class="mini-top"><b>Círculos</b><span data-i18n="sample">Ejemplo</span></div>
+      <div class="ctabs" role="tablist" aria-label="Círculos">
+        <button type="button" role="tab" data-ctab="talk" aria-selected="true" data-i18n="ct.talk">Conversaciones</button>
+        <button type="button" role="tab" data-ctab="people" aria-selected="false" data-i18n="ct.people">Conexiones</button>
+      </div>
+      <div data-cpane="talk">
       <div class="topics" role="group" aria-label="Temas de ejemplo">
         <button type="button" data-topic="ciudad" aria-pressed="true" data-i18n="topic.ciudad">Una nueva ciudad</button>
         <button type="button" data-topic="uni" aria-pressed="false" data-i18n="topic.uni">Vida universitaria</button>
@@ -124,6 +134,16 @@
         <p class="meta"><span id="circle-count">1 respuesta</span></p>
         <button type="button" class="open" id="circle-open" aria-expanded="false" aria-controls="circle-thread">Abrir la conversación</button>
       </article>
+      </div>
+      <div data-cpane="people" hidden>
+        <p class="people-intro" data-i18n="cp.intro">Mujeres que están viviendo algo parecido.</p>
+        <ul class="matches">
+          <li><p class="who"><span class="av" aria-hidden="true">L</span><b>Lucía R.</b><i data-i18n="circ.profile">Perfil de ejemplo</i></p><button type="button" class="common" data-common aria-expanded="false" data-i18n="cp.common">Ver qué tienen en común</button><p class="incommon" hidden><span class="chip" data-i18n="cp.t1">Una nueva ciudad</span> <span data-i18n="cp.1">También se mudó hace poco y busca planes entre semana.</span></p></li>
+          <li><p class="who"><span class="av alt" aria-hidden="true">S</span><b>Sofía A.</b><i data-i18n="circ.profile">Perfil de ejemplo</i></p><button type="button" class="common" data-common aria-expanded="false" data-i18n="cp.common">Ver qué tienen en común</button><p class="incommon" hidden><span class="chip" data-i18n="cp.t2">Vida universitaria</span> <span data-i18n="cp.2">Estudia y trabaja; organiza su semana los domingos.</span></p></li>
+          <li><p class="who"><span class="av" aria-hidden="true">P</span><b>Paula M.</b><i data-i18n="circ.profile">Perfil de ejemplo</i></p><button type="button" class="common" data-common aria-expanded="false" data-i18n="cp.common">Ver qué tienen en común</button><p class="incommon" hidden><span class="chip" data-i18n="cp.t3">Soy mamá</span> <span data-i18n="cp.3">Mamá de dos; busca conversaciones cortas y sin juicio.</span></p></li>
+        </ul>
+        <p class="fine" data-i18n="cp.fine">Perfiles de ejemplo. En esta página no se envían solicitudes ni se conecta a nadie.</p>
+      </div>
     </div>
     <div class="thread" id="circle-thread" hidden>
       <p class="thread-top"><b id="circle-topic">Una nueva ciudad</b><span data-i18n="circ.sampleconv">Conversación de ejemplo</span></p>
@@ -160,9 +180,6 @@
     <details><summary data-i18n="faq.q1">¿Qué pasa en una práctica diaria?</summary><p data-i18n="faq.a1">Llegas a un lugar, lees una situación concreta, respondes una pregunta y te llevas una herramienta y un recuerdo. Como en el ejemplo de arriba.</p></details>
     <details><summary data-i18n="faq.q2">¿Cuánto tiempo necesito?</summary><p data-i18n="faq.a2">Unos minutos al día. Vas a tu ritmo y puedes pausar cuando quieras.</p></details>
     <details><summary data-i18n="faq.q3">¿Puedo usarla en español o en inglés?</summary><p data-i18n="faq.a3">En los dos. Elara se piensa primero en español y también está en inglés.</p></details>
-    <details><summary data-i18n="faq.q4">¿Funciona en un navegador?</summary><p><span class="tbc" data-i18n="tbc">Por confirmar</span> <span data-i18n="faq.a4">La versión de prueba actual se abre en un navegador. Cómo se entregará la app final todavía no está decidido.</span></p></details>
-    <details><summary data-i18n="faq.q5">¿Qué incluye la beta?</summary><p><span class="tbc" data-i18n="tbc">Por confirmar</span> <span data-i18n="faq.a5">Todavía lo estamos definiendo. Lo que ves en esta página son ejemplos de la versión de prueba.</span></p></details>
-    <details><summary data-i18n="faq.q6">¿Es gratis o de pago?</summary><p><span class="tbc" data-i18n="tbc">Por confirmar</span> <span data-i18n="faq.a6">Aún no está decidido. Te lo diremos antes de abrir.</span></p></details>
     <details><summary data-i18n="faq.q7">¿Qué pasa con mis respuestas y cómo las borro?</summary><p data-i18n-html="faq.a7">En esta página no se guarda nada. En la app puedes pedir que eliminemos tu cuenta y tus datos desde <a href="https://holaelara.com/request-account-deletion">esta página</a>. Los detalles están en la <a href="https://holaelara.com/privacidad">Política de Privacidad</a>. Elara no es terapia ni un servicio médico.</p></details>
   </div>
 </section>
@@ -181,6 +198,7 @@
   <a class="brand" href="#top"><img src="assets/orb.png" alt="" width="22" height="22" loading="lazy">elara</a>
   <nav aria-label="Legal"><a data-privacy href="https://holaelara.com/privacidad" data-i18n="ft.privacy">Privacidad</a><a href="https://holaelara.com/terms-and-conditions" data-i18n="ft.terms">Términos</a><a href="https://holaelara.com/support" data-i18n="ft.support">Soporte</a></nav>
 </footer>
+<script defer src="destinations.js"></script>
 <script defer src="stage.js"></script>
 <script defer src="globe.js"></script>
 <script defer src="app.js"></script>

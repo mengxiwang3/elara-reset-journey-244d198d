@@ -49,14 +49,11 @@
     'res.taller': ['<b>Tu próxima decisión, con más claridad</b>Taller · 45 min', '<b>Your next decision, with more clarity</b>Workshop · 45 min'],
     'res.l1': ['<b>Antes del siguiente paso</b>Lectura guiada · 2 min', '<b>Before the next step</b>Guided reading · 2 min'],
     'res.l2': ['<b>Antes de pedir otra opinión</b>Lectura guiada · 2 min', '<b>Before asking for another opinion</b>Guided reading · 2 min'],
-    'faq.h': ['Preguntas prácticas', 'Practical questions'], 'tbc': ['Por confirmar', 'To be confirmed'],
+    'faq.h': ['Preguntas prácticas', 'Practical questions'],
     'faq.q1': ['¿Qué pasa en una práctica diaria?', 'What happens in a daily practice?'],
     'faq.a1': ['Llegas a un lugar, lees una situación concreta, respondes una pregunta y te llevas una herramienta y un recuerdo. Como en el ejemplo de arriba.', 'You arrive somewhere, read a concrete situation, answer one question and leave with a tool and a souvenir. Like the example above.'],
     'faq.q2': ['¿Cuánto tiempo necesito?', 'How much time do I need?'], 'faq.a2': ['Unos minutos al día. Vas a tu ritmo y puedes pausar cuando quieras.', 'A few minutes a day. You go at your own pace and can pause whenever you like.'],
     'faq.q3': ['¿Puedo usarla en español o en inglés?', 'Can I use it in Spanish or English?'], 'faq.a3': ['En los dos. Elara se piensa primero en español y también está en inglés.', 'Both. Elara is built in Spanish first and is also in English.'],
-    'faq.q4': ['¿Funciona en un navegador?', 'Does it work in a browser?'], 'faq.a4': ['La versión de prueba actual se abre en un navegador. Cómo se entregará la app final todavía no está decidido.', 'The current test version opens in a browser. How the final app will be delivered is not decided yet.'],
-    'faq.q5': ['¿Qué incluye la beta?', 'What is in the beta?'], 'faq.a5': ['Todavía lo estamos definiendo. Lo que ves en esta página son ejemplos de la versión de prueba.', 'We are still defining it. What you see on this page are examples from the test version.'],
-    'faq.q6': ['¿Es gratis o de pago?', 'Is it free or paid?'], 'faq.a6': ['Aún no está decidido. Te lo diremos antes de abrir.', 'Not decided yet. We will tell you before we open.'],
     'faq.q7': ['¿Qué pasa con mis respuestas y cómo las borro?', 'What happens to my answers, and how do I remove them?'],
     'faq.a7': ['En esta página no se guarda nada. En la app puedes pedir que eliminemos tu cuenta y tus datos desde <a href="https://holaelara.com/request-account-deletion">esta página</a>. Los detalles están en la <a href="https://holaelara.com/privacidad">Política de Privacidad</a>. Elara no es terapia ni un servicio médico.',
       'Nothing is saved on this page. In the app you can ask us to delete your account and data from <a href="https://holaelara.com/request-account-deletion">this page</a>. Details are in the <a href="https://holaelara.com/privacy">Privacy Policy</a>. Elara is not therapy or a medical service.'],
@@ -74,16 +71,24 @@
     'tour.pause': ['Pausar el recorrido', 'Pause the tour'], 'tour.play': ['Ver el recorrido automático', 'Play the automatic tour'],
     'st.walk': ['Camina hacia', 'Walking to'], 'st.at': ['Estás en', 'You are in'],
     'atlas.p': ['Tu Atlas. Gira el globo o toca un destino para ir.', 'Your Atlas. Turn the globe or tap a destination to go there.'],
-    'soon': ['Destino en preparación', 'Destination in preparation'],
+    'pass.h': ['Tu pasaporte', 'Your passport'], 'pass.stamp': ['Sellado', 'Stamped'],
+    'vid.h': ['Alejandra te cuenta por qué hacemos Elara', 'Alejandra on why we are making Elara'], 'vid.soon': ['Video próximamente', 'Video coming soon'],
+    'ct.talk': ['Conversaciones', 'Conversations'], 'ct.people': ['Conexiones', 'Connections'],
+    'cp.intro': ['Mujeres que están viviendo algo parecido.', 'Women living through something similar.'], 'cp.common': ['Ver qué tienen en común', 'See what you have in common'],
+    'cp.1': ['También se mudó hace poco y busca planes entre semana.', 'She also moved recently and is looking for weekday plans.'],
+    'cp.2': ['Estudia y trabaja; organiza su semana los domingos.', 'She studies and works; she plans her week on Sundays.'],
+    'cp.3': ['Mamá de dos; busca conversaciones cortas y sin juicio.', 'Mum of two; looking for short conversations without judgement.'],
+    'cp.t1': ['Una nueva ciudad', 'A new city'], 'cp.t2': ['Vida universitaria', 'University life'], 'cp.t3': ['Soy mamá', 'I am a mum'],
+    'cp.fine': ['Perfiles de ejemplo. En esta página no se envían solicitudes ni se conecta a nadie.', 'Sample profiles. No requests are sent and no one is connected on this page.'],
   };
   let lang = 'es';
   try { if (sessionStorage.getItem('elara-lang') === 'en') lang = 'en'; } catch (e) { /* storage unavailable: stay in Spanish */ }
   const t = k => T[k][lang === 'en' ? 1 : 0], L = pair => pair[lang === 'en' ? 1 : 0];
 
   // ---------------------------------------------------------------- Destinations: area, place, one short practice each
-  const DEST = [
-    { key: 'kyoto', place: ['Kioto', 'Kyoto'], area: ['Claridad financiera', 'Money Clarity'], item: ['Taza de Kioto', 'Kyoto cup'], img: 'souvenir-cup.png',
-      sit: ['Alguien de tu familia te pide dinero. Quieres ayudar, pero todavía no sabes cuánto puedes aportar.', 'Someone in your family asks you for money. You want to help, but you do not yet know how much you can give.'],
+  // Practice copy per destination. Names, images and coordinates come from the shared list in destinations.js.
+  const PRACTICE = {
+    kyoto: { sit: ['Alguien de tu familia te pide dinero. Quieres ayudar, pero todavía no sabes cuánto puedes aportar.', 'Someone in your family asks you for money. You want to help, but you do not yet know how much you can give.'],
       q: ['¿Qué le dices?', 'What do you say?'],
       a: [{ label: ['Voy a revisar cuánto puedo aportar y te digo mañana.', 'I will check how much I can give and tell you tomorrow.'],
             fb: ['Dar un momento concreto para responder te permite revisar tus posibilidades sin dejar a la otra persona esperando.', 'Giving a specific time to answer lets you check what is possible without leaving the other person waiting.'],
@@ -91,8 +96,7 @@
           { label: ['Sí, después veo cómo me organizo.', 'Yes, I will figure it out later.'],
             fb: ['Quieres ayudar. Decir que sí antes de revisar puede dejarte con un compromiso que todavía no sabes si puedes cumplir.', 'You want to help. Saying yes before checking can leave you with a commitment you do not yet know you can keep.'],
             ph: ['Quiero ayudarte. Déjame revisar cuánto puedo aportar y mañana te respondo.', 'I want to help you. Let me check how much I can give and I will answer you tomorrow.'] }] },
-    { key: 'venice', place: ['Venecia', 'Venice'], area: ['Ritmo diario', 'Daily Rhythm'], item: ['Velero de Venecia', 'Venice sailboat'], img: 'souvenir-boat.png',
-      sit: ['Tu día cambió y la rutina que querías hacer ya no cabe.', 'Your day changed and the routine you planned no longer fits.'],
+    venice: { sit: ['Tu día cambió y la rutina que querías hacer ya no cabe.', 'Your day changed and the routine you planned no longer fits.'],
       q: ['¿Qué haces con ella hoy?', 'What do you do with it today?'],
       a: [{ label: ['Hago una versión corta, aunque sean cinco minutos.', 'I do a short version, even five minutes.'],
             fb: ['Una versión mínima mantiene la rutina viva cuando el día cambia. Es más fácil retomarla mañana.', 'A minimum version keeps the routine alive when the day changes. It is easier to pick up again tomorrow.'],
@@ -100,8 +104,7 @@
           { label: ['La dejo para mañana y empiezo de cero.', 'I leave it for tomorrow and start from zero.'],
             fb: ['Tiene sentido soltarla hoy. Empezar de cero cada vez hace que la rutina dependa de días perfectos.', 'It makes sense to drop it today. Starting from zero each time makes the routine depend on perfect days.'],
             ph: ['Hoy no cabe entera: hago cinco minutos.', 'It does not fit whole today: I do five minutes.'] }] },
-    { key: 'andes', place: ['Machu Picchu', 'Machu Picchu'], area: ['Encontrar tu propósito', 'Purpose Finding'], item: ['Cantimplora de los Andes', 'Andes flask'], img: 'souvenir-flask.png',
-      sit: ['Tienes una idea que te interesa, pero no sabes si es lo tuyo.', 'You have an idea that interests you, but you are not sure it is for you.'],
+    andes: { sit: ['Tienes una idea que te interesa, pero no sabes si es lo tuyo.', 'You have an idea that interests you, but you are not sure it is for you.'],
       q: ['¿Cuál es tu siguiente paso?', 'What is your next step?'],
       a: [{ label: ['Pruebo una parte pequeña esta semana.', 'I try a small part this week.'],
             fb: ['Una prueba, no una decisión para siempre. Probar una parte te dice qué te interesa de verdad.', 'A test, not a forever decision. Trying one part tells you what really interests you.'],
@@ -109,8 +112,7 @@
           { label: ['Espero a estar segura antes de moverme.', 'I wait until I am sure before I move.'],
             fb: ['Quieres decidir bien. Esperar la certeza suele dejar la idea igual que estaba; una prueba pequeña te da información real.', 'You want to decide well. Waiting for certainty usually leaves the idea where it was; a small test gives you real information.'],
             ph: ['No tengo que decidir todo: pruebo una parte.', 'I do not have to decide everything: I try one part.'] }] },
-    { key: 'mexico', place: ['Ciudad de México', 'Mexico City'], area: ['Amor y límites', 'Love & Boundaries'], item: ['Pulsera tejida', 'Woven bracelet'], img: 'souvenir-bracelet.png',
-      sit: ['Una amiga te pide un favor que este fin de semana no puedes hacer.', 'A friend asks for a favour you cannot do this weekend.'],
+    mexico: { sit: ['Una amiga te pide un favor que este fin de semana no puedes hacer.', 'A friend asks for a favour you cannot do this weekend.'],
       q: ['¿Qué le respondes?', 'What do you answer?'],
       a: [{ label: ['Le digo qué sí puedo ofrecer.', 'I tell her what I can offer.'],
             fb: ['Distinguir lo que puedes ofrecer te deja cuidar la relación sin prometer de más.', 'Separating out what you can offer lets you care for the relationship without over-promising.'],
@@ -118,8 +120,7 @@
           { label: ['Digo que sí y veo cómo le hago.', 'I say yes and work it out somehow.'],
             fb: ['Quieres estar para ella. Decir que sí sin poder cumplir suele terminar en cansancio o en cancelar a última hora.', 'You want to be there for her. Saying yes when you cannot follow through often ends in exhaustion or a last-minute cancel.'],
             ph: ['Quiero ayudarte. Este fin de semana no puedo; ¿te sirve el martes?', 'I want to help. I cannot this weekend; would Tuesday work?'] }] },
-    { key: 'redsea', place: ['Mar Rojo', 'Red Sea'], area: ['Confianza en ti', 'Self-Trust'], item: ['Camello de plata', 'Silver camel'], img: 'souvenir-camel.png',
-      sit: ['Tomaste una decisión y ahora tres personas opinan distinto.', 'You made a decision and now three people disagree.'],
+    redsea: { sit: ['Tomaste una decisión y ahora tres personas opinan distinto.', 'You made a decision and now three people disagree.'],
       q: ['¿Qué haces primero?', 'What do you do first?'],
       a: [{ label: ['Escribo mis razones antes de preguntar.', 'I write down my reasons before asking.'],
             fb: ['Reconocer lo que ya sabes te permite revisar la decisión con razones, no con ruido.', 'Recognising what you already know lets you review the decision with reasons, not noise.'],
@@ -127,15 +128,33 @@
           { label: ['Pregunto a alguien más para estar segura.', 'I ask someone else to be sure.'],
             fb: ['Otra opinión puede sumar. Si llega antes de saber qué piensas tú, es fácil que decida por ti.', 'Another opinion can help. If it comes before you know what you think, it can easily decide for you.'],
             ph: ['Primero anoto qué pienso yo; después pregunto.', 'First I write what I think; then I ask.'] }] },
-  ];
-  const SOON = { area: ['Recuperar tu energía', 'Energy Reset'] };     // sixth area: no approved destination or art yet
+    reef: { sit: ['Antes de seguir con el día, te detienes un momento a notar cómo estás.', 'Before carrying on with the day, you stop for a moment to notice how you are.'],
+      q: ['¿Cómo describirías la energía que tienes disponible ahora?', 'How would you describe the energy available to you now?'],
+      a: [{ label: ['Un poco.', 'A little.'],
+            fb: ['Podemos observar una sola cosa, sin añadir una tarea para rendir más.', 'We can observe one thing without adding a task to perform more.'],
+            ph: ['Mi energía de hoy es información; no es una nota sobre mí.', 'Today’s energy is information, not a grade on me.'] },
+          { label: ['Cambia, o no sé cómo nombrarla.', 'It changes, or I do not know how to name it.'],
+            fb: ['Puedes dejarla sin número y mirar un momento concreto.', 'You can leave it unnumbered and look at one concrete moment.'],
+            ph: ['Mi energía de hoy es información; no es una nota sobre mí.', 'Today’s energy is information, not a grade on me.'] }] },
+  };
+  const DEST = window.ELARA_DEST.map(d => ({ key: d.key, place: d.place, area: d.area, region: d.region, item: d.souvenir.name, img: d.souvenir.img, plate: d.plate, ...PRACTICE[d.key] }));
 
   // ---------------------------------------------------------------- Single source of truth for the demonstration
   const state = { dest: 0, answers: {}, collected: [], editing: {}, open: null };   // answers: key -> 0|1; collected: keys in order
+  // The demonstration survives a visit to another page (Nosotras, the legal pages) in the same tab. It is session-only,
+  // lives in this browser, and is never sent anywhere.
+  const STORE = 'elara-demo-v1';
+  try { const saved = JSON.parse(sessionStorage.getItem(STORE) || 'null');
+    if (saved) { const keys = window.ELARA_DEST.map(d => d.key);
+      state.dest = Math.max(0, Math.min(keys.length - 1, saved.dest | 0));
+      Object.entries(saved.answers || {}).forEach(([k, v]) => { if (keys.includes(k) && (v === 0 || v === 1)) state.answers[k] = v; });
+      state.collected = [...new Set((saved.collected || []).filter(k => keys.includes(k) && k in state.answers))]; } } catch (e) { /* storage unavailable: start fresh */ }
+  const persist = () => { try { sessionStorage.setItem(STORE, JSON.stringify({ dest: state.dest, answers: state.answers, collected: state.collected })); } catch (e) { /* fine */ } };
   const answerOf = d => (d.key in state.answers ? d.a[state.answers[d.key]] : null);
   const takeaway = d => { const a = answerOf(d); return a ? { label: L(a.label), fb: L(a.fb), ph: L(a.ph) } : null; };
   let autoplay = !Stage.still(), idle = 0, arrived = true;
-  const interact = () => { if (autoplay) { autoplay = false; renderTour(); } };
+  let busy = false;                                        // pointer or focus is on the practice card: do not walk away
+  const interact = () => { idle = 0; };                    // any action restarts the wait; only the Pause button turns the tour off
 
   // ---------------------------------------------------------------- Rendering (always from state)
   function applyLang() {
@@ -150,9 +169,8 @@
   }
   function renderDests() {
     $('#dests').replaceChildren(...DEST.map((d, i) => el('button', { type: 'button', className: 'dest', onclick: () => { interact(); travel(i); } },
-      [el('b', { textContent: L(d.area) }), el('span', { textContent: L(d.place) })])),
-      el('p', { className: 'dest off' }, [el('b', { textContent: L(SOON.area) }), el('span', { textContent: t('soon') })]));
-    $$('#dests .dest:not(.off)').forEach((b, i) => { if (i === state.dest) b.setAttribute('aria-current', 'true'); });
+      [el('b', { textContent: L(d.area) }), el('span', { textContent: L(d.place) })])));
+    $$('#dests .dest').forEach((b, i) => { if (i === state.dest) b.setAttribute('aria-current', 'true'); });
   }
   function renderCards() {
     const keep = document.activeElement && document.activeElement.closest('.card') ? document.activeElement.dataset.role : null;
@@ -185,8 +203,9 @@
     $('#strip').replaceChildren(...DEST.map((d, i) => {
       const got = state.collected.includes(d.key);
       const b = el('button', { type: 'button', className: 'slot' + (got ? ' got' : ''), onclick: () => (got ? openCard(d.key) : (interact(), travel(i), $('#stage').scrollIntoView({ block: 'center', behavior: reduced.matches ? 'auto' : 'smooth' }))) },
-        [el('img', { src: 'assets/' + d.img, alt: '', loading: 'lazy', className: fresh === d.key ? 'fresh' : '' }), el('b', { textContent: L(d.item) }),
-          el('span', { className: 'state', textContent: got ? `✓ ${t('strip.kept')}` : `${t('strip.not')} · ${t('strip.go')} ${L(d.place)}` })]);
+        [el('img', { src: 'assets/' + d.img, alt: '', loading: 'lazy', className: fresh === d.key ? 'fresh' : '' }),
+          el('span', {}, [el('b', { textContent: L(d.item) }), el('span', { className: 'state', textContent: got ? `✓ ${t('strip.kept')} · ${L(d.place)}` : `${t('strip.not')} · ${L(d.place)}` })]),
+          ...(got ? [el('span', { className: 'stamp' + (fresh === d.key ? ' fresh' : ''), textContent: L(d.place) })] : [])]);
       if (got) b.setAttribute('aria-expanded', String(state.open === d.key));
       b.dataset.key = d.key;
       return el('li', {}, [b]);
@@ -197,7 +216,7 @@
     if (!d || !tk || !state.collected.includes(d.key)) { state.open = null; pc.hidden = true; return; }
     pc.hidden = false;
     pc.replaceChildren(
-      el('div', { className: 'pc-photo' }, [el('img', { src: `assets/${d.key}.webp`, alt: '', loading: 'lazy' }), el('span', { className: 'stamp', textContent: `${L(d.place)} · ${t('stamp')}` })]),
+      el('div', { className: 'pc-photo' }, [el('img', { src: 'assets/' + d.plate, alt: '', loading: 'lazy' }), el('span', { className: 'stamp', textContent: `${L(d.place)} · ${t('stamp')}` })]),
       el('div', { className: 'pc-text' }, [
         el('h3', { id: 'pc-title', textContent: `${t('pc.from')} ${L(d.place)} · ${L(d.area)}` }),
         el('p', { className: 'pc-phrase', textContent: tk.ph }),
@@ -218,7 +237,7 @@
   function renderTour() { const b = $('#tour'); b.hidden = Stage.still(); b.textContent = t(autoplay ? 'tour.pause' : 'tour.play'); b.setAttribute('aria-pressed', String(!autoplay)); }
   function renderStatus() { $('#status').textContent = `${t(arrived ? 'st.at' : 'st.walk')} ${L(DEST[state.dest].place)} · ${L(DEST[state.dest].area)}`; }
   function renderAll(focusRole) {
-    const keep = renderCards(); renderDests(); renderStrip(); renderPostcard(); renderWeek(); renderRecap(); renderGlobe(); renderTour(); renderStatus();
+    persist(); const keep = renderCards(); renderDests(); renderStrip(); renderPostcard(); renderWeek(); renderRecap(); renderGlobe(); renderTour(); renderStatus();
     const role = focusRole || keep; if (role) { const n = $(`.card.on [data-role="${role}"]`); if (n) n.focus({ preventScroll: true }); }
   }
 
@@ -248,13 +267,16 @@
     const ui = () => { const p = $('#circle-pause'); p.hidden = !(running || (timer === null && step < 4)); p.textContent = t(timer === null && step < 4 ? 'circ.resume' : 'circ.pause'); };
     const stop = () => { clearTimeout(timer); timer = null; };
     const next = () => { if (step >= 4) { running = false; timer = null; return ui(); } timer = setTimeout(() => { setStep(step + 1); next(); }, STEP_MS[step]); ui(); };
-    const play = () => { stop(); played = true; if (reduced.matches) { setStep(4); running = false; return ui(); } setThread(false); topic = 'ciudad'; relabel(); running = true; setStep(0); next(); };
+    const play = () => { stop(); played = true; const first = $('[data-ctab=talk]'); if (first.getAttribute('aria-selected') !== 'true') first.click(); if (reduced.matches) { setStep(4); running = false; return ui(); } setThread(false); topic = 'ciudad'; relabel(); running = true; setStep(0); next(); };
     const hold = () => { if (running && timer !== null) { stop(); ui(); } };
     const carryOn = () => { if (running && timer === null && inView && !document.hidden) next(); };
     $('#circle-replay').addEventListener('click', play);
     $('#circle-pause').addEventListener('click', () => { if (timer !== null) { stop(); running = false; ui(); } else if (step < 4) { running = true; next(); } });
     topics.forEach(b => b.addEventListener('click', () => { stop(); running = false; topic = b.dataset.topic; relabel(); setStep(4); ui(); }));
     openBtn.addEventListener('click', () => setThread(thread.hidden));
+    const tabs = $$('[data-ctab]'), panes = $$('[data-cpane]');
+    tabs.forEach(b => b.addEventListener('click', () => { stop(); running = false; setStep(4); setThread(false); ui(); tabs.forEach(x => x.setAttribute('aria-selected', String(x === b))); panes.forEach(p => { p.hidden = p.dataset.cpane !== b.dataset.ctab; }); stage.classList.toggle('tab-people', b.dataset.ctab === 'people'); }));
+    $$('[data-common]').forEach(b => b.addEventListener('click', () => { const p = b.nextElementSibling, open = p.hidden; p.hidden = !open; b.setAttribute('aria-expanded', String(open)); }));
     new IntersectionObserver(es => { inView = es[0].isIntersecting; if (inView && !played) play(); else if (inView) carryOn(); else hold(); }, { threshold: .45 }).observe(stage);
     document.addEventListener('visibilitychange', () => (document.hidden ? hold() : carryOn()));
     window.__circles = { get step() { return step; }, get running() { return running; }, get ticking() { return timer !== null; } };
@@ -276,22 +298,30 @@
 
   // ---------------------------------------------------------------- Wiring
   $$('[data-lang]').forEach(b => b.addEventListener('click', () => { lang = b.dataset.lang; try { sessionStorage.setItem('elara-lang', lang); } catch (e) { /* fine */ } applyLang(); }));
-  $('#tour').addEventListener('click', () => { autoplay = !autoplay; idle = 0; renderTour(); });
+  $('#tour').addEventListener('click', () => { autoplay = !autoplay; idle = 0; if (autoplay && state.dest >= DEST.length - 1) travel(0); renderTour(); });
   const stageEl = $('#stage');
   $('#scene').addEventListener('click', e => { const i = Stage.phoneAt(e.clientX, e.clientY); if (i >= 0) { interact(); travel(i); } });
   let sx = 0, sy = 0;
   stageEl.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
   stageEl.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
     if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.6) { interact(); travel(Math.max(0, Math.min(DEST.length - 1, state.dest + (dx < 0 ? 1 : -1)))); } }, { passive: true });
-  $('#cards').addEventListener('pointerdown', interact); $('#cards').addEventListener('focusin', interact);
+  $('#cards').addEventListener('pointerdown', interact);
   window.ElaraGlobe.onPick(i => { interact(); travel(i); $('#stage').scrollIntoView({ block: 'center', behavior: reduced.matches ? 'auto' : 'smooth' }); });
   Stage.on('arrive', i => { state.dest = i; arrived = true; idle = 0; renderAll(); });
-  Stage.on('frame', dt => {                                // brief automatic introduction: one pass, until she does anything
-    if (!autoplay || !arrived || Stage.moving) return;
-    idle += dt; if (idle < 6) return;
+  // She walks on by herself. The wait depends on what the visitor is doing: longer while a question is unanswered,
+  // no moving on while an answer is chosen but its souvenir is not kept yet, a short pause after collecting.
+  Stage.on('frame', dt => {
+    if (!autoplay || !arrived || Stage.moving || busy) return;
+    const d = DEST[state.dest], answered = d.key in state.answers, got = state.collected.includes(d.key);
+    if (answered && !got) return;
+    idle += dt; if (idle < (got ? 3.5 : 9)) return;
     if (state.dest >= DEST.length - 1) { autoplay = false; return renderTour(); }
     travel(state.dest + 1);
   });
+  $('#cards').addEventListener('pointerenter', () => { busy = true; }); $('#cards').addEventListener('pointerleave', () => { busy = false; idle = 0; });
+  $('#cards').addEventListener('focusin', () => { busy = true; }); $('#cards').addEventListener('focusout', () => { busy = false; idle = 0; });
   window.__elara = { state, DEST, takeaway, get lang() { return lang; }, get autoplay() { return autoplay; }, get arrived() { return arrived; } };
-  Stage.ready.then(() => { $('#tour').hidden = false; applyLang(); }, err => { console.error(err); applyLang(); });
+  const resumed = state.dest > 0 || state.collected.length > 0 || Object.keys(state.answers).length > 0;
+  if (resumed) autoplay = false;                           // she comes back to where she left off; the tour does not restart on its own
+  Stage.ready.then(() => { $('#tour').hidden = false; if (state.dest) Stage.goTo(state.dest, true); applyLang(); }, err => { console.error(err); applyLang(); });
 })();

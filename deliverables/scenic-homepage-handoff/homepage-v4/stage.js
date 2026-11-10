@@ -12,13 +12,7 @@ window.ElaraStage = (() => {
   const STEP = .218 * H0, CADENCE = 2.7, LEG = 5;        // half a stride (from the sprite), half-steps per second, half-steps between phones
   const PITCH = LEG * STEP;
   const WL = 300, HL = 596, WS = 216, HS = 430;          // focused / resting phone glass
-  const PHONES = [
-    { key: 'kyoto',  m: 1,    ob: 0 },
-    { key: 'venice', m: .95,  ob: -12 },
-    { key: 'andes',  m: 1.03, ob: 8 },
-    { key: 'mexico', m: .96,  ob: -6 },
-    { key: 'redsea', m: .97,  ob: 4 },
-  ].map((p, i) => ({ ...p, cx: i * PITCH, bottom: 620 + p.ob }));
+  const PHONES = window.ELARA_DEST.map((d, i) => ({ ...d, cx: i * PITCH, bottom: 620 + d.ob }));
   const LAST = PHONES.length - 1;
 
   // ---- Sprites: 3x3 sheets of 418px cells (walker), 3x3 of ~420x416 (diver) ----
@@ -100,7 +94,7 @@ window.ElaraStage = (() => {
     cell(0, 1 - tr.stand); cell(7, tr.stand);
   }
   const stacked = matchMedia('(max-width: 900px)');
-  const camX = () => pos * STEP - viewW * (stacked.matches ? .5 : .42);
+  const camX = () => pos * STEP - viewW * (stacked.matches ? .5 : .33);   // desktop: the active phone sits left of centre, next to the copy, with the journey ahead on the right
   function draw() {
     if (!loaded) return;
     const dpr = Math.min(2, devicePixelRatio || 1), cw = Math.round(viewW * scale * dpr), ch = Math.round(HT * scale * dpr);
@@ -121,7 +115,7 @@ window.ElaraStage = (() => {
       const s = Math.max(PW / plate.width, PH / plate.height), iw = plate.width * s, ih = plate.height * s;
       ctx.drawImage(plate, ph.cx - iw / 2, ph.bottom - ih, iw, ih);                // scenery is fixed in the world
       if (w.f < 1) { ctx.fillStyle = `rgba(255,255,255,${(.34 * (1 - w.f)).toFixed(3)})`; ctx.fillRect(w.x, w.y, w.w, w.h); }
-      if (Math.abs(tr.body.x - ph.cx) < PITCH + H0) { if (ph.key === 'redsea') drawDiver(tr); else drawWalker(tr, sameOutfit ? 'kyoto' : ph.key); }
+      if (Math.abs(tr.body.x - ph.cx) < PITCH + H0) { if (ph.traveler === 'diver') drawDiver(tr); else drawWalker(tr, sameOutfit ? 'kyoto' : ph.traveler); }
       ctx.restore();
       ctx.fillStyle = BODY; ctx.beginPath(); ctx.roundRect(ph.cx - w.w * .15, w.y + w.w * .04, w.w * .3, w.w * .08, w.w * .04); ctx.fill();
     }
@@ -134,6 +128,7 @@ window.ElaraStage = (() => {
     viewW = w / scale; stage.style.height = HT * scale + 'px'; draw();
   }
   function frame(now) {
+    if (!canvas.isConnected) return;                     // the page was replaced: stop
     requestAnimationFrame(frame);
     if (!loaded) return;
     const dt = Math.min(.1, (now - last) / 1000); last = now;
@@ -141,7 +136,7 @@ window.ElaraStage = (() => {
     clock += dt;
     const was = moving();
     if (was) { const d = CADENCE * speed * dt, gap = target - pos; pos = Math.abs(gap) <= d ? target : pos + Math.sign(gap) * d; if (!moving()) from = pos; }
-    if (was || index() === LAST) draw();                 // the diver keeps gently moving; everyone else is still when standing
+    if (was || PHONES[index()].traveler === 'diver') draw();                 // the diver keeps gently moving; everyone else is still when standing
     if (was && !moving()) emit('arrive', index());
     emit('frame', dt);
   }
@@ -155,8 +150,9 @@ window.ElaraStage = (() => {
 
   const load = src => new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error(src)); i.src = src; });
   const ready = (async () => {
-    const names = [...PHONES.map(p => p.key), ...Object.keys(META).map(k => k + '-sprite'), 'diver-sprite'];
-    (await Promise.all(names.map(n => load(`assets/${n}.webp`)))).forEach((im, i) => img[names[i]] = im);
+    const sprites = [...new Set(PHONES.map(p => p.traveler))].map(k => k + '-sprite');
+    (await Promise.all(PHONES.map(p => load('assets/' + p.plate)))).forEach((im, i) => img[PHONES[i].key] = im);
+    (await Promise.all(sprites.map(n => load(`assets/${n}.webp`)))).forEach((im, i) => img[sprites[i]] = im);
     document.documentElement.dataset.motion = still() ? 'off' : 'on';
     $('#world').hidden = false; document.documentElement.classList.add('ready'); loaded = true;
     new ResizeObserver(layout).observe($('#stage'));
