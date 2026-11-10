@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elara · Nosotras</title>
+<meta name="description" content="Quiénes hacemos Elara y por qué.">
+<link rel="icon" type="image/png" href="assets/orb.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap">
+<link rel="stylesheet" href="page.css">
+<style>
+.about{max-width:760px;margin:0 auto;padding:56px 20px 72px}
+.about h1{margin-bottom:28px}
+.about h1 em{font-family:var(--serif);font-weight:400;font-size:1.12em;color:var(--blue)}
+.bignote{padding:26px 28px;border-radius:4px;background:var(--grain),var(--lilac);box-shadow:0 14px 30px rgba(14,22,48,.12);font-size:20px;line-height:1.5;color:var(--head);transform:rotate(-.6deg)}
+.bignote cite{display:block;margin-top:14px;font-family:var(--serif);font-size:24px;font-style:italic}
+.who{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin:44px 0 0;padding:0;list-style:none}
+.who li{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center}
+.who img{width:96px;height:96px;border-radius:50%;object-fit:cover}
+.who b{display:block;font-size:20px;color:var(--head)}
+.who span{color:var(--muted)}
+.about h2{margin:48px 0 12px;font-size:26px}
+.about p{color:var(--muted);font-size:18px}
+.back{display:inline-flex;align-items:center;min-height:44px;margin-top:36px;font-weight:600;color:var(--blue);text-underline-offset:4px}
+@media (max-width:600px){.who{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><img src="assets/orb.png" alt="" width="26" height="26">elara</a>
+  <div class="lang" role="group" aria-label="Idioma / Language" style="margin-left:auto">
+    <button type="button" data-lang="es" aria-pressed="true" lang="es">ES</button><button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+  </div>
+  <a class="btn primary small" id="cta" href="https://holaelara.com/#lista">Unirme a la lista</a>
+</header>
+<main class="about">
+  <h1 id="h">Nosotras</h1>
+  <blockquote class="bignote"><span id="note">Lo veíamos en nuestra vida y en miles de mensajes: mujeres que por fuera parecen tenerlo todo resuelto y por dentro funcionan en vacío. No encontrábamos el lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. (La verdad, también para nosotras.)</span><cite id="sign">Mengxi y Ale</cite></blockquote>
+  <ul class="who">
+    <li><img src="assets/founder-mengxi.jpg" alt="Mengxi Wang" width="96" height="96"><div><b>Mengxi Wang</b><span id="r1">Producto y diseño</span></div></li>
+    <li><img src="assets/founder-alejandra.jpg" alt="Alejandra Ramirez" width="96" height="96"><div><b>Alejandra Ramirez</b><span id="r2">Creadora y comunidad</span></div></li>
+  </ul>
+  <h2 id="fh">Cómo nos ayuda lo que nos cuentas</h2>
+  <p id="fp">Más de 4600 mujeres respondieron nuestra encuesta, y el dinero fue lo que más salió. Por eso Elara empieza ahí. Leemos cada respuesta, de verdad.</p>
+  <a class="back" id="back" href="index.html">Volver al inicio</a>
+</main>
+<footer class="foot">
+  <a class="brand" href="index.html"><img src="assets/orb.png" alt="" width="22" height="22">elara</a>
+  <nav aria-label="Legal"><a id="pv" href="https://holaelara.com/privacidad">Privacidad</a><a id="tm" href="https://holaelara.com/terms-and-conditions">Términos</a><a id="sp" href="https://holaelara.com/support">Soporte</a></nav>
+</footer>
+<script>
+(function () {
+  var S = {
+    h: ['Nosotras', 'About us'], sign: ['Mengxi y Ale', 'Mengxi and Ale'], r1: ['Producto y diseño', 'Product and design'], r2: ['Creadora y comunidad', 'Creator and community'],
+    note: ['Lo veíamos en nuestra vida y en miles de mensajes: mujeres que por fuera parecen tenerlo todo resuelto y por dentro funcionan en vacío. No encontrábamos el lugar suave que necesitábamos, así que empezamos a construirlo. Elara es para ti. (La verdad, también para nosotras.)', 'We saw it in our own lives and in thousands of messages: women who look like they have it all together and are running on empty inside. We couldn\'t find the soft place we needed, so we started building it. Elara is for you. (Honestly, for us too.)'],
+    fh: ['Cómo nos ayuda lo que nos cuentas', 'How what you tell us shapes Elara'],
+    fp: ['Más de 4600 mujeres respondieron nuestra encuesta, y el dinero fue lo que más salió. Por eso Elara empieza ahí. Leemos cada respuesta, de verdad.', 'More than 4,600 women answered our survey, and money came up most. So Elara starts there. We read every reply, really.'],
+    back: ['Volver al inicio', 'Back to the homepage'], cta: ['Unirme a la lista', 'Join the list'], pv: ['Privacidad', 'Privacy'], tm: ['Términos', 'Terms'], sp: ['Soporte', 'Support']
+  };
+  var lang = 'es';
+  try { if (sessionStorage.getItem('elara-lang') === 'en') lang = 'en'; } catch (e) {}
+  if (location.hash === '#en') lang = 'en';
+  function apply() {
+    document.documentElement.lang = lang; var i = lang === 'en' ? 1 : 0;
+    Object.keys(S).forEach(function (k) { document.getElementById(k).textContent = S[k][i]; });
+    document.getElementById('cta').href = i ? 'https://holaelara.com/en#waitlist' : 'https://holaelara.com/#lista';
+    document.getElementById('pv').href = i ? 'https://holaelara.com/privacy' : 'https://holaelara.com/privacidad';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (b) { b.addEventListener('click', function () { lang = b.dataset.lang; try { sessionStorage.setItem('elara-lang', lang); } catch (e) {} apply(); }); });
+  apply();
+})();
+</script>
+</body>
+</html>

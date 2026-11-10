@@ -1,0 +1,297 @@
+// Elara homepage: one connected practice. Everything is local and curated: nothing is sent, saved or generated,
+// and nothing here is real app progress.
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const Stage = window.ElaraStage, reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const el = (tag, props = {}, kids = []) => { const n = Object.assign(document.createElement(tag), props); n.append(...kids); return n; };
+
+  // ---------------------------------------------------------------- Copy (es, en). Spanish is the default.
+  const T = {
+    'skip': ['Saltar al contenido', 'Skip to content'],
+    'nav.you': ['Para ti', 'For you'], 'nav.circles': ['Círculos', 'Circles'], 'nav.us': ['Nosotras', 'About us'],
+    'cta.short': ['Unirme a la lista', 'Join the list'], 'cta': ['Unirme a la lista de espera', 'Join the waitlist'],
+    'h1.a': ['Una pregunta al día para dar', 'One question a day to take'], 'h1.b': ['tu siguiente paso.', 'your next step.'],
+    'lead': ['Elige un destino, responde una pregunta sobre algo que estás viviendo y llévate una herramienta para usar en tu vida.', 'Choose a destination, answer one question about something you are living through, and leave with a tool you can use in your life.'],
+    'pick': ['Elige un destino. Cada uno es un área de tu vida.', 'Choose a destination. Each one is an area of your life.'],
+    'sample': ['Ejemplo', 'Sample'],
+    'col.h': ['Lo que te llevas de esta visita', 'What you take from this visit'],
+    'col.empty': ['Responde una pregunta arriba y guarda su recuerdo. Aparecerá aquí con la frase que elegiste.', 'Answer a question above and keep its souvenir. It will appear here with the phrase you chose.'],
+    'col.some': ['Toca un recuerdo guardado para volver a abrir lo que te llevaste.', 'Tap a kept souvenir to reopen what you took from it.'],
+    'col.fine': ['Demostración: nada de esto se guarda ni cuenta como progreso en la app.', 'Demonstration: none of this is saved or counts as progress in the app.'],
+    'week.h': ['Cómo se conecta una semana', 'How a week connects'], 'week.tag': ['Ejemplo ilustrativo · Claridad financiera', 'Illustrative example · Money Clarity'],
+    'week.1': ['Una situación real', 'A real situation'], 'week.2': ['Una herramienta', 'A tool'], 'week.3': ['Algo pequeño que pruebas', 'Something small you try'],
+    'week.4': ['Vuelves a lo que pasó', 'You return to what happened'], 'week.5': ['Algo tuyo para volver a usar', 'Something of your own to use again'],
+    'week.out': ['Al final: una regla sobre tu dinero que probaste y ajustaste a tu realidad.', 'At the end: a rule about your money that you tried and adjusted to your reality.'],
+    'week.y': ['Ayer te llevaste', 'Yesterday you took'], 'week.t': ['Hoy empiezas ahí', 'Today you start there'], 'week.tq': ['¿Qué pasó cuando lo probaste?', 'What happened when you tried it?'],
+    'you.h1': ['Para la mujer que sostiene todo,', 'For the woman who holds everything,'], 'you.h2': ['aunque nadie lo note.', 'even when no one notices.'],
+    'you.p': ['Elara te ayuda a ver dónde estás, qué está pidiendo atención y cuál es el siguiente paso pequeño. Cada destino es una pausa corta para mirar una situación como estas y salir con algo que puedas usar ese mismo día.', 'Elara helps you see where you are, what is asking for attention, and your next small step. Each destination is a short pause to look at a situation like these and leave with something you can use that same day.'],
+    'you.1': ['Te piden dinero y todavía no sabes cuánto puedes dar.', 'Someone asks you for money and you do not yet know how much you can give.'],
+    'you.2': ['Resuelves para todos y casi nadie pregunta cómo estás tú.', 'You solve things for everyone and almost no one asks how you are.'],
+    'you.3': ['Quieres poner un límite sin pelearte con nadie.', 'You want to set a limit without a fight.'],
+    'you.4': ['Por fuera todo en orden; por dentro, sin saber qué quieres después.', 'Fine on the outside; inside, unsure what you want next.'],
+    'es.h': ['No es inglés, traducido. Es español, entendido.', 'Not English, translated. Spanish, understood.'],
+    'es.p': ['El peso de ser la hija mayor, la familia que llama, los dos mundos que habitas. También está disponible en inglés.', 'The weight of being the eldest daughter, the family that calls, the two worlds you live in. Also available in English.'],
+    'sv.h': ['Construido con ellas.', 'Built with them.'],
+    'sv.p': ['Más de 4600 mujeres respondieron nuestra encuesta; casi 1 de cada 3 eligió el dinero como lo primero que resolvería. Por eso el ejemplo de arriba empieza ahí.', 'More than 4,600 women answered our survey; almost 1 in 3 chose money as the first thing they would fix. That is why the example above starts there.'],
+    'us.r1': ['Producto y diseño', 'Product and design'], 'us.r2': ['Creadora y comunidad', 'Creator and community'],
+    'us.line': ['Hecho por dos mujeres que también lo necesitaban.', 'Made by two women who needed it too.'], 'us.link': ['Conoce a Mengxi y Alejandra', 'Meet Mengxi and Alejandra'],
+    'circ.h': ['Círculos: tu pregunta puede abrir una conversación.', 'Circles: your question can open a conversation.'],
+    'circ.p': ['Elige un tema que estés viviendo, lee o pregunta. Tú decides cuándo participar.', 'Pick a topic you are living through, read or ask. You decide when to take part.'],
+    'circ.replay': ['Ver de nuevo', 'Play again'],
+    'circ.fine': ['Demostración con perfiles y mensajes de ejemplo. No son personas reales ni conversaciones en vivo.', 'Demonstration with sample profiles and messages. These are not real people or live conversations.'],
+    'circ.noreply': ['Aquí no puedes responder: es una demostración.', 'You cannot reply here: this is a demonstration.'],
+    'circ.sampleconv': ['Conversación de ejemplo', 'Sample conversation'], 'circ.profile': ['Perfil de ejemplo', 'Sample profile'],
+    'circ.open': ['Abrir la conversación', 'Open the conversation'], 'circ.close': ['Cerrar la conversación', 'Close the conversation'],
+    'circ.count': ['1 respuesta', '1 reply'], 'circ.pause': ['Pausar', 'Pause'], 'circ.resume': ['Continuar', 'Continue'],
+    'topic.ciudad': ['Una nueva ciudad', 'A new city'], 'topic.uni': ['Vida universitaria', 'University life'], 'topic.mama': ['Soy mamá', 'I am a mum'], 'topic.amigas': ['Amistades adultas', 'Adult friendships'],
+    'exp.h': ['Explorar: para los días que piden un poco más.', 'Explore: for the days that ask for a little more.'], 'exp.for': ['Te sirve para', 'It helps you'],
+    'exp.fine': ['Recursos de ejemplo tomados de la versión de prueba.', 'Sample resources taken from the test version.'],
+    'res.taller': ['<b>Tu próxima decisión, con más claridad</b>Taller · 45 min', '<b>Your next decision, with more clarity</b>Workshop · 45 min'],
+    'res.l1': ['<b>Antes del siguiente paso</b>Lectura guiada · 2 min', '<b>Before the next step</b>Guided reading · 2 min'],
+    'res.l2': ['<b>Antes de pedir otra opinión</b>Lectura guiada · 2 min', '<b>Before asking for another opinion</b>Guided reading · 2 min'],
+    'faq.h': ['Preguntas prácticas', 'Practical questions'], 'tbc': ['Por confirmar', 'To be confirmed'],
+    'faq.q1': ['¿Qué pasa en una práctica diaria?', 'What happens in a daily practice?'],
+    'faq.a1': ['Llegas a un lugar, lees una situación concreta, respondes una pregunta y te llevas una herramienta y un recuerdo. Como en el ejemplo de arriba.', 'You arrive somewhere, read a concrete situation, answer one question and leave with a tool and a souvenir. Like the example above.'],
+    'faq.q2': ['¿Cuánto tiempo necesito?', 'How much time do I need?'], 'faq.a2': ['Unos minutos al día. Vas a tu ritmo y puedes pausar cuando quieras.', 'A few minutes a day. You go at your own pace and can pause whenever you like.'],
+    'faq.q3': ['¿Puedo usarla en español o en inglés?', 'Can I use it in Spanish or English?'], 'faq.a3': ['En los dos. Elara se piensa primero en español y también está en inglés.', 'Both. Elara is built in Spanish first and is also in English.'],
+    'faq.q4': ['¿Funciona en un navegador?', 'Does it work in a browser?'], 'faq.a4': ['La versión de prueba actual se abre en un navegador. Cómo se entregará la app final todavía no está decidido.', 'The current test version opens in a browser. How the final app will be delivered is not decided yet.'],
+    'faq.q5': ['¿Qué incluye la beta?', 'What is in the beta?'], 'faq.a5': ['Todavía lo estamos definiendo. Lo que ves en esta página son ejemplos de la versión de prueba.', 'We are still defining it. What you see on this page are examples from the test version.'],
+    'faq.q6': ['¿Es gratis o de pago?', 'Is it free or paid?'], 'faq.a6': ['Aún no está decidido. Te lo diremos antes de abrir.', 'Not decided yet. We will tell you before we open.'],
+    'faq.q7': ['¿Qué pasa con mis respuestas y cómo las borro?', 'What happens to my answers, and how do I remove them?'],
+    'faq.a7': ['En esta página no se guarda nada. En la app puedes pedir que eliminemos tu cuenta y tus datos desde <a href="https://holaelara.com/request-account-deletion">esta página</a>. Los detalles están en la <a href="https://holaelara.com/privacidad">Política de Privacidad</a>. Elara no es terapia ni un servicio médico.',
+      'Nothing is saved on this page. In the app you can ask us to delete your account and data from <a href="https://holaelara.com/request-account-deletion">this page</a>. Details are in the <a href="https://holaelara.com/privacy">Privacy Policy</a>. Elara is not therapy or a medical service.'],
+    'join.h1': ['Tu próxima parada:', 'Your next stop:'], 'join.h2': ['algo para ti.', 'something for you.'],
+    'join.after': ['Se abre el formulario en holaelara.com. Después de unirte, te escribimos antes de abrir; mientras tanto no tienes que hacer nada. Sin spam, y puedes darte de baja cuando quieras.', 'This opens the form on holaelara.com. After you join, we write to you before we open; until then there is nothing you need to do. No spam, and you can leave whenever you like.'],
+    'ft.privacy': ['Privacidad', 'Privacy'], 'ft.terms': ['Términos', 'Terms'], 'ft.support': ['Soporte', 'Support'],
+    // dynamic
+    'card.change': ['Cambiar', 'Change'], 'card.chose': ['Elegiste', 'You chose'],
+    'card.keep': ['Guardar', 'Keep'], 'card.kept': ['Guardado en tu colección', 'Kept in your collection'],
+    'stamp': ['ejemplo', 'sample'],
+    'strip.kept': ['Guardado', 'Kept'], 'strip.not': ['Sin recoger', 'Not collected'], 'strip.go': ['Ir a', 'Go to'],
+    'pc.answer': ['Tu respuesta', 'Your answer'], 'pc.learn': ['Lo que aprendiste', 'What you learned'], 'pc.close': ['Cerrar', 'Close'], 'pc.from': ['Postal de', 'Postcard from'],
+    'recap.h': ['De esta visita te llevas', 'From this visit you take'], 'recap.none': ['Todavía no guardaste ningún recuerdo. Elige un destino y prueba una pregunta.', 'You have not kept a souvenir yet. Choose a destination and try a question.'],
+    'recap.top': ['Volver a los destinos', 'Back to the destinations'],
+    'tour.pause': ['Pausar el recorrido', 'Pause the tour'], 'tour.play': ['Ver el recorrido automático', 'Play the automatic tour'],
+    'st.walk': ['Camina hacia', 'Walking to'], 'st.at': ['Estás en', 'You are in'],
+    'atlas.h': ['Tu Atlas', 'Your Atlas'], 'atlas.p': ['Gira el globo o toca un destino para ir.', 'Turn the globe or tap a destination to go there.'],
+    'soon': ['Destino en preparación', 'Destination in preparation'],
+  };
+  let lang = 'es';
+  try { if (sessionStorage.getItem('elara-lang') === 'en') lang = 'en'; } catch (e) { /* storage unavailable: stay in Spanish */ }
+  const t = k => T[k][lang === 'en' ? 1 : 0], L = pair => pair[lang === 'en' ? 1 : 0];
+
+  // ---------------------------------------------------------------- Destinations: area, place, one short practice each
+  const DEST = [
+    { key: 'kyoto', place: ['Kioto', 'Kyoto'], area: ['Claridad financiera', 'Money Clarity'], item: ['Taza de Kioto', 'Kyoto cup'], img: 'souvenir-cup.png',
+      sit: ['Alguien de tu familia te pide dinero. Quieres ayudar, pero todavía no sabes cuánto puedes aportar.', 'Someone in your family asks you for money. You want to help, but you do not yet know how much you can give.'],
+      q: ['¿Qué le dices?', 'What do you say?'],
+      a: [{ label: ['Voy a revisar cuánto puedo aportar y te digo mañana.', 'I will check how much I can give and tell you tomorrow.'],
+            fb: ['Dar un momento concreto para responder te permite revisar tus posibilidades sin dejar a la otra persona esperando.', 'Giving a specific time to answer lets you check what is possible without leaving the other person waiting.'],
+            ph: ['Déjame revisar cuánto puedo aportar y mañana te respondo.', 'Let me check how much I can give and I will answer you tomorrow.'] },
+          { label: ['Sí, después veo cómo me organizo.', 'Yes, I will figure it out later.'],
+            fb: ['Quieres ayudar. Decir que sí antes de revisar puede dejarte con un compromiso que todavía no sabes si puedes cumplir.', 'You want to help. Saying yes before checking can leave you with a commitment you do not yet know you can keep.'],
+            ph: ['Quiero ayudarte. Déjame revisar cuánto puedo aportar y mañana te respondo.', 'I want to help you. Let me check how much I can give and I will answer you tomorrow.'] }] },
+    { key: 'venice', place: ['Venecia', 'Venice'], area: ['Ritmo diario', 'Daily Rhythm'], item: ['Velero de Venecia', 'Venice sailboat'], img: 'souvenir-boat.png',
+      sit: ['Tu día cambió y la rutina que querías hacer ya no cabe.', 'Your day changed and the routine you planned no longer fits.'],
+      q: ['¿Qué haces con ella hoy?', 'What do you do with it today?'],
+      a: [{ label: ['Hago una versión corta, aunque sean cinco minutos.', 'I do a short version, even five minutes.'],
+            fb: ['Una versión mínima mantiene la rutina viva cuando el día cambia. Es más fácil retomarla mañana.', 'A minimum version keeps the routine alive when the day changes. It is easier to pick up again tomorrow.'],
+            ph: ['Hoy hago la versión de cinco minutos.', 'Today I do the five-minute version.'] },
+          { label: ['La dejo para mañana y empiezo de cero.', 'I leave it for tomorrow and start from zero.'],
+            fb: ['Tiene sentido soltarla hoy. Empezar de cero cada vez hace que la rutina dependa de días perfectos.', 'It makes sense to drop it today. Starting from zero each time makes the routine depend on perfect days.'],
+            ph: ['Hoy no cabe entera: hago cinco minutos.', 'It does not fit whole today: I do five minutes.'] }] },
+    { key: 'andes', place: ['Machu Picchu', 'Machu Picchu'], area: ['Encontrar tu propósito', 'Purpose Finding'], item: ['Cantimplora de los Andes', 'Andes flask'], img: 'souvenir-flask.png',
+      sit: ['Tienes una idea que te interesa, pero no sabes si es lo tuyo.', 'You have an idea that interests you, but you are not sure it is for you.'],
+      q: ['¿Cuál es tu siguiente paso?', 'What is your next step?'],
+      a: [{ label: ['Pruebo una parte pequeña esta semana.', 'I try a small part this week.'],
+            fb: ['Una prueba, no una decisión para siempre. Probar una parte te dice qué te interesa de verdad.', 'A test, not a forever decision. Trying one part tells you what really interests you.'],
+            ph: ['Esta semana pruebo una parte pequeña y veo qué me dice.', 'This week I try a small part and see what it tells me.'] },
+          { label: ['Espero a estar segura antes de moverme.', 'I wait until I am sure before I move.'],
+            fb: ['Quieres decidir bien. Esperar la certeza suele dejar la idea igual que estaba; una prueba pequeña te da información real.', 'You want to decide well. Waiting for certainty usually leaves the idea where it was; a small test gives you real information.'],
+            ph: ['No tengo que decidir todo: pruebo una parte.', 'I do not have to decide everything: I try one part.'] }] },
+    { key: 'mexico', place: ['Ciudad de México', 'Mexico City'], area: ['Amor y límites', 'Love & Boundaries'], item: ['Pulsera tejida', 'Woven bracelet'], img: 'souvenir-bracelet.png',
+      sit: ['Una amiga te pide un favor que este fin de semana no puedes hacer.', 'A friend asks for a favour you cannot do this weekend.'],
+      q: ['¿Qué le respondes?', 'What do you answer?'],
+      a: [{ label: ['Le digo qué sí puedo ofrecer.', 'I tell her what I can offer.'],
+            fb: ['Distinguir lo que puedes ofrecer te deja cuidar la relación sin prometer de más.', 'Separating out what you can offer lets you care for the relationship without over-promising.'],
+            ph: ['Este fin de semana no puedo, pero el martes sí te ayudo.', 'I cannot this weekend, but I can help you on Tuesday.'] },
+          { label: ['Digo que sí y veo cómo le hago.', 'I say yes and work it out somehow.'],
+            fb: ['Quieres estar para ella. Decir que sí sin poder cumplir suele terminar en cansancio o en cancelar a última hora.', 'You want to be there for her. Saying yes when you cannot follow through often ends in exhaustion or a last-minute cancel.'],
+            ph: ['Quiero ayudarte. Este fin de semana no puedo; ¿te sirve el martes?', 'I want to help. I cannot this weekend; would Tuesday work?'] }] },
+    { key: 'redsea', place: ['Mar Rojo', 'Red Sea'], area: ['Confianza en ti', 'Self-Trust'], item: ['Camello de plata', 'Silver camel'], img: 'souvenir-camel.png',
+      sit: ['Tomaste una decisión y ahora tres personas opinan distinto.', 'You made a decision and now three people disagree.'],
+      q: ['¿Qué haces primero?', 'What do you do first?'],
+      a: [{ label: ['Escribo mis razones antes de preguntar.', 'I write down my reasons before asking.'],
+            fb: ['Reconocer lo que ya sabes te permite revisar la decisión con razones, no con ruido.', 'Recognising what you already know lets you review the decision with reasons, not noise.'],
+            ph: ['Antes de preguntar, anoto mis tres razones.', 'Before I ask, I write down my three reasons.'] },
+          { label: ['Pregunto a alguien más para estar segura.', 'I ask someone else to be sure.'],
+            fb: ['Otra opinión puede sumar. Si llega antes de saber qué piensas tú, es fácil que decida por ti.', 'Another opinion can help. If it comes before you know what you think, it can easily decide for you.'],
+            ph: ['Primero anoto qué pienso yo; después pregunto.', 'First I write what I think; then I ask.'] }] },
+  ];
+  const SOON = { area: ['Recuperar tu energía', 'Energy Reset'] };     // sixth area: no approved destination or art yet
+
+  // ---------------------------------------------------------------- Single source of truth for the demonstration
+  const state = { dest: 0, answers: {}, collected: [], editing: {}, open: null };   // answers: key -> 0|1; collected: keys in order
+  const answerOf = d => (d.key in state.answers ? d.a[state.answers[d.key]] : null);
+  const takeaway = d => { const a = answerOf(d); return a ? { label: L(a.label), fb: L(a.fb), ph: L(a.ph) } : null; };
+  let autoplay = !Stage.still(), idle = 0, arrived = true;
+  const interact = () => { if (autoplay) { autoplay = false; renderTour(); } };
+
+  // ---------------------------------------------------------------- Rendering (always from state)
+  function applyLang() {
+    document.documentElement.lang = lang;
+    $$('[data-i18n]').forEach(n => { n.textContent = t(n.dataset.i18n); });
+    $$('[data-i18n-html]').forEach(n => { n.innerHTML = t(n.dataset.i18nHtml); });
+    $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    $$('[data-signup]').forEach(a => { a.href = lang === 'en' ? 'https://holaelara.com/en#waitlist' : 'https://holaelara.com/#lista'; });
+    $$('[data-privacy]').forEach(a => { a.href = lang === 'en' ? 'https://holaelara.com/privacy' : 'https://holaelara.com/privacidad'; });
+    $$('a[href^="nosotras.html"]').forEach(a => { a.href = lang === 'en' ? 'nosotras.html#en' : 'nosotras.html'; });
+    renderAll(); circles.relabel(); explore.relabel();
+  }
+  function renderDests() {
+    $('#dests').replaceChildren(...DEST.map((d, i) => el('button', { type: 'button', className: 'dest', onclick: () => { interact(); travel(i); } },
+      [el('b', { textContent: L(d.area) }), el('span', { textContent: L(d.place) })])),
+      el('p', { className: 'dest off' }, [el('b', { textContent: L(SOON.area) }), el('span', { textContent: t('soon') })]));
+    $$('#dests .dest:not(.off)').forEach((b, i) => { if (i === state.dest) b.setAttribute('aria-current', 'true'); });
+  }
+  function renderCards() {
+    const keep = document.activeElement && document.activeElement.closest('.card') ? document.activeElement.dataset.role : null;
+    $('#cards').replaceChildren(...DEST.map((d, i) => {
+      const box = Stage.cardBox(i), tk = takeaway(d), got = state.collected.includes(d.key), result = tk && !state.editing[d.key];
+      const card = el('article', { className: 'card' + (i === state.dest && arrived ? ' on' : '') + (result ? ' result' : '') });
+      card.style.cssText = `left:${box.left}px;top:${box.top}px;width:${box.width}px`;
+      card.append(el('p', { className: 'where' }, [`${L(d.place)} · ${L(d.area)} `, el('span', { textContent: t('sample') })]));
+      if (!result) {
+        card.append(el('p', { className: 'sit', textContent: L(d.sit) }), el('h3', { className: 'q', textContent: L(d.q) }),
+          ...d.a.map((a, n) => { const b = el('button', { type: 'button', className: 'ans', textContent: L(a.label), onclick: () => choose(d, n) });
+            b.setAttribute('aria-pressed', String(state.answers[d.key] === n)); b.dataset.role = 'ans' + n; return b; }));
+      } else {
+        const change = el('button', { type: 'button', className: 'change', textContent: t('card.change'), onclick: () => { interact(); state.editing[d.key] = true; renderAll('ans' + state.answers[d.key]); } });
+        change.dataset.role = 'change';
+        card.append(el('p', { className: 'picked' }, [el('span', { textContent: `${t('card.chose')}: ${tk.label}` }), change]),
+          el('p', { className: 'fb', textContent: tk.fb }), el('p', { className: 'phrase', textContent: tk.ph }));
+        const keepBtn = el('button', { type: 'button', className: 'collect' + (got ? ' got' : ''), onclick: () => collect(d) },
+          [el('img', { src: 'assets/' + d.img, alt: '' }), el('span', { textContent: got ? `${L(d.item)} · ${t('card.kept')}` : `${t('card.keep')}: ${L(d.item)}` })]);
+        keepBtn.dataset.role = 'collect'; if (got) keepBtn.setAttribute('aria-disabled', 'true');
+        card.append(keepBtn);
+        if (got) card.append(el('span', { className: 'stamp' + (fresh === d.key ? ' fresh' : ''), textContent: `${L(d.place)} · ${t('stamp')}` }));
+      }
+      return card;
+    }));
+    return keep;
+  }
+  function renderStrip() {
+    $('#col-sub').textContent = t(state.collected.length ? 'col.some' : 'col.empty');
+    $('#strip').replaceChildren(...DEST.map((d, i) => {
+      const got = state.collected.includes(d.key);
+      const b = el('button', { type: 'button', className: 'slot' + (got ? ' got' : ''), onclick: () => (got ? openCard(d.key) : (interact(), travel(i), $('#stage').scrollIntoView({ block: 'center', behavior: reduced.matches ? 'auto' : 'smooth' }))) },
+        [el('img', { src: 'assets/' + d.img, alt: '', loading: 'lazy', className: fresh === d.key ? 'fresh' : '' }), el('b', { textContent: L(d.item) }),
+          el('span', { className: 'state', textContent: got ? `✓ ${t('strip.kept')}` : `${t('strip.not')} · ${t('strip.go')} ${L(d.place)}` })]);
+      if (got) b.setAttribute('aria-expanded', String(state.open === d.key));
+      b.dataset.key = d.key;
+      return el('li', {}, [b]);
+    }));
+  }
+  function renderPostcard() {
+    const pc = $('#postcard'), d = DEST.find(x => x.key === state.open), tk = d && takeaway(d);
+    if (!d || !tk || !state.collected.includes(d.key)) { state.open = null; pc.hidden = true; return; }
+    pc.hidden = false;
+    pc.replaceChildren(
+      el('div', { className: 'pc-photo' }, [el('img', { src: `assets/${d.key}.webp`, alt: '', loading: 'lazy' }), el('span', { className: 'stamp', textContent: `${L(d.place)} · ${t('stamp')}` })]),
+      el('div', { className: 'pc-text' }, [
+        el('h3', { id: 'pc-title', textContent: `${t('pc.from')} ${L(d.place)} · ${L(d.area)}` }),
+        el('p', { className: 'pc-phrase', textContent: tk.ph }),
+        el('p', {}, [el('span', { textContent: t('pc.learn') }), tk.fb]),
+        el('p', {}, [el('span', { textContent: t('pc.answer') }), tk.label]),
+        el('button', { type: 'button', className: 'btn small', textContent: t('pc.close'), onclick: () => { const k = state.open; state.open = null; renderAll(); const b = $(`.slot[data-key="${k}"]`); if (b) b.focus(); } }),
+      ]));
+  }
+  function renderWeek() { const tk = takeaway(DEST[0]); $('#week-phrase').textContent = tk ? tk.ph : L(DEST[0].a[0].ph); }
+  function renderRecap() {
+    const items = state.collected.map(k => DEST.find(d => d.key === k)).filter(d => takeaway(d));
+    $('#recap').replaceChildren(...(items.length
+      ? [el('h3', { textContent: t('recap.h') }), el('ul', {}, items.map(d => el('li', {}, [el('img', { src: 'assets/' + d.img, alt: '', loading: 'lazy' }),
+          el('span', {}, [el('b', { textContent: `${L(d.item)} · ${L(d.area)}` }), takeaway(d).ph])])))]
+      : [el('p', { textContent: t('recap.none') }), el('a', { href: '#top', className: 'recap-link', textContent: t('recap.top') })]));
+  }
+  function renderGlobe() { window.ElaraGlobe.set({ current: state.dest, collected: state.collected.map(k => DEST.findIndex(d => d.key === k)), labels: DEST.map(d => L(d.place)) }); }
+  function renderTour() { const b = $('#tour'); b.hidden = Stage.still(); b.textContent = t(autoplay ? 'tour.pause' : 'tour.play'); b.setAttribute('aria-pressed', String(!autoplay)); }
+  function renderStatus() { $('#status').textContent = `${t(arrived ? 'st.at' : 'st.walk')} ${L(DEST[state.dest].place)} · ${L(DEST[state.dest].area)}`; }
+  function renderAll(focusRole) {
+    const keep = renderCards(); renderDests(); renderStrip(); renderPostcard(); renderWeek(); renderRecap(); renderGlobe(); renderTour(); renderStatus();
+    const role = focusRole || keep; if (role) { const n = $(`.card.on [data-role="${role}"]`); if (n) n.focus({ preventScroll: true }); }
+  }
+
+  // ---------------------------------------------------------------- Actions
+  let fresh = null;
+  function choose(d, n) { interact(); state.answers[d.key] = n; state.editing[d.key] = false; renderAll('collect'); }
+  function collect(d) { interact(); if (!state.collected.includes(d.key)) { state.collected.push(d.key); fresh = d.key; } renderAll('collect'); fresh = null; }   // never a duplicate
+  function openCard(key) { state.open = state.open === key ? null : key; renderAll(); if (state.open) $('#postcard').focus({ preventScroll: true }); $('#postcard').scrollIntoView({ block: 'nearest', behavior: reduced.matches ? 'auto' : 'smooth' }); }
+  function travel(i) { if (i === state.dest && !Stage.moving) return; state.dest = i; arrived = false; idle = 0; Stage.goTo(i); if (!Stage.moving) arrived = true; renderAll(); }
+
+  // ---------------------------------------------------------------- Circles: a five-step miniature story (plays once in view)
+  const circles = (() => {
+    const TOPICS = {
+      ciudad: [['Me mudé hace poco. ¿Cómo empezaron a hacer amigas sin conocer a nadie?', 'I moved recently. How did you start making friends without knowing anyone?'], ['Me ayudó volver al mismo lugar cada semana. La conversación empezó después de vernos varias veces.', 'Going back to the same place every week helped. The conversation started after we had seen each other a few times.']],
+      uni: [['Trabajo y estudio. ¿Cómo eligen qué soltar en una semana pesada?', 'I work and study. How do you choose what to drop in a heavy week?'], ['Elijo una sola cosa que sí hago ese día. Lo demás lo aviso con tiempo.', 'I pick one thing I will do that day. I give notice on the rest early.']],
+      mama: [['¿Cómo piden ayuda sin sentir que están fallando?', 'How do you ask for help without feeling you are failing?'], ['Empecé pidiendo una cosa concreta y con hora. Fue más fácil que pedir ayuda en general.', 'I started by asking for one specific thing, with a time. It was easier than asking for help in general.']],
+      amigas: [['¿Cómo retoman una amistad después de meses sin hablar?', 'How do you pick a friendship back up after months of silence?'], ['Yo escribí algo corto, sin explicaciones largas. Lo difícil era empezar.', 'I wrote something short, no long explanations. The hard part was starting.']],
+    };
+    const stage = $('#circle-stage'), topics = $$('[data-topic]'), openBtn = $('#circle-open'), thread = $('#circle-thread');
+    const STEP_MS = [500, 1000, 1100, 1300];
+    let step = 4, timer = null, running = false, played = false, inView = false, topic = 'ciudad';
+    const setStep = n => { step = n; stage.dataset.step = n; };
+    const relabel = () => { const [q, r] = TOPICS[topic]; topics.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.topic === topic)));
+      $('#circle-q').textContent = L(q); $('#thread-q').textContent = L(q); $('#circle-r').textContent = L(r); $('#thread-r').textContent = L(r);
+      $('#circle-topic').textContent = t('topic.' + topic); $('#circle-count').textContent = t('circ.count'); openBtn.textContent = t(thread.hidden ? 'circ.open' : 'circ.close'); ui(); };
+    const setThread = open => { thread.hidden = !open; openBtn.setAttribute('aria-expanded', String(open)); stage.classList.toggle('open', open); openBtn.textContent = t(open ? 'circ.close' : 'circ.open'); };
+    const ui = () => { const p = $('#circle-pause'); p.hidden = !(running || (timer === null && step < 4)); p.textContent = t(timer === null && step < 4 ? 'circ.resume' : 'circ.pause'); };
+    const stop = () => { clearTimeout(timer); timer = null; };
+    const next = () => { if (step >= 4) { running = false; timer = null; return ui(); } timer = setTimeout(() => { setStep(step + 1); next(); }, STEP_MS[step]); ui(); };
+    const play = () => { stop(); played = true; if (reduced.matches) { setStep(4); running = false; return ui(); } setThread(false); topic = 'ciudad'; relabel(); running = true; setStep(0); next(); };
+    const hold = () => { if (running && timer !== null) { stop(); ui(); } };
+    const carryOn = () => { if (running && timer === null && inView && !document.hidden) next(); };
+    $('#circle-replay').addEventListener('click', play);
+    $('#circle-pause').addEventListener('click', () => { if (timer !== null) { stop(); running = false; ui(); } else if (step < 4) { running = true; next(); } });
+    topics.forEach(b => b.addEventListener('click', () => { stop(); running = false; topic = b.dataset.topic; relabel(); setStep(4); ui(); }));
+    openBtn.addEventListener('click', () => setThread(thread.hidden));
+    new IntersectionObserver(es => { inView = es[0].isIntersecting; if (inView && !played) play(); else if (inView) carryOn(); else hold(); }, { threshold: .45 }).observe(stage);
+    document.addEventListener('visibilitychange', () => (document.hidden ? hold() : carryOn()));
+    window.__circles = { get step() { return step; }, get running() { return running; }, get ticking() { return timer !== null; } };
+    return { relabel };
+  })();
+
+  // ---------------------------------------------------------------- Explore: what each sample resource helps with
+  const explore = (() => {
+    const RES = {
+      taller: ['Ordenar una decisión que tienes pendiente y salir con un siguiente paso escrito.', 'Sort out a decision you have pending and leave with a written next step.'],
+      l1: ['Parar dos minutos antes de avanzar y revisar si ese paso sigue teniendo sentido.', 'Stop for two minutes before moving on and check that the step still makes sense.'],
+      l2: ['Reconocer lo que ya sabes antes de preguntarle a alguien más.', 'Recognise what you already know before asking someone else.'],
+    };
+    const res = $$('[data-res]'); let cur = 'taller';
+    const relabel = () => { res.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.res === cur))); $('#res-help').textContent = L(RES[cur]); };
+    res.forEach(b => b.addEventListener('click', () => { cur = b.dataset.res; relabel(); }));
+    return { relabel };
+  })();
+
+  // ---------------------------------------------------------------- Wiring
+  $$('[data-lang]').forEach(b => b.addEventListener('click', () => { lang = b.dataset.lang; try { sessionStorage.setItem('elara-lang', lang); } catch (e) { /* fine */ } applyLang(); }));
+  $('#tour').addEventListener('click', () => { autoplay = !autoplay; idle = 0; renderTour(); });
+  const stageEl = $('#stage');
+  $('#scene').addEventListener('click', e => { const i = Stage.phoneAt(e.clientX, e.clientY); if (i >= 0) { interact(); travel(i); } });
+  let sx = 0, sy = 0;
+  stageEl.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  stageEl.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.6) { interact(); travel(Math.max(0, Math.min(DEST.length - 1, state.dest + (dx < 0 ? 1 : -1)))); } }, { passive: true });
+  $('#cards').addEventListener('pointerdown', interact); $('#cards').addEventListener('focusin', interact);
+  window.ElaraGlobe.onPick(i => { interact(); travel(i); $('#stage').scrollIntoView({ block: 'center', behavior: reduced.matches ? 'auto' : 'smooth' }); });
+  Stage.on('arrive', i => { state.dest = i; arrived = true; idle = 0; renderAll(); });
+  Stage.on('frame', dt => {                                // brief automatic introduction: one pass, until she does anything
+    if (!autoplay || !arrived || Stage.moving) return;
+    idle += dt; if (idle < 6) return;
+    if (state.dest >= DEST.length - 1) { autoplay = false; return renderTour(); }
+    travel(state.dest + 1);
+  });
+  window.__elara = { state, DEST, takeaway, get lang() { return lang; }, get autoplay() { return autoplay; }, get arrived() { return arrived; } };
+  Stage.ready.then(() => { $('#tour').hidden = false; applyLang(); }, err => { console.error(err); applyLang(); });
+})();
