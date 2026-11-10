@@ -5,6 +5,23 @@ Local preview only. Not deployed. `homepage-v2/` and `homepage-v3/` are the pres
 Run: open `index.html`, or `python3 -m http.server 4194 --bind 127.0.0.1` in this folder.
 Files: `index.html`, `nosotras.html`, `page.css`, `stage.js` (traveler and phones), `globe.js` + `land.js` (Atlas globe), `app.js` (state, copy in es/en, every other interaction), `assets/`.
 
+## Palette (corrected)
+Reference: the app's Explore header and tab bar, `#263E56`.
+
+| Token | Value | Use |
+|---|---|---|
+| `--blue` | `#263E56` | primary buttons, selected states, links, focus ring |
+| `--blue-deep` | `#1C3045` | hover and pressed |
+| `--head` | `#1B2B3C` | headings |
+| `--ink` | `#1F2B38` | body text |
+| `--muted` | `#56626F` | secondary text, small labels |
+| `--line` / `--edge` | `#DCE3EC` / `#AAB7C6` | dividers / control borders |
+| `--sky` | `#EDF3FA` | pale blue surfaces |
+| `--purple` / `--lilac` | `#6A5F92` / `#F1EFF7` | quiet accent: stamp, kept souvenirs, sample avatars, paper notes |
+| `--frame` | `#172433` | drawn phone frames |
+
+Selected states also carry a tick, a weight change or a bar, not colour alone. One focus ring: 3 px `--blue` with a 3 px gap. The orb, photographs, souvenirs and app captures are not recoloured; the Explore capture keeps its own darker navy header and teal accents because those are in the screenshot.
+
 ## The loop
 Choose a destination (buttons, tap a phone, swipe, or the globe) -> she walks there -> the practice appears inside the active phone -> pick one of two answers -> feedback, a phrase, and a souvenir to keep -> the collection strip, postcard, weekly example and signup recap all read from the same state.
 

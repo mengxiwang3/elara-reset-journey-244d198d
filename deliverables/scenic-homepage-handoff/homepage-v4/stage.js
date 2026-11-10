@@ -80,7 +80,7 @@ window.ElaraStage = (() => {
   }
   function shadow(x, y, rx, ry, a) {
     const g = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
-    g.addColorStop(0, `rgba(12,20,24,${a})`); g.addColorStop(.55, `rgba(12,20,24,${a * .55})`); g.addColorStop(1, 'rgba(12,20,24,0)');
+    g.addColorStop(0, `rgba(16,24,34,${a})`); g.addColorStop(.55, `rgba(16,24,34,${a * .55})`); g.addColorStop(1, 'rgba(16,24,34,0)');
     ctx.save(); ctx.translate(x, y); ctx.scale(rx, ry); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, 1, 0, 7); ctx.fill(); ctx.restore();
   }
   function drawWalker(tr, key) {
@@ -109,12 +109,12 @@ window.ElaraStage = (() => {
     ctx.setTransform(dpr * scale, 0, 0, dpr * scale, 0, 0); ctx.clearRect(0, 0, viewW, HT); ctx.translate(-cam, 0);
     // Depth order never changes: each phone sits in front of the one before it, so the next phone's frame is the
     // edge she passes behind, and that frame hides the line where her outfit changes.
-    const BODY = '#1a2233', B = 7;
+    const BODY = '#172433', B = 7;
     for (const ph of PHONES) {
       const w = windowOf(ph, tr.body.x);
       if (w.x + w.w < cam - 60 || w.x > cam + viewW + 60) continue;
       const plate = img[ph.key], PW = WL * ph.m, PH = HL * ph.m;
-      ctx.save(); ctx.shadowColor = `rgba(14,22,48,${(.16 + .14 * w.f).toFixed(3)})`; ctx.shadowBlur = 16 + 16 * w.f; ctx.shadowOffsetY = 6 + 8 * w.f;
+      ctx.save(); ctx.shadowColor = `rgba(22,36,54,${(.16 + .14 * w.f).toFixed(3)})`; ctx.shadowBlur = 16 + 16 * w.f; ctx.shadowOffsetY = 6 + 8 * w.f;
       ctx.fillStyle = BODY; ctx.beginPath(); ctx.roundRect(w.x - B, w.y - B, w.w + 2 * B, w.h + 2 * B, w.r + B); ctx.fill(); ctx.restore();
       ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255,255,255,.22)'; ctx.beginPath(); ctx.roundRect(w.x - B + .5, w.y - B + .5, w.w + 2 * B - 1, w.h + 2 * B - 1, w.r + B - .5); ctx.stroke();
       ctx.save(); ctx.beginPath(); ctx.roundRect(w.x, w.y, w.w, w.h, w.r); ctx.clip();

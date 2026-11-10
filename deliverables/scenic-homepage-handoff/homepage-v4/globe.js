@@ -15,29 +15,29 @@ window.ElaraGlobe = (() => {
     if (canvas.width !== px) { canvas.width = canvas.height = px; }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, size, size);
     const R = size * .43, cx = size / 2, cy = size / 2;
-    ctx.save(); ctx.shadowColor = 'rgba(14,22,48,.22)'; ctx.shadowBlur = 22; ctx.shadowOffsetY = 10;
-    const sea = ctx.createRadialGradient(cx - R * .35, cy - R * .4, R * .1, cx, cy, R); sea.addColorStop(0, '#dfeafb'); sea.addColorStop(1, '#a9c1ea');
+    ctx.save(); ctx.shadowColor = 'rgba(22,36,54,.22)'; ctx.shadowBlur = 22; ctx.shadowOffsetY = 10;
+    const sea = ctx.createRadialGradient(cx - R * .35, cy - R * .4, R * .1, cx, cy, R); sea.addColorStop(0, '#e6eef8'); sea.addColorStop(1, '#b3c5da');
     ctx.fillStyle = sea; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.fill(); ctx.restore();
     ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.clip();
-    ctx.fillStyle = '#f6f8fc'; ctx.strokeStyle = 'rgba(70,96,150,.55)'; ctx.lineWidth = .8; ctx.lineJoin = 'round';
+    ctx.fillStyle = '#f7f9fc'; ctx.strokeStyle = 'rgba(38,62,86,.5)'; ctx.lineWidth = .8; ctx.lineJoin = 'round';
     for (const ring of window.ELARA_LAND || []) {
       let any = false; ctx.beginPath();
       ring.forEach(([lo, la], i) => { let [x, y, z] = project(lo, la); if (z > 0) any = true; else { const n = Math.hypot(x, y) || 1; x /= n; y /= n; }   // points on the far side slide to the rim
         const X = cx + x * R, Y = cy - y * R; if (i) ctx.lineTo(X, Y); else ctx.moveTo(X, Y); });
       if (any) { ctx.closePath(); ctx.fill(); ctx.stroke(); }
     }
-    const shade = ctx.createRadialGradient(cx - R * .4, cy - R * .45, R * .2, cx, cy, R * 1.02); shade.addColorStop(0, 'rgba(255,255,255,.25)'); shade.addColorStop(.6, 'rgba(255,255,255,0)'); shade.addColorStop(1, 'rgba(20,34,80,.28)');
+    const shade = ctx.createRadialGradient(cx - R * .4, cy - R * .45, R * .2, cx, cy, R * 1.02); shade.addColorStop(0, 'rgba(255,255,255,.25)'); shade.addColorStop(.6, 'rgba(255,255,255,0)'); shade.addColorStop(1, 'rgba(22,36,54,.26)');
     ctx.fillStyle = shade; ctx.fillRect(cx - R, cy - R, R * 2, R * 2); ctx.restore();
     hit = [];
     PINS.forEach(([lo, la], i) => {
       const [x, y, z] = project(lo, la); if (z < .08) return;
       const X = cx + x * R, Y = cy - y * R, got = collected.includes(i), cur = i === current, r = cur ? 8 : 6.5;
       ctx.beginPath(); ctx.arc(X, Y, r + 2.5, 0, 7); ctx.fillStyle = '#fff'; ctx.fill();
-      ctx.beginPath(); ctx.arc(X, Y, r, 0, 7); ctx.fillStyle = got ? '#6f4fc0' : cur ? '#2343d6' : '#fff'; ctx.fill();
-      if (!got && !cur) { ctx.lineWidth = 2; ctx.strokeStyle = '#2343d6'; ctx.stroke(); }
+      ctx.beginPath(); ctx.arc(X, Y, r, 0, 7); ctx.fillStyle = got ? '#6a5f92' : cur ? '#263e56' : '#fff'; ctx.fill();
+      if (!got && !cur) { ctx.lineWidth = 2; ctx.strokeStyle = '#263e56'; ctx.stroke(); }
       if (got) { ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.moveTo(X - 3.2, Y + .2); ctx.lineTo(X - .8, Y + 2.6); ctx.lineTo(X + 3.4, Y - 2.4); ctx.stroke(); }
       if (labels[i] && (cur || got)) { ctx.font = '600 11.5px "Instrument Sans",sans-serif'; const w = ctx.measureText(labels[i]).width + 12, lx = Math.min(size - w - 2, Math.max(2, X - w / 2)), ly = Y - r - 24;
-        ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.beginPath(); ctx.roundRect(lx, ly, w, 18, 9); ctx.fill(); ctx.fillStyle = '#1f3b42'; ctx.fillText(labels[i], lx + 6, ly + 13); }
+        ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.beginPath(); ctx.roundRect(lx, ly, w, 18, 9); ctx.fill(); ctx.fillStyle = '#1b2b3c'; ctx.fillText(labels[i], lx + 6, ly + 13); }
       hit.push({ i, X, Y });
     });
   }
