@@ -20,6 +20,12 @@ Files: `index.html`, `page.css` (whole page), `crossing.mjs` (traveler animation
 - Style follows the live site tokens: cream paper, forest, navy, terracotta orange, Fraunces + Instrument Sans (Google Fonts). This replaces the white/blue/purple palette of revision 1.
 - Draft copy to approve: everything in the practice feedback, the "Lo que te llevas" lines, section headings, the Venice question and lesson.
 
+## Revision 4 (no beige)
+- Cream, grain, Fraunces, orange tabs, rounded shadowed cards and the dark green close are gone.
+- White page, hard edges, large tight Instrument Sans headings with one Instrument Serif italic phrase each. Cobalt blue (from the Mexico City wall) for actions, purple for selection and labels.
+- "Lo que te llevas" is three flat blocks; the six areas are a large type list; the close sits on the Red Sea photo, the next destination.
+- This supersedes the palette and type lines in Revision 2.
+
 ## Revision 3 (handoff timing and scrubber)
 - Each stop runs in a fixed order after she arrives: settle 0.45 s, question, tool, souvenir, 2.3 s hold on the finished card, card fades out, then she leaves. A card is never visible while its phone is shrinking or the next one is growing.
 - The sequence opens on Kyoto with its card already complete, so the first frame still shows destination, question and souvenir.

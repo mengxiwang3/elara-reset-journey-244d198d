@@ -118,17 +118,17 @@ function draw() {
   const tr = traveler(T), cam = camera(tr);
   ctx.setTransform(dpr * scale, 0, 0, dpr * scale, 0, 0); ctx.clearRect(0, 0, viewW, HT); ctx.translate(-cam, 0);
   const wins = PHONES.map(ph => ({ ph, ...windowOf(ph, tr.body.x) })).sort((a, b) => a.f - b.f);   // nearest phone is drawn last, in front
-  const INK = '#1b2440';
+  const INK = '#0e1630';
   const phone = (w, shadow) => {
     if (w.x + w.w < cam - 40 || w.x > cam + viewW + 40) return;
     const ph = w.ph, plate = img[ph.key], PW = WL * ph.m, PH = HL * ph.m;
-    if (shadow) { ctx.save(); ctx.shadowColor = `rgba(34,32,28,${(.14 + .16 * w.f).toFixed(3)})`; ctx.shadowBlur = 14 + 18 * w.f; ctx.shadowOffsetY = 6 + 8 * w.f;
+    if (shadow) { ctx.save(); ctx.shadowColor = `rgba(14,22,48,${(.12 + .16 * w.f).toFixed(3)})`; ctx.shadowBlur = 14 + 18 * w.f; ctx.shadowOffsetY = 6 + 8 * w.f;
       ctx.fillStyle = INK; ctx.beginPath(); ctx.roundRect(w.x, w.y, w.w, w.h, w.r); ctx.fill(); ctx.restore(); }
     ctx.save(); ctx.beginPath(); ctx.roundRect(w.x, w.y, w.w, w.h, w.r); ctx.clip();
     // The scenery is fixed in the world; a smaller phone simply shows less of it.
     const s = Math.max(PW / plate.width, PH / plate.height), iw = plate.width * s, ih = plate.height * s;
     ctx.drawImage(plate, ph.cx - iw / 2, ph.bottom - ih, iw, ih);
-    if (w.f < 1) { ctx.fillStyle = `rgba(246,238,223,${(.34 * (1 - w.f)).toFixed(3)})`; ctx.fillRect(w.x, w.y, w.w, w.h); }   // resting phones fade back; she never does
+    if (w.f < 1) { ctx.fillStyle = `rgba(255,255,255,${(.36 * (1 - w.f)).toFixed(3)})`; ctx.fillRect(w.x, w.y, w.w, w.h); }   // resting phones fade back; she never does
     if (META[ph.key] && Math.abs(tr.body.x - ph.cx) < PITCH + H0) drawTraveler(tr, sameOutfit ? 'kyoto' : ph.key);
     ctx.restore();
     ctx.lineWidth = 2.5; ctx.strokeStyle = INK; ctx.beginPath(); ctx.roundRect(w.x + 1.25, w.y + 1.25, w.w - 2.5, w.h - 2.5, w.r - 1.25); ctx.stroke();
