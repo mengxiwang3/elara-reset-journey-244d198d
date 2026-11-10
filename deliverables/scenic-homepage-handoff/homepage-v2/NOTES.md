@@ -20,6 +20,13 @@ Files: `index.html`, `page.css` (whole page), `crossing.mjs` (traveler animation
 - Style follows the live site tokens: cream paper, forest, navy, terracotta orange, Fraunces + Instrument Sans (Google Fonts). This replaces the white/blue/purple palette of revision 1.
 - Draft copy to approve: everything in the practice feedback, the "Lo que te llevas" lines, section headings, the Venice question and lesson.
 
+## Revision 3 (handoff timing and scrubber)
+- Each stop runs in a fixed order after she arrives: settle 0.45 s, question, tool, souvenir, 2.3 s hold on the finished card, card fades out, then she leaves. A card is never visible while its phone is shrinking or the next one is growing.
+- The sequence opens on Kyoto with its card already complete, so the first frame still shows destination, question and souvenir.
+- Card and teaser state are computed from the timeline (CSS variables, no transitions). The same scrubber position always gives the same pose, phones, cards and caption; checked by jumping back from the Red Sea teaser to Venice and comparing against a forward scrub.
+- Full sequence is now about 31 s.
+- Sequence sheets: screens/venice-to-machu-picchu.jpg and screens/machu-picchu-to-mexico-city.jpg.
+
 ## Changes from crossing-five
 - One outfit for the whole walk. No cut-out in any plate sits at her ground line: the Kyoto fence post and Venice mooring poles are about a third of her height, and the Kyoto tree, Venice wall, Andes rock and Mexico tree all meet the ground behind her path, so her feet would show below them. `?outfit=change` restores the old per-phone outfits (with the visible cut).
 - Hand-over between phones is a short dissolve of the overlap strip instead of a z-order swap. No pop.

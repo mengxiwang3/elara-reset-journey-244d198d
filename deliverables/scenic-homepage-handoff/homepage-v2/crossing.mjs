@@ -24,7 +24,15 @@ const PHONES = [                                         // m = size multiplier,
 const STOPS = 4;                                         // she walks the first four; the Red Sea only peeks in (see NOTES.md)
 
 // ---- Timeline ----
-const DWELL = 4.6, WALKT = LEG / CADENCE, SEG = DWELL + WALKT, T_END = (STOPS - 1) * SEG + DWELL + 1;
+// Each stop, in seconds after she arrives (local time). Nothing overlaps: she settles, the question
+// appears, then the tool, then the souvenir; the finished card holds, fades out, and only then does she leave.
+const SETTLE = .45, Q_IN = [SETTLE, .9], TOOL_IN = [2.1, 2.6], KEEP_IN = [3.5, 4.0], HOLD = 2.3, FADE = .45;
+const CARD_OUT = [KEEP_IN[1] + HOLD, KEEP_IN[1] + HOLD + FADE], DWELL = CARD_OUT[1] + .1;
+const WALKT = LEG / CADENCE, SEG = DWELL + WALKT;
+const OPEN = KEEP_IN[1];                                  // T = 0 opens on Kyoto with its card complete (destination, question, souvenir)
+const arrive = i => i * SEG - OPEN;                       // timeline second at which she arrives at stop i
+const CHIP_IN = [arrive(STOPS - 1) + KEEP_IN[1] + .4, arrive(STOPS - 1) + KEEP_IN[1] + .9];
+const T_END = CHIP_IN[1] + 2;
 const CARDS = [
   { place: 'Kioto, Japón', area: 'Claridad financiera', q: '¿Qué quieres mirar hoy sobre tu dinero?',
     lesson: 'Empieza por una compra concreta. Te da algo que observar; todavía no demuestra un patrón.', keep: ['Taza de Kioto', 'souvenir-cup'] },
@@ -35,14 +43,16 @@ const CARDS = [
   { place: 'Ciudad de México', area: 'Amor y límites', q: '¿Qué te gustaría conversar?',
     lesson: 'Una pregunta puede abrir una conversación. Tú eliges qué compartir.', keep: ['Pulsera tejida', 'souvenir-bracelet'] },
 ];
-const BEATS = [];
+const BEATS = [];                                         // captions and step targets; each sits where its reveal has finished
 CARDS.forEach((c, i) => {
-  const t0 = i * SEG, name = c.place.split(',')[0];
-  BEATS.push({ t: t0, say: `${name}. Llegas y te espera una pregunta sobre ${c.area.toLowerCase()}.` },
-    { t: t0 + 1.5, say: `${name}. Te llevas una herramienta para usar hoy.` },
-    { t: t0 + 3, say: `${name}. Y un recuerdo para tu colección.` });
-  if (i < STOPS - 1) BEATS.push({ t: t0 + DWELL, walk: true, say: `Sigue caminando: de ${name} a ${CARDS[i + 1].place.split(',')[0]}.` });
+  const a = arrive(i), name = c.place.split(',')[0];
+  if (i === 0) BEATS.push({ t: 0, say: `${name}. Una pregunta sobre ${c.area.toLowerCase()}, una herramienta y un recuerdo.` });
+  else BEATS.push({ t: a + Q_IN[1], say: `${name}. Llegas y te espera una pregunta sobre ${c.area.toLowerCase()}.` },
+    { t: a + TOOL_IN[1], say: `${name}. Te llevas una herramienta para usar hoy.` },
+    { t: a + KEEP_IN[1], say: `${name}. Y un recuerdo para tu colección.` });
+  if (i < STOPS - 1) BEATS.push({ t: a + DWELL, walk: true, say: `Sigue caminando: de ${name} a ${CARDS[i + 1].place.split(',')[0]}.` });
 });
+BEATS.push({ t: CHIP_IN[1], say: 'Próximo destino: Mar Rojo.' });
 const beatAt = t => { let i = 0; BEATS.forEach((b, j) => { if (t >= b.t - 1e-6) i = j; }); return i; };
 
 // ---- Sprite metrics, measured from the sheets (3x3 grid of 418px cells) ----
@@ -65,7 +75,7 @@ const smooth = (a, b, v) => { const t = clamp((v - a) / (b - a), 0, 1); return t
 
 // ---- Traveler model: time -> steps walked -> one ground position ----
 function traveler(t) {
-  const k = clamp(Math.floor(t / SEG), 0, STOPS - 1), pp = k === STOPS - 1 ? 0 : clamp((t - k * SEG - DWELL) * CADENCE, 0, LEG);
+  const tt = t + OPEN, k = clamp(Math.floor(tt / SEG), 0, STOPS - 1), pp = k === STOPS - 1 ? 0 : clamp((tt - k * SEG - DWELL) * CADENCE, 0, LEG);
   const p = k * LEG + pp, n = Math.round(p);
   return { p, n, body: { x: p * STEP, y: Y0, h: H0 }, foot: { x: n * STEP, y: Y0, h: H0 },   // foot = where the planted foot stays
     stand: Math.max(1 - smooth(0, .35, pp), smooth(LEG - .35, LEG, pp)) };
@@ -136,22 +146,29 @@ function draw() {
 function buildCards() {
   $('#cards').innerHTML = CARDS.map((c, i) => {
     const ph = PHONES[i], w = WL * ph.m - 30;
-    return `<article class="card" data-card="${i}" data-stage="0" style="left:${ph.cx - w / 2}px;top:${ph.bottom - HL * ph.m + WL * ph.m * .17}px;width:${w}px">
+    return `<article class="card" data-card="${i}" style="left:${ph.cx - w / 2}px;top:${ph.bottom - HL * ph.m + WL * ph.m * .17}px;width:${w}px">
       <p class="where">${c.place} · ${c.area}</p><h2>${c.q}</h2>
       <p class="lesson"><img src="assets/orb.png" alt=""><span>${c.lesson}</span></p>
       <p class="keep"><img src="assets/${c.keep[1]}.png" alt=""><span><b>${c.keep[0]}</b>Tu recuerdo de este lugar</span></p></article>`;
   }).join('') + (() => { const ph = PHONES[4]; return `<p class="next" id="nextchip" style="left:${ph.cx - 84}px;top:${ph.bottom - HS * ph.m + 44}px">Próximo destino<b>Mar Rojo</b><i>Confianza en ti</i></p>`; })();
 }
-function cardStage(i) {
-  const local = T - i * SEG;
-  if (local < -.25 || (i < STOPS - 1 && local > DWELL + .3)) return 0;
-  return local < 1.5 ? 1 : local < 3 ? 2 : 3;
+// Card state is a pure function of T (no CSS transitions), so any timeline position always looks the same.
+const ramp = (r, v) => smooth(r[0], r[1], v);
+function cardState(i) {
+  const local = T - arrive(i), last = i === STOPS - 1;
+  const o = ramp(Q_IN, local) * (last ? 1 : 1 - ramp(CARD_OUT, local));
+  return { o, l: ramp(TOOL_IN, local), k: ramp(KEEP_IN, local) };
 }
 function sync() {
   const { cam } = draw(), beat = beatAt(T), ended = T >= T_END - 1e-3;
   $('#cards').style.transform = `scale(${scale}) translateX(${-cam}px)`;
-  document.querySelectorAll('.card').forEach((el, i) => { const st = String(cardStage(i)); if (el.dataset.stage !== st) el.dataset.stage = st; });
-  $('#nextchip').classList.toggle('on', T > (STOPS - 1) * SEG + .4);
+  document.querySelectorAll('.card').forEach((el, i) => {
+    const c = cardState(i), key = [c.o, c.l, c.k].map(v => v.toFixed(3)).join();
+    if (el.dataset.k === key) return; el.dataset.k = key;
+    el.style.setProperty('--o', c.o.toFixed(3)); el.style.setProperty('--l', c.l.toFixed(3)); el.style.setProperty('--k', c.k.toFixed(3));
+    el.style.visibility = c.o > 0 ? 'visible' : 'hidden';
+  });
+  $('#nextchip').style.opacity = ramp(CHIP_IN, T).toFixed(3);
   const s = still();
   $('#play').textContent = s ? 'Sin animación' : ended ? 'Repetir' : paused ? 'Reproducir' : 'Pausar';
   $('#play').disabled = s; $('#scrub').hidden = s; $('#play').setAttribute('aria-pressed', String(paused && !ended && !s));
@@ -200,7 +217,7 @@ try {
   new ResizeObserver(layout).observe($('#stage'));
   new IntersectionObserver(es => { visible = es[0].isIntersecting; last = performance.now(); }).observe($('#stage'));   // no drawing while it is scrolled away
   layout(); sync(); last = performance.now(); requestAnimationFrame(frame);
-  window.__crossing = { get T() { return T; }, set T(v) { T = v; paused = true; sync(); }, traveler: () => traveler(T), get paused() { return paused; }, T_END, SEG, DWELL, STEP, PHONES };
+  window.__crossing = { get T() { return T; }, set T(v) { T = v; paused = true; sync(); }, traveler: () => traveler(T), get paused() { return paused; }, T_END, SEG, DWELL, STEP, PHONES, arrive, BEATS, state: () => ({ t: traveler(T), cards: CARDS.map((_, i) => cardState(i)), caption: BEATS[beatAt(T)].say }) };
 } catch (err) {
   $('#status').textContent = 'La animación no pudo cargarse. La imagen resume la escena y los enlaces siguen funcionando.';
   console.error(err);
