@@ -79,19 +79,25 @@ window.ElaraStage = (() => {
   }
   function drawWalker(tr, key) {
     const sheet = img[key + '-sprite'], meta = META[key], { p, n, foot, body } = tr, h = body.h, walk = 1 - tr.stand, flip = tr.facing < 0;
-    shadow(body.x, body.y + h * .004, h * (.2 + .08 * walk), h * .045, .3);        // soft shadow under the body
+    const stride = Math.abs(Math.cos(Math.PI * p)) * walk;                           // 1 at foot contact (legs apart), 0 as they pass
+    shadow(body.x, body.y + h * .004, h * (.2 + .1 * stride), h * .045, .3);         // soft shadow, widest when her feet are apart
     shadow(walk > 0 ? foot.x : body.x, body.y + h * .002, h * .1, h * .02, .5);    // tight contact under the planted foot
     if (tr.stand >= 1) return drawPose(sheet, meta, STAND, body, body, 1, 0, false);
     const lift = h * .012 * (.5 - .5 * Math.cos(Math.PI * p)) * walk;              // lowest at foot contact, highest as the legs pass
     drawPose(sheet, meta, WALK_SIDE[((n % 4) + 4) % 4], foot, body, 1, lift, flip);
     drawPose(sheet, meta, STAND, body, body, tr.stand, 0, false);
   }
-  function drawDiver(tr) {                                // in the Red Sea she is under water: she swims, she does not walk
-    const sheet = img['diver-sprite'], cw = sheet.width / 3, ch = sheet.height / 3, size = H0 * 1.25;
-    const x = tr.body.x, y = Y0 - H0 * .82 + Math.sin(clock * 1.3) * 5, flip = tr.facing < 0 && tr.stand < 1;
-    const cell = (c, a) => { if (a <= 0) return; ctx.globalAlpha = a; ctx.save(); ctx.translate(x, y); ctx.scale(flip ? -1 : 1, 1);
-      ctx.drawImage(sheet, (c % 3) * cw, Math.floor(c / 3) * ch, cw, ch, -size / 2, -size / 2, size, size * ch / cw); ctx.restore(); ctx.globalAlpha = 1; };
-    cell(0, 1 - tr.stand); cell(7, tr.stand);
+  function drawCamel(tr) {                                // Giza: she rides (the app's own camel-rider sheet, 3x3; it faces left, so it is mirrored when she heads right)
+    const sheet = img['camel-sprite'], c = sheet.width / 3, size = H0 * 1.16, x = tr.body.x, moving = tr.stand < 1;
+    const cell = moving ? [0, 1, 2, 1][((tr.n % 4) + 4) % 4] : 6, flip = tr.facing > 0;
+    shadow(x, Y0 + 1, H0 * .42, H0 * .05, .32);
+    ctx.save(); ctx.translate(x, Y0 - (moving ? Math.abs(Math.sin(tr.p * Math.PI)) * 2 : 0)); ctx.scale(flip ? -1 : 1, 1);
+    ctx.drawImage(sheet, (cell % 3) * c, Math.floor(cell / 3) * c, c, c, -size / 2, -size * .955, size, size); ctx.restore();
+  }
+  function drawBoat(tr) {                                 // Great Barrier Reef: she is in the boat, on the water (the app's own art)
+    const sheet = img['boat-sprite'], w = H0 * 1.5, h = w * sheet.height / sheet.width, x = tr.body.x, y = Y0 + 6 + Math.sin(clock * 1.2) * 3;
+    ctx.save(); ctx.translate(x, y); ctx.rotate(Math.sin(clock * .9) * .012); ctx.scale(tr.facing < 0 && tr.stand < 1 ? -1 : 1, 1);
+    ctx.drawImage(sheet, -w / 2, -h, w, h); ctx.restore();
   }
   const stacked = matchMedia('(max-width: 900px)');
   const camX = () => pos * STEP - viewW * (stacked.matches ? .5 : .33);   // desktop: the active phone sits left of centre, next to the copy, with the journey ahead on the right
@@ -115,7 +121,8 @@ window.ElaraStage = (() => {
       const s = Math.max(PW / plate.width, PH / plate.height), iw = plate.width * s, ih = plate.height * s;
       ctx.drawImage(plate, ph.cx - iw / 2, ph.bottom - ih, iw, ih);                // scenery is fixed in the world
       if (w.f < 1) { ctx.fillStyle = `rgba(255,255,255,${(.34 * (1 - w.f)).toFixed(3)})`; ctx.fillRect(w.x, w.y, w.w, w.h); }
-      if (Math.abs(tr.body.x - ph.cx) < PITCH + H0) { if (ph.traveler === 'diver') drawDiver(tr); else drawWalker(tr, sameOutfit ? 'kyoto' : ph.traveler); }
+      if (Math.abs(tr.body.x - ph.cx) < PITCH + H0) { const inside = tr.body.x > w.x - 16 && tr.body.x < w.x + w.w + 16;   // wide rides appear once she is in that phone, so they never poke into a neighbour
+        if (ph.traveler === 'camel') { if (inside) drawCamel(tr); } else if (ph.traveler === 'boat') { if (inside) drawBoat(tr); } else drawWalker(tr, sameOutfit ? 'kyoto' : ph.traveler); }
       ctx.restore();
       ctx.fillStyle = BODY; ctx.beginPath(); ctx.roundRect(ph.cx - w.w * .15, w.y + w.w * .04, w.w * .3, w.w * .08, w.w * .04); ctx.fill();
     }
@@ -135,8 +142,9 @@ window.ElaraStage = (() => {
     if (!visible || document.hidden) return;
     clock += dt;
     const was = moving();
-    if (was) { const d = CADENCE * speed * dt, gap = target - pos; pos = Math.abs(gap) <= d ? target : pos + Math.sign(gap) * d; if (!moving()) from = pos; }
-    if (was || PHONES[index()].traveler === 'diver') draw();                 // the diver keeps gently moving; everyone else is still when standing
+    // She eases into and out of a walk (no instant full speed), so the first and last steps are shorter and slower.
+    if (was) { const gap = target - pos, ease = Math.min(1, .4 + Math.abs(pos - from) * .75, .4 + Math.abs(gap) * .75), d = CADENCE * speed * ease * dt; pos = Math.abs(gap) <= d ? target : pos + Math.sign(gap) * d; if (!moving()) from = pos; }
+    if (was || PHONES[index()].traveler === 'boat') draw();   // the boat keeps bobbing; everyone else is still when standing                 // the diver keeps gently moving; everyone else is still when standing
     if (was && !moving()) emit('arrive', index());
     emit('frame', dt);
   }

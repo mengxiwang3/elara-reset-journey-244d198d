@@ -15,7 +15,7 @@ window.ElaraGlobe = (() => {
   let current = 0, collected = [], lang = 0, pick = () => {}, visible = false, fallback = false, hover = false, press = null, started = false;
   const m = { yaw: PINS[0].lon * RAD, pitch: PINS[0].lat * RAD, targetYaw: PINS[0].lon * RAD, targetPitch: PINS[0].lat * RAD, spinning: !reduced.matches, drag: false, lastX: 0, lastY: 0 };
   const choose = i => { const p = PINS[i]; if (p.locked) return; m.spinning = false; turnTo(p); pick(i); };
-  const turnTo = p => { m.targetYaw = m.yaw + Math.atan2(Math.sin(p.lon * RAD - m.yaw), Math.cos(p.lon * RAD - m.yaw)); m.targetPitch = p.lat * RAD; };
+  const turnTo = p => { if (stillMode) return; m.targetYaw = m.yaw + Math.atan2(Math.sin(p.lon * RAD - m.yaw), Math.cos(p.lon * RAD - m.yaw)); m.targetPitch = p.lat * RAD; };
 
   // ---- markers (same markup and classes as the app)
   const els = PINS.map((p, i) => {
@@ -52,12 +52,23 @@ window.ElaraGlobe = (() => {
     earth.onload = () => { gl.bindTexture(gl.TEXTURE_2D, tex); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, earth); gl.uniform1i(gl.getUniformLocation(prog, 'earth'), 0);
+      try { gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, earth); } catch (e) { return still(); }   // e.g. opened straight from a folder: browsers refuse the texture
+      gl.uniform1i(gl.getUniformLocation(prog, 'earth'), 0);
       canvas.dataset.ready = 'true'; ready = true; draw(); stage.classList.add('is-live'); requestAnimationFrame(frame); };
     earth.onerror = fail; earth.src = 'assets/paper-earth.jpg';
     } catch (e) { fail(); }
   }
+  // No WebGL texture: keep the still artwork (the stage background) and place the markers for that same view.
+  let stillMode = false;
+  function still() { stillMode = true; canvas.style.visibility = 'hidden'; m.spinning = false; m.yaw = m.targetYaw = 135 * RAD; m.pitch = m.targetPitch = 35 * RAD; placePins(); }
+  function placePins() {
+    PINS.forEach((p, i) => { const b = els[i], la = p.lat * RAD, lo = p.lon * RAD - m.yaw;
+      const x = Math.cos(la) * Math.sin(lo), y = Math.sin(la) * Math.cos(m.pitch) - Math.cos(la) * Math.cos(lo) * Math.sin(m.pitch);
+      b.hidden = Math.sin(la) * Math.sin(m.pitch) + Math.cos(la) * Math.cos(lo) * Math.cos(m.pitch) < .12;
+      b.style.left = 50 + x / 1.15 * 50 + '%'; b.style.top = 50 - y / 1.15 * 50 + '%'; });
+  }
   function draw() {
+    if (stillMode) return placePins();
     if (!ready || fallback) return;
     const px = Math.round(canvas.clientWidth * Math.min(devicePixelRatio || 1, 2));
     if (px && canvas.width !== px) { canvas.width = px; canvas.height = px; gl.viewport(0, 0, px, px); }
@@ -82,7 +93,7 @@ window.ElaraGlobe = (() => {
   // A press that moves is a drag, wherever it starts; only a press that stays put on a marker opens that destination.
   stage.addEventListener('pointerdown', e => { m.spinning = false; const b = e.target.closest('.paper-globe-pin'); press = { x: e.clientX, y: e.clientY, pin: b ? +b.dataset.i : -1, moved: false };
     m.drag = true; m.lastX = e.clientX; m.lastY = e.clientY; try { stage.setPointerCapture(e.pointerId); } catch (err) { /* fine */ } });
-  stage.addEventListener('pointermove', e => { if (!m.drag) return; if (press && Math.hypot(e.clientX - press.x, e.clientY - press.y) > 6) press.moved = true; if (press && !press.moved) return;
+  stage.addEventListener('pointermove', e => { if (!m.drag || stillMode) return; if (press && Math.hypot(e.clientX - press.x, e.clientY - press.y) > 6) press.moved = true; if (press && !press.moved) return;
     m.targetYaw -= (e.clientX - m.lastX) * .009; m.targetPitch = Math.max(-1.1, Math.min(1.1, m.targetPitch + (e.clientY - m.lastY) * .006)); m.lastX = e.clientX; m.lastY = e.clientY; });
   stage.addEventListener('pointerup', () => { m.drag = false; const p = press; press = null; if (p && !p.moved && p.pin >= 0) choose(p.pin); });
   stage.addEventListener('pointercancel', () => { m.drag = false; press = null; });

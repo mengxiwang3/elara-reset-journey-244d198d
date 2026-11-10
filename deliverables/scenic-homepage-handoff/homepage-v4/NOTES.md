@@ -32,11 +32,16 @@ One state object in `app.js` (`state.dest`, `state.answers`, `state.collected`).
 - Planted foot stays on its spot; one ground line; constant size; position is continuous in both directions and across several phones.
 - Each phone sits in front of the previous one; she passes behind the next phone's 7 px frame and her outfit changes there. The frame hides the cut line, not her whole body.
 - Red Sea: she is the diver (existing art), hovering with a gentle bob. There is no kick cycle, so the swim is a held pose.
-- A short automatic tour (6 s per stop, one pass) runs until the visitor does anything; one Pause control. No scrubber or player controls.
+- She walks on by herself (9 s per stop, one pass) until the visitor's first tap or key press, which ends the tour for good; the button can restart it. No scrubber or player controls.
+- Walking eases in and out; the shadow widens at foot contact. The camel rider (Giza) and the boat (Great Barrier Reef) are the app's own art; the camel uses a 3-pose cycle without planted feet, so it can slide slightly.
+- The Atlas globe needs WebGL and a web address. Opened straight from a folder, browsers refuse the texture, so the still artwork stays with markers placed for that view.
 
 ## Destinations and areas
 Kioto = Claridad financiera, Venecia = Ritmo diario, Machu Picchu = Encontrar tu propósito, Ciudad de México = Amor y límites, Mar Rojo = Confianza en ti. These come from the earlier prototype screens.
 Recuperar tu energía has no destination, plate or souvenir: shown as "Destino en preparación", not mapped to another place.
+
+## Alejandra's video
+The public "video próximamente" block is removed. Proposed placement when the recording exists: in the `#para-ti` section, directly above the founders line (`.usline`), as a `<figure>` with a real `<video controls poster>`; the founders page is the second candidate.
 
 ## Needs approval or is unverified
 - Practice copy: only the Kioto family-money example follows the supplied wording. The Venecia, Machu Picchu, Ciudad de México and Mar Rojo situations, answers, feedback and phrases are drafts written here from each area's one-line description.
