@@ -12,7 +12,11 @@ export const Route = createFileRoute("/terms-and-conditions")({
       { property: "og:title", content: TITLE },
       { property: "og:url", content: "https://holaelara.com/terms-and-conditions" },
     ],
-    links: [{ rel: "canonical", href: "https://holaelara.com/terms-and-conditions" }],
+    links: [
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" },
+      { rel: "stylesheet", href: "/home/page.css" },
+      { rel: "stylesheet", href: "/home/legal.css" },
+      { rel: "canonical", href: "https://holaelara.com/terms-and-conditions" }],
   }),
   component: TermsPage,
 });

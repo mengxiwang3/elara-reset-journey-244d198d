@@ -1,0 +1,21 @@
+/* Terms, Support, Account deletion: plain reading pages in the homepage's tokens. */
+.v4.legal .doc{max-width:680px;margin:0 auto;padding:56px var(--side) 72px;color:var(--ink)}
+.v4.legal .doc[hidden],.v4.legal .doc>div[hidden]{display:none}
+.v4.legal h1{font-size:clamp(30px,5vw,40px);line-height:1.12;font-weight:600;letter-spacing:-.02em;color:var(--head);margin:0}
+.v4.legal .doc h1+p{color:var(--muted);font-size:14px;line-height:1.5;margin:10px 0 0}
+.v4.legal .doc h1+p+p{color:var(--ink);font-size:17px;line-height:1.6;margin:22px 0 0}
+.v4.legal h2{font-size:18px;line-height:1.3;font-weight:600;color:var(--head);margin:0}
+.v4.legal section{padding:22px 0 0;margin-top:22px;border-top:1px solid var(--line)}
+.v4.legal section:first-child{margin-top:34px}
+.v4.legal .doc p,.v4.legal .doc li{font-size:16px;line-height:1.65;color:var(--ink)}
+.v4.legal .doc h1+p{font-size:14px;color:var(--muted)}
+.v4.legal .doc h1+p+p{font-size:17px;color:var(--ink)}
+.v4.legal section p{margin:8px 0 0}
+.v4.legal .doc ul{margin:10px 0 0;padding-left:1.2em;list-style:disc}
+.v4.legal .doc ol{margin:10px 0 0;padding-left:1.4em;list-style:decimal}
+.v4.legal li{margin-top:6px}
+.v4.legal li::marker{color:var(--edge)}
+.v4.legal .doc a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--edge)}
+.v4.legal .doc a:hover{text-decoration-color:var(--blue)}
+.v4.legal .back{display:inline-block;margin-top:44px;font-size:15px;font-weight:500}
+.v4.legal .top .lang button{min-width:44px;min-height:44px}

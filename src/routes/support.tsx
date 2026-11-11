@@ -12,7 +12,11 @@ export const Route = createFileRoute("/support")({
       { property: "og:title", content: TITLE },
       { property: "og:url", content: "https://holaelara.com/support" },
     ],
-    links: [{ rel: "canonical", href: "https://holaelara.com/support" }],
+    links: [
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" },
+      { rel: "stylesheet", href: "/home/page.css" },
+      { rel: "stylesheet", href: "/home/legal.css" },
+      { rel: "canonical", href: "https://holaelara.com/support" }],
   }),
   component: SupportPage,
 });

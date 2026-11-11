@@ -1,36 +1,107 @@
-import { useEffect, useRef } from "react";
-import orb from "@/assets/paper/orb-sm.webp";
+import { useEffect, useState } from "react";
 
 /**
- * Terms, Support and Account deletion.
+ * Terms, Support and Account deletion, in the homepage's design.
  *
- * These three pages are live on holaelara.com but their source was never committed.
- * The markup here is the deployed page itself, captured on 10 Nov 2026 (both languages
- * are in it; `#en` shows English). Replace with the original components when they are
- * committed; until then this keeps the pages, their text and their links intact.
+ * The wording comes from the three pages as deployed (captured 10 Nov 2026; their original source
+ * was never committed). Only the shell is new: plain white page, one reading column, a language
+ * switch that is easy to see, and a language picked from the visitor's browser so a reviewer or
+ * visitor who reads English lands on English. Both languages stay in the HTML so the text is
+ * readable without JavaScript.
  */
+const strip = (s: string) => s.replace(/\sclass="[^"]*"/g, "").replace(/\starget="_blank"/g, ' target="_blank"');
+
+function split(html: string) {
+  const es = /<div id="es"><div lang="es">([\s\S]*?)<\/div><\/div><div id="en"/.exec(html)?.[1] ?? "";
+  const en = /<div id="en" hidden=""><div lang="en">([\s\S]*?)<\/div><\/div><\/div><\/article>/.exec(html)?.[1] ?? "";
+  // The captured pages wrap the rules and sections in one extra div; flatten it.
+  const flat = (x: string) => strip(x.replace(/<div class="e-rule[^"]*">/, "<div>"));
+  return { es: flat(es), en: flat(en) };
+}
+
+const UI = {
+  home: ["/", "/en"],
+  back: ["Volver al inicio", "Back to the homepage"],
+  pv: [["Privacidad", "/privacidad"], ["Privacy", "/privacy"]],
+  tm: ["Términos", "Terms"],
+  sp: ["Soporte", "Support"],
+  del: ["Eliminar cuenta", "Delete account"],
+  note: ["Elara no es terapia ni un servicio médico.", "Elara is not therapy or a medical service."],
+} as const;
+
 export function LegalSnapshot({ html }: { html: string }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const { es, en: enHtml } = split(html);
+  const [en, setEn] = useState(false);
+
   useEffect(() => {
-    const root = ref.current;
-    if (!root) return;
-    const apply = () => {
-      const en = window.location.hash === "#en";
-      const es = root.querySelector<HTMLElement>("#es");
-      const enEl = root.querySelector<HTMLElement>("#en");
-      if (es) es.hidden = en;
-      if (enEl) enEl.hidden = !en;
-      root.querySelector("main")?.setAttribute("lang", en ? "en" : "es");
-      const seg = root.querySelector(".e-seg");
-      if (seg) {
-        seg.innerHTML = en
-          ? '<a href="#es" lang="es" class="e-seg__off">ES</a><span class="e-seg__on" aria-current="true">EN</span>'
-          : '<span class="e-seg__on" aria-current="true">ES</span><a href="#en" lang="en" class="e-seg__off">EN</a>';
-      }
-    };
-    apply();
-    window.addEventListener("hashchange", apply);
-    return () => window.removeEventListener("hashchange", apply);
+    let stored = "";
+    try {
+      stored = sessionStorage.getItem("elara-lang") || "";
+    } catch {
+      /* storage unavailable */
+    }
+    const h = window.location.hash;
+    if (h === "#en") setEn(true);
+    else if (h === "#es") setEn(false);
+    else if (stored) setEn(stored === "en");
+    else setEn(!/^es\b/i.test(navigator.language || "es"));
+    const onHash = () => setEn(window.location.hash === "#en");
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
   }, []);
-  return <div ref={ref} dangerouslySetInnerHTML={{ __html: html.replaceAll("__ORB__", orb) }} />;
+
+  useEffect(() => {
+    document.documentElement.lang = en ? "en" : "es";
+  }, [en]);
+
+  const i = en ? 1 : 0;
+  const pick = (v: boolean) => {
+    setEn(v);
+    try {
+      sessionStorage.setItem("elara-lang", v ? "en" : "es");
+    } catch {
+      /* fine */
+    }
+    history.replaceState(null, "", window.location.pathname + (v ? "#en" : "#es"));
+  };
+
+  return (
+    <div className="v4 legal" lang={en ? "en" : "es"}>
+      <header className="top">
+        <a className="brand" href={UI.home[i]}>
+          <img src="/home/assets/orb.png" alt="" width={26} height={26} />
+          elara
+        </a>
+        <div className="lang" role="group" aria-label="Idioma / Language" style={{ marginLeft: "auto" }}>
+          <button type="button" aria-pressed={!en} lang="es" onClick={() => pick(false)}>
+            ES
+          </button>
+          <button type="button" aria-pressed={en} lang="en" onClick={() => pick(true)}>
+            EN
+          </button>
+        </div>
+      </header>
+      <main className="doc">
+        <div lang="es" hidden={en} dangerouslySetInnerHTML={{ __html: es }} />
+        <div lang="en" hidden={!en} dangerouslySetInnerHTML={{ __html: enHtml }} />
+        <a className="back" href={UI.home[i]}>
+          {UI.back[i]}
+        </a>
+      </main>
+      <footer className="foot">
+        <a className="brand" href={UI.home[i]}>
+          <img src="/home/assets/orb.png" alt="" width={22} height={22} />
+          elara
+        </a>
+        <p className="foot-note">{UI.note[i]}</p>
+        <nav aria-label="Legal">
+          <a href={UI.pv[i][1]}>{UI.pv[i][0]}</a>
+          <a href="/terms-and-conditions">{UI.tm[i]}</a>
+          <a href="/support">{UI.sp[i]}</a>
+          <a href="/request-account-deletion">{UI.del[i]}</a>
+          <a href="mailto:hola@holaelara.com">hola@holaelara.com</a>
+        </nav>
+      </footer>
+    </div>
+  );
 }
