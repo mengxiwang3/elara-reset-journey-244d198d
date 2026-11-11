@@ -71,7 +71,8 @@
     'tour.pause': ['Pausar el recorrido', 'Pause the tour'], 'tour.play': ['Ver el recorrido', 'Play the tour'],
     'st.walk': ['Camina hacia', 'Walking to'], 'st.at': ['Estás en', 'You are in'],
     'atlas.p': ['Tu Atlas. Gira el globo o toca un destino para ir.', 'Your Atlas. Turn the globe or tap a destination to go there.'],
-    'pass.h': ['Tu pasaporte', 'Your passport'], 'pass.stamp': ['Sellado', 'Stamped'],
+    'pass.h': ['Tu pasaporte', 'Your passport'], 'pass.open': ['Abrir el pasaporte', 'Open the passport'],
+    'pp.close': ['Cerrar', 'Close'], 'pp.go': ['Ir a', 'Go to'], 'pp.empty': ['Responde su pregunta para sellar esta página.', 'Answer its question to stamp this page.'], 'pp.sealed': ['Sellada', 'Stamped'], 'pp.blank': ['En blanco', 'Blank'], 'pp.page': ['Página', 'Page'], 'pass.stamp': ['Sellado', 'Stamped'],
     'ct.talk': ['Conversaciones', 'Conversations'], 'ct.people': ['Conexiones', 'Connections'],
     'cp.intro': ['Mujeres que están viviendo algo parecido.', 'Women living through something similar.'], 'cp.common': ['Ver qué tienen en común', 'See what you have in common'],
     'cp.1': ['También se mudó hace poco y busca planes entre semana.', 'She also moved recently and is looking for weekday plans.'],
@@ -204,28 +205,52 @@
     $('#col-sub').textContent = t(state.collected.length ? 'col.some' : 'col.empty');
     $('#strip').replaceChildren(...DEST.map((d, i) => {
       const got = state.collected.includes(d.key);
-      const b = el('button', { type: 'button', className: 'slot' + (got ? ' got' : ''), onclick: () => (got ? openCard(d.key) : (interact(), travel(i), $('#stage').scrollIntoView({ block: 'center', behavior: reduced.matches ? 'auto' : 'smooth' }))) },
+      const b = el('button', { type: 'button', className: 'slot' + (got ? ' got' : ''), onclick: ev => openPassport(d.key, ev.currentTarget) },
         [el('img', { src: A + d.img, alt: '', loading: 'lazy', className: fresh === d.key ? 'fresh' : '' }),
           el('span', {}, [el('b', { textContent: L(d.item) }), el('span', { className: 'state', textContent: got ? `✓ ${t('strip.kept')} · ${L(d.place)}` : `${t('strip.not')} ${L(d.place)}` })]),
           ...(got ? [el('span', { className: 'stamp' + (fresh === d.key ? ' fresh' : ''), textContent: L(d.place) })] : [])]);
-      if (got) b.setAttribute('aria-expanded', String(state.open === d.key));
+      b.setAttribute('aria-haspopup', 'dialog');
       b.dataset.key = d.key;
       return el('li', {}, [b]);
     }));
   }
-  function renderPostcard() {
-    const pc = $('#postcard'), d = DEST.find(x => x.key === state.open), tk = d && takeaway(d);
-    if (!d || !tk || !state.collected.includes(d.key)) { state.open = null; pc.hidden = true; return; }
-    pc.hidden = false;
-    pc.replaceChildren(
-      el('div', { className: 'pc-photo' }, [el('img', { src: A + d.plate, alt: '', loading: 'lazy' }), el('span', { className: 'stamp', textContent: L(d.place) })]),
-      el('div', { className: 'pc-text' }, [
-        el('h3', { id: 'pc-title', textContent: `${t('pc.from')} ${L(d.place)} · ${L(d.area)}` }),
-        el('p', { className: 'pc-phrase' }, [el('span', { textContent: t('pc.suggest') }), tk.ph]),
-        el('p', {}, [el('span', { textContent: t('pc.learn') }), tk.fb]),
-        el('p', {}, [el('span', { textContent: t('pc.answer') }), tk.label]),
-        el('button', { type: 'button', className: 'btn small', textContent: t('pc.close'), onclick: () => { const k = state.open; state.open = null; renderAll(); const b = $(`.slot[data-key="${k}"]`); if (b) b.focus(); } }),
-      ]));
+  // The passport: one interactive view of all six pages. Opens from any slot (or the button), never moves the page.
+  let ppOpener = null;
+  function renderPassport() {
+    const dlg = $('#passport'); if (!dlg || !dlg.open) return;
+    const sel = DEST.find(x => x.key === state.open) || DEST[0], tk = takeaway(sel), got = state.collected.includes(sel.key) && !!tk;
+    const stamps = DEST.map((d, i) => { const g = state.collected.includes(d.key);
+      const b = el('button', { type: 'button', className: 'pp-stamp' + (g ? ' got' : '') + (d.key === sel.key ? ' on' : ''), onclick: () => { state.open = d.key; renderPassport(); const n = $(`.pp-stamp[data-key="${d.key}"]`); if (n) n.focus(); } },
+        [el('img', { src: A + d.img, alt: '' }), el('b', { textContent: L(d.place) }), el('span', { textContent: g ? `✓ ${t('pp.sealed')}` : t('pp.blank') })]);
+      b.dataset.key = d.key; b.setAttribute('aria-pressed', String(d.key === sel.key)); b.style.setProperty('--tilt', ((i % 3) - 1) * 1.6 + 'deg'); return b; });
+    const detail = got
+      ? el('div', { className: 'pp-detail' }, [
+          el('div', { className: 'pc-photo' }, [el('img', { src: A + sel.plate, alt: '' }), el('span', { className: 'stamp', textContent: L(sel.place) })]),
+          el('h3', { textContent: `${L(sel.place)} · ${L(sel.area)}` }),
+          el('p', { className: 'pc-keep' }, [el('img', { src: A + sel.img, alt: '' }), L(sel.item)]),
+          el('p', { className: 'pc-phrase' }, [el('span', { textContent: t('pc.suggest') }), tk.ph]),
+          el('p', {}, [el('span', { textContent: t('pc.learn') }), tk.fb]),
+          el('p', {}, [el('span', { textContent: t('pc.answer') }), tk.label])])
+      : el('div', { className: 'pp-detail blank' }, [
+          el('div', { className: 'pc-photo' }, [el('img', { src: A + sel.plate, alt: '' })]),
+          el('h3', { textContent: `${L(sel.place)} · ${L(sel.area)}` }),
+          el('p', { textContent: t('pp.empty') }),
+          el('button', { type: 'button', className: 'btn primary small', textContent: `${t('pp.go')} ${L(sel.place)}`, onclick: () => closePassport(true, DEST.indexOf(sel)) })]);
+    dlg.replaceChildren(el('div', { className: 'pp' }, [
+      el('div', { className: 'pp-top' }, [el('h2', { id: 'pp-title', textContent: t('pass.h') }), el('button', { type: 'button', className: 'btn small pp-x', textContent: t('pp.close'), onclick: () => closePassport(false) })]),
+      el('div', { className: 'pp-spread' }, [el('div', { className: 'pp-stamps', role: 'group', 'aria-label': t('pass.h') }, stamps), detail])]));
+  }
+  function openPassport(key, opener) {
+    const dlg = $('#passport'); if (!dlg) return;
+    ppOpener = opener || document.activeElement; state.open = key || state.open || DEST[0].key;
+    if (!dlg.open) { if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', ''); }
+    renderPassport(); const on = $('.pp-stamp.on'); if (on) on.focus({ preventScroll: true });
+  }
+  function closePassport(go, idx) {
+    const dlg = $('#passport'); if (!dlg || !dlg.open) return;
+    dlg.close(); state.open = null;
+    if (go && idx >= 0) { interact(); travel(idx); $('#stage').scrollIntoView({ block: 'center', behavior: reduced.matches ? 'auto' : 'smooth' }); }
+    else if (ppOpener && ppOpener.isConnected) ppOpener.focus();
   }
   function renderWeek() { const tk = takeaway(DEST[0]); $('#week-phrase').textContent = tk ? tk.ph : L(DEST[0].a[0].ph); }
   // Closing postcard: one card for one collected destination; a compact selector when there are several.
@@ -257,7 +282,7 @@
   function renderTour() { const b = $('#tour'); b.hidden = Stage.still(); b.textContent = t(autoplay ? 'tour.pause' : 'tour.play'); b.setAttribute('aria-pressed', String(!autoplay)); }
   function renderStatus() { $('#status').textContent = `${t(arrived ? 'st.at' : 'st.walk')} ${L(DEST[state.dest].place)} · ${L(DEST[state.dest].area)}`; }
   function renderAll(focusRole) {
-    persist(); const keep = renderCards(); renderDests(); renderStrip(); renderPostcard(); renderWeek(); renderRecap(); renderGlobe(); renderTour(); renderStatus();
+    persist(); const keep = renderCards(); renderDests(); renderStrip(); renderPassport(); renderWeek(); renderRecap(); renderGlobe(); renderTour(); renderStatus();
     const role = focusRole || keep; if (role) { const n = $(`.card.on [data-role="${role}"]`); if (n) n.focus({ preventScroll: true }); }
   }
 
@@ -275,7 +300,6 @@
       { transform: `translate(${dx}px,${dy}px) scale(${k}) rotate(0)`, opacity: seen ? 1 : 0 }], { duration: 650, easing: 'cubic-bezier(.3,.7,.3,1)' }).onfinish = () => { ghost.remove(); to.style.visibility = ''; };
   }
   function collect(d) { interact(); const isNew = !state.collected.includes(d.key); if (isNew) { state.collected.push(d.key); fresh = d.key; recapKey = d.key; recapOpen = false; } renderAll('collect'); if (isNew) transfer(d); fresh = null; }   // never a duplicate
-  function openCard(key) { state.open = state.open === key ? null : key; renderAll(); if (state.open) $('#postcard').focus({ preventScroll: true }); $('#postcard').scrollIntoView({ block: 'nearest', behavior: reduced.matches ? 'auto' : 'smooth' }); }
   function travel(i) { if (i === state.dest && !Stage.moving) return; state.dest = i; arrived = false; idle = 0; Stage.goTo(i); if (!Stage.moving) arrived = true; renderAll(); }
 
   // ---------------------------------------------------------------- Circles: a five-step miniature story (plays once in view)
@@ -349,8 +373,11 @@
   });
   $('#cards').addEventListener('pointerenter', () => { busy = true; }); $('#cards').addEventListener('pointerleave', () => { busy = false; idle = 0; });
   $('#cards').addEventListener('focusin', () => { busy = true; }); $('#cards').addEventListener('focusout', () => { busy = false; idle = 0; });
-  $('#reset').addEventListener('click', () => { state.answers = {}; state.collected = []; state.editing = {}; state.open = null; recapKey = null; recapOpen = false; idle = 0;
+  $('#reset').addEventListener('click', () => { state.answers = {}; state.collected = []; state.editing = {}; state.open = null; if ($('#passport') && $('#passport').open) $('#passport').close(); recapKey = null; recapOpen = false; idle = 0;
     try { sessionStorage.removeItem(STORE); } catch (e) { /* fine */ } travel(0); renderAll(); $('#reset-note').textContent = t('reset.done'); });
+  const pdlg = $('#passport'); $('#pass-open').addEventListener('click', ev => openPassport(state.collected[state.collected.length - 1] || DEST[0].key, ev.currentTarget));
+  pdlg.addEventListener('click', ev => { if (ev.target === pdlg) closePassport(false); });          // a click on the dimmed background closes it
+  pdlg.addEventListener('close', () => { state.open = null; });
   window.__elara = { state, DEST, takeaway, get lang() { return lang; }, get autoplay() { return autoplay; }, get arrived() { return arrived; } };
   const resumed = state.dest > 0 || state.collected.length > 0 || Object.keys(state.answers).length > 0;
   if (resumed) autoplay = false;                           // she comes back to where she left off; the tour does not restart on its own

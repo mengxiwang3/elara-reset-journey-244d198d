@@ -38,14 +38,14 @@
     <p id="col-sub" data-i18n="col.empty">Answer a question and keep its souvenir: it will appear here.</p>
   </div>
   <div class="colgrid">
-    <div class="passport"><p class="pass-title"><b data-i18n="pass.h">Your passport</b></p>
+    <div class="passport"><p class="pass-title"><b data-i18n="pass.h">Your passport</b><button type="button" class="linkbtn" id="pass-open" data-i18n="pass.open">Open the passport</button></p>
       <ul class="strip" id="strip" aria-label="Colección"></ul></div>
     <div class="atlas-live">
       <div class="paper-globe-stage" id="globe-stage" data-scroll-drag="ignore"><canvas tabindex="0" aria-label="Globo de papel interactivo. Flechas para girar, espacio para pausar."></canvas></div>
       <p class="fine" data-i18n="atlas.p">Your Atlas. Turn the globe or tap a destination to go there.</p>
     </div>
   </div>
-  <article class="postcard" id="postcard" hidden="" tabindex="-1" aria-labelledby="pc-title"></article>
+  <dialog class="passport-dlg" id="passport" aria-labelledby="pp-title"></dialog>
   <div class="week">
     <div>
       <h3 data-i18n="week.h">Each day starts where the last one ended</h3>
