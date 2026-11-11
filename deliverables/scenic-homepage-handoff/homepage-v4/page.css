@@ -362,3 +362,31 @@ h3{font-size:19px;line-height:1.25;font-weight:600;letter-spacing:-.01em;color:v
 
 /* Desktop: the destination row runs the full page width under the copy and the phones: six names on one line */
 @media (min-width:901px){.hero .under{grid-column:1/-1;width:100%;max-width:none;margin:4px 0 0;padding:0 var(--side)}.hero .dest b{white-space:nowrap}}
+
+/* The passport: opens over the page like an open booklet; the page behind does not move */
+.passport-dlg{width:min(900px,calc(100vw - 20px));max-height:calc(100dvh - 24px);margin:auto;padding:0;border:0;background:transparent;color:var(--ink);overflow:visible}
+.passport-dlg::backdrop{background:rgba(22,36,54,.5)}
+.passport-dlg[open]{animation:ppOpen .35s cubic-bezier(.22,1,.36,1)}
+@keyframes ppOpen{from{opacity:0;transform:perspective(900px) rotateX(-12deg) translateY(18px) scale(.96)}}
+.pp{max-height:calc(100dvh - 24px);overflow:auto;padding:16px 18px 20px;border-radius:8px 18px 18px 8px;background:var(--grain),var(--lilac);box-shadow:0 24px 60px rgba(22,36,54,.35),inset 7px 0 0 rgba(22,36,54,.08)}
+.pp-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.pp-top h2{font-size:26px}
+.pp-spread{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:0;border-radius:6px;background:#fff;box-shadow:0 1px 0 #fff inset,0 3px 10px rgba(22,36,54,.12)}
+.pp-stamps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-content:start;padding:16px}
+.pp-stamp{display:grid;justify-items:center;gap:4px;min-height:108px;padding:10px 6px;border:1.5px dashed var(--edge);border-radius:12px;background:rgba(255,255,255,.6);font:inherit;font-size:12px;line-height:1.25;color:var(--muted);cursor:pointer;transform:rotate(var(--tilt,0deg));transition:transform .2s,box-shadow .2s}
+.pp-stamp img{width:56px;height:46px;object-fit:contain;opacity:.3;filter:grayscale(1)}
+.pp-stamp b{font-size:13.5px;color:var(--head)}
+.pp-stamp.got{border:1.5px solid var(--purple);background:#fff}
+.pp-stamp.got img{opacity:1;filter:none}
+.pp-stamp.got span{font-weight:600;color:var(--purple)}
+.pp-stamp:hover{transform:rotate(0) translateY(-2px);box-shadow:0 6px 14px rgba(22,36,54,.14)}
+.pp-stamp.on{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue);transform:rotate(0);background:var(--sky)}
+.pp-stamp:focus-visible{border-radius:12px}
+.pp-detail{display:grid;gap:10px;align-content:start;padding:16px 18px;border-left:1px dashed var(--edge);font-size:15.5px}
+.pp-detail .pc-photo{position:relative;height:150px;border-radius:8px;overflow:hidden}
+.pp-detail.blank .pc-photo img{filter:grayscale(.85) brightness(1.05);opacity:.7}
+.pp-detail h3{font-size:16px;color:var(--purple)}
+.pp-detail p span{display:block;font-size:13px;font-weight:600;color:var(--muted)}
+.pp-detail .btn{justify-self:start}
+@media (max-width:700px){.pp{padding:12px 12px 16px}.pp-spread{grid-template-columns:minmax(0,1fr)}.pp-detail{border-left:0;border-top:1px dashed var(--edge)}.pp-stamps{grid-template-columns:repeat(3,minmax(0,1fr));padding:12px}.pp-stamp{min-height:92px;padding:8px 4px}.pp-stamp img{width:44px;height:36px}.pp-detail .pc-photo{height:110px}}
+.pass-title .linkbtn{margin-left:auto}
